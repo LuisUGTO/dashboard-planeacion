@@ -8,13 +8,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <!-- PapaParse (Lector CSV en vivo desde Google Sheets) -->
+  <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- Leaflet (Mapa Interactivo de Guanajuato) -->
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Tipografía Oficial Principal: Vollkorn (Regular, Medium, SemiBold, Bold, ExtraBold, Black) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -22,184 +26,244 @@
         extend: {
           colors: {
             gto: {
-              dark: '#0B2240',
-              primary: '#133863',
-              blue: '#1E56A0',
-              accent: '#D97706',
-              pink: '#E11D48',
-              teal: '#0D9488',
-              light: '#F4F6F9'
+              /* Paleta Oficial Manual de Identidad Gobierno de la Gente 2024-2030 */
+              blue: '#004B87',      /* PANTONE 301 C */
+              dark: '#00335C',      /* Variante profunda derivada de 301 C */
+              sky: '#69B3E7',       /* PANTONE 292 C */
+              ice: '#C8D8EB',       /* PANTONE 657 C */
+              gray10: '#63666A',    /* PANTONE Cool Gray 10 C */
+              gray7: '#97999B',     /* PANTONE Cool Gray 7 C */
+              gray3: '#C8C9C7',     /* PANTONE Cool Gray 3 C */
+              bg: '#F4F7FB'
             }
+          },
+          fontFamily: {
+            vollkorn: ['"Vollkorn"', 'Georgia', 'serif'],
+            helvetica: ['"Helvetica Neue LT Std"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif']
           }
         }
       }
     };
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    body { font-family: 'Inter', sans-serif; background-color: #F4F6F9; }
+    body {
+      font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #F4F7FB;
+      color: #63666A;
+    }
+    h1, h2, h3, .font-identidad, .kpi-number {
+      font-family: 'Vollkorn', Georgia, serif;
+    }
     .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
-    .nav-btn.active { background: linear-gradient(90deg, #1E56A0 0%, #133863 100%); color: #fff; border-left: 4px solid #F59E0B; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #C8C9C7; border-radius: 3px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #97999B; }
+
+    /* Degradado Institucional Oficial (Página 15 Manual de Identidad) */
+    .bg-gto-gradient {
+      background: linear-gradient(135deg, #004B87 0%, #003865 65%, #00284B 100%);
+    }
+    .bg-gto-header-bar {
+      background: linear-gradient(90deg, #004B87 0%, #69B3E7 100%);
+    }
+    .nav-btn.active {
+      background: linear-gradient(90deg, #69B3E7 0%, rgba(105, 179, 231, 0.18) 100%);
+      color: #FFFFFF;
+      border-left: 4px solid #C8D8EB;
+      font-weight: 700;
+    }
     #mapGto { height: 340px; width: 100%; border-radius: 0.75rem; z-index: 10; }
   </style>
 </head>
-<body class="text-slate-800 flex h-screen overflow-hidden">
+<body class="flex h-screen overflow-hidden">
 
-  <!-- SIDEBAR INSTITUCIONAL -->
-  <aside class="w-64 bg-gto-dark text-white flex flex-col justify-between shrink-0 shadow-xl z-20">
+  <!-- =========================================================
+       SIDEBAR INSTITUCIONAL (PANTONE 301 C #004B87)
+  ========================================================== -->
+  <aside class="w-72 bg-gto-gradient text-white flex flex-col justify-between shrink-0 shadow-2xl z-20 relative overflow-hidden">
     <div>
-      <!-- Encabezado Institucional -->
-      <div class="p-5 border-b border-slate-700/60">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center font-extrabold text-gto-dark text-lg shadow">
-            SC
+      <!-- Tarjeta Blanca de Identidad Oficial (Respeta Fondo Claro y Tamaño Mínimo Web >= 90px) -->
+      <div class="m-3.5 p-3.5 bg-white rounded-xl shadow-md border-b-4 border-gto-sky flex flex-col items-center text-center">
+        <img
+          id="sidebar-logo"
+          src="assets/Logo.png"
+          alt="Guanajuato Gobierno de la Gente"
+          class="h-[92px] w-auto object-contain mx-auto transition-transform duration-200 hover:scale-105"
+          onerror="if(this.src.includes('assets/Logo.png')){this.src='Logo.png';}else if(this.src.includes('Logo.png')){this.src='assets/Logo-Gobierno-de-la-Gente-de-Guanajuato-v2.001 (1).png';}else{this.style.display='none';document.getElementById('fallback-shield').classList.remove('hidden');}"
+        />
+        <!-- Escudo SVG de respaldo por si aún no se sube la carpeta assets -->
+        <div id="fallback-shield" class="hidden py-1 flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full border-2 border-gto-blue bg-gto-ice/40 flex items-center justify-center text-gto-blue font-vollkorn font-black text-xl">
+            GTO
           </div>
-          <div>
-            <p class="text-[11px] uppercase tracking-widest text-amber-400 font-bold">Secretaría de Cultura</p>
-            <p class="text-[10px] text-slate-300">Gobierno del Estado de Guanajuato</p>
-          </div>
+          <div class="font-vollkorn font-black text-gto-blue text-base tracking-wider mt-1 leading-none">GUANAJUATO</div>
+          <div class="font-vollkorn font-bold text-gto-sky text-[9px] tracking-widest uppercase">GOBIERNO DE LA GENTE</div>
         </div>
-        <h1 class="mt-3 text-xs font-bold tracking-wide text-white leading-snug">
-          SISTEMA ESTATAL DE INTELIGENCIA CULTURAL
-        </h1>
-        <p class="text-[11px] text-slate-400 italic mt-0.5">Transformar la cultura en bienestar para la gente</p>
+
+        <!-- Separador y Secretaría Conceptual (Págs. 20, 23 y 31 del Manual) -->
+        <div class="w-4/5 h-[2px] bg-gto-blue my-2"></div>
+        <div class="font-vollkorn font-extrabold text-gto-blue text-lg tracking-wider leading-none">
+          CULTURA
+        </div>
+        <div class="font-vollkorn font-bold text-gto-sky text-[9.5px] tracking-widest uppercase mt-0.5">
+          SECRETARÍA DE CULTURA
+        </div>
       </div>
 
-      <!-- Menú de las 4 Vistas + Auditoría -->
-      <nav class="p-3 space-y-1.5">
-        <button onclick="switchTab('tab-vision')" id="btn-tab-vision" class="nav-btn active w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-medium text-slate-300 hover:bg-slate-800/60 transition">
-          <i data-lucide="layout-dashboard" class="w-4 h-4 shrink-0 text-amber-400"></i>
+      <!-- Título del Sistema -->
+      <div class="px-5 pb-3 border-b border-white/15">
+        <p class="font-vollkorn font-extrabold text-xs tracking-wide text-white uppercase leading-snug">
+          Sistema Estatal de Inteligencia Cultural
+        </p>
+        <p class="text-[11px] text-gto-ice italic mt-0.5">
+          Transformar la cultura en bienestar para la gente
+        </p>
+      </div>
+
+      <!-- Menú de Navegación de las 5 Vistas -->
+      <nav class="p-3 space-y-1">
+        <button onclick="switchTab('tab-vision')" id="btn-tab-vision" class="nav-btn active w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs text-gto-ice hover:bg-white/10 transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 shrink-0 text-gto-sky"></i>
           <div>
             <div class="font-semibold text-white">Inicio</div>
-            <div class="text-[10px] text-slate-400">Visión general</div>
+            <div class="text-[10px] text-gto-ice/80">Visión general</div>
           </div>
         </button>
 
-        <button onclick="switchTab('tab-matriz')" id="btn-tab-matriz" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-medium text-slate-300 hover:bg-slate-800/60 transition">
-          <i data-lucide="target" class="w-4 h-4 shrink-0 text-sky-400"></i>
+        <button onclick="switchTab('tab-matriz')" id="btn-tab-matriz" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs text-gto-ice hover:bg-white/10 transition">
+          <i data-lucide="target" class="w-4 h-4 shrink-0 text-gto-sky"></i>
           <div>
             <div class="font-semibold text-white">Matriz Estratégica</div>
-            <div class="text-[10px] text-slate-400">Alineación de metas</div>
+            <div class="text-[10px] text-gto-ice/80">Alineación de metas</div>
           </div>
         </button>
 
-        <button onclick="switchTab('tab-territorio')" id="btn-tab-territorio" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-medium text-slate-300 hover:bg-slate-800/60 transition">
-          <i data-lucide="map-pin" class="w-4 h-4 shrink-0 text-emerald-400"></i>
+        <button onclick="switchTab('tab-territorio')" id="btn-tab-territorio" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs text-gto-ice hover:bg-white/10 transition">
+          <i data-lucide="map-pin" class="w-4 h-4 shrink-0 text-gto-sky"></i>
           <div>
             <div class="font-semibold text-white">Cobertura Territorial</div>
-            <div class="text-[10px] text-slate-400">Impacto en Municipios</div>
+            <div class="text-[10px] text-gto-ice/80">Impacto en Municipios</div>
           </div>
         </button>
 
-        <button onclick="switchTab('tab-poblacion')" id="btn-tab-poblacion" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-medium text-slate-300 hover:bg-slate-800/60 transition">
-          <i data-lucide="users" class="w-4 h-4 shrink-0 text-rose-400"></i>
+        <button onclick="switchTab('tab-poblacion')" id="btn-tab-poblacion" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs text-gto-ice hover:bg-white/10 transition">
+          <i data-lucide="users" class="w-4 h-4 shrink-0 text-gto-sky"></i>
           <div>
             <div class="font-semibold text-white">Perfil de Población</div>
-            <div class="text-[10px] text-slate-400">Análisis demográfico</div>
+            <div class="text-[10px] text-gto-ice/80">Análisis demográfico</div>
           </div>
         </button>
 
-        <button onclick="switchTab('tab-auditoria')" id="btn-tab-auditoria" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-medium text-slate-300 hover:bg-slate-800/60 transition">
-          <i data-lucide="shield-check" class="w-4 h-4 shrink-0 text-purple-400"></i>
+        <button onclick="switchTab('tab-auditoria')" id="btn-tab-auditoria" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs text-gto-ice hover:bg-white/10 transition">
+          <i data-lucide="shield-check" class="w-4 h-4 shrink-0 text-gto-sky"></i>
           <div>
             <div class="font-semibold text-white flex items-center gap-1.5">
               Auditoría de Cuadre
-              <span id="badge-audit" class="bg-amber-500 text-gto-dark text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+              <span id="badge-audit" class="bg-gto-sky text-gto-dark text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
             </div>
-            <div class="text-[10px] text-slate-400">Control Territorio vs Población</div>
+            <div class="text-[10px] text-gto-ice/80">Control Territorio vs Población</div>
           </div>
         </button>
       </nav>
     </div>
 
-    <!-- Frase Institucional e Información de Conexión -->
-    <div class="p-4 m-3 rounded-xl bg-slate-800/70 border border-slate-700/60 text-xs">
-      <p class="italic text-slate-300 leading-relaxed text-[11px]">
+    <!-- Pie de Sidebar con Lema y Estado de Sincronización -->
+    <div class="p-3.5 m-3 rounded-xl bg-black/20 border border-white/10 text-xs">
+      <p class="font-vollkorn italic text-gto-ice leading-relaxed text-[11px]">
         "Donde la piedra canta y el color perdura, Guanajuato inspira al alma. Un legado de creación infinita."
       </p>
-      <div class="mt-3 pt-3 border-t border-slate-700 flex items-center justify-between text-[10px] text-slate-400">
-        <span id="status-dot" class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Google Sheet en vivo
+      <div class="mt-2.5 pt-2.5 border-t border-white/15 flex items-center justify-between text-[10px] text-gto-ice">
+        <span class="flex items-center gap-1.5">
+          <span id="sync-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="sync-text">Google Sheet conectado</span>
         </span>
-        <button onclick="loadAllData()" title="Actualizar datos ahora" class="hover:text-white underline">Recargar</button>
+        <button onclick="loadAllData()" class="hover:text-white underline font-semibold">Actualizar</button>
       </div>
     </div>
   </aside>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- =========================================================
+       CONTENIDO PRINCIPAL
+  ========================================================== -->
   <div class="flex-1 flex flex-col h-screen overflow-hidden">
 
+    <!-- Cintillo Superior Institucional con Degradado Oficial -->
+    <div class="h-1.5 w-full bg-gto-header-bar shrink-0"></div>
+
     <!-- BARRA SUPERIOR Y FILTROS GLOBALES -->
-    <header class="bg-white border-b border-slate-200 px-6 py-3 shadow-sm z-10">
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-        <div>
-          <h2 id="view-title" class="text-lg font-extrabold text-gto-dark">Visión General del Ecosistema Cultural</h2>
-          <p id="view-subtitle" class="text-xs text-slate-500">Datos relacionales 1:N sincronizados sin duplicación desde las 4 pestañas de registro</p>
+    <header class="bg-white border-b border-gto-gray3 px-6 py-3 shadow-sm z-10">
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-gto-ice/60">
+        <div class="flex items-center gap-3">
+          <div>
+            <h2 id="view-title" class="text-xl font-extrabold text-gto-blue tracking-tight">
+              Visión General del Ecosistema Cultural
+            </h2>
+            <p id="view-subtitle" class="text-xs text-gto-gray7">
+              Datos relacionales 1:N sincronizados en tiempo real desde las 4 pestañas de captura
+            </p>
+          </div>
         </div>
 
-        <!-- Selector de Criterio de Población + Fechas + Botón Limpiar -->
+        <!-- Controles Superiores: Fuente de Población + Rango de Fechas + Limpiar -->
         <div class="flex flex-wrap items-center gap-2">
-          <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
-            <span class="px-2 text-[11px] font-semibold text-slate-600">Fuente Población:</span>
+          <div class="flex items-center bg-gto-ice/35 p-1 rounded-lg border border-gto-ice text-xs">
+            <span class="px-2 text-[11px] font-bold text-gto-blue">Fuente Población:</span>
             <button id="btn-pop-ter" onclick="setPopMode('territorio')" class="px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]">
-              Territorio (342.6k)
+              Territorio (0)
             </button>
-            <button id="btn-pop-pob" onclick="setPopMode('poblacion')" class="px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]">
-              Demográfico (285.0k)
+            <button id="btn-pop-pob" onclick="setPopMode('poblacion')" class="px-2.5 py-1 rounded-md font-semibold text-gto-gray10 hover:text-gto-blue transition text-[11px]">
+              Demográfico (0)
             </button>
           </div>
 
-          <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-xs">
-            <span class="text-slate-400 text-[11px]">Del:</span>
-            <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-medium text-slate-700 focus:outline-none text-xs" />
-            <span class="text-slate-400 text-[11px]">Al:</span>
-            <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-medium text-slate-700 focus:outline-none text-xs" />
+          <div class="flex items-center gap-1 bg-white border border-gto-gray3 rounded-lg px-2.5 py-1 text-xs">
+            <span class="text-gto-gray7 text-[11px] font-semibold">Del:</span>
+            <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-semibold text-gto-gray10 focus:outline-none text-xs" />
+            <span class="text-gto-gray7 text-[11px] font-semibold">Al:</span>
+            <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-semibold text-gto-gray10 focus:outline-none text-xs" />
           </div>
 
-          <button onclick="resetFilters()" class="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+          <button onclick="resetFilters()" class="flex items-center gap-1.5 bg-gto-ice/40 hover:bg-gto-ice text-gto-blue border border-gto-sky/50 px-3 py-1.5 rounded-lg text-xs font-bold transition">
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
             Borrar filtros
           </button>
         </div>
       </div>
 
-      <!-- Controles de Filtro Multicriterio -->
+      <!-- Selectores Multicriterio -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 pt-2.5">
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Municipio</label>
-          <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Municipio</label>
+          <select id="f-municipio" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Todos los municipios</option>
           </select>
         </div>
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Dirección General</label>
-          <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Dirección General</label>
+          <select id="f-direccion" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Todas las direcciones</option>
           </select>
         </div>
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Disciplina</label>
-          <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Disciplina</label>
+          <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Todas las disciplinas</option>
           </select>
         </div>
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Eje Plan de Gobierno</label>
-          <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Eje Plan de Gobierno</label>
+          <select id="f-eje" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Todos los ejes</option>
           </select>
         </div>
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Enfoque</label>
-          <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Enfoque</label>
+          <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Cultural y Artística</option>
           </select>
         </div>
         <div>
-          <label class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Zona Prioritaria (ZAP)</label>
-          <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 focus:outline-none focus:border-gto-blue">
+          <label class="block text-[10px] font-bold uppercase text-gto-gray7 mb-0.5">Zona Prioritaria (ZAP)</label>
+          <select id="f-zap" onchange="applyFilters()" class="w-full bg-gto-bg border border-gto-gray3 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gto-gray10 focus:outline-none focus:border-gto-blue">
             <option value="ALL">Todas (Con y sin ZAP)</option>
             <option value="ZAP_ANY">Solo en ZAP (NC o SSyP)</option>
             <option value="ZAP_NC">ZAP Nuevo Comienzo (Sí)</option>
@@ -211,10 +275,10 @@
     </header>
 
     <!-- PANTALLA DE CARGA -->
-    <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-slate-50 z-30">
-      <div class="w-12 h-12 border-4 border-gto-blue border-t-transparent rounded-full animate-spin"></div>
-      <p class="mt-4 text-sm font-bold text-gto-dark">Conectando con Google Sheets de Secretaría de Cultura...</p>
-      <p class="text-xs text-slate-500 mt-1">Descargando y relacionando Actividades, Territorio, Población y Evidencia</p>
+    <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-gto-bg z-30">
+      <div class="w-12 h-12 border-4 border-gto-blue border-t-gto-sky rounded-full animate-spin"></div>
+      <p class="mt-4 text-base font-vollkorn font-extrabold text-gto-blue">Sincronizando Sistema Estatal de Inteligencia Cultural...</p>
+      <p class="text-xs text-gto-gray7 mt-1">Leyendo Actividades, Territorio, Población y Evidencia desde Google Sheets</p>
     </div>
 
     <!-- CONTENEDOR DESPLAZABLE DE VISTAS -->
@@ -224,207 +288,196 @@
            VISTA 1: INICIO - VISIÓN GENERAL
       ========================================================== -->
       <section id="tab-vision" class="space-y-6">
-        <!-- Tarjetas KPI Superiores -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm flex items-center justify-between">
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Actividades Realizadas</p>
-              <p id="kpi-act-total" class="text-3xl font-extrabold text-gto-dark mt-1">0</p>
-              <p class="text-xs text-emerald-600 font-semibold mt-1">
-                <span id="kpi-sesiones-total">0</span> sesiones totales
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gto-gray7">Actividades Realizadas</p>
+              <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+              <p class="text-xs text-gto-gray10 font-semibold mt-1">
+                <span id="kpi-sesiones-total" class="text-gto-blue font-bold">0</span> sesiones totales
               </p>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-gto-blue flex items-center justify-center">
+            <div class="w-12 h-12 rounded-xl bg-gto-ice/50 text-gto-blue flex items-center justify-center">
               <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
             </div>
           </div>
 
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm flex items-center justify-between">
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Personas Beneficiadas</p>
-              <p id="kpi-pop-total" class="text-3xl font-extrabold text-gto-blue mt-1">0</p>
-              <p id="kpi-pop-sub" class="text-[11px] text-slate-500 font-medium mt-1">0 part. activa | 0 acceso</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gto-gray7">Personas Beneficiadas</p>
+              <p id="kpi-pop-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+              <p id="kpi-pop-sub" class="text-[11px] text-gto-gray10 font-medium mt-1">0 part. activa | 0 acceso</p>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-xl bg-gto-ice/50 text-gto-blue flex items-center justify-center">
               <i data-lucide="users" class="w-6 h-6"></i>
             </div>
           </div>
 
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm flex items-center justify-between">
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Ingresos / Inversión</p>
-              <p id="kpi-ingresos" class="text-2xl font-extrabold text-emerald-700 mt-1">$0.00</p>
-              <p id="kpi-contratado" class="text-[11px] text-slate-500 font-medium mt-1">Contratado: $0.00</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gto-gray7">Ingresos Generados</p>
+              <p id="kpi-ingresos" class="kpi-number text-2xl font-black text-gto-blue mt-1">$0.00</p>
+              <p id="kpi-contratado" class="text-[11px] text-gto-gray10 font-medium mt-1">Contratado: $0.00</p>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-xl bg-gto-ice/50 text-gto-blue flex items-center justify-center">
               <i data-lucide="banknote" class="w-6 h-6"></i>
             </div>
           </div>
 
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm flex items-center justify-between">
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Municipios con Actividad</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gto-gray7">Municipios con Actividad</p>
               <div class="flex items-baseline gap-2 mt-1">
-                <p id="kpi-mun-ratio" class="text-3xl font-extrabold text-gto-dark">0/46</p>
-                <span id="kpi-mun-pct" class="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-gto-blue">0%</span>
+                <p id="kpi-mun-ratio" class="kpi-number text-3xl font-black text-gto-blue">0/46</p>
+                <span id="kpi-mun-pct" class="text-xs font-bold px-2 py-0.5 rounded-full bg-gto-ice text-gto-blue">0%</span>
               </div>
-              <p id="kpi-mun-foraneo" class="text-[11px] text-slate-500 mt-1">Cobertura Estatal GTO</p>
+              <p id="kpi-mun-foraneo" class="text-[11px] text-gto-gray10 mt-1">Cobertura Estatal GTO</p>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-xl bg-gto-ice/50 text-gto-blue flex items-center justify-center">
               <i data-lucide="map" class="w-6 h-6"></i>
             </div>
           </div>
         </div>
 
-        <!-- Fila Central: Mapa Territorial + Top Tipos + Disciplinas -->
+        <!-- Fila Central: Mapa + Top Tipos + Disciplinas -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <!-- Mapa de Cobertura Territorial + Sub-KPIs -->
-          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-bold text-gto-dark">Cobertura Territorial en Guanajuato</h3>
-                <span class="text-[11px] text-slate-400">Tamaño = Actividades</span>
+                <h3 class="text-base font-extrabold text-gto-blue">Cobertura Territorial en Guanajuato</h3>
+                <span class="text-[11px] text-gto-gray7 font-medium">Tamaño = Actividades</span>
               </div>
-              <div id="mapGto"></div>
+              <div id="mapGto" class="border border-gto-ice"></div>
             </div>
-            <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100 text-center">
-              <div class="bg-slate-50 rounded-lg p-2">
-                <p class="text-[10px] uppercase font-bold text-slate-400">Municipios GTO</p>
-                <p id="sub-mun-gto" class="text-lg font-extrabold text-gto-dark">0 de 46</p>
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gto-ice text-center">
+              <div class="bg-gto-bg rounded-lg p-2 border border-gto-ice/60">
+                <p class="text-[10px] uppercase font-bold text-gto-gray7">Municipios GTO</p>
+                <p id="sub-mun-gto" class="kpi-number text-lg font-black text-gto-blue">0 de 46</p>
               </div>
-              <div class="bg-amber-50/70 rounded-lg p-2">
-                <p class="text-[10px] uppercase font-bold text-amber-700">ZAP Impactadas</p>
-                <p id="sub-zap-total" class="text-lg font-extrabold text-amber-600">0</p>
+              <div class="bg-gto-ice/35 rounded-lg p-2 border border-gto-sky/40">
+                <p class="text-[10px] uppercase font-bold text-gto-blue">ZAP Impactadas</p>
+                <p id="sub-zap-total" class="kpi-number text-lg font-black text-gto-blue">0</p>
               </div>
-              <div class="bg-slate-50 rounded-lg p-2">
-                <p class="text-[10px] uppercase font-bold text-slate-400">Comunidades</p>
-                <p id="sub-loc-total" class="text-lg font-extrabold text-gto-blue">0</p>
+              <div class="bg-gto-bg rounded-lg p-2 border border-gto-ice/60">
+                <p class="text-[10px] uppercase font-bold text-gto-gray7">Localidades</p>
+                <p id="sub-loc-total" class="kpi-number text-lg font-black text-gto-blue">0</p>
               </div>
             </div>
           </div>
 
-          <!-- Top de Tipos de Actividad -->
-          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col">
-            <h3 class="text-sm font-bold text-gto-dark mb-1">Top de Tipos de Actividad</h3>
-            <p class="text-[11px] text-slate-400 mb-3">Frecuencia y proporción sobre el total</p>
+          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex flex-col">
+            <h3 class="text-base font-extrabold text-gto-blue mb-0.5">Top de Tipos de Actividad</h3>
+            <p class="text-[11px] text-gto-gray7 mb-3">Proporción sobre actividades realizadas</p>
             <div id="list-tipos-actividad" class="flex-1 overflow-y-auto custom-scroll space-y-2.5 pr-1"></div>
           </div>
 
-          <!-- Actividades por Disciplina + Dona Plan de Gobierno -->
           <div class="lg:col-span-4 flex flex-col gap-5">
-            <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
-              <h3 class="text-sm font-bold text-gto-dark mb-2">Actividades Realizadas por Disciplina</h3>
-              <div class="h-44">
-                <canvas id="chart-disciplinas"></canvas>
-              </div>
+            <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex-1">
+              <h3 class="text-base font-extrabold text-gto-blue mb-2">Actividades Realizadas por Disciplina</h3>
+              <div class="h-44"><canvas id="chart-disciplinas"></canvas></div>
             </div>
-            <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
-              <h3 class="text-sm font-bold text-gto-dark mb-2">Distribución por Plan de Gobierno</h3>
-              <div class="h-40">
-                <canvas id="chart-eje-dona"></canvas>
-              </div>
+            <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex-1">
+              <h3 class="text-base font-extrabold text-gto-blue mb-2">Distribución por Plan de Gobierno</h3>
+              <div class="h-40"><canvas id="chart-eje-dona"></canvas></div>
             </div>
           </div>
         </div>
 
-        <!-- Evolución Mensual Ordenada Cronológicamente -->
-        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+        <!-- Evolución Mensual -->
+        <div class="bg-white rounded-xl p-5 border border-gto-gray3/70 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div>
-              <h3 class="text-sm font-bold text-gto-dark">Evolución Mensual de Actividades y Personas Atendidas (Orden Cronológico)</h3>
-              <p class="text-xs text-slate-400">Barras = Actividades realizadas por mes | Línea = Personas beneficiadas en el mes</p>
+              <h3 class="text-base font-extrabold text-gto-blue">Evolución Mensual de Actividades y Personas Beneficiadas (Orden Cronológico)</h3>
+              <p class="text-xs text-gto-gray7">Barras (#004B87) = Actividades realizadas por mes | Línea (#69B3E7) = Personas atendidas en el mes</p>
             </div>
-            <div class="text-xs bg-blue-50 text-gto-blue px-3 py-1 rounded-lg font-semibold">
-              Avance Meta Anual de Actividades: <span id="lbl-avance-meta-global">0%</span>
+            <div class="text-xs bg-gto-ice/50 text-gto-blue border border-gto-sky/50 px-3 py-1 rounded-lg font-bold">
+              Avance Meta Anual Actividades: <span id="lbl-avance-meta-global">0%</span>
             </div>
           </div>
-          <div class="h-64">
-            <canvas id="chart-evolucion-mensual"></canvas>
-          </div>
+          <div class="h-64"><canvas id="chart-evolucion-mensual"></canvas></div>
         </div>
       </section>
 
       <!-- =========================================================
-           VISTA 2: MATRIZ ESTRATÉGICA - ALINEACIÓN DE METAS
+           VISTA 2: MATRIZ ESTRATÉGICA
       ========================================================== -->
       <section id="tab-matriz" class="hidden space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Total Actividades Estratégicas</p>
-            <p id="kpi-mat-act" class="text-3xl font-extrabold text-gto-dark mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Alineadas al Plan de Gobierno</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Total Actividades Estratégicas</p>
+            <p id="kpi-mat-act" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Alineadas al Plan de Gobierno</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Direcciones Generales Activas</p>
-            <p id="kpi-mat-dir" class="text-3xl font-extrabold text-purple-700 mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Con registro en el periodo</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Direcciones Generales Activas</p>
+            <p id="kpi-mat-dir" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Con registro en el periodo</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Metas de Gobierno Atendidas</p>
-            <p id="kpi-mat-metas" class="text-3xl font-extrabold text-gto-blue mt-1">0</p>
-            <p id="kpi-mat-procesos" class="text-xs text-slate-500 mt-1">En 0 procesos (Clave PB/QC)</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Metas de Gobierno Atendidas</p>
+            <p id="kpi-mat-metas" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p id="kpi-mat-procesos" class="text-xs text-gto-gray10 mt-1">En 0 procesos activos (PB / QC)</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Cumplimiento Meta Actividades</p>
-            <p id="kpi-mat-cumplimiento" class="text-3xl font-extrabold text-emerald-600 mt-1">0%</p>
-            <p id="kpi-mat-cumplimiento-sub" class="text-xs text-slate-500 mt-1">0 de 1,098 programadas</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Cumplimiento Meta Actividades</p>
+            <p id="kpi-mat-cumplimiento" class="kpi-number text-3xl font-black text-gto-blue mt-1">0%</p>
+            <p id="kpi-mat-cumplimiento-sub" class="text-xs text-gto-gray10 mt-1">0 de 1,098 programadas</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-3">Actividades por Eje de Gobierno</h3>
+          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-3">Actividades por Eje de Gobierno</h3>
             <div class="h-56"><canvas id="chart-mat-eje"></canvas></div>
           </div>
-          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-3">Aportación Estratégica por Dirección</h3>
+          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-3">Aportación Estratégica por Dirección</h3>
             <div class="h-56"><canvas id="chart-mat-direccion"></canvas></div>
           </div>
           <div class="lg:col-span-4 grid grid-rows-2 gap-4">
-            <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex items-center justify-between">
+            <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex items-center justify-between">
               <div class="w-1/2">
-                <h3 class="text-xs font-bold text-gto-dark">Eje Transversal PEC</h3>
-                <p class="text-[11px] text-slate-400 mt-0.5">Cooperación, Inclusión</p>
+                <h3 class="text-sm font-extrabold text-gto-blue">Eje Transversal PEC</h3>
+                <p class="text-[11px] text-gto-gray7 mt-0.5">Cooperación, Inclusión</p>
               </div>
               <div class="w-1/2 h-28"><canvas id="chart-mat-pec"></canvas></div>
             </div>
-            <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex items-center justify-between">
+            <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm flex items-center justify-between">
               <div class="w-1/2">
-                <h3 class="text-xs font-bold text-gto-dark">Distribución del Enfoque</h3>
-                <p class="text-[11px] text-slate-400 mt-0.5">Cultural vs Artística</p>
+                <h3 class="text-sm font-extrabold text-gto-blue">Distribución del Enfoque</h3>
+                <p class="text-[11px] text-gto-gray7 mt-0.5">Cultural vs Artística</p>
               </div>
               <div class="w-1/2 h-28"><canvas id="chart-mat-enfoque"></canvas></div>
             </div>
           </div>
         </div>
 
-        <!-- Tabla de Detalle de Alineación Institucional y Avance real por Meta -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-1">Detalle de Alineación Institucional (Objetivo PG / Línea PEC)</h3>
-            <p class="text-xs text-slate-400 mb-3">Cruce exacto de actividades por enfoque Cultural y Artística</p>
+          <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-1">Detalle de Alineación Institucional (Objetivo PG / Línea PEC)</h3>
+            <p class="text-xs text-gto-gray7 mb-3">Desglose de actividades por enfoque Cultural y Artística</p>
             <div class="overflow-x-auto max-h-80 custom-scroll">
               <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-100 text-slate-600 sticky top-0">
+                <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
                     <th class="p-2.5 font-bold">Objetivo Plan de Gobierno</th>
                     <th class="p-2.5 font-bold">Línea PEC</th>
-                    <th class="p-2.5 font-bold text-right text-emerald-700">Cultural</th>
-                    <th class="p-2.5 font-bold text-right text-amber-600">Artística</th>
+                    <th class="p-2.5 font-bold text-right">Cultural</th>
+                    <th class="p-2.5 font-bold text-right">Artística</th>
                     <th class="p-2.5 font-bold text-right">Total</th>
                   </tr>
                 </thead>
-                <tbody id="tbl-alineacion" class="divide-y divide-slate-100"></tbody>
+                <tbody id="tbl-alineacion" class="divide-y divide-gto-gray3/40"></tbody>
               </table>
             </div>
           </div>
 
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-1">Avance Real por Meta Anual Deduplicada (Claves PB / QC)</h3>
-            <p class="text-xs text-slate-400 mb-3">Sin sumar la meta fila por fila; separa metas de Actividades vs. Personas</p>
+          <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-1">Avance Real por Meta Anual Deduplicada (Claves PB / QC)</h3>
+            <p class="text-xs text-gto-gray7 mb-3">Deduplica la meta por proceso y distingue metas de Actividades vs. Personas</p>
             <div class="overflow-x-auto max-h-80 custom-scroll">
               <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-100 text-slate-600 sticky top-0">
+                <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
                     <th class="p-2.5 font-bold">Proceso</th>
                     <th class="p-2.5 font-bold">Meta Institucional / Unidad</th>
@@ -433,7 +486,7 @@
                     <th class="p-2.5 font-bold text-right">% Avance</th>
                   </tr>
                 </thead>
-                <tbody id="tbl-metas-avance" class="divide-y divide-slate-100"></tbody>
+                <tbody id="tbl-metas-avance" class="divide-y divide-gto-gray3/40"></tbody>
               </table>
             </div>
           </div>
@@ -441,64 +494,63 @@
       </section>
 
       <!-- =========================================================
-           VISTA 3: COBERTURA TERRITORIAL - IMPACTO EN MUNICIPIOS
+           VISTA 3: COBERTURA TERRITORIAL
       ========================================================== -->
       <section id="tab-territorio" class="hidden space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Municipios de GTO Atendidos</p>
-            <p id="kpi-ter-mun" class="text-3xl font-extrabold text-emerald-700 mt-1">0</p>
-            <p id="kpi-ter-mun-sub" class="text-xs text-slate-500 mt-1">De los 46 municipios del Estado</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Municipios de GTO Atendidos</p>
+            <p id="kpi-ter-mun" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">De los 46 municipios del Estado</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Comunidades Impactadas (Limpias)</p>
-            <p id="kpi-ter-com" class="text-3xl font-extrabold text-gto-dark mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Nombres normalizados sin duplicados</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Comunidades Impactadas (Limpias)</p>
+            <p id="kpi-ter-com" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Nombres normalizados sin duplicados</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Actividades en Zonas Prioritarias</p>
-            <p id="kpi-ter-zap" class="text-3xl font-extrabold text-amber-600 mt-1">0</p>
-            <p id="kpi-ter-zap-sub" class="text-xs text-slate-500 mt-1">ZAP Nuevo Comienzo / SSyP</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Actividades en Zonas Prioritarias</p>
+            <p id="kpi-ter-zap" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">ZAP Nuevo Comienzo / SSyP</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Población Territorial Alcanzada</p>
-            <p id="kpi-ter-pop" class="text-3xl font-extrabold text-gto-blue mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Suma directa en Registro_Territorio</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Población Territorial Alcanzada</p>
+            <p id="kpi-ter-pop" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Suma directa en Registro_Territorio</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Atención a Zonas de Atención Prioritaria por Municipio</h3>
-            <p class="text-xs text-slate-400 mb-3">Proporción de actividades en ZAP (Sí vs. No)</p>
+          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-1">Atención a Zonas Prioritarias por Municipio</h3>
+            <p class="text-xs text-gto-gray7 mb-3">Actividades en ZAP (Sí vs. No)</p>
             <div class="h-72"><canvas id="chart-ter-zap-mun"></canvas></div>
           </div>
 
-          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Tipo de Asentamiento</h3>
-            <p class="text-xs text-slate-400 mb-3">Urbano, Periurbano y Rural</p>
+          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-1">Tipo de Asentamiento</h3>
+            <p class="text-xs text-gto-gray7 mb-3">Urbano, Periurbano y Rural</p>
             <div class="h-64"><canvas id="chart-ter-asentamiento"></canvas></div>
           </div>
 
-          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Municipios con Mayor Actividad</h3>
-            <p class="text-xs text-slate-400 mb-3">Top municipios por número de registros</p>
+          <div class="lg:col-span-4 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-1">Municipios con Mayor Actividad</h3>
+            <p class="text-xs text-gto-gray7 mb-3">Top municipios por registros</p>
             <div class="h-72"><canvas id="chart-ter-top-mun"></canvas></div>
           </div>
         </div>
 
-        <!-- Tabla Desglose Operativo por Comunidad (Normalizada) -->
-        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+        <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div>
-              <h3 class="text-sm font-bold text-gto-dark">Desglose Operativo por Comunidad (Nombres Homologados)</h3>
-              <p class="text-xs text-slate-400">Agrupa variaciones de mayúsculas/acentos (ej. "ZONA CENTRO", "Zona centro" y "Guanajuato Centro")</p>
+              <h3 class="text-base font-extrabold text-gto-blue">Desglose Operativo por Comunidad (Nombres Homologados)</h3>
+              <p class="text-xs text-gto-gray7">Unifica variaciones de mayúsculas y acentos (ej. "ZONA CENTRO", "Zona centro" y "Guanajuato Centro")</p>
             </div>
-            <input type="text" id="search-comunidad" oninput="renderTerritorioTable()" placeholder="Buscar municipio o comunidad..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
+            <input type="text" id="search-comunidad" oninput="renderTerritorioTable()" placeholder="Buscar municipio o comunidad..." class="bg-gto-bg border border-gto-gray3 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
           </div>
           <div class="overflow-x-auto max-h-80 custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-slate-100 text-slate-600 sticky top-0">
+              <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                 <tr>
                   <th class="p-2.5 font-bold">Municipio</th>
                   <th class="p-2.5 font-bold">Comunidad (Normalizada)</th>
@@ -510,77 +562,76 @@
                   <th class="p-2.5 font-bold text-right">Total Beneficiarios</th>
                 </tr>
               </thead>
-              <tbody id="tbl-comunidades" class="divide-y divide-slate-100"></tbody>
+              <tbody id="tbl-comunidades" class="divide-y divide-gto-gray3/40"></tbody>
             </table>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-           VISTA 4: PERFIL DE POBLACIÓN - ANÁLISIS DEMOGRÁFICO
+           VISTA 4: PERFIL DE POBLACIÓN
       ========================================================== -->
       <section id="tab-poblacion" class="hidden space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Participación Activa vs. Acceso</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Participación Activa vs. Acceso</p>
             <div class="flex items-baseline gap-2 mt-1">
-              <span id="kpi-pob-part" class="text-2xl font-extrabold text-rose-600">0</span>
-              <span class="text-xs text-slate-400 font-bold">vs</span>
-              <span id="kpi-pob-acc" class="text-2xl font-extrabold text-gto-blue">0</span>
+              <span id="kpi-pob-part" class="kpi-number text-2xl font-black text-gto-blue">0</span>
+              <span class="text-xs text-gto-gray7 font-bold">vs</span>
+              <span id="kpi-pob-acc" class="kpi-number text-2xl font-black text-gto-sky">0</span>
             </div>
-            <p class="text-xs text-slate-500 mt-1">En Registro_Poblacion</p>
+            <p class="text-xs text-gto-gray10 mt-1">En Registro_Poblacion</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Total Población Demográfica</p>
-            <p id="kpi-pob-total-dem" class="text-3xl font-extrabold text-gto-dark mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Suma exacta sin producto cartesiano</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Total Población Demográfica</p>
+            <p id="kpi-pob-total-dem" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Suma exacta sin duplicación</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Impacto en Grupos Prioritarios</p>
-            <p id="kpi-pob-prio" class="text-3xl font-extrabold text-teal-600 mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">NNA, Jóvenes en riesgo, LGBTIQ+, etc.</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Impacto en Grupos Prioritarios</p>
+            <p id="kpi-pob-prio" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">NNA, Jóvenes en riesgo, LGBTIQ+, etc.</p>
           </div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <p class="text-[11px] font-bold uppercase text-slate-400">Promedio Asistentes por Actividad</p>
-            <p id="kpi-pob-avg" class="text-3xl font-extrabold text-amber-600 mt-1">0</p>
-            <p class="text-xs text-slate-500 mt-1">Personas promedio por actividad</p>
+          <div class="bg-white rounded-xl p-4 border-l-4 border-l-gto-sky border border-gto-gray3/60 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-gto-gray7">Promedio Asistentes por Actividad</p>
+            <p id="kpi-pob-avg" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
+            <p class="text-xs text-gto-gray10 mt-1">Personas promedio por actividad</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-6 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Atención por Grupo Etario (Personas Impactadas)</h3>
+          <div class="lg:col-span-6 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-2">Atención por Grupo Etario (Personas Impactadas)</h3>
             <div class="h-64"><canvas id="chart-pob-etario"></canvas></div>
           </div>
-          <div class="lg:col-span-6 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Atención Específica a Grupos Prioritarios</h3>
+          <div class="lg:col-span-6 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-2">Atención Específica a Grupos Prioritarios</h3>
             <div class="h-64"><canvas id="chart-pob-prioritario"></canvas></div>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-7 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Composición de Público por Enfoque (Cultural vs. Artística)</h3>
+          <div class="lg:col-span-7 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-2">Composición de Público por Enfoque (Cultural vs. Artística)</h3>
             <div class="h-60"><canvas id="chart-pob-enfoque-stack"></canvas></div>
           </div>
-          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-sm font-bold text-gto-dark mb-2">Distribución por Género</h3>
+          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
+            <h3 class="text-base font-extrabold text-gto-blue mb-2">Distribución por Género</h3>
             <div class="h-60"><canvas id="chart-pob-genero"></canvas></div>
           </div>
         </div>
 
-        <!-- Tabla Desglose de Población y Evidencias por Actividad -->
-        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+        <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div>
-              <h3 class="text-sm font-bold text-gto-dark">Desglose de Población y Evidencia Documental por Actividad</h3>
-              <p class="text-xs text-slate-400">Cifras reales por actividad (sin el error de multiplicación por 1,000 de Looker Studio)</p>
+              <h3 class="text-base font-extrabold text-gto-blue">Desglose de Población y Evidencia Documental por Actividad</h3>
+              <p class="text-xs text-gto-gray7">Cifras reales por actividad sin multiplicación por cruces 1:N</p>
             </div>
-            <input type="text" id="search-actividad" oninput="renderPoblacionTable()" placeholder="Buscar por ID, nombre o municipio..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
+            <input type="text" id="search-actividad" oninput="renderPoblacionTable()" placeholder="Buscar por ID, nombre o municipio..." class="bg-gto-bg border border-gto-gray3 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
           </div>
           <div class="overflow-x-auto max-h-96 custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-slate-100 text-slate-600 sticky top-0">
+              <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                 <tr>
                   <th class="p-2.5 font-bold">ID Actividad</th>
                   <th class="p-2.5 font-bold">Fecha</th>
@@ -592,36 +643,36 @@
                   <th class="p-2.5 font-bold text-center">Evidencias</th>
                 </tr>
               </thead>
-              <tbody id="tbl-poblacion-act" class="divide-y divide-slate-100"></tbody>
+              <tbody id="tbl-poblacion-act" class="divide-y divide-gto-gray3/40"></tbody>
             </table>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-           VISTA 5: AUDITORÍA DE CUADRE (TERRITORIO VS POBLACIÓN)
+           VISTA 5: AUDITORÍA DE CUADRE
       ========================================================== -->
       <section id="tab-auditoria" class="hidden space-y-6">
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="bg-gto-ice/40 border border-gto-sky rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
           <div class="flex items-start gap-3">
-            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0 mt-0.5"></i>
+            <i data-lucide="shield-alert" class="w-6 h-6 text-gto-blue shrink-0 mt-0.5"></i>
             <div>
-              <h3 class="text-sm font-bold text-amber-900">Módulo de Conciliación: Registro_Territorio vs. Registro_Poblacion</h3>
-              <p class="text-xs text-amber-800 mt-0.5">
-                Lista automática de actividades donde la suma de beneficiarios capturada en la pestaña <b>Registro_Territorio</b> difiere de la suma capturada en <b>Registro_Poblacion</b>.
+              <h3 class="text-base font-extrabold text-gto-blue">Módulo de Conciliación: Registro_Territorio vs. Registro_Poblacion</h3>
+              <p class="text-xs text-gto-gray10 mt-0.5">
+                Actividades donde la suma capturada en <b>Registro_Territorio</b> difiere de la suma capturada en <b>Registro_Poblacion</b>.
               </p>
             </div>
           </div>
-          <button onclick="exportAuditCSV()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+          <button onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
             <i data-lucide="download" class="w-4 h-4"></i>
             Exportar incidencias a CSV
           </button>
         </div>
 
-        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+        <div class="bg-white rounded-xl p-4 border border-gto-gray3/70 shadow-sm">
           <div class="overflow-x-auto max-h-[500px] custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-slate-100 text-slate-600 sticky top-0">
+              <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                 <tr>
                   <th class="p-2.5 font-bold">ID Actividad</th>
                   <th class="p-2.5 font-bold">Usuario Captura</th>
@@ -633,7 +684,7 @@
                   <th class="p-2.5 font-bold">Diagnóstico</th>
                 </tr>
               </thead>
-              <tbody id="tbl-auditoria" class="divide-y divide-slate-100"></tbody>
+              <tbody id="tbl-auditoria" class="divide-y divide-gto-gray3/40"></tbody>
             </table>
           </div>
         </div>
@@ -642,7 +693,9 @@
     </main>
   </div>
 
-  <!-- LÓGICA DE DATOS, CRUCE RELACIONAL Y GRÁFICAS -->
+  <!-- =========================================================
+       MOTOR JAVASCRIPT: CONEXIÓN GOOGLE SHEETS + NORMALIZACIÓN
+  ========================================================== -->
   <script>
     const SHEET_ID = '1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4';
     const SHEETS = {
@@ -652,7 +705,9 @@
       evidencia: 'Regitro_Evidencia'
     };
 
-    // Coordenadas de los Municipios de Guanajuato para el mapa interactivo
+    // Paleta Oficial Manual de Identidad Gobierno de la Gente 2024-2030
+    const PALETTE_GTO = ['#004B87', '#69B3E7', '#63666A', '#97999B', '#C8D8EB', '#00284B', '#3B82F6'];
+
     const GTO_COORDS = {
       'Guanajuato': [21.0190, -101.2574],
       'León': [21.1221, -101.6826],
@@ -677,26 +732,54 @@
 
     const MUNICIPIOS_FORANEOS = ['ciudad de mexico', 'cdmx', 'foraneo'];
 
-    // Estado Global
     let rawDB = { actividades: [], territorio: [], poblacion: [], evidencia: [] };
     let filteredActIds = new Set();
-    let popMode = 'territorio'; // 'territorio' | 'poblacion'
+    let popMode = 'territorio';
     let charts = {};
     let leafletMap = null;
     let mapLayerGroup = null;
     let auditList = [];
 
-    // Utilidades de limpieza
     const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).trim();
     const toNum = (val) => {
-      if (!val) return 0;
+      if (val === null || val === undefined || val === '') return 0;
+      if (typeof val === 'number') return isNaN(val) ? 0 : val;
       const n = parseFloat(String(val).replace(/[^0-9.-]/g, ''));
       return isNaN(n) ? 0 : n;
     };
     const fmtInt = (n) => Math.round(n).toLocaleString('es-MX');
     const fmtMoney = (n) => '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    // Homologación de nombres de comunidades (Regla 2)
+    // Normalizador Universal de Fechas (Convierte DD/MM/YYYY, D/M/YYYY, Date(Y,M,D) y YYYY-MM-DD a YYYY-MM-DD)
+    function normalizeDateISO(val) {
+      const s = cleanStr(val);
+      if (!s) return '';
+      // Formato gviz Date(2026,3,8) -> mes base 0
+      const mGviz = s.match(/^Date\((\d{4})\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})/i);
+      if (mGviz) {
+        const y = mGviz[1];
+        const m = String(parseInt(mGviz[2], 10) + 1).padStart(2, '0');
+        const d = String(parseInt(mGviz[3], 10)).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+      }
+      // Formato ISO YYYY-MM-DD
+      const mIso = s.match(/^(\d{4})[\-\/](\d{1,2})[\-\/](\d{1,2})/);
+      if (mIso) {
+        return `${mIso[1]}-${String(mIso[2]).padStart(2, '0')}-${String(mIso[3]).padStart(2, '0')}`;
+      }
+      // Formato Latino DD/MM/YYYY o D/M/YYYY
+      const mLat = s.match(/^(\d{1,2})[\-\/](\d{1,2})[\-\/](\d{4})/);
+      if (mLat) {
+        const p1 = parseInt(mLat[1], 10);
+        const p2 = parseInt(mLat[2], 10);
+        const y = mLat[3];
+        const day = p2 > 12 ? p2 : p1;
+        const month = p2 > 12 ? p1 : p2;
+        return `${y}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      }
+      return s;
+    }
+
     function normalizeCommunityName(rawName, municipio) {
       const s = cleanStr(rawName);
       if (!s || s.toLowerCase() === 'null' || s.toLowerCase() === 'nan') {
@@ -715,14 +798,15 @@
       return !MUNICIPIOS_FORANEOS.includes(m);
     }
 
-    // Descarga CSV desde Google Sheets
+    // Descarga CSV con normalización de encabezados
     function fetchSheetCSV(sheetName) {
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(sheetName)}`;
       return new Promise((resolve, reject) => {
         Papa.parse(url, {
           download: true,
           header: true,
           skipEmptyLines: true,
+          transformHeader: (h) => cleanStr(h),
           complete: (res) => resolve(res.data),
           error: (err) => reject(err)
         });
@@ -740,10 +824,19 @@
           fetchSheetCSV(SHEETS.evidencia)
         ]);
 
-        rawDB.actividades = act.filter(r => cleanStr(r.ID_Actividad) !== '');
+        // Limpiar y normalizar fechas de inmediato a YYYY-MM-DD
+        rawDB.actividades = act
+          .filter(r => cleanStr(r.ID_Actividad) !== '')
+          .map(r => ({
+            ...r,
+            Fecha_Inicio_ISO: normalizeDateISO(r.Fecha_Inicio)
+          }));
+
         rawDB.territorio = ter.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.poblacion = pob.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.evidencia = evi.filter(r => cleanStr(r.ID_Actividad) !== '');
+
+        document.getElementById('sync-text').textContent = `${rawDB.actividades.length} registros en vivo`;
 
         populateFilterDropdowns();
         document.getElementById('loader').classList.add('hidden');
@@ -754,7 +847,7 @@
         lucide.createIcons();
       } catch (err) {
         console.error('Error cargando Google Sheet:', err);
-        alert('No se pudo conectar al Google Sheet. Verifica que el documento esté compartido como "Cualquier persona con el enlace (Lector)".');
+        alert('No se pudo conectar al Google Sheet. Verifica que el documento esté compartido como "Cualquier persona con el enlace".');
       }
     }
 
@@ -770,17 +863,11 @@
         });
       };
 
-      const muns = new Set(rawDB.territorio.map(r => cleanStr(r.Municipio)));
-      const dirs = new Set(rawDB.actividades.map(r => cleanStr(r.Direccion)));
-      const discs = new Set(rawDB.actividades.map(r => cleanStr(r.Disciplina)));
-      const ejes = new Set(rawDB.actividades.map(r => cleanStr(r.Eje_PG)));
-      const enfoques = new Set(rawDB.actividades.map(r => cleanStr(r.Enfoque_Actividad)));
-
-      fillSelect('f-municipio', muns, 'Todos los municipios');
-      fillSelect('f-direccion', dirs, 'Todas las direcciones');
-      fillSelect('f-disciplina', discs, 'Todas las disciplinas');
-      fillSelect('f-eje', ejes, 'Todos los ejes');
-      fillSelect('f-enfoque', enfoques, 'Cultural y Artística');
+      fillSelect('f-municipio', new Set(rawDB.territorio.map(r => cleanStr(r.Municipio))), 'Todos los municipios');
+      fillSelect('f-direccion', new Set(rawDB.actividades.map(r => cleanStr(r.Direccion))), 'Todas las direcciones');
+      fillSelect('f-disciplina', new Set(rawDB.actividades.map(r => cleanStr(r.Disciplina))), 'Todas las disciplinas');
+      fillSelect('f-eje', new Set(rawDB.actividades.map(r => cleanStr(r.Eje_PG))), 'Todos los ejes');
+      fillSelect('f-enfoque', new Set(rawDB.actividades.map(r => cleanStr(r.Enfoque_Actividad))), 'Cultural y Artística');
     }
 
     function resetFilters() {
@@ -801,15 +888,14 @@
       const btnPob = document.getElementById('btn-pop-pob');
       if (mode === 'territorio') {
         btnTer.className = 'px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]';
-        btnPob.className = 'px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]';
+        btnPob.className = 'px-2.5 py-1 rounded-md font-semibold text-gto-gray10 hover:text-gto-blue transition text-[11px]';
       } else {
         btnPob.className = 'px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]';
-        btnTer.className = 'px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]';
+        btnTer.className = 'px-2.5 py-1 rounded-md font-semibold text-gto-gray10 hover:text-gto-blue transition text-[11px]';
       }
       applyFilters();
     }
 
-    // Aplicación de filtros relacionales 1:N
     function applyFilters() {
       const dStart = document.getElementById('f-date-start').value;
       const dEnd = document.getElementById('f-date-end').value;
@@ -820,7 +906,6 @@
       const fEnf = document.getElementById('f-enfoque').value;
       const fZap = document.getElementById('f-zap').value;
 
-      // Indexar territorio por ID_Actividad para filtrar por Municipio y ZAP
       const terByAct = {};
       rawDB.territorio.forEach(t => {
         const id = cleanStr(t.ID_Actividad);
@@ -832,9 +917,9 @@
 
       rawDB.actividades.forEach(a => {
         const id = cleanStr(a.ID_Actividad);
-        const fIni = cleanStr(a.Fecha_Inicio);
-        if (dStart && fIni && fIni < dStart) return;
-        if (dEnd && fIni && fIni > dEnd) return;
+        const fIso = a.Fecha_Inicio_ISO || '';
+        if (dStart && fIso && fIso < dStart) return;
+        if (dEnd && fIso && fIso > dEnd) return;
         if (fDir !== 'ALL' && cleanStr(a.Direccion) !== fDir) return;
         if (fDisc !== 'ALL' && cleanStr(a.Disciplina) !== fDisc) return;
         if (fEje !== 'ALL' && cleanStr(a.Eje_PG) !== fEje) return;
@@ -866,7 +951,6 @@
       const pobF = rawDB.poblacion.filter(p => filteredActIds.has(cleanStr(p.ID_Actividad)));
       const eviF = rawDB.evidencia.filter(e => filteredActIds.has(cleanStr(e.ID_Actividad)));
 
-      // Actualizar botones del selector con los totales actuales
       const sumTerAll = terF.reduce((s, r) => s + toNum(r.Cantidad), 0);
       const sumPobAll = pobF.reduce((s, r) => s + toNum(r.Cantidad_Poblacion), 0);
       document.getElementById('btn-pop-ter').textContent = `Territorio (${fmtInt(sumTerAll)})`;
@@ -880,7 +964,7 @@
     }
 
     // =========================================================
-    // RENDER VISTA 1: VISIÓN GENERAL
+    // VISTA 1: VISIÓN GENERAL
     // =========================================================
     function renderVisionGeneral(actF, terF, pobF) {
       const totalAct = actF.length;
@@ -931,10 +1015,9 @@
       document.getElementById('sub-zap-total').textContent = fmtInt(zapCount);
       document.getElementById('sub-loc-total').textContent = fmtInt(comunidadesLimpias.size);
 
-      // Actualizar Mapa Leaflet
       updateMapMarkers(terF);
 
-      // Lista Top Tipos de Actividad
+      // Top Tipos de Actividad
       const tipoCount = {};
       actF.forEach(a => {
         const t = cleanStr(a.Tipo_Actividad) || 'Sin especificar';
@@ -942,24 +1025,23 @@
       });
       const sortedTipos = Object.entries(tipoCount).sort((a, b) => b[1] - a[1]);
       const maxTipo = sortedTipos[0]?.[1] || 1;
-      const containerTipos = document.getElementById('list-tipos-actividad');
-      containerTipos.innerHTML = sortedTipos.slice(0, 10).map(([nombre, count]) => {
+      document.getElementById('list-tipos-actividad').innerHTML = sortedTipos.slice(0, 10).map(([nombre, count]) => {
         const pctTotal = totalAct ? ((count / totalAct) * 100).toFixed(1) : 0;
         const barW = ((count / maxTipo) * 100).toFixed(0);
         return `
           <div class="text-xs">
-            <div class="flex justify-between font-medium text-slate-700 mb-0.5">
-              <span class="truncate pr-2">${nombre} <span class="text-slate-400">(${pctTotal}%)</span></span>
-              <span class="font-bold text-gto-dark">${count}</span>
+            <div class="flex justify-between font-medium text-gto-gray10 mb-0.5">
+              <span class="truncate pr-2">${nombre} <span class="text-gto-gray7">(${pctTotal}%)</span></span>
+              <span class="font-bold text-gto-blue">${count}</span>
             </div>
-            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-              <div class="bg-teal-600 h-2 rounded-full" style="width:${barW}%"></div>
+            <div class="w-full bg-gto-ice/50 h-2 rounded-full overflow-hidden">
+              <div class="bg-gto-blue h-2 rounded-full" style="width:${barW}%"></div>
             </div>
           </div>
         `;
       }).join('');
 
-      // Gráfica Disciplinas
+      // Disciplinas
       const discCount = {};
       actF.forEach(a => {
         const d = cleanStr(a.Disciplina) || 'Sin disciplina';
@@ -971,12 +1053,12 @@
         datasets: [{
           label: 'Actividades',
           data: topDisc.map(x => x[1]),
-          backgroundColor: '#1E56A0',
+          backgroundColor: '#004B87',
           borderRadius: 4
         }]
       }, { indexAxis: 'y', plugins: { legend: { display: false } } });
 
-      // Gráfica Dona Eje Plan de Gobierno
+      // Dona Eje Plan de Gobierno
       const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
@@ -987,16 +1069,15 @@
         labels: ejeEntries.map(x => x[0]),
         datasets: [{
           data: ejeEntries.map(x => x[1]),
-          backgroundColor: ['#D97706', '#2563EB', '#E11D48', '#7C3AED', '#64748B']
+          backgroundColor: PALETTE_GTO
         }]
       }, { plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } } });
 
-      // Evolución Mensual Cronológica (Ene -> Dic)
+      // Evolución Mensual Cronológica
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const actPorMes = new Array(12).fill(0);
       const popPorMes = new Array(12).fill(0);
 
-      // Mapa rápido de población por actividad
       const popByAct = {};
       if (popMode === 'territorio') {
         terF.forEach(t => { popByAct[cleanStr(t.ID_Actividad)] = (popByAct[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
@@ -1005,9 +1086,9 @@
       }
 
       actF.forEach(a => {
-        const f = cleanStr(a.Fecha_Inicio);
-        if (!f) return;
-        const parts = f.split('-');
+        const fIso = a.Fecha_Inicio_ISO || '';
+        if (!fIso) return;
+        const parts = fIso.split('-');
         if (parts.length >= 2) {
           const mIdx = parseInt(parts[1], 10) - 1;
           if (mIdx >= 0 && mIdx < 12) {
@@ -1024,7 +1105,7 @@
             type: 'bar',
             label: 'Actividades realizadas por mes',
             data: actPorMes,
-            backgroundColor: '#F59E0B',
+            backgroundColor: '#004B87',
             borderRadius: 5,
             yAxisID: 'y'
           },
@@ -1032,8 +1113,8 @@
             type: 'line',
             label: 'Personas beneficiadas en el mes',
             data: popPorMes,
-            borderColor: '#0D9488',
-            backgroundColor: 'rgba(13, 148, 136, 0.12)',
+            borderColor: '#69B3E7',
+            backgroundColor: 'rgba(105, 179, 231, 0.22)',
             fill: true,
             tension: 0.3,
             yAxisID: 'y1'
@@ -1048,13 +1129,12 @@
     }
 
     // =========================================================
-    // RENDER VISTA 2: MATRIZ ESTRATÉGICA
+    // VISTA 2: MATRIZ ESTRATÉGICA
     // =========================================================
     function renderMatrizEstrategica(actF, pobF, terF) {
       const dirs = new Set(actF.map(a => cleanStr(a.Direccion)).filter(Boolean));
       const metasMap = {};
 
-      // Deduplicar metas por (Clave_Proceso_Txt + Nombre_Meta)
       actF.forEach(a => {
         const clave = cleanStr(a.Clave_Proceso_Txt) || 'S/C';
         const metaNom = cleanStr(a.Nombre_Meta);
@@ -1077,7 +1157,6 @@
       const metasArr = Object.values(metasMap);
       const procesosUnicos = new Set(metasArr.map(m => m.clave));
 
-      // Separar metas de Actividades vs metas de Personas (Regla 3)
       let sumMetaAct = 0;
       let sumRealAct = 0;
       metasArr.forEach(m => {
@@ -1098,16 +1177,14 @@
       document.getElementById('kpi-mat-cumplimiento').textContent = `${pctAvanceAct}%`;
       document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealAct)} de ${fmtInt(sumMetaAct)} actividades meta`;
 
-      // Gráfica Eje de Gobierno
       const ejeMap = {};
       actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
       const ejeSort = Object.entries(ejeMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-mat-eje', 'bar', {
         labels: ejeSort.map(x => x[0]),
-        datasets: [{ label: 'Actividades', data: ejeSort.map(x => x[1]), backgroundColor: '#2563EB', borderRadius: 4 }]
+        datasets: [{ label: 'Actividades', data: ejeSort.map(x => x[1]), backgroundColor: '#004B87', borderRadius: 4 }]
       }, { indexAxis: 'y', plugins: { legend: { display: false } } });
 
-      // Gráfica Dirección General
       const dirMap = {};
       actF.forEach(a => {
         const d = (cleanStr(a.Direccion) || 'SIN ASIGNAR').replace('DIRECCIÓN GENERAL DE ', 'DG ');
@@ -1116,26 +1193,23 @@
       const dirSort = Object.entries(dirMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-mat-direccion', 'bar', {
         labels: dirSort.map(x => x[0]),
-        datasets: [{ label: 'Actividades', data: dirSort.map(x => x[1]), backgroundColor: '#7C3AED', borderRadius: 4 }]
+        datasets: [{ label: 'Actividades', data: dirSort.map(x => x[1]), backgroundColor: '#69B3E7', borderRadius: 4 }]
       }, { plugins: { legend: { display: false } } });
 
-      // Dona Eje Transversal PEC
       const pecMap = {};
       actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
       renderChart('chart-mat-pec', 'pie', {
         labels: Object.keys(pecMap),
-        datasets: [{ data: Object.values(pecMap), backgroundColor: ['#84CC16', '#A855F7', '#F97316'] }]
+        datasets: [{ data: Object.values(pecMap), backgroundColor: ['#004B87', '#69B3E7', '#63666A'] }]
       }, { plugins: { legend: { position: 'right', labels: { boxWidth: 8, font: { size: 9 } } } } });
 
-      // Dona Enfoque Cultural vs Artística
       const enfMap = {};
       actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No esp.'; enfMap[e] = (enfMap[e] || 0) + 1; });
       renderChart('chart-mat-enfoque', 'doughnut', {
         labels: Object.keys(enfMap),
-        datasets: [{ data: Object.values(enfMap), backgroundColor: ['#10B981', '#F59E0B', '#94A3B8'] }]
+        datasets: [{ data: Object.values(enfMap), backgroundColor: ['#004B87', '#69B3E7', '#97999B'] }]
       }, { plugins: { legend: { position: 'right', labels: { boxWidth: 8, font: { size: 9 } } } } });
 
-      // Tabla Alineación Institucional
       const alinMap = {};
       actF.forEach(a => {
         const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo PG';
@@ -1149,16 +1223,15 @@
       });
       const alinRows = Object.values(alinMap).sort((a, b) => b.total - a.total);
       document.getElementById('tbl-alineacion').innerHTML = alinRows.map(r => `
-        <tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-medium text-slate-700">${r.obj}</td>
-          <td class="p-2.5 text-slate-600">${r.lin}</td>
-          <td class="p-2.5 text-right font-semibold text-emerald-700">${r.cultural}</td>
-          <td class="p-2.5 text-right font-semibold text-amber-600">${r.artistica}</td>
-          <td class="p-2.5 text-right font-bold text-gto-dark">${r.total}</td>
+        <tr class="hover:bg-gto-bg">
+          <td class="p-2.5 font-semibold text-gto-gray10">${r.obj}</td>
+          <td class="p-2.5 text-gto-gray10">${r.lin}</td>
+          <td class="p-2.5 text-right font-bold text-gto-blue">${r.cultural}</td>
+          <td class="p-2.5 text-right font-bold text-gto-sky">${r.artistica}</td>
+          <td class="p-2.5 text-right font-black text-gto-blue">${r.total}</td>
         </tr>
       `).join('');
 
-      // Tabla Avance de Metas
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
 
@@ -1169,16 +1242,16 @@
           realizado = [...m.actIds].reduce((acc, id) => acc + (popByActTer[id] || 0), 0);
         }
         const pct = m.metaAnual > 0 ? ((realizado / m.metaAnual) * 100).toFixed(1) : '0.0';
-        const badgeColor = parseFloat(pct) >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-gto-blue';
+        const badgeColor = parseFloat(pct) >= 100 ? 'bg-gto-blue text-white' : 'bg-gto-ice text-gto-blue';
         return `
-          <tr class="hover:bg-slate-50">
+          <tr class="hover:bg-gto-bg">
             <td class="p-2.5 font-bold text-gto-blue">${m.clave}</td>
             <td class="p-2.5">
-              <div class="font-medium text-slate-700 line-clamp-2">${m.nombre}</div>
-              <div class="text-[10px] text-slate-400">${m.unidad}</div>
+              <div class="font-medium text-gto-gray10 line-clamp-2">${m.nombre}</div>
+              <div class="text-[10px] text-gto-gray7">${m.unidad}</div>
             </td>
             <td class="p-2.5 text-right font-medium">${fmtInt(m.metaAnual)}</td>
-            <td class="p-2.5 text-right font-bold text-gto-dark">${fmtInt(realizado)}</td>
+            <td class="p-2.5 text-right font-bold text-gto-blue">${fmtInt(realizado)}</td>
             <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pct}%</span></td>
           </tr>
         `;
@@ -1186,7 +1259,7 @@
     }
 
     // =========================================================
-    // RENDER VISTA 3: COBERTURA TERRITORIAL
+    // VISTA 3: COBERTURA TERRITORIAL
     // =========================================================
     let cachedComunidadesRows = [];
     function renderCoberturaTerritorial(actF, terF) {
@@ -1240,29 +1313,26 @@
 
       const sortedMuns = Object.entries(munStats).sort((a, b) => b[1].total - a[1].total);
 
-      // Gráfica 100% apilada ZAP por Municipio
       renderChart('chart-ter-zap-mun', 'bar', {
         labels: sortedMuns.map(x => x[0]),
         datasets: [
-          { label: 'En ZAP (Sí)', data: sortedMuns.map(x => x[1].si), backgroundColor: '#F59E0B' },
-          { label: 'Sin ZAP (No)', data: sortedMuns.map(x => x[1].no), backgroundColor: '#1E56A0' }
+          { label: 'En ZAP (Sí)', data: sortedMuns.map(x => x[1].si), backgroundColor: '#69B3E7' },
+          { label: 'Sin ZAP (No)', data: sortedMuns.map(x => x[1].no), backgroundColor: '#004B87' }
         ]
       }, {
         indexAxis: 'y',
         scales: { x: { stacked: true }, y: { stacked: true } }
       });
 
-      // Dona Tipo de Asentamiento
       renderChart('chart-ter-asentamiento', 'doughnut', {
         labels: Object.keys(asentMap),
-        datasets: [{ data: Object.values(asentMap), backgroundColor: ['#0D9488', '#F59E0B', '#E11D48', '#94A3B8'] }]
+        datasets: [{ data: Object.values(asentMap), backgroundColor: PALETTE_GTO }]
       });
 
-      // Top Municipios
       const topM = sortedMuns.slice(0, 10);
       renderChart('chart-ter-top-mun', 'bar', {
         labels: topM.map(x => x[0]),
-        datasets: [{ label: 'Actividades', data: topM.map(x => x[1].total), backgroundColor: '#15803D', borderRadius: 4 }]
+        datasets: [{ label: 'Actividades', data: topM.map(x => x[1].total), backgroundColor: '#004B87', borderRadius: 4 }]
       }, { indexAxis: 'y', plugins: { legend: { display: false } } });
 
       cachedComunidadesRows = Object.values(comGroup).sort((a, b) => b.acts - a.acts);
@@ -1275,23 +1345,23 @@
         r.mun.toLowerCase().includes(q) || r.com.toLowerCase().includes(q)
       );
       document.getElementById('tbl-comunidades').innerHTML = rows.map(r => `
-        <tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-semibold text-slate-700">${r.mun}</td>
-          <td class="p-2.5 text-slate-600">${r.com}</td>
-          <td class="p-2.5 text-slate-500">${r.asent}</td>
+        <tr class="hover:bg-gto-bg">
+          <td class="p-2.5 font-semibold text-gto-blue">${r.mun}</td>
+          <td class="p-2.5 text-gto-gray10">${r.com}</td>
+          <td class="p-2.5 text-gto-gray7">${r.asent}</td>
           <td class="p-2.5 text-center">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${r.zap === 'Sí' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}">${r.zap}</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${r.zap === 'Sí' ? 'bg-gto-ice text-gto-blue' : 'bg-slate-100 text-gto-gray7'}">${r.zap}</span>
           </td>
-          <td class="p-2.5 text-right font-bold text-gto-dark">${fmtInt(r.acts)}</td>
-          <td class="p-2.5 text-right text-slate-600">${fmtInt(r.part)}</td>
-          <td class="p-2.5 text-right text-slate-600">${fmtInt(r.acc)}</td>
-          <td class="p-2.5 text-right font-bold text-gto-blue">${fmtInt(r.total)}</td>
+          <td class="p-2.5 text-right font-bold text-gto-blue">${fmtInt(r.acts)}</td>
+          <td class="p-2.5 text-right text-gto-gray10">${fmtInt(r.part)}</td>
+          <td class="p-2.5 text-right text-gto-gray10">${fmtInt(r.acc)}</td>
+          <td class="p-2.5 text-right font-black text-gto-blue">${fmtInt(r.total)}</td>
         </tr>
       `).join('');
     }
 
     // =========================================================
-    // RENDER VISTA 4: PERFIL DE POBLACIÓN
+    // VISTA 4: PERFIL DE POBLACIÓN
     // =========================================================
     let cachedPoblacionActRows = [];
     function renderPerfilPoblacion(actF, terF, pobF, eviF) {
@@ -1304,7 +1374,6 @@
       const prioMap = {};
       const generoMap = {};
 
-      // Mapa rápido de Enfoque por ID_Actividad
       const enfoqueByAct = {};
       actF.forEach(a => { enfoqueByAct[cleanStr(a.ID_Actividad)] = cleanStr(a.Enfoque_Actividad) || 'Cultural'; });
 
@@ -1337,29 +1406,25 @@
       document.getElementById('kpi-pob-prio').textContent = fmtInt(totalPrio);
       document.getElementById('kpi-pob-avg').textContent = fmtInt(avgAsist);
 
-      // Grupo Etario
       const etSort = Object.entries(etarioMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-pob-etario', 'bar', {
         labels: etSort.map(x => x[0]),
-        datasets: [{ label: 'Personas Impactadas', data: etSort.map(x => x[1]), backgroundColor: '#EC4899', borderRadius: 4 }]
+        datasets: [{ label: 'Personas Impactadas', data: etSort.map(x => x[1]), backgroundColor: '#004B87', borderRadius: 4 }]
       }, { indexAxis: 'y', plugins: { legend: { display: false } } });
 
-      // Grupos Prioritarios
       const prSort = Object.entries(prioMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-pob-prioritario', 'bar', {
         labels: prSort.map(x => x[0]),
-        datasets: [{ label: 'Personas en Grupos Prioritarios', data: prSort.map(x => x[1]), backgroundColor: '#06B6D4', borderRadius: 4 }]
+        datasets: [{ label: 'Personas en Grupos Prioritarios', data: prSort.map(x => x[1]), backgroundColor: '#69B3E7', borderRadius: 4 }]
       }, { plugins: { legend: { display: false } } });
 
-      // Composición por Enfoque (Apilada)
       const allEtarios = Object.keys(etarioMap);
-      const colorsEt = ['#84CC16', '#F59E0B', '#F97316', '#EC4899', '#8B5CF6', '#06B6D4', '#64748B'];
       renderChart('chart-pob-enfoque-stack', 'bar', {
         labels: ['Cultural', 'Artística'],
         datasets: allEtarios.map((ge, i) => ({
           label: ge,
           data: [enfoqueEtario['Cultural']?.[ge] || 0, enfoqueEtario['Artística']?.[ge] || 0],
-          backgroundColor: colorsEt[i % colorsEt.length]
+          backgroundColor: PALETTE_GTO[i % PALETTE_GTO.length]
         }))
       }, {
         indexAxis: 'y',
@@ -1367,13 +1432,11 @@
         plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }
       });
 
-      // Dona Género
       renderChart('chart-pob-genero', 'doughnut', {
         labels: Object.keys(generoMap),
-        datasets: [{ data: Object.values(generoMap), backgroundColor: ['#06B6D4', '#EAB308', '#EC4899', '#8B5CF6'] }]
+        datasets: [{ data: Object.values(generoMap), backgroundColor: PALETTE_GTO }]
       });
 
-      // Tabla por Actividad con Evidencias (Sin duplicar filas)
       const munByAct = {};
       terF.forEach(t => { munByAct[cleanStr(t.ID_Actividad)] = cleanStr(t.Municipio); });
 
@@ -1399,7 +1462,7 @@
         const evs = eviByAct[id] || [];
         return {
           id,
-          fecha: cleanStr(a.Fecha_Inicio),
+          fecha: a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio),
           mun: munByAct[id] || 'Sin municipio',
           nombre: cleanStr(a.Nombre_Actividad),
           part: p.part,
@@ -1421,17 +1484,17 @@
       );
       document.getElementById('tbl-poblacion-act').innerHTML = rows.slice(0, 150).map(r => {
         const evBadge = r.evidencias.length > 0
-          ? `<span title="${r.evidencias.map(e => cleanStr(e.Archivo_Evidencia)).join('\n')}" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px] cursor-help">${r.evidencias.length} archivo(s)</span>`
-          : `<span class="text-slate-400 text-[10px]">Sin archivo</span>`;
+          ? `<span title="${r.evidencias.map(e => cleanStr(e.Archivo_Evidencia)).join('\n')}" class="px-2 py-0.5 rounded-full bg-gto-ice text-gto-blue font-bold text-[10px] cursor-help">${r.evidencias.length} archivo(s)</span>`
+          : `<span class="text-gto-gray7 text-[10px]">Sin archivo</span>`;
         return `
-          <tr class="hover:bg-slate-50">
+          <tr class="hover:bg-gto-bg">
             <td class="p-2.5 font-mono font-bold text-gto-blue">${r.id}</td>
-            <td class="p-2.5 text-slate-500 whitespace-nowrap">${r.fecha}</td>
-            <td class="p-2.5 font-medium text-slate-700">${r.mun}</td>
-            <td class="p-2.5 text-slate-700">${r.nombre}</td>
-            <td class="p-2.5 text-right text-rose-600 font-semibold">${fmtInt(r.part)}</td>
-            <td class="p-2.5 text-right text-gto-blue font-semibold">${fmtInt(r.acc)}</td>
-            <td class="p-2.5 text-right font-extrabold text-gto-dark">${fmtInt(r.total)}</td>
+            <td class="p-2.5 text-gto-gray7 whitespace-nowrap">${r.fecha}</td>
+            <td class="p-2.5 font-semibold text-gto-gray10">${r.mun}</td>
+            <td class="p-2.5 text-gto-gray10">${r.nombre}</td>
+            <td class="p-2.5 text-right text-gto-blue font-semibold">${fmtInt(r.part)}</td>
+            <td class="p-2.5 text-right text-gto-sky font-semibold">${fmtInt(r.acc)}</td>
+            <td class="p-2.5 text-right font-black text-gto-blue">${fmtInt(r.total)}</td>
             <td class="p-2.5 text-center">${evBadge}</td>
           </tr>
         `;
@@ -1439,7 +1502,7 @@
     }
 
     // =========================================================
-    // RENDER VISTA 5: AUDITORÍA DE CUADRE
+    // VISTA 5: AUDITORÍA DE CUADRE
     // =========================================================
     function renderAuditoria(actF, terF, pobF) {
       const terSum = {};
@@ -1488,15 +1551,15 @@
       document.getElementById('badge-audit').textContent = auditList.length;
 
       document.getElementById('tbl-auditoria').innerHTML = auditList.map(r => `
-        <tr class="hover:bg-amber-50/40">
+        <tr class="hover:bg-gto-bg">
           <td class="p-2.5 font-mono font-bold text-gto-blue">${r.id}</td>
-          <td class="p-2.5 text-slate-500">${r.usuario}</td>
-          <td class="p-2.5 font-medium text-slate-700">${r.nombre}</td>
-          <td class="p-2.5 text-slate-600">${r.mun}</td>
+          <td class="p-2.5 text-gto-gray7">${r.usuario}</td>
+          <td class="p-2.5 font-medium text-gto-gray10">${r.nombre}</td>
+          <td class="p-2.5 text-gto-gray10">${r.mun}</td>
           <td class="p-2.5 text-right font-semibold">${fmtInt(r.sT)}</td>
           <td class="p-2.5 text-right font-semibold">${fmtInt(r.sP)}</td>
-          <td class="p-2.5 text-right font-extrabold ${r.diff === 0 ? 'text-slate-400' : 'text-rose-600'}">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</td>
-          <td class="p-2.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">${r.diag}</span></td>
+          <td class="p-2.5 text-right font-black text-gto-blue">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gto-ice text-gto-blue">${r.diag}</span></td>
         </tr>
       `).join('');
     }
@@ -1513,7 +1576,7 @@
     }
 
     // =========================================================
-    // MAPA INTERACTIVO LEAFLET Y MOTOR CHART.JS
+    // MAPA LEAFLET Y MOTOR DE GRÁFICAS
     // =========================================================
     function initLeafletMap() {
       if (leafletMap) return;
@@ -1543,11 +1606,11 @@
         const radius = Math.min(26, Math.max(7, Math.sqrt(stats.acts) * 2.4));
         L.circleMarker(coords, {
           radius,
-          fillColor: '#1E56A0',
-          color: '#0B2240',
-          weight: 1.5,
+          fillColor: '#004B87',
+          color: '#69B3E7',
+          weight: 2,
           opacity: 1,
-          fillOpacity: 0.75
+          fillOpacity: 0.82
         })
           .bindPopup(`<b>${mun}</b><br>Actividades: <b>${fmtInt(stats.acts)}</b><br>Beneficiarios: <b>${fmtInt(stats.pop)}</b>`)
           .addTo(mapLayerGroup);
