@@ -11,16 +11,17 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js + Plugin DataLabels -->
+  <!-- Chart.js + Plugin DataLabels (Servidor jsDelivr de alta disponibilidad) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- Leaflet (Mapa Interactivo) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet (Mapa Interactivo vía jsDelivr sin bloqueos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+  <!-- Lucide Icons (Versión fija en jsDelivr para evitar redirecciones colgadas) -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
   <!-- Tipografías Institucionales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +52,90 @@
         }
       }
     };
+
+    // Funciones del Escudo definidas en <head> para que funcionen incluso si Logo.png carga desde caché instantáneamente
+    window.drawFallbackShield = function() {
+      const canvas = document.getElementById('shield-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, 300, 370);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.moveTo(85, 65); ctx.lineTo(65, 25); ctx.lineTo(115, 45);
+      ctx.lineTo(150, 10); ctx.lineTo(185, 45); ctx.lineTo(235, 25);
+      ctx.lineTo(215, 65); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.arc(150, 220, 140, 0, Math.PI * 2); ctx.fillStyle = '#FFFFFF'; ctx.fill();
+      ctx.beginPath(); ctx.arc(150, 220, 134, 0, Math.PI * 2); ctx.lineWidth = 22; ctx.strokeStyle = '#004B87'; ctx.stroke();
+      ctx.beginPath(); ctx.arc(150, 220, 114, 0, Math.PI * 2); ctx.fillStyle = '#C8D8EB'; ctx.fill();
+    };
+
+    window.processShieldFromLogo = function(imgEl) {
+      try {
+        const canvas = document.getElementById('shield-canvas');
+        if (!canvas || !imgEl || !imgEl.naturalWidth) {
+          window.drawFallbackShield();
+          return;
+        }
+        const ctx = canvas.getContext('2d');
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = imgEl.naturalWidth;
+        tempCanvas.height = imgEl.naturalHeight;
+        const tCtx = tempCanvas.getContext('2d');
+        tCtx.drawImage(imgEl, 0, 0);
+
+        const sx = Math.round(tempCanvas.width * (138 / 576));
+        const sy = 0;
+        const sw = Math.round(tempCanvas.width * (300 / 576));
+        const sh = Math.round(tempCanvas.height * (370 / 491));
+
+        const imgData = tCtx.getImageData(sx, sy, sw, sh);
+        const data = imgData.data;
+
+        const outCanvas = document.createElement('canvas');
+        outCanvas.width = sw;
+        outCanvas.height = sh;
+        const outCtx = outCanvas.getContext('2d');
+        const outData = outCtx.createImageData(sw, sh);
+        const dst = outData.data;
+
+        const cx = sw * (149.5 / 300);
+        const cy = sh * (221.0 / 370);
+        const rCircle = sw * (144.5 / 300);
+        const rBorder = sw * (146.5 / 300);
+
+        for (let y = 0; y < sh; y++) {
+          for (let x = 0; x < sw; x++) {
+            const idx = (y * sw + x) * 4;
+            const a = data[idx + 3];
+            const dx = x - cx;
+            const dy = y - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist <= rBorder) {
+              if (dist <= rCircle && a > 10) {
+                const af = a / 255.0;
+                dst[idx] = Math.round(data[idx] * af + 255 * (1 - af));
+                dst[idx + 1] = Math.round(data[idx + 1] * af + 255 * (1 - af));
+                dst[idx + 2] = Math.round(data[idx + 2] * af + 255 * (1 - af));
+                dst[idx + 3] = 255;
+              } else {
+                dst[idx] = 255; dst[idx + 1] = 255; dst[idx + 2] = 255; dst[idx + 3] = 255;
+              }
+            } else if (a > 15) {
+              dst[idx] = 255; dst[idx + 1] = 255; dst[idx + 2] = 255; dst[idx + 3] = a;
+            }
+          }
+        }
+
+        outCtx.putImageData(outData, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(outCanvas, 0, 0, canvas.width, canvas.height);
+      } catch (e) {
+        window.drawFallbackShield();
+      }
+    };
   </script>
+
   <style>
     body {
       font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -90,28 +174,31 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 20px -5px rgba(0, 75, 135, 0.1);
     }
-    #mapGto { height: 350px; width: 100%; border-radius: 0.75rem; z-index: 10; }
+    #mapGto { height: 340px; width: 100%; border-radius: 0.75rem; z-index: 10; }
     .leaflet-popup-content-wrapper { border-radius: 0.65rem; font-family: "Helvetica Neue", Arial, sans-serif; }
     @media print {
-      aside, #top-filter-controls { display: none !important; }
+      aside, #top-filter-controls, #mobile-menu-btn { display: none !important; }
       main { overflow: visible !important; height: auto !important; }
     }
   </style>
 </head>
-<body class="flex h-screen overflow-hidden">
+<body class="flex h-screen overflow-hidden relative">
+
+  <!-- FONDO OSCURO PARA MENÚ MÓVIL -->
+  <div id="sidebar-backdrop" onclick="toggleMobileSidebar(false)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-30 hidden lg:hidden"></div>
 
   <!-- =========================================================
-       SIDEBAR INSTITUCIONAL
+       SIDEBAR INSTITUCIONAL (FIJO EN PC, DESLIZABLE EN MÓVIL)
   ========================================================== -->
-  <aside class="w-64 bg-sidebar-custom text-white flex flex-col justify-between shrink-0 shadow-2xl z-20 overflow-y-auto custom-scroll select-none">
+  <aside id="app-sidebar" class="fixed lg:static inset-y-0 left-0 w-64 bg-sidebar-custom text-white flex flex-col justify-between shrink-0 shadow-2xl z-40 overflow-y-auto custom-scroll select-none transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div>
       <!-- Encabezado: Escudo Circular con Corona Blanca + SECRETARÍA DE CULTURA -->
-      <div class="px-3.5 pt-4 pb-3 flex items-center gap-2.5 border-b border-slate-700/60">
+      <div class="px-3.5 pt-4 pb-3 flex items-center gap-2.5 border-b border-slate-700/60 relative">
         <div class="w-16 h-20 shrink-0 flex items-center justify-center relative">
           <canvas id="shield-canvas" width="300" height="370" class="w-16 h-20 object-contain drop-shadow-md"></canvas>
           <img id="raw-logo-source" src="assets/Logo.png" crossorigin="anonymous" class="hidden"
-               onerror="if(this.src.includes('assets/Logo.png')){this.src='Logo.png';}else{drawFallbackShield();}"
-               onload="processShieldFromLogo(this)" />
+               onerror="if(this.src.includes('assets/Logo.png')){this.src='Logo.png';}else{window.drawFallbackShield();}"
+               onload="window.processShieldFromLogo(this)" />
         </div>
         <div class="flex-1 text-center pr-1">
           <div class="font-montserrat font-black text-white text-[15px] leading-[1.12] tracking-wide uppercase">
@@ -121,6 +208,10 @@
             GOBIERNO DEL ESTADO DE GUANAJUATO
           </div>
         </div>
+        <!-- Botón cerrar menú en móvil -->
+        <button onclick="toggleMobileSidebar(false)" class="lg:hidden absolute top-2 right-2 w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-slate-300 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
       </div>
 
       <!-- Botones de Navegación (6 Vistas) -->
@@ -165,7 +256,7 @@
           </div>
         </button>
 
-        <!-- NUEVO BOTÓN: REPOSITORIO DE EVIDENCIAS -->
+        <!-- BOTÓN REPOSITORIO DE EVIDENCIAS -->
         <button onclick="switchTab('tab-evidencia')" id="btn-tab-evidencia" class="nav-btn w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left">
           <div class="w-8 h-8 rounded-lg bg-teal-500/20 border border-teal-400/40 flex items-center justify-center shrink-0">
             <i data-lucide="folder-check" class="w-4 h-4 text-teal-300"></i>
@@ -195,7 +286,7 @@
     </div>
 
     <!-- Pie Artístico del Panel Lateral -->
-    <div class="mt-1 relative w-full overflow-hidden border-t border-slate-700/80" style="min-height: 270px;">
+    <div class="mt-1 relative w-full overflow-hidden border-t border-slate-700/80" style="min-height: 265px;">
       <img
         id="custom-postal-img"
         src="assets/postal.png"
@@ -205,7 +296,7 @@
         onerror="if(this.src.includes('assets/postal.png')){this.src='assets/postal.jpg';}else{this.classList.add('hidden');}"
       />
 
-      <div id="svg-postal-art" class="w-full h-full min-h-[270px] relative flex flex-col justify-between items-center text-center px-4 py-4"
+      <div id="svg-postal-art" class="w-full h-full min-h-[265px] relative flex flex-col justify-between items-center text-center px-4 py-4"
            style="background: radial-gradient(circle at 50% 35%, #2E1A47 0%, #1A1635 55%, #0F172A 100%);">
         <svg viewBox="0 0 260 75" class="w-full absolute top-0 left-0 opacity-85 pointer-events-none">
           <defs>
@@ -269,124 +360,145 @@
   </aside>
 
   <!-- =========================================================
-       CONTENIDO PRINCIPAL
+       CONTENIDO PRINCIPAL (RESPONSIVO MÓVIL Y ESCRITORIO)
   ========================================================== -->
-  <div class="flex-1 flex flex-col h-screen overflow-hidden">
+  <div class="flex-1 flex flex-col h-screen overflow-hidden w-full">
 
     <div class="h-1.5 w-full bg-gto-header-bar shrink-0"></div>
 
     <!-- BARRA SUPERIOR Y FILTROS GLOBALES -->
-    <header class="bg-white border-b border-slate-200 px-6 py-3 shadow-sm z-10">
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
-        <div>
-          <p class="text-[10px] font-bold uppercase tracking-widest text-gto-sky">
-            Sistema Estatal de Inteligencia Cultural • Transformar la cultura en bienestar para la gente
-          </p>
-          <h2 id="view-title" class="text-xl font-extrabold text-gto-blue tracking-tight leading-snug">
-            Visión General del Ecosistema Cultural
-          </h2>
+    <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 sm:py-3 shadow-sm z-10">
+      <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <!-- Botón Menú Hamburguesa para Móvil -->
+          <button id="mobile-menu-btn" onclick="toggleMobileSidebar(true)" class="lg:hidden p-2 rounded-lg bg-gto-blue text-white shadow-sm hover:bg-gto-dark transition">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+          <div>
+            <p class="hidden sm:block text-[10px] font-bold uppercase tracking-widest text-gto-sky">
+              Sistema Estatal de Inteligencia Cultural • Transformar la cultura en bienestar para la gente
+            </p>
+            <h2 id="view-title" class="text-base sm:text-xl font-extrabold text-gto-blue tracking-tight leading-snug">
+              Visión General del Ecosistema Cultural
+            </h2>
+          </div>
         </div>
 
         <!-- Controles Superiores -->
-        <div id="top-filter-controls" class="flex flex-wrap items-center gap-2">
+        <div id="top-filter-controls" class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-between sm:justify-end">
           <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
-            <span class="px-2 text-[11px] font-bold text-gto-blue flex items-center gap-1">
+            <span class="hidden md:flex px-2 text-[11px] font-bold text-gto-blue items-center gap-1">
               <i data-lucide="users-round" class="w-3.5 h-3.5 text-gto-sky"></i>
               Población:
             </span>
-            <button id="btn-pop-ter" onclick="setPopMode('territorio')" class="px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]">
-              Cobertura Territorial (0)
+            <button id="btn-pop-ter" onclick="setPopMode('territorio')" class="px-2 sm:px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[10.5px] sm:text-[11px]">
+              Territorial (0)
             </button>
-            <button id="btn-pop-pob" onclick="setPopMode('poblacion')" class="px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[11px]">
-              Perfil Demográfico (0)
+            <button id="btn-pop-pob" onclick="setPopMode('poblacion')" class="px-2 sm:px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[10.5px] sm:text-[11px]">
+              Demográfico (0)
             </button>
           </div>
 
-          <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs">
-            <i data-lucide="calendar" class="w-3.5 h-3.5 text-gto-blue"></i>
-            <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none text-xs" />
-            <span class="text-slate-400 text-[11px]">—</span>
-            <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none text-xs" />
+          <div class="flex items-center gap-1.5">
+            <!-- Botón desplegar filtros en móvil -->
+            <button onclick="toggleMobileFilters()" class="lg:hidden flex items-center gap-1 bg-blue-50 text-gto-blue border border-blue-200 px-2.5 py-1.5 rounded-lg text-xs font-bold">
+              <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+              Filtros
+            </button>
+
+            <button onclick="resetFilters()" class="flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2.5 py-1.5 rounded-lg text-xs font-bold transition">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">Borrar filtros</span>
+            </button>
+
+            <button onclick="window.print()" title="Imprimir o guardar vista actual en PDF" class="hidden sm:flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              PDF
+            </button>
           </div>
-
-          <button onclick="resetFilters()" class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-3 py-1.5 rounded-lg text-xs font-bold transition">
-            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-            Borrar filtros
-          </button>
-
-          <button onclick="window.print()" title="Imprimir o guardar vista actual en PDF" class="flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition">
-            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
-            PDF
-          </button>
         </div>
       </div>
 
-      <!-- Selectores Multicriterio -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 pt-2.5">
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue"></i> Municipio
-          </label>
-          <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Todos los municipios</option>
-          </select>
-        </div>
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="building-2" class="w-3 h-3 text-purple-600"></i> Dirección General
-          </label>
-          <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Todas las direcciones</option>
-          </select>
-        </div>
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="palette" class="w-3 h-3 text-amber-600"></i> Disciplina
-          </label>
-          <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Todas las disciplinas</option>
-          </select>
-        </div>
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="landmark" class="w-3 h-3 text-emerald-600"></i> Plan de Gobierno
-          </label>
-          <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Todos los ejes</option>
-          </select>
-        </div>
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="sparkles" class="w-3 h-3 text-rose-600"></i> Enfoque
-          </label>
-          <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Cultural y Artística</option>
-          </select>
-        </div>
-        <div>
-          <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-            <i data-lucide="flame" class="w-3 h-3 text-orange-600"></i> Zona Prioritaria
-          </label>
-          <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-            <option value="ALL">Todas las zonas</option>
-            <option value="ZAP_ANY">En Zona Prioritaria (ZAP)</option>
-            <option value="ZAP_NC">ZAP Nuevo Comienzo</option>
-            <option value="ZAP_SSYP">ZAP SSyP</option>
-            <option value="NO_ZAP">Fuera de ZAP</option>
-          </select>
+      <!-- Contenedor de Filtros (Siempre visible en PC, desplegable en Móvil) -->
+      <div id="filters-drawer" class="hidden lg:block pt-2.5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
+          <div class="col-span-2 sm:col-span-1">
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="calendar" class="w-3 h-3 text-gto-blue"></i> Periodo 2026
+            </label>
+            <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-[11px]">
+              <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full" />
+              <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full" />
+            </div>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue"></i> Municipio
+            </label>
+            <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todos los municipios</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="building-2" class="w-3 h-3 text-purple-600"></i> Dirección General
+            </label>
+            <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todas las direcciones</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="palette" class="w-3 h-3 text-amber-600"></i> Disciplina
+            </label>
+            <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todas las disciplinas</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="landmark" class="w-3 h-3 text-emerald-600"></i> Plan de Gobierno
+            </label>
+            <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todos los ejes</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="sparkles" class="w-3 h-3 text-rose-600"></i> Enfoque
+            </label>
+            <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Cultural y Artística</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+              <i data-lucide="flame" class="w-3 h-3 text-orange-600"></i> Zona Prioritaria
+            </label>
+            <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todas las zonas</option>
+              <option value="ZAP_ANY">En Zona Prioritaria (ZAP)</option>
+              <option value="ZAP_NC">ZAP Nuevo Comienzo</option>
+              <option value="ZAP_SSYP">ZAP SSyP</option>
+              <option value="NO_ZAP">Fuera de ZAP</option>
+            </select>
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- PANTALLA DE CARGA -->
-    <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-gto-bg z-30">
+    <!-- PANTALLA DE CARGA CON PROGRESO EN VIVO -->
+    <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-gto-bg z-20 p-6 text-center">
       <div class="w-12 h-12 border-4 border-gto-blue border-t-amber-500 rounded-full animate-spin"></div>
       <p class="mt-4 text-base font-vollkorn font-extrabold text-gto-blue">Cargando Sistema Estatal de Inteligencia Cultural...</p>
-      <p class="text-xs text-slate-500 mt-1">Secretaría de Cultura del Estado de Guanajuato</p>
+      <p id="loader-status" class="text-xs text-slate-500 mt-1">Conectando con la base de datos institucional (0/4)...</p>
+      <button id="loader-retry-btn" onclick="loadAllData()" class="hidden mt-4 px-4 py-2 rounded-lg bg-gto-blue text-white text-xs font-bold shadow hover:bg-gto-dark transition">
+        Reintentar conexión
+      </button>
     </div>
 
     <!-- CONTENEDOR DESPLAZABLE DE VISTAS -->
-    <main id="main-content" class="hidden flex-1 overflow-y-auto custom-scroll p-6 space-y-6">
+    <main id="main-content" class="hidden flex-1 overflow-y-auto custom-scroll p-3.5 sm:p-6 space-y-6">
 
       <!-- =========================================================
            VISTA 1: INICIO - VISIÓN GENERAL
@@ -464,41 +576,41 @@
               <div id="mapGto" class="border border-slate-200 shadow-inner"></div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2.5 mt-4 pt-3 border-t border-slate-100">
-              <div class="bg-blue-50/60 rounded-xl p-2.5 border border-blue-100 flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-gto-blue text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="landmark" class="w-4 h-4"></i>
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100">
+              <div class="bg-blue-50/60 rounded-xl p-2 border border-blue-100 flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-gto-blue text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
                 </div>
                 <div>
-                  <p class="text-[9.5px] uppercase font-bold text-slate-500">Municipios</p>
-                  <p id="sub-mun-gto" class="kpi-number text-base font-black text-gto-blue">0 de 46</p>
+                  <p class="text-[9px] uppercase font-bold text-slate-500">Municipios</p>
+                  <p id="sub-mun-gto" class="kpi-number text-sm sm:text-base font-black text-gto-blue">0 de 46</p>
                 </div>
               </div>
 
-              <div class="bg-amber-50/70 rounded-xl p-2.5 border border-amber-200/70 flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="flame" class="w-4 h-4"></i>
+              <div class="bg-amber-50/70 rounded-xl p-2 border border-amber-200/70 flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="flame" class="w-3.5 h-3.5"></i>
                 </div>
                 <div>
-                  <p class="text-[9.5px] uppercase font-bold text-amber-800">ZAP Impactadas</p>
-                  <p id="sub-zap-total" class="kpi-number text-base font-black text-amber-600">0</p>
+                  <p class="text-[9px] uppercase font-bold text-amber-800">ZAP</p>
+                  <p id="sub-zap-total" class="kpi-number text-sm sm:text-base font-black text-amber-600">0</p>
                 </div>
               </div>
 
-              <div class="bg-emerald-50/70 rounded-xl p-2.5 border border-emerald-200/70 flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="home" class="w-4 h-4"></i>
+              <div class="bg-emerald-50/70 rounded-xl p-2 border border-emerald-200/70 flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="home" class="w-3.5 h-3.5"></i>
                 </div>
                 <div>
-                  <p class="text-[9.5px] uppercase font-bold text-emerald-800">Localidades</p>
-                  <p id="sub-loc-total" class="kpi-number text-base font-black text-emerald-700">0</p>
+                  <p class="text-[9px] uppercase font-bold text-emerald-800">Localidades</p>
+                  <p id="sub-loc-total" class="kpi-number text-sm sm:text-base font-black text-emerald-700">0</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Top de Tipos de Actividad -->
-          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col">
+          <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col max-h-[470px]">
             <div class="flex items-center gap-2 mb-3">
               <div class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center">
                 <i data-lucide="award" class="w-4 h-4"></i>
@@ -530,16 +642,16 @@
                 </div>
                 <h3 class="text-base font-extrabold text-gto-blue">Distribución por Plan de Gobierno</h3>
               </div>
-              <div class="grid grid-cols-12 items-center gap-3">
-                <div class="col-span-5 h-36"><canvas id="chart-eje-dona"></canvas></div>
-                <div id="legend-eje-dona" class="col-span-7 space-y-1.5"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-3">
+                <div class="sm:col-span-5 h-36"><canvas id="chart-eje-dona"></canvas></div>
+                <div id="legend-eje-dona" class="sm:col-span-7 space-y-1.5"></div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Evolución Mensual -->
-        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+        <div class="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div class="flex items-center gap-2.5">
               <div class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center">
@@ -560,7 +672,7 @@
       </section>
 
       <!-- =========================================================
-           VISTA 2: MATRIZ ESTRATÉGICA (SIN RECORTE DE CIFRAS)
+           VISTA 2: MATRIZ ESTRATÉGICA
       ========================================================== -->
       <section id="tab-matriz" class="hidden space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -630,16 +742,16 @@
             <div class="h-64"><canvas id="chart-mat-direccion"></canvas></div>
           </div>
 
-          <!-- Tarjetas de Pastel/Dona rediseñadas con Leyenda HTML Completa (Cero recortes) -->
+          <!-- Tarjetas de Pastel/Dona con Leyenda HTML Completa (Cero recortes) -->
           <div class="lg:col-span-4 grid grid-rows-2 gap-4">
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1">
                 <h3 class="text-sm font-extrabold text-gto-blue">Programa Estatal de Cultura</h3>
                 <span class="text-[10px] text-slate-400 font-semibold">Ejes transversales PEC</span>
               </div>
-              <div class="grid grid-cols-12 items-center gap-2 my-auto">
-                <div class="col-span-5 h-28"><canvas id="chart-mat-pec"></canvas></div>
-                <div id="legend-mat-pec" class="col-span-7 space-y-1.5"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-2 my-auto">
+                <div class="sm:col-span-5 h-28"><canvas id="chart-mat-pec"></canvas></div>
+                <div id="legend-mat-pec" class="sm:col-span-7 space-y-1.5"></div>
               </div>
             </div>
 
@@ -648,9 +760,9 @@
                 <h3 class="text-sm font-extrabold text-gto-blue">Distribución del Enfoque</h3>
                 <span class="text-[10px] text-slate-400 font-semibold">Cultural vs. Artística</span>
               </div>
-              <div class="grid grid-cols-12 items-center gap-2 my-auto">
-                <div class="col-span-5 h-28"><canvas id="chart-mat-enfoque"></canvas></div>
-                <div id="legend-mat-enfoque" class="col-span-7 space-y-1.5"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-2 my-auto">
+                <div class="sm:col-span-5 h-28"><canvas id="chart-mat-enfoque"></canvas></div>
+                <div id="legend-mat-enfoque" class="sm:col-span-7 space-y-1.5"></div>
               </div>
             </div>
           </div>
@@ -776,7 +888,7 @@
               <h3 class="text-base font-extrabold text-gto-blue">Desglose Operativo por Comunidad</h3>
               <p class="text-xs text-slate-400">Concentrado de actividades y población beneficiada por localidad</p>
             </div>
-            <input type="text" id="search-comunidad" oninput="renderTerritorioTable()" placeholder="Buscar municipio o comunidad..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
+            <input type="text" id="search-comunidad" oninput="renderTerritorioTable()" placeholder="Buscar municipio o comunidad..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-full sm:w-64" />
           </div>
           <div class="overflow-x-auto max-h-80 custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
@@ -870,9 +982,9 @@
           </div>
           <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
             <h3 class="text-base font-extrabold text-gto-blue mb-2">Distribución por Género</h3>
-            <div class="grid grid-cols-12 items-center gap-3 my-auto">
-              <div class="col-span-5 h-44"><canvas id="chart-pob-genero"></canvas></div>
-              <div id="legend-pob-genero" class="col-span-7 space-y-2"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-3 my-auto">
+              <div class="sm:col-span-5 h-44"><canvas id="chart-pob-genero"></canvas></div>
+              <div id="legend-pob-genero" class="sm:col-span-7 space-y-2"></div>
             </div>
           </div>
         </div>
@@ -883,7 +995,7 @@
               <h3 class="text-base font-extrabold text-gto-blue">Desglose de Población y Expediente por Actividad</h3>
               <p class="text-xs text-slate-400">Haz clic en cualquier fila o botón para abrir la ficha completa y sus archivos de evidencia</p>
             </div>
-            <input type="text" id="search-actividad" oninput="renderPoblacionTable()" placeholder="Buscar por folio, nombre o municipio..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
+            <input type="text" id="search-actividad" oninput="renderPoblacionTable()" placeholder="Buscar por folio, nombre o municipio..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-full sm:w-64" />
           </div>
           <div class="overflow-x-auto max-h-96 custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
@@ -906,10 +1018,9 @@
       </section>
 
       <!-- =========================================================
-           VISTA 5: REPOSITORIO DE EVIDENCIAS (NUEVA SECCIÓN)
+           VISTA 5: REPOSITORIO DE EVIDENCIAS
       ========================================================== -->
       <section id="tab-evidencia" class="hidden space-y-6">
-        <!-- KPIs de Evidencias -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-teal-600 border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
@@ -959,7 +1070,6 @@
           </div>
         </div>
 
-        <!-- Gráficas de Evidencia -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-7 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-1">Cumplimiento de Evidencia Documental por Dirección General</h3>
@@ -972,29 +1082,28 @@
               <h3 class="text-base font-extrabold text-gto-blue mb-1">Distribución por Tipo de Evidencia</h3>
               <p class="text-xs text-slate-400 mb-2">Clasificación por formato de archivo</p>
             </div>
-            <div class="grid grid-cols-12 items-center gap-3 my-auto">
-              <div class="col-span-5 h-44"><canvas id="chart-evi-tipo"></canvas></div>
-              <div id="legend-evi-tipo" class="col-span-7 space-y-2"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-3 my-auto">
+              <div class="sm:col-span-5 h-44"><canvas id="chart-evi-tipo"></canvas></div>
+              <div id="legend-evi-tipo" class="sm:col-span-7 space-y-2"></div>
             </div>
           </div>
         </div>
 
-        <!-- Explorador y Buscador de Evidencias -->
         <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
               <h3 class="text-base font-extrabold text-gto-blue">Repositorio y Consulta de Evidencias</h3>
               <p class="text-xs text-slate-400">Localiza cada archivo directamente en la carpeta institucional de Google Drive o consulta el expediente de la actividad</p>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
-              <select id="filter-evi-status" onchange="renderEvidenciasTable()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              <select id="filter-evi-status" onchange="renderEvidenciasTable()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue w-full sm:w-auto">
                 <option value="ALL_FILES">Todos los archivos cargados</option>
                 <option value="FOTO">Solo Fotografías (.jpg / .png)</option>
                 <option value="PDF">Solo Documentos PDF (.pdf)</option>
                 <option value="CARPETA">Carpetas y Presentaciones (.zip / .pptx)</option>
                 <option value="MISSING">Actividades pendientes de evidencia</option>
               </select>
-              <input type="text" id="search-evidencia" oninput="renderEvidenciasTable()" placeholder="Buscar por ID, actividad, archivo..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-64" />
+              <input type="text" id="search-evidencia" oninput="renderEvidenciasTable()" placeholder="Buscar por ID, actividad, archivo..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-gto-blue w-full sm:w-64" />
             </div>
           </div>
 
@@ -1063,18 +1172,18 @@
   <!-- =========================================================
        VENTANA MODAL: FICHA EJECUTIVA DE EXPEDIENTE DE ACTIVIDAD
   ========================================================== -->
-  <div id="modal-expediente" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
-      <div class="bg-gto-blue text-white px-6 py-4 flex items-center justify-between">
+  <div id="modal-expediente" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="bg-gto-blue text-white px-5 py-4 flex items-center justify-between">
         <div>
           <span id="mod-id" class="text-[11px] font-mono uppercase bg-white/20 px-2 py-0.5 rounded font-bold">ACT00000</span>
-          <h3 id="mod-title" class="text-lg font-vollkorn font-extrabold mt-1 leading-snug">Detalle de la Actividad</h3>
+          <h3 id="mod-title" class="text-base sm:text-lg font-vollkorn font-extrabold mt-1 leading-snug">Detalle de la Actividad</h3>
         </div>
-        <button onclick="closeExpedienteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+        <button onclick="closeExpedienteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div id="mod-body" class="p-6 overflow-y-auto custom-scroll space-y-5 text-xs"></div>
+      <div id="mod-body" class="p-4 sm:p-6 overflow-y-auto custom-scroll space-y-5 text-xs"></div>
     </div>
   </div>
 
@@ -1082,7 +1191,9 @@
        MOTOR DE DATOS Y GRÁFICAS
   ========================================================== -->
   <script>
-    Chart.register(ChartDataLabels);
+    if (window.Chart && window.ChartDataLabels) {
+      Chart.register(ChartDataLabels);
+    }
 
     const SHEET_ID = '1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4';
     const SHEETS = {
@@ -1128,6 +1239,7 @@
     let leafletMap = null;
     let mapLayerGroup = null;
     let auditList = [];
+    let loadedCount = 0;
 
     const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).trim();
     const toNum = (val) => {
@@ -1143,6 +1255,31 @@
     };
     const fmtMoney = (n) => '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+    function safeCreateIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        try { window.lucide.createIcons(); } catch (e) {}
+      }
+    }
+
+    // Funciones de Interfaz Móvil
+    function toggleMobileSidebar(show) {
+      const sb = document.getElementById('app-sidebar');
+      const bd = document.getElementById('sidebar-backdrop');
+      if (!sb || !bd) return;
+      if (show) {
+        sb.classList.remove('-translate-x-full');
+        bd.classList.remove('hidden');
+      } else {
+        sb.classList.add('-translate-x-full');
+        bd.classList.add('hidden');
+      }
+    }
+
+    function toggleMobileFilters() {
+      const fd = document.getElementById('filters-drawer');
+      if (fd) fd.classList.toggle('hidden');
+    }
+
     function formatShortDireccion(rawDir) {
       const u = cleanStr(rawDir).toUpperCase();
       if (!u || u === 'SIN ASIGNAR') return 'Sin Asignar';
@@ -1153,84 +1290,6 @@
       if (u.includes('PRODUCCIÓN') || u.includes('PRODUCCION')) return 'DG Producción Artística';
       const cleaned = cleanStr(rawDir).replace(/DIRECCIÓN GENERAL DE /i, 'DG ');
       return cleaned.length > 26 ? cleaned.substring(0, 24) + '…' : cleaned;
-    }
-
-    // Recorte automático del escudo circular con corona blanca
-    function processShieldFromLogo(imgEl) {
-      try {
-        const canvas = document.getElementById('shield-canvas');
-        const ctx = canvas.getContext('2d');
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = imgEl.naturalWidth || 576;
-        tempCanvas.height = imgEl.naturalHeight || 491;
-        const tCtx = tempCanvas.getContext('2d');
-        tCtx.drawImage(imgEl, 0, 0);
-
-        const sx = Math.round(tempCanvas.width * (138 / 576));
-        const sy = 0;
-        const sw = Math.round(tempCanvas.width * (300 / 576));
-        const sh = Math.round(tempCanvas.height * (370 / 491));
-
-        const imgData = tCtx.getImageData(sx, sy, sw, sh);
-        const data = imgData.data;
-
-        const outCanvas = document.createElement('canvas');
-        outCanvas.width = sw;
-        outCanvas.height = sh;
-        const outCtx = outCanvas.getContext('2d');
-        const outData = outCtx.createImageData(sw, sh);
-        const dst = outData.data;
-
-        const cx = sw * (149.5 / 300);
-        const cy = sh * (221.0 / 370);
-        const rCircle = sw * (144.5 / 300);
-        const rBorder = sw * (146.5 / 300);
-
-        for (let y = 0; y < sh; y++) {
-          for (let x = 0; y < sw; x++) {
-            const idx = (y * sw + x) * 4;
-            const a = data[idx + 3];
-            const dx = x - cx;
-            const dy = y - cy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist <= rBorder) {
-              if (dist <= rCircle && a > 10) {
-                const af = a / 255.0;
-                dst[idx] = Math.round(data[idx] * af + 255 * (1 - af));
-                dst[idx + 1] = Math.round(data[idx + 1] * af + 255 * (1 - af));
-                dst[idx + 2] = Math.round(data[idx + 2] * af + 255 * (1 - af));
-                dst[idx + 3] = 255;
-              } else {
-                dst[idx] = 255; dst[idx + 1] = 255; dst[idx + 2] = 255; dst[idx + 3] = 255;
-              }
-            } else if (a > 15) {
-              dst[idx] = 255; dst[idx + 1] = 255; dst[idx + 2] = 255; dst[idx + 3] = a;
-            }
-          }
-        }
-
-        outCtx.putImageData(outData, 0, 0);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(outCanvas, 0, 0, canvas.width, canvas.height);
-      } catch (e) {
-        drawFallbackShield();
-      }
-    }
-
-    function drawFallbackShield() {
-      const canvas = document.getElementById('shield-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, 300, 370);
-      ctx.fillStyle = '#FFFFFF';
-      ctx.beginPath();
-      ctx.moveTo(85, 65); ctx.lineTo(65, 25); ctx.lineTo(115, 45);
-      ctx.lineTo(150, 10); ctx.lineTo(185, 45); ctx.lineTo(235, 25);
-      ctx.lineTo(215, 65); ctx.closePath(); ctx.fill();
-      ctx.beginPath(); ctx.arc(150, 220, 140, 0, Math.PI * 2); ctx.fillStyle = '#FFFFFF'; ctx.fill();
-      ctx.beginPath(); ctx.arc(150, 220, 134, 0, Math.PI * 2); ctx.lineWidth = 22; ctx.strokeStyle = '#004B87'; ctx.stroke();
-      ctx.beginPath(); ctx.arc(150, 220, 114, 0, Math.PI * 2); ctx.fillStyle = '#C8D8EB'; ctx.fill();
     }
 
     function normalizeDateISO(val) {
@@ -1274,34 +1333,61 @@
       return !MUNICIPIOS_FORANEOS.includes(m);
     }
 
-    // Generar URL inteligente para localizar archivo de AppSheet en Google Drive
     function getDriveSearchUrl(rawPath) {
       const s = cleanStr(rawPath);
       if (!s) return '#';
       if (/^https?:\/\//i.test(s)) return s;
-      // Extraer el nombre de archivo limpio después de Regitro_Evidencia_Files_/
       const parts = s.split('/');
       const fileName = parts[parts.length - 1] || s;
       return `https://drive.google.com/drive/search?q=${encodeURIComponent(fileName)}`;
     }
 
-    function fetchSheetCSV(sheetName) {
+    // Descarga resiliente con fetch + timeout y reintento automático
+    async function fetchSheetCSV(sheetName) {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(sheetName)}`;
-      return new Promise((resolve, reject) => {
-        Papa.parse(url, {
-          download: true,
-          header: true,
-          skipEmptyLines: true,
-          transformHeader: (h) => cleanStr(h),
-          complete: (res) => resolve(res.data),
-          error: (err) => reject(err)
-        });
-      });
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 9000);
+          const response = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+          clearTimeout(timer);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const csvText = await response.text();
+          return new Promise((resolve, reject) => {
+            Papa.parse(csvText, {
+              header: true,
+              skipEmptyLines: true,
+              transformHeader: (h) => cleanStr(h),
+              complete: (res) => {
+                loadedCount++;
+                const st = document.getElementById('loader-status');
+                if (st) st.textContent = `Sincronizando tablas de información (${loadedCount}/4)...`;
+                resolve(res.data);
+              },
+              error: (err) => reject(err)
+            });
+          });
+        } catch (err) {
+          if (attempt === 2) throw err;
+        }
+      }
     }
 
     async function loadAllData() {
+      // Inicializar íconos y escudo de inmediato sin esperar la red
+      safeCreateIcons();
+      window.drawFallbackShield();
+      const logoImg = document.getElementById('raw-logo-source');
+      if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
+        window.processShieldFromLogo(logoImg);
+      }
+
+      loadedCount = 0;
       document.getElementById('loader').classList.remove('hidden');
+      document.getElementById('loader-retry-btn').classList.add('hidden');
       document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('loader-status').textContent = 'Conectando con la base de datos institucional (0/4)...';
+
       try {
         const [act, ter, pob, evi] = await Promise.all([
           fetchSheetCSV(SHEETS.actividades),
@@ -1327,16 +1413,18 @@
 
         initLeafletMap();
         applyFilters();
-        lucide.createIcons();
+        safeCreateIcons();
       } catch (err) {
         console.error('Error cargando datos:', err);
-        alert('No se pudo establecer conexión con el repositorio de datos.');
+        document.getElementById('loader-status').textContent = 'La conexión tardó más de lo esperado. Haz clic en Reintentar.';
+        document.getElementById('loader-retry-btn').classList.remove('hidden');
       }
     }
 
     function populateFilterDropdowns() {
       const fillSelect = (id, values, defaultLabel) => {
         const sel = document.getElementById(id);
+        if (!sel) return;
         sel.innerHTML = `<option value="ALL">${defaultLabel}</option>`;
         [...values].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es')).forEach(v => {
           const opt = document.createElement('option');
@@ -1370,11 +1458,11 @@
       const btnTer = document.getElementById('btn-pop-ter');
       const btnPob = document.getElementById('btn-pop-pob');
       if (mode === 'territorio') {
-        btnTer.className = 'px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]';
-        btnPob.className = 'px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[11px]';
+        btnTer.className = 'px-2 sm:px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[10.5px] sm:text-[11px]';
+        btnPob.className = 'px-2 sm:px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[10.5px] sm:text-[11px]';
       } else {
-        btnPob.className = 'px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[11px]';
-        btnTer.className = 'px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[11px]';
+        btnPob.className = 'px-2 sm:px-2.5 py-1 rounded-md font-bold bg-gto-blue text-white shadow-sm transition text-[10.5px] sm:text-[11px]';
+        btnTer.className = 'px-2 sm:px-2.5 py-1 rounded-md font-semibold text-slate-600 hover:text-gto-blue transition text-[10.5px] sm:text-[11px]';
       }
       applyFilters();
     }
@@ -1436,8 +1524,8 @@
 
       const sumTerAll = terF.reduce((s, r) => s + toNum(r.Cantidad), 0);
       const sumPobAll = pobF.reduce((s, r) => s + toNum(r.Cantidad_Poblacion), 0);
-      document.getElementById('btn-pop-ter').textContent = `Cobertura Territorial (${fmtInt(sumTerAll)})`;
-      document.getElementById('btn-pop-pob').textContent = `Perfil Demográfico (${fmtInt(sumPobAll)})`;
+      document.getElementById('btn-pop-ter').textContent = `Territorial (${fmtInt(sumTerAll)})`;
+      document.getElementById('btn-pop-pob').textContent = `Demográfico (${fmtInt(sumPobAll)})`;
       document.getElementById('badge-evi').textContent = eviF.length;
 
       renderVisionGeneral(actF, terF, pobF);
@@ -1446,10 +1534,9 @@
       renderPerfilPoblacion(actF, terF, pobF, eviF);
       renderRepositorioEvidencias(actF, terF, eviF);
       renderAuditoria(actF, terF, pobF);
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
-    // Opciones de barras horizontales con amplio margen derecho para que jamás se corte la cifra
     function barHorizontalOptions(extra = {}) {
       return {
         indexAxis: 'y',
@@ -1474,7 +1561,6 @@
       };
     }
 
-    // Generador de Donas/Pasteles con Leyenda HTML externa para que NUNCA se corte el texto ni los porcentajes
     function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false) {
       const total = entries.reduce((s, e) => s + e[1], 0) || 1;
       renderChart(canvasId, isPie ? 'pie' : 'doughnut', {
@@ -1578,7 +1664,6 @@
 
       updateMapMarkers(terF);
 
-      // Top Tipos de Actividad
       const tipoCount = {};
       actF.forEach(a => {
         const t = cleanStr(a.Tipo_Actividad) || 'Sin especificar';
@@ -1605,7 +1690,6 @@
         `;
       }).join('');
 
-      // Gráfica Disciplinas
       const discCount = {};
       actF.forEach(a => {
         const d = cleanStr(a.Disciplina) || 'Sin disciplina';
@@ -1622,7 +1706,6 @@
         }]
       }, barHorizontalOptions());
 
-      // Dona Plan de Gobierno con Leyenda HTML sin recortes
       const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
@@ -1631,7 +1714,6 @@
       const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981']);
 
-      // Evolución Mensual Cronológica
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const actPorMes = new Array(12).fill(0);
       const popPorMes = new Array(12).fill(0);
@@ -1781,7 +1863,6 @@
       document.getElementById('kpi-mat-cumplimiento').textContent = `${pctAvanceAct}%`;
       document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealAct)} de ${fmtInt(sumMetaAct)} actividades programadas`;
 
-      // 1. Actividades por Eje de Gobierno
       const ejeMap = {};
       actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
       const ejeSort = Object.entries(ejeMap).sort((a, b) => b[1] - a[1]);
@@ -1795,7 +1876,6 @@
         }]
       }, barHorizontalOptions());
 
-      // 2. Aportación Estratégica por Dirección
       const dirMap = {};
       const fullDirNames = {};
       actF.forEach(a => {
@@ -1831,19 +1911,16 @@
         }
       }));
 
-      // 3. Pastel Eje Transversal PEC con Leyenda HTML (Cero recortes)
       const pecMap = {};
       actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
       const pecEntries = Object.entries(pecMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-pec', 'legend-mat-pec', pecEntries, ['#84CC16', '#A855F7', '#F97316'], true);
 
-      // 4. Dona Enfoque Cultural vs Artística con Leyenda HTML (Cero recortes)
       const enfMap = {};
       actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No esp.'; enfMap[e] = (enfMap[e] || 0) + 1; });
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false);
 
-      // Tabla Alineación Institucional
       const alinMap = {};
       actF.forEach(a => {
         const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo PG';
@@ -1866,7 +1943,6 @@
         </tr>
       `).join('');
 
-      // Tabla Avance de Metas
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
 
@@ -2165,7 +2241,7 @@
     }
 
     // =========================================================
-    // VISTA 5: REPOSITORIO DE EVIDENCIAS (NUEVA SECCIÓN)
+    // VISTA 5: REPOSITORIO DE EVIDENCIAS
     // =========================================================
     let cachedEvidenciasList = [];
     let cachedMissingActsList = [];
@@ -2251,7 +2327,6 @@
       document.getElementById('kpi-evi-fotos').textContent = fmtInt(countFotos);
       document.getElementById('kpi-evi-docs').textContent = fmtInt(countDocs);
 
-      // Gráfica Cumplimiento de Evidencia por Dirección General
       const dirCov = {};
       actF.forEach(a => {
         const d = formatShortDireccion(a.Direccion);
@@ -2281,7 +2356,6 @@
         }
       });
 
-      // Dona por Tipo de Evidencia con Leyenda HTML
       const tipoEntries = Object.entries(tipoCount).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-evi-tipo', 'legend-evi-tipo', tipoEntries, ['#F59E0B', '#2563EB', '#7C3AED', '#0D9488', '#64748B']);
 
@@ -2533,7 +2607,7 @@
       `;
 
       document.getElementById('modal-expediente').classList.remove('hidden');
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function closeExpedienteModal() {
@@ -2544,7 +2618,7 @@
     // MAPA LEAFLET Y CHART.JS
     // =========================================================
     function initLeafletMap() {
-      if (leafletMap) return;
+      if (leafletMap || !window.L) return;
       leafletMap = L.map('mapGto').setView([20.92, -101.18], 8);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
@@ -2554,7 +2628,7 @@
     }
 
     function updateMapMarkers(terF) {
-      if (!mapLayerGroup) return;
+      if (!mapLayerGroup || !window.L) return;
       mapLayerGroup.clearLayers();
 
       const byMun = {};
@@ -2593,6 +2667,7 @@
     }
 
     function renderChart(canvasId, type, data, extraOptions = {}) {
+      if (!window.Chart) return;
       if (charts[canvasId]) {
         charts[canvasId].destroy();
       }
@@ -2625,6 +2700,9 @@
       });
 
       document.getElementById('view-title').textContent = titles[tabId];
+
+      // Cerrar automáticamente el menú lateral al elegir una vista en el celular
+      toggleMobileSidebar(false);
 
       if (tabId === 'tab-vision' && leafletMap) {
         setTimeout(() => leafletMap.invalidateSize(), 150);
