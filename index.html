@@ -19,7 +19,7 @@
   <!-- Leaflet (Mapa Interactivo vía jsDelivr sin bloqueos) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
-  <!-- Lucide Icons (Versión fija en jsDelivr para evitar redirecciones colgadas) -->
+  <!-- Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 
   <!-- Tipografías Institucionales -->
@@ -53,7 +53,6 @@
       }
     };
 
-    // Funciones del Escudo definidas en <head> para que funcionen incluso si Logo.png carga desde caché instantáneamente
     window.drawFallbackShield = function() {
       const canvas = document.getElementById('shield-canvas');
       if (!canvas) return;
@@ -188,7 +187,7 @@
   <div id="sidebar-backdrop" onclick="toggleMobileSidebar(false)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-30 hidden lg:hidden"></div>
 
   <!-- =========================================================
-       SIDEBAR INSTITUCIONAL (FIJO EN PC, DESLIZABLE EN MÓVIL)
+       SIDEBAR INSTITUCIONAL
   ========================================================== -->
   <aside id="app-sidebar" class="fixed lg:static inset-y-0 left-0 w-64 bg-sidebar-custom text-white flex flex-col justify-between shrink-0 shadow-2xl z-40 overflow-y-auto custom-scroll select-none transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div>
@@ -208,13 +207,12 @@
             GOBIERNO DEL ESTADO DE GUANAJUATO
           </div>
         </div>
-        <!-- Botón cerrar menú en móvil -->
         <button onclick="toggleMobileSidebar(false)" class="lg:hidden absolute top-2 right-2 w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-slate-300 hover:text-white">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <!-- Botones de Navegación (6 Vistas) -->
+      <!-- Botones de Navegación -->
       <nav class="px-3.5 py-3 space-y-2">
         <button onclick="switchTab('tab-vision')" id="btn-tab-vision" class="nav-btn active w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left">
           <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center shrink-0">
@@ -256,7 +254,6 @@
           </div>
         </button>
 
-        <!-- BOTÓN REPOSITORIO DE EVIDENCIAS -->
         <button onclick="switchTab('tab-evidencia')" id="btn-tab-evidencia" class="nav-btn w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left">
           <div class="w-8 h-8 rounded-lg bg-teal-500/20 border border-teal-400/40 flex items-center justify-center shrink-0">
             <i data-lucide="folder-check" class="w-4 h-4 text-teal-300"></i>
@@ -283,6 +280,26 @@
           </div>
         </button>
       </nav>
+
+      <!-- TARJETA PRIVADA DE AUDITORÍA DE VISITAS (Solo visible con ?admin=1) -->
+      <div id="admin-analytics-box" class="hidden mx-3 mb-2 p-2.5 rounded-lg bg-blue-950/70 border border-blue-400/30 text-[10px] text-slate-300">
+        <div class="flex items-center justify-between font-bold text-amber-300 uppercase tracking-wider mb-1.5">
+          <span class="flex items-center gap-1"><i data-lucide="eye" class="w-3 h-3"></i> Monitor Privado</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        </div>
+        <div class="flex justify-between border-b border-white/10 pb-1 mb-1">
+          <span>Visitas hoy:</span>
+          <b id="stat-visits-today" class="text-white font-mono">0</b>
+        </div>
+        <div class="flex justify-between border-b border-white/10 pb-1 mb-1">
+          <span>Total acumulado:</span>
+          <b id="stat-visits-total" class="text-white font-mono">0</b>
+        </div>
+        <div class="flex justify-between text-[9px] text-slate-400">
+          <span>Último acceso:</span>
+          <span id="stat-visits-last">--:--</span>
+        </div>
+      </div>
     </div>
 
     <!-- Pie Artístico del Panel Lateral -->
@@ -360,7 +377,7 @@
   </aside>
 
   <!-- =========================================================
-       CONTENIDO PRINCIPAL (RESPONSIVO MÓVIL Y ESCRITORIO)
+       CONTENIDO PRINCIPAL
   ========================================================== -->
   <div class="flex-1 flex flex-col h-screen overflow-hidden w-full">
 
@@ -370,7 +387,6 @@
     <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 sm:py-3 shadow-sm z-10">
       <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
-          <!-- Botón Menú Hamburguesa para Móvil -->
           <button id="mobile-menu-btn" onclick="toggleMobileSidebar(true)" class="lg:hidden p-2 rounded-lg bg-gto-blue text-white shadow-sm hover:bg-gto-dark transition">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
@@ -400,7 +416,6 @@
           </div>
 
           <div class="flex items-center gap-1.5">
-            <!-- Botón desplegar filtros en móvil -->
             <button onclick="toggleMobileFilters()" class="lg:hidden flex items-center gap-1 bg-blue-50 text-gto-blue border border-blue-200 px-2.5 py-1.5 rounded-lg text-xs font-bold">
               <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
               Filtros
@@ -419,7 +434,7 @@
         </div>
       </div>
 
-      <!-- Contenedor de Filtros (Siempre visible en PC, desplegable en Móvil) -->
+      <!-- Contenedor de Filtros (Programa de Gobierno Oficial) -->
       <div id="filters-drawer" class="hidden lg:block pt-2.5">
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
           <div class="col-span-2 sm:col-span-1">
@@ -435,7 +450,7 @@
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue"></i> Municipio
             </label>
-            <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todos los municipios</option>
             </select>
           </div>
@@ -443,7 +458,7 @@
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="building-2" class="w-3 h-3 text-purple-600"></i> Dirección General
             </label>
-            <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las direcciones</option>
             </select>
           </div>
@@ -451,15 +466,15 @@
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="palette" class="w-3 h-3 text-amber-600"></i> Disciplina
             </label>
-            <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las disciplinas</option>
             </select>
           </div>
           <div>
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="landmark" class="w-3 h-3 text-emerald-600"></i> Plan de Gobierno
+              <i data-lucide="landmark" class="w-3 h-3 text-emerald-600"></i> Programa de Gobierno
             </label>
-            <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todos los ejes</option>
             </select>
           </div>
@@ -467,7 +482,7 @@
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="sparkles" class="w-3 h-3 text-rose-600"></i> Enfoque
             </label>
-            <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Cultural y Artística</option>
             </select>
           </div>
@@ -475,7 +490,7 @@
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="flame" class="w-3 h-3 text-orange-600"></i> Zona Prioritaria
             </label>
-            <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las zonas</option>
               <option value="ZAP_ANY">En Zona Prioritaria (ZAP)</option>
               <option value="ZAP_NC">ZAP Nuevo Comienzo</option>
@@ -487,7 +502,7 @@
       </div>
     </header>
 
-    <!-- PANTALLA DE CARGA CON PROGRESO EN VIVO -->
+    <!-- PANTALLA DE CARGA -->
     <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-gto-bg z-20 p-6 text-center">
       <div class="w-12 h-12 border-4 border-gto-blue border-t-amber-500 rounded-full animate-spin"></div>
       <p class="mt-4 text-base font-vollkorn font-extrabold text-gto-blue">Cargando Sistema Estatal de Inteligencia Cultural...</p>
@@ -555,7 +570,7 @@
           </div>
         </div>
 
-        <!-- Fila Central: Mapa + Top Tipos + Disciplinas y Plan de Gobierno -->
+        <!-- Fila Central: Mapa + Top Tipos + Disciplinas y Programa de Gobierno -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
@@ -623,7 +638,7 @@
             <div id="list-tipos-actividad" class="flex-1 overflow-y-auto custom-scroll space-y-2.5 pr-1"></div>
           </div>
 
-          <!-- Actividades por Disciplina + Dona Plan de Gobierno (Con Leyenda HTML sin cortes) -->
+          <!-- Actividades por Disciplina + Dona Programa de Gobierno -->
           <div class="lg:col-span-4 flex flex-col gap-5">
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
               <div class="flex items-center gap-2 mb-2">
@@ -640,7 +655,7 @@
                 <div class="w-6 h-6 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center">
                   <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i>
                 </div>
-                <h3 class="text-base font-extrabold text-gto-blue">Distribución por Plan de Gobierno</h3>
+                <h3 class="text-base font-extrabold text-gto-blue">Distribución por Programa de Gobierno</h3>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-3">
                 <div class="sm:col-span-5 h-36"><canvas id="chart-eje-dona"></canvas></div>
@@ -680,7 +695,7 @@
             <div>
               <p class="text-[11px] font-bold uppercase text-slate-400">Total Actividades Estratégicas</p>
               <p id="kpi-mat-act" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
-              <p class="text-xs text-slate-500 mt-1">Alineadas al Plan de Gobierno</p>
+              <p class="text-xs text-slate-500 mt-1">Alineadas al Programa de Gobierno</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center">
               <i data-lucide="layers" class="w-6 h-6"></i>
@@ -742,7 +757,6 @@
             <div class="h-64"><canvas id="chart-mat-direccion"></canvas></div>
           </div>
 
-          <!-- Tarjetas de Pastel/Dona con Leyenda HTML Completa (Cero recortes) -->
           <div class="lg:col-span-4 grid grid-rows-2 gap-4">
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1">
@@ -771,12 +785,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-1">Detalle de Alineación Institucional</h3>
-            <p class="text-xs text-slate-400 mb-3">Vinculación entre Objetivos del Plan de Gobierno y Líneas del Programa Estatal de Cultura</p>
+            <p class="text-xs text-slate-400 mb-3">Vinculación entre Objetivos del Programa de Gobierno y Líneas del Programa Estatal de Cultura</p>
             <div class="overflow-x-auto max-h-80 custom-scroll">
               <table class="w-full text-left border-collapse text-xs">
                 <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
-                    <th class="p-2.5 font-bold">Objetivo Plan de Gobierno</th>
+                    <th class="p-2.5 font-bold">Objetivo Programa de Gobierno</th>
                     <th class="p-2.5 font-bold">Línea Estratégica PEC</th>
                     <th class="p-2.5 font-bold text-right text-emerald-700">Cultural</th>
                     <th class="p-2.5 font-bold text-right text-amber-600">Artística</th>
@@ -1169,9 +1183,7 @@
     </main>
   </div>
 
-  <!-- =========================================================
-       VENTANA MODAL: FICHA EJECUTIVA DE EXPEDIENTE DE ACTIVIDAD
-  ========================================================== -->
+  <!-- VENTANA MODAL: EXPEDIENTE DE ACTIVIDAD -->
   <div id="modal-expediente" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
       <div class="bg-gto-blue text-white px-5 py-4 flex items-center justify-between">
@@ -1188,7 +1200,7 @@
   </div>
 
   <!-- =========================================================
-       MOTOR DE DATOS Y GRÁFICAS
+       MOTOR DE DATOS Y MÉTRICAS PRIVADAS
   ========================================================== -->
   <script>
     if (window.Chart && window.ChartDataLabels) {
@@ -1261,7 +1273,6 @@
       }
     }
 
-    // Funciones de Interfaz Móvil
     function toggleMobileSidebar(show) {
       const sb = document.getElementById('app-sidebar');
       const bd = document.getElementById('sidebar-backdrop');
@@ -1342,7 +1353,41 @@
       return `https://drive.google.com/drive/search?q=${encodeURIComponent(fileName)}`;
     }
 
-    // Descarga resiliente con fetch + timeout y reintento automático
+    // =========================================================
+    // CONTADOR DE VISITAS PRIVADO (DISCRETO Y AUTÓNOMO)
+    // =========================================================
+    function registerPrivateVisitCounter() {
+      try {
+        const todayStr = new Date().toISOString().split('T')[0];
+        const nowTime = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+
+        let stats = JSON.parse(localStorage.getItem('gto_cultura_stats') || '{}');
+        if (!stats.total) stats.total = 0;
+        if (!stats.byDay) stats.byDay = {};
+
+        // Incrementar visitas
+        stats.total++;
+        stats.byDay[todayStr] = (stats.byDay[todayStr] || 0) + 1;
+        stats.lastAccess = nowTime;
+        localStorage.setItem('gto_cultura_stats', JSON.stringify(stats));
+
+        // Registro anónimo externo vía CountAPI en segundo plano
+        fetch('https://api.counterapi.dev/v1/cultura-gto-planeacion/visitas/up').catch(() => {});
+
+        // Comprobar si la URL tiene ?admin=1 o ?privado=1 para mostrar la tarjeta al usuario
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('admin') === '1' || urlParams.get('privado') === '1') {
+          const adminBox = document.getElementById('admin-analytics-box');
+          if (adminBox) {
+            adminBox.classList.remove('hidden');
+            document.getElementById('stat-visits-today').textContent = fmtInt(stats.byDay[todayStr]);
+            document.getElementById('stat-visits-total').textContent = fmtInt(stats.total);
+            document.getElementById('stat-visits-last').textContent = nowTime;
+          }
+        }
+      } catch (e) {}
+    }
+
     async function fetchSheetCSV(sheetName) {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(sheetName)}`;
       for (let attempt = 1; attempt <= 2; attempt++) {
@@ -1374,7 +1419,6 @@
     }
 
     async function loadAllData() {
-      // Inicializar íconos y escudo de inmediato sin esperar la red
       safeCreateIcons();
       window.drawFallbackShield();
       const logoImg = document.getElementById('raw-logo-source');
@@ -1414,6 +1458,7 @@
         initLeafletMap();
         applyFilters();
         safeCreateIcons();
+        registerPrivateVisitCounter();
       } catch (err) {
         console.error('Error cargando datos:', err);
         document.getElementById('loader-status').textContent = 'La conexión tardó más de lo esperado. Haz clic en Reintentar.';
@@ -1706,6 +1751,7 @@
         }]
       }, barHorizontalOptions());
 
+      // Dona Programa de Gobierno
       const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
@@ -1863,6 +1909,7 @@
       document.getElementById('kpi-mat-cumplimiento').textContent = `${pctAvanceAct}%`;
       document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealAct)} de ${fmtInt(sumMetaAct)} actividades programadas`;
 
+      // 1. Actividades por Eje de Gobierno
       const ejeMap = {};
       actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
       const ejeSort = Object.entries(ejeMap).sort((a, b) => b[1] - a[1]);
@@ -1876,6 +1923,7 @@
         }]
       }, barHorizontalOptions());
 
+      // 2. Aportación Estratégica por Dirección
       const dirMap = {};
       const fullDirNames = {};
       actF.forEach(a => {
@@ -1911,16 +1959,19 @@
         }
       }));
 
+      // 3. Pastel Eje Transversal PEC
       const pecMap = {};
       actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
       const pecEntries = Object.entries(pecMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-pec', 'legend-mat-pec', pecEntries, ['#84CC16', '#A855F7', '#F97316'], true);
 
+      // 4. Dona Enfoque Cultural vs Artística
       const enfMap = {};
       actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No esp.'; enfMap[e] = (enfMap[e] || 0) + 1; });
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false);
 
+      // Tabla Alineación Institucional (Objetivo Programa de Gobierno)
       const alinMap = {};
       actF.forEach(a => {
         const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo PG';
@@ -1943,6 +1994,7 @@
         </tr>
       `).join('');
 
+      // Tabla Avance de Metas
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
 
@@ -2527,7 +2579,7 @@
     }
 
     // =========================================================
-    // VENTANA MODAL: EXPEDIENTE COMPLETO POR ACTIVIDAD
+    // VENTANA MODAL: EXPEDIENTE
     // =========================================================
     function openExpedienteModal(idAct) {
       const a = rawDB.actividades.find(x => cleanStr(x.ID_Actividad) === idAct);
@@ -2700,8 +2752,6 @@
       });
 
       document.getElementById('view-title').textContent = titles[tabId];
-
-      // Cerrar automáticamente el menú lateral al elegir una vista en el celular
       toggleMobileSidebar(false);
 
       if (tabId === 'tab-vision' && leafletMap) {
