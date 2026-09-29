@@ -11,12 +11,12 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js + Plugin DataLabels (Servidor jsDelivr de alta disponibilidad) -->
+  <!-- Chart.js + Plugin DataLabels -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- Leaflet (Mapa Interactivo vía jsDelivr sin bloqueos) -->
+  <!-- Leaflet (Mapa Interactivo) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
   <!-- Lucide Icons -->
@@ -506,7 +506,7 @@
     <div id="loader" class="flex-1 flex flex-col items-center justify-center bg-gto-bg z-20 p-6 text-center">
       <div class="w-12 h-12 border-4 border-gto-blue border-t-amber-500 rounded-full animate-spin"></div>
       <p class="mt-4 text-base font-vollkorn font-extrabold text-gto-blue">Cargando Sistema Estatal de Inteligencia Cultural...</p>
-      <p id="loader-status" class="text-xs text-slate-500 mt-1">Conectando con la base de datos institucional (0/4)...</p>
+      <p id="loader-status" class="text-xs text-slate-500 mt-1">Conectando con la base de datos institucional (0/5)...</p>
       <button id="loader-retry-btn" onclick="loadAllData()" class="hidden mt-4 px-4 py-2 rounded-lg bg-gto-blue text-white text-xs font-bold shadow hover:bg-gto-dark transition">
         Reintentar conexión
       </button>
@@ -677,9 +677,15 @@
                 <p class="text-xs text-slate-400 mt-0.5">Comportamiento cronológico de la programación cultural y alcance ciudadano</p>
               </div>
             </div>
-            <div class="flex items-center gap-2 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg font-bold">
-              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
-              <span>Avance de Meta Anual: <span id="lbl-avance-meta-global">0%</span></span>
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="flex items-center gap-1.5 text-xs bg-blue-50 text-gto-blue border border-blue-200 px-3 py-1.5 rounded-lg font-bold" title="Calculado contra el total de las 86 metas de actividades de Cat_Alineacion">
+                <i data-lucide="flag" class="w-3.5 h-3.5 text-gto-blue"></i>
+                <span>Meta Anual Catálogo: <span id="lbl-avance-meta-global">0%</span></span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg font-bold" title="Calculado sobre las metas que ya iniciaron captura de actividades en el periodo">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Metas en Operación: <span id="lbl-avance-meta-activas">0%</span></span>
+              </div>
             </div>
           </div>
           <div class="h-64"><canvas id="chart-evolucion-mensual"></canvas></div>
@@ -687,7 +693,7 @@
       </section>
 
       <!-- =========================================================
-           VISTA 2: MATRIZ ESTRATÉGICA
+           VISTA 2: MATRIZ ESTRATÉGICA (CONECTADA A CAT_ALINEACION)
       ========================================================== -->
       <section id="tab-matriz" class="hidden space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -695,7 +701,7 @@
             <div>
               <p class="text-[11px] font-bold uppercase text-slate-400">Total Actividades Estratégicas</p>
               <p id="kpi-mat-act" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
-              <p class="text-xs text-slate-500 mt-1">Alineadas al Programa de Gobierno</p>
+              <p id="kpi-mat-act-sub" class="text-xs text-slate-500 mt-1">Alineadas al Programa de Gobierno</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center">
               <i data-lucide="layers" class="w-6 h-6"></i>
@@ -704,9 +710,9 @@
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-purple-600 border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase text-slate-400">Direcciones Generales Activas</p>
+              <p class="text-[11px] font-bold uppercase text-slate-400">Direcciones Generales</p>
               <p id="kpi-mat-dir" class="kpi-number text-3xl font-black text-purple-700 mt-1">0</p>
-              <p class="text-xs text-slate-500 mt-1">Unidades administrativas</p>
+              <p id="kpi-mat-dir-sub" class="text-xs text-slate-500 mt-1">Con registro activo en el periodo</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center">
               <i data-lucide="building-2" class="w-6 h-6"></i>
@@ -715,9 +721,12 @@
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-amber-500 border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase text-slate-400">Metas de Gobierno Atendidas</p>
-              <p id="kpi-mat-metas" class="kpi-number text-3xl font-black text-amber-600 mt-1">0</p>
-              <p id="kpi-mat-procesos" class="text-xs text-slate-500 mt-1">En 0 procesos institucionales</p>
+              <p class="text-[11px] font-bold uppercase text-slate-400">Metas Institucionales Activas</p>
+              <div class="flex items-baseline gap-2 mt-1">
+                <p id="kpi-mat-metas" class="kpi-number text-3xl font-black text-amber-600">0/99</p>
+                <span id="kpi-mat-metas-pct" class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">0%</span>
+              </div>
+              <p id="kpi-mat-procesos" class="text-xs text-slate-500 mt-1">En 0 de 34 procesos del catálogo</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center">
               <i data-lucide="target" class="w-6 h-6"></i>
@@ -726,9 +735,12 @@
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-emerald-500 border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase text-slate-400">Avance Meta de Actividades</p>
-              <p id="kpi-mat-cumplimiento" class="kpi-number text-3xl font-black text-emerald-600 mt-1">0%</p>
-              <p id="kpi-mat-cumplimiento-sub" class="text-xs text-slate-500 mt-1">0 de 1,098 programadas</p>
+              <p class="text-[11px] font-bold uppercase text-slate-400">Meta Anual de Actividades</p>
+              <div class="flex items-baseline gap-2 mt-1">
+                <p id="kpi-mat-cumplimiento" class="kpi-number text-3xl font-black text-emerald-600">0%</p>
+                <span id="kpi-mat-cumplimiento-activas" class="text-[10.5px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800" title="Avance sobre las metas que ya tienen captura">0% en activas</span>
+              </div>
+              <p id="kpi-mat-cumplimiento-sub" class="text-xs text-slate-500 mt-1">0 de 6,535 programadas en catálogo</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center">
               <i data-lucide="trending-up" class="w-6 h-6"></i>
@@ -761,7 +773,7 @@
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1">
                 <h3 class="text-sm font-extrabold text-gto-blue">Programa Estatal de Cultura</h3>
-                <span class="text-[10px] text-slate-400 font-semibold">Ejes transversales PEC</span>
+                <span class="text-[10px] text-slate-400 font-semibold">Ejes transversales</span>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-2 my-auto">
                 <div class="sm:col-span-5 h-28"><canvas id="chart-mat-pec"></canvas></div>
@@ -786,12 +798,12 @@
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-1">Detalle de Alineación Institucional</h3>
             <p class="text-xs text-slate-400 mb-3">Vinculación entre Objetivos del Programa de Gobierno y Líneas del Programa Estatal de Cultura</p>
-            <div class="overflow-x-auto max-h-80 custom-scroll">
+            <div class="overflow-x-auto max-h-96 custom-scroll">
               <table class="w-full text-left border-collapse text-xs">
                 <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
                     <th class="p-2.5 font-bold">Objetivo Programa de Gobierno</th>
-                    <th class="p-2.5 font-bold">Línea Estratégica PEC</th>
+                    <th class="p-2.5 font-bold">Línea del Programa Estatal de Cultura</th>
                     <th class="p-2.5 font-bold text-right text-emerald-700">Cultural</th>
                     <th class="p-2.5 font-bold text-right text-amber-600">Artística</th>
                     <th class="p-2.5 font-bold text-right">Total</th>
@@ -803,9 +815,20 @@
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <h3 class="text-base font-extrabold text-gto-blue mb-1">Seguimiento de Metas Institucionales por Proceso</h3>
-            <p class="text-xs text-slate-400 mb-3">Avance acumulado respecto a la meta anual programada por clave de proceso</p>
-            <div class="overflow-x-auto max-h-80 custom-scroll">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-base font-extrabold text-gto-blue">Seguimiento del Catálogo Oficial de Metas (Cat_Alineacion)</h3>
+                <p class="text-xs text-slate-400">Evalúa las 99 metas anuales programadas distinguiendo Actividades, Personas y Metros cuadrados</p>
+              </div>
+              <select id="filter-metas-cat" onchange="renderTablaMetasCatalogo()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+                <option value="ALL">Todas las metas del catálogo (99)</option>
+                <option value="ACTIVE">Solo metas con avance registrado</option>
+                <option value="PENDING">Metas pendientes de captura (en 0)</option>
+                <option value="ACT_ONLY">Solo metas de Actividades / Eventos</option>
+                <option value="POP_ONLY">Solo metas de Personas / Asistentes</option>
+              </select>
+            </div>
+            <div class="overflow-x-auto max-h-96 custom-scroll">
               <table class="w-full text-left border-collapse text-xs">
                 <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
@@ -1200,7 +1223,7 @@
   </div>
 
   <!-- =========================================================
-       MOTOR DE DATOS Y MÉTRICAS PRIVADAS
+       MOTOR DE DATOS CONECTADO A LAS 5 PESTAÑAS (INCLUYE CAT_ALINEACION)
   ========================================================== -->
   <script>
     if (window.Chart && window.ChartDataLabels) {
@@ -1212,7 +1235,8 @@
       actividades: 'Registro_Actividades',
       territorio: 'Registro_Territorio',
       poblacion: 'Registro_Poblacion',
-      evidencia: 'Regitro_Evidencia'
+      evidencia: 'Regitro_Evidencia',
+      alineacion: 'Cat_Alineacion'
     };
 
     const VIBRANT_PALETTE = [
@@ -1244,16 +1268,18 @@
 
     const MUNICIPIOS_FORANEOS = ['ciudad de mexico', 'cdmx', 'foraneo'];
 
-    let rawDB = { actividades: [], territorio: [], poblacion: [], evidencia: [] };
+    let rawDB = { actividades: [], territorio: [], poblacion: [], evidencia: [], alineacion: [] };
     let filteredActIds = new Set();
     let popMode = 'territorio';
     let charts = {};
     let leafletMap = null;
     let mapLayerGroup = null;
     let auditList = [];
+    let cachedMetasCatalogoRows = [];
     let loadedCount = 0;
 
-    const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).trim();
+    // Limpieza profunda (elimina espacios invisibles \xa0 de los catálogos)
+    const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).replace(/\u00a0/g, ' ').trim();
     const toNum = (val) => {
       if (val === null || val === undefined || val === '') return 0;
       if (typeof val === 'number') return isNaN(val) ? 0 : val;
@@ -1266,6 +1292,14 @@
       return String(Math.round(n));
     };
     const fmtMoney = (n) => '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // Clasificador de Unidad de Medida en Cat_Alineacion
+    function getUnitCategory(unidad) {
+      const s = cleanStr(unidad).toLowerCase();
+      if (s.includes('persona') || s.includes('asistente') || s.includes('alumn')) return 'PERSONAS';
+      if (s.includes('metro')) return 'METROS';
+      return 'ACTIVIDADES';
+    }
 
     function safeCreateIcons() {
       if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -1299,6 +1333,9 @@
       if (u.includes('EDITORIAL') || u.includes('PUBLICACIONES')) return 'DG Editorial y Publicaciones';
       if (u.includes('PATRIMONIO')) return 'DG Patrimonio Cultural';
       if (u.includes('PRODUCCIÓN') || u.includes('PRODUCCION')) return 'DG Producción Artística';
+      if (u.includes('VINCULACIÓN') || u.includes('VINCULACION')) return 'DG Vinculación Cultural';
+      if (u.includes('FORUM')) return 'DG Forum Cultural';
+      if (u.includes('COMUNICACIÓN') || u.includes('COMUNICACION')) return 'Coord. Comunicación Social';
       const cleaned = cleanStr(rawDir).replace(/DIRECCIÓN GENERAL DE /i, 'DG ');
       return cleaned.length > 26 ? cleaned.substring(0, 24) + '…' : cleaned;
     }
@@ -1353,9 +1390,7 @@
       return `https://drive.google.com/drive/search?q=${encodeURIComponent(fileName)}`;
     }
 
-    // =========================================================
-    // CONTADOR DE VISITAS PRIVADO (DISCRETO Y AUTÓNOMO)
-    // =========================================================
+    // Contador Privado de Visitas
     function registerPrivateVisitCounter() {
       try {
         const todayStr = new Date().toISOString().split('T')[0];
@@ -1365,16 +1400,13 @@
         if (!stats.total) stats.total = 0;
         if (!stats.byDay) stats.byDay = {};
 
-        // Incrementar visitas
         stats.total++;
         stats.byDay[todayStr] = (stats.byDay[todayStr] || 0) + 1;
         stats.lastAccess = nowTime;
         localStorage.setItem('gto_cultura_stats', JSON.stringify(stats));
 
-        // Registro anónimo externo vía CountAPI en segundo plano
         fetch('https://api.counterapi.dev/v1/cultura-gto-planeacion/visitas/up').catch(() => {});
 
-        // Comprobar si la URL tiene ?admin=1 o ?privado=1 para mostrar la tarjeta al usuario
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('admin') === '1' || urlParams.get('privado') === '1') {
           const adminBox = document.getElementById('admin-analytics-box');
@@ -1406,7 +1438,7 @@
               complete: (res) => {
                 loadedCount++;
                 const st = document.getElementById('loader-status');
-                if (st) st.textContent = `Sincronizando tablas de información (${loadedCount}/4)...`;
+                if (st) st.textContent = `Sincronizando tablas y catálogos (${loadedCount}/5)...`;
                 resolve(res.data);
               },
               error: (err) => reject(err)
@@ -1430,14 +1462,15 @@
       document.getElementById('loader').classList.remove('hidden');
       document.getElementById('loader-retry-btn').classList.add('hidden');
       document.getElementById('main-content').classList.add('hidden');
-      document.getElementById('loader-status').textContent = 'Conectando con la base de datos institucional (0/4)...';
+      document.getElementById('loader-status').textContent = 'Conectando con la base de datos institucional (0/5)...';
 
       try {
-        const [act, ter, pob, evi] = await Promise.all([
+        const [act, ter, pob, evi, catAl] = await Promise.all([
           fetchSheetCSV(SHEETS.actividades),
           fetchSheetCSV(SHEETS.territorio),
           fetchSheetCSV(SHEETS.poblacion),
-          fetchSheetCSV(SHEETS.evidencia)
+          fetchSheetCSV(SHEETS.evidencia),
+          fetchSheetCSV(SHEETS.alineacion)
         ]);
 
         rawDB.actividades = act
@@ -1450,6 +1483,7 @@
         rawDB.territorio = ter.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.poblacion = pob.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.evidencia = evi.filter(r => cleanStr(r.ID_Actividad) !== '');
+        rawDB.alineacion = catAl.filter(r => cleanStr(r.ID_Alineacion) !== '' || cleanStr(r.Nombre_Meta) !== '');
 
         populateFilterDropdowns();
         document.getElementById('loader').classList.add('hidden');
@@ -1479,10 +1513,19 @@
         });
       };
 
+      const allDirs = new Set([
+        ...rawDB.actividades.map(r => cleanStr(r.Direccion)),
+        ...rawDB.alineacion.map(r => cleanStr(r.Direccion))
+      ]);
+      const allEjes = new Set([
+        ...rawDB.actividades.map(r => cleanStr(r.Eje_PG)),
+        ...rawDB.alineacion.map(r => cleanStr(r.Eje_PG))
+      ]);
+
       fillSelect('f-municipio', new Set(rawDB.territorio.map(r => cleanStr(r.Municipio))), 'Todos los municipios');
-      fillSelect('f-direccion', new Set(rawDB.actividades.map(r => cleanStr(r.Direccion))), 'Todas las direcciones');
+      fillSelect('f-direccion', allDirs, 'Todas las direcciones');
       fillSelect('f-disciplina', new Set(rawDB.actividades.map(r => cleanStr(r.Disciplina))), 'Todas las disciplinas');
-      fillSelect('f-eje', new Set(rawDB.actividades.map(r => cleanStr(r.Eje_PG))), 'Todos los ejes');
+      fillSelect('f-eje', allEjes, 'Todos los ejes');
       fillSelect('f-enfoque', new Set(rawDB.actividades.map(r => cleanStr(r.Enfoque_Actividad))), 'Cultural y Artística');
     }
 
@@ -1562,6 +1605,13 @@
         filteredActIds.add(id);
       });
 
+      // Filtrar Cat_Alineacion según Dirección y Eje del Programa de Gobierno seleccionados
+      const catAlF = rawDB.alineacion.filter(c => {
+        if (fDir !== 'ALL' && cleanStr(c.Direccion) !== fDir) return false;
+        if (fEje !== 'ALL' && cleanStr(c.Eje_PG) !== fEje) return false;
+        return true;
+      });
+
       const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
       const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
       const pobF = rawDB.poblacion.filter(p => filteredActIds.has(cleanStr(p.ID_Actividad)));
@@ -1574,7 +1624,7 @@
       document.getElementById('badge-evi').textContent = eviF.length;
 
       renderVisionGeneral(actF, terF, pobF);
-      renderMatrizEstrategica(actF, pobF, terF);
+      renderMatrizEstrategica(actF, pobF, terF, catAlF);
       renderCoberturaTerritorial(actF, terF);
       renderPerfilPoblacion(actF, terF, pobF, eviF);
       renderRepositorioEvidencias(actF, terF, eviF);
@@ -1751,7 +1801,6 @@
         }]
       }, barHorizontalOptions());
 
-      // Dona Programa de Gobierno
       const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
@@ -1861,53 +1910,104 @@
     }
 
     // =========================================================
-    // VISTA 2: MATRIZ ESTRATÉGICA
+    // VISTA 2: MATRIZ ESTRATÉGICA (CONECTADA A CAT_ALINEACION)
     // =========================================================
-    function renderMatrizEstrategica(actF, pobF, terF) {
-      const dirs = new Set(actF.map(a => cleanStr(a.Direccion)).filter(Boolean));
-      const metasMap = {};
+    function renderMatrizEstrategica(actF, pobF, terF, catAlF) {
+      const dirsActivas = new Set(actF.map(a => cleanStr(a.Direccion)).filter(Boolean));
+      const dirsCatalogo = new Set(catAlF.map(c => cleanStr(c.Direccion)).filter(Boolean));
+
+      const popByActTer = {};
+      terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
+
+      const popByActDem = {};
+      pobF.forEach(p => { popByActDem[cleanStr(p.ID_Actividad)] = (popByActDem[cleanStr(p.ID_Actividad)] || 0) + toNum(p.Cantidad_Poblacion); });
+
+      const activePopMap = popMode === 'territorio' ? popByActTer : popByActDem;
+
+      // Agrupar actividades realizadas por ID_Alineacion (columna Clave_Proceso en Registro_Actividades) y respaldar por Nombre_Meta
+      const byIdAlin = {};
+      const byNombreMeta = {};
 
       actF.forEach(a => {
-        const clave = cleanStr(a.Clave_Proceso_Txt) || 'S/C';
-        const metaNom = cleanStr(a.Nombre_Meta);
-        if (!metaNom) return;
-        const key = `${clave}||${metaNom}`;
-        if (!metasMap[key]) {
-          metasMap[key] = {
-            clave,
-            nombre: metaNom,
-            unidad: cleanStr(a.Unidad_Medida),
-            metaAnual: toNum(a.Meta_Anual),
-            actCount: 0,
-            actIds: new Set()
-          };
+        const idAct = cleanStr(a.ID_Actividad);
+        const fkId = String(Math.round(toNum(a.Clave_Proceso)));
+        const nomMeta = cleanStr(a.Nombre_Meta);
+        const pop = activePopMap[idAct] || 0;
+
+        if (fkId && fkId !== '0') {
+          if (!byIdAlin[fkId]) byIdAlin[fkId] = { count: 0, pop: 0 };
+          byIdAlin[fkId].count++;
+          byIdAlin[fkId].pop += pop;
         }
-        metasMap[key].actCount++;
-        metasMap[key].actIds.add(cleanStr(a.ID_Actividad));
-      });
-
-      const metasArr = Object.values(metasMap);
-      const procesosUnicos = new Set(metasArr.map(m => m.clave));
-
-      let sumMetaAct = 0;
-      let sumRealAct = 0;
-      metasArr.forEach(m => {
-        const esPersonas = /personas|asistentes/i.test(m.unidad);
-        if (!esPersonas) {
-          sumMetaAct += m.metaAnual;
-          sumRealAct += m.actCount;
+        if (nomMeta) {
+          if (!byNombreMeta[nomMeta]) byNombreMeta[nomMeta] = { count: 0, pop: 0 };
+          byNombreMeta[nomMeta].count++;
+          byNombreMeta[nomMeta].pop += pop;
         }
       });
 
-      const pctAvanceAct = sumMetaAct > 0 ? ((sumRealAct / sumMetaAct) * 100).toFixed(1) : '0.0';
-      document.getElementById('lbl-avance-meta-global').textContent = `${pctAvanceAct}% (${fmtInt(sumRealAct)} de ${fmtInt(sumMetaAct)})`;
+      // Construir el catálogo completo de metas desde Cat_Alineacion
+      const sourceCat = catAlF.length > 0 ? catAlF : rawDB.alineacion;
+      cachedMetasCatalogoRows = sourceCat.map(c => {
+        const idAlin = String(Math.round(toNum(c.ID_Alineacion)));
+        const clave = cleanStr(c.Clave_Proceso) || 'S/C';
+        const nombre = cleanStr(c.Nombre_Meta) || 'Meta Institucional';
+        const direccion = cleanStr(c.Direccion) || 'SIN ASIGNAR';
+        const unidad = cleanStr(c.Unidad_Medida) || 'Actividades realizadas';
+        const metaAnual = toNum(c.Meta_Anual);
+        const unitCat = getUnitCategory(unidad);
+
+        const matchStats = byIdAlin[idAlin] || byNombreMeta[nombre] || { count: 0, pop: 0 };
+        const actCount = matchStats.count;
+        const realizado = unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : actCount);
+        const pct = metaAnual > 0 ? (realizado / metaAnual) * 100 : 0;
+
+        return {
+          idAlin,
+          clave,
+          nombre,
+          direccion,
+          unidad,
+          unitCat,
+          metaAnual,
+          actCount,
+          realizado,
+          pct
+        };
+      });
+
+      // Cálculos oficiales sobre Cat_Alineacion
+      const totalMetasCat = cachedMetasCatalogoRows.length;
+      const metasConRegistro = cachedMetasCatalogoRows.filter(m => m.actCount > 0).length;
+      const pctMetasAtendidas = totalMetasCat > 0 ? ((metasConRegistro / totalMetasCat) * 100).toFixed(1) : '0.0';
+
+      const procesosCatTotal = new Set(cachedMetasCatalogoRows.map(m => m.clave)).size;
+      const procesosActivos = new Set(cachedMetasCatalogoRows.filter(m => m.actCount > 0).map(m => m.clave)).size;
+
+      // Metas de Actividades (las 86 metas del catálogo que suman 6,535 actividades)
+      const metasActCatalogo = cachedMetasCatalogoRows.filter(m => m.unitCat === 'ACTIVIDADES');
+      const sumMetaActCatalogo = metasActCatalogo.reduce((s, m) => s + m.metaAnual, 0);
+      const sumRealActCatalogo = metasActCatalogo.reduce((s, m) => s + m.actCount, 0);
+      const pctGlobalCatalogo = sumMetaActCatalogo > 0 ? ((sumRealActCatalogo / sumMetaActCatalogo) * 100).toFixed(1) : '0.0';
+
+      // Subconjunto de metas de Actividades que ya tienen captura activa (suma 1,104)
+      const metasActEnOperacion = metasActCatalogo.filter(m => m.actCount > 0);
+      const sumMetaActOperacion = metasActEnOperacion.reduce((s, m) => s + m.metaAnual, 0);
+      const pctActivasOperacion = sumMetaActOperacion > 0 ? ((sumRealActCatalogo / sumMetaActOperacion) * 100).toFixed(1) : '0.0';
+
+      // Etiquetas en vista Inicio y Matriz Estratégica
+      document.getElementById('lbl-avance-meta-global').textContent = `${pctGlobalCatalogo}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)})`;
+      document.getElementById('lbl-avance-meta-activas').textContent = `${pctActivasOperacion}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActOperacion)})`;
 
       document.getElementById('kpi-mat-act').textContent = fmtInt(actF.length);
-      document.getElementById('kpi-mat-dir').textContent = fmtInt(dirs.size);
-      document.getElementById('kpi-mat-metas').textContent = fmtInt(metasArr.length);
-      document.getElementById('kpi-mat-procesos').textContent = `En ${procesosUnicos.size} procesos institucionales`;
-      document.getElementById('kpi-mat-cumplimiento').textContent = `${pctAvanceAct}%`;
-      document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealAct)} de ${fmtInt(sumMetaAct)} actividades programadas`;
+      document.getElementById('kpi-mat-dir').textContent = `${dirsActivas.size}/${dirsCatalogo.size || dirsActivas.size}`;
+      document.getElementById('kpi-mat-metas').textContent = `${metasConRegistro}/${totalMetasCat}`;
+      document.getElementById('kpi-mat-metas-pct').textContent = `${pctMetasAtendidas}%`;
+      document.getElementById('kpi-mat-procesos').textContent = `En ${procesosActivos} de ${procesosCatTotal} procesos del catálogo`;
+
+      document.getElementById('kpi-mat-cumplimiento').textContent = `${pctGlobalCatalogo}%`;
+      document.getElementById('kpi-mat-cumplimiento-activas').textContent = `${pctActivasOperacion}% en activas`;
+      document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} actividades en Cat_Alineacion`;
 
       // 1. Actividades por Eje de Gobierno
       const ejeMap = {};
@@ -1959,7 +2059,7 @@
         }
       }));
 
-      // 3. Pastel Eje Transversal PEC
+      // 3. Pastel Eje Transversal del Programa Estatal de Cultura
       const pecMap = {};
       actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
       const pecEntries = Object.entries(pecMap).sort((a, b) => b[1] - a[1]);
@@ -1971,11 +2071,11 @@
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false);
 
-      // Tabla Alineación Institucional (Objetivo Programa de Gobierno)
+      // Tabla Alineación Institucional (Sin siglas PEC)
       const alinMap = {};
       actF.forEach(a => {
-        const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo PG';
-        const lin = cleanStr(a.Linea_PEC) || 'Sin Línea PEC';
+        const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo del Programa de Gobierno';
+        const lin = cleanStr(a.Linea_PEC) || 'Sin Línea del Programa Estatal de Cultura';
         const enf = cleanStr(a.Enfoque_Actividad);
         const k = `${obj}||${lin}`;
         if (!alinMap[k]) alinMap[k] = { obj, lin, cultural: 0, artistica: 0, total: 0 };
@@ -1994,28 +2094,53 @@
         </tr>
       `).join('');
 
-      // Tabla Avance de Metas
-      const popByActTer = {};
-      terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
+      renderTablaMetasCatalogo();
+    }
 
-      document.getElementById('tbl-metas-avance').innerHTML = metasArr.sort((a, b) => b.actCount - a.actCount).map(m => {
-        const esPersonas = /personas|asistentes/i.test(m.unidad);
-        let realizado = m.actCount;
-        if (esPersonas) {
-          realizado = [...m.actIds].reduce((acc, id) => acc + (popByActTer[id] || 0), 0);
-        }
-        const pct = m.metaAnual > 0 ? ((realizado / m.metaAnual) * 100).toFixed(1) : '0.0';
-        const badgeColor = parseFloat(pct) >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-gto-blue';
+    function renderTablaMetasCatalogo() {
+      const mode = document.getElementById('filter-metas-cat')?.value || 'ALL';
+      let rows = [...cachedMetasCatalogoRows];
+
+      if (mode === 'ACTIVE') rows = rows.filter(m => m.actCount > 0);
+      else if (mode === 'PENDING') rows = rows.filter(m => m.actCount === 0);
+      else if (mode === 'ACT_ONLY') rows = rows.filter(m => m.unitCat === 'ACTIVIDADES');
+      else if (mode === 'POP_ONLY') rows = rows.filter(m => m.unitCat === 'PERSONAS');
+
+      // Ordenar primero las que tienen avance y luego por tamaño de meta anual
+      rows.sort((a, b) => (b.actCount - a.actCount) || (b.metaAnual - a.metaAnual));
+
+      document.getElementById('tbl-metas-avance').innerHTML = rows.map(m => {
+        const pctStr = m.pct.toFixed(1);
+        const badgeColor = m.pct >= 100
+          ? 'bg-emerald-100 text-emerald-800'
+          : m.actCount > 0
+          ? 'bg-blue-100 text-gto-blue'
+          : 'bg-slate-100 text-slate-500';
+        const unitTag = m.unitCat === 'PERSONAS'
+          ? `<span class="text-[9.5px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">Población</span>`
+          : m.unitCat === 'METROS'
+          ? `<span class="text-[9.5px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200">Infraestructura</span>`
+          : `<span class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">Actividades</span>`;
+
         return `
           <tr class="hover:bg-slate-50">
-            <td class="p-2.5 font-bold text-gto-blue">${m.clave}</td>
-            <td class="p-2.5">
-              <div class="font-medium text-slate-700 line-clamp-2">${m.nombre}</div>
-              <div class="text-[10px] text-slate-400">${m.unidad}</div>
+            <td class="p-2.5 font-bold text-gto-blue whitespace-nowrap">
+              <div>${m.clave}</div>
+              <div class="text-[9.5px] font-normal text-slate-400">ID #${m.idAlin}</div>
             </td>
-            <td class="p-2.5 text-right font-medium">${fmtInt(m.metaAnual)}</td>
-            <td class="p-2.5 text-right font-bold text-gto-blue">${fmtInt(realizado)}</td>
-            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pct}%</span></td>
+            <td class="p-2.5">
+              <div class="font-medium text-slate-700 line-clamp-2" title="${m.nombre}">${m.nombre}</div>
+              <div class="flex items-center gap-1.5 mt-1">
+                ${unitTag}
+                <span class="text-[10px] text-slate-400">${m.unidad} • ${formatShortDireccion(m.direccion)}</span>
+              </div>
+            </td>
+            <td class="p-2.5 text-right font-semibold text-slate-700">${fmtInt(m.metaAnual)}</td>
+            <td class="p-2.5 text-right font-bold text-gto-blue">
+              ${fmtInt(m.realizado)}
+              ${m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
+            </td>
+            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}%</span></td>
           </tr>
         `;
       }).join('');
