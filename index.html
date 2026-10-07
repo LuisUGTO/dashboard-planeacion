@@ -191,7 +191,6 @@
   ========================================================== -->
   <aside id="app-sidebar" class="fixed lg:static inset-y-0 left-0 w-64 bg-sidebar-custom text-white flex flex-col justify-between shrink-0 shadow-2xl z-40 overflow-y-auto custom-scroll select-none transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div>
-      <!-- Encabezado: Escudo Circular con Corona Blanca + SECRETARÍA DE CULTURA -->
       <div class="px-3.5 pt-4 pb-3 flex items-center gap-2.5 border-b border-slate-700/60 relative">
         <div class="w-16 h-20 shrink-0 flex items-center justify-center relative">
           <canvas id="shield-canvas" width="300" height="370" class="w-16 h-20 object-contain drop-shadow-md"></canvas>
@@ -678,9 +677,9 @@
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <div class="flex items-center gap-1.5 text-xs bg-blue-50 text-gto-blue border border-blue-200 px-3 py-1.5 rounded-lg font-bold" title="Calculado contra el total programado institucionalmente">
+              <div class="flex items-center gap-1.5 text-xs bg-blue-50 text-gto-blue border border-blue-200 px-3 py-1.5 rounded-lg font-bold" title="Calculado contra el total de las metas de actividades oficiales">
                 <i data-lucide="flag" class="w-3.5 h-3.5 text-gto-blue"></i>
-                <span>Avance de Meta Anual: <span id="lbl-avance-meta-global">0%</span></span>
+                <span>Meta Anual General: <span id="lbl-avance-meta-global">0%</span></span>
               </div>
               <div class="flex items-center gap-1.5 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg font-bold" title="Calculado sobre las metas que ya iniciaron operaciones">
                 <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
@@ -769,6 +768,7 @@
             <div class="h-64"><canvas id="chart-mat-direccion"></canvas></div>
           </div>
 
+          <!-- Tarjetas de Pastel/Dona con Leyenda HTML Completa -->
           <div class="lg:col-span-4 grid grid-rows-2 gap-4">
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1">
@@ -1222,6 +1222,9 @@
     </div>
   </div>
 
+  <!-- =========================================================
+       MOTOR DE DATOS Y GRÁFICAS
+  ========================================================== -->
   <script>
     if (window.Chart && window.ChartDataLabels) {
       Chart.register(ChartDataLabels);
@@ -1385,6 +1388,7 @@
       return `https://drive.google.com/drive/search?q=${encodeURIComponent(fileName)}`;
     }
 
+    // Contador Privado de Visitas
     function registerPrivateVisitCounter() {
       try {
         const todayStr = new Date().toISOString().split('T')[0];
@@ -1631,7 +1635,7 @@
         layout: { padding: { right: 58, left: 160, top: 4, bottom: 4 } },
         scales: {
           x: { grace: '22%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } },
-          y: { grid: { display: false }, ticks: { mirror: true, labelOffset: -12, font: { size: 10.5, weight: '600' }, color: '#334155' } }
+          y: { grid: { display: false }, ticks: { mirror: false, font: { size: 10.5, weight: '600' }, color: '#334155' } }
         },
         plugins: {
           legend: { display: false },
@@ -1792,7 +1796,7 @@
           backgroundColor: topDisc.map((_, i) => VIBRANT_PALETTE[i % VIBRANT_PALETTE.length]),
           borderRadius: 5
         }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } } }));
 
       const ejeCount = {};
       actF.forEach(a => {
@@ -1998,7 +2002,7 @@
           backgroundColor: ['#2563EB', '#F59E0B', '#10B981', '#E11D48', '#7C3AED'],
           borderRadius: 5
         }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } } }));
 
       const dirMap = {};
       const fullDirNames = {};
@@ -2018,10 +2022,10 @@
           borderRadius: 5
         }]
       }, barHorizontalOptions({
-        layout: { padding: { right: 58, left: 180, top: 4, bottom: 4 } },
+        layout: { padding: { right: 58, left: 160, top: 4, bottom: 4 } },
         scales: {
           x: { grace: '22%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } },
-          y: { grid: { display: false }, ticks: { mirror: true, labelOffset: -14, font: { size: 10.5, weight: '600' }, color: '#334155', align: 'right' } }
+          y: { grid: { display: false }, ticks: { mirror: false, font: { size: 10.5, weight: '600' }, color: '#334155' } }
         },
         plugins: {
           legend: { display: false },
@@ -2185,7 +2189,7 @@
       renderChart('chart-ter-top-mun', 'bar', {
         labels: topM.map(x => x[0]),
         datasets: [{ label: 'Actividades', data: topM.map(x => x[1].total), backgroundColor: '#15803D', borderRadius: 5 }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } } }));
 
       cachedComunidadesRows = Object.values(comGroup).sort((a, b) => b.acts - a.acts);
       renderTerritorioTable();
@@ -2262,7 +2266,7 @@
       renderChart('chart-pob-etario', 'bar', {
         labels: etSort.map(x => x[0]),
         datasets: [{ label: 'Personas Impactadas', data: etSort.map(x => x[1]), backgroundColor: '#EC4899', borderRadius: 5 }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } } }));
 
       const prSort = Object.entries(prioMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-pob-prioritario', 'bar', {
@@ -2485,7 +2489,7 @@
       }, {
         indexAxis: 'y',
         layout: { padding: { left: 160 } },
-        scales: { x: { stacked: true, grace: '10%' }, y: { stacked: true, ticks: { mirror: true, labelOffset: -14, align: 'right' } } },
+        scales: { x: { stacked: true, grace: '10%' }, y: { stacked: true, ticks: { mirror: false, font: { size: 10.5, weight: '600' }, color: '#334155' } } },
         plugins: {
           legend: { position: 'top' },
           tooltip: { callbacks: { title: (items) => fullDirNames[items[0].label] || items[0].label } },
