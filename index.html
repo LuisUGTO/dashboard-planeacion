@@ -1220,14 +1220,14 @@
   </div>
 
   <!-- VENTANA MODAL: EXPEDIENTE DE ACTIVIDAD -->
-  <div id="modal-expediente" role="dialog" aria-modal="true" aria-labelledby="mod-title" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
+  <div id="modal-expediente" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
       <div class="bg-gto-blue text-white px-5 py-4 flex items-center justify-between">
         <div>
           <span id="mod-id" class="text-[11px] font-mono uppercase bg-white/20 px-2 py-0.5 rounded font-bold">ACT00000</span>
           <h3 id="mod-title" class="text-base sm:text-lg font-vollkorn font-extrabold mt-1 leading-snug">Detalle de la Actividad</h3>
         </div>
-        <button onclick="closeExpedienteModal()" aria-label="Cerrar expediente" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
+        <button onclick="closeExpedienteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -1289,31 +1289,11 @@
     let loadedCount = 0;
 
     const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).replace(/\u00a0/g, ' ').trim();
-    // Valores externos se muestran como texto, incluso dentro de atributos HTML.
-    function escapeHTML(value) {
-      return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-    document.addEventListener('click', event => {
-      const target = event.target.closest('[data-expediente]');
-      if (!target) return;
-      event.stopPropagation();
-      openExpedienteModal(target.dataset.expediente);
-    });
     const toNum = (val) => {
       if (val === null || val === undefined || val === '') return 0;
-      if (typeof val === 'number') return Number.isFinite(val) ? val : 0;
-      let s = String(val).trim().replace(/(?:MXN|USD|\$|€|%|\s)/gi, '');
-      const negative = /^\(.*\)$/.test(s);
-      if (negative) s = s.slice(1, -1);
-      if (!/^[+-]?\d[\d.,]*$/.test(s)) return 0;
-      if (s.includes(',') && s.includes('.')) {
-        s = s.lastIndexOf(',') > s.lastIndexOf('.') ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');
-      } else if (s.includes(',')) {
-        // Se conserva la convención mexicana: 1,234 son miles; 1,5 es decimal.
-        s = /^[+-]?\d{1,3}(,\d{3})+$/.test(s) ? s.replace(/,/g, '') : s.replace(',', '.');
-      }
-      const n = Number(s);
-      return Number.isFinite(n) ? (negative ? -n : n) : 0;
+      if (typeof val === 'number') return isNaN(val) ? 0 : val;
+      const n = parseFloat(String(val).replace(/[^0-9.-]/g, ''));
+      return isNaN(n) ? 0 : n;
     };
     const fmtInt = (n) => Math.round(n).toLocaleString('es-MX');
     const fmtCompact = (n) => {
@@ -1370,18 +1350,25 @@
 
     function normalizeDateISO(val) {
       const s = cleanStr(val);
-      let y, m, d, match;
-      if ((match = s.match(/^Date\((\d{4})\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})/i))) {
-        y = +match[1]; m = +match[2] + 1; d = +match[3];
-      } else if ((match = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:$|[T\s])/))) {
-        y = +match[1]; m = +match[2]; d = +match[3];
-      } else if ((match = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/))) {
-        y = +match[3]; d = +match[1]; m = +match[2];
-        if (m > 12) [d, m] = [m, d];
-      } else return '';
-      const date = new Date(Date.UTC(y, m - 1, d));
-      if (date.getUTCFullYear() !== y || date.getUTCMonth() !== m - 1 || date.getUTCDate() !== d) return '';
-      return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      if (!s) return '';
+      const mGviz = s.match(/^Date\((\d{4})\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})/i);
+      if (mGviz) {
+        return `${mGviz[1]}-${String(parseInt(mGviz[2], 10) + 1).padStart(2, '0')}-${String(parseInt(mGviz[3], 10)).padStart(2, '0')}`;
+      }
+      const mIso = s.match(/^(\d{4})[\-\/](\d{1,2})[\-\/](\d{1,2})/);
+      if (mIso) {
+        return `${mIso[1]}-${String(mIso[2]).padStart(2, '0')}-${String(mIso[3]).padStart(2, '0')}`;
+      }
+      const mLat = s.match(/^(\d{1,2})[\-\/](\d{1,2})[\-\/](\d{4})/);
+      if (mLat) {
+        const p1 = parseInt(mLat[1], 10);
+        const p2 = parseInt(mLat[2], 10);
+        const y = mLat[3];
+        const day = p2 > 12 ? p2 : p1;
+        const month = p2 > 12 ? p1 : p2;
+        return `${y}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      }
+      return s;
     }
 
     function normalizeCommunityName(rawName) {
@@ -1405,14 +1392,7 @@
     function getDriveSearchUrl(rawPath) {
       const s = cleanStr(rawPath);
       if (!s) return '#';
-      if (/^https?:\/\//i.test(s)) {
-        try {
-          const url = new URL(s);
-          if (url.username || url.password) return '#';
-          return url.href;
-        } catch { return '#'; }
-      }
-      if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return '#';
+      if (/^https?:\/\//i.test(s)) return s;
       const parts = s.split('/');
       const fileName = parts[parts.length - 1] || s;
       return `https://drive.google.com/drive/search?q=${encodeURIComponent(fileName)}`;
@@ -1420,7 +1400,7 @@
 
     function registerPrivateVisitCounter() {
       try {
-        const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Mexico_City', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+        const todayStr = new Date().toISOString().split('T')[0];
         const nowTime = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
 
         let stats = JSON.parse(localStorage.getItem('gto_cultura_stats') || '{}');
@@ -1450,26 +1430,19 @@
     async function fetchSheetCSV(sheetName) {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(sheetName)}`;
       for (let attempt = 1; attempt <= 2; attempt++) {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 9000);
         try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 9000);
           const response = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+          clearTimeout(timer);
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const csvText = await response.text();
-          return await new Promise((resolve, reject) => {
+          return new Promise((resolve, reject) => {
             Papa.parse(csvText, {
               header: true,
               skipEmptyLines: true,
               transformHeader: (h) => cleanStr(h),
               complete: (res) => {
-                const required = sheetName === SHEETS.alineacion ? ['ID_Alineacion', 'Nombre_Meta'] : ['ID_Actividad'];
-                const fields = res.meta.fields || [];
-                if (required.some(field => !fields.includes(field))) {
-                  reject(new Error('Columnas faltantes en ' + sheetName)); return;
-                }
-                if (res.errors.length) {
-                  reject(new Error('CSV inválido en ' + sheetName + ': ' + res.errors[0].message)); return;
-                }
                 loadedCount++;
                 const st = document.getElementById('loader-status');
                 if (st) st.textContent = `Sincronizando módulos de información (${loadedCount}/5)...`;
@@ -1479,18 +1452,12 @@
             });
           });
         } catch (err) {
-          if (attempt === 2) throw new Error(sheetName + ": " + err.message);
-        } finally {
-          clearTimeout(timer);
+          if (attempt === 2) throw err;
         }
       }
     }
 
-    let territoryIndex = Object.create(null);
-    let dataLoadInProgress = false;
     async function loadAllData() {
-      if (dataLoadInProgress) return;
-      dataLoadInProgress = true;
       safeCreateIcons();
       window.drawFallbackShield();
       const logoImg = document.getElementById('raw-logo-source');
@@ -1505,17 +1472,13 @@
       document.getElementById('loader-status').textContent = 'Conectando con la base de datos institucional (0/5)...';
 
       try {
-        if (!window.Papa) throw new Error('No se pudo cargar el lector de datos');
-        const results = await Promise.allSettled([
+        const [act, ter, pob, evi, catAl] = await Promise.all([
           fetchSheetCSV(SHEETS.actividades),
           fetchSheetCSV(SHEETS.territorio),
           fetchSheetCSV(SHEETS.poblacion),
           fetchSheetCSV(SHEETS.evidencia),
           fetchSheetCSV(SHEETS.alineacion)
         ]);
-        const failed = results.find(result => result.status === 'rejected');
-        if (failed) throw failed.reason;
-        const [act, ter, pob, evi, catAl] = results.map(result => result.value);
 
         rawDB.actividades = act
           .filter(r => cleanStr(r.ID_Actividad) !== '')
@@ -1525,11 +1488,6 @@
           }));
 
         rawDB.territorio = ter.filter(r => cleanStr(r.ID_Actividad) !== '');
-        territoryIndex = Object.create(null);
-        rawDB.territorio.forEach(row => {
-          const id = cleanStr(row.ID_Actividad);
-          (territoryIndex[id] ||= []).push(row);
-        });
         rawDB.poblacion = pob.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.evidencia = evi.filter(r => cleanStr(r.ID_Actividad) !== '');
         rawDB.alineacion = catAl.filter(r => cleanStr(r.ID_Alineacion) !== '' || cleanStr(r.Nombre_Meta) !== '');
@@ -1544,10 +1502,8 @@
         registerPrivateVisitCounter();
       } catch (err) {
         console.error('Error cargando datos:', err);
-        document.getElementById('loader-status').textContent = 'No se pudo cargar la información. ' + err.message + '. Haz clic en Reintentar.';
+        document.getElementById('loader-status').textContent = 'La conexión tardó más de lo esperado. Haz clic en Reintentar.';
         document.getElementById('loader-retry-btn').classList.remove('hidden');
-      } finally {
-        dataLoadInProgress = false;
       }
     }
 
@@ -1555,7 +1511,7 @@
       const fillSelect = (id, values, defaultLabel) => {
         const sel = document.getElementById(id);
         if (!sel) return;
-        sel.innerHTML = `<option value="ALL">${escapeHTML(defaultLabel)}</option>`;
+        sel.innerHTML = `<option value="ALL">${defaultLabel}</option>`;
         [...values].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es')).forEach(v => {
           const opt = document.createElement('option');
           opt.value = v;
@@ -1616,15 +1572,19 @@
       const fEnf = document.getElementById('f-enfoque').value;
       const fZap = document.getElementById('f-zap').value;
 
-      const terByAct = territoryIndex;
+      const terByAct = {};
+      rawDB.territorio.forEach(t => {
+        const id = cleanStr(t.ID_Actividad);
+        if (!terByAct[id]) terByAct[id] = [];
+        terByAct[id].push(t);
+      });
 
       filteredActIds.clear();
 
       rawDB.actividades.forEach(a => {
         const id = cleanStr(a.ID_Actividad);
         const fIso = a.Fecha_Inicio_ISO || '';
-        if ((dStart || dEnd) && !fIso) return;
-        if (dStart && fIso < dStart) return;
+        if (dStart && fIso && fIso < dStart) return;
         if (dEnd && fIso && fIso > dEnd) return;
         if (fDir !== 'ALL' && cleanStr(a.Direccion) !== fDir) return;
         if (fDisc !== 'ALL' && cleanStr(a.Disciplina) !== fDisc) return;
@@ -1739,12 +1699,12 @@
         return `
           <div class="flex items-center justify-between text-xs bg-slate-50/80 px-2 py-1 rounded-md border border-slate-100">
             <div class="flex items-center gap-1.5 min-w-0 pr-1.5">
-              <span class="w-2.5 h-2.5 rounded-sm shrink-0" style="background:${escapeHTML(c)}"></span>
-              <span class="font-semibold text-slate-700 truncate" title="${escapeHTML(label)}">${escapeHTML(label)}</span>
+              <span class="w-2.5 h-2.5 rounded-sm shrink-0" style="background:${c}"></span>
+              <span class="font-semibold text-slate-700 truncate" title="${label}">${label}</span>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
-              <span class="font-extrabold text-gto-blue">${escapeHTML(fmtInt(count))}</span>
-              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-white border border-slate-200 text-slate-600">${escapeHTML(pct)}%</span>
+              <span class="font-extrabold text-gto-blue">${fmtInt(count)}</span>
+              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-white border border-slate-200 text-slate-600">${pct}%</span>
             </div>
           </div>
         `;
@@ -1805,7 +1765,7 @@
 
       updateMapMarkers(terF);
 
-      const tipoCount = Object.create(null);
+      const tipoCount = {};
       actF.forEach(a => {
         const t = cleanStr(a.Tipo_Actividad) || 'Sin especificar';
         tipoCount[t] = (tipoCount[t] || 0) + 1;
@@ -1821,17 +1781,17 @@
         return `
           <div class="text-xs">
             <div class="flex justify-between font-medium text-slate-700 mb-1">
-              <span class="truncate pr-2 font-semibold">${escapeHTML(nombre)} <span class="text-slate-400 font-normal">(${escapeHTML(pctTotal)}%)</span></span>
-              <span class="font-extrabold text-gto-blue">${escapeHTML(count)}</span>
+              <span class="truncate pr-2 font-semibold">${nombre} <span class="text-slate-400 font-normal">(${pctTotal}%)</span></span>
+              <span class="font-extrabold text-gto-blue">${count}</span>
             </div>
             <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="${escapeHTML(cClass)} h-2.5 rounded-full transition-all duration-500" style="width:${escapeHTML(barW)}%"></div>
+              <div class="${cClass} h-2.5 rounded-full transition-all duration-500" style="width:${barW}%"></div>
             </div>
           </div>
         `;
       }).join('');
 
-      const discCount = Object.create(null);
+      const discCount = {};
       actF.forEach(a => {
         const d = cleanStr(a.Disciplina) || 'Sin disciplina';
         discCount[d] = (discCount[d] || 0) + 1;
@@ -1847,7 +1807,7 @@
         }]
       }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
 
-      const ejeCount = Object.create(null);
+      const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
         ejeCount[e] = (ejeCount[e] || 0) + 1;
@@ -1859,7 +1819,7 @@
       const actPorMes = new Array(12).fill(0);
       const popPorMes = new Array(12).fill(0);
 
-      const popByAct = Object.create(null);
+      const popByAct = {};
       if (popMode === 'territorio') {
         terF.forEach(t => { popByAct[cleanStr(t.ID_Actividad)] = (popByAct[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
       } else {
@@ -1962,16 +1922,16 @@
       const dirsActivas = new Set(actF.map(a => cleanStr(a.Direccion)).filter(Boolean));
       const dirsCatalogo = new Set(catAlF.map(c => cleanStr(c.Direccion)).filter(Boolean));
 
-      const popByActTer = Object.create(null);
+      const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
 
-      const popByActDem = Object.create(null);
+      const popByActDem = {};
       pobF.forEach(p => { popByActDem[cleanStr(p.ID_Actividad)] = (popByActDem[cleanStr(p.ID_Actividad)] || 0) + toNum(p.Cantidad_Poblacion); });
 
       const activePopMap = popMode === 'territorio' ? popByActTer : popByActDem;
 
-      const byIdAlin = Object.create(null);
-      const byNombreMeta = Object.create(null);
+      const byIdAlin = {};
+      const byNombreMeta = {};
 
       actF.forEach(a => {
         const idAct = cleanStr(a.ID_Actividad);
@@ -2040,7 +2000,7 @@
       document.getElementById('kpi-mat-cumplimiento-activas').textContent = `${pctActivasOperacion}% en activas`;
       document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial`;
 
-      const ejeMap = Object.create(null);
+      const ejeMap = {};
       actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
       const ejeSort = Object.entries(ejeMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-mat-eje', 'bar', {
@@ -2061,17 +2021,17 @@
       });
       renderStrategicDirections([...dirMap].sort((a, b) => b[1] - a[1]));
 
-      const pecMap = Object.create(null);
+      const pecMap = {};
       actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
       const pecEntries = Object.entries(pecMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-pec', 'legend-mat-pec', pecEntries, ['#84CC16', '#A855F7', '#F97316'], true);
 
-      const enfMap = Object.create(null);
+      const enfMap = {};
       actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No esp.'; enfMap[e] = (enfMap[e] || 0) + 1; });
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false);
 
-      const alinMap = Object.create(null);
+      const alinMap = {};
       actF.forEach(a => {
         const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo del Programa de Gobierno';
         const lin = cleanStr(a.Linea_PEC) || 'Sin Línea del Programa Estatal de Cultura';
@@ -2085,11 +2045,11 @@
       const alinRows = Object.values(alinMap).sort((a, b) => b.total - a.total);
       document.getElementById('tbl-alineacion').innerHTML = alinRows.map(r => `
         <tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-semibold text-slate-700">${escapeHTML(r.obj)}</td>
-          <td class="p-2.5 text-slate-600">${escapeHTML(r.lin)}</td>
-          <td class="p-2.5 text-right font-bold text-emerald-700">${escapeHTML(r.cultural)}</td>
-          <td class="p-2.5 text-right font-bold text-amber-600">${escapeHTML(r.artistica)}</td>
-          <td class="p-2.5 text-right font-black text-gto-blue">${escapeHTML(r.total)}</td>
+          <td class="p-2.5 font-semibold text-slate-700">${r.obj}</td>
+          <td class="p-2.5 text-slate-600">${r.lin}</td>
+          <td class="p-2.5 text-right font-bold text-emerald-700">${r.cultural}</td>
+          <td class="p-2.5 text-right font-bold text-amber-600">${r.artistica}</td>
+          <td class="p-2.5 text-right font-black text-gto-blue">${r.total}</td>
         </tr>
       `).join('');
 
@@ -2115,22 +2075,22 @@
         return `
           <tr class="hover:bg-slate-50">
             <td class="p-2.5 font-bold text-gto-blue whitespace-nowrap">
-              <div>${escapeHTML(m.clave)}</div>
-              <div class="text-[9.5px] font-normal text-slate-400">ID #${escapeHTML(m.idAlin)}</div>
+              <div>${m.clave}</div>
+              <div class="text-[9.5px] font-normal text-slate-400">ID #${m.idAlin}</div>
             </td>
             <td class="p-2.5">
-              <div class="font-medium text-slate-700 line-clamp-2" title="${escapeHTML(m.nombre)}">${escapeHTML(m.nombre)}</div>
+              <div class="font-medium text-slate-700 line-clamp-2" title="${m.nombre}">${m.nombre}</div>
               <div class="flex items-center gap-1.5 mt-1">
                 ${unitTag}
-                <span class="text-[10px] text-slate-400">${escapeHTML(m.unidad)} • ${escapeHTML(formatShortDireccion(m.direccion))}</span>
+                <span class="text-[10px] text-slate-400">${m.unidad} • ${formatShortDireccion(m.direccion)}</span>
               </div>
             </td>
-            <td class="p-2.5 text-right font-semibold text-slate-700">${escapeHTML(fmtInt(m.metaAnual))}</td>
+            <td class="p-2.5 text-right font-semibold text-slate-700">${fmtInt(m.metaAnual)}</td>
             <td class="p-2.5 text-right font-bold text-gto-blue">
-              ${escapeHTML(fmtInt(m.realizado))}
-              ${m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${escapeHTML(m.actCount)} act.</div>` : ''}
+              ${fmtInt(m.realizado)}
+              ${m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
             </td>
-            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${escapeHTML(badgeColor)}">${escapeHTML(pctStr)}%</span></td>
+            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}%</span></td>
           </tr>
         `;
       }).join('');
@@ -2146,9 +2106,9 @@
       let zapActs = 0;
       let totalPopTer = 0;
 
-      const munStats = Object.create(null);
-      const asentMap = Object.create(null);
-      const comGroup = Object.create(null);
+      const munStats = {};
+      const asentMap = {};
+      const comGroup = {};
 
       terF.forEach(t => {
         const mun = cleanStr(t.Municipio) || 'Sin municipio';
@@ -2229,16 +2189,16 @@
       );
       document.getElementById('tbl-comunidades').innerHTML = rows.map(r => `
         <tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-semibold text-gto-blue">${escapeHTML(r.mun)}</td>
-          <td class="p-2.5 text-slate-700">${escapeHTML(r.com)}</td>
-          <td class="p-2.5 text-slate-500">${escapeHTML(r.asent)}</td>
+          <td class="p-2.5 font-semibold text-gto-blue">${r.mun}</td>
+          <td class="p-2.5 text-slate-700">${r.com}</td>
+          <td class="p-2.5 text-slate-500">${r.asent}</td>
           <td class="p-2.5 text-center">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${escapeHTML(r.zap === 'Sí' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600')}">${escapeHTML(r.zap)}</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${r.zap === 'Sí' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}">${r.zap}</span>
           </td>
-          <td class="p-2.5 text-right font-bold text-gto-blue">${escapeHTML(fmtInt(r.acts))}</td>
-          <td class="p-2.5 text-right text-slate-600">${escapeHTML(fmtInt(r.part))}</td>
-          <td class="p-2.5 text-right text-slate-600">${escapeHTML(fmtInt(r.acc))}</td>
-          <td class="p-2.5 text-right font-black text-emerald-700">${escapeHTML(fmtInt(r.total))}</td>
+          <td class="p-2.5 text-right font-bold text-gto-blue">${fmtInt(r.acts)}</td>
+          <td class="p-2.5 text-right text-slate-600">${fmtInt(r.part)}</td>
+          <td class="p-2.5 text-right text-slate-600">${fmtInt(r.acc)}</td>
+          <td class="p-2.5 text-right font-black text-emerald-700">${fmtInt(r.total)}</td>
         </tr>
       `).join('');
     }
@@ -2253,11 +2213,11 @@
       const totalDem = pobF.reduce((s, r) => s + toNum(r.Cantidad_Poblacion), 0);
 
       let totalPrio = 0;
-      const etarioMap = Object.create(null);
-      const prioMap = Object.create(null);
-      const generoMap = Object.create(null);
+      const etarioMap = {};
+      const prioMap = {};
+      const generoMap = {};
 
-      const enfoqueByAct = Object.create(null);
+      const enfoqueByAct = {};
       actF.forEach(a => { enfoqueByAct[cleanStr(a.ID_Actividad)] = cleanStr(a.Enfoque_Actividad) || 'Cultural'; });
 
       const enfoqueEtario = { Cultural: {}, Artística: {} };
@@ -2343,10 +2303,10 @@
       const genEntries = Object.entries(generoMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-pob-genero', 'legend-pob-genero', genEntries, ['#06B6D4', '#F59E0B', '#EC4899', '#8B5CF6']);
 
-      const munByAct = Object.create(null);
+      const munByAct = {};
       terF.forEach(t => { munByAct[cleanStr(t.ID_Actividad)] = cleanStr(t.Municipio); });
 
-      const pobByActAgg = Object.create(null);
+      const pobByActAgg = {};
       pobF.forEach(p => {
         const id = cleanStr(p.ID_Actividad);
         if (!pobByActAgg[id]) pobByActAgg[id] = { part: 0, acc: 0, total: 0 };
@@ -2355,7 +2315,7 @@
         pobByActAgg[id].total += toNum(p.Cantidad_Poblacion);
       });
 
-      const eviByAct = Object.create(null);
+      const eviByAct = {};
       eviF.forEach(e => {
         const id = cleanStr(e.ID_Actividad);
         if (!eviByAct[id]) eviByAct[id] = [];
@@ -2381,33 +2341,6 @@
       renderPoblacionTable();
     }
 
-    const tableLimits = Object.create(null);
-    function visibleTableRows(rows, tableId, render) {
-      const table = document.getElementById(tableId);
-      const key = JSON.stringify(rows.map(row => [row.id || row.idAct, row.archivo || '', row.nombre || row.nombreAct || '']));
-      if (!tableLimits[tableId] || tableLimits[tableId].key !== key) tableLimits[tableId] = { key, limit: 150 };
-      const state = tableLimits[tableId];
-      let footer = document.getElementById(tableId + '-more');
-      if (!footer) {
-        footer = document.createElement('div');
-        footer.id = tableId + '-more';
-        footer.className = 'flex items-center justify-between gap-3 p-3 text-xs text-slate-500';
-        table.closest('table').parentElement.after(footer);
-      }
-      footer.replaceChildren();
-      const text = document.createElement('span');
-      text.textContent = 'Mostrando ' + Math.min(state.limit, rows.length) + ' de ' + rows.length;
-      footer.append(text);
-      if (state.limit < rows.length) {
-        const button = document.createElement('button');
-        button.className = 'px-3 py-1 rounded-lg bg-slate-100 text-gto-blue font-semibold';
-        button.textContent = 'Mostrar más';
-        button.addEventListener('click', () => { state.limit += 150; render(); });
-        footer.append(button);
-      }
-      return rows.slice(0, state.limit);
-    }
-
     function renderPoblacionTable() {
       const q = (document.getElementById('search-actividad')?.value || '').toLowerCase();
       const rows = cachedPoblacionActRows.filter(r =>
@@ -2415,20 +2348,20 @@
         r.nombre.toLowerCase().includes(q) ||
         r.mun.toLowerCase().includes(q)
       );
-      document.getElementById('tbl-poblacion-act').innerHTML = visibleTableRows(rows, 'tbl-poblacion-act', renderPoblacionTable).map(r => {
+      document.getElementById('tbl-poblacion-act').innerHTML = rows.slice(0, 150).map(r => {
         const evBtn = r.evidencias.length > 0
-          ? `<button data-expediente="${escapeHTML(r.id)}" class="px-2.5 py-1 rounded-full bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 font-bold text-[10px] transition">Ver ${escapeHTML(r.evidencias.length)} evidencia(s)</button>`
-          : `<button data-expediente="${escapeHTML(r.id)}" class="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium text-[10px] transition">Ver ficha</button>`;
+          ? `<button onclick="openExpedienteModal('${r.id}')" class="px-2.5 py-1 rounded-full bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 font-bold text-[10px] transition">Ver ${r.evidencias.length} evidencia(s)</button>`
+          : `<button onclick="openExpedienteModal('${r.id}')" class="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium text-[10px] transition">Ver ficha</button>`;
         return `
-          <tr class="hover:bg-slate-50 cursor-pointer" data-expediente="${escapeHTML(r.id)}">
-            <td class="p-2.5 font-mono font-bold text-gto-blue">${escapeHTML(r.id)}</td>
-            <td class="p-2.5 text-slate-500 whitespace-nowrap">${escapeHTML(r.fecha)}</td>
-            <td class="p-2.5 font-semibold text-slate-700">${escapeHTML(r.mun)}</td>
-            <td class="p-2.5 text-slate-700">${escapeHTML(r.nombre)}</td>
-            <td class="p-2.5 text-right text-rose-600 font-semibold">${escapeHTML(fmtInt(r.part))}</td>
-            <td class="p-2.5 text-right text-gto-blue font-semibold">${escapeHTML(fmtInt(r.acc))}</td>
-            <td class="p-2.5 text-right font-black text-gto-blue">${escapeHTML(fmtInt(r.total))}</td>
-            <td class="p-2.5 text-center" >${evBtn}</td>
+          <tr class="hover:bg-slate-50 cursor-pointer" onclick="openExpedienteModal('${r.id}')">
+            <td class="p-2.5 font-mono font-bold text-gto-blue">${r.id}</td>
+            <td class="p-2.5 text-slate-500 whitespace-nowrap">${r.fecha}</td>
+            <td class="p-2.5 font-semibold text-slate-700">${r.mun}</td>
+            <td class="p-2.5 text-slate-700">${r.nombre}</td>
+            <td class="p-2.5 text-right text-rose-600 font-semibold">${fmtInt(r.part)}</td>
+            <td class="p-2.5 text-right text-gto-blue font-semibold">${fmtInt(r.acc)}</td>
+            <td class="p-2.5 text-right font-black text-gto-blue">${fmtInt(r.total)}</td>
+            <td class="p-2.5 text-center" onclick="event.stopPropagation()">${evBtn}</td>
           </tr>
         `;
       }).join('');
@@ -2441,16 +2374,16 @@
     let cachedMissingActsList = [];
 
     function renderRepositorioEvidencias(actF, terF, eviF) {
-      const actMap = Object.create(null);
+      const actMap = {};
       actF.forEach(a => { actMap[cleanStr(a.ID_Actividad)] = a; });
 
-      const munByAct = Object.create(null);
+      const munByAct = {};
       terF.forEach(t => { munByAct[cleanStr(t.ID_Actividad)] = cleanStr(t.Municipio); });
 
       const actsWithEviSet = new Set();
       let countFotos = 0;
       let countDocs = 0;
-      const tipoCount = Object.create(null);
+      const tipoCount = {};
 
       cachedEvidenciasList = eviF.map(e => {
         const idAct = cleanStr(e.ID_Actividad);
@@ -2521,8 +2454,8 @@
       document.getElementById('kpi-evi-fotos').textContent = fmtInt(countFotos);
       document.getElementById('kpi-evi-docs').textContent = fmtInt(countDocs);
 
-      const dirCov = Object.create(null);
-      const fullDirNames = Object.create(null);
+      const dirCov = {};
+      const fullDirNames = {};
       actF.forEach(a => {
         const rawD = cleanStr(a.Direccion) || 'SIN ASIGNAR';
         const shortD = formatShortDireccion(rawD);
@@ -2573,21 +2506,21 @@
           r.mun.toLowerCase().includes(q) ||
           r.dir.toLowerCase().includes(q)
         );
-        tbody.innerHTML = visibleTableRows(rows, 'tbl-evidencias', renderEvidenciasTable).map(r => `
+        tbody.innerHTML = rows.slice(0, 150).map(r => `
           <tr class="hover:bg-amber-50/40">
-            <td class="p-2.5 font-mono font-bold text-gto-blue">${escapeHTML(r.idAct)}</td>
+            <td class="p-2.5 font-mono font-bold text-gto-blue">${r.idAct}</td>
             <td class="p-2.5">
-              <div class="font-semibold text-slate-700">${escapeHTML(r.mun)}</div>
-              <div class="text-[10px] text-slate-400">${escapeHTML(r.fecha)}</div>
+              <div class="font-semibold text-slate-700">${r.mun}</div>
+              <div class="text-[10px] text-slate-400">${r.fecha}</div>
             </td>
             <td class="p-2.5">
-              <div class="font-medium text-slate-700">${escapeHTML(r.nombreAct)}</div>
-              <div class="text-[10px] text-slate-400">${escapeHTML(r.dir)} • ${escapeHTML(r.usuario)}</div>
+              <div class="font-medium text-slate-700">${r.nombreAct}</div>
+              <div class="text-[10px] text-slate-400">${r.dir} • ${r.usuario}</div>
             </td>
             <td class="p-2.5"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px]">Sin Evidencia</span></td>
             <td class="p-2.5 text-slate-400 italic">Pendiente de adjuntar archivo en el sistema de captura</td>
             <td class="p-2.5 text-center">
-              <button data-expediente="${escapeHTML(r.idAct)}" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[11px] transition">
+              <button onclick="openExpedienteModal('${r.idAct}')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[11px] transition">
                 Ver Ficha
               </button>
             </td>
@@ -2610,7 +2543,7 @@
         );
       });
 
-      tbody.innerHTML = visibleTableRows(rows, 'tbl-evidencias', renderEvidenciasTable).map(r => {
+      tbody.innerHTML = rows.slice(0, 150).map(r => {
         const badgeStyle = r.catTipo === 'Fotografía'
           ? 'bg-amber-100 text-amber-800'
           : r.catTipo === 'Documento PDF'
@@ -2618,27 +2551,27 @@
           : 'bg-purple-100 text-purple-800';
         return `
           <tr class="hover:bg-slate-50">
-            <td class="p-2.5 font-mono font-bold text-gto-blue">${escapeHTML(r.idAct)}</td>
+            <td class="p-2.5 font-mono font-bold text-gto-blue">${r.idAct}</td>
             <td class="p-2.5">
-              <div class="font-semibold text-slate-700">${escapeHTML(r.mun)}</div>
-              <div class="text-[10px] text-slate-400">${escapeHTML(r.fecha)}</div>
+              <div class="font-semibold text-slate-700">${r.mun}</div>
+              <div class="text-[10px] text-slate-400">${r.fecha}</div>
             </td>
             <td class="p-2.5">
-              <div class="font-medium text-slate-700 line-clamp-1">${escapeHTML(r.nombreAct)}</div>
-              <div class="text-[10px] text-slate-400">${escapeHTML(r.dir)}</div>
+              <div class="font-medium text-slate-700 line-clamp-1">${r.nombreAct}</div>
+              <div class="text-[10px] text-slate-400">${r.dir}</div>
             </td>
-            <td class="p-2.5"><span class="px-2 py-0.5 rounded-full font-bold text-[10px] ${escapeHTML(badgeStyle)}">${escapeHTML(r.catTipo)}</span></td>
+            <td class="p-2.5"><span class="px-2 py-0.5 rounded-full font-bold text-[10px] ${badgeStyle}">${r.catTipo}</span></td>
             <td class="p-2.5 max-w-xs">
-              <div class="font-mono text-[11px] text-slate-700 truncate" title="${escapeHTML(r.archivo)}">${escapeHTML(r.fileNameClean || 'Sin nombre')}</div>
-              ${r.desc ? `<div class="text-[10px] text-teal-700 italic mt-0.5 line-clamp-1">"${escapeHTML(r.desc)}"</div>` : ''}
+              <div class="font-mono text-[11px] text-slate-700 truncate" title="${r.archivo}">${r.fileNameClean || 'Sin nombre'}</div>
+              ${r.desc ? `<div class="text-[10px] text-teal-700 italic mt-0.5 line-clamp-1">"${r.desc}"</div>` : ''}
             </td>
             <td class="p-2.5 text-center whitespace-nowrap space-x-1">
               ${r.archivo ? `
-                <a href="${escapeHTML(r.driveUrl)}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gto-blue hover:bg-gto-dark text-white font-bold text-[10px] transition shadow-xs">
+                <a href="${r.driveUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gto-blue hover:bg-gto-dark text-white font-bold text-[10px] transition shadow-xs">
                   Abrir en Drive
                 </a>
               ` : ''}
-              <button data-expediente="${escapeHTML(r.idAct)}" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[10px] transition">
+              <button onclick="openExpedienteModal('${r.idAct}')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[10px] transition">
                 Ficha
               </button>
             </td>
@@ -2651,15 +2584,15 @@
     // VISTA 6: CONCILIACIÓN OPERATIVA
     // =========================================================
     function renderAuditoria(actF, terF, pobF) {
-      const terSum = Object.create(null);
-      const munMap = Object.create(null);
+      const terSum = {};
+      const munMap = {};
       terF.forEach(t => {
         const id = cleanStr(t.ID_Actividad);
         terSum[id] = (terSum[id] || 0) + toNum(t.Cantidad);
         munMap[id] = cleanStr(t.Municipio);
       });
 
-      const pobSum = Object.create(null);
+      const pobSum = {};
       pobF.forEach(p => {
         const id = cleanStr(p.ID_Actividad);
         pobSum[id] = (pobSum[id] || 0) + toNum(p.Cantidad_Poblacion);
@@ -2698,15 +2631,15 @@
 
       document.getElementById('tbl-auditoria').innerHTML = auditList.map(r => `
         <tr class="hover:bg-amber-50/30">
-          <td class="p-2.5 font-mono font-bold text-gto-blue">${escapeHTML(r.id)}</td>
-          <td class="p-2.5 text-slate-500">${escapeHTML(r.usuario)}</td>
-          <td class="p-2.5 font-medium text-slate-700">${escapeHTML(r.nombre)}</td>
-          <td class="p-2.5 text-slate-600">${escapeHTML(r.mun)}</td>
-          <td class="p-2.5 text-right font-semibold">${escapeHTML(fmtInt(r.sT))}</td>
-          <td class="p-2.5 text-right font-semibold">${escapeHTML(fmtInt(r.sP))}</td>
-          <td class="p-2.5 text-right font-black text-rose-600">${escapeHTML(r.diff > 0 ? '+' : '')}${escapeHTML(fmtInt(r.diff))}</td>
+          <td class="p-2.5 font-mono font-bold text-gto-blue">${r.id}</td>
+          <td class="p-2.5 text-slate-500">${r.usuario}</td>
+          <td class="p-2.5 font-medium text-slate-700">${r.nombre}</td>
+          <td class="p-2.5 text-slate-600">${r.mun}</td>
+          <td class="p-2.5 text-right font-semibold">${fmtInt(r.sT)}</td>
+          <td class="p-2.5 text-right font-semibold">${fmtInt(r.sP)}</td>
+          <td class="p-2.5 text-right font-black text-rose-600">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</td>
           <td class="p-2.5 text-center">
-            <button data-expediente="${escapeHTML(r.id)}" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">
+            <button onclick="openExpedienteModal('${r.id}')" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">
               Revisar Ficha
             </button>
           </td>
@@ -2716,20 +2649,18 @@
 
     function exportAuditCSV() {
       if (!auditList.length) return;
-      const csv = Papa.unparse(auditList, { escapeFormulae: true });
+      const csv = Papa.unparse(auditList);
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'Conciliacion_Operativa_Cultura_GTO.csv';
       a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     // =========================================================
     // VENTANA MODAL: EXPEDIENTE
     // =========================================================
-    let modalPreviousFocus = null;
     function openExpedienteModal(idAct) {
       const a = rawDB.actividades.find(x => cleanStr(x.ID_Actividad) === idAct);
       if (!a) return;
@@ -2748,10 +2679,10 @@
             return `
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-teal-50/70 border border-teal-200">
                 <div class="pr-3 min-w-0">
-                  <div class="font-bold text-teal-900 truncate">${escapeHTML(fName)}</div>
-                  <div class="text-[11px] text-teal-700">${escapeHTML(cleanStr(e.Tipo_Evidencia) || 'Archivo')} ${escapeHTML(cleanStr(e.Descripcion) ? '• ' + cleanStr(e.Descripcion) : '')}</div>
+                  <div class="font-bold text-teal-900 truncate">${fName}</div>
+                  <div class="text-[11px] text-teal-700">${cleanStr(e.Tipo_Evidencia) || 'Archivo'} ${cleanStr(e.Descripcion) ? '• ' + cleanStr(e.Descripcion) : ''}</div>
                 </div>
-                <a href="${escapeHTML(dUrl)}" target="_blank" rel="noopener" class="shrink-0 bg-gto-blue hover:bg-gto-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                <a href="${dUrl}" target="_blank" rel="noopener" class="shrink-0 bg-gto-blue hover:bg-gto-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">
                   Abrir en Drive
                 </a>
               </div>
@@ -2761,40 +2692,40 @@
 
       document.getElementById('mod-body').innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Dirección General</span><b class="text-slate-800">${escapeHTML(cleanStr(a.Direccion) || 'No especificada')}</b></div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Disciplina / Tipo</span><b class="text-slate-800">${escapeHTML(cleanStr(a.Disciplina))} • ${escapeHTML(cleanStr(a.Tipo_Actividad))}</b></div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Fecha y Sesiones</span><b class="text-slate-800">${escapeHTML(a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio))} (${escapeHTML(cleanStr(a.Total_Sesiones) || 1)} sesión)</b></div>
-          <div class="md:col-span-2"><span class="text-slate-400 font-bold block text-[10px] uppercase">Clave de Proceso y Meta</span><b class="text-gto-blue">${escapeHTML(cleanStr(a.Clave_Proceso_Txt))}</b> — ${escapeHTML(cleanStr(a.Nombre_Meta))}</div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Recinto / Espacio</span><b class="text-slate-800">${escapeHTML(cleanStr(a.Nombre_Espacio) || cleanStr(a.Especifique_Espacio) || cleanStr(a.Tipo_Espacio))}</b></div>
+          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Dirección General</span><b class="text-slate-800">${cleanStr(a.Direccion) || 'No especificada'}</b></div>
+          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Disciplina / Tipo</span><b class="text-slate-800">${cleanStr(a.Disciplina)} • ${cleanStr(a.Tipo_Actividad)}</b></div>
+          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Fecha y Sesiones</span><b class="text-slate-800">${a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio)} (${cleanStr(a.Total_Sesiones) || 1} sesión)</b></div>
+          <div class="md:col-span-2"><span class="text-slate-400 font-bold block text-[10px] uppercase">Clave de Proceso y Meta</span><b class="text-gto-blue">${cleanStr(a.Clave_Proceso_Txt)}</b> — ${cleanStr(a.Nombre_Meta)}</div>
+          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Recinto / Espacio</span><b class="text-slate-800">${cleanStr(a.Nombre_Espacio) || cleanStr(a.Especifique_Espacio) || cleanStr(a.Tipo_Espacio)}</b></div>
         </div>
 
         ${cleanStr(a.Descripcion_Breve) ? `
           <div>
             <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1">Descripción de la Actividad</h4>
-            <p class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">${escapeHTML(cleanStr(a.Descripcion_Breve))}</p>
+            <p class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">${cleanStr(a.Descripcion_Breve)}</p>
           </div>
         ` : ''}
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Cobertura Territorial (${escapeHTML(tRows.length)})</h4>
+            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Cobertura Territorial (${tRows.length})</h4>
             <div class="space-y-1.5">
               ${tRows.map(t => `
                 <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex justify-between">
-                  <div><b>${escapeHTML(cleanStr(t.Municipio))}</b> •${escapeHTML(normalizeCommunityName(t.Nombre_Comunidad_Final))}</div>
-                  <div class="font-bold text-gto-blue">${escapeHTML(fmtInt(toNum(t.Cantidad)))} pers.</div>
+                  <div><b>${cleanStr(t.Municipio)}</b> •${normalizeCommunityName(t.Nombre_Comunidad_Final)}</div>
+                  <div class="font-bold text-gto-blue">${fmtInt(toNum(t.Cantidad))} pers.</div>
                 </div>
               `).join('') || '<div class="text-slate-400">Sin registro territorial</div>'}
             </div>
           </div>
 
           <div>
-            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Desglose Demográfico (${escapeHTML(pRows.length)})</h4>
+            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Desglose Demográfico (${pRows.length})</h4>
             <div class="space-y-1.5">
               ${pRows.map(p => `
                 <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex justify-between">
-                  <div><b>${escapeHTML(cleanStr(p.Grupo_Etario))}</b> (${escapeHTML(cleanStr(p.Genero))})</div>
-                  <div class="font-bold text-rose-600">${escapeHTML(fmtInt(toNum(p.Cantidad_Poblacion)))} pers.</div>
+                  <div><b>${cleanStr(p.Grupo_Etario)}</b> (${cleanStr(p.Genero)})</div>
+                  <div class="font-bold text-rose-600">${fmtInt(toNum(p.Cantidad_Poblacion))} pers.</div>
                 </div>
               `).join('') || '<div class="text-slate-400">Sin desglose demográfico</div>'}
             </div>
@@ -2802,38 +2733,22 @@
         </div>
 
         <div>
-          <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Archivos de Evidencia Documental (${escapeHTML(eRows.length)})</h4>
+          <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Archivos de Evidencia Documental (${eRows.length})</h4>
           <div class="space-y-2">${evHtml}</div>
         </div>
       `;
 
-      const modal = document.getElementById('modal-expediente');
-      if (modal.classList.contains('hidden')) modalPreviousFocus = document.activeElement;
-      modal.classList.remove('hidden');
-      modal.querySelector('button').focus();
+      document.getElementById('modal-expediente').classList.remove('hidden');
       safeCreateIcons();
     }
 
     function closeExpedienteModal() {
       document.getElementById('modal-expediente').classList.add('hidden');
-      if (modalPreviousFocus?.isConnected) modalPreviousFocus.focus();
     }
 
     // =========================================================
     // MAPA LEAFLET Y CHART.JS
     // =========================================================
-    document.addEventListener('keydown', event => {
-      const modal = document.getElementById('modal-expediente');
-      if (modal.classList.contains('hidden')) return;
-      if (event.key === 'Escape') { event.preventDefault(); closeExpedienteModal(); }
-      if (event.key === 'Tab') {
-        const items = [...modal.querySelectorAll('button, a[href], input, select, [tabindex="0"]')].filter(el => el.getClientRects().length);
-        if (!items.length) return;
-        const first = items[0], last = items[items.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-      }
-    });
     function initLeafletMap() {
       if (leafletMap || !window.L) return;
       leafletMap = L.map('mapGto').setView([20.92, -101.18], 8);
@@ -2848,13 +2763,12 @@
       if (!mapLayerGroup || !window.L) return;
       mapLayerGroup.clearLayers();
 
-      const byMun = Object.create(null);
+      const byMun = {};
       terF.forEach(t => {
         const m = cleanStr(t.Municipio);
         if (!m) return;
-        if (!byMun[m]) byMun[m] = { acts: 0, pop: 0, ids: new Set() };
-        byMun[m].ids.add(cleanStr(t.ID_Actividad));
-        byMun[m].acts = byMun[m].ids.size;
+        if (!byMun[m]) byMun[m] = { acts: 0, pop: 0 };
+        byMun[m].acts++;
         byMun[m].pop += toNum(t.Cantidad);
       });
 
@@ -2872,12 +2786,12 @@
           opacity: 1,
           fillOpacity: 0.85
         })
-          .bindTooltip(`<b>${escapeHTML(mun)}</b>: ${escapeHTML(fmtInt(stats.acts))} act.`, { direction: 'top', offset: [0, -6] })
+          .bindTooltip(`<b>${mun}</b>: ${fmtInt(stats.acts)} act.`, { direction: 'top', offset: [0, -6] })
           .bindPopup(`
             <div class="text-xs p-1">
-              <div class="font-bold text-sm text-[#004B87] border-b pb-1 mb-1">${escapeHTML(mun)}</div>
-              <div>Actividades realizadas: <b>${escapeHTML(fmtInt(stats.acts))}</b></div>
-              <div>Personas beneficiadas: <b>${escapeHTML(fmtInt(stats.pop))}</b></div>
+              <div class="font-bold text-sm text-[#004B87] border-b pb-1 mb-1">${mun}</div>
+              <div>Actividades realizadas: <b>${fmtInt(stats.acts)}</b></div>
+              <div>Personas beneficiadas: <b>${fmtInt(stats.pop)}</b></div>
             </div>
           `)
           .addTo(mapLayerGroup);
@@ -2968,4 +2882,4 @@
     window.addEventListener('DOMContentLoaded', loadAllData);
   </script>
 </body>
-</html> 
+</html>
