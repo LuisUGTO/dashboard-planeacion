@@ -21,6 +21,8 @@
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <!-- PptxGenJS (Generador de Presentaciones Ejecutivas .pptx) -->
+  <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 
   <!-- Tipografías Institucionales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -319,11 +321,11 @@
     <div class="mt-1 relative w-full overflow-hidden border-t border-slate-700/80" style="min-height: 265px;">
       <img
         id="custom-postal-img"
-        src="assets/postal.png"
+        src="assets/postal.jpg"
         alt="Guanajuato Inspira al Alma"
         class="w-full h-full object-cover absolute inset-0 z-20 hidden"
         onload="this.classList.remove('hidden'); document.getElementById('svg-postal-art').classList.add('hidden');"
-        onerror="if(this.src.includes('assets/postal.png')){this.src='assets/postal.jpg';}else{this.classList.add('hidden');}"
+        onerror="if(this.src.includes('assets/postal.jpg')){this.src='postal.jpg';}else{this.classList.add('hidden');}"
       />
 
       <div id="svg-postal-art" class="w-full h-full min-h-[265px] relative flex flex-col justify-between items-center text-center px-4 py-4"
@@ -437,6 +439,12 @@
             <button onclick="resetFilters()" class="flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2.5 py-1.5 rounded-lg text-xs font-bold transition">
               <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
               <span class="hidden sm:inline">Borrar filtros</span>
+            </button>
+
+            <button id="btn-export-pptx" onclick="exportExecutivePPTX()" title="Descargar Presentación Ejecutiva en formato PowerPoint (.pptx) con los filtros activos" class="flex items-center gap-1.5 bg-gto-blue hover:bg-gto-dark text-white border border-gto-blue px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition">
+              <i data-lucide="presentation" class="w-3.5 h-3.5 text-amber-300"></i>
+              <span id="lbl-export-pptx" class="hidden sm:inline">Exportar Presentación Ejecutiva</span>
+              <span class="sm:hidden">PPTX</span>
             </button>
 
             <button onclick="window.print()" title="Imprimir o guardar vista actual en PDF" class="hidden sm:flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition">
@@ -1254,27 +1262,71 @@
       '#16A34A', '#EA580C', '#06B6D4', '#DB2777', '#4F46E5'
     ];
 
+    // Coordenadas geográficas de las 46 cabeceras municipales del Estado de Guanajuato
     const GTO_COORDS = {
-      'Guanajuato': [21.0190, -101.2574],
-      'León': [21.1221, -101.6826],
-      'Silao de la Victoria': [20.9436, -101.4272],
-      'Purísima del Rincón': [21.0289, -101.8789],
-      'Salamanca': [20.5739, -101.1957],
-      'Ciudad Manuel Doblado': [20.7289, -101.9511],
-      'Jaral del Progreso': [20.3719, -101.0664],
-      'Comonfort': [20.7222, -100.7617],
-      'San Miguel de Allende': [20.9144, -100.7452],
-      'Huanímaro': [20.3694, -101.4981],
-      'Salvatierra': [20.2142, -100.8808],
-      'San Luis de la Paz': [21.2981, -100.5175],
+      'Abasolo': [20.4508, -101.5314],
       'Acámbaro': [20.0319, -100.7228],
-      'Tierra Blanca': [21.1008, -100.1583],
-      'San Francisco del Rincón': [21.0239, -101.8561],
-      'Santa Catarina': [21.1419, -100.0683],
-      'Irapuato': [20.6767, -101.3563],
+      'Apaseo el Alto': [20.4578, -100.6225],
+      'Apaseo el Grande': [20.5442, -100.6869],
+      'Atarjea': [21.2683, -99.7183],
       'Celaya': [20.5235, -100.8157],
-      'Dolores Hidalgo Cuna de la Independencia Nacional': [21.1561, -100.9325]
+      'Ciudad Manuel Doblado': [20.7289, -101.9511],
+      'Comonfort': [20.7222, -100.7617],
+      'Coroneo': [20.1986, -100.3653],
+      'Cortazar': [20.4819, -100.9619],
+      'Cuerámaro': [20.6250, -101.6736],
+      'Doctor Mora': [21.1425, -100.3192],
+      'Dolores Hidalgo Cuna de la Independencia Nacional': [21.1561, -100.9325],
+      'Guanajuato': [21.0190, -101.2574],
+      'Huanímaro': [20.3694, -101.4981],
+      'Irapuato': [20.6767, -101.3563],
+      'Jaral del Progreso': [20.3719, -101.0664],
+      'Jerécuaro': [20.1536, -100.5094],
+      'León': [21.1221, -101.6826],
+      'Moroleón': [20.1306, -101.1903],
+      'Ocampo': [21.6481, -101.4792],
+      'Pénjamo': [20.4314, -101.7225],
+      'Pueblo Nuevo': [20.5269, -101.3719],
+      'Pueblonuevo': [20.5269, -101.3719],
+      'Purísima del Rincón': [21.0289, -101.8789],
+      'Romita': [20.8711, -101.5169],
+      'Salamanca': [20.5739, -101.1957],
+      'Salvatierra': [20.2142, -100.8808],
+      'San Diego de la Unión': [21.4664, -100.8728],
+      'San Felipe': [21.4789, -101.2156],
+      'San Francisco del Rincón': [21.0239, -101.8561],
+      'San José Iturbide': [21.0003, -100.3853],
+      'San Luis de la Paz': [21.2981, -100.5175],
+      'San Miguel de Allende': [20.9144, -100.7452],
+      'Santa Catarina': [21.1419, -100.0683],
+      'Santa Cruz de Juventino Rosas': [20.6436, -100.9936],
+      'Santiago Maravatío': [20.1744, -100.9931],
+      'Silao de la Victoria': [20.9436, -101.4272],
+      'Tarandacuao': [20.0028, -100.5186],
+      'Tarimoro': [20.2886, -100.7556],
+      'Tierra Blanca': [21.1008, -100.1583],
+      'Uriangato': [20.1417, -101.1764],
+      'Valle de Santiago': [20.3928, -101.1914],
+      'Victoria': [21.2122, -100.2153],
+      'Villagrán': [20.5150, -100.9978],
+      'Xichú': [21.2997, -100.0558],
+      'Yuriria': [20.2117, -101.1325]
     };
+
+    // Mapa auxiliar normalizado (sin acentos y en minúsculas) para resolución tolerante de coordenadas
+    const GTO_COORDS_NORM = Object.fromEntries(
+      Object.entries(GTO_COORDS).map(([k, v]) => [
+        k.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(),
+        v
+      ])
+    );
+
+    function getMunicipioCoords(mun) {
+      if (!mun) return null;
+      if (GTO_COORDS[mun]) return GTO_COORDS[mun];
+      const norm = String(mun).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+      return GTO_COORDS_NORM[norm] || null;
+    }
 
     const MUNICIPIOS_FORANEOS = ['ciudad de mexico', 'cdmx', 'foraneo'];
 
@@ -2773,7 +2825,7 @@
       });
 
       Object.entries(byMun).forEach(([mun, stats]) => {
-        const coords = GTO_COORDS[mun];
+        const coords = getMunicipioCoords(mun);
         if (!coords) return;
         const radius = Math.min(26, Math.max(8, Math.sqrt(stats.acts) * 2.3));
         const fillColor = stats.acts >= 100 ? '#E11D48' : stats.acts >= 30 ? '#F59E0B' : '#004B87';
@@ -2854,6 +2906,423 @@
           ...extraOptions
         }
       });
+    }
+
+    // =========================================================
+    // MÓDULO DE EXPORTACIÓN A PRESENTACIÓN EJECUTIVA (.PPTX)
+    // =========================================================
+    function getShieldDataUrl() {
+      try {
+        const shieldCanvas = document.getElementById('shield-canvas');
+        if (shieldCanvas) {
+          return shieldCanvas.toDataURL('image/png', 1.0);
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function getChartHighResBase64(canvasId) {
+      const chart = charts[canvasId];
+      if (!chart) return null;
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return null;
+
+      // Si el canvas está dentro de una pestaña oculta (.hidden), forzamos dimensión temporal para extraer imagen nítida
+      const section = canvas.closest('section');
+      const wasHidden = section && section.classList.contains('hidden');
+      let prevStyle = '';
+
+      if (wasHidden) {
+        prevStyle = section.getAttribute('style') || '';
+        section.style.position = 'fixed';
+        section.style.left = '-9999px';
+        section.style.top = '0';
+        section.style.width = '1280px';
+        section.style.display = 'block';
+        section.classList.remove('hidden');
+      }
+
+      try {
+        chart.options.animation = false;
+        chart.resize();
+        chart.update('none');
+
+        // Crear lienzo compuesto con fondo blanco para evitar transparencias oscuras en PowerPoint
+        const expCanvas = document.createElement('canvas');
+        expCanvas.width = canvas.width || 800;
+        expCanvas.height = canvas.height || 400;
+        const eCtx = expCanvas.getContext('2d');
+        eCtx.fillStyle = '#FFFFFF';
+        eCtx.fillRect(0, 0, expCanvas.width, expCanvas.height);
+        eCtx.drawImage(canvas, 0, 0);
+        return expCanvas.toDataURL('image/png', 1.0);
+      } catch (err) {
+        try { return chart.toBase64Image('image/png', 1.0); } catch (e2) { return null; }
+      } finally {
+        if (wasHidden && section) {
+          section.classList.add('hidden');
+          if (prevStyle) section.setAttribute('style', prevStyle);
+          else section.removeAttribute('style');
+        }
+      }
+    }
+
+    function addExecutiveSlideHeader(slide, pptx, title, subtitle, shieldDataUrl, pageNum) {
+      // Barra superior institucional degradada / sólida
+      slide.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: 13.333, h: 0.78, fill: { color: '004B87' } });
+      slide.addShape(pptx.ShapeType.rect, { x: 0, y: 0.78, w: 13.333, h: 0.06, fill: { color: 'F59E0B' } });
+
+      if (shieldDataUrl) {
+        slide.addImage({ data: shieldDataUrl, x: 0.35, y: 0.08, w: 0.50, h: 0.62 });
+      }
+
+      slide.addText(title, {
+        x: 0.98, y: 0.10, w: 9.2, h: 0.36,
+        fontSize: 16, bold: true, color: 'FFFFFF', fontFace: 'Arial'
+      });
+      slide.addText(subtitle, {
+        x: 0.98, y: 0.44, w: 9.2, h: 0.24,
+        fontSize: 9.5, color: 'C8D8EB', fontFace: 'Arial'
+      });
+
+      slide.addText('SECRETARÍA DE CULTURA • GUANAJUATO', {
+        x: 10.2, y: 0.16, w: 2.8, h: 0.45,
+        fontSize: 8.5, bold: true, color: '69B3E7', align: 'right', fontFace: 'Arial'
+      });
+
+      // Pie de página
+      slide.addShape(pptx.ShapeType.rect, { x: 0, y: 7.18, w: 13.333, h: 0.32, fill: { color: '141C2E' } });
+      slide.addText('Sistema Estatal de Inteligencia Cultural (PULSO Q) • Reporte Ejecutivo Generado con Filtros Activos', {
+        x: 0.4, y: 7.21, w: 9.5, h: 0.24, fontSize: 8, color: '94A3B8', fontFace: 'Arial'
+      });
+      slide.addText(`Lámina ${pageNum} de 6`, {
+        x: 11.2, y: 7.21, w: 1.7, h: 0.24, fontSize: 8, bold: true, color: 'F59E0B', align: 'right', fontFace: 'Arial'
+      });
+    }
+
+    function addKpiCardToSlide(slide, pptx, x, y, w, h, label, value, subtext, accentHex) {
+      slide.addShape(pptx.ShapeType.roundRect, {
+        x, y, w, h, rectRadius: 0.08,
+        fill: { color: 'FFFFFF' },
+        line: { color: 'E2E8F0', width: 1 }
+      });
+      slide.addShape(pptx.ShapeType.rect, {
+        x, y: y + 0.06, w: 0.08, h: h - 0.12,
+        fill: { color: accentHex }
+      });
+      slide.addText(label.toUpperCase(), {
+        x: x + 0.18, y: y + 0.08, w: w - 0.26, h: 0.22,
+        fontSize: 8, bold: true, color: '64748B', fontFace: 'Arial'
+      });
+      slide.addText(String(value), {
+        x: x + 0.18, y: y + 0.28, w: w - 0.26, h: 0.42,
+        fontSize: 19, bold: true, color: '004B87', fontFace: 'Georgia'
+      });
+      if (subtext) {
+        slide.addText(String(subtext), {
+          x: x + 0.18, y: y + 0.70, w: w - 0.26, h: 0.24,
+          fontSize: 8, color: '475569', fontFace: 'Arial'
+        });
+      }
+    }
+
+    async function exportExecutivePPTX() {
+      if (typeof PptxGenJS === 'undefined') {
+        alert('La librería de exportación PptxGenJS aún se está cargando. Intenta de nuevo en unos segundos.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-export-pptx');
+      const lbl = document.getElementById('lbl-export-pptx');
+      const origText = lbl ? lbl.textContent : 'Exportar Presentación Ejecutiva';
+      if (btn) btn.disabled = true;
+      if (lbl) lbl.textContent = 'Generando PPTX...';
+
+      try {
+        const pptx = new PptxGenJS();
+        pptx.layout = 'LAYOUT_WIDE'; // 13.333 x 7.5 pulgadas (16:9 Widescreen)
+        pptx.author = 'Secretaría de Cultura de Guanajuato';
+        pptx.company = 'Gobierno del Estado de Guanajuato';
+        pptx.subject = 'Reporte Ejecutivo del Sistema Estatal de Inteligencia Cultural';
+        pptx.title = 'Presentación Ejecutiva - Inteligencia Cultural Guanajuato';
+
+        const shieldDataUrl = getShieldDataUrl();
+        const nowStr = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        // Lectura de filtros activos
+        const getSelectLabel = (id) => {
+          const el = document.getElementById(id);
+          return el && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : 'Todos';
+        };
+        const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
+        const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
+        const fMun = getSelectLabel('f-municipio');
+        const fDir = getSelectLabel('f-direccion');
+        const fDisc = getSelectLabel('f-disciplina');
+        const fEje = getSelectLabel('f-eje');
+        const fEnf = getSelectLabel('f-enfoque');
+        const fZap = getSelectLabel('f-zap');
+        const popModeTxt = popMode === 'territorio' ? 'Cobertura Territorial' : 'Perfil Demográfico';
+
+        const filterSummaryLine = `Periodo: ${dStart} a ${dEnd} | Municipio: ${fMun} | Dirección: ${formatShortDireccion(fDir)} | Enfoque: ${fEnf} | Fuente Población: ${popModeTxt}`;
+
+        // Lectura de KPIs renderizados en pantalla
+        const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
+
+        // =========================================================
+        // LÁMINA 1: PORTADA INSTITUCIONAL Y FILTROS ACTIVOS
+        // =========================================================
+        const slide1 = pptx.addSlide();
+        slide1.background = { color: '141C2E' };
+        slide1.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: 13.333, h: 0.18, fill: { color: 'F59E0B' } });
+        slide1.addShape(pptx.ShapeType.rect, { x: 0, y: 0.18, w: 13.333, h: 0.10, fill: { color: '69B3E7' } });
+
+        if (shieldDataUrl) {
+          slide1.addImage({ data: shieldDataUrl, x: 0.85, y: 0.85, w: 1.35, h: 1.66 });
+        }
+
+        slide1.addText('SECRETARÍA DE CULTURA\nGOBIERNO DEL ESTADO DE GUANAJUATO', {
+          x: 2.45, y: 1.05, w: 9.8, h: 0.95,
+          fontSize: 18, bold: true, color: '69B3E7', fontFace: 'Arial'
+        });
+
+        slide1.addText('Sistema Estatal de Inteligencia Cultural', {
+          x: 0.85, y: 2.75, w: 11.6, h: 0.75,
+          fontSize: 32, bold: true, color: 'FFFFFF', fontFace: 'Georgia'
+        });
+
+        slide1.addText('Informe Ejecutivo de Actividades, Alineación Estratégica, Cobertura Territorial y Perfil de Población', {
+          x: 0.85, y: 3.55, w: 11.2, h: 0.45,
+          fontSize: 14, color: 'E5B869', fontFace: 'Arial'
+        });
+
+        // Recuadro de Filtros Activos
+        slide1.addShape(pptx.ShapeType.roundRect, {
+          x: 0.85, y: 4.35, w: 11.6, h: 2.05, rectRadius: 0.10,
+          fill: { color: '1E293B' }, line: { color: '69B3E7', width: 1.2 }
+        });
+
+        slide1.addText('PARÁMETROS Y FILTROS ACTIVOS DEL REPORTE', {
+          x: 1.15, y: 4.50, w: 11.0, h: 0.30,
+          fontSize: 11, bold: true, color: 'F59E0B', fontFace: 'Arial'
+        });
+
+        const filterRows = [
+          [
+            { text: 'Periodo Consultado:', options: { bold: true, color: '94A3B8' } },
+            { text: `${dStart} al ${dEnd}`, options: { color: 'FFFFFF' } },
+            { text: 'Municipio:', options: { bold: true, color: '94A3B8' } },
+            { text: fMun, options: { color: 'FFFFFF' } }
+          ],
+          [
+            { text: 'Dirección General:', options: { bold: true, color: '94A3B8' } },
+            { text: fDir, options: { color: 'FFFFFF' } },
+            { text: 'Disciplina:', options: { bold: true, color: '94A3B8' } },
+            { text: fDisc, options: { color: 'FFFFFF' } }
+          ],
+          [
+            { text: 'Programa de Gobierno:', options: { bold: true, color: '94A3B8' } },
+            { text: fEje, options: { color: 'FFFFFF' } },
+            { text: 'Zona Prioritaria / Enfoque:', options: { bold: true, color: '94A3B8' } },
+            { text: `${fZap} • ${fEnf}`, options: { color: 'FFFFFF' } }
+          ]
+        ];
+
+        slide1.addTable(filterRows, {
+          x: 1.10, y: 4.88, w: 11.1, colW: [2.1, 3.4, 2.2, 3.4],
+          fontSize: 9.5, fontFace: 'Arial', border: { pt: 0, color: '1E293B' },
+          rowH: 0.36
+        });
+
+        slide1.addText(`Fecha de emisión: ${nowStr} • Criterio poblacional activo: ${popModeTxt}`, {
+          x: 0.85, y: 6.75, w: 11.6, h: 0.35,
+          fontSize: 9.5, color: '94A3B8', fontFace: 'Arial'
+        });
+
+        // =========================================================
+        // LÁMINA 2: VISIÓN GENERAL DEL ECOSISTEMA CULTURAL
+        // =========================================================
+        const slide2 = pptx.addSlide();
+        slide2.background = { color: 'F4F7FB' };
+        addExecutiveSlideHeader(slide2, pptx, '1. Visión General del Ecosistema Cultural', filterSummaryLine, shieldDataUrl, 2);
+
+        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Actividades Realizadas', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones totales`, '004B87');
+        addKpiCardToSlide(slide2, pptx, 3.58, 0.98, 3.00, 1.00, 'Personas Beneficiadas', txt('kpi-pop-total'), txt('kpi-pop-sub'), 'F59E0B');
+        addKpiCardToSlide(slide2, pptx, 6.76, 0.98, 3.00, 1.00, 'Ingresos Generados', txt('kpi-ingresos'), txt('kpi-contratado'), '10B981');
+        addKpiCardToSlide(slide2, pptx, 9.94, 0.98, 3.00, 1.00, 'Cobertura Municipal', `${txt('kpi-mun-ratio')} (${txt('kpi-mun-pct')})`, txt('kpi-mun-foraneo'), '7C3AED');
+
+        // Gráfica Evolución Mensual
+        slide2.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 7.75, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide2.addText('Evolución Mensual de Actividades y Público Atendido', { x: 0.58, y: 2.22, w: 7.4, h: 0.30, fontSize: 11, bold: true, color: '004B87', fontFace: 'Arial' });
+        slide2.addText(`Avance Meta Anual: ${txt('lbl-avance-meta-global')}   |   Metas en Operación: ${txt('lbl-avance-meta-activas')}`, { x: 0.58, y: 2.50, w: 7.4, h: 0.22, fontSize: 8.5, bold: true, color: '0D9488', fontFace: 'Arial' });
+        const imgEvol = getChartHighResBase64('chart-evolucion-mensual');
+        if (imgEvol) slide2.addImage({ data: imgEvol, x: 0.52, y: 2.78, w: 7.50, h: 4.05 });
+
+        // Gráfica Disciplinas y Programa de Gobierno
+        slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 2.12, w: 4.62, h: 2.40, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide2.addText('Actividades por Disciplina (Top 8)', { x: 8.48, y: 2.20, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgDisc = getChartHighResBase64('chart-disciplinas');
+        if (imgDisc) slide2.addImage({ data: imgDisc, x: 8.42, y: 2.48, w: 4.42, h: 1.96 });
+
+        slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 4.62, w: 4.62, h: 2.38, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide2.addText('Distribución por Programa de Gobierno', { x: 8.48, y: 4.70, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgEjeDona = getChartHighResBase64('chart-eje-dona');
+        if (imgEjeDona) slide2.addImage({ data: imgEjeDona, x: 8.45, y: 4.98, w: 2.10, h: 1.90 });
+
+        // Leyenda textual de Ejes en Lámina 2
+        const ejeLegendItems = [...document.querySelectorAll('#legend-eje-dona > div')].slice(0, 5).map(el => cleanStr(el.innerText).replace(/\s+/g, ' '));
+        if (ejeLegendItems.length) {
+          slide2.addText(ejeLegendItems.join('\n'), { x: 10.60, y: 5.05, w: 2.25, h: 1.80, fontSize: 8, color: '334155', fontFace: 'Arial' });
+        }
+
+        // =========================================================
+        // LÁMINA 3: MATRIZ ESTRATÉGICA Y ALINEACIÓN DE METAS
+        // =========================================================
+        const slide3 = pptx.addSlide();
+        slide3.background = { color: 'F4F7FB' };
+        addExecutiveSlideHeader(slide3, pptx, '2. Matriz Estratégica y Cumplimiento de Metas', filterSummaryLine, shieldDataUrl, 3);
+
+        addKpiCardToSlide(slide3, pptx, 0.40, 0.98, 3.00, 1.00, 'Actividades Estratégicas', txt('kpi-mat-act'), 'Alineadas al Programa de Gobierno', '004B87');
+        addKpiCardToSlide(slide3, pptx, 3.58, 0.98, 3.00, 1.00, 'Direcciones Generales', txt('kpi-mat-dir'), 'Con registro activo en el periodo', '7C3AED');
+        addKpiCardToSlide(slide3, pptx, 6.76, 0.98, 3.00, 1.00, 'Metas Institucionales Activas', `${txt('kpi-mat-metas')} (${txt('kpi-mat-metas-pct')})`, txt('kpi-mat-procesos'), 'F59E0B');
+        addKpiCardToSlide(slide3, pptx, 9.94, 0.98, 3.00, 1.00, 'Avance Meta Anual', txt('kpi-mat-cumplimiento'), `${txt('kpi-mat-cumplimiento-activas')} • ${txt('kpi-mat-cumplimiento-sub')}`, '10B981');
+
+        // Gráfica Ejes de Gobierno
+        slide3.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 5.20, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide3.addText('Actividades por Eje de Gobierno y Enfoque', { x: 0.56, y: 2.22, w: 4.9, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgMatEje = getChartHighResBase64('chart-mat-eje');
+        if (imgMatEje) slide3.addImage({ data: imgMatEje, x: 0.50, y: 2.55, w: 5.00, h: 2.45 });
+        const imgMatEnf = getChartHighResBase64('chart-mat-enfoque');
+        if (imgMatEnf) slide3.addImage({ data: imgMatEnf, x: 0.65, y: 5.10, w: 2.10, h: 1.75 });
+        const enfLegendItems = [...document.querySelectorAll('#legend-mat-enfoque > div')].map(el => cleanStr(el.innerText).replace(/\s+/g, ' '));
+        if (enfLegendItems.length) {
+          slide3.addText('Distribución por Enfoque:\n' + enfLegendItems.join('\n'), { x: 2.85, y: 5.25, w: 2.6, h: 1.5, fontSize: 8.5, color: '334155', fontFace: 'Arial' });
+        }
+
+        // Tabla Top 10 Metas Institucionales con mayor actividad
+        slide3.addShape(pptx.ShapeType.roundRect, { x: 5.78, y: 2.12, w: 7.16, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide3.addText('Seguimiento del Tabulador Oficial de Metas (Top 9 con Mayor Avance)', { x: 5.95, y: 2.22, w: 6.8, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+
+        const topMetas = [...cachedMetasCatalogoRows]
+          .sort((a, b) => (b.actCount - a.actCount) || (b.metaAnual - a.metaAnual))
+          .slice(0, 9);
+
+        const metasTableRows = [
+          [
+            { text: 'Proceso', options: { bold: true, fill: '004B87', color: 'FFFFFF' } },
+            { text: 'Dirección General / Meta Institucional', options: { bold: true, fill: '004B87', color: 'FFFFFF' } },
+            { text: 'Meta Anual', options: { bold: true, fill: '004B87', color: 'FFFFFF', align: 'right' } },
+            { text: 'Realizado', options: { bold: true, fill: '004B87', color: 'FFFFFF', align: 'right' } },
+            { text: '% Avance', options: { bold: true, fill: '004B87', color: 'FFFFFF', align: 'right' } }
+          ],
+          ...topMetas.map((m, idx) => {
+            const bg = idx % 2 === 0 ? 'F8FAFC' : 'FFFFFF';
+            const shortMeta = m.nombre.length > 68 ? m.nombre.substring(0, 66) + '…' : m.nombre;
+            return [
+              { text: `${m.clave} (#${m.idAlin})`, options: { bold: true, color: '004B87', fill: bg } },
+              { text: `${formatShortDireccion(m.direccion)}: ${shortMeta}`, options: { color: '334155', fill: bg } },
+              { text: fmtInt(m.metaAnual), options: { align: 'right', color: '475569', fill: bg } },
+              { text: fmtInt(m.realizado), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
+              { text: `${m.pct.toFixed(1)}%`, options: { align: 'right', bold: true, color: m.pct >= 100 ? '047857' : 'B45309', fill: bg } }
+            ];
+          })
+        ];
+
+        slide3.addTable(metasTableRows, {
+          x: 5.92, y: 2.58, w: 6.88, colW: [1.05, 3.53, 0.80, 0.75, 0.75],
+          fontSize: 7.5, fontFace: 'Arial', border: { pt: 0.5, color: 'E2E8F0' }, rowH: 0.40
+        });
+
+        // =========================================================
+        // LÁMINA 4: COBERTURA TERRITORIAL Y ZONAS PRIORITARIAS
+        // =========================================================
+        const slide4 = pptx.addSlide();
+        slide4.background = { color: 'F4F7FB' };
+        addExecutiveSlideHeader(slide4, pptx, '3. Cobertura Territorial y Atención en Zonas Prioritarias (ZAP)', filterSummaryLine, shieldDataUrl, 4);
+
+        addKpiCardToSlide(slide4, pptx, 0.40, 0.98, 3.00, 1.00, 'Municipios Atendidos', txt('kpi-ter-mun'), 'De los 46 municipios del Estado', '10B981');
+        addKpiCardToSlide(slide4, pptx, 3.58, 0.98, 3.00, 1.00, 'Comunidades Impactadas', txt('kpi-ter-com'), 'Localidades y colonias atendidas', '004B87');
+        addKpiCardToSlide(slide4, pptx, 6.76, 0.98, 3.00, 1.00, 'Actividades en ZAP', txt('kpi-ter-zap'), 'Atención en polígonos prioritarios', 'F59E0B');
+        addKpiCardToSlide(slide4, pptx, 9.94, 0.98, 3.00, 1.00, 'Población en Territorio', txt('kpi-ter-pop'), 'Beneficiarios registrados en sedes', '7C3AED');
+
+        slide4.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 6.15, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide4.addText('Atención a Zonas de Atención Prioritaria (ZAP) por Municipio', { x: 0.56, y: 2.22, w: 5.8, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgTerZap = getChartHighResBase64('chart-ter-zap-mun');
+        if (imgTerZap) slide4.addImage({ data: imgTerZap, x: 0.52, y: 2.55, w: 5.90, h: 4.30 });
+
+        slide4.addShape(pptx.ShapeType.roundRect, { x: 6.75, y: 2.12, w: 6.18, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide4.addText('Municipios con Mayor Volumen de Programación Cultural', { x: 6.92, y: 2.22, w: 5.8, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgTerTop = getChartHighResBase64('chart-ter-top-mun');
+        if (imgTerTop) slide4.addImage({ data: imgTerTop, x: 6.88, y: 2.55, w: 5.90, h: 4.30 });
+
+        // =========================================================
+        // LÁMINA 5: PERFIL DE POBLACIÓN E INCLUSIÓN SOCIAL
+        // =========================================================
+        const slide5 = pptx.addSlide();
+        slide5.background = { color: 'F4F7FB' };
+        addExecutiveSlideHeader(slide5, pptx, '4. Perfil Demográfico de Población e Inclusión Social', filterSummaryLine, shieldDataUrl, 5);
+
+        addKpiCardToSlide(slide5, pptx, 0.40, 0.98, 3.00, 1.00, 'Participación vs. Acceso', `${txt('kpi-pob-part')} / ${txt('kpi-pob-acc')}`, 'Participación activa vs. Acceso', 'E11D48');
+        addKpiCardToSlide(slide5, pptx, 3.58, 0.98, 3.00, 1.00, 'Población con Perfil', txt('kpi-pob-total-dem'), 'Público con desglose demográfico', '004B87');
+        addKpiCardToSlide(slide5, pptx, 6.76, 0.98, 3.00, 1.00, 'Grupos Prioritarios', txt('kpi-pob-prio'), 'Personas en situación prioritaria', '06B6D4');
+        addKpiCardToSlide(slide5, pptx, 9.94, 0.98, 3.00, 1.00, 'Promedio por Actividad', txt('kpi-pob-avg'), 'Asistentes promedio por evento', 'F59E0B');
+
+        slide5.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 6.15, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide5.addText('Población Atendida por Grupo Etario', { x: 0.56, y: 2.22, w: 5.8, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgPobEt = getChartHighResBase64('chart-pob-etario');
+        if (imgPobEt) slide5.addImage({ data: imgPobEt, x: 0.52, y: 2.55, w: 5.90, h: 4.30 });
+
+        slide5.addShape(pptx.ShapeType.roundRect, { x: 6.75, y: 2.12, w: 6.18, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide5.addText('Atención a Grupos Prioritarios de Inclusión', { x: 6.92, y: 2.22, w: 5.8, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgPobPrio = getChartHighResBase64('chart-pob-prioritario');
+        if (imgPobPrio) slide5.addImage({ data: imgPobPrio, x: 6.88, y: 2.55, w: 5.90, h: 4.30 });
+
+        // =========================================================
+        // LÁMINA 6: EVIDENCIA DOCUMENTAL Y CONCILIACIÓN OPERATIVA
+        // =========================================================
+        const slide6 = pptx.addSlide();
+        slide6.background = { color: 'F4F7FB' };
+        addExecutiveSlideHeader(slide6, pptx, '5. Respaldo Documental y Control de Conciliación Operativa', filterSummaryLine, shieldDataUrl, 6);
+
+        addKpiCardToSlide(slide6, pptx, 0.40, 0.98, 3.00, 1.00, 'Archivos de Evidencia', txt('kpi-evi-total'), 'Documentos y registros en Drive', '0D9488');
+        addKpiCardToSlide(slide6, pptx, 3.58, 0.98, 3.00, 1.00, 'Cobertura Documental', `${txt('kpi-evi-cov-pct')} (${txt('kpi-evi-cov-ratio')})`, txt('kpi-evi-missing'), '004B87');
+        addKpiCardToSlide(slide6, pptx, 6.76, 0.98, 3.00, 1.00, 'Evidencia Fotográfica', txt('kpi-evi-fotos'), 'Memoria gráfica de actividades', 'F59E0B');
+        addKpiCardToSlide(slide6, pptx, 9.94, 0.98, 3.00, 1.00, 'Registros en Conciliación', txt('badge-audit'), 'Con variación Territorial vs. Demográfico', '7C3AED');
+
+        slide6.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 7.45, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide6.addText('Cumplimiento de Evidencia Documental por Dirección General', { x: 0.56, y: 2.22, w: 7.1, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgEviDir = getChartHighResBase64('chart-evi-direccion');
+        if (imgEviDir) slide6.addImage({ data: imgEviDir, x: 0.52, y: 2.55, w: 7.20, h: 4.30 });
+
+        slide6.addShape(pptx.ShapeType.roundRect, { x: 8.02, y: 2.12, w: 4.92, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide6.addText('Distribución por Formato de Evidencia', { x: 8.18, y: 2.22, w: 4.6, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        const imgEviTipo = getChartHighResBase64('chart-evi-tipo');
+        if (imgEviTipo) slide6.addImage({ data: imgEviTipo, x: 8.15, y: 2.58, w: 2.35, h: 2.15 });
+
+        const eviLegendItems = [...document.querySelectorAll('#legend-evi-tipo > div')].map(el => cleanStr(el.innerText).replace(/\s+/g, ' '));
+        if (eviLegendItems.length) {
+          slide6.addText(eviLegendItems.join('\n'), { x: 10.55, y: 2.70, w: 2.25, h: 2.00, fontSize: 8.5, color: '334155', fontFace: 'Arial' });
+        }
+
+        slide6.addShape(pptx.ShapeType.roundRect, { x: 8.20, y: 4.92, w: 4.56, h: 1.88, rectRadius: 0.06, fill: { color: 'FFFBEB' }, line: { color: 'FDE68A', width: 1 } });
+        slide6.addText('Resumen de Conciliación Operativa', { x: 8.35, y: 5.02, w: 4.25, h: 0.25, fontSize: 9.5, bold: true, color: '92400E', fontFace: 'Arial' });
+        slide6.addText(
+          `• Total Territorial Filtrado: ${txt('btn-pop-ter').replace('Territorial ', '')}\n` +
+          `• Total Demográfico Filtrado: ${txt('btn-pop-pob').replace('Demográfico ', '')}\n` +
+          `• Actividades con observación de captura: ${auditList.length}\n` +
+          `• Cobertura estatal activa: ${txt('kpi-mun-ratio')} municipios (${txt('kpi-mun-pct')})`,
+          { x: 8.35, y: 5.32, w: 4.25, h: 1.35, fontSize: 8.5, color: '475569', fontFace: 'Arial' }
+        );
+
+        const dateStamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        await pptx.writeFile({ fileName: `Presentacion_Ejecutiva_Cultura_GTO_${dateStamp}.pptx` });
+      } catch (err) {
+        console.error('Error al exportar presentación ejecutiva:', err);
+        alert('Ocurrió un error al generar la presentación ejecutiva. Revisa la consola para más detalles.');
+      } finally {
+        if (btn) btn.disabled = false;
+        if (lbl) lbl.textContent = origText;
+      }
     }
 
     function switchTab(tabId) {
