@@ -6,8 +6,8 @@
   <title>Sistema Estatal de Inteligencia Cultural | Secretaría de Cultura de Guanajuato</title>
 
   <!-- Favicon Oficial en la pestaña del navegador -->
-  <link id="page-favicon" rel="icon" type="image/png" href="assets/Logo.png" />
-  <link rel="apple-touch-icon" href="assets/Logo.png" />
+  <link id="page-favicon" rel="icon" type="image/png" href="assets/identidad/Logo.png" />
+  <link rel="apple-touch-icon" href="assets/identidad/Logo.png" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -210,8 +210,8 @@
       <div class="px-3.5 pt-4 pb-3 flex items-center gap-2.5 border-b border-slate-700/60 relative">
         <div class="w-16 h-20 shrink-0 flex items-center justify-center relative">
           <canvas id="shield-canvas" width="300" height="370" class="w-16 h-20 object-contain drop-shadow-md"></canvas>
-          <img id="raw-logo-source" src="assets/Logo.png" crossorigin="anonymous" class="hidden"
-               onerror="if(this.src.includes('assets/Logo.png')){this.src='Logo.png';}else{window.drawFallbackShield();}"
+          <img id="raw-logo-source" src="assets/identidad/Logo.png" crossorigin="anonymous" class="hidden"
+               onerror="window.drawFallbackShield();"
                onload="window.processShieldFromLogo(this)" />
         </div>
         <div class="flex-1 text-center pr-1">
@@ -321,11 +321,11 @@
     <div class="mt-1 relative w-full overflow-hidden border-t border-slate-700/80" style="min-height: 265px;">
       <img
         id="custom-postal-img"
-        src="assets/postal.jpg"
+        src="assets/interfaz/postal.jpg"
         alt="Guanajuato Inspira al Alma"
         class="w-full h-full object-cover absolute inset-0 z-20 hidden"
         onload="this.classList.remove('hidden'); document.getElementById('svg-postal-art').classList.add('hidden');"
-        onerror="if(this.src.includes('assets/postal.jpg')){this.src='postal.jpg';}else{this.classList.add('hidden');}"
+        onerror="this.classList.add('hidden');"
       />
 
       <div id="svg-postal-art" class="w-full h-full min-h-[265px] relative flex flex-col justify-between items-center text-center px-4 py-4"

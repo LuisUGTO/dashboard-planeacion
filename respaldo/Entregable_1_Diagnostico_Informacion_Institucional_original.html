@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entregable 1 — Diagnóstico de Información Institucional Elaborado | Secretaría de Cultura de Guanajuato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    body {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      color: #1E293B;
+      background-color: #FFFFFF;
+      line-height: 1.48;
+      font-size: 9.2pt;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .toolbar-no-print {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #CBD5E1;
+      font-size: 9pt;
+    }
+    .toolbar-no-print button {
+      background-color: #FFFFFF;
+      color: #0F2942;
+      border: 1px solid #CBD5E1;
+      padding: 5px 14px;
+      font-weight: 700;
+      font-size: 8.5pt;
+      cursor: pointer;
+    }
+
+    .page-wrap {
+      max-width: 216mm;
+      margin: 0 auto;
+      padding: 8mm 10mm;
+      background-color: #FFFFFF;
+    }
+
+    /* MEMBRETE INSTITUCIONAL LIMPIO (INSPIRADO EN FORMATO DE LA SECRETARÍA, SIN CAJAS INNECESARIAS) */
+    .letterhead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #0F2942;
+    }
+    .letterhead-left {
+      width: 22%;
+      text-align: left;
+    }
+    .letterhead-left img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+    .letterhead-center {
+      width: 63%;
+      text-align: center;
+      padding: 0 8px;
+    }
+    .letterhead-center .dep-sup {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: #0F2942;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .letterhead-center .dep-sub {
+      font-size: 7.8pt;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+      margin-top: 2px;
+      letter-spacing: 0.03em;
+    }
+    .letterhead-center .doc-title {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #0F172A;
+      text-transform: uppercase;
+      margin-top: 6px;
+      line-height: 1.2;
+    }
+    .letterhead-right {
+      width: 15%;
+      text-align: right;
+    }
+    .letterhead-right img {
+      height: 42px;
+      width: auto;
+      display: inline-block;
+    }
+    .letterhead-right .pulso-caption {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: #0F2942;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    /* CÉDULA DE CONTROL NORMATIVO Y FISCAL */
+    .control-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 8pt;
+    }
+    .control-table .section-banner {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 7.8pt;
+      padding: 5px 8px;
+      border: 1px solid #0F2942;
+      text-align: left;
+    }
+    .control-table th {
+      background-color: #F8FAFC;
+      color: #0F2942;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4.5px 8px;
+      border: 1px solid #CBD5E1;
+      text-align: left;
+      width: 18%;
+      font-size: 7.4pt;
+    }
+    .control-table td {
+      padding: 4.5px 8px;
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
+      vertical-align: top;
+      width: 32%;
+    }
+
+    /* ENCABEZADOS DE SECCIÓN SOBRIOS (BLOQUES RECTANGULARES PUROS #0F2942, CERO BORDER-LEFT) */
+    h2.section-heading {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-size: 9.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 5px 10px;
+      margin: 14px 0 8px 0;
+      border: 1px solid #0F2942;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3.area-heading {
+      font-size: 9.8pt;
+      font-weight: 800;
+      color: #0F2942;
+      border-bottom: 1.5px solid #0F2942;
+      padding-bottom: 3px;
+      margin: 13px 0 6px 0;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h4.sub-block-title {
+      font-size: 8.8pt;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 7px 0 4px 0;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 6px;
+      text-align: justify;
+    }
+
+    ul.clean-list {
+      margin: 3px 0 8px 18px;
+      padding: 0;
+    }
+    ul.clean-list li {
+      margin-bottom: 3.5px;
+      text-align: justify;
+    }
+    ul.clean-sublist {
+      margin: 2px 0 4px 18px;
+      list-style-type: circle;
+    }
+
+    .area-block {
+      margin-bottom: 10px;
+    }
+
+    /* TABLAS FORMALES DE BORDES RECTOS Y FINOS */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5px 0 11px 0;
+      font-size: 7.7pt;
+    }
+    table.data-table thead {
+      display: table-header-group;
+    }
+    table.data-table th {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7.1pt;
+      letter-spacing: 0.02em;
+      padding: 5px 6px;
+      border: 1px solid #0F2942;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.data-table td {
+      padding: 4px 5.5px;
+      border: 1px solid #CBD5E1;
+      vertical-align: top;
+      text-align: left;
+      color: #1E293B;
+      line-height: 1.34;
+    }
+    table.data-table tr {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    table.data-table tbody tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+    table.data-table td.num,
+    table.data-table th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    table.data-table td.center,
+    table.data-table th.center {
+      text-align: center;
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 7.3pt;
+      color: #0F2942;
+      font-weight: 600;
+    }
+
+    /* CONTENEDOR DE EVIDENCIA VISUAL DEL SISTEMA (BORDES RECTOS 1PX) */
+    .figure-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .figure-grid td {
+      border: 1px solid #CBD5E1;
+      padding: 6px;
+      background-color: #FFFFFF;
+      vertical-align: top;
+    }
+    .figure-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #CBD5E1;
+    }
+    .figure-caption {
+      font-size: 7.4pt;
+      color: #334155;
+      margin-top: 5px;
+      text-align: justify;
+      line-height: 1.32;
+    }
+
+    /* BLOQUE DE FIRMA AUTÓGRAFA EN BLANCO (CERO IMAGEN DE FIRMA DIGITAL) */
+    .signature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      font-size: 8pt;
+    }
+    .signature-table th {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+      padding: 5px 8px;
+      border: 1px solid #0F2942;
+      text-align: center;
+      width: 50%;
+    }
+    .signature-table td {
+      border: 1px solid #CBD5E1;
+      padding: 10px 16px;
+      vertical-align: bottom;
+      text-align: center;
+      height: 115px;
+    }
+    .sig-blank-space {
+      height: 62px;
+      width: 100%;
+    }
+    .sig-line {
+      border-top: 1px solid #0F2942;
+      padding-top: 5px;
+      margin: 0 auto;
+      width: 86%;
+    }
+    .sig-name {
+      font-weight: 800;
+      color: #0F172A;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+    }
+    .sig-role {
+      font-size: 7.4pt;
+      color: #334155;
+      margin-top: 2px;
+      line-height: 1.32;
+    }
+
+    .doc-footer {
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px solid #0F2942;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: #475569;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 10mm 11mm 11mm 11mm;
+    }
+
+    @media print {
+      .toolbar-no-print { display: none !important; }
+      .page-wrap { max-width: 100%; padding: 0; margin: 0; }
+      .page-break { page-break-before: always; break-before: page; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar-no-print">
+    <div><strong>ENTREGABLE 1 (PUNTO 1 DEL CONTRATO)</strong> — Diagnóstico de Información Institucional Elaborado</div>
+    <button onclick="window.print()">Imprimir / Exportar PDF Oficial</button>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- 1. MEMBRETE INSTITUCIONAL LIMPIO -->
+    <header class="letterhead">
+      <div class="letterhead-left">
+        <img src="assets/Logo.png" alt="Gobierno del Estado de Guanajuato" />
+      </div>
+      <div class="letterhead-center">
+        <div class="dep-sup">Secretaría de Cultura del Estado de Guanajuato</div>
+        <div class="dep-sub">Dirección de Planeación • Sistema de Información Cultural</div>
+        <div class="doc-title">Entregable 1: Diagnóstico de Información Institucional Elaborado</div>
+      </div>
+      <div class="letterhead-right">
+        <img src="assets/pulso-q-logo-sobrio.png" alt="Consultoría PULSO Q" />
+        <div class="pulso-caption">PULSO Q</div>
+      </div>
+    </header>
+
+    <!-- CÉDULA DE CONTROL TÉCNICO, CONTRACTUAL Y FISCAL -->
+    <table class="control-table">
+      <tr>
+        <td colspan="4" class="section-banner">Cédula de Control Técnico, Contractual y Fiscal del Entregable</td>
+      </tr>
+      <tr>
+        <th>Servicio Contractual:</th>
+        <td colspan="3"><strong>Sistematización de Información Institucional y Diseño Funcional del Sistema de Información Cultural</strong></td>
+      </tr>
+      <tr>
+        <th>Objeto del Contrato:</th>
+        <td colspan="3" style="text-align:justify;">
+          Prestación de servicios profesionales para la sistematización, organización, análisis y estructuración de la información institucional de la Secretaría de Cultura, así como para el diseño conceptual y funcional de un Sistema de Información Cultural, que permita integrar, consultar, actualizar y dar seguimiento a información relacionada con programas, proyectos, acciones, beneficiarios, cobertura territorial, infraestructura, indicadores y resultados institucionales, con el propósito de fortalecer los procesos de planeación, seguimiento, evaluación y toma de decisiones.
+        </td>
+      </tr>
+      <tr>
+        <th>Sustento Contractual:</th>
+        <td colspan="3">
+          <strong>Entregable 1: Diagnóstico de información institucional elaborado.</strong> Que identifique fuentes, bases de datos, registros, responsables, periodicidad, variables disponibles, duplicidades, vacíos de información y necesidades de sistematización.
+        </td>
+      </tr>
+      <tr>
+        <th>Dependencia Destinataria:</th>
+        <td>Secretaría de Cultura del Estado de Guanajuato — <strong>Dirección de Planeación</strong></td>
+        <th>Titular / Área Validadora:</th>
+        <td><strong>Lic. Marcela Chagoya</strong><br/>Directora de Planeación</td>
+      </tr>
+      <tr>
+        <th>Prestador de Servicios:</th>
+        <td><strong>Luis Ángel Durán Alvarez</strong><br/>Persona Física | Consultoría <strong>PULSO Q</strong></td>
+        <th>Datos Fiscales y Padrón GTO:</th>
+        <td><strong>RFC:</strong> <span class="mono">DUAL921018QI3</span><br/><strong>No. Proveedor (Finanzas GTO):</strong> <span class="mono">504898</span> (Estatus R-2026)</td>
+      </tr>
+      <tr>
+        <th>Base Auditada:</th>
+        <td><span class="mono">DB_Sistema_Cultura_GTO_V1</span> (99 Metas • 34 Procesos)</td>
+        <th>Fecha de Emisión:</th>
+        <td>Guanajuato, Gto., a <strong>19 de octubre de 2026</strong></td>
+      </tr>
+    </table>
+
+    <!-- SECCIÓN 2: MATRIZ MAESTRA DE CONTROL DE LAS 8 UNIDADES GENERADORAS -->
+    <h2 class="section-heading">1. Matriz Maestra de Control: Fuentes, Bases de Datos, Responsables, Variables, Duplicidades y Vacíos</h2>
+    <p>
+      En cumplimiento estricto al numeral 1 de los Entregables Principales del Contrato, se presenta la matriz maestra resultante del levantamiento técnico en las <strong>8 Unidades Generadoras de Información</strong> de la Secretaría de Cultura del Estado de Guanajuato, identificando sus fuentes primarias, bases de datos, registros, responsables, periodicidad, variables disponibles, duplicidades y vacíos de información frente al seguimiento de las <strong>99 metas institucionales (<span class="mono">Cat_Alineacion</span>)</strong> y los <strong>34 procesos presupuestales</strong>:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:4%;" class="center">N°</th>
+          <th style="width:15%;">Unidad Generadora / Área Operativa</th>
+          <th style="width:16%;">Fuentes, Bases de Datos y Registros</th>
+          <th style="width:14%;">Responsables y Periodicidad</th>
+          <th style="width:17%;">Variables Disponibles en Origen</th>
+          <th style="width:17%;">Duplicidades Detectadas</th>
+          <th style="width:17%;">Vacíos de Información y Necesidad de Sistematización</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"><strong>01</strong></td>
+          <td><strong>Coordinación de Desarrollo Cultural Municipal</strong></td>
+          <td>• 46 archivos Excel (<span class="mono">.xlsx</span>) en Drive.<br/>• Expedientes PDF escaneados con firmas y sellos.<br/>• Listas de asistencia.</td>
+          <td><strong>Responsables:</strong> Titular de Coordinación y 46 Enlaces Municipales.<br/><strong>Periodicidad:</strong> Mensual (corte días 1–5).</td>
+          <td>Municipio, localidad, fecha, disciplina, taller u oferta cultural, asistencia general, participación de mujeres y monto de subsidio ejercido.</td>
+          <td>• Doble captura manual al copiar y pegar 46 archivos en una matriz concentradora.<br/>• Asistencias recurrentes en talleres contadas como personas únicas.</td>
+          <td>• Datos financieros de subsidios encerrados en PDFs escaneados ilegibles.<br/>• Falta de clave presupuestal (<span class="mono">Clave_Proceso</span>) y marcaje homologado de polígonos ZAP.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>02</strong></td>
+          <td><strong>Coordinación de Vinculación y Redes Culturales</strong></td>
+          <td>• Hojas mensuales de proyectos comunitarios en Excel / Drive.<br/>• Listas por sesión.<br/>• Memorias fotográficas.</td>
+          <td><strong>Responsables:</strong> Titular de Coordinación y Gestores Comunitarios.<br/><strong>Periodicidad:</strong> Semanal por sesión / Mensual.</td>
+          <td>Municipio, comunidad o colonia, nombre del proyecto comunitario, sesiones realizadas, edad, género y grupos prioritarios.</td>
+          <td>• En proyectos comunitarios de 5 o más sesiones al mes, un mismo participante se contabiliza múltiples veces por carecer de identificador único.</td>
+          <td>• Escritura libre de nombres de colonias o comunidades, impidiendo el cruce automático con el catálogo <span class="mono">Cat_Comunidades_Limpio</span> (ZAP).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>03</strong></td>
+          <td><strong>Dirección General de Patrimonio Cultural</strong></td>
+          <td>• Bitácoras en papel y lápiz en sitio.<br/>• Hojas de Excel locales.<br/>• Capturas de pantalla de redes sociales.</td>
+          <td><strong>Responsables:</strong> Dirección General y Encargados de CAV / Zonas Arqueológicas.<br/><strong>Periodicidad:</strong> Diaria en papel / Mensual.</td>
+          <td>Zona arqueológica o sitio patrimonial, fecha, conteo global de visitantes en taquilla, desglose básico en papel e interacciones digitales.</td>
+          <td>• Doble transcripción manual (del papel en sitio al Excel local y luego al concentrado central), triplicando el riesgo de error.</td>
+          <td>• Carencia física de internet y energía eléctrica en Centros de Atención a Visitantes (CAV).<br/>• Conteo artesanal de métricas digitales mediante capturas de pantalla.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>04</strong></td>
+          <td><strong>DG de Museos, Artes Visuales y Exposiciones (DGMAVE)</strong></td>
+          <td>• Informes narrativos en Word (<span class="mono">.docx</span>) y PowerPoint (<span class="mono">.pptx</span>).<br/>• <strong>Google Forms</strong> (Visitas escolares).<br/>• Excel de taquilla.</td>
+          <td><strong>Responsables:</strong> Dirección General, Administradores de Museos y Servicios Educativos.<br/><strong>Periodicidad:</strong> Diaria / Mensual.</td>
+          <td>Recinto museístico (27 recintos), título de exposición, fecha de inauguración, visitantes por sexo (H/M), grupos escolares y talleres.</td>
+          <td>• Variaciones ortográficas en nombres de museos y exposiciones mes con mes, fragmentando el conteo acumulado anual.</td>
+          <td>• Cifras de exposiciones inauguradas redactadas en prosa dentro de Word/PPT.<br/>• Limitación operativa en taquilla para desagregar la edad exacta de cada visitante.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>05</strong></td>
+          <td><strong>Dirección General de Producción Artística</strong></td>
+          <td>• Hojas de cálculo de programación de teatros y presupuesto.<br/>• Encuestas de satisfacción en Word y Excel dispersos.</td>
+          <td><strong>Responsables:</strong> Dirección General y Coordinaciones de Teatros.<br/><strong>Periodicidad:</strong> Por función / Cierre mensual.</td>
+          <td>Recinto escénico (Teatro Juárez, Cervantes, etc.), disciplina, espectáculo, compañía contratada, monto contratado y público asistente.</td>
+          <td>• Nombres de programas y procesos presupuestarios escritos manualmente con variaciones, duplicando categorías financieras.</td>
+          <td>• Fórmulas de Excel desbloqueadas alteradas por error humano (<span class="mono">#REF!</span>, <span class="mono">#DIV/0!</span>) y celdas obligatorias vacías.<br/>• Encuestas no tabuladas.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>06</strong></td>
+          <td><strong>Dirección General del Forum Cultural Guanajuato</strong></td>
+          <td>• Sistemas de control de accesos y matrices detalladas en Excel (<span class="mono">.xlsx</span>).<br/>• Cartelera mensual en PowerPoint (<span class="mono">.pptx</span>).</td>
+          <td><strong>Responsables:</strong> Dirección General del Forum y Responsables de Recinto.<br/><strong>Periodicidad:</strong> Por evento / Mensual.</td>
+          <td>Espacio del Forum (Teatro del Bicentenario, Mateo Herrera, etc.), modalidad (presencial/virtual), nuevas producciones y perfil demográfico.</td>
+          <td>• Dificultad para distinguir entre visitas totales (boletos emitidos) y visitantes únicos cuando un usuario asiste a varios eventos.</td>
+          <td>• Entrega de la cartelera mensual en diapositivas <span class="mono">.pptx</span> no procesables.<br/>• Consolidación manual hacia una sábana concentradora.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>07</strong></td>
+          <td><strong>Dirección General Editorial y de Publicaciones</strong></td>
+          <td>• Hojas compartidas en Drive (convocatorias, ventas e inventarios).<br/>• Catálogo semestral de publicaciones en <span class="mono">.pdf</span>.</td>
+          <td><strong>Responsables:</strong> Dirección General, Coordinación Editorial, Almacén y Ferias.<br/><strong>Periodicidad:</strong> Transaccional / Mensual / Semestral.</td>
+          <td>Título, autor, ISBN, género editorial, tiraje, estímulos públicos, presencia en ferias nacionales, ingresos por ventas y stock.</td>
+          <td>• Edición simultánea sin control de permisos por múltiples usuarios sobre las mismas hojas, causando sobreescritura y duplicación.</td>
+          <td>• Catálogo editorial encerrado en archivo PDF estático.<br/>• Desconexión entre el <em>Stock Teórico</em> (Excel) y el <em>Stock Físico</em> (Almacén).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>08</strong></td>
+          <td><strong>Dirección General de Formación e Investigación</strong></td>
+          <td>• <strong>Google Forms</strong> para talleres y diplomados.<br/>• Hojas de Excel para conciertos, concursos y agrupaciones.</td>
+          <td><strong>Responsables:</strong> Dirección General, CEARG y Coordinadores Académicos.<br/><strong>Periodicidad:</strong> Por sesión o módulo / Mensual.</td>
+          <td>Proceso formativo, tipo de oferta (taller, diplomado, laboratorio), disciplina, municipio sede y perfil demográfico del alumno.</td>
+          <td>• En bandas, orquestas y diplomados con múltiples ensayos al mes, el registro por sesión sin matrícula única multiplica a un mismo alumno.</td>
+          <td>• Brecha física interna: En 5 de sus 6 fuentes primarias se reporta carencia de equipos de cómputo y personal para captura en sitio.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- SECCIÓN 3: AUDITORÍA DEL PADRÓN REAL Y EVIDENCIA VISUAL DEL SISTEMA -->
+    <h2 class="section-heading">2. Auditoría Forense del Padrón Real (DB_Sistema_Cultura_GTO_V1) y Evidencia Visual del Sistema</h2>
+    <p>
+      Adicionalmente al levantamiento documental de las áreas, Consultoría <strong>PULSO Q</strong> ejecutó una auditoría informática integral sobre la base de datos institucional en operación (<span class="mono">DB_Sistema_Cultura_GTO_V1</span>), contrastando el padrón de actividades contra el tabulador oficial de las <strong>99 metas anuales</strong> y los <strong>34 procesos presupuestales</strong> (<span class="mono">Cat_Alineacion</span>). Los hallazgos cuantitativos auditados se resumen en la siguiente tabla:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:28%;">Vector Auditado en DB_Sistema_Cultura_GTO_V1</th>
+          <th style="width:19%;" class="num">Cifra Oficial Auditada</th>
+          <th style="width:53%;">Dictamen Técnico de Integridad, Discrepancias y Trazabilidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Universo de Actividades Culturales y Artísticas (<span class="mono">Registro_Actividades</span>)</strong></td>
+          <td class="num"><strong>573 actividades</strong><br/><em>(1,797 sesiones)</em></td>
+          <td>El <strong>100.0%</strong> de las actividades cuenta con llave primaria única (<span class="mono">ACT00001</span> al <span class="mono">ACT00573</span>), folio temporal de auditoría y vinculación hacia el catálogo rector <span class="mono">Cat_Alineacion</span> (99 metas anuales y 34 procesos estratégicos).</td>
+        </tr>
+        <tr>
+          <td><strong>2. Cobertura Territorial Estatal (<span class="mono">Cat_Municipio</span> / <span class="mono">GTO_COORDS</span>)</strong></td>
+          <td class="num"><strong>25 de 46 municipios</strong><br/><em>(54.3% cobertura estatal)</em></td>
+          <td>Se registra presencia activa en <strong>25 municipios del Estado de Guanajuato</strong> más <strong>1 sede nacional foránea</strong> (<em>Ciudad de México</em>), abarcando <strong>37 localidades</strong> y <strong>228 actividades con incidencia en Zonas de Atención Prioritaria (ZAP)</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>3. Alcance Total en Registro Territorial (<span class="mono">Registro_Territorio</span>)</strong></td>
+          <td class="num"><strong>349,183 beneficiarios</strong><br/><em>(en 563 filas hijas)</em></td>
+          <td>Representa el volumen bruto de población alcanzada por sede municipal y comunidad. Presenta <strong>100.0% de integridad referencial (0 registros huérfanos)</strong> respecto a la tabla padre.</td>
+        </tr>
+        <tr>
+          <td><strong>4. Alcance Total en Desglose Demográfico (<span class="mono">Registro_Poblacion</span>)</strong></td>
+          <td class="num"><strong>304,626 personas</strong><br/><em>(en 1,033 filas hijas)</em></td>
+          <td>Representa la población desagregada por grupo etario, género y grupo prioritario. Presenta <strong>100.0% de integridad referencial (0 registros huérfanos)</strong> respecto a la tabla padre.</td>
+        </tr>
+        <tr>
+          <td><strong>5. Discrepancia Detectada: Territorio vs. Demografía (<span class="mono">Variación Neta</span>)</strong></td>
+          <td class="num"><strong>-44,557 registros</strong><br/><em>(-12.76% de variación)</em></td>
+          <td><strong>Hallazgo Crítico de Auditoría:</strong> Existe una diferencia neta de <strong>-44,557 registros</strong> entre el total territorial (<strong>349,183</strong>) y el total demográfico (<strong>304,626</strong>), originada por <strong>10 actividades (<span class="mono">573 - 563</span>) con captura incompleta</strong> y por eventos masivos (ej. zonas arqueológicas y ferias) donde se registró el aforo territorial pero se omitió desglosar <span class="mono">Registro_Poblacion</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>6. Separación Metodológica: Acceso Masivo vs. Participación Activa</strong></td>
+          <td class="num"><strong>344,037 Acceso (98.52%)</strong><br/><strong>5,146 Participación (1.48%)</strong></td>
+          <td>El modelo distingue con precisión el <strong>Acceso Cultural</strong> (<strong>344,037</strong> espectadores y visitantes en exposiciones, funciones, festivales y zonas arqueológicas) frente a la <strong>Participación Activa</strong> (<strong>5,146</strong> personas en talleres formativos, diplomados, laboratorios y procesos comunitarios continuos).</td>
+        </tr>
+        <tr>
+          <td><strong>7. Respaldo Probatorio en Google Drive (<span class="mono">Regitro_Evidencia</span>)</strong></td>
+          <td class="num"><strong>289 expedientes</strong><br/><em>(0 huérfanos)</em></td>
+          <td>Archivos probatorios (fotografías, listas de asistencia en PDF y carpetas ZIP) vinculados al folio de cada actividad, permitiendo auditar en tiempo real las actividades con evidencia pendiente por Dirección General.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- EVIDENCIA VISUAL REAL: CAPTURAS DE PANTALLA DEL TABLERO DIRECTIVO SPA -->
+    <table class="figure-grid">
+      <tr>
+        <td style="width:50%;">
+          <img src="assets/captura-tablero-vista-general.png" alt="Vista General del Tablero Directivo SPA y Mapa de 46 Municipios" class="figure-img" />
+          <div class="figure-caption">
+            <strong>Figura 1.1 — Vista General del Tablero Directivo Web SPA y Mapa Geoespacial (<span class="mono">GTO_COORDS</span>):</strong> Visualización en tiempo real de las <strong>573 actividades</strong> auditadas, el conmutador dual <em>Territorial (349,183) vs. Demográfico (304,626)</em>, la separación entre <em>Participación Activa (5,146)</em> y <em>Acceso (344,037)</em>, la cobertura en <strong>25 de los 46 municipios (54.3%)</strong> y el botón de exportación ejecutiva Widescreen (<span class="mono">.pptx</span>).
+          </div>
+        </td>
+        <td style="width:50%;">
+          <img src="assets/captura-mapa-46-municipios.png" alt="Vista de Cobertura Territorial e Impacto en Zonas de Atención Prioritaria (ZAP)" class="figure-img" />
+          <div class="figure-caption">
+            <strong>Figura 1.2 — Módulo de Cobertura Territorial y Polígonos ZAP:</strong> Desglose geoespacial sobre el padrón completo de los <strong>46 municipios del Estado de Guanajuato</strong>, mostrando las <strong>37 comunidades impactadas</strong>, las <strong>228 actividades en Zonas de Atención Prioritaria (ZAP)</strong>, la proporción por ámbito (Urbano 96.6%, Periurbano 2.5%, Rural 0.9%) y el padrón por localidad.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <img src="assets/captura-conciliacion-operativa.png" alt="Módulo de Conciliación Operativa (Vista 6)" class="figure-img" style="max-height: 225px; object-fit: cover; object-position: top;" />
+          <div class="figure-caption">
+            <strong>Figura 1.3 — Módulo de Conciliación Operativa (Vista 6 — Control de Registros):</strong> Auditoría automatizada que aísla nominalmente los folios causantes de la discrepancia de <strong>-44,557 registros</strong> entre el aforo territorial y el desglose demográfico (ej. <span class="mono">ACT-SCBV52724</span> en Zona Arqueológica Cañada de la Virgen con <span class="mono">+49,254</span> y <span class="mono">ACT-SCQN95689</span> con <span class="mono">-16,765</span>), permitiendo descargar el reporte CSV para solventación directa con los enlaces responsables.
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- SECCIÓN 4: DIAGNÓSTICO GENERAL Y POR LAS 8 DIRECCIONES GENERALES -->
+    <h2 class="section-heading">3. Diagnóstico General del Estado de los Datos y Viabilidad de Indicadores</h2>
+    <p>
+      El análisis de la matriz de información institucional confirma que la Secretaría de Cultura posee una amplia capacidad operativa y de generación de datos en territorio. Sin embargo, previo a la sistematización instrumentada con la Dirección de Planeación, este activo estratégico se encontraba atomizado y desestructurado. Para consolidar la operación del Tablero de Control y dar seguimiento riguroso a las <strong>99 metas anuales</strong> y los <strong>34 procesos presupuestales</strong>, resulta imperativo transitar de un modelo de <em>"Información Estática"</em> (almacenada en documentos aislados) a un ecosistema de <em>"Datos Estructurados Transaccionales"</em>.
+    </p>
+
+    <h4 class="sub-block-title">3.1 Los Tres Nudos Críticos Transversales del Estado Actual</h4>
+    <ul class="clean-list">
+      <li>
+        <strong>1. Incompatibilidad de formatos (datos estáticos no procesables):</strong> Un alto porcentaje de las fuentes primarias históricas se reportaba en procesadores de texto (Word <span class="mono">.docx</span>), presentaciones visuales de cartelera (PowerPoint <span class="mono">.pptx</span>) o imágenes digitalizadas (<span class="mono">.pdf</span> escaneado con firmas y sellos).
+        <ul class="clean-sublist">
+          <li><strong>Impacto técnico:</strong> Los motores de inteligencia de datos no pueden realizar lecturas matemáticas automatizadas sobre descripciones narrativas en prosa ni extraer sumatorias financieras desde fotografías o PDFs escaneados, impidiendo la ingesta directa hacia el sistema.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>2. Vulnerabilidad en los procesos de consolidación manual:</strong> Se identificó una dependencia sistemática de la captura y transcripción manual (copiado y pegado de hasta 46 archivos Excel municipales y múltiples hojas por recinto) para alimentar matrices concentradoras.
+        <ul class="clean-sublist">
+          <li><strong>Impacto técnico:</strong> La transcripción humana eleva exponencialmente el riesgo de error (alteración accidental de fórmulas <span class="mono">#REF!</span> / <span class="mono">#DIV/0!</span>, variaciones ortográficas en nombres de municipios y recintos), introduce rezagos de semanas en la actualización del tablero y dificulta la detección de registros duplicados.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>3. Brecha física de conectividad e infraestructura en sitio:</strong> Existen limitaciones operativas severas en puntos de captura en campo, específicamente en los Centros de Atención a Visitantes (CAV) y zonas arqueológicas de la Dirección General de Patrimonio Cultural (carencia de internet y suministro eléctrico), así como déficit de equipos de cómputo en sedes de Formación e Investigación.
+        <ul class="clean-sublist">
+          <li><strong>Impacto técnico:</strong> Obliga a mantener flujos primarios en papel y lápiz que requieren protocolos formales de captura diferida homologada (<em>Offline</em>) para evitar que el dato se pierda o se distorsione al transcribirse en oficinas centrales.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4 class="sub-block-title">3.2 Análisis de Viabilidad por Indicador Estratégico (Indicadores 11, 1, 13, 8 y 9)</h4>
+    <ul class="clean-list">
+      <li>
+        <strong>Indicador de mayor viabilidad e implementación inmediata — Indicador 11 (Tasa de variación de oferta cultural realizada en los municipios):</strong> Cuenta con la mayor cobertura transversal al ser alimentado por múltiples direcciones (Desarrollo Cultural Municipal, Museos, Forum Cultural, Producción Artística). Mediante su vinculación con el catálogo de los <strong>46 municipios (<span class="mono">GTO_COORDS</span>)</strong> y las <strong>99 metas de <span class="mono">Cat_Alineacion</span></strong>, opera ya en tiempo real dentro de los Módulos 1, 2 y 3 del Tablero Directivo.
+      </li>
+      <li>
+        <strong>Indicadores de alta complejidad demográfica — Indicadores 1 y 13 (Grupos Prioritarios, Polígonos ZAP y Jóvenes):</strong> Exigen alta precisión en la desagregación por sexo, edad, comunidad ZAP y distinción entre <em>asistencias recurrentes</em> y <em>personas únicas beneficiadas</em>. Se resuelven mediante la separación estructural entre <span class="mono">Total_Sesiones</span> y padrón de participantes (<span class="mono">Cantidad_Participacion</span>), el catálogo depurado <span class="mono">Cat_Comunidades_Limpio</span> (239 localidades con marcaje ZAP) y la categoría controlada <span class="mono">"Dato global"</span> cuando en taquilla física sólo sea viable el conteo general.
+      </li>
+      <li>
+        <strong>Indicadores con riesgo de estructura cualitativa — Indicadores 8 y 9 (Nuevas producciones y Circulación de proyectos fuera del territorio estatal):</strong> Su información residía en fichas informativas de Word, diapositivas PowerPoint o catálogos editoriales en PDF. Se estandarizan al asignar un folio relacional único (<span class="mono">ID_Actividad</span>) a cada nueva producción y al habilitar el registro de sedes foráneas nacionales (ej. <em>Ciudad de México</em>) separadas estadísticamente de los 46 municipios mediante la función <span class="mono">isMunicipioGTO()</span>.
+      </li>
+    </ul>
+
+    <!-- SECCIÓN 5: DIAGNÓSTICO ESPECÍFICO POR LAS 8 DIRECCIONES GENERALES / ÁREAS OPERATIVAS -->
+    <h2 class="section-heading">4. Diagnóstico Específico y Solución de Sistematización por las 8 Unidades Generadoras</h2>
+
+    <!-- ÁREA 1 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.1 Coordinación de Desarrollo Cultural Municipal (Articulación con los 46 Municipios)</h3>
+      <p>
+        La Coordinación de Desarrollo Cultural Municipal funge como el nodo principal de articulación territorial de la Secretaría, concentrando la información operativa y financiera de las Casas de la Cultura y Organismos Culturales en los 46 municipios. Es fuente primaria para los <strong>Indicadores 1 (Grupos prioritarios), 2 (Formación), 6 (Participación de mujeres) y 11 (Oferta cultural municipal)</strong>. Presenta una <strong>Madurez Digital Intermedia</strong>: aunque adoptó hojas de cálculo en Google Drive, su operatividad previa dependía de consolidaciones manuales y comprobaciones financieras escaneadas.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Gestión de la oferta cultural y talleres (Indicadores 2 y 11):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> La información se recibe en hojas de cálculo individuales por municipio en Google Drive.</li>
+            <li><strong>La barrera crítica:</strong> Cuello de botella operativo; la matriz reporta que <em>"la captura se realiza manualmente y se pasa a una matriz de concentrado general"</em> a partir de hasta 46 archivos independientes.</li>
+            <li><strong>Impacto técnico:</strong> Copiar y pegar datos desde 46 fuentes distintas introduce errores humanos de transcripción, variaciones en la nomenclatura de municipios/localidades y retrasos en la actualización del tablero.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Gestión financiera y comprobación de subsidios (Indicador 6):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> El reporte del ejercicio del subsidio municipal se entrega mediante el escaneo de documentos finales con firmas y sellos en PDF.</li>
+            <li><strong>La barrera crítica:</strong> Insumos calificados como <em>"Documentos ilegibles"</em> para procesamiento automatizado (información estática en imagen).</li>
+            <li><strong>Impacto técnico:</strong> Imposibilidad de correlacionar automáticamente el monto de inversión ejercido con el impacto social en mujeres y grupos prioritarios sin transcripción previa.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>C. Integridad de los padrones de beneficiarios (Indicador 1):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Recepción de listas de asistencia físicas y reportes de proyectos socioculturales.</li>
+            <li><strong>La barrera crítica:</strong> Dificultad operativa para <em>"estandarizar y corregir duplicados en el registro"</em>.</li>
+            <li><strong>Impacto técnico:</strong> Riesgo de reportar asistencias acumuladas en lugar de personas únicas beneficiadas en talleres continuos.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>D. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Captura directa en origen (AppSheet):</strong> Sustitución de los 46 archivos Excel sueltos por captura directa en <span class="mono">Registro_Actividades</span> y <span class="mono">Registro_Territorio</span> con lista cerrada de los 46 municipios (<span class="mono">Cat_Municipio</span>) y vinculación automática al proceso presupuestal en <span class="mono">Cat_Alineacion</span>.</li>
+            <li><strong>2. Protocolo de "Doble Entregable" para subsidios:</strong> El PDF escaneado con firmas y sellos se aloja como respaldo legal en <span class="mono">Regitro_Evidencia</span> (Google Drive), mientras que el monto financiero se registra como dato numérico tipado en <span class="mono">Monto_Total_Contratado</span>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 2 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.2 Coordinación de Vinculación y Redes Culturales (Tejido Social y Proyectos Comunitarios)</h3>
+      <p>
+        Responsable de articular el tejido social mediante proyectos interinstitucionales, colectivos y caravanas comunitarias, alimentando directamente los <strong>Indicadores 1 (Participación de grupos prioritarios) y 2 (Oferta de formación)</strong>. Presenta una <strong>Madurez Digital Media</strong>: centraliza archivos en Drive, pero enfrenta riesgos de inflación estadística en proyectos multi-sesión y falta de estandarización territorial.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Fragmentación en la consolidación de proyectos (Indicadores 1 y 2):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Recepción de reportes mensuales de proyectos comunitarios en hojas de cálculo dispersas.</li>
+            <li><strong>La barrera crítica:</strong> Reiteración del proceso artesanal donde <em>"la captura se realiza manualmente y se pasa a una matriz de concentrado general"</em>.</li>
+            <li><strong>Impacto técnico:</strong> Latencia en la disponibilidad de datos e imposibilidad de contar con una radiografía en tiempo real del avance en polígonos prioritarios.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Duplicidad en procesos comunitarios recurrentes y heterogeneidad de evidencia:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Se reportan listas de asistencia y fotografías por cada sesión de trabajo comunitario.</li>
+            <li><strong>La barrera crítica:</strong> Necesidad expresa de <em>"estandarizar y corregir duplicados en el registro"</em> ante fuentes externas diversas (líderes comunitarios e instituciones aliadas).</li>
+            <li><strong>Impacto técnico:</strong> En laboratorios o coros comunitarios donde una misma persona asiste a 5 sesiones en el mes, la suma simple sin separar sesiones de padrón único quintuplica artificialmente los beneficiarios del Indicador 1.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>C. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Desacoplamiento entre Sesiones y Personas Atendidas:</strong> El número de sesiones se captura en el atributo <span class="mono">Total_Sesiones</span> de <span class="mono">Registro_Actividades</span>, mientras que el padrón real de participantes comunitarios se registra en <span class="mono">Cantidad_Participacion</span>.</li>
+            <li><strong>2. Georreferenciación automática de Zonas de Atención Prioritaria (ZAP):</strong> Selección obligatoria de localidad desde el catálogo <span class="mono">Cat_Comunidades_Limpio</span> (239 localidades), activando automáticamente las banderas <span class="mono">ZAP_Nuevo_Comienzo</span> y <span class="mono">ZAP_SSyP</span>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 3 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.3 Dirección General de Patrimonio Cultural (Zonas Arqueológicas y Centros de Atención a Visitantes)</h3>
+      <p>
+        Genera el insumo exclusivo del <strong>Indicador 4 (Participación en procesos de memoria y patrimonio)</strong> y alimenta las metas de conservación y difusión patrimonial. Presenta una <strong>Madurez Digital Crítica (Baja)</strong> condicionada no por resistencia operativa, sino por una barrera física de infraestructura en las zonas arqueológicas del Estado.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. La brecha física de conectividad en sitio:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> La captura primaria de visitantes se realiza manualmente con papel y lápiz en los sitios patrimoniales y posteriormente se transcribe a Excel para enviarse a oficinas centrales.</li>
+            <li><strong>La barrera crítica:</strong> El levantamiento advierte textualmente: <em>"En los Centros de Atención a Visitantes (CAV) no hay servicio de internet, y en algunos no hay energía eléctrica"</em>.</li>
+            <li><strong>Impacto técnico:</strong> Alta latencia y doble transcripción manual que triplica el margen de error humano. En la auditoría de <span class="mono">DB_Sistema_Cultura_GTO_V1</span>, el folio <span class="mono">ACT-SCBV52724</span> (Zona Arqueológica de Cañada de la Virgen en San Miguel de Allende) registró <strong>49,465 visitantes en territorio contra sólo 211 en demografía</strong> (+49,254 de discrepancia).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Medición artesanal de audiencias digitales:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Se reporta que <em>"en base a imágenes se realiza el conteo"</em> de interacciones digitales por zona arqueológica.</li>
+            <li><strong>La barrera crítica:</strong> Recolección artesanal mediante revisión visual de capturas de pantalla, no escalable y propensa a error.</li>
+            <li><strong>Impacto técnico:</strong> Inconsistencia en la trazabilidad del alcance digital frente al aforo físico en recintos patrimoniales.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>C. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Despliegue de la "Plantilla Maestra de Carga Local (Offline)":</strong> Instalación en los equipos de los encargados de los CAV de una plantilla local protegida con menús desplegables idénticos a los 18 catálogos (<span class="mono">Cat_Alineacion</span>, <span class="mono">Cat_Recintos</span>) para captura semanal sin internet y sincronización diferida al contar con red.</li>
+            <li><strong>2. Homologación de taquilla mediante "Dato global":</strong> Cuando la afluencia en taquilla impida censar edad por edad, el enlace registrará el mismo total territorial en <span class="mono">Registro_Poblacion</span> bajo la categoría controlada <span class="mono">"Dato global"</span>, eliminando el descuadre de +49,254 registros.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 4 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.4 Dirección General de Museos, Artes Visuales y Exposiciones (DGMAVE)</h3>
+      <p>
+        Columna vertebral de la oferta expositiva y de servicios educativos museísticos del Estado (Circuito Estatal de Museos), impactando en los <strong>Indicadores 11 (Exposiciones e inauguraciones), 1 y 13 (Grupos prioritarios y jóvenes en servicios educativos) y 12 (Agentes culturales en formación)</strong>. Presenta una <strong>Madurez Digital Desigual (Baja en Formatos / Alta en Potencial)</strong>: genera información constante (245 actividades auditadas en la base), pero gran parte de su numeralia histórica se entregaba encerrada en documentos narrativos.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Datos cuantitativos encerrados en formatos narrativos (Word y PowerPoint):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Reportes clave como el número de exposiciones inauguradas o actividades educativas se entregan en documentos Word (<span class="mono">.docx</span>) o presentaciones PowerPoint (<span class="mono">.pptx</span>).</li>
+            <li><strong>La barrera crítica:</strong> Un sistema de información no puede contabilizar automáticamente un párrafo en prosa que dice <em>"Este mes se inauguraron tres exposiciones..."</em>; requiere un registro estructurado tipado.</li>
+            <li><strong>Impacto técnico:</strong> Obliga a que personal de Planeación lea documentos extensos y transcriba manualmente las cifras para poder graficarlas.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Limitaciones operativas en taquilla e inconsistencia en taxonomía de recintos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Se exigen desgloses detallados de visitantes (edad, sexo, procedencia) en múltiples hojas de Excel.</li>
+            <li><strong>La barrera crítica:</strong> La dirección expone que <em>"no tenemos personal capacitado para realizar la disgregación en las áreas de taquillas y no contamos con el equipo técnico"</em> (sólo se disgrega Hombre/Mujer), aunado a la necesidad de <em>"homologar letras, mayúsculas, etc."</em> en los nombres de los museos.</li>
+            <li><strong>Impacto técnico:</strong> Exigir un censo edad por edad inviable en taquilla provoca vacíos en <span class="mono">Registro_Poblacion</span>, mientras que escribir el nombre de un mismo museo con variantes ortográficas fragmenta la estadística anual.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>C. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Erradicación del reporte en Word para numeralia y catálogo cerrado de 27 recintos:</strong> Toda exposición, inauguración o actividad educativa se registra directamente en <span class="mono">Registro_Actividades</span> seleccionando el museo desde el catálogo cerrado <span class="mono">Cat_Recintos</span> (27 recintos estatales) y vinculándolo a su proceso (ej. <span class="mono">PB3572</span>) en <span class="mono">Cat_Alineacion</span>.</li>
+            <li><strong>2. Escalamiento del caso de éxito de formularios digitales:</strong> Extender el modelo de formularios estructurados que la DGMAVE ya utilizaba exitosamente en <em>solicitudes de visitas escolares</em> hacia todas las coordinaciones educativas de los museos.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 5 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.5 Dirección General de Producción Artística (Programación Escénica y Operación de Teatros)</h3>
+      <p>
+        Responsable de la programación escénica estatal y de la operación de los principales teatros (Teatro Juárez, Teatro Cervantes, Teatro Principal, etc.), alimentando los <strong>Indicadores 11 (Oferta cultural), 13 (Jóvenes), 7 (Contratos de servicios profesionales a artistas) y 3 (Aprovechamiento de espacios culturales)</strong>. Presenta una <strong>Madurez Digital Baja por Riesgo de Integridad</strong>: utiliza Excel, pero con alta vulnerabilidad en sus fórmulas y catálogos abiertos.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Inestabilidad en fórmulas de hojas de cálculo y dispersión presupuestal:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Uso de hojas de cálculo abiertas para el registro diario y mensual de funciones, taquilla y presupuesto por programa.</li>
+            <li><strong>La barrera crítica:</strong> El diagnóstico advierte que <em>"a veces no ponen bien las fórmulas y se refleja información poco fiable"</em>, además de requerir <em>"estandarizar nombres correctos y completos de los programas"</em> y <em>"unificar criterios para que todas las celdas sean llenadas"</em>.</li>
+            <li><strong>Impacto técnico:</strong> La alteración accidental de fórmulas (<span class="mono">#REF!</span>, <span class="mono">#DIV/0!</span>) y la escritura manual de nombres de programas presupuestarios impiden cruzar con exactitud el gasto ejercido contra las metas del Programa de Gobierno.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Instrumentos de evaluación no estandarizados (Encuestas):</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong>Aplicación de encuestas de satisfacción al público, enlaces municipales y artistas en archivos Word y Excel dispersos.</li>
+            <li><strong>La barrera crítica:</strong> Ausencia de un formulario digital único que tabule automáticamente las respuestas.</li>
+            <li><strong>Impacto técnico:</strong> Pérdida de trazabilidad histórica sobre el índice de satisfacción ciudadana en recintos escénicos.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>C. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Eliminación de fórmulas editables y selección cerrada de los 34 procesos:</strong> En el formulario transaccional de <span class="mono">DB_Sistema_Cultura_GTO_V1</span>, el usuario operativo sólo ingresa datos brutos (<span class="mono">Cantidad_Acceso</span>, <span class="mono">Monto_Total_Contratado</span>, <span class="mono">Cantidad_Agentes</span>) y selecciona el recinto desde <span class="mono">Cat_Recintos</span> y el proceso desde <span class="mono">Cat_Alineacion</span>; todos los cálculos los ejecuta el motor central sin intervención humana.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 6 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.6 Dirección General del Forum Cultural Guanajuato (Complejo Cultural)</h3>
+      <p>
+        Gestiona el complejo cultural de mayor infraestructura del Estado (Teatro del Bicentenario Roberto Plasencia Saldaña, Auditorio Mateo Herrera, Museo de Arte e Historia de Guanajuato, Calzada de las Artes), alimentando con alta precisión los <strong>Indicadores 8 (Nuevas producciones), 13 (Participación de jóvenes) y 11 (Oferta cultural presencial y virtual)</strong>. Se clasifica con una <strong>Madurez Digital Alta (Estándar de Calidad Potencial)</strong> al contar con excelente desglose demográfico por recinto, pero afectada por procesos manuales de consolidación y entrega de cartelera en formatos visuales.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Granularidad de datos frente a consolidación manual y formatos PowerPoint:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Reportan matrices detalladas en Excel (<span class="mono">.xlsx</span>) por espacio y perfil demográfico, mientras que el Programa Mensual de Actividades se entrega en presentación PowerPoint (<span class="mono">.pptx</span>).</li>
+            <li><strong>La barrera crítica:</strong> Pese a la riqueza de su información en origen, <em>"la captura se realiza manualmente y se pasa a una matriz de concentrado general"</em>, y la cartelera mensual se entrega como una <em>"presentación integral en diapositivas"</em> no tabular.</li>
+            <li><strong>Impacto técnico:</strong> El archivo <span class="mono">.pptx</span> es un formato de visualización humana, no de transmisión de datos estructurados, obligando a recapturar manualmente las funciones y producciones en la base central.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Carga distribuida directa por responsable de recinto:</strong> Sustitución del concentrado manual mensual por el registro directo de cada recinto del Forum en <span class="mono">Registro_Actividades</span> al cierre de cada evento, clasificando automáticamente la modalidad (<span class="mono">Presencial</span>, <span class="mono">Virtual</span> o <span class="mono">Híbrido</span> en <span class="mono">Cat_Formato</span>) y asignando un <span class="mono">ID_Actividad</span> único a cada nueva producción escénica.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 7 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.7 Dirección General Editorial y de Publicaciones (Producción Editorial y Fomento Lector)</h3>
+      <p>
+        Gestiona la producción editorial del Estado (Ediciones La Rana), la distribución de acervos y las ferias del libro, alimentando los <strong>Indicadores 5 (Comercialización de bienes culturales), 8 (Nuevas producciones editoriales), 9 (Circulación fuera del territorio estatal) y 10 (Estímulos públicos)</strong>. Presenta una <strong>Madurez Digital Media con Riesgo Operativo Alto</strong> derivado de la edición concurrente sin control de gobernanza sobre hojas compartidas.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Vulnerabilidad por edición simultánea sin control y catálogos estáticos en PDF:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Múltiples usuarios editan simultáneamente las mismas hojas de cálculo en Google Drive (convocatorias, ventas, inventarios), y el Catálogo de Publicaciones se gestiona como un archivo <span class="mono">.pdf</span> semestral.</li>
+            <li><strong>La barrera crítica:</strong> La matriz advierte reiteradamente que <em>"la captura es realizada por distintos integrantes de la dirección, por lo que el margen de error es mayor"</em> (borrado accidental de filas, alteración de estructura), aunado a la imposibilidad de procesar estadísticamente un catálogo encerrado en PDF.</li>
+            <li><strong>Impacto técnico:</strong> Inestabilidad estructural de la fuente de datos y desfase permanente entre el <em>Stock Teórico</em> (Excel) y el <em>Stock Físico</em> (Almacén).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Gobernanza transaccional con sello de usuario (<span class="mono">Usuario_Registra</span>):</strong> Bloqueo de la estructura de columnas en <span class="mono">DB_Sistema_Cultura_GTO_V1</span> y captura mediante formulario donde cada integrante ingresa registros nuevos con su correo institucional sin poder alterar ni borrar filas históricas.</li>
+            <li><strong>2. Trazabilidad de ingresos y circulación nacional (Indicadores 5 y 9):</strong> Registro estructurado de ingresos por ventas en el atributo <span class="mono">Monto_Ingreso</span> y habilitación de sedes foráneas (ej. ferias nacionales en <em>Ciudad de México</em>) en <span class="mono">Cat_Municipio</span>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ÁREA 8 -->
+    <div class="area-block">
+      <h3 class="area-heading">4.8 Dirección General de Formación e Investigación (CEARG y Profesionalización Artística)</h3>
+      <p>
+        Responsable de los procesos académicos, de investigación y del Centro de las Artes de Guanajuato (CEARG), alimentando los <strong>Indicadores 2 (Oferta de formación y profesionalización), 1 (Grupos prioritarios) y 11 (Oferta cultural)</strong>. Presenta una <strong>Madurez Digital Alta en Metodología pero Baja en Infraestructura Física</strong>: es el referente interno en el uso de formularios web (Google Forms), pero enfrenta carencias de equipos de cómputo en sus sedes operativas.
+      </p>
+      <ul class="clean-list">
+        <li>
+          <strong>A. Adopción de formularios web bloqueada por déficit de equipo de cómputo y duplicidad longitudinal:</strong>
+          <ul class="clean-sublist">
+            <li><strong>Estado actual:</strong> Utilizan formularios web (Google Forms) para el reporte de talleres y diplomados, pero reportan en 5 de sus 6 fuentes primarias <em>"falta de personal y equipo de cómputo"</em>, además de la necesidad de <em>"estandarizar y corregir duplicados en el registro de personas"</em>.</li>
+            <li><strong>La barrera crítica:</strong> Carencia de computadoras de escritorio en aulas y sedes para capturar en sitio, y riesgo de inflación estadística en agrupaciones artísticas (bandas, orquestas, diplomados) donde un mismo alumno asiste a múltiples ensayos al mes.</li>
+            <li><strong>Impacto técnico:</strong> Cuello de botella logístico en la entrega de informes y sobreestimación de beneficiarios si se contabilizan asistencias por ensayo en lugar de alumnos únicos formados.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>B. Recomendaciones y Solución PULSO Q vinculada a las 99 Metas y 34 Procesos:</strong>
+          <ul class="clean-sublist">
+            <li><strong>1. Captura móvil responsiva en teléfonos de instructores y coordinadores:</strong> Aprovechamiento de la interfaz móvil de AppSheet / Formularios Web mediante enlaces directos y códigos QR para que los docentes registren desde sus dispositivos móviles sin depender de computadoras de escritorio.</li>
+            <li><strong>2. Parametrización específica de formación en <span class="mono">Cat_Actividades</span>:</strong> Uso obligatorio de los campos <span class="mono">Tipo_Proceso_Formacion</span> y <span class="mono">Tipo_Oferta_Formacion</span>, registrando el número de clases o ensayos en <span class="mono">Total_Sesiones</span> y la matrícula real de alumnos únicos en <span class="mono">Cantidad_Participacion</span>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 5. BLOQUE DE FIRMA DE ENTREGA-RECEPCIÓN CON ESPACIO EN BLANCO PARA FIRMA AUTÓGRAFA -->
+    <table class="signature-table">
+      <thead>
+        <tr>
+          <th>Elaboró y Entrega (Prestador de Servicios Profesionales)</th>
+          <th>Recibe y Valida a Satisfacción (Dependencia Destinataria)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="sig-blank-space"></div>
+            <div class="sig-line">
+              <div class="sig-name">Luis Ángel Durán Alvarez</div>
+              <div class="sig-role">
+                Persona Física | Consultoría <strong>PULSO Q</strong><br/>
+                <strong>RFC:</strong> <span class="mono">DUAL921018QI3</span> • <strong>No. Proveedor (Finanzas GTO):</strong> <span class="mono">504898</span> (Estatus R-2026)
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="sig-blank-space"></div>
+            <div class="sig-line">
+              <div class="sig-name">Lic. Marcela Chagoya</div>
+              <div class="sig-role">
+                <strong>Directora de Planeación</strong><br/>
+                Secretaría de Cultura del Estado de Guanajuato<br/>
+                Fecha: 19 de octubre de 2026
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer class="doc-footer">
+      <div><strong>Secretaría de Cultura del Estado de Guanajuato</strong> • Dirección de Planeación</div>
+      <div><strong>Entregable 1:</strong> Diagnóstico de Información Institucional Elaborado • Proveedor: Luis Ángel Durán Alvarez (RFC: DUAL921018QI3 | No. Proveedor: 504898)</div>
+    </footer>
+
+  </div>
+</body>
+</html>

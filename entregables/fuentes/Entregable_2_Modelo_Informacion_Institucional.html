@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entregable 2 — Modelo de Información Institucional Diseñado | Secretaría de Cultura de Guanajuato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    body {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      color: #1E293B;
+      background-color: #FFFFFF;
+      line-height: 1.48;
+      font-size: 9.2pt;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .toolbar-no-print {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #CBD5E1;
+      font-size: 9pt;
+    }
+    .toolbar-no-print button {
+      background-color: #FFFFFF;
+      color: #0F2942;
+      border: 1px solid #CBD5E1;
+      padding: 5px 14px;
+      font-weight: 700;
+      font-size: 8.5pt;
+      cursor: pointer;
+    }
+
+    .page-wrap {
+      max-width: 216mm;
+      margin: 0 auto;
+      padding: 8mm 10mm;
+      background-color: #FFFFFF;
+    }
+
+    /* MEMBRETE INSTITUCIONAL LIMPIO (SIN CAJAS INNECESARIAS, ESTILO SECRETARÍA) */
+    .letterhead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #0F2942;
+    }
+    .letterhead-left {
+      width: 22%;
+      text-align: left;
+    }
+    .letterhead-left img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+    .letterhead-center {
+      width: 63%;
+      text-align: center;
+      padding: 0 8px;
+    }
+    .letterhead-center .dep-sup {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: #0F2942;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .letterhead-center .dep-sub {
+      font-size: 7.8pt;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+      margin-top: 2px;
+      letter-spacing: 0.03em;
+    }
+    .letterhead-center .doc-title {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #0F172A;
+      text-transform: uppercase;
+      margin-top: 6px;
+      line-height: 1.2;
+    }
+    .letterhead-right {
+      width: 15%;
+      text-align: right;
+    }
+    .letterhead-right img {
+      height: 42px;
+      width: auto;
+      display: inline-block;
+    }
+    .letterhead-right .pulso-caption {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: #0F2942;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    /* CÉDULA DE CONTROL NORMATIVO Y FISCAL */
+    .control-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 8pt;
+    }
+    .control-table .section-banner {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 7.8pt;
+      padding: 5px 8px;
+      border: 1px solid #0F2942;
+      text-align: left;
+    }
+    .control-table th {
+      background-color: #F8FAFC;
+      color: #0F2942;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3.5px 7px;
+      border: 1px solid #CBD5E1;
+      text-align: left;
+      width: 18%;
+      font-size: 7.3pt;
+    }
+    .control-table td {
+      padding: 3.5px 7px;
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
+      vertical-align: top;
+      width: 32%;
+    }
+
+    /* ENCABEZADOS DE SECCIÓN SOBRIOS (BLOQUES RECTANGULARES PUROS #0F2942, CERO BORDER-LEFT) */
+    h2.section-heading {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-size: 9.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 5px 10px;
+      margin: 14px 0 8px 0;
+      border: 1px solid #0F2942;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3.subsection-heading {
+      font-size: 8.8pt;
+      font-weight: 700;
+      color: #0F2942;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #0F2942;
+      padding-bottom: 3px;
+      margin: 11px 0 6px 0;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 7px;
+      text-align: justify;
+    }
+
+    /* TABLAS FORMALES DE BORDES RECTOS Y FINOS */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5px 0 12px 0;
+      font-size: 7.8pt;
+    }
+    table.data-table thead {
+      display: table-header-group;
+    }
+    table.data-table th {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7.2pt;
+      letter-spacing: 0.02em;
+      padding: 5px 6px;
+      border: 1px solid #0F2942;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.data-table td {
+      padding: 4px 5.5px;
+      border: 1px solid #CBD5E1;
+      vertical-align: top;
+      text-align: left;
+      color: #1E293B;
+      line-height: 1.32;
+    }
+    table.data-table tr {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    table.data-table tbody tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+    table.data-table td.num,
+    table.data-table th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    table.data-table td.center,
+    table.data-table th.center {
+      text-align: center;
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 7.3pt;
+      color: #0F2942;
+      font-weight: 600;
+    }
+
+    /* ESQUEMA RELACIONAL EN TABLA RECTANGULAR FORMAL */
+    .schema-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 3px 0 6px 0;
+      font-size: 6.5pt;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .schema-table th {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      padding: 3.5px 5px;
+      border: 1px solid #0F2942;
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      text-align: center;
+    }
+    .schema-table td {
+      border: 1px solid #CBD5E1;
+      padding: 3.5px 5px;
+      vertical-align: top;
+      background-color: #FFFFFF;
+      line-height: 1.18;
+    }
+    .schema-box-title {
+      font-weight: 800;
+      color: #0F2942;
+      border-bottom: 1px solid #CBD5E1;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      font-size: 7.3pt;
+    }
+
+    /* BLOQUE DE FIRMA AUTÓGRAFA EN BLANCO (CERO IMAGEN DE FIRMA DIGITAL) */
+    .signature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      font-size: 8pt;
+    }
+    .signature-table th {
+      background-color: #0F2942;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+      padding: 5px 8px;
+      border: 1px solid #0F2942;
+      text-align: center;
+      width: 50%;
+    }
+    .signature-table td {
+      border: 1px solid #CBD5E1;
+      padding: 8px 14px;
+      vertical-align: bottom;
+      text-align: center;
+      height: 98px;
+    }
+    .sig-blank-space {
+      height: 50px;
+      width: 100%;
+    }
+    .sig-line {
+      border-top: 1px solid #0F2942;
+      padding-top: 5px;
+      margin: 0 auto;
+      width: 86%;
+    }
+    .sig-name {
+      font-weight: 800;
+      color: #0F172A;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+    }
+    .sig-role {
+      font-size: 7.4pt;
+      color: #334155;
+      margin-top: 2px;
+      line-height: 1.32;
+    }
+
+    .doc-footer {
+      margin-top: 5px;
+      padding-top: 4px;
+      border-top: 1px solid #0F2942;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: #475569;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Sistema visual institucional conforme al Manual de Identidad V1.2. */
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    .toolbar-no-print,
+    .control-table .section-banner,
+    h2.section-heading,
+    table.data-table th,
+    .schema-table th,
+    .signature-table th { background-color: #004B87 !important; }
+    .control-table .section-banner,
+    h2.section-heading,
+    table.data-table th,
+    .schema-table th,
+    .signature-table th { border-color: #004B87 !important; }
+    .toolbar-no-print button,
+    .letterhead-center .dep-sup,
+    .letterhead-right .pulso-caption,
+    .control-table th,
+    h3.subsection-heading,
+    .mono,
+    .schema-box-title { color: #004B87 !important; }
+    .letterhead,
+    h3.subsection-heading { border-color: #69B3E7 !important; }
+
+    @page {
+      size: letter portrait;
+      margin: 26mm 11mm 17mm 11mm;
+    }
+    @page:first { margin-top: 10mm; }
+
+    @media print {
+      .toolbar-no-print { display: none !important; }
+      .page-wrap { max-width: 100%; padding: 0; margin: 0; }
+      .page-break { page-break-before: always; break-before: page; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar-no-print">
+    <div><strong>ENTREGABLE 2 (NUMERAL 2 DE LA PROPUESTA TÉCNICA)</strong> — Modelo de Información Institucional Diseñado</div>
+    <button onclick="window.print()">Imprimir / Exportar PDF Oficial</button>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- 1. MEMBRETE INSTITUCIONAL LIMPIO -->
+    <header class="letterhead">
+      <div class="letterhead-left">
+        <img src="../../assets/identidad/Logo.png" alt="Gobierno del Estado de Guanajuato" />
+      </div>
+      <div class="letterhead-center">
+        <div class="dep-sup">Secretaría de Cultura del Estado de Guanajuato</div>
+        <div class="dep-sub">Dirección de Planeación • Sistema de Información Cultural</div>
+        <div class="doc-title">Entregable 2: Modelo de Información Institucional Diseñado</div>
+      </div>
+      <div class="letterhead-right">
+        <img src="../../assets/identidad/pulso-q-logo.png" alt="Consultoría PULSO Q" />
+        <div class="pulso-caption">PULSO Q</div>
+      </div>
+    </header>
+
+    <!-- CÉDULA DE CONTROL TÉCNICO, CONTRACTUAL Y FISCAL -->
+    <table class="control-table">
+      <tr>
+        <td colspan="4" class="section-banner">Cédula de Control Técnico y Administrativo del Entregable</td>
+      </tr>
+      <tr>
+        <th>Servicio Propuesto:</th>
+        <td colspan="3"><strong>Sistematización de Información Institucional y Diseño Funcional del Sistema de Información Cultural</strong></td>
+      </tr>
+      <tr>
+        <th>Objeto de la Propuesta:</th>
+        <td colspan="3" style="text-align:justify;">
+          Prestación de servicios profesionales para la sistematización, organización, análisis y estructuración de la información institucional de la Secretaría de Cultura, así como para el diseño conceptual y funcional de un Sistema de Información Cultural, que permita integrar, consultar, actualizar y dar seguimiento a información relacionada con programas, proyectos, acciones, beneficiarios, cobertura territorial, infraestructura, indicadores y resultados institucionales, con el propósito de fortalecer los procesos de planeación, seguimiento, evaluación y toma de decisiones.
+        </td>
+      </tr>
+      <tr>
+        <th>Sustento Técnico:</th>
+        <td colspan="3">
+          <strong>Entregable 2: Modelo de información institucional diseñado.</strong> Que incluya estructura de datos, variables, catálogos, criterios de clasificación, relaciones entre información y reglas básicas para su integración y actualización.
+        </td>
+      </tr>
+      <tr>
+        <th>Dependencia Destinataria:</th>
+        <td>Secretaría de Cultura del Estado de Guanajuato — <strong>Dirección de Planeación</strong></td>
+        <th>Titular / Área Validadora:</th>
+        <td><strong>Lic. Marcela Chagoya</strong><br/>Directora de Planeación</td>
+      </tr>
+      <tr>
+        <th>Prestador de Servicios:</th>
+        <td><strong>Luis Angel Durán Alvarez</strong><br/>Persona Física | Consultoría <strong>PULSO Q</strong></td>
+        <th>Datos Fiscales y Padrón GTO:</th>
+        <td><strong>RFC:</strong> <span class="mono">DUAL921018QI3</span><br/><strong>No. Proveedor (Finanzas GTO):</strong> <span class="mono">504898</span> (Estatus R-2026)</td>
+      </tr>
+      <tr>
+        <th>Repositorio Auditado:</th>
+        <td><span class="mono">DB_Sistema_Cultura_GTO_V1</span> (22 hojas: 18 catálogos + 4 operativas • 0 huérfanos)</td>
+        <th>Fecha de Emisión:</th>
+        <td>Guanajuato, Gto., a <strong>19 de octubre de 2026</strong></td>
+      </tr>
+    </table>
+
+    <!-- SECCIÓN 2: ARQUITECTURA RELACIONAL NORMALIZADA (3FN) -->
+    <h2 class="section-heading">1. Arquitectura Relacional Normalizada en Tercera Forma Normal (3FN) y Relaciones de Datos</h2>
+    <p>
+      Con el propósito de reducir las hojas planas y la duplicidad derivada de la captura manual, se diseñó el modelo institucional sobre la base maestra <span class="mono">DB_Sistema_Cultura_GTO_V1</span> con criterios de normalización. El inventario documentado suma <strong>22 hojas</strong>, distribuidas en tres capas: (1) <strong>18 catálogos maestros cerrados</strong>, (2) una <strong>entidad padre</strong> (<span class="mono">Registro_Actividades</span> con 72 atributos) y (3) <strong>tres entidades hijas con relación uno a muchos (<span class="mono">1:N</span>)</strong>. Los campos estratégicos visibles en la entidad padre se obtienen mediante referencias al catálogo rector; no constituyen duplicación física del dato maestro. La revisión de las relaciones reporta <strong>0 registros huérfanos</strong> en el corte analizado:
+    </p>
+
+    <table class="schema-table">
+      <thead>
+        <tr>
+          <th style="width:29%;">Capa 1: Gobernanza de Catálogos (18 Tablas)<br/>Listas Cerradas de Validación</th>
+          <th style="width:38%;">Capa 2: Entidad Transaccional Padre (1)<br/>Ficha Única de la Actividad Cultural</th>
+          <th style="width:33%;">Capa 3: Entidades Hijas Relacionales (1:N)<br/>Integridad Referencial Auditada: 100.0%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="schema-box-title">1. Cat_Alineacion (99 Metas / 34 Procesos)</div>
+            • <strong>PK:</strong> <span class="mono">ID_Alineacion</span> (1 al 99)<br/>
+            • <span class="mono">Clave_Proceso</span> (<span class="mono">PB3572</span>, <span class="mono">QC4102</span>, etc.)<br/>
+            • <span class="mono">Area</span>, <span class="mono">Direccion</span>, <span class="mono">Nombre_Meta</span><br/>
+            • <span class="mono">Unidad_Medida</span>, <span class="mono">Meta_Anual</span><br/>
+            • <span class="mono">Eje_PG</span>, <span class="mono">Objetivo_PG</span>, <span class="mono">Linea_PEC</span><br/><br/>
+            <div class="schema-box-title">2. 17 Catálogos Operativos Cerrados</div>
+            • <strong>Geográficos:</strong> <span class="mono">Cat_Municipio</span> (46 municipios oficiales), <span class="mono">Cat_Comunidades_Limpio</span> (239 polígonos ZAP), <span class="mono">Cat_Comunidades</span> (171), <span class="mono">Cat_Tipo_Asentamiento</span> (3). Las sedes fuera de Guanajuato se registran en un catálogo independiente de ubicaciones externas.<br/>
+            • <strong>Sustantivos:</strong> <span class="mono">Cat_Disciplina</span> (82), <span class="mono">Cat_Actividades</span> (84), <span class="mono">Cat_Tipo_Actividad</span> (87), <span class="mono">Cat_Recintos</span> (27), <span class="mono">Cat_Tipo_Espacio</span> (7), <span class="mono">Cat_Enfoque</span> (2), <span class="mono">Cat_Formato</span> (3), <span class="mono">Cat_Costo</span> (2), <span class="mono">Cat_Agentes_Culturales</span> (28), <span class="mono">Cat_Indicadores</span> (9).<br/>
+            • <strong>Demográficos:</strong> <span class="mono">Cat_Grupo_Etario</span> (7), <span class="mono">Cat_Genero</span> (5), <span class="mono">Cat_Grupo_Prioritario</span> (9).
+          </td>
+          <td>
+            <div class="schema-box-title">Entidad Padre: Registro_Actividades (72 Atributos)</div>
+            • <strong>Llave Primaria (PK):</strong> <span class="mono">ID_Actividad</span> (<span class="mono">ACT00001..ACT00573</span>)<br/>
+            • <strong>Llave Foránea (FK):</strong> <span class="mono">ID_Alineacion</span> &rarr; <span class="mono">Cat_Alineacion.ID_Alineacion</span>; <span class="mono">Clave_Proceso</span> se obtiene del registro rector.<br/>
+            • <strong>Trazabilidad y Sello de Auditoría:</strong> <span class="mono">Folio</span> (<span class="mono">SC-YYMMDD-HHMMSS</span>), <span class="mono">Fecha_Captura</span>, <span class="mono">Usuario_Registra</span> (<span class="mono">@guanajuato.gob.mx</span>), <span class="mono">Estado_Actividad</span>.<br/>
+            • <strong>Herencia Estratégica Automática (15 columnas por Dereference):</strong> Subsecretaría, Dirección General, Meta Anual, Promesa Nuevo Comienzo, Eje PG, Objetivo PG, Estrategia PG, Acciones PG, Eje Transversal PEC, Línea PEC, Estrategia PEC, Acciones PEC, Metas PEC.<br/>
+            • <strong>Atributos Sustantivos:</strong> <span class="mono">Enfoque_Actividad</span>, <span class="mono">Nombre_Actividad</span>, <span class="mono">Descripcion_Breve</span>, <span class="mono">Temporalidad</span>, <span class="mono">Fecha_Inicio</span>, <span class="mono">Fecha_Fin</span>, <span class="mono">Total_Sesiones</span> (1,797 sesiones), <span class="mono">Disciplina</span>, <span class="mono">Subdisciplina</span>, <span class="mono">Tipo_Actividad</span>, <span class="mono">Formato</span>, <span class="mono">Nombre_Espacio</span>.<br/>
+            • <strong>Finanzas y Agentes:</strong> <span class="mono">Costo</span>, <span class="mono">Monto_Ingreso</span>, <span class="mono">Monto_Total_Contratado</span>, <span class="mono">Cantidad_Agentes</span>.
+          </td>
+          <td>
+            <div class="schema-box-title">Hija 1: Registro_Territorio (563 Filas • 16 Cols)</div>
+            • <strong>PK:</strong> <span class="mono">ID_Territorio</span> | <strong>FK:</strong> <span class="mono">ID_Actividad</span><br/>
+            • <span class="mono">Municipio</span>, <span class="mono">Tipo_Asentamiento</span>, <span class="mono">Nombre_Comunidad_Final</span><br/>
+            • <span class="mono">ZAP_Nuevo_Comienzo</span> (<span class="mono">Si/No</span>), <span class="mono">ZAP_SSyP</span> (<span class="mono">Si/No</span>)<br/>
+            • <span class="mono">Cantidad_Participacion</span> + <span class="mono">Cantidad_Acceso</span> = <span class="mono">Cantidad</span><br/>
+            • <em>Volumen: 349,183 | 0 registros huérfanos.</em><br/><br/>
+            <div class="schema-box-title">Hija 2: Registro_Poblacion (1,033 Filas • 8 Cols)</div>
+            • <strong>PK:</strong> <span class="mono">ID_Poblacion</span> | <strong>FK:</strong> <span class="mono">ID_Actividad</span><br/>
+            • <span class="mono">Grupo_Etario</span>, <span class="mono">Genero</span>, <span class="mono">Grupo_Prioritario</span><br/>
+            • <span class="mono">Cantidad_Participacion</span> + <span class="mono">Cantidad_Acceso</span> = <span class="mono">Cantidad_Poblacion</span><br/>
+            • <em>Volumen: 304,626 | 0 registros huérfanos.</em><br/><br/>
+            <div class="schema-box-title">Hija 3: Registro_Evidencia (289 Filas • 5 Cols)</div>
+            • <strong>PK:</strong> <span class="mono">ID_Evidencia</span> | <strong>FK:</strong> <span class="mono">ID_Actividad</span><br/>
+            • <span class="mono">Archivo_Evidencia</span> (Ruta Drive), <span class="mono">Tipo_Evidencia</span>, <span class="mono">Descripcion</span><br/>
+            • <em>289 expedientes | 0 registros huérfanos.</em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:20%;">Entidad Relacional</th>
+          <th style="width:14%;">Rol en Modelo 3FN</th>
+          <th style="width:14%;">Llave Primaria (PK)</th>
+          <th style="width:14%;">Llave Foránea (FK)</th>
+          <th style="width:9%;" class="num">Atributos</th>
+          <th style="width:9%;" class="num">Filas</th>
+          <th style="width:20%;">Dictamen de Integridad Referencial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mono">Registro_Actividades</span></td>
+          <td>Entidad Padre Maestra</td>
+          <td><span class="mono">ID_Actividad</span></td>
+          <td><span class="mono">Clave_Proceso</span></td>
+          <td class="num"><strong>72</strong></td>
+          <td class="num"><strong>573</strong></td>
+          <td><strong>100.0% Íntegra</strong> (Folios únicos <span class="mono">ACT00001..ACT00573</span>)</td>
+        </tr>
+        <tr>
+          <td><span class="mono">Registro_Territorio</span></td>
+          <td>Entidad Hija (<span class="mono">1:N</span>)</td>
+          <td><span class="mono">ID_Territorio</span></td>
+          <td><span class="mono">ID_Actividad</span></td>
+          <td class="num"><strong>16</strong></td>
+          <td class="num"><strong>563</strong></td>
+          <td><strong>100.0% Íntegra</strong> (0 huérfanos • 349,183 alcance)</td>
+        </tr>
+        <tr>
+          <td><span class="mono">Registro_Poblacion</span></td>
+          <td>Entidad Hija (<span class="mono">1:N</span>)</td>
+          <td><span class="mono">ID_Poblacion</span></td>
+          <td><span class="mono">ID_Actividad</span></td>
+          <td class="num"><strong>8</strong></td>
+          <td class="num"><strong>1,033</strong></td>
+          <td><strong>100.0% Íntegra</strong> (0 huérfanos • 304,626 personas)</td>
+        </tr>
+        <tr>
+          <td><span class="mono">Registro_Evidencia</span></td>
+          <td>Entidad Hija (<span class="mono">1:N</span>)</td>
+          <td><span class="mono">ID_Evidencia</span></td>
+          <td><span class="mono">ID_Actividad</span></td>
+          <td class="num"><strong>5</strong></td>
+          <td class="num"><strong>289</strong></td>
+          <td><strong>100.0% Íntegra</strong> (0 huérfanos • Vínculos a Google Drive)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- SECCIÓN 3: CRITERIOS DE CLASIFICACIÓN Y DICCIONARIO DE VARIABLES -->
+    <h2 class="section-heading">2. Criterios de Clasificación Institucional y Diccionario de Variables Clave</h2>
+    <p>
+      El modelo incorpora cuatro criterios rectores de clasificación programática y estadística que permiten evaluar con precisión el cumplimiento de las <strong>99 metas anuales</strong> y los <strong>34 procesos estratégicos</strong> sin incurrir en sumatorias heterogéneas ni distorsiones metodológicas:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Criterio de Clasificación</th>
+          <th style="width:24%;">Variables Físicas del Modelo</th>
+          <th style="width:54%;">Regla de Clasificación y Tratamiento en el Motor Analítico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Unidades de Medida de Metas (<span class="mono">ACTIVIDADES</span>, <span class="mono">PERSONAS</span>, <span class="mono">METROS</span>)</strong></td>
+          <td><span class="mono">Cat_Alineacion.Unidad_Medida</span><br/><span class="mono">Cat_Alineacion.Meta_Anual</span></td>
+          <td>Clasifica las <strong>99 metas institucionales</strong> en tres dominios matemáticos mutuamente excluyentes mediante la función <span class="mono">getUnitCategory()</span>:<br/>• <strong><span class="mono">ACTIVIDADES</span>:</strong> Metas expresadas en eventos, acciones, talleres, exposiciones o producciones (<strong>6,535 actividades programadas</strong> en el ejercicio), evaluadas por conteo de folios únicos (<span class="mono">COUNT(ID_Actividad)</span>).<br/>• <strong><span class="mono">PERSONAS</span>:</strong> Metas expresadas en asistentes, alumnos o beneficiarios, evaluadas mediante la sumatoria de alcance (<span class="mono">SUM(Cantidad)</span>).<br/>• <strong><span class="mono">METROS</span>:</strong> Metas de conservación e infraestructura patrimonial medidas en metros cuadrados intervenidos.</td>
+        </tr>
+        <tr>
+          <td><strong>2. Modalidad de Alcance: Acceso vs. Participación Activa</strong></td>
+          <td><span class="mono">Cantidad_Participacion</span><br/><span class="mono">Cantidad_Acceso</span><br/><span class="mono">Cantidad</span> / <span class="mono">Cantidad_Poblacion</span></td>
+          <td>Separa desde el registro primario el grado de involucramiento ciudadano:<br/>• <strong>Acceso Cultural (<span class="mono">Cantidad_Acceso</span> = 344,037; 98.52%):</strong> Público espectador o visitante en conciertos, funciones escénicas, exposiciones museísticas, ferias del libro y zonas arqueológicas.<br/>• <strong>Participación Activa (<span class="mono">Cantidad_Participacion</span> = 5,146; 1.48%):</strong> Personas inscritas en procesos formativos, talleres continuos, diplomados (CEARG), laboratorios creativos y agrupaciones comunitarias.</td>
+        </tr>
+        <tr>
+          <td><strong>3. Vocación Sustantiva: Enfoque Cultural vs. Artístico</strong></td>
+          <td><span class="mono">Enfoque_Actividad</span><br/><span class="mono">Disciplina</span> / <span class="mono">Subdisciplina</span></td>
+          <td>Clasifica toda acción registrada bajo dos vertientes complementarias del catálogo <span class="mono">Cat_Enfoque</span>:<br/>• <strong>Enfoque Cultural:</strong> Acciones de desarrollo cultural comunitario, salvaguardia del patrimonio, memoria histórica, fomento a la lectura y reconstrucción del tejido social.<br/>• <strong>Enfoque Artístico:</strong> Procesos de creación, producción escénica, perfeccionamiento técnico y exhibición de bellas artes.</td>
+        </tr>
+        <tr>
+          <td><strong>4. Criterio Geoespacial y Marcaje de Polígonos ZAP</strong></td>
+          <td><span class="mono">Municipio</span>, <span class="mono">Tipo_Asentamiento</span>,<br/><span class="mono">ZAP_Nuevo_Comienzo</span>,<br/><span class="mono">ZAP_SSyP</span></td>
+          <td>Vincula cada sede con el catálogo de los <strong>46 municipios oficiales del Estado de Guanajuato</strong> (<span class="mono">GTO_COORDS</span>) distinguiéndolos de sedes de circulación nacional foránea (<span class="mono">isMunicipioGTO</span>), clasifica el ámbito (<span class="mono">Urbano</span>, <span class="mono">Periurbano</span>, <span class="mono">Rural</span>) y asigna automáticamente el marcaje booleano (<span class="mono">Si</span> / <span class="mono">No</span>) cuando la localidad pertenece a una <strong>Zona de Atención Prioritaria Nuevo Comienzo</strong> o de la <strong>Secretaría de Seguridad y Paz (SSyP)</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- SECCIÓN 4: GOBERNANZA DE LOS 18 CATÁLOGOS MAESTROS -->
+    <h2 class="section-heading">3. Gobernanza y Diccionario de los 18 Catálogos Maestros Homologados</h2>
+    <p>
+      La totalidad de las listas desplegables del sistema se encuentra gobernada por <strong>18 Catálogos Maestros Cerrados</strong> alojados en <span class="mono">DB_Sistema_Cultura_GTO_V1</span>, cuya administración y actualización corresponde exclusivamente a la Dirección de Planeación:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:4%;" class="center">N°</th>
+          <th style="width:21%;">Nombre del Catálogo</th>
+          <th style="width:8%;" class="num">Registros</th>
+          <th style="width:29%;">Llave Primaria y Atributos del Catálogo</th>
+          <th style="width:38%;">Función de Gobernanza y Relación en el Sistema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"><strong>01</strong></td>
+          <td><span class="mono">Cat_Alineacion</span></td>
+          <td class="num"><strong>99</strong></td>
+          <td><span class="mono">ID_Alineacion</span> (PK), <span class="mono">Clave_Proceso</span>, <span class="mono">Area</span>, <span class="mono">Direccion</span>, <span class="mono">Meta</span>, <span class="mono">Nombre_Meta</span>, <span class="mono">Unidad_Medida</span>, <span class="mono">Meta_Anual</span>, <span class="mono">Promesa_NC</span>, <span class="mono">Eje_PG</span>.. <span class="mono">Metas_PEC</span></td>
+          <td>Catálogo rector que articula las <strong>99 metas anuales</strong> y los <strong>34 procesos presupuestales</strong> con el Programa de Gobierno 2024–2030 y el Programa Estatal de Cultura (PEC).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>02</strong></td>
+          <td><span class="mono">Cat_Disciplina</span></td>
+          <td class="num"><strong>82</strong></td>
+          <td><span class="mono">ID_Disciplina</span> (PK), <span class="mono">Disciplina</span>, <span class="mono">Subdisciplina</span>, <span class="mono">Tipo_Actividad</span>, <span class="mono">Proceso_Institucional</span></td>
+          <td>Gobierna la cascada jerárquica entre disciplina artística, subdisciplina y formato operativo en <span class="mono">Registro_Actividades</span>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>03</strong></td>
+          <td><span class="mono">Cat_Actividades</span></td>
+          <td class="num"><strong>84</strong></td>
+          <td><span class="mono">ID_Actividad</span> (PK), <span class="mono">Actividad</span>, <span class="mono">Tipo_Actividad</span>, <span class="mono">Tipo_Proceso_Formacion</span>.. <span class="mono">Tipo_Vinculacion</span></td>
+          <td>Parametriza las reglas de activación condicional para procesos formativos, apoyos a agentes, circulación y convenios.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>04</strong></td>
+          <td><span class="mono">Cat_Tipo_Actividad</span></td>
+          <td class="num"><strong>87</strong></td>
+          <td><span class="mono">Tipo_Actividad</span> (PK)</td>
+          <td>Catálogo controlado de 87 formatos de acción cultural (<em>Taller, Concierto, Exposición, Función, Diplomado, Festival</em>, etc.).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>05</strong></td>
+          <td><span class="mono">Cat_Recintos</span></td>
+          <td class="num"><strong>27</strong></td>
+          <td><span class="mono">ID_Recinto</span> (PK), <span class="mono">Nombre_Recinto</span>, <span class="mono">Tipo_Espacio</span></td>
+          <td>Padrón oficial estandarizado de los 27 museos, teatros, zonas arqueológicas, bibliotecas y centros culturales del Estado.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>06</strong></td>
+          <td><span class="mono">Cat_Tipo_Espacio</span></td>
+          <td class="num"><strong>7</strong></td>
+          <td><span class="mono">Tipo_Espacio</span> (PK)</td>
+          <td>Clasifica la adscripción del espacio físico (<em>A Cargo de la Secretaría, Espacio Público, Centro Nuevo Comienzo</em>, etc.).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>07</strong></td>
+          <td><span class="mono">Cat_Agentes_Culturales</span></td>
+          <td class="num"><strong>28</strong></td>
+          <td><span class="mono">ID_Agente</span> (PK), <span class="mono">Categoria_Principal</span>, <span class="mono">Tipo_Agente</span></td>
+          <td>Clasifica el padrón de artistas, creadores, talleristas, gestores y colectivos contratados o beneficiados.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>08</strong></td>
+          <td><span class="mono">Cat_Indicadores</span></td>
+          <td class="num"><strong>9</strong></td>
+          <td><span class="mono">ID_Indicador</span> (PK), <span class="mono">Clave_Indicador</span>, <span class="mono">Nombre_Indicador</span>, <span class="mono">Unidad_Medida</span>, <span class="mono">Activo</span>, <span class="mono">Instrumento</span></td>
+          <td>Catálogo normativo de indicadores estratégicos y de gestión vinculados al seguimiento institucional.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>09</strong></td>
+          <td><span class="mono">Cat_Enfoque</span></td>
+          <td class="num"><strong>2</strong></td>
+          <td><span class="mono">ID_Enfoque</span> (PK), <span class="mono">Enfoque_Actividad</span></td>
+          <td>Clasificación sustantiva superior: <span class="mono">Artística</span> y <span class="mono">Cultural</span>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>10</strong></td>
+          <td><span class="mono">Cat_Formato</span></td>
+          <td class="num"><strong>3</strong></td>
+          <td><span class="mono">Formato</span> (PK)</td>
+          <td>Modalidad de realización: <span class="mono">Presencial</span>, <span class="mono">Virtual</span> e <span class="mono">Híbrido</span>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>11</strong></td>
+          <td><span class="mono">Cat_Costo</span></td>
+          <td class="num"><strong>2</strong></td>
+          <td><span class="mono">Costo</span> (PK)</td>
+          <td>Condición de acceso ciudadano: <span class="mono">Sin costo</span> (gratuidad) vs. <span class="mono">Con cuota de recuperación</span>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>12</strong></td>
+          <td><span class="mono">Cat_Grupo_Etario</span></td>
+          <td class="num"><strong>7</strong></td>
+          <td><span class="mono">Grupo_Etario</span> (PK)</td>
+          <td>Cortes etarios por ciclo de vida desde <em>Primera Infancia (0 a 5 años)</em> hasta <em>Adultos Mayores (60+)</em> y categoría controlada <em>Dato global</em>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>13</strong></td>
+          <td><span class="mono">Cat_Genero</span></td>
+          <td class="num"><strong>5</strong></td>
+          <td><span class="mono">Genero</span> (PK)</td>
+          <td>Categorías: <em>Mujer, Hombre, No binario, Dato global, No se cuenta con el dato</em>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>14</strong></td>
+          <td><span class="mono">Cat_Grupo_Prioritario</span></td>
+          <td class="num"><strong>9</strong></td>
+          <td><span class="mono">Grupo_Prioritario</span> (PK)</td>
+          <td>Población de atención prioritaria (<em>NNA, Personas con Discapacidad, Pueblos Indígenas, Adultos Mayores, Ninguno</em>, etc.).</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>15</strong></td>
+          <td><span class="mono">Cat_Tipo_Asentamiento</span></td>
+          <td class="num"><strong>3</strong></td>
+          <td><span class="mono">Tipo_Asentamiento</span> (PK)</td>
+          <td>Tipología territorial de la localidad intervenida: <span class="mono">Urbano</span>, <span class="mono">Periurbano</span> y <span class="mono">Rural</span>.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>16</strong></td>
+          <td><span class="mono">Cat_Municipio</span></td>
+          <td class="num"><strong>46</strong></td>
+          <td><span class="mono">Municipio</span> (PK)</td>
+          <td>Los <strong>46 municipios constitucionales del Estado de Guanajuato</strong>, integrados en <span class="mono">GTO_COORDS</span>. Las sedes fuera del estado se administran en un catálogo independiente de ubicaciones externas.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>17</strong></td>
+          <td><span class="mono">Cat_Comunidades</span></td>
+          <td class="num"><strong>171</strong></td>
+          <td><span class="mono">ID_Comunidad</span> (PK), <span class="mono">Municipio</span>, <span class="mono">Comunidad</span>, <span class="mono">Zap_Nuevo_Comienzo</span>, <span class="mono">ZAP_SSyP</span></td>
+          <td>Catálogo base de localidades y colonias con referencia de polígono prioritario.</td>
+        </tr>
+        <tr>
+          <td class="center"><strong>18</strong></td>
+          <td><span class="mono">Cat_Comunidades_Limpio</span></td>
+          <td class="num"><strong>239</strong></td>
+          <td><span class="mono">ID_Comunidad</span> (PK), <span class="mono">Municipio</span>, <span class="mono">Comunidad</span>, <span class="mono">Zap_Nuevo_Comienzo</span>, <span class="mono">ZAP_NC_SI/NO</span>, <span class="mono">ZAP_SSyP</span></td>
+          <td>Catálogo normalizado con banderas booleanas (<span class="mono">Si</span> / <span class="mono">No</span>) para georreferenciación automática de polígonos ZAP.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- SECCIÓN 5: DECÁLOGO DE REGLAS BÁSICAS DE NEGOCIO PARA INTEGRACIÓN Y ACTUALIZACIÓN -->
+    <h2 class="section-heading">4. Decálogo de Reglas Básicas de Negocio para la Integración y Actualización</h2>
+    <p>
+      En cumplimiento de la parte final del numeral 2 de la propuesta técnica, se define el <strong>Decálogo Técnico Operativo de Reglas de Negocio (<span class="mono">RN-01</span> a <span class="mono">RN-10</span>)</strong> que rige la captura, validación, integración y actualización del Sistema de Información Cultural:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:8%;" class="center">Código</th>
+          <th style="width:24%;">Regla de Negocio Institucional</th>
+          <th style="width:68%;">Especificación Normativa y Mecanismo Técnico de Aplicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"><span class="mono">RN-01</span></td>
+          <td><strong>Cuadre Obligatorio (<span class="mono">Territorio == Demografía</span>)</strong></td>
+          <td>Para todo folio <span class="mono">ID_Actividad</span>, la sumatoria de <span class="mono">Registro_Territorio.Cantidad</span> debe ser idéntica a la sumatoria de <span class="mono">Registro_Poblacion.Cantidad_Poblacion</span>. Cualquier variación (<span class="mono">&Delta; &ne; 0</span>, como los -44,557 registros detectados en la auditoría inicial) es aislada automáticamente en el <strong>Módulo de Conciliación Operativa (Vista 6)</strong> para su corrección antes del corte mensual.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-02</span></td>
+          <td><strong>Uso Controlado de "Dato Global" en Eventos Masivos</strong></td>
+          <td>Cuando un evento masivo no disponga de desglose demográfico, el enlace registra el total como <span class="mono">"Dato global"</span>, lo marca expresamente como información demográfica no disponible y adjunta la evidencia de aforo. Su uso o corrección requiere validación del titular del área dueña del dato y deja bitácora de usuario, fecha y motivo; no se inventan distribuciones.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-03</span></td>
+          <td><strong>Integridad Referencial Estricta (<span class="mono">100% IsPartOf</span>)</strong></td>
+          <td>Ningún registro hijo en <span class="mono">Registro_Territorio</span>, <span class="mono">Registro_Poblacion</span> o <span class="mono">Registro_Evidencia</span> puede crearse ni subsistir sin una llave foránea <span class="mono">ID_Actividad</span> válida en <span class="mono">Registro_Actividades</span>. La eliminación o anulación de una ficha padre propaga su estado en cascada, garantizando cero registros huérfanos.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-04</span></td>
+          <td><strong>Herencia Estratégica Automática por <span class="mono">Clave_Proceso</span></strong></td>
+          <td>El usuario operativo selecciona únicamente su Proceso y Meta Anual desde <span class="mono">Cat_Alineacion</span>; las <strong>15 columnas de alineación estratégica</strong> (Subsecretaría, Dirección General, Unidad de Medida, Meta Anual, Promesa Nuevo Comienzo, Ejes y Líneas PG/PEC) se asignan por referencia (<span class="mono">Dereference</span>) con bloqueo total de edición manual.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-05</span></td>
+          <td><strong>Prohibición Absoluta de Texto Libre en Catálogos</strong></td>
+          <td>Queda prohibida la captura libre en atributos de municipio, comunidad ZAP, recinto, disciplina, subdisciplina, tipo de actividad, género y grupo etario. Toda entrada se valida mediante reglas <span class="mono">Valid_If</span> conectadas a los <strong>18 Catálogos Maestros</strong>, erradicando variantes ortográficas.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-06</span></td>
+          <td><strong>Separación Estricta entre Acceso y Participación Activa</strong></td>
+          <td>En cada fila territorial y demográfica se capturan por separado <span class="mono">Cantidad_Participacion</span> (procesos formativos y comunitarios continuos) y <span class="mono">Cantidad_Acceso</span> (público espectador o visitante), calculando mediante fórmula protegida el total (<span class="mono">Cantidad = Cantidad_Participacion + Cantidad_Acceso</span>).</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-07</span></td>
+          <td><strong>Separación entre Sesiones y Personas Únicas</strong></td>
+          <td>El número de sesiones o funciones realizadas se registra exclusivamente en el atributo <span class="mono">Total_Sesiones</span> de la tabla padre <span class="mono">Registro_Actividades</span>, mientras que en <span class="mono">Registro_Territorio</span> y <span class="mono">Registro_Poblacion</span> se reporta el padrón real de personas atendidas, evitando multiplicar un mismo alumno por sus asistencias del mes.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-08</span></td>
+          <td><strong>Trazabilidad Documental Obligatoria en Google Drive</strong></td>
+          <td>Toda actividad ejecutada debe vincular al menos un expediente probatorio en <span class="mono">Registro_Evidencia</span> (fotografía, lista de asistencia en PDF o carpeta ZIP) alojado en la ruta institucional <span class="mono">Registro_Evidencia_Files_</span> de Google Drive. Las actividades sin soporte son señaladas automáticamente en la Vista 5 del Tablero.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-09</span></td>
+          <td><strong>Sincronización Diferida Homologada para Zonas Offline</strong></td>
+          <td>Los Centros de Atención a Visitantes (CAV) y zonas arqueológicas sin conectividad capturan en la <strong>Plantilla Maestra Offline Protegida</strong> (que replica exactamente la estructura de llaves y listas de los 18 catálogos) para su ingesta semanal sin recaptura manual.</td>
+        </tr>
+        <tr>
+          <td class="center"><span class="mono">RN-10</span></td>
+          <td><strong>Sello de Auditoría e Inmutabilidad de Corte Mensual</strong></td>
+          <td>Todo registro genera automáticamente su <span class="mono">Folio</span> temporal, <span class="mono">Fecha_Captura</span> y correo institucional <span class="mono">Usuario_Registra</span>. Una vez conciliado el mes (días 1 al 5 del mes siguiente) y emitida la Presentación Ejecutiva oficial (<span class="mono">.pptx</span>), el corte mensual queda cerrado para garantizar estabilidad estadística.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 6. BLOQUE DE FIRMA DE ENTREGA-RECEPCIÓN CON ESPACIO EN BLANCO PARA FIRMA AUTÓGRAFA -->
+    <table class="signature-table">
+      <thead>
+        <tr>
+          <th>Elaboró y Entrega (Prestador de Servicios Profesionales)</th>
+          <th>Recibe para Revisión y Validación (Dependencia Destinataria)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="sig-blank-space"></div>
+            <div class="sig-line">
+              <div class="sig-name">Luis Angel Durán Alvarez</div>
+              <div class="sig-role">
+                Persona Física | Consultoría <strong>PULSO Q</strong><br/>
+                <strong>RFC:</strong> <span class="mono">DUAL921018QI3</span> • <strong>No. Proveedor (Finanzas GTO):</strong> <span class="mono">504898</span> (Estatus R-2026)
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="sig-blank-space"></div>
+            <div class="sig-line">
+              <div class="sig-name">Lic. Marcela Chagoya</div>
+              <div class="sig-role">
+                <strong>Directora de Planeación</strong><br/>
+                Secretaría de Cultura del Estado de Guanajuato<br/>
+                Fecha: 19 de octubre de 2026
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer class="doc-footer">
+      <div><strong>Secretaría de Cultura del Estado de Guanajuato</strong> • Dirección de Planeación</div>
+      <div><strong>Entregable 2:</strong> Modelo de Información Institucional Diseñado • Proveedor: Luis Angel Durán Alvarez (RFC: DUAL921018QI3 | No. Proveedor: 504898)</div>
+    </footer>
+
+  </div>
+</body>
+</html>
