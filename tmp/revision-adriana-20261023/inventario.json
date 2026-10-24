@@ -1,0 +1,6126 @@
+{
+  "Captura Plataforma Gestión de Metas Cultura .xlsx": {
+    "sha256": "e2787be05aa357a6e25f5687f03400401c13737f9cde0de24e30afd9d77bbb5c",
+    "sheets": {
+      "PB3563": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE:E071.C01 : Cultura en igualdad, promovida."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "INDICADOR",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Frecuencia de la actividad ",
+              "H": "Enfoque de la actividad ",
+              "I": "Características de la actividad ",
+              "J": "Agentes con contrato ",
+              "K": "No. De Agentes con contrato",
+              "L": "Alineación/ Promesas Nuevo Comienzo ",
+              "M": "Acción del Programa de Gobierno ",
+              "N": "Eje transversal del Programa Estatal de Cultura ",
+              "O": "Acción Program Estatal de Cultura",
+              "P": "Clasificación de los Agentes apoyados o participantes ",
+              "Q": "¿Se entregó algún apoyo? ",
+              "R": "Tipo de apoyo ",
+              "S": "¿Hubo vinculación con otros actores?",
+              "T": "Especifique tipo de convenio o colaboración  (SOLO ENCASO DE QUE EXISTA VINCULACIÓN CON OTROS ACTORES)",
+              "U": "Población beneficiaria (Indicar nivel de desagregación)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3563",
+              "C": "Coordinación y vinculación de redes de mediación cultural municipal",
+              "D": "Apoyos especiales a organismos culturales municipales\n",
+              "E": 94,
+              "F": "Apoyos otorgados",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "L": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "M": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "N/A",
+              "Q": "Sí",
+              "R": "Económico",
+              "S": "SI",
+              "T": "Gestión de recursos económicos",
+              "U": "Ninguno (Población general)",
+              "V": "¿Se considera las CC como agentes con contrato?",
+              "W": "Grupo etario"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 6,
+            "values": {
+              "D": "Actividades colaborativas de la red de identidad cultura y memoria",
+              "E": 495,
+              "F": "Acciones realizadas",
+              "G": "Mensual",
+              "H": "Artística",
+              "I": "Presencial",
+              "J": "No",
+              "L": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "M": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Mediación",
+              "Q": "Sí",
+              "R": "Económico",
+              "S": "SI",
+              "T": "Gestión de recursos económicos",
+              "U": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 7,
+            "values": {
+              "D": "Visitas escolares a zonas arqueológicas y recintos culturales del estado para impulsar aprendizajes significativos en alumnos de educación básica",
+              "E": 30,
+              "F": "Visitas realizadas",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "No",
+              "L": "Arraigo y empoderamiento cultural de comunidades",
+              "M": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "N/A",
+              "Q": "Sí",
+              "R": "Económico",
+              "S": "SI",
+              "T": "Gestión de recursos económicos",
+              "U": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 8,
+            "values": {
+              "D": "Actividades de promoción y animación lectora para público en general",
+              "E": 4800,
+              "F": "Actividades realizadas",
+              "G": "Mensual",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "Si",
+              "L": "Leer para crecer",
+              "M": "4.4.2 Fomentar el hábito lector",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "N/A",
+              "Q": "NO ",
+              "S": "SI",
+              "U": "Ninguno (Población general)",
+              "V": "¿las bibliotecas como vinculación con otros actores?"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 9,
+            "values": {
+              "D": "Encuentros y capacitaciones del personal bibliotecario incorporado a la red estatal de bibliotecas públicas del estado de Guanajuato",
+              "E": 15,
+              "F": "Encuentros y capacitaciones realizadas",
+              "G": "Mensual",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "Si",
+              "L": "Leer para crecer",
+              "M": "4.4.2 Fomentar el hábito lector",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Formación",
+              "Q": "Sí",
+              "R": "Económico",
+              "S": "SI",
+              "U": "Ninguno (Población general)",
+              "V": "¿las bibliotecas como vinculación con otros actores?"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 10,
+            "values": {
+              "E": "Beneficiarios"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 12,
+            "values": {
+              "B": "Promesas Nvo Comienzo ",
+              "M": "Acción Program de gobierno "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 13,
+            "values": {
+              "B": "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso",
+              "M": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "Q": "Población Beneficiaria "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 14,
+            "values": {
+              "B": "Arraigo y empoderamiento cultural de comunidades",
+              "M": "2.1.3.2 Coordinar la incorporación progresiva de la accesibilidad universal",
+              "Q": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 15,
+            "values": {
+              "B": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "M": "2.1.5 Inclusión población migrante",
+              "Q": "Género (Hombre, Mujer, No binario)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 16,
+            "values": {
+              "B": "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales",
+              "M": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "Q": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "B": "Apoyos para artistas populares",
+              "M": "2.2.1 Participación social comunitaria",
+              "Q": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "B": "Leer para crecer",
+              "M": "2.4.2 Seguridad alimentaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "B": "Programas extraescolares de lectura y escritura, con: A. Formación de bibliotecarios y escritores locales mediante bibliotecas itinerantes. B. Concursos de creación literaria como cuentacuentos y oratoria en todos los niveles educativos",
+              "M": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 20,
+            "values": {
+              "B": "Promover visitas de autores locales, regionales y nacionales a las escuelas",
+              "M": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "B": "Actividades artísticas y culturales en zonas de alta marginación",
+              "M": "2.4.3.4 Actividades culturales en colonias y comunidades rurales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 22,
+            "values": {
+              "B": "Mayor inversión en conservación del patrimonio artístico y cultural",
+              "M": "4.4.1 Competencias y habilidades"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "B": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "M": "4.4.2 Fomentar el hábito lector"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 24,
+            "values": {
+              "B": "Casas de cultura itinerantes: unidades móviles para acercar talleres de expresiones artísticas a zonas marginadas",
+              "M": "5.4 Fortalecer presencia turística"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "B": "Creación de la Secretaría de Cultura, con una visión social de la política cultural",
+              "M": "5.5 Detonar economía naranja"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 26,
+            "values": {
+              "B": "Educación: Arte, cultura, activación física y deporte de calidad en todas las escuelas"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 27,
+            "values": {
+              "B": "Juventudes: Apropiación de espacios públicos: revitalizar espacios subutilizados para actividades comunitarias y culturales, con jóvenes en su diseño y gestión"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 28,
+            "values": {
+              "B": "Guanajuato Digital: Promoción de la oferta cultural y turística con uso de tecnología"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 29,
+            "values": {
+              "B": "Seguridad y Paz: Rescate y recuperación de espacios públicos en municipios y zonas con alta incidencia delictiva"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "B": "Acción del Programa Estatal de Cultura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "B": "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 33,
+            "values": {
+              "B": "Realizar mesas de co-creación de programas culturales con enfoque en grupos prioritarios y atención a zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 34,
+            "values": {
+              "B": "Fortalecer las capacidades de autoridades locales y estatales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 35,
+            "values": {
+              "B": "Diseñar e impartir talleres de formación en derechos culturales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 36,
+            "values": {
+              "B": "Impulsar los proyectos culturales itinerantes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 37,
+            "values": {
+              "B": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 38,
+            "values": {
+              "B": "Implementar un sistema estatal de buenas prácticas para replicar experiencias exitosas en todas las subregiones."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "B": "Desarrollar investigación de la oferta cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "B": "Crear un sistema de inteligencia cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "B": "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "B": "Promover alianzas para implementar programas de certificación regionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "B": "Diseñar programas de formación y profesionalización modulares y flexibles."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 44,
+            "values": {
+              "B": "Generar laboratorios de experimentación e intercambio de saberes, técnicas y experiencias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 45,
+            "values": {
+              "B": "Crear un micrositio ligado a la página web de la Secretaría de Cultura con información de la oferta disponible."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 46,
+            "values": {
+              "B": "Establecer convenios con la Secretaría de Educación, universidades y el sector privado para ampliar la oferta de formación en modalidad presencial y virtual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 47,
+            "values": {
+              "B": "Colaborar a través de la red global de mentores para fortalecer proyectos de industrias creativas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 48,
+            "values": {
+              "B": "Implementar el Fondo Estatal para la Cultura y las Artes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 49,
+            "values": {
+              "B": "Incrementar la contratación de talento artístico local en actividades comunitarias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 50,
+            "values": {
+              "B": "Diseñar e implementar un sistema de reconocimiento público a las comunidades culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 51,
+            "values": {
+              "B": "Realizar clínicas de acompañamiento técnico para fortalecer los proyectos postulados a convocatorias públicas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 52,
+            "values": {
+              "B": "Crear una cartografía cultural que incluya un directorio de agentes culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 53,
+            "values": {
+              "B": "Celebrar esquemas de colaboración para facilitar la presencia de artistas locales en ferias, festivales y redes culturales nacionales e internacionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 54,
+            "values": {
+              "B": "Crear rutas culturales con enfoque en diversidad lingüística, étnica y generacional."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 55,
+            "values": {
+              "B": "Crear un programa estatal de residencias colaborativas entre artistas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "B": "Reconocer a portadoras y portadores de saberes como patrimonio vivo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "B": "Vinculación interinstitucional para incorporar elementos culturales en el desarrollo de productos turísticos identitarios en los destinos, así como en la promoción y difusión de la actividad turística."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "B": "Realizar procesos de memoria colaborativa con comunidades para reconocer su legado cultural en el patrimonio estatal."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "B": "Ampliar las actividades de documentación, divulgación y difusión de patrimonio material e inmaterial."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 60,
+            "values": {
+              "B": "Fortalecer la oferta cultura en espacios independientes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 61,
+            "values": {
+              "B": "Promover mecanismos de gobernanza para el aprovechamiento de espacios patrimoniales del estado de Guanajuato (ferias, festivales, encuentros comunitarios, etc.)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 62,
+            "values": {
+              "B": "Impulsar proyectos de autogestión comunitaria para el cuidado, mantenimiento y aprovechamiento de espacios culturales y zonas patrimoniales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 63,
+            "values": {
+              "B": "Diseñar programas de formación y gestión cultural de base comunitaria."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 64,
+            "values": {
+              "B": "Realizar vinculaciones para promover una red de mentorías para la consolidación de modelos de negocio cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 65,
+            "values": {
+              "B": "Realizar convenios y colaboraciones para facilitar el acceso a microcréditos y financiamiento mixto (público–privado) para iniciativas culturales con impacto económico y social."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 66,
+            "values": {
+              "B": "Vincular nuevas unidades de negocios culturales con redes estatales y nacionales de economía"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 67,
+            "values": {
+              "B": "Crear un Fondo Estatal de Innovación y Escalamiento Cultural, que apoye a emprendimientos con potencial de crecimiento mediante inversión semilla, incubación y aceleración de proyectos culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 68,
+            "values": {
+              "B": "Identificar oportunidades de negocios y llevar a cabo conexiones industriales (encuentros de negocios)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 69,
+            "values": {
+              "B": "Realizar talleres regionales de sensibilización y capacitación sobre derechos de autor dirigidos a creadores locales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 70,
+            "values": {
+              "B": "Implementar jornadas itinerantes de registro de obras artísticas en colaboración con INDAUTOR, especialmente en municipios con menor acceso a servicios administrativos"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 71,
+            "values": {
+              "B": "Crear un micrositio estatal con recursos, tutoriales y asesoría virtual sobre derechos de autor y propiedad intelectual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 72,
+            "values": {
+              "B": "Impulsar campañas de sensibilización sobre el valor económico y social del trabajo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 73,
+            "values": {
+              "B": "Realizar mesas de trabajo sobre el mejoramiento de las condiciones laborales del sector."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 74,
+            "values": {
+              "B": "Generar un censo y registro actualizado de agentes culturales para orientar políticas públicas de empleo y profesionalización"
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": [
+          "A1:F1",
+          "A2:F2",
+          "D9:D10",
+          "E10:F10",
+          "C5:C10",
+          "B5:B10",
+          "A5:A10"
+        ]
+      },
+      "PB3562": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE:  E071.C02 : Programas de formación y profesionalización de agentes culturales, ofertados."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Frecuencia de la actividad ",
+              "H": "Enfoque de la actividad ",
+              "I": "Características de la actividad ",
+              "J": "Agentes con contrato ",
+              "K": "No. De Agentes con contrato",
+              "L": "Alineación/ Promesas Nuevo Comienzo ",
+              "M": "Acción del Programa de Gobierno ",
+              "N": "Eje transversal del Programa Estatal de Cultura ",
+              "O": "Acción Program Estatal de Cultura",
+              "P": "Clasificación de los Agentes apoyados o participantes ",
+              "Q": "¿Se entregó algún apoyo? ",
+              "R": "Tipo de apoyo ",
+              "S": "¿Hubo vinculación con otros actores?",
+              "T": "Especifique tipo de convenio o colaboración  (SOLO ENCASO DE QUE EXISTA VINCULACIÓN CON OTROS ACTORES)",
+              "U": "Población beneficiaria (Indicar nivel de desagregación)",
+              "V": "Observaciones ",
+              "W": "Dudas captura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3562",
+              "C": "Integración de nodos creativos y formativos",
+              "D": "Cursos y talleres para promotores culturales e instructores de casas de la cultura",
+              "E": 138,
+              "F": "Cursos y talleres realizados",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Híbrido",
+              "J": "No",
+              "K": "NA",
+              "L": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "M": "4.4.1 Competencias y habilidades",
+              "N": "Ninguno ",
+              "O": "Fortalecer las capacidades de autoridades locales y estatales",
+              "P": "Formación",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Acompañamiento técnico",
+              "U": "Ninguno (Población general)",
+              "V": "Febrero a noviembre",
+              "W": "Rango de fechas plataforma (Todas las actividades) Eje transversar del programa de cultura (Todas las actividades) Descripción de la oferta (Todas las actividades) Población Acceso (Todas las actividades)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 6,
+            "values": {
+              "D": "Talleres de educación artística y cultural no formales impartidos en casas de cultura y salones culturales",
+              "E": 3800,
+              "F": "Talleres realizados",
+              "G": "Otras ",
+              "H": "Artística",
+              "I": "Presencial",
+              "J": "No",
+              "K": "N/A",
+              "L": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "M": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural",
+              "N": "Ninguno ",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Formación",
+              "Q": "Sí",
+              "R": "Económico",
+              "S": "SI",
+              "T": "Gestión de recursos económicos",
+              "U": "Ninguno (Población general)",
+              "V": "Febrero a noviembre/ Grupo etario para 2027",
+              "W": "Subdisciplina/ Agentes apoyados o participantes/Monto total del contrato  "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 7,
+            "values": {
+              "D": "Cursos y talleres de formación lectora para bibliotecarios, niños narradores y escritores, padres de familia y promotores de lectura",
+              "E": 90,
+              "F": "Cursos y talleres realizados",
+              "G": "Mensual",
+              "H": "Artística",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 1,
+              "L": "Leer para crecer",
+              "M": "4.4.2 Fomentar el hábito lector",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Formación",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Acompañamiento técnico",
+              "U": "Ninguno (Población general)",
+              "W": " Agentes apoyados o participantes/ Tipo de convenioo colaboración "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 8,
+            "values": {
+              "D": "Talleres de seguimiento a la implementación del programa curricular para la asignatura de artes en la educación básica",
+              "E": 20,
+              "F": "Talleres realizados",
+              "G": "Anual",
+              "H": "Artística",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 1,
+              "L": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "M": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Formación",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Acompañamiento técnico",
+              "U": "Género (Hombre, Mujer, No binario)",
+              "V": "Octubre/ Faltan beneficiarios ",
+              "W": "Subdisciplina/Agentes apoyados o participantes/ Tipo de convenioo colaboración"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 9,
+            "values": {
+              "D": "Capacitaciones en danza folclórica dirigido a directores, maestros y ejecutantes del estado de Guanajuato",
+              "E": 2,
+              "F": "Capacitaciones realizadas",
+              "G": "Otras ",
+              "H": "Artística",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 6,
+              "L": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "M": "4.4.1 Competencias y habilidades",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Formación",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Acompañamiento técnico",
+              "U": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) ",
+              "V": "Y por género "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 10,
+            "values": {
+              "A": "Promesas Nvo Comienzo ",
+              "K": "¿Agentes culturales con apoyo de logística? Duda Marce"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 11,
+            "values": {
+              "A": "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso",
+              "O": "Acción Program de gobierno ",
+              "S": "Población Beneficiaria "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 12,
+            "values": {
+              "A": "Arraigo y empoderamiento cultural de comunidades",
+              "O": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "S": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 13,
+            "values": {
+              "A": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "O": "2.1.3.2 Coordinar la incorporación progresiva de la accesibilidad universal",
+              "S": "Género (Hombre, Mujer, No binario)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 14,
+            "values": {
+              "A": "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales",
+              "O": "2.1.5 Inclusión población migrante",
+              "S": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 15,
+            "values": {
+              "A": "Apoyos para artistas populares",
+              "O": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "S": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 16,
+            "values": {
+              "A": "Leer para crecer",
+              "O": "2.2.1 Participación social comunitaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "A": "Programas extraescolares de lectura y escritura, con: A. Formación de bibliotecarios y escritores locales mediante bibliotecas itinerantes. B. Concursos de creación literaria como cuentacuentos y oratoria en todos los niveles educativos",
+              "O": "2.4.2 Seguridad alimentaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "A": "Promover visitas de autores locales, regionales y nacionales a las escuelas",
+              "O": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "A": "Actividades artísticas y culturales en zonas de alta marginación",
+              "O": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 20,
+            "values": {
+              "A": "Mayor inversión en conservación del patrimonio artístico y cultural",
+              "O": "2.4.3.4 Actividades culturales en colonias y comunidades rurales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "A": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "O": "4.4.1 Competencias y habilidades"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 22,
+            "values": {
+              "A": "Casas de cultura itinerantes: unidades móviles para acercar talleres de expresiones artísticas a zonas marginadas",
+              "O": "4.4.2 Fomentar el hábito lector"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "A": "Creación de la Secretaría de Cultura, con una visión social de la política cultural",
+              "O": "5.4 Fortalecer presencia turística"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 24,
+            "values": {
+              "A": "Educación: Arte, cultura, activación física y deporte de calidad en todas las escuelas",
+              "O": "5.5 Detonar economía naranja"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "A": "Juventudes: Apropiación de espacios públicos: revitalizar espacios subutilizados para actividades comunitarias y culturales, con jóvenes en su diseño y gestión"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 26,
+            "values": {
+              "A": "Guanajuato Digital: Promoción de la oferta cultural y turística con uso de tecnología"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 27,
+            "values": {
+              "A": "Seguridad y Paz: Rescate y recuperación de espacios públicos en municipios y zonas con alta incidencia delictiva"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 29,
+            "values": {
+              "A": "Acción del Programa Estatal de Cultura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 30,
+            "values": {
+              "A": "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "A": "Realizar mesas de co-creación de programas culturales con enfoque en grupos prioritarios y atención a zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "A": "Fortalecer las capacidades de autoridades locales y estatales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 33,
+            "values": {
+              "A": "Diseñar e impartir talleres de formación en derechos culturales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 34,
+            "values": {
+              "A": "Impulsar los proyectos culturales itinerantes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 35,
+            "values": {
+              "A": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 36,
+            "values": {
+              "A": "Implementar un sistema estatal de buenas prácticas para replicar experiencias exitosas en todas las subregiones."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 37,
+            "values": {
+              "A": "Desarrollar investigación de la oferta cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 38,
+            "values": {
+              "A": "Crear un sistema de inteligencia cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "A": "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "A": "Promover alianzas para implementar programas de certificación regionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "A": "Diseñar programas de formación y profesionalización modulares y flexibles."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "A": "Generar laboratorios de experimentación e intercambio de saberes, técnicas y experiencias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "A": "Crear un micrositio ligado a la página web de la Secretaría de Cultura con información de la oferta disponible."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 44,
+            "values": {
+              "A": "Establecer convenios con la Secretaría de Educación, universidades y el sector privado para ampliar la oferta de formación en modalidad presencial y virtual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 45,
+            "values": {
+              "A": "Colaborar a través de la red global de mentores para fortalecer proyectos de industrias creativas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 46,
+            "values": {
+              "A": "Implementar el Fondo Estatal para la Cultura y las Artes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 47,
+            "values": {
+              "A": "Incrementar la contratación de talento artístico local en actividades comunitarias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 48,
+            "values": {
+              "A": "Diseñar e implementar un sistema de reconocimiento público a las comunidades culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 49,
+            "values": {
+              "A": "Realizar clínicas de acompañamiento técnico para fortalecer los proyectos postulados a convocatorias públicas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 50,
+            "values": {
+              "A": "Crear una cartografía cultural que incluya un directorio de agentes culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 51,
+            "values": {
+              "A": "Celebrar esquemas de colaboración para facilitar la presencia de artistas locales en ferias, festivales y redes culturales nacionales e internacionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 52,
+            "values": {
+              "A": "Crear rutas culturales con enfoque en diversidad lingüística, étnica y generacional."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 53,
+            "values": {
+              "A": "Crear un programa estatal de residencias colaborativas entre artistas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 54,
+            "values": {
+              "A": "Reconocer a portadoras y portadores de saberes como patrimonio vivo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 55,
+            "values": {
+              "A": "Vinculación interinstitucional para incorporar elementos culturales en el desarrollo de productos turísticos identitarios en los destinos, así como en la promoción y difusión de la actividad turística."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "A": "Realizar procesos de memoria colaborativa con comunidades para reconocer su legado cultural en el patrimonio estatal."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "A": "Ampliar las actividades de documentación, divulgación y difusión de patrimonio material e inmaterial."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "A": "Fortalecer la oferta cultura en espacios independientes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "A": "Promover mecanismos de gobernanza para el aprovechamiento de espacios patrimoniales del estado de Guanajuato (ferias, festivales, encuentros comunitarios, etc.)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 60,
+            "values": {
+              "A": "Impulsar proyectos de autogestión comunitaria para el cuidado, mantenimiento y aprovechamiento de espacios culturales y zonas patrimoniales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 61,
+            "values": {
+              "A": "Diseñar programas de formación y gestión cultural de base comunitaria."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 62,
+            "values": {
+              "A": "Realizar vinculaciones para promover una red de mentorías para la consolidación de modelos de negocio cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 63,
+            "values": {
+              "A": "Realizar convenios y colaboraciones para facilitar el acceso a microcréditos y financiamiento mixto (público–privado) para iniciativas culturales con impacto económico y social."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 64,
+            "values": {
+              "A": "Vincular nuevas unidades de negocios culturales con redes estatales y nacionales de economía"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 65,
+            "values": {
+              "A": "Crear un Fondo Estatal de Innovación y Escalamiento Cultural, que apoye a emprendimientos con potencial de crecimiento mediante inversión semilla, incubación y aceleración de proyectos culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 66,
+            "values": {
+              "A": "Identificar oportunidades de negocios y llevar a cabo conexiones industriales (encuentros de negocios)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 67,
+            "values": {
+              "A": "Realizar talleres regionales de sensibilización y capacitación sobre derechos de autor dirigidos a creadores locales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 68,
+            "values": {
+              "A": "Implementar jornadas itinerantes de registro de obras artísticas en colaboración con INDAUTOR, especialmente en municipios con menor acceso a servicios administrativos"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 69,
+            "values": {
+              "A": "Crear un micrositio estatal con recursos, tutoriales y asesoría virtual sobre derechos de autor y propiedad intelectual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 70,
+            "values": {
+              "A": "Impulsar campañas de sensibilización sobre el valor económico y social del trabajo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 71,
+            "values": {
+              "A": "Realizar mesas de trabajo sobre el mejoramiento de las condiciones laborales del sector."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 72,
+            "values": {
+              "A": "Generar un censo y registro actualizado de agentes culturales para orientar políticas públicas de empleo y profesionalización"
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": [
+          "A1:F1",
+          "A2:F2",
+          "A5:A9",
+          "B5:B9",
+          "C5:C9"
+        ]
+      },
+      "PB3564": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE: E071.C01 : Cultura en igualdad, promovida."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Frecuencia de la actividad ",
+              "H": "Enfoque de la actividad ",
+              "I": "Características de la actividad ",
+              "J": "Agentes con contrato ",
+              "K": "No. De Agentes con contrato",
+              "L": "Alineación/ Promesas Nuevo Comienzo ",
+              "M": "Acción del Programa de Gobierno ",
+              "N": "Eje transversal del Programa Estatal de Cultura ",
+              "O": "Acción Program Estatal de Cultura",
+              "P": "Clasificación de los Agentes apoyados o participantes ",
+              "Q": "¿Se entregó algún apoyo? ",
+              "R": "Tipo de apoyo ",
+              "S": "¿Hubo vinculación con otros actores?",
+              "T": "Especifique tipo de convenio o colaboración  (SOLO ENCASO DE QUE EXISTA VINCULACIÓN CON OTROS ACTORES)",
+              "U": "Población beneficiaria (Indicar nivel de desagregación)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3564",
+              "C": "Fortalecimiento de procesos participativos municipales",
+              "D": "Proyectos culturales interinstitucionales y comunitarios dirigidos a públicos vulnerables",
+              "E": 3,
+              "F": "Proyectos realizados",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 6,
+              "L": "Arraigo y empoderamiento cultural de comunidades",
+              "M": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "N/A",
+              "Q": "NO ",
+              "S": "SI",
+              "U": "Ninguno (Población general)",
+              "V": "¿Centros gerontológicos, Organizaciones de migrantes, Secretaría de derechos humanos, como vinculación con oros actores?"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 6,
+            "values": {
+              "D": "Proyectos socioculturales en barrios, colonias, periferias y/o comunidades",
+              "E": 1,
+              "F": "Proyectos realizados",
+              "G": "Anual",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 1,
+              "L": "Arraigo y empoderamiento cultural de comunidades",
+              "M": "2.2.1 Participación social comunitaria",
+              "O": "Impulsar los proyectos culturales itinerantes.",
+              "P": "N/A",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Acompañamiento técnico",
+              "U": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 7,
+            "values": {
+              "D": "Encuentros de lectores y círculos de lectura para usuarios de la red estatal de bibliotecas públicas",
+              "E": 95,
+              "F": "Encuentros y círculos realizados",
+              "G": "Mensual",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "No",
+              "L": "Leer para crecer",
+              "M": "4.4.2 Fomentar el hábito lector",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "N/A",
+              "Q": "NO ",
+              "S": "SI",
+              "U": "Ninguno (Población general)",
+              "V": "¿las bibliotecas como vinculación con otros actores?"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 8,
+            "values": {
+              "D": "*Préstamos ( consultar) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 9,
+            "values": {
+              "A": "Promesas Nvo Comienzo ",
+              "L": "Acción Program de gobierno "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 10,
+            "values": {
+              "A": "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso",
+              "L": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "P": "Población Beneficiaria "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 11,
+            "values": {
+              "A": "Arraigo y empoderamiento cultural de comunidades",
+              "L": "2.1.3.2 Coordinar la incorporación progresiva de la accesibilidad universal",
+              "P": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 12,
+            "values": {
+              "A": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "L": "2.1.5 Inclusión población migrante",
+              "P": "Género (Hombre, Mujer, No binario)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 13,
+            "values": {
+              "A": "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales",
+              "L": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "P": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 14,
+            "values": {
+              "A": "Apoyos para artistas populares",
+              "L": "2.2.1 Participación social comunitaria",
+              "P": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 15,
+            "values": {
+              "A": "Leer para crecer",
+              "L": "2.4.2 Seguridad alimentaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 16,
+            "values": {
+              "A": "Programas extraescolares de lectura y escritura, con: A. Formación de bibliotecarios y escritores locales mediante bibliotecas itinerantes. B. Concursos de creación literaria como cuentacuentos y oratoria en todos los niveles educativos",
+              "L": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "A": "Promover visitas de autores locales, regionales y nacionales a las escuelas",
+              "L": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "A": "Actividades artísticas y culturales en zonas de alta marginación",
+              "L": "2.4.3.4 Actividades culturales en colonias y comunidades rurales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "A": "Mayor inversión en conservación del patrimonio artístico y cultural",
+              "L": "4.4.1 Competencias y habilidades"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 20,
+            "values": {
+              "A": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "L": "4.4.2 Fomentar el hábito lector"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "A": "Casas de cultura itinerantes: unidades móviles para acercar talleres de expresiones artísticas a zonas marginadas",
+              "L": "5.4 Fortalecer presencia turística"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 22,
+            "values": {
+              "A": "Creación de la Secretaría de Cultura, con una visión social de la política cultural",
+              "L": "5.5 Detonar economía naranja"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "A": "Educación: Arte, cultura, activación física y deporte de calidad en todas las escuelas"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 24,
+            "values": {
+              "A": "Juventudes: Apropiación de espacios públicos: revitalizar espacios subutilizados para actividades comunitarias y culturales, con jóvenes en su diseño y gestión"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "A": "Guanajuato Digital: Promoción de la oferta cultural y turística con uso de tecnología"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 26,
+            "values": {
+              "A": "Seguridad y Paz: Rescate y recuperación de espacios públicos en municipios y zonas con alta incidencia delictiva"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 28,
+            "values": {
+              "A": "Acción del Programa Estatal de Cultura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 29,
+            "values": {
+              "A": "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 30,
+            "values": {
+              "A": "Realizar mesas de co-creación de programas culturales con enfoque en grupos prioritarios y atención a zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "A": "Fortalecer las capacidades de autoridades locales y estatales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "A": "Diseñar e impartir talleres de formación en derechos culturales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 33,
+            "values": {
+              "A": "Impulsar los proyectos culturales itinerantes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 34,
+            "values": {
+              "A": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 35,
+            "values": {
+              "A": "Implementar un sistema estatal de buenas prácticas para replicar experiencias exitosas en todas las subregiones."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 36,
+            "values": {
+              "A": "Desarrollar investigación de la oferta cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 37,
+            "values": {
+              "A": "Crear un sistema de inteligencia cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 38,
+            "values": {
+              "A": "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "A": "Promover alianzas para implementar programas de certificación regionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "A": "Diseñar programas de formación y profesionalización modulares y flexibles."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "A": "Generar laboratorios de experimentación e intercambio de saberes, técnicas y experiencias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "A": "Crear un micrositio ligado a la página web de la Secretaría de Cultura con información de la oferta disponible."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "A": "Establecer convenios con la Secretaría de Educación, universidades y el sector privado para ampliar la oferta de formación en modalidad presencial y virtual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 44,
+            "values": {
+              "A": "Colaborar a través de la red global de mentores para fortalecer proyectos de industrias creativas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 45,
+            "values": {
+              "A": "Implementar el Fondo Estatal para la Cultura y las Artes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 46,
+            "values": {
+              "A": "Incrementar la contratación de talento artístico local en actividades comunitarias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 47,
+            "values": {
+              "A": "Diseñar e implementar un sistema de reconocimiento público a las comunidades culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 48,
+            "values": {
+              "A": "Realizar clínicas de acompañamiento técnico para fortalecer los proyectos postulados a convocatorias públicas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 49,
+            "values": {
+              "A": "Crear una cartografía cultural que incluya un directorio de agentes culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 50,
+            "values": {
+              "A": "Celebrar esquemas de colaboración para facilitar la presencia de artistas locales en ferias, festivales y redes culturales nacionales e internacionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 51,
+            "values": {
+              "A": "Crear rutas culturales con enfoque en diversidad lingüística, étnica y generacional."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 52,
+            "values": {
+              "A": "Crear un programa estatal de residencias colaborativas entre artistas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 53,
+            "values": {
+              "A": "Reconocer a portadoras y portadores de saberes como patrimonio vivo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 54,
+            "values": {
+              "A": "Vinculación interinstitucional para incorporar elementos culturales en el desarrollo de productos turísticos identitarios en los destinos, así como en la promoción y difusión de la actividad turística."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 55,
+            "values": {
+              "A": "Realizar procesos de memoria colaborativa con comunidades para reconocer su legado cultural en el patrimonio estatal."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "A": "Ampliar las actividades de documentación, divulgación y difusión de patrimonio material e inmaterial."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "A": "Fortalecer la oferta cultura en espacios independientes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "A": "Promover mecanismos de gobernanza para el aprovechamiento de espacios patrimoniales del estado de Guanajuato (ferias, festivales, encuentros comunitarios, etc.)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "A": "Impulsar proyectos de autogestión comunitaria para el cuidado, mantenimiento y aprovechamiento de espacios culturales y zonas patrimoniales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 60,
+            "values": {
+              "A": "Diseñar programas de formación y gestión cultural de base comunitaria."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 61,
+            "values": {
+              "A": "Realizar vinculaciones para promover una red de mentorías para la consolidación de modelos de negocio cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 62,
+            "values": {
+              "A": "Realizar convenios y colaboraciones para facilitar el acceso a microcréditos y financiamiento mixto (público–privado) para iniciativas culturales con impacto económico y social."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 63,
+            "values": {
+              "A": "Vincular nuevas unidades de negocios culturales con redes estatales y nacionales de economía"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 64,
+            "values": {
+              "A": "Crear un Fondo Estatal de Innovación y Escalamiento Cultural, que apoye a emprendimientos con potencial de crecimiento mediante inversión semilla, incubación y aceleración de proyectos culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 65,
+            "values": {
+              "A": "Identificar oportunidades de negocios y llevar a cabo conexiones industriales (encuentros de negocios)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 66,
+            "values": {
+              "A": "Realizar talleres regionales de sensibilización y capacitación sobre derechos de autor dirigidos a creadores locales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 67,
+            "values": {
+              "A": "Implementar jornadas itinerantes de registro de obras artísticas en colaboración con INDAUTOR, especialmente en municipios con menor acceso a servicios administrativos"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 68,
+            "values": {
+              "A": "Crear un micrositio estatal con recursos, tutoriales y asesoría virtual sobre derechos de autor y propiedad intelectual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 69,
+            "values": {
+              "A": "Impulsar campañas de sensibilización sobre el valor económico y social del trabajo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 70,
+            "values": {
+              "A": "Realizar mesas de trabajo sobre el mejoramiento de las condiciones laborales del sector."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 71,
+            "values": {
+              "A": "Generar un censo y registro actualizado de agentes culturales para orientar políticas públicas de empleo y profesionalización"
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": [
+          "B5:B7",
+          "A5:A7",
+          "C5:C7",
+          "A1:F1",
+          "A2:F2"
+        ]
+      },
+      "QC4098": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 3,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Frecuencia de la actividad ",
+              "H": "Enfoque de la actividad ",
+              "I": "Características de la actividad ",
+              "J": "Agentes con contrato ",
+              "K": "No. De Agentes con contrato",
+              "L": "Alineación/ Promesas Nuevo Comienzo ",
+              "M": "Acción del Programa de Gobierno ",
+              "N": "Eje transversal del Programa Estatal de Cultura ",
+              "O": "Acción Program Estatal de Cultura",
+              "P": "Clasificación de los Agentes apoyados o participantes ",
+              "Q": "¿Se entregó algún apoyo? ",
+              "R": "Tipo de apoyo ",
+              "S": "¿Hubo vinculación con otros actores?",
+              "T": "Especifique tipo de convenio o colaboración  (SOLO ENCASO DE QUE EXISTA VINCULACIÓN CON OTROS ACTORES)",
+              "U": "Población beneficiaria (Indicar nivel de desagregación)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "PROYECTO ",
+              "B": "Q3688",
+              "C": "Programa de Acciones en Materia Cultural dirigido a Personas Privadas de la Libertad en los CERESOS del Estado de Guanajuato",
+              "D": "Talleres de escritura creativa dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 9,
+              "F": "Talleres realizados",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "J": "Si",
+              "K": 7,
+              "M": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "O": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+              "P": "Creación",
+              "Q": "NO ",
+              "S": "SI",
+              "T": "Gestión de recursos económicos",
+              "U": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)",
+              "V": "¿Promesa nuevo comienzo?",
+              "W": "Género"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "D": "Talleres de música dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 9,
+              "F": "Talleres realizados",
+              "G": "Otras ",
+              "H": "Cultural ",
+              "I": "Presencial",
+              "K": 3
+            },
+            "formulas": {}
+          },
+          {
+            "row": 6,
+            "values": {
+              "D": "Talleres de pintura, cartornería y talla en madera dirigidos a personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 19,
+              "F": "Talleres realizados",
+              "K": 10
+            },
+            "formulas": {}
+          },
+          {
+            "row": 7,
+            "values": {
+              "D": "Talleres de danza folclórica y ritmos latinos dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 12,
+              "F": "Talleres realizados",
+              "K": 8
+            },
+            "formulas": {}
+          },
+          {
+            "row": 8,
+            "values": {
+              "D": "Talleres de teatro dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 12,
+              "F": "Talleres realizados",
+              "K": 7
+            },
+            "formulas": {}
+          },
+          {
+            "row": 10,
+            "values": {
+              "A": "Promesas Nvo Comienzo ",
+              "L": "Acción Program de gobierno "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 11,
+            "values": {
+              "A": "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso",
+              "L": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "P": "Población Beneficiaria "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 12,
+            "values": {
+              "A": "Arraigo y empoderamiento cultural de comunidades",
+              "L": "2.1.3.2 Coordinar la incorporación progresiva de la accesibilidad universal",
+              "P": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 13,
+            "values": {
+              "A": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "L": "2.1.5 Inclusión población migrante",
+              "P": "Género (Hombre, Mujer, No binario)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 14,
+            "values": {
+              "A": "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales",
+              "L": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "P": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 15,
+            "values": {
+              "A": "Apoyos para artistas populares",
+              "L": "2.2.1 Participación social comunitaria",
+              "P": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 16,
+            "values": {
+              "A": "Leer para crecer",
+              "L": "2.4.2 Seguridad alimentaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "A": "Programas extraescolares de lectura y escritura, con: A. Formación de bibliotecarios y escritores locales mediante bibliotecas itinerantes. B. Concursos de creación literaria como cuentacuentos y oratoria en todos los niveles educativos",
+              "L": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "A": "Promover visitas de autores locales, regionales y nacionales a las escuelas",
+              "L": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "A": "Actividades artísticas y culturales en zonas de alta marginación",
+              "L": "2.4.3.4 Actividades culturales en colonias y comunidades rurales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 20,
+            "values": {
+              "A": "Mayor inversión en conservación del patrimonio artístico y cultural",
+              "L": "4.4.1 Competencias y habilidades"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "A": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "L": "4.4.2 Fomentar el hábito lector"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 22,
+            "values": {
+              "A": "Casas de cultura itinerantes: unidades móviles para acercar talleres de expresiones artísticas a zonas marginadas",
+              "L": "5.4 Fortalecer presencia turística"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "A": "Creación de la Secretaría de Cultura, con una visión social de la política cultural",
+              "L": "5.5 Detonar economía naranja"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 24,
+            "values": {
+              "A": "Educación: Arte, cultura, activación física y deporte de calidad en todas las escuelas"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "A": "Juventudes: Apropiación de espacios públicos: revitalizar espacios subutilizados para actividades comunitarias y culturales, con jóvenes en su diseño y gestión"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 26,
+            "values": {
+              "A": "Guanajuato Digital: Promoción de la oferta cultural y turística con uso de tecnología"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 27,
+            "values": {
+              "A": "Seguridad y Paz: Rescate y recuperación de espacios públicos en municipios y zonas con alta incidencia delictiva"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 29,
+            "values": {
+              "A": "Acción del Programa Estatal de Cultura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 30,
+            "values": {
+              "A": "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "A": "Realizar mesas de co-creación de programas culturales con enfoque en grupos prioritarios y atención a zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "A": "Fortalecer las capacidades de autoridades locales y estatales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 33,
+            "values": {
+              "A": "Diseñar e impartir talleres de formación en derechos culturales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 34,
+            "values": {
+              "A": "Impulsar los proyectos culturales itinerantes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 35,
+            "values": {
+              "A": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 36,
+            "values": {
+              "A": "Implementar un sistema estatal de buenas prácticas para replicar experiencias exitosas en todas las subregiones."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 37,
+            "values": {
+              "A": "Desarrollar investigación de la oferta cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 38,
+            "values": {
+              "A": "Crear un sistema de inteligencia cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "A": "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "A": "Promover alianzas para implementar programas de certificación regionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "A": "Diseñar programas de formación y profesionalización modulares y flexibles."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "A": "Generar laboratorios de experimentación e intercambio de saberes, técnicas y experiencias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "A": "Crear un micrositio ligado a la página web de la Secretaría de Cultura con información de la oferta disponible."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 44,
+            "values": {
+              "A": "Establecer convenios con la Secretaría de Educación, universidades y el sector privado para ampliar la oferta de formación en modalidad presencial y virtual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 45,
+            "values": {
+              "A": "Colaborar a través de la red global de mentores para fortalecer proyectos de industrias creativas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 46,
+            "values": {
+              "A": "Implementar el Fondo Estatal para la Cultura y las Artes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 47,
+            "values": {
+              "A": "Incrementar la contratación de talento artístico local en actividades comunitarias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 48,
+            "values": {
+              "A": "Diseñar e implementar un sistema de reconocimiento público a las comunidades culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 49,
+            "values": {
+              "A": "Realizar clínicas de acompañamiento técnico para fortalecer los proyectos postulados a convocatorias públicas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 50,
+            "values": {
+              "A": "Crear una cartografía cultural que incluya un directorio de agentes culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 51,
+            "values": {
+              "A": "Celebrar esquemas de colaboración para facilitar la presencia de artistas locales en ferias, festivales y redes culturales nacionales e internacionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 52,
+            "values": {
+              "A": "Crear rutas culturales con enfoque en diversidad lingüística, étnica y generacional."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 53,
+            "values": {
+              "A": "Crear un programa estatal de residencias colaborativas entre artistas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 54,
+            "values": {
+              "A": "Reconocer a portadoras y portadores de saberes como patrimonio vivo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 55,
+            "values": {
+              "A": "Vinculación interinstitucional para incorporar elementos culturales en el desarrollo de productos turísticos identitarios en los destinos, así como en la promoción y difusión de la actividad turística."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "A": "Realizar procesos de memoria colaborativa con comunidades para reconocer su legado cultural en el patrimonio estatal."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "A": "Ampliar las actividades de documentación, divulgación y difusión de patrimonio material e inmaterial."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "A": "Fortalecer la oferta cultura en espacios independientes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "A": "Promover mecanismos de gobernanza para el aprovechamiento de espacios patrimoniales del estado de Guanajuato (ferias, festivales, encuentros comunitarios, etc.)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 60,
+            "values": {
+              "A": "Impulsar proyectos de autogestión comunitaria para el cuidado, mantenimiento y aprovechamiento de espacios culturales y zonas patrimoniales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 61,
+            "values": {
+              "A": "Diseñar programas de formación y gestión cultural de base comunitaria."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 62,
+            "values": {
+              "A": "Realizar vinculaciones para promover una red de mentorías para la consolidación de modelos de negocio cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 63,
+            "values": {
+              "A": "Realizar convenios y colaboraciones para facilitar el acceso a microcréditos y financiamiento mixto (público–privado) para iniciativas culturales con impacto económico y social."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 64,
+            "values": {
+              "A": "Vincular nuevas unidades de negocios culturales con redes estatales y nacionales de economía"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 65,
+            "values": {
+              "A": "Crear un Fondo Estatal de Innovación y Escalamiento Cultural, que apoye a emprendimientos con potencial de crecimiento mediante inversión semilla, incubación y aceleración de proyectos culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 66,
+            "values": {
+              "A": "Identificar oportunidades de negocios y llevar a cabo conexiones industriales (encuentros de negocios)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 67,
+            "values": {
+              "A": "Realizar talleres regionales de sensibilización y capacitación sobre derechos de autor dirigidos a creadores locales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 68,
+            "values": {
+              "A": "Implementar jornadas itinerantes de registro de obras artísticas en colaboración con INDAUTOR, especialmente en municipios con menor acceso a servicios administrativos"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 69,
+            "values": {
+              "A": "Crear un micrositio estatal con recursos, tutoriales y asesoría virtual sobre derechos de autor y propiedad intelectual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 70,
+            "values": {
+              "A": "Impulsar campañas de sensibilización sobre el valor económico y social del trabajo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 71,
+            "values": {
+              "A": "Realizar mesas de trabajo sobre el mejoramiento de las condiciones laborales del sector."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 72,
+            "values": {
+              "A": "Generar un censo y registro actualizado de agentes culturales para orientar políticas públicas de empleo y profesionalización"
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": [
+          "A4:A8",
+          "B4:B8",
+          "C4:C8"
+        ]
+      },
+      "ACTVS QUE NO SE REPORTAN (SED) ": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 1,
+            "values": {
+              "A": "NOMBRE",
+              "B": "ENTREGABLE",
+              "C": "META",
+              "D": "UNIDAD DE MEDIDA",
+              "E": "Frecuencia de la actividad ",
+              "F": "Enfoque de la actividad ",
+              "G": "Características de la actividad ",
+              "H": "Agentes con contrato ",
+              "I": "No. De Agentes con contrato",
+              "J": "Alineación/ Promesas Nuevo Comienzo ",
+              "K": "Acción del Programa de Gobierno ",
+              "L": "Eje transversal del Programa Estatal de Cultura ",
+              "M": "Acción Program Estatal de Cultura",
+              "N": "Clasificación de los Agentes apoyados o participantes ",
+              "O": "¿Se entregó algún apoyo? ",
+              "P": "Tipo de apoyo ",
+              "Q": "¿Hubo vinculación con otros actores?",
+              "R": "Especifique tipo de convenio o colaboración  (SOLO ENCASO DE QUE EXISTA VINCULACIÓN CON OTROS ACTORES)",
+              "S": "Población beneficiaria (Indicar nivel de desagregación)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 2,
+            "values": {
+              "A": "Taller de gráfica experimental para el Centro de Internamiento Especializado para Adolescentes de la DGRSA",
+              "B": "Taller de gráfica experimental para el Centro de Internamiento Especializado para Adolescentes de la DGRSA",
+              "C": "1 taller (15 sesiones) ",
+              "D": "Taller realizado "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "A": "Promesas Nvo Comienzo ",
+              "L": "Acción Program de gobierno "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "A": "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso",
+              "L": "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+              "P": "Población Beneficiaria "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "A": "Arraigo y empoderamiento cultural de comunidades",
+              "L": "2.1.3.2 Coordinar la incorporación progresiva de la accesibilidad universal",
+              "P": "Grupo Etario (Primera Infancia, Niñas y niños, Adolescentes, Jóvenes, Adultos, Adultos mayores) "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 20,
+            "values": {
+              "A": "Formación de formadores artísticos y culturales: Cursos y talleres de capacitación artística para docentes.  Encuentros entre formadores de casas de cultura.  Plataforma de colaboración entre instituciones culturales",
+              "L": "2.1.5 Inclusión población migrante",
+              "P": "Género (Hombre, Mujer, No binario)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "A": "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales",
+              "L": "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+              "P": "Grupo prioritario (Personas con discapacidad, Comunidades indígenas, Comunidad LGTBTIQ+, Personas migrantes, Mujeres en situación de vulnerabilidad, Jóvenes en riesgo, Población afroamericana, NNA)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 22,
+            "values": {
+              "A": "Apoyos para artistas populares",
+              "L": "2.2.1 Participación social comunitaria",
+              "P": "Ninguno (Población general)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "A": "Leer para crecer",
+              "L": "2.4.2 Seguridad alimentaria"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 24,
+            "values": {
+              "A": "Programas extraescolares de lectura y escritura, con: A. Formación de bibliotecarios y escritores locales mediante bibliotecas itinerantes. B. Concursos de creación literaria como cuentacuentos y oratoria en todos los niveles educativos",
+              "L": "2.4.3.1 Impulsar el desarrollo artístico y cultural entre infancias y juventudes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "A": "Promover visitas de autores locales, regionales y nacionales a las escuelas",
+              "L": "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 26,
+            "values": {
+              "A": "Actividades artísticas y culturales en zonas de alta marginación",
+              "L": "2.4.3.4 Actividades culturales en colonias y comunidades rurales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 27,
+            "values": {
+              "A": "Mayor inversión en conservación del patrimonio artístico y cultural",
+              "L": "4.4.1 Competencias y habilidades"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 28,
+            "values": {
+              "A": "Fortalecer la vinculación y el trabajo con casas de cultura y centros culturales municipales",
+              "L": "4.4.2 Fomentar el hábito lector"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 29,
+            "values": {
+              "A": "Casas de cultura itinerantes: unidades móviles para acercar talleres de expresiones artísticas a zonas marginadas",
+              "L": "5.4 Fortalecer presencia turística"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 30,
+            "values": {
+              "A": "Creación de la Secretaría de Cultura, con una visión social de la política cultural",
+              "L": "5.5 Detonar economía naranja"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "A": "Educación: Arte, cultura, activación física y deporte de calidad en todas las escuelas"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "A": "Juventudes: Apropiación de espacios públicos: revitalizar espacios subutilizados para actividades comunitarias y culturales, con jóvenes en su diseño y gestión"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 33,
+            "values": {
+              "A": "Guanajuato Digital: Promoción de la oferta cultural y turística con uso de tecnología"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 34,
+            "values": {
+              "A": "Seguridad y Paz: Rescate y recuperación de espacios públicos en municipios y zonas con alta incidencia delictiva"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 36,
+            "values": {
+              "A": "Acción del Programa Estatal de Cultura "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 37,
+            "values": {
+              "A": "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 38,
+            "values": {
+              "A": "Realizar mesas de co-creación de programas culturales con enfoque en grupos prioritarios y atención a zonas prioritarias"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "A": "Fortalecer las capacidades de autoridades locales y estatales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "A": "Diseñar e impartir talleres de formación en derechos culturales"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "A": "Impulsar los proyectos culturales itinerantes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "A": "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "A": "Implementar un sistema estatal de buenas prácticas para replicar experiencias exitosas en todas las subregiones."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 44,
+            "values": {
+              "A": "Desarrollar investigación de la oferta cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 45,
+            "values": {
+              "A": "Crear un sistema de inteligencia cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 46,
+            "values": {
+              "A": "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 47,
+            "values": {
+              "A": "Promover alianzas para implementar programas de certificación regionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 48,
+            "values": {
+              "A": "Diseñar programas de formación y profesionalización modulares y flexibles."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 49,
+            "values": {
+              "A": "Generar laboratorios de experimentación e intercambio de saberes, técnicas y experiencias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 50,
+            "values": {
+              "A": "Crear un micrositio ligado a la página web de la Secretaría de Cultura con información de la oferta disponible."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 51,
+            "values": {
+              "A": "Establecer convenios con la Secretaría de Educación, universidades y el sector privado para ampliar la oferta de formación en modalidad presencial y virtual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 52,
+            "values": {
+              "A": "Colaborar a través de la red global de mentores para fortalecer proyectos de industrias creativas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 53,
+            "values": {
+              "A": "Implementar el Fondo Estatal para la Cultura y las Artes."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 54,
+            "values": {
+              "A": "Incrementar la contratación de talento artístico local en actividades comunitarias."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 55,
+            "values": {
+              "A": "Diseñar e implementar un sistema de reconocimiento público a las comunidades culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "A": "Realizar clínicas de acompañamiento técnico para fortalecer los proyectos postulados a convocatorias públicas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "A": "Crear una cartografía cultural que incluya un directorio de agentes culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "A": "Celebrar esquemas de colaboración para facilitar la presencia de artistas locales en ferias, festivales y redes culturales nacionales e internacionales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "A": "Crear rutas culturales con enfoque en diversidad lingüística, étnica y generacional."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 60,
+            "values": {
+              "A": "Crear un programa estatal de residencias colaborativas entre artistas."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 61,
+            "values": {
+              "A": "Reconocer a portadoras y portadores de saberes como patrimonio vivo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 62,
+            "values": {
+              "A": "Vinculación interinstitucional para incorporar elementos culturales en el desarrollo de productos turísticos identitarios en los destinos, así como en la promoción y difusión de la actividad turística."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 63,
+            "values": {
+              "A": "Realizar procesos de memoria colaborativa con comunidades para reconocer su legado cultural en el patrimonio estatal."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 64,
+            "values": {
+              "A": "Ampliar las actividades de documentación, divulgación y difusión de patrimonio material e inmaterial."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 65,
+            "values": {
+              "A": "Fortalecer la oferta cultura en espacios independientes"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 66,
+            "values": {
+              "A": "Promover mecanismos de gobernanza para el aprovechamiento de espacios patrimoniales del estado de Guanajuato (ferias, festivales, encuentros comunitarios, etc.)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 67,
+            "values": {
+              "A": "Impulsar proyectos de autogestión comunitaria para el cuidado, mantenimiento y aprovechamiento de espacios culturales y zonas patrimoniales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 68,
+            "values": {
+              "A": "Diseñar programas de formación y gestión cultural de base comunitaria."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 69,
+            "values": {
+              "A": "Realizar vinculaciones para promover una red de mentorías para la consolidación de modelos de negocio cultural."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 70,
+            "values": {
+              "A": "Realizar convenios y colaboraciones para facilitar el acceso a microcréditos y financiamiento mixto (público–privado) para iniciativas culturales con impacto económico y social."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 71,
+            "values": {
+              "A": "Vincular nuevas unidades de negocios culturales con redes estatales y nacionales de economía"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 72,
+            "values": {
+              "A": "Crear un Fondo Estatal de Innovación y Escalamiento Cultural, que apoye a emprendimientos con potencial de crecimiento mediante inversión semilla, incubación y aceleración de proyectos culturales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 73,
+            "values": {
+              "A": "Identificar oportunidades de negocios y llevar a cabo conexiones industriales (encuentros de negocios)."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 74,
+            "values": {
+              "A": "Realizar talleres regionales de sensibilización y capacitación sobre derechos de autor dirigidos a creadores locales."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 75,
+            "values": {
+              "A": "Implementar jornadas itinerantes de registro de obras artísticas en colaboración con INDAUTOR, especialmente en municipios con menor acceso a servicios administrativos"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 76,
+            "values": {
+              "A": "Crear un micrositio estatal con recursos, tutoriales y asesoría virtual sobre derechos de autor y propiedad intelectual."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 77,
+            "values": {
+              "A": "Impulsar campañas de sensibilización sobre el valor económico y social del trabajo."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 78,
+            "values": {
+              "A": "Realizar mesas de trabajo sobre el mejoramiento de las condiciones laborales del sector."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 79,
+            "values": {
+              "A": "Generar un censo y registro actualizado de agentes culturales para orientar políticas públicas de empleo y profesionalización"
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": []
+      }
+    }
+  },
+  "Avance de metas DGVDC 2026.xlsx": {
+    "sha256": "3cb750a39151fd8bce43c52ad878d37554affcde0e558287d777af9cabcfd0c8",
+    "sheets": {
+      "PB3563": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE:E071.C01 : Cultura en igualdad, promovida."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "ENERO",
+              "H": "FEBRERO",
+              "I": "MARZO",
+              "J": "ABRIL",
+              "K": "MAYO",
+              "L": "JUNIO",
+              "M": "JULIO",
+              "N": "AGOSTO",
+              "O": "SEPT",
+              "P": "OCT",
+              "Q": "NOV",
+              "R": "DIC",
+              "S": "AVANCE TOTAL",
+              "T": "% DE CUMPLIMIENTO",
+              "U": "OBSERVACIONES"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "A": "COMPONENTE",
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": "SUM(G5:R5)",
+              "T": "S5/E5"
+            }
+          },
+          {
+            "row": 6,
+            "values": {
+              "S": 0
+            },
+            "formulas": {
+              "S": "SUM(G6:R6)"
+            }
+          },
+          {
+            "row": 7,
+            "values": {
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": "SUM(G7:R7)",
+              "T": "S7/E7"
+            }
+          },
+          {
+            "row": 8,
+            "values": {
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 9,
+            "values": {
+              "A": "COMPONENTE",
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 10,
+            "values": {
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 11,
+            "values": {
+              "A": "INDICADOR",
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 12,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3563",
+              "C": "Coordinación y vinculación de redes de mediación cultural municipal",
+              "D": "Apoyos especiales a organismos culturales municipales\n",
+              "E": 94,
+              "F": "Apoyos otorgados",
+              "G": 0,
+              "H": 0,
+              "I": 8,
+              "J": 30,
+              "K": 5,
+              "L": 0,
+              "M": 29,
+              "N": 0,
+              "O": 0,
+              "S": 72,
+              "T": 0.7659574468085106,
+              "U": "Teté (Solicitud de cambio)"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 13,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 0,
+              "I": 1544,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 1544
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 14,
+            "values": {
+              "D": "Actividades colaborativas de la red de identidad cultura y memoria",
+              "E": 495,
+              "F": "Acciones realizadas",
+              "G": 4,
+              "H": 13,
+              "I": 23,
+              "J": 11,
+              "K": 43,
+              "L": 22,
+              "M": 23,
+              "N": 11,
+              "O": 287,
+              "S": 437,
+              "T": 0.8828282828282829,
+              "U": "Teté"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 15,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 138,
+              "H": 222,
+              "I": 179,
+              "J": 195,
+              "K": 2250,
+              "L": 356,
+              "M": 281,
+              "N": 144,
+              "O": 51211,
+              "S": 54976
+            },
+            "formulas": {
+              "G": "46*3",
+              "S": null
+            }
+          },
+          {
+            "row": 16,
+            "values": {
+              "D": "Visitas escolares a zonas arqueológicas y recintos culturales del estado para impulsar aprendizajes significativos en alumnos de educación básica",
+              "E": 30,
+              "F": "Visitas realizadas",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 20,
+              "O": 0,
+              "S": 20,
+              "T": 0.6666666666666666,
+              "U": "An"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 17,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 18,
+            "values": {
+              "D": "Actividades de promoción y animación lectora para público en general",
+              "E": 4800,
+              "F": "Actividades realizadas",
+              "G": 0,
+              "H": 258,
+              "I": 350,
+              "J": 497,
+              "K": 318,
+              "L": 355,
+              "M": 376,
+              "N": 461,
+              "O": 0,
+              "S": 2615,
+              "T": 0.5447916666666667,
+              "U": "Lili (Solicitud de cambio)"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 19,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 4071,
+              "I": 4598,
+              "J": 11138,
+              "K": 2,
+              "L": 5226,
+              "M": 6094,
+              "N": 8219,
+              "O": 0,
+              "S": 39348
+            },
+            "formulas": {
+              "I": "4376+222",
+              "S": null
+            }
+          },
+          {
+            "row": 20,
+            "values": {
+              "D": "Encuentros y capacitaciones del personal bibliotecario incorporado a la red estatal de bibliotecas públicas del estado de Guanajuato",
+              "E": 15,
+              "F": "Encuentros y capacitaciones realizadas",
+              "G": 0,
+              "H": 1,
+              "I": 0,
+              "J": 1,
+              "K": 4,
+              "L": 4,
+              "M": 4,
+              "N": 4,
+              "O": 0,
+              "S": 18,
+              "T": 1.2,
+              "U": "Lili (Solicitud de cambio)"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 21,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 300,
+              "I": 0,
+              "J": 5,
+              "K": 12,
+              "L": 30,
+              "M": 26,
+              "N": 20,
+              "O": 0,
+              "S": 393
+            },
+            "formulas": {
+              "S": null
+            }
+          }
+        ],
+        "merged": [
+          "D20:D21",
+          "E21:F21",
+          "C12:C21",
+          "B12:B21",
+          "A12:A21",
+          "E19:F19",
+          "D18:D19",
+          "A1:U1",
+          "E6:F6",
+          "D5:D6",
+          "A5:A8",
+          "C5:C8",
+          "B5:B8",
+          "C11:D11",
+          "A2:U2",
+          "D7:D8",
+          "D12:D13",
+          "E17:F17",
+          "E13:F13",
+          "D14:D15",
+          "E15:F15",
+          "D16:D17",
+          "E8:F8",
+          "D9:D10",
+          "A9:A10",
+          "B9:B10",
+          "C9:C10",
+          "E10:F10"
+        ]
+      },
+      "PB3562": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE:  E071.C02 : Programas de formación y profesionalización de agentes culturales, ofertados."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "ENERO",
+              "H": "FEBRERO",
+              "I": "MARZO",
+              "J": "ABRIL",
+              "K": "MAYO",
+              "L": "JUNIO",
+              "M": "JULIO",
+              "N": "AGOSTO",
+              "O": "SEPT",
+              "P": "OCT",
+              "Q": "NOV",
+              "R": "DIC",
+              "S": "AVANCE TOTAL",
+              "T": "% DE CUMPLIMIENTO",
+              "U": "OBSERVACIONES"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "A": "COMPONENTE",
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": "SUM(G5:R5)",
+              "T": "S5/E5"
+            }
+          },
+          {
+            "row": 6,
+            "values": {
+              "S": 0
+            },
+            "formulas": {
+              "S": "SUM(G6:R6)"
+            }
+          },
+          {
+            "row": 7,
+            "values": {
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": null,
+              "T": "S7/E7"
+            }
+          },
+          {
+            "row": 8,
+            "values": {
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 9,
+            "values": {
+              "A": "INDICADOR",
+              "S": 0,
+              "T": "#DIV/0!"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 10,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3562",
+              "C": "Integración de nodos creativos y formativos",
+              "D": "Cursos y talleres para promotores culturales e instructores de casas de la cultura",
+              "E": 138,
+              "F": "Cursos y talleres realizados",
+              "G": 0,
+              "H": 8,
+              "I": 34,
+              "J": 14,
+              "K": 10,
+              "L": 2,
+              "M": 4,
+              "N": 4,
+              "O": 26,
+              "S": 102,
+              "T": 0.7391304347826086,
+              "U": "Teté"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 11,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 116,
+              "I": 377,
+              "J": 146,
+              "K": 322,
+              "L": 13,
+              "M": 74,
+              "N": 135,
+              "O": 310,
+              "S": 1493
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 12,
+            "values": {
+              "D": "Talleres de educación artística y cultural no formales impartidos en casas de cultura y salones culturales",
+              "E": 3800,
+              "F": "Talleres realizados",
+              "G": 687,
+              "H": 190,
+              "I": 767,
+              "J": 618,
+              "K": 87,
+              "L": 12,
+              "M": 347,
+              "N": 915,
+              "O": 571,
+              "S": 4194,
+              "T": 1.1036842105263158,
+              "U": "Teté "
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 13,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 16765,
+              "H": 2914,
+              "I": 16107,
+              "J": 9395,
+              "K": 2061,
+              "L": 255,
+              "M": 7458,
+              "N": 20940,
+              "O": 17206,
+              "S": 93101
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 14,
+            "values": {
+              "D": "Cursos y talleres de formación lectora para bibliotecarios, niños narradores y escritores, padres de familia y promotores de lectura",
+              "E": 90,
+              "F": "Cursos y talleres realizados",
+              "G": 0,
+              "H": 12,
+              "I": 12,
+              "J": 0,
+              "K": 5,
+              "L": 20,
+              "M": 12,
+              "N": 10,
+              "O": 0,
+              "S": 71,
+              "T": 0.7888888888888889,
+              "U": "Lili"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 15,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 406,
+              "I": 406,
+              "J": 0,
+              "K": 230,
+              "L": 1967,
+              "M": 2270,
+              "N": 2000,
+              "O": 0,
+              "S": 7279
+            },
+            "formulas": {
+              "L": "1997-30",
+              "S": null
+            }
+          },
+          {
+            "row": 16,
+            "values": {
+              "D": "Talleres de seguimiento a la implementación del programa curricular para la asignatura de artes en la educación básica",
+              "E": 20,
+              "F": "Talleres realizados",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 3,
+              "S": 3,
+              "T": 0.15,
+              "U": "An Meta anulada (solicitud de cambio)"
+            },
+            "formulas": {
+              "S": "SUM(G16:R16)",
+              "T": null
+            }
+          },
+          {
+            "row": 17,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 18,
+            "values": {
+              "D": "Capacitaciones en danza folclórica dirigido a directores, maestros y ejecutantes del estado de Guanajuato",
+              "E": 2,
+              "F": "Capacitaciones realizadas",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 1,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 1,
+              "O": 0,
+              "S": 2,
+              "T": 1,
+              "U": "An"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 19,
+            "values": {
+              "E": "Beneficiarios",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 88,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 248,
+              "O": 0,
+              "S": 336,
+              "T": "#VALUE!"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          }
+        ],
+        "merged": [
+          "A10:A19",
+          "B10:B19",
+          "C10:C19",
+          "E17:F17",
+          "E19:F19",
+          "D12:D13",
+          "E13:F13",
+          "D14:D15",
+          "E15:F15",
+          "E11:F11",
+          "D10:D11",
+          "C9:D9",
+          "A1:U1",
+          "A2:U2",
+          "D5:D6",
+          "E6:F6",
+          "A5:A8",
+          "B5:B8",
+          "C5:C8",
+          "D7:D8",
+          "E8:F8"
+        ]
+      },
+      "PB3564": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 2,
+            "values": {
+              "A": "COMPONENTE: E071.C01 : Cultura en igualdad, promovida."
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "ENERO",
+              "H": "FEBRERO",
+              "I": "MARZO",
+              "J": "ABRIL",
+              "K": "MAYO",
+              "L": "JUNIO",
+              "M": "JULIO",
+              "N": "AGOSTO",
+              "O": "SEPT",
+              "P": "OCT",
+              "Q": "NOV",
+              "R": "DIC",
+              "S": "AVANCE TOTAL",
+              "T": "% DE CUMPLIMIENTO ",
+              "U": "OBSERVACIONES"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 9,
+            "values": {
+              "A": "PROCESO",
+              "B": "PB3564",
+              "C": "Fortalecimiento de procesos participativos municipales",
+              "D": "Proyectos culturales interinstitucionales y comunitarios dirigidos a públicos vulnerables",
+              "E": 3,
+              "F": "Proyectos realizados",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 1,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 1,
+              "T": 0.3333333333333333,
+              "U": "An"
+            },
+            "formulas": {
+              "S": "SUM(G9:R9)",
+              "T": "S9/E9"
+            }
+          },
+          {
+            "row": 10,
+            "values": {
+              "E": "Beneficiarios:",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 23,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 23
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 11,
+            "values": {
+              "D": "Proyectos socioculturales en barrios, colonias, periferias y/o comunidades",
+              "E": 10,
+              "F": "Proyectos realizados",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0,
+              "T": 0,
+              "U": "Teté            (cambio en la meta de 10 a 1)"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 12,
+            "values": {
+              "E": "Beneficiarios:",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0
+            },
+            "formulas": {
+              "S": null
+            }
+          },
+          {
+            "row": 13,
+            "values": {
+              "D": "Encuentros de lectores y círculos de lectura para usuarios de la red estatal de bibliotecas públicas",
+              "E": 95,
+              "F": "Encuentros y círculos realizados",
+              "G": 0,
+              "H": 9,
+              "I": 4,
+              "J": 0,
+              "K": 5,
+              "L": 8,
+              "M": 12,
+              "N": 12,
+              "O": 0,
+              "S": 50,
+              "T": 0.5263157894736842,
+              "U": "Lili"
+            },
+            "formulas": {
+              "S": null,
+              "T": null
+            }
+          },
+          {
+            "row": 14,
+            "values": {
+              "E": "Beneficiarios:",
+              "G": 0,
+              "H": 180,
+              "I": 148,
+              "J": 0,
+              "K": 100,
+              "L": 210,
+              "M": 220,
+              "N": 180,
+              "O": 0,
+              "S": 1038
+            },
+            "formulas": {
+              "S": null
+            }
+          }
+        ],
+        "merged": [
+          "D11:D12",
+          "E14:F14",
+          "D13:D14",
+          "B9:B14",
+          "A9:A14",
+          "C9:C14",
+          "E10:F10",
+          "D9:D10",
+          "E12:F12",
+          "A1:U1",
+          "A2:U2",
+          "D5:D6",
+          "E6:F6",
+          "C5:C8",
+          "B5:B8",
+          "A5:A8",
+          "E8:F8",
+          "D7:D8"
+        ]
+      },
+      "GA2476": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 1,
+            "values": {
+              "A": "COMPONENTE: E071.C01 : M005.C82: Actividades estratégicas para el cumplimiento de los objetivos institucionales realizadas (SC) ( 06 - SF ) M005.C82: Actividades estratégicas para el cumplimiento de los objetivos institucionales realizadas (SC)"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 2,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "ENERO",
+              "H": "FEBRERO",
+              "I": "MARZO",
+              "J": "ABRIL",
+              "K": "MAYO",
+              "L": "JUNIO",
+              "M": "JULIO",
+              "N": "AGOSTO",
+              "O": "SEPT",
+              "P": "OCT",
+              "Q": "NOV",
+              "R": "DIC",
+              "S": "AVANCE TOTAL",
+              "T": "% DE CUMPLIMIENTO ",
+              "U": "OBSERVACIONES"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 3,
+            "values": {
+              "A": "Gestión ",
+              "B": "GA2476",
+              "C": "Administración de la Subsecretaría de Desarrollo Comunitario y Promoción Patrimonial",
+              "D": "Plan de trabajo para el establecimiento de directrices y mecanismos para la operación, seguimiento y evaluación de los programas y proyectos que se pretendan promover o implementar en materia de vinculación, desarrollo cultural, patrimonio cultural , formación e investigación.",
+              "E": 1,
+              "F": "Plan de trabajo realizado",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "D": "Participaciones en reuniones de consejos, comisiones y comités, asignadas por la persona titular de la Secretaría en temas relacionados con el desarrollo comunitario y promoción patrimonial.",
+              "E": 1,
+              "F": "Participaciones realizadas",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0
+            },
+            "formulas": {}
+          },
+          {
+            "row": 5,
+            "values": {
+              "D": "Documento con información y/o cooperación solicitadas por las dependencias, organismos autónomos y entidades de los gobiernos federales, estatales y municipales en materia de vinculación, desarrollo cultural, patrimonio cultural, formación e investigación.",
+              "E": 1,
+              "F": "Documento generado.",
+              "G": 0,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0
+            },
+            "formulas": {}
+          }
+        ],
+        "merged": [
+          "A1:U1",
+          "A3:A5",
+          "B3:B5",
+          "C3:C5"
+        ]
+      },
+      "QC4098": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 3,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Junio ",
+              "H": "Julio ",
+              "I": "Agosto",
+              "J": "Septiembre ",
+              "K": "Octubre ",
+              "L": "Noviembre ",
+              "M": "Diciembre ",
+              "N": "Total ",
+              "O": "% DE CUMPLIMIENTO",
+              "P": "observaciones "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "PROYECTO ",
+              "B": "Q3688",
+              "C": "Programa de Acciones en Materia Cultural dirigido a Personas Privadas de la Libertad en los CERESOS del Estado de Guanajuato",
+              "D": "Talleres de escritura creativa dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 9,
+              "F": "Talleres realizados",
+              "H": 2,
+              "I": 0,
+              "J": 5,
+              "N": 7,
+              "O": 0.7777777777777778
+            },
+            "formulas": {
+              "N": "SUM(G4:M4)",
+              "O": "N4/E4"
+            }
+          },
+          {
+            "row": 5,
+            "values": {
+              "E": "Beneficiarios",
+              "N": 0,
+              "P": "20263011000002501"
+            },
+            "formulas": {
+              "N": "SUM(G5:M5)"
+            }
+          },
+          {
+            "row": 6,
+            "values": {
+              "D": "Talleres de música dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 9,
+              "F": "Talleres realizados",
+              "H": 3,
+              "I": 0,
+              "J": 4,
+              "N": 7,
+              "O": 0.7777777777777778
+            },
+            "formulas": {
+              "N": null,
+              "O": "N6/E6"
+            }
+          },
+          {
+            "row": 7,
+            "values": {
+              "E": "Beneficiarios",
+              "N": 0,
+              "P": "20263011000002502"
+            },
+            "formulas": {
+              "N": null
+            }
+          },
+          {
+            "row": 8,
+            "values": {
+              "D": "Talleres de pintura, cartornería y talla en madera dirigidos a personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 19,
+              "F": "Talleres realizados",
+              "H": 9,
+              "I": 0,
+              "J": 6,
+              "N": 15,
+              "O": 0.7894736842105263
+            },
+            "formulas": {
+              "N": null,
+              "O": "N8/E8"
+            }
+          },
+          {
+            "row": 9,
+            "values": {
+              "E": "Beneficiarios",
+              "N": 0,
+              "P": "20263011000002503"
+            },
+            "formulas": {
+              "N": null
+            }
+          },
+          {
+            "row": 10,
+            "values": {
+              "D": "Talleres de danza folclórica y ritmos latinos dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 12,
+              "F": "Talleres realizados",
+              "H": 2,
+              "I": 0,
+              "J": 4,
+              "N": 6,
+              "O": 0.5
+            },
+            "formulas": {
+              "N": null,
+              "O": "N10/E10"
+            }
+          },
+          {
+            "row": 11,
+            "values": {
+              "E": "Beneficiarios",
+              "N": 0,
+              "P": "20263011000002504"
+            },
+            "formulas": {
+              "N": null
+            }
+          },
+          {
+            "row": 12,
+            "values": {
+              "D": "Talleres de teatro dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+              "E": 12,
+              "F": "Talleres realizados",
+              "H": 5,
+              "I": 0,
+              "J": 2,
+              "N": 7,
+              "O": 0.5833333333333334
+            },
+            "formulas": {
+              "N": null,
+              "O": "N12/E12"
+            }
+          },
+          {
+            "row": 13,
+            "values": {
+              "E": "Beneficiarios",
+              "N": 0,
+              "P": "20263011000002505"
+            },
+            "formulas": {
+              "N": null
+            }
+          },
+          {
+            "row": 15,
+            "values": {
+              "A": "AVANCES FINANCIEROS"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 17,
+            "values": {
+              "C": "Monto SED ",
+              "D": "Ponderación SED",
+              "E": "Junio ",
+              "F": "Julio ",
+              "G": "Agosto",
+              "H": "Septiembre",
+              "I": "Octubre",
+              "J": "Noviembre ",
+              "K": "Diciembre ",
+              "L": "Total ",
+              "M": 0,
+              "O": "HANA",
+              "P": 0
+            },
+            "formulas": {
+              "M": "E18+F18+J18+K18+E20+F20+J20+K20+E22+F22+J22+K22+E24+F24+J24+K24+E26+F26+J26+K26"
+            }
+          },
+          {
+            "row": 18,
+            "values": {
+              "A": "ID Entregable IGTO",
+              "F": 0,
+              "G": 51040
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "A": "20263011000002501",
+              "C": 229680,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+              "G": 0.2222222222222222,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0.2222222222222222,
+              "M": 0,
+              "N": "HANA"
+            },
+            "formulas": {
+              "E": "(E18*$D$19)/$C$19",
+              "F": "(F18*$D$19)/$C$19",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": "SUM(E19:K19)",
+              "M": "+E18+F18+J18+K18"
+            }
+          },
+          {
+            "row": 20,
+            "values": {
+              "A": "ID Entregable IGTO",
+              "F": 0,
+              "G": 62640
+            },
+            "formulas": {}
+          },
+          {
+            "row": 21,
+            "values": {
+              "A": "20263011000002502",
+              "C": 187920,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+              "G": 0.3333333333333333,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0.3333333333333333,
+              "M": 0,
+              "N": "HANA"
+            },
+            "formulas": {
+              "E": "(E20*$D$21)/$C$21",
+              "F": "(F20*$D$21)/$C$21",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": "SUM(E21:K21)",
+              "M": "+E20+F20+J20+K20"
+            }
+          },
+          {
+            "row": 22,
+            "values": {
+              "A": "ID Entregable IGTO",
+              "F": 0,
+              "G": 211120
+            },
+            "formulas": {}
+          },
+          {
+            "row": 23,
+            "values": {
+              "A": "20263011000002503",
+              "C": 516200,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+              "G": 0.40898876404494383,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0.40898876404494383,
+              "M": 0,
+              "N": "HANA"
+            },
+            "formulas": {
+              "E": "(E22*$D$23)/$C$23",
+              "F": "(F22*$D$23)/$C$23",
+              "G": "(G22*$D$23)/$C$23",
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": "SUM(E23:K23)",
+              "M": "+E22+F22+J22+K22"
+            }
+          },
+          {
+            "row": 24,
+            "values": {
+              "A": "ID Entregable IGTO",
+              "F": 0,
+              "G": 41760
+            },
+            "formulas": {}
+          },
+          {
+            "row": 25,
+            "values": {
+              "A": "20263011000002504",
+              "C": 250560,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+              "G": 0.16666666666666666,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0.16666666666666666,
+              "M": 0,
+              "N": "HANA"
+            },
+            "formulas": {
+              "E": "(E24*$D$25)/$C$25",
+              "F": "(F24*$D$25)/$C$25",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": "SUM(E25:K25)",
+              "M": "+E24+F24+J24+K24"
+            }
+          },
+          {
+            "row": 26,
+            "values": {
+              "A": "ID Entregable IGTO",
+              "F": 0,
+              "G": 127600
+            },
+            "formulas": {}
+          },
+          {
+            "row": 27,
+            "values": {
+              "A": "20263011000002505",
+              "C": 306240,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+              "G": 0.4166666666666667,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0.4166666666666667,
+              "M": 0,
+              "N": "HANA"
+            },
+            "formulas": {
+              "E": "(E26*$D$27)/$C$27",
+              "F": "(F26*$D$27)/$C$27",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": "SUM(E27:K27)",
+              "M": "+E26+F26+J26+K26"
+            }
+          },
+          {
+            "row": 29,
+            "values": {
+              "A": "AVANCES FÍSICOS"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 31,
+            "values": {
+              "C": "ID Entregable IGTO",
+              "D": "Meta ",
+              "E": "Junio ",
+              "F": "Julio",
+              "G": "Agosto",
+              "H": "Septiembre",
+              "I": "Octubre",
+              "J": "Noviembre ",
+              "K": "Diciembre ",
+              "L": "Total "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 32,
+            "values": {
+              "C": "20263011000002501",
+              "D": 9,
+              "E": 0.5555555555555556,
+              "F": 0,
+              "G": 0,
+              "H": 0,
+              "I": 0.7777777777777778,
+              "J": 0,
+              "K": 0,
+              "L": 1.3333333333333335
+            },
+            "formulas": {
+              "C": "+A19",
+              "E": "(J4*100%)/$D$32",
+              "F": "(K4*100%)/$D$32",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": "(L4*100%)/$D$32",
+              "K": null,
+              "L": "SUM(E32:K32)"
+            }
+          },
+          {
+            "row": 33,
+            "values": {
+              "C": "20263011000002502",
+              "D": 9,
+              "E": 0.4444444444444444,
+              "F": 0,
+              "G": 0,
+              "H": 0,
+              "I": 0.7777777777777778,
+              "J": 0,
+              "K": 0,
+              "L": 1.2222222222222223
+            },
+            "formulas": {
+              "C": "+A21",
+              "E": "(J6*100%)/$D$33",
+              "F": "(K6*100%)/$D$33",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": "(L6*100%)/$D$33",
+              "K": null,
+              "L": "SUM(E33:K33)"
+            }
+          },
+          {
+            "row": 34,
+            "values": {
+              "C": "20263011000002503",
+              "D": 19,
+              "E": 0.3157894736842105,
+              "F": 0,
+              "G": 0,
+              "H": 0,
+              "I": 0.7894736842105263,
+              "J": 0,
+              "K": 0,
+              "L": 1.1052631578947367
+            },
+            "formulas": {
+              "C": "+A23",
+              "D": "+E8",
+              "E": "(J8*100%)/$D$34",
+              "F": "(K8*100%)/$D$34",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": "(L8*100%)/$D$34",
+              "K": null,
+              "L": "SUM(E34:K34)"
+            }
+          },
+          {
+            "row": 35,
+            "values": {
+              "C": "20263011000002504",
+              "D": 12,
+              "E": 0.3333333333333333,
+              "F": 0,
+              "G": 0,
+              "H": 0,
+              "I": 0.5,
+              "J": 0,
+              "K": 0,
+              "L": 0.8333333333333333
+            },
+            "formulas": {
+              "C": "+A25",
+              "E": "(J10*100%)/$D$35",
+              "F": "(K10*100%)/$D$35",
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": "(L10*100%)/$D$35",
+              "K": null,
+              "L": "SUM(E35:K35)"
+            }
+          },
+          {
+            "row": 36,
+            "values": {
+              "C": "20263011000002505",
+              "D": 12,
+              "E": 0.16666666666666666,
+              "F": 0,
+              "G": 0,
+              "H": 0,
+              "I": 0.5833333333333334,
+              "J": 0,
+              "K": 0,
+              "L": 0.75
+            },
+            "formulas": {
+              "C": "+A27",
+              "E": "(J12*100%)/$D$36",
+              "F": "(K12*100%)/$D$36",
+              "G": "(L12*100%)/$D$36",
+              "H": null,
+              "I": null,
+              "J": "(L12*100%)/$D$36",
+              "K": null,
+              "L": "SUM(E36:K36)"
+            }
+          },
+          {
+            "row": 38,
+            "values": {
+              "A": "SEGUIMIENTO SED METAS"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 39,
+            "values": {
+              "D": "E003QC40982501 ESCRITURA CREATIVA",
+              "AA": "ACUMULADO"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 40,
+            "values": {
+              "D": "Junio",
+              "G": "Julio",
+              "K": "Agosto ",
+              "N": "Septiembre",
+              "R": "Octubre",
+              "U": "Noviembre ",
+              "X": "Diciembre"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 41,
+            "values": {
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido",
+              "G": "Cantidad de talleres",
+              "H": "Cantidad de Beneficiarios",
+              "I": "Importe ejercido",
+              "K": "Cantidad de talleres",
+              "L": "Cantidad de Beneficiarios",
+              "M": "Importe ejercido",
+              "N": "Cantidad de talleres",
+              "O": "Cantidad de Beneficiarios",
+              "Q": "Importe ejercido",
+              "R": "Cantidad de talleres",
+              "S": "Cantidad de Beneficiarios",
+              "T": "Importe ejercido",
+              "U": "Cantidad de talleres",
+              "V": "Cantidad de Beneficiarios",
+              "W": "Importe ejercido",
+              "X": "Cantidad de talleres",
+              "Y": "Cantidad de Beneficiarios",
+              "Z": "Importe ejercido",
+              "AA": "Cantidad de talleres",
+              "AB": "Cantidad de Beneficiarios",
+              "AC": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 42,
+            "values": {
+              "C": "Municipio"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 43,
+            "values": {
+              "C": "ACÁMBARO ",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": "+D43+K43+N43+R43+U43",
+              "AB": null,
+              "AC": "+F43+M43+Q43+T43+W43"
+            }
+          },
+          {
+            "row": 44,
+            "values": {
+              "C": "CELAYA ",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 45,
+            "values": {
+              "C": "GUANAJUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 46,
+            "values": {
+              "C": "IRAPUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 47,
+            "values": {
+              "C": "LEÓN",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 48,
+            "values": {
+              "C": "PÉNJAMO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 49,
+            "values": {
+              "C": "SALAMANCA",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 50,
+            "values": {
+              "C": "SAN FELIPE",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 51,
+            "values": {
+              "C": "SAN MIGUEL DE ALLENDE ",
+              "N": 1,
+              "AB": 0
+            },
+            "formulas": {
+              "AB": "+E51+L51+O51+S51+V51"
+            }
+          },
+          {
+            "row": 52,
+            "values": {
+              "C": "VALLE DE SANTIAGO ",
+              "G": 1,
+              "M": 25520,
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": "+D52+K52+N52+R52+U52",
+              "AB": "+E52+L52+O52+S52+V52",
+              "AC": "+F52+M52+Q52+T52+W52"
+            }
+          },
+          {
+            "row": 53,
+            "values": {
+              "C": "Totales",
+              "D": 0,
+              "E": 0,
+              "F": 0,
+              "G": 2,
+              "H": 0,
+              "I": 0,
+              "K": 0,
+              "L": 0,
+              "M": 51040,
+              "N": 5,
+              "O": 0,
+              "Q": 0,
+              "R": 0,
+              "S": 0,
+              "T": 0,
+              "U": 0,
+              "V": 0,
+              "W": 0,
+              "AA": 4,
+              "AB": 0,
+              "AC": 51040
+            },
+            "formulas": {
+              "D": "SUM(D43:D52)",
+              "E": "SUM(E43:E52)",
+              "F": "SUM(F43:F52)",
+              "G": "SUM(G43:G52)",
+              "H": "SUM(H43:H52)",
+              "K": "SUM(K43:K52)",
+              "L": "SUM(L43:L52)",
+              "M": "SUM(M43:M52)",
+              "N": "SUM(N43:N52)",
+              "O": "SUM(O43:O52)",
+              "Q": "SUM(Q43:Q52)",
+              "R": null,
+              "S": null,
+              "T": null,
+              "U": null,
+              "V": null,
+              "W": null,
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 55,
+            "values": {
+              "D": "E003QC40982502 MÚSICA",
+              "AA": "ACUMULADO"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 56,
+            "values": {
+              "D": "Junio ",
+              "G": "Julio ",
+              "K": "Agosto ",
+              "N": "Septiembre ",
+              "R": "Octubre",
+              "U": "Noviembre ",
+              "X": "Diciembre"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 57,
+            "values": {
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido",
+              "K": "Cantidad de talleres",
+              "L": "Cantidad de Beneficiarios",
+              "M": "Importe ejercido",
+              "N": "Cantidad de talleres",
+              "O": "Cantidad de Beneficiarios",
+              "Q": "Importe ejercido",
+              "R": "Cantidad de talleres",
+              "S": "Cantidad de Beneficiarios",
+              "T": "Importe ejercido",
+              "U": "Cantidad de talleres",
+              "V": "Cantidad de Beneficiarios",
+              "W": "Importe ejercido",
+              "AA": "Cantidad de talleres",
+              "AB": "Cantidad de Beneficiarios",
+              "AC": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 58,
+            "values": {
+              "C": "Municipio"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 59,
+            "values": {
+              "C": "ACÁMBARO ",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": "+D59+K59+N59+R59+U59",
+              "AB": "+E59+L59+O59+S59+V59",
+              "AC": "+F59+M59+Q59+T59+W59"
+            }
+          },
+          {
+            "row": 60,
+            "values": {
+              "C": "CELAYA ",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 61,
+            "values": {
+              "C": "GUANAJUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 62,
+            "values": {
+              "C": "IRAPUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 63,
+            "values": {
+              "C": "LEÓN",
+              "G": 1,
+              "M": 20880,
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 20880
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 64,
+            "values": {
+              "C": "PÉNJAMO",
+              "N": 2,
+              "AA": 2,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 65,
+            "values": {
+              "C": "SALAMANCA",
+              "G": 1,
+              "M": 20880,
+              "AA": 0,
+              "AB": 0,
+              "AC": 20880
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 66,
+            "values": {
+              "C": "SAN FELIPE",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 67,
+            "values": {
+              "C": "SAN MIGUEL DE ALLENDE ",
+              "G": 1,
+              "M": 20880,
+              "AA": 0,
+              "AB": 0,
+              "AC": 20880
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 68,
+            "values": {
+              "C": "VALLE DE SANTIAGO ",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 69,
+            "values": {
+              "C": "Totales ",
+              "D": 0,
+              "E": 0,
+              "F": 0,
+              "G": 3,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 62640,
+              "N": 4,
+              "O": 0,
+              "P": 0,
+              "Q": 0,
+              "R": 0,
+              "S": 0,
+              "T": 0,
+              "U": 0,
+              "V": 0,
+              "W": 0,
+              "AA": 4,
+              "AB": 0,
+              "AC": 62640
+            },
+            "formulas": {
+              "D": "SUM(D59:D68)",
+              "E": "SUM(E59:E68)",
+              "F": null,
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": null,
+              "M": null,
+              "N": null,
+              "O": null,
+              "P": null,
+              "Q": null,
+              "R": null,
+              "S": null,
+              "T": null,
+              "U": null,
+              "V": null,
+              "W": null,
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 71,
+            "values": {
+              "D": "E003QC40982503 ARTES PLÁSTICAS",
+              "AA": "ACUMULADO"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 72,
+            "values": {
+              "D": "Junio ",
+              "G": "Julio ",
+              "K": "Agosto ",
+              "N": "Septiembre ",
+              "R": "Octubre ",
+              "U": "Noviembre ",
+              "X": "Diciembre"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 73,
+            "values": {
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido",
+              "K": "Cantidad de talleres",
+              "L": "Cantidad de Beneficiarios",
+              "M": "Importe ejercido",
+              "N": "Cantidad de talleres",
+              "O": "Cantidad de Beneficiarios",
+              "Q": "Importe ejercido",
+              "R": "Cantidad de talleres",
+              "S": "Cantidad de Beneficiarios",
+              "T": "Importe ejercido",
+              "U": "Cantidad de talleres",
+              "V": "Cantidad de Beneficiarios",
+              "W": "Importe ejercido",
+              "AA": "Cantidad de talleres",
+              "AB": "Cantidad de Beneficiarios",
+              "AC": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 74,
+            "values": {
+              "C": "Municipio"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 75,
+            "values": {
+              "C": "ACAMBARO",
+              "G": 1,
+              "M": 25520,
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": "+D75+K75+N75+R75+U75",
+              "AB": "+E75+L75+O75+S75+V75",
+              "AC": "+F75+M75+Q75+T75+W75"
+            }
+          },
+          {
+            "row": 76,
+            "values": {
+              "C": "CELAYA",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 77,
+            "values": {
+              "C": "GUANAJUATO",
+              "G": 2,
+              "M": 54520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 54520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 78,
+            "values": {
+              "C": "IRAPUATO",
+              "G": 1,
+              "M": 25520,
+              "N": 2,
+              "AA": 2,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 79,
+            "values": {
+              "C": "LEON",
+              "G": 1,
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 80,
+            "values": {
+              "C": "PENJAMO",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 81,
+            "values": {
+              "C": "SALAMANCA",
+              "G": 1,
+              "M": 25520,
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 82,
+            "values": {
+              "C": "SAN FELIPE",
+              "G": 1,
+              "M": 29000,
+              "AA": 0,
+              "AB": 0,
+              "AC": 29000
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 83,
+            "values": {
+              "C": "SAN MIGUEL DE ALLENDE",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 84,
+            "values": {
+              "C": "VALLE DE SANTIAGO",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 85,
+            "values": {
+              "C": "Totales",
+              "D": 0,
+              "E": 0,
+              "F": 0,
+              "G": 9,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 211120,
+              "N": 6,
+              "O": 0,
+              "Q": 0,
+              "R": 0,
+              "S": 0,
+              "T": 0,
+              "U": 0,
+              "V": 0,
+              "W": 0,
+              "AA": 6,
+              "AB": 0,
+              "AC": 211120
+            },
+            "formulas": {
+              "D": "SUM(D75:D84)",
+              "E": "SUM(E75:E84)",
+              "F": null,
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": null,
+              "L": null,
+              "M": null,
+              "N": null,
+              "O": null,
+              "Q": null,
+              "R": null,
+              "S": null,
+              "T": null,
+              "U": null,
+              "V": null,
+              "W": null,
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 87,
+            "values": {
+              "D": "E003QC40982504 DANZA",
+              "AA": "ACUMULADO"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 88,
+            "values": {
+              "D": "Junio ",
+              "G": "Julio ",
+              "K": "Agosto ",
+              "N": "Septeimbre ",
+              "R": "Octubre ",
+              "U": "Noviembre ",
+              "X": "Diciembre "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 89,
+            "values": {
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido",
+              "K": "Cantidad de talleres",
+              "L": "Cantidad de Beneficiarios",
+              "M": "Importe ejercido",
+              "N": "Cantidad de talleres",
+              "O": "Cantidad de Beneficiarios",
+              "Q": "Importe ejercido",
+              "R": "Cantidad de talleres",
+              "S": "Cantidad de Beneficiarios",
+              "T": "Importe ejercido",
+              "U": "Cantidad de talleres",
+              "V": "Cantidad de Beneficiarios",
+              "W": "Importe ejercido",
+              "AA": "Cantidad de talleres",
+              "AB": "Cantidad de Beneficiarios",
+              "AC": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 90,
+            "values": {
+              "C": "Municipio"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 91,
+            "values": {
+              "C": "ACAMBARO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": "+D91+K91+N91+R91+U91",
+              "AB": "+E91+L91+O91+S91+V91",
+              "AC": "+F91+M91+Q91+T91+W91"
+            }
+          },
+          {
+            "row": 92,
+            "values": {
+              "C": "CELAYA",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 93,
+            "values": {
+              "C": "GUANAJUATO",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 94,
+            "values": {
+              "C": "IRAPUATO",
+              "G": 1,
+              "M": 20880,
+              "AA": 0,
+              "AB": 0,
+              "AC": 20880
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 95,
+            "values": {
+              "C": "LEON",
+              "G": 1,
+              "M": 20880,
+              "AA": 0,
+              "AB": 0,
+              "AC": 20880
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 96,
+            "values": {
+              "C": "PENJAMO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 97,
+            "values": {
+              "C": "SALAMANCA",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 98,
+            "values": {
+              "C": "SAN FELIPE",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 99,
+            "values": {
+              "C": "SAN MIGUEL DE ALLENDE",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 100,
+            "values": {
+              "C": "VALLE DE SANTIAGO",
+              "N": 1,
+              "AA": 1,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 101,
+            "values": {
+              "C": "Totales",
+              "D": 0,
+              "E": 0,
+              "F": 0,
+              "G": 2,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 41760,
+              "N": 4,
+              "O": 0,
+              "Q": 0,
+              "R": 0,
+              "S": 0,
+              "T": 0,
+              "U": 0,
+              "V": 0,
+              "W": 0,
+              "AA": 4,
+              "AB": 0,
+              "AC": 41760
+            },
+            "formulas": {
+              "D": "SUM(D91:D100)",
+              "E": "SUM(E91:E100)",
+              "F": null,
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": "SUM(K91:K100)",
+              "L": null,
+              "M": null,
+              "N": null,
+              "O": null,
+              "Q": "SUM(Q91:Q100)",
+              "R": null,
+              "S": null,
+              "T": null,
+              "U": null,
+              "V": null,
+              "W": null,
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 103,
+            "values": {
+              "D": "E003QC40982505 TEATRO",
+              "AA": "ACUMULADO"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 104,
+            "values": {
+              "D": "Junio ",
+              "G": "Julio ",
+              "K": "Agosto ",
+              "N": "Septiembre",
+              "R": "Octubre ",
+              "U": "Noviembre ",
+              "X": "Diciembre "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 105,
+            "values": {
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido",
+              "K": "Cantidad de talleres",
+              "L": "Cantidad de Beneficiarios",
+              "M": "Importe ejercido",
+              "N": "Cantidad de talleres",
+              "O": "Cantidad de Beneficiarios",
+              "Q": "Importe ejercido",
+              "R": "Cantidad de talleres",
+              "S": "Cantidad de Beneficiarios",
+              "T": "Importe ejercido",
+              "U": "Cantidad de talleres",
+              "V": "Cantidad de Beneficiarios",
+              "W": "Importe ejercido",
+              "AA": "Cantidad de talleres",
+              "AB": "Cantidad de Beneficiarios",
+              "AC": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 106,
+            "values": {
+              "C": "Municipio"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 107,
+            "values": {
+              "C": "ACAMBARO",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": "+D107+K107+N107+R107+U107",
+              "AB": "+E107+L107+O107+S107+V107",
+              "AC": "+F107+M107+Q107+T107+W107"
+            }
+          },
+          {
+            "row": 108,
+            "values": {
+              "C": "CELAYA",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 109,
+            "values": {
+              "C": "GUANAJUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 110,
+            "values": {
+              "C": "IRAPUATO",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 111,
+            "values": {
+              "C": "LEON",
+              "N": 2,
+              "AA": 2,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 112,
+            "values": {
+              "C": "PENJAMO",
+              "G": 1,
+              "M": 25520,
+              "AA": 0,
+              "AB": 0,
+              "AC": 25520
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 113,
+            "values": {
+              "C": "SALAMANCA",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 114,
+            "values": {
+              "C": "SAN FELIPE",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 115,
+            "values": {
+              "C": "SAN MIGUEL DE ALLENDE",
+              "AA": 0,
+              "AB": 0,
+              "AC": 0
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 116,
+            "values": {
+              "C": "VALLE DE SANTIAGO",
+              "G": 2,
+              "M": 51040,
+              "AA": 0,
+              "AB": 0,
+              "AC": 51040
+            },
+            "formulas": {
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 117,
+            "values": {
+              "C": "Totales",
+              "D": 0,
+              "E": 0,
+              "F": 0,
+              "G": 5,
+              "H": 0,
+              "I": 0,
+              "J": 0,
+              "K": 0,
+              "L": 0,
+              "M": 127600,
+              "N": 2,
+              "O": 0,
+              "Q": 0,
+              "R": 0,
+              "S": 0,
+              "T": 0,
+              "U": 0,
+              "V": 0,
+              "W": 0,
+              "AA": 2,
+              "AB": 0,
+              "AC": 127600
+            },
+            "formulas": {
+              "D": "SUM(D107:D116)",
+              "E": "SUM(E107:E116)",
+              "F": null,
+              "G": null,
+              "H": null,
+              "I": null,
+              "J": null,
+              "K": "SUM(K107:K116)",
+              "L": null,
+              "M": null,
+              "N": null,
+              "O": null,
+              "Q": "SUM(Q107:Q116)",
+              "R": null,
+              "S": null,
+              "T": null,
+              "U": null,
+              "V": null,
+              "W": null,
+              "AA": null,
+              "AB": null,
+              "AC": null
+            }
+          },
+          {
+            "row": 120,
+            "values": {
+              "D": "Acumulado"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 121,
+            "values": {
+              "C": "Meta",
+              "D": "Cantidad de talleres",
+              "E": "Cantidad de Beneficiarios",
+              "F": "Importe ejercido"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 122,
+            "values": {
+              "C": "E003QC40982501 ESCRITURA CREATIVA",
+              "D": 14,
+              "E": 0,
+              "F": 324800
+            },
+            "formulas": {
+              "C": "+D39",
+              "D": "+AA53+AA69+AA85",
+              "E": "+AB53+AB69+AB85+AB101+AB117",
+              "F": "+AC53+AC69+AC85"
+            }
+          },
+          {
+            "row": 123,
+            "values": {
+              "E": "Septiembre ",
+              "F": "Octubre",
+              "J": "Noviembre ",
+              "K": "Diciembre ",
+              "L": "Total "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 124,
+            "values": {
+              "D": "ACAMBARO",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": "SUM(L43,L59,L75,L91,L107)",
+              "F": "SUM(O43,O59,O75,O91,O107)",
+              "L": "SUM(E124:K124)"
+            }
+          },
+          {
+            "row": 125,
+            "values": {
+              "D": "CELAYA",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": "SUM(L44,L60,L76,L92,L108)",
+              "F": "SUM(O44,O60,O76,O92,O108)",
+              "L": "SUM(E125:K125)"
+            }
+          },
+          {
+            "row": 126,
+            "values": {
+              "D": "GUANAJUATO",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 127,
+            "values": {
+              "D": "IRAPUATO",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 128,
+            "values": {
+              "D": "LEON",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 129,
+            "values": {
+              "D": "PENJAMO",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 130,
+            "values": {
+              "D": "SALAMANCA",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 131,
+            "values": {
+              "D": "SAN FELIPE",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 132,
+            "values": {
+              "D": "SAN MIGUEL DE ALLENDE",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          },
+          {
+            "row": 133,
+            "values": {
+              "D": "VALLE DE SANTIAGO",
+              "E": 0,
+              "F": 0,
+              "L": 0
+            },
+            "formulas": {
+              "E": null,
+              "F": null,
+              "L": null
+            }
+          }
+        ],
+        "merged": [
+          "I53:J53",
+          "X40:Z40",
+          "X39:Z39",
+          "X56:Z56",
+          "X72:Z72",
+          "G56:J56",
+          "G72:J72",
+          "D55:W55",
+          "I45:J45",
+          "I46:J46",
+          "I47:J47",
+          "I48:J48",
+          "I49:J49",
+          "I50:J50",
+          "I51:J51",
+          "I52:J52",
+          "D10:D11",
+          "G40:J40",
+          "I41:J41",
+          "I43:J43",
+          "I44:J44",
+          "A25:B25",
+          "E11:F11",
+          "D12:D13",
+          "E13:F13",
+          "A15:W15",
+          "A18:B18",
+          "A19:B19",
+          "A4:A13",
+          "B4:B13",
+          "C4:C13",
+          "D4:D5",
+          "E5:F5",
+          "D6:D7",
+          "E7:F7",
+          "D8:D9",
+          "E9:F9",
+          "A20:B20",
+          "A21:B21",
+          "A22:B22",
+          "A23:B23",
+          "A24:B24",
+          "A26:B26",
+          "A27:B27",
+          "A29:W29",
+          "A38:AC38",
+          "D39:W39",
+          "AA39:AC40",
+          "D40:F40",
+          "K40:M40",
+          "N40:Q40",
+          "R40:T40",
+          "U40:W40",
+          "AA55:AC56",
+          "D56:F56",
+          "K56:M56",
+          "N56:Q56",
+          "R56:T56",
+          "U56:W56",
+          "D71:W71",
+          "AA71:AC72",
+          "D72:F72",
+          "K72:M72",
+          "N72:Q72",
+          "R72:T72",
+          "U72:W72",
+          "D87:W87",
+          "AA87:AC88",
+          "D88:F88",
+          "K88:M88",
+          "N88:Q88",
+          "R88:T88",
+          "U88:W88",
+          "X88:Z88",
+          "G88:J88",
+          "D120:F120",
+          "D103:W103",
+          "AA103:AC104",
+          "D104:F104",
+          "K104:M104",
+          "N104:Q104",
+          "R104:T104",
+          "U104:W104",
+          "X104:Z104",
+          "G104:J104"
+        ]
+      },
+      "QB4039": {
+        "state": "visible",
+        "data": [
+          {
+            "row": 3,
+            "values": {
+              "A": "ELEMENTO",
+              "B": "CLAVE",
+              "C": "NOMBRE",
+              "D": "ENTREGABLE",
+              "E": "META",
+              "F": "UNIDAD DE MEDIDA",
+              "G": "Enero ",
+              "H": "Febrero",
+              "I": "Marzo",
+              "J": "Abril",
+              "K": "Mayo ",
+              "L": "Junio",
+              "M": "Julio",
+              "N": "Agosto",
+              "O": "Septiembre",
+              "P": "Octubre",
+              "Q": "Noviembre",
+              "R": "Diciembre ",
+              "S": "Total ",
+              "T": "ID"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 4,
+            "values": {
+              "A": "PROYECTO ",
+              "B": "QB4039 ",
+              "C": "Instalación de elevador y montacargas en la Biblioteca Central Estatal de León",
+              "D": "Proyecto ejecutivo para la sustitución de los elevadores de la Biblioteca Central Estatal, que comprende: dictamen estructural, proyecto estructural, proyecto eléctrico y estudios.",
+              "E": 1,
+              "F": "Proyecto ejecutivo realizado ",
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0,
+              "T": "202500350000024011"
+            },
+            "formulas": {
+              "S": "SUM(G4:R9)"
+            }
+          },
+          {
+            "row": 10,
+            "values": {
+              "A": "AVANCES FINANCIEROS"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 12,
+            "values": {
+              "E": "ID Entregable IGTO",
+              "F": "Monto SED ",
+              "G": "Enero ",
+              "H": "Febrero",
+              "I": "Marzo",
+              "J": "Abril",
+              "K": "Mayo",
+              "L": "Junio",
+              "M": "Julio",
+              "N": "Agosto",
+              "O": "Septiembre",
+              "P": "Octubre",
+              "Q": "Noviembre",
+              "R": "Diciembre",
+              "S": "Total ",
+              "T": "Porcentaje de avance "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 13,
+            "values": {
+              "F": 131520.51,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0,
+              "T": 0
+            },
+            "formulas": {
+              "S": "SUM(G13:R13)",
+              "T": "S13/F13"
+            }
+          },
+          {
+            "row": 16,
+            "values": {
+              "A": "AVANCES FÍSICOS"
+            },
+            "formulas": {}
+          },
+          {
+            "row": 18,
+            "values": {
+              "E": "ID Entregable IGTO",
+              "F": "Meta ",
+              "G": "Enero ",
+              "H": "Febrero",
+              "I": "Marzo",
+              "J": "Abril",
+              "K": "Mayo",
+              "L": "Junio",
+              "M": "Julio",
+              "N": "Agosto",
+              "O": "Septiembre",
+              "P": "Octubre",
+              "Q": "Noviembre",
+              "R": "Diciembre",
+              "S": "Total "
+            },
+            "formulas": {}
+          },
+          {
+            "row": 19,
+            "values": {
+              "F": 1,
+              "L": 0,
+              "M": 0,
+              "N": 0,
+              "O": 0,
+              "S": 0
+            },
+            "formulas": {
+              "S": "SUM(G19:R19)"
+            }
+          }
+        ],
+        "merged": [
+          "F4:F9",
+          "A4:A9",
+          "B4:B9",
+          "C4:C9",
+          "D4:D9",
+          "E4:E9",
+          "S4:S9",
+          "T4:T9",
+          "A10:Y10",
+          "A16:Z16",
+          "M4:M9",
+          "N4:N9",
+          "O4:O9",
+          "P4:P9",
+          "Q4:Q9",
+          "R4:R9",
+          "G4:G9",
+          "H4:H9",
+          "I4:I9",
+          "J4:J9",
+          "K4:K9",
+          "L4:L9"
+        ]
+      }
+    }
+  }
+}

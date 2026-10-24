@@ -1,0 +1,17 @@
+{
+  "verificacion": "correcta",
+  "hojas": 4,
+  "conteos": {
+    "Registro_Actividades": 242,
+    "Registro_Territorio": 242,
+    "Registro_Poblacion": 566,
+    "Regitro_Evidencia": 0
+  },
+  "ids_unicos_sin_coincidencias": 1050,
+  "folios_unicos": 242,
+  "usuario_correcto": 242,
+  "encabezados_y_valores": "coinciden con la preparación",
+  "fuentes_originales": "sin cambios",
+  "validacion_AppSheet": "no ejecutada",
+  "pendientes_clave_proceso": 105
+}

@@ -1,0 +1,219 @@
+[
+  {
+    "sheet": "PB3563",
+    "row": 5,
+    "name": "Apoyos especiales a organismos culturales municipales\n",
+    "target": 94,
+    "matches": [
+      [
+        56,
+        55,
+        "PB3563",
+        74
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3563",
+    "row": 6,
+    "name": "Actividades colaborativas de la red de identidad cultura y memoria",
+    "target": 495,
+    "matches": [
+      [
+        57,
+        56,
+        "PB3563",
+        495
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3563",
+    "row": 7,
+    "name": "Visitas escolares a zonas arqueológicas y recintos culturales del estado para impulsar aprendizajes significativos en alumnos de educación básica",
+    "target": 30,
+    "matches": [
+      [
+        58,
+        57,
+        "PB3563",
+        30
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3563",
+    "row": 8,
+    "name": "Actividades de promoción y animación lectora para público en general",
+    "target": 4800,
+    "matches": [
+      [
+        59,
+        58,
+        "PB3563",
+        125
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3563",
+    "row": 9,
+    "name": "Encuentros y capacitaciones del personal bibliotecario incorporado a la red estatal de bibliotecas públicas del estado de Guanajuato",
+    "target": 15,
+    "matches": [
+      [
+        60,
+        59,
+        "PB3563",
+        2
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3562",
+    "row": 5,
+    "name": "Cursos y talleres para promotores culturales e instructores de casas de la cultura",
+    "target": 138,
+    "matches": [
+      [
+        51,
+        50,
+        "PB3562",
+        138
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3562",
+    "row": 6,
+    "name": "Talleres de educación artística y cultural no formales impartidos en casas de cultura y salones culturales",
+    "target": 3800,
+    "matches": [
+      [
+        52,
+        51,
+        "PB3562",
+        3800
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3562",
+    "row": 7,
+    "name": "Cursos y talleres de formación lectora para bibliotecarios, niños narradores y escritores, padres de familia y promotores de lectura",
+    "target": 90,
+    "matches": [
+      [
+        53,
+        52,
+        "PB3562",
+        90
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3562",
+    "row": 8,
+    "name": "Talleres de seguimiento a la implementación del programa curricular para la asignatura de artes en la educación básica",
+    "target": 20,
+    "matches": [
+      [
+        54,
+        53,
+        "PB3562",
+        20
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3562",
+    "row": 9,
+    "name": "Capacitaciones en danza folclórica dirigido a directores, maestros y ejecutantes del estado de Guanajuato",
+    "target": 2,
+    "matches": [
+      [
+        55,
+        54,
+        "PB3562",
+        2
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3564",
+    "row": 5,
+    "name": "Proyectos culturales interinstitucionales y comunitarios dirigidos a públicos vulnerables",
+    "target": 3,
+    "matches": [
+      [
+        61,
+        60,
+        "PB3564",
+        3
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3564",
+    "row": 6,
+    "name": "Proyectos socioculturales en barrios, colonias, periferias y/o comunidades",
+    "target": 1,
+    "matches": [
+      [
+        62,
+        61,
+        "PB3564",
+        10
+      ]
+    ]
+  },
+  {
+    "sheet": "PB3564",
+    "row": 7,
+    "name": "Encuentros de lectores y círculos de lectura para usuarios de la red estatal de bibliotecas públicas",
+    "target": 95,
+    "matches": [
+      [
+        63,
+        62,
+        "PB3564",
+        95
+      ]
+    ]
+  },
+  {
+    "sheet": "QC4098",
+    "row": 4,
+    "name": "Talleres de escritura creativa dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+    "target": 9,
+    "matches": []
+  },
+  {
+    "sheet": "QC4098",
+    "row": 5,
+    "name": "Talleres de música dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+    "target": 9,
+    "matches": []
+  },
+  {
+    "sheet": "QC4098",
+    "row": 6,
+    "name": "Talleres de pintura, cartornería y talla en madera dirigidos a personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+    "target": 19,
+    "matches": []
+  },
+  {
+    "sheet": "QC4098",
+    "row": 7,
+    "name": "Talleres de danza folclórica y ritmos latinos dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+    "target": 12,
+    "matches": []
+  },
+  {
+    "sheet": "QC4098",
+    "row": 8,
+    "name": "Talleres de teatro dirigidos a las personas privadas de la libertad en los CEPRERESOS del estado de Guanajuato",
+    "target": 12,
+    "matches": []
+  }
+]
