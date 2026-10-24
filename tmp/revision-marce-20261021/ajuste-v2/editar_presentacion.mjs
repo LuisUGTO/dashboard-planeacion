@@ -1,0 +1,30 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import vm from 'node:vm';
+import {pathToFileURL} from 'node:url';
+import {FileBlob,PresentationFile} from 'file:///C:/Users/luisa/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs';
+const root='D:/Proyectos/dashboard-planeacion';
+const build=path.join(root,'tmp/revision-marce-20261021/ajuste-v2');
+const out=path.join(root,'entregables/revision_ejecutiva_2026-10-21/actualizados');
+await fs.mkdir(out,{recursive:true});
+await fs.mkdir(path.join(build,'validados'),{recursive:true});
+const skill='C:/Users/luisa/.codex/plugins/cache/openai-primary-runtime/presentations/26.1020.11127/skills/presentations';
+process.env.RUNTIME_NODE_MODULES='C:/Users/luisa/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
+process.env.RUNTIME_NODE='C:/Users/luisa/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe';
+const source=path.join(root,'respaldo/revision_ejecutiva_2026-10-21_antes_ajuste_campos/Presentacion_Ejecutiva_Captura_y_Calidad_2026-10-21_FINAL.pptx');
+const presentation=await PresentationFile.importPptx(await FileBlob.load(source));
+const before=await presentation.inspect({kind:'slide,shape,table',maxChars:6000});
+await fs.writeFile(path.join(build,'antes.ndjson'),before.ndjson);
+const fn=vm.runInThisContext((await fs.readFile(path.join(build,'ajustar_slides.js'),'utf8'))+'\najustar;');
+await fn(presentation);
+await fs.mkdir(path.join(build,'slides'),{recursive:true});
+for(const [i,s]of presentation.slides.items.entries()){
+ const blob=await presentation.export({slide:s,format:'png',scale:1.25});
+ await fs.writeFile(path.join(build,'slides',`slide-${i+1}.png`),new Uint8Array(await blob.arrayBuffer()));
+}
+const candidate=path.join(build,'candidate.pptx');
+await(await PresentationFile.exportPptx(presentation)).save(candidate);
+const{finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
+const result=await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath:path.join(build,'validados/Presentacion_validada.pptx'),pythonExecutable:'C:/Users/luisa/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe',integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...[2,3,5,6].flatMap(i=>['--require-native-table-slide',String(i)])],explicitTotalSlideCount:7,requiredNativeTableOwnerSlides:[2,3,5,6],fontPolicy:{basis:'design',families:['Arial']},verifyArtifactToolImport:true,receiptPath:path.join(build,'validacion.json')});
+await fs.copyFile(result.finalPath,path.join(out,'Presentacion_Ejecutiva_Captura_y_Calidad_2026-10-21_FINAL.pptx'));
+console.log(JSON.stringify({output:result.finalPath,slides:7,integrity:result.packageIntegrity.status}));
