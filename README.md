@@ -19,6 +19,16 @@ El tablero se abre desde `index.html`, que permanece en la raíz del proyecto.
 
 Las rutas de recursos de `index.html` y de los generadores están actualizadas para esta estructura.
 
+## Conciliación y publicación del tablero
+
+La sección Conciliación muestra diferencias de cifras, campos importantes pendientes, evidencia, cantidades por revisar y posibles duplicaciones. Permite filtrar, buscar y descargar los resultados. La lógica está en `assets/js/calidad-datos.js`; se publica junto con `index.html`.
+
+Registros capturados, actividades reportadas y sesiones se mantienen separados. El esquema de concentrados mensuales y las columnas opcionales propuestas se describen en [Conciliación y concentrados](documentacion/Conciliacion_y_concentrados_2026-10-26.md). Estas columnas aún no se agregaron a AppSheet ni a la base productiva.
+
+`_config.yml` excluye las carpetas de trabajo del proceso de GitHub Pages. Se debe subir también este archivo para que Jekyll no intente procesar dependencias y documentos temporales. `.gitignore` previene agregar nuevos temporales, pero no retira los que ya estaban versionados.
+
+Comprobación local de conciliación y cantidades en la matriz: `node --test tests/calidad-datos.test.cjs tests/tablero.test.cjs`.
+
 ## Flujo recomendado de edición
 
 1. Para el entregable 1, abrir el archivo `_BASE_PDF.docx`.

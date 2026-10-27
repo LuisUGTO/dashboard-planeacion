@@ -1,0 +1,14 @@
+# GitHub Pages only builds the public dashboard, not local preparation files.
+exclude:
+  - tmp
+  - node_modules
+  - archivos_base
+  - outputs
+  - entregables
+  - referencias
+  - respaldo
+  - documentacion
+  - tools
+  - tests
+  - SC_Planeacion_Handoff_Auditoria_AppSheet.md
+  - Application Documentation.pdf

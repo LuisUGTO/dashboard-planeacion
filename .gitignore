@@ -1,0 +1,9 @@
+# Local work files. Existing tracked files stay tracked; _config.yml excludes
+# them from the GitHub Pages build as well.
+tmp/
+**/node_modules/
+*.inspect.ndjson
+__pycache__/
+*.pyc
+_site/
+.jekyll-cache/

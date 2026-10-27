@@ -543,11 +543,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-slate-200/80 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Actividades Realizadas</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Registros de actividades</p>
               <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
               <p class="text-xs text-slate-500 font-semibold mt-1">
-                <span id="kpi-sesiones-total" class="text-emerald-600 font-bold">0</span> sesiones totales
+                <span id="kpi-sesiones-total" class="text-emerald-600 font-bold">0</span> sesiones reportadas
               </p>
+              <p id="kpi-actividades-reportadas" class="text-[10px] text-slate-500 mt-1"></p>
+              <button id="kpi-cantidades-alerta" onclick="document.getElementById('filter-audit-kind').value='concentrados'; switchTab('tab-auditoria'); renderAuditTable();" class="hidden text-[10px] font-bold text-amber-800 mt-1 underline text-left"></button>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner">
               <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
@@ -666,7 +668,7 @@
                 <div class="w-6 h-6 rounded-md bg-indigo-50 text-indigo-600 flex items-center justify-center">
                   <i data-lucide="palette" class="w-3.5 h-3.5"></i>
                 </div>
-                <h3 class="text-base font-extrabold text-gto-blue">Actividades por Disciplina</h3>
+                <h3 class="text-base font-extrabold text-gto-blue">Registros por Disciplina</h3>
               </div>
               <div class="h-48"><canvas id="chart-disciplinas"></canvas></div>
             </div>
@@ -1191,9 +1193,9 @@
           <div class="flex items-start gap-3">
             <i data-lucide="clipboard-check" class="w-6 h-6 text-amber-600 shrink-0 mt-0.5"></i>
             <div>
-              <h3 class="text-base font-extrabold text-gto-blue">Conciliación de Cifras: Cobertura Territorial vs. Perfil Demográfico</h3>
+              <h3 class="text-base font-extrabold text-gto-blue">Conciliación y calidad de la información</h3>
               <p class="text-xs text-slate-600 mt-0.5">
-                Listado de seguimiento para homologar las cifras reportadas entre el registro territorial y el desglose demográfico.
+                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Cada actividad puede tener más de una alerta.
               </p>
             </div>
           </div>
@@ -1203,7 +1205,26 @@
           </button>
         </div>
 
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3" aria-label="Resumen de calidad">
+          <div class="bg-white rounded-xl p-4 border border-rose-200"><p class="text-xs font-bold text-slate-600">Cifras discrepantes</p><p id="audit-count-diferencias" class="text-2xl font-black text-rose-700 mt-1">0</p></div>
+          <div class="bg-white rounded-xl p-4 border border-amber-200"><p class="text-xs font-bold text-slate-600">Datos por completar</p><p id="audit-count-faltantes" class="text-2xl font-black text-amber-700 mt-1">0</p></div>
+          <div class="bg-white rounded-xl p-4 border border-slate-200"><p class="text-xs font-bold text-slate-600">Sin evidencia</p><p id="audit-count-evidencias" class="text-2xl font-black text-slate-700 mt-1">0</p></div>
+          <div class="bg-white rounded-xl p-4 border border-blue-200"><p class="text-xs font-bold text-slate-600">Revisar cantidades</p><p id="audit-count-concentrados" class="text-2xl font-black text-gto-blue mt-1">0</p></div>
+          <div class="bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></div>
+        </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
+          <div class="flex flex-wrap gap-3 mb-3">
+            <label class="text-xs font-bold text-slate-600">Tipo de alerta
+              <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
+                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option>
+              </select>
+            </label>
+            <label class="text-xs font-bold text-slate-600 flex-1">Buscar actividad, folio, dirección o responsable
+              <input id="search-audit" oninput="renderAuditTable()" type="search" placeholder="Escribe para buscar…" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs" />
+            </label>
+          </div>
+          <p id="audit-visible-count" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
           <div class="overflow-x-auto max-h-[500px] custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
               <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
@@ -1215,6 +1236,7 @@
                   <th class="p-2.5 font-bold text-right">Total Territorial</th>
                   <th class="p-2.5 font-bold text-right">Total Demográfico</th>
                   <th class="p-2.5 font-bold text-right">Variación</th>
+                  <th class="p-2.5 font-bold min-w-[280px]">Qué revisar</th>
                   <th class="p-2.5 font-bold text-center">Expediente</th>
                 </tr>
               </thead>
@@ -1243,6 +1265,7 @@
     </div>
   </div>
 
+  <script src="assets/js/calidad-datos.js"></script>
   <script>
     if (window.Chart && window.ChartDataLabels) {
       Chart.register(ChartDataLabels);
@@ -1635,7 +1658,7 @@
 
       rawDB.actividades.forEach(a => {
         const id = cleanStr(a.ID_Actividad);
-        const fIso = a.Fecha_Inicio_ISO || '';
+        const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
         if (dStart && fIso && fIso < dStart) return;
         if (dEnd && fIso && fIso > dEnd) return;
         if (fDir !== 'ALL' && cleanStr(a.Direccion) !== fDir) return;
@@ -1686,7 +1709,7 @@
       renderCoberturaTerritorial(actF, terF);
       renderPerfilPoblacion(actF, terF, pobF, eviF);
       renderRepositorioEvidencias(actF, terF, eviF);
-      renderAuditoria(actF, terF, pobF);
+      renderAuditoria(actF);
       safeCreateIcons();
     }
 
@@ -1768,7 +1791,8 @@
     // =========================================================
     function renderVisionGeneral(actF, terF, pobF) {
       const totalAct = actF.length;
-      const totalSesiones = actF.reduce((s, r) => s + toNum(r.Total_Sesiones), 0);
+      const countMetrics = CulturaCalidad.metrics(actF);
+      const totalSesiones = countMetrics.sessions;
 
       const terPart = terF.reduce((s, r) => s + toNum(r.Cantidad_Participacion), 0);
       const terAcc = terF.reduce((s, r) => s + toNum(r.Cantidad_Acceso), 0);
@@ -1799,6 +1823,11 @@
 
       document.getElementById('kpi-act-total').textContent = fmtInt(totalAct);
       document.getElementById('kpi-sesiones-total').textContent = fmtInt(totalSesiones);
+      document.getElementById('kpi-sesiones-total').title = countMetrics.missingSessions ? `${countMetrics.missingSessions} registros sin cantidad válida de sesiones; no se convierten en cero` : 'Suma de las sesiones informadas; no equivale a cantidad de talleres';
+      const hasReportedQuantity = actF.some(a => cleanStr(a.Cantidad_Actividades) || cleanStr(a.Tipo_Registro));
+      document.getElementById('kpi-actividades-reportadas').textContent = hasReportedQuantity
+        ? `${fmtInt(countMetrics.activities)} actividades reportadas${countMetrics.unresolved ? ` + ${countMetrics.unresolved} concentrados por cuantificar` : ''}`
+        : 'Un registro puede incluir varias sesiones o talleres';
       document.getElementById('kpi-pop-total').textContent = fmtInt(mainPop);
       document.getElementById('kpi-pop-sub').textContent = `${fmtInt(mainPart)} part. activa | ${fmtInt(mainAcc)} acceso`;
       document.getElementById('kpi-ingresos').textContent = fmtMoney(ingresos);
@@ -1927,7 +1956,7 @@
           },
           {
             type: 'bar',
-            label: 'Actividades realizadas por mes',
+            label: 'Registros por mes de inicio',
             data: actPorMes,
             backgroundColor: '#F59E0B',
             hoverBackgroundColor: '#D97706',
@@ -1954,7 +1983,7 @@
             type: 'linear',
             position: 'left',
             grace: '18%',
-            title: { display: true, text: 'Actividades realizadas', color: '#D97706', font: { weight: 'bold' } }
+            title: { display: true, text: 'Registros por mes de inicio', color: '#D97706', font: { weight: 'bold' } }
           },
           y1: {
             type: 'linear',
@@ -1992,14 +2021,20 @@
         const pop = activePopMap[idAct] || 0;
 
         if (fkId && fkId !== '0') {
-          if (!byIdAlin[fkId]) byIdAlin[fkId] = { count: 0, pop: 0 };
+          if (!byIdAlin[fkId]) byIdAlin[fkId] = { count: 0, pop: 0, reported: 0, unresolved: 0 };
           byIdAlin[fkId].count++;
           byIdAlin[fkId].pop += pop;
+          const quantity = CulturaCalidad.quantity(a).value;
+          if (quantity === null) byIdAlin[fkId].unresolved++;
+          else byIdAlin[fkId].reported += quantity;
         }
         if (nomMeta) {
-          if (!byNombreMeta[nomMeta]) byNombreMeta[nomMeta] = { count: 0, pop: 0 };
+          if (!byNombreMeta[nomMeta]) byNombreMeta[nomMeta] = { count: 0, pop: 0, reported: 0, unresolved: 0 };
           byNombreMeta[nomMeta].count++;
           byNombreMeta[nomMeta].pop += pop;
+          const quantity = CulturaCalidad.quantity(a).value;
+          if (quantity === null) byNombreMeta[nomMeta].unresolved++;
+          else byNombreMeta[nomMeta].reported += quantity;
         }
       });
 
@@ -2013,10 +2048,10 @@
         const metaAnual = toNum(c.Meta_Anual);
         const unitCat = getUnitCategory(unidad);
 
-        const matchStats = byIdAlin[idAlin] || byNombreMeta[nombre] || { count: 0, pop: 0 };
+        const matchStats = byIdAlin[idAlin] || byNombreMeta[nombre] || { count: 0, pop: 0, reported: 0, unresolved: 0 };
         const actCount = matchStats.count;
-        const realizado = unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : actCount);
-        const pct = metaAnual > 0 ? (realizado / metaAnual) * 100 : 0;
+        const realizado = unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : (matchStats.unresolved ? null : matchStats.reported));
+        const pct = realizado === null ? null : (metaAnual > 0 ? (realizado / metaAnual) * 100 : 0);
 
         return {
           idAlin, clave, nombre, direccion, unidad, unitCat, metaAnual, actCount, realizado, pct
@@ -2032,15 +2067,16 @@
 
       const metasActCatalogo = cachedMetasCatalogoRows.filter(m => m.unitCat === 'ACTIVIDADES');
       const sumMetaActCatalogo = metasActCatalogo.reduce((s, m) => s + m.metaAnual, 0);
-      const sumRealActCatalogo = metasActCatalogo.reduce((s, m) => s + m.actCount, 0);
+      const sumRealActCatalogo = metasActCatalogo.reduce((s, m) => s + (m.realizado || 0), 0);
+      const pendingQuantities = metasActCatalogo.some(m => m.realizado === null);
       const pctGlobalCatalogo = sumMetaActCatalogo > 0 ? ((sumRealActCatalogo / sumMetaActCatalogo) * 100).toFixed(1) : '0.0';
 
       const metasActEnOperacion = metasActCatalogo.filter(m => m.actCount > 0);
       const sumMetaActOperacion = metasActEnOperacion.reduce((s, m) => s + m.metaAnual, 0);
       const pctActivasOperacion = sumMetaActOperacion > 0 ? ((sumRealActCatalogo / sumMetaActOperacion) * 100).toFixed(1) : '0.0';
 
-      document.getElementById('lbl-avance-meta-global').textContent = `${pctGlobalCatalogo}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)})`;
-      document.getElementById('lbl-avance-meta-activas').textContent = `${pctActivasOperacion}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActOperacion)})`;
+      document.getElementById('lbl-avance-meta-global').textContent = pendingQuantities ? 'Por confirmar: hay concentrados sin cuantificar' : `${pctGlobalCatalogo}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)})`;
+      document.getElementById('lbl-avance-meta-activas').textContent = pendingQuantities ? 'Por confirmar: hay concentrados sin cuantificar' : `${pctActivasOperacion}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActOperacion)})`;
 
       document.getElementById('kpi-mat-act').textContent = fmtInt(actF.length);
       document.getElementById('kpi-mat-dir').textContent = `${dirsActivas.size}/${dirsCatalogo.size || dirsActivas.size}`;
@@ -2048,9 +2084,9 @@
       document.getElementById('kpi-mat-metas-pct').textContent = `${pctMetasAtendidas}%`;
       document.getElementById('kpi-mat-procesos').textContent = `Sobre ${procesosCatTotal} procesos estratégicos`;
 
-      document.getElementById('kpi-mat-cumplimiento').textContent = `${pctGlobalCatalogo}%`;
-      document.getElementById('kpi-mat-cumplimiento-activas').textContent = `${pctActivasOperacion}% en activas`;
-      document.getElementById('kpi-mat-cumplimiento-sub').textContent = `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial`;
+      document.getElementById('kpi-mat-cumplimiento').textContent = pendingQuantities ? 'Por confirmar' : `${pctGlobalCatalogo}%`;
+      document.getElementById('kpi-mat-cumplimiento-activas').textContent = pendingQuantities ? 'Falta cuantificar concentrados' : `${pctActivasOperacion}% en activas`;
+      document.getElementById('kpi-mat-cumplimiento-sub').textContent = pendingQuantities ? 'Revisar cantidades en conciliación' : `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial`;
 
       const ejeMap = {};
       actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
@@ -2120,7 +2156,7 @@
       rows.sort((a, b) => (b.actCount - a.actCount) || (b.metaAnual - a.metaAnual));
 
       document.getElementById('tbl-metas-avance').innerHTML = rows.map(m => {
-        const pctStr = m.pct.toFixed(1);
+        const pctStr = m.pct === null ? 'Por confirmar' : m.pct.toFixed(1) + '%';
         const badgeColor = m.pct >= 100 ? 'bg-emerald-100 text-emerald-800' : m.actCount > 0 ? 'bg-blue-100 text-gto-blue' : 'bg-slate-100 text-slate-500';
         const unitTag = m.unitCat === 'PERSONAS' ? `<span class="text-[9.5px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">Población</span>` : m.unitCat === 'METROS' ? `<span class="text-[9.5px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200">Infraestructura</span>` : `<span class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">Actividades</span>`;
 
@@ -2139,10 +2175,10 @@
             </td>
             <td class="p-2.5 text-right font-semibold text-slate-700">${fmtInt(m.metaAnual)}</td>
             <td class="p-2.5 text-right font-bold text-gto-blue">
-              ${fmtInt(m.realizado)}
+              ${m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado)}
               ${m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
             </td>
-            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}%</span></td>
+            <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}</span></td>
           </tr>
         `;
       }).join('');
@@ -2635,79 +2671,59 @@
     // =========================================================
     // VISTA 6: CONCILIACIÓN OPERATIVA
     // =========================================================
-    function renderAuditoria(actF, terF, pobF) {
-      const terSum = {};
-      const munMap = {};
-      terF.forEach(t => {
-        const id = cleanStr(t.ID_Actividad);
-        terSum[id] = (terSum[id] || 0) + toNum(t.Cantidad);
-        munMap[id] = cleanStr(t.Municipio);
+    const auditEscape = value => cleanStr(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+
+    function renderAuditoria(actF) {
+      // Keep full child records: a municipal filter must not compare a partial
+      // territory total with the complete demographic total of the activity.
+      auditList = CulturaCalidad.audit(actF, rawDB.territorio, rawDB.poblacion, rawDB.evidencia, rawDB.alineacion);
+      auditList.sort((a, b) => Math.abs(b.diff || 0) - Math.abs(a.diff || 0));
+      document.getElementById('badge-audit').textContent = new Set(auditList.map(r => r.id)).size;
+      ['diferencias', 'faltantes', 'evidencias', 'concentrados', 'identidad'].forEach(kind => {
+        document.getElementById('audit-count-' + kind).textContent = fmtInt(new Set(auditList.filter(r => r.categories.includes(kind)).map(r => r.id)).size);
       });
+      const quantityCount = new Set(auditList.filter(r => r.categories.includes('concentrados')).map(r => r.id)).size;
+      const quantityButton = document.getElementById('kpi-cantidades-alerta');
+      quantityButton.classList.toggle('hidden', quantityCount === 0);
+      quantityButton.textContent = `Revisar cantidades en ${quantityCount} registros`;
+      renderAuditTable();
+    }
 
-      const pobSum = {};
-      pobF.forEach(p => {
-        const id = cleanStr(p.ID_Actividad);
-        pobSum[id] = (pobSum[id] || 0) + toNum(p.Cantidad_Poblacion);
-      });
+    function filteredAuditRows() {
+      const kind = document.getElementById('filter-audit-kind').value;
+      const search = cleanStr(document.getElementById('search-audit').value).toLocaleLowerCase('es');
+      return auditList.filter(r => (kind === 'ALL' || r.categories.includes(kind)) && (!search || [r.id, r.folio, r.nombre, r.direccion, r.usuario, r.mun, r.diag].join(' ').toLocaleLowerCase('es').includes(search)));
+    }
 
-      auditList = [];
-      actF.forEach(a => {
-        const id = cleanStr(a.ID_Actividad);
-        const sT = terSum[id] || 0;
-        const sP = pobSum[id] || 0;
-        const diff = sT - sP;
-        const hasTer = id in terSum;
-        const hasPob = id in pobSum;
-
-        if (diff !== 0 || !hasTer || !hasPob) {
-          let diag = 'Variación operativa entre registro territorial y demográfico';
-          if (!hasTer && !hasPob) diag = 'Falta capturar impacto territorial y perfil demográfico';
-          else if (!hasTer) diag = 'Falta registrar cobertura territorial';
-          else if (!hasPob) diag = 'Falta registrar desglose demográfico';
-
-          auditList.push({
-            id,
-            usuario: cleanStr(a.Usuario_Registra),
-            nombre: cleanStr(a.Nombre_Actividad),
-            mun: munMap[id] || 'Sin asignar',
-            sT,
-            sP,
-            diff,
-            diag
-          });
-        }
-      });
-
-      auditList.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
-      document.getElementById('badge-audit').textContent = auditList.length;
-
-      document.getElementById('tbl-auditoria').innerHTML = auditList.map(r => `
+    function renderAuditTable() {
+      const rows = filteredAuditRows();
+      document.getElementById('audit-visible-count').textContent = `Mostrando ${Math.min(rows.length, 250)} de ${rows.length} registros con alertas. El CSV incluye todos los resultados de esta búsqueda.`;
+      const total = n => n === null ? '<span class="text-amber-700">No disponible</span>' : fmtInt(n);
+      document.getElementById('tbl-auditoria').innerHTML = rows.length ? rows.slice(0, 250).map(r => `
         <tr class="hover:bg-amber-50/30">
-          <td class="p-2.5 font-mono font-bold text-gto-blue">${r.id}</td>
-          <td class="p-2.5 text-slate-500">${r.usuario}</td>
-          <td class="p-2.5 font-medium text-slate-700">${r.nombre}</td>
-          <td class="p-2.5 text-slate-600">${r.mun}</td>
-          <td class="p-2.5 text-right font-semibold">${fmtInt(r.sT)}</td>
-          <td class="p-2.5 text-right font-semibold">${fmtInt(r.sP)}</td>
-          <td class="p-2.5 text-right font-black text-rose-600">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</td>
-          <td class="p-2.5 text-center">
-            <button onclick="openExpedienteModal('${r.id}')" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">
-              Revisar Ficha
-            </button>
-          </td>
-        </tr>
-      `).join('');
+          <td class="p-2.5 font-mono font-bold text-gto-blue">${auditEscape(r.id)}<div class="text-[10px] text-slate-500">${auditEscape(r.folio)}</div></td>
+          <td class="p-2.5 text-slate-500">${auditEscape(r.usuario)}</td>
+          <td class="p-2.5 font-medium text-slate-700">${auditEscape(r.nombre)}<div class="text-[10px] text-slate-500">${auditEscape(r.direccion)}</div></td>
+          <td class="p-2.5 text-slate-600">${auditEscape(r.mun)}</td>
+          <td class="p-2.5 text-right font-semibold">${total(r.sT)}</td>
+          <td class="p-2.5 text-right font-semibold">${total(r.sP)}</td>
+          <td class="p-2.5 text-right font-bold ${r.diff ? 'text-rose-700' : 'text-slate-500'}">${r.diff === null ? 'No comparable' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}</td>
+          <td class="p-2.5 text-slate-700 min-w-[280px]">${auditEscape(r.diag)}</td>
+          <td class="p-2.5 text-center"><button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">Revisar ficha</button></td>
+        </tr>`).join('') : '<tr><td colspan="9" class="p-6 text-center text-slate-500">No hay alertas para esta selección y búsqueda.</td></tr>';
     }
 
     function exportAuditCSV() {
-      if (!auditList.length) return;
-      const csv = Papa.unparse(auditList);
+      const rows = filteredAuditRows();
+      if (!rows.length) return;
+      const csv = Papa.unparse(rows.map(r => ({ ID_Actividad: r.id, Folio: r.folio, Direccion: r.direccion, Usuario: r.usuario, Actividad: r.nombre, Municipios: r.mun, Total_Territorial: r.sT, Total_Demografico: r.sP, Diferencia: r.diff, Tipos_Alerta: r.categories.join(' | '), Que_Revisar: r.diag })), { escapeFormulae: true });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'Conciliacion_Operativa_Cultura_GTO.csv';
       a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     // =========================================================
@@ -2746,7 +2762,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
           <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Dirección General</span><b class="text-slate-800">${cleanStr(a.Direccion) || 'No especificada'}</b></div>
           <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Disciplina / Tipo</span><b class="text-slate-800">${cleanStr(a.Disciplina)} • ${cleanStr(a.Tipo_Actividad)}</b></div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Fecha y Sesiones</span><b class="text-slate-800">${a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio)} (${cleanStr(a.Total_Sesiones) || 1} sesión)</b></div>
+          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Fecha y Sesiones</span><b class="text-slate-800">${a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio)} (${CulturaCalidad.count(a.Total_Sesiones) === null ? 'Sesiones no informadas' : fmtInt(CulturaCalidad.count(a.Total_Sesiones)) + ' sesiones'})</b></div>
           <div class="md:col-span-2"><span class="text-slate-400 font-bold block text-[10px] uppercase">Clave de Proceso y Meta</span><b class="text-gto-blue">${cleanStr(a.Clave_Proceso_Txt)}</b> — ${cleanStr(a.Nombre_Meta)}</div>
           <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Recinto / Espacio</span><b class="text-slate-800">${cleanStr(a.Nombre_Espacio) || cleanStr(a.Especifique_Espacio) || cleanStr(a.Tipo_Espacio)}</b></div>
         </div>
@@ -3146,7 +3162,7 @@
         slide2.background = { color: 'F4F7FB' };
         addExecutiveSlideHeader(slide2, pptx, '1. Visión General del Ecosistema Cultural', filterSummaryLine, shieldDataUrl, 2);
 
-        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Actividades Realizadas', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones totales`, '004B87');
+        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Registros de actividades', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones reportadas`, '004B87');
         addKpiCardToSlide(slide2, pptx, 3.58, 0.98, 3.00, 1.00, 'Personas Beneficiadas', txt('kpi-pop-total'), txt('kpi-pop-sub'), 'F59E0B');
         addKpiCardToSlide(slide2, pptx, 6.76, 0.98, 3.00, 1.00, 'Ingresos Generados', txt('kpi-ingresos'), txt('kpi-contratado'), '10B981');
         addKpiCardToSlide(slide2, pptx, 9.94, 0.98, 3.00, 1.00, 'Cobertura Municipal', `${txt('kpi-mun-ratio')} (${txt('kpi-mun-pct')})`, txt('kpi-mun-foraneo'), '7C3AED');
@@ -3160,7 +3176,7 @@
 
         // Gráfica Disciplinas y Programa de Gobierno
         slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 2.12, w: 4.62, h: 2.40, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
-        slide2.addText('Actividades por Disciplina (Top 8)', { x: 8.48, y: 2.20, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        slide2.addText('Registros por Disciplina (Top 8)', { x: 8.48, y: 2.20, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
         const imgDisc = getChartHighResBase64('chart-disciplinas');
         if (imgDisc) slide2.addImage({ data: imgDisc, x: 8.42, y: 2.48, w: 4.42, h: 1.96 });
 
@@ -3222,8 +3238,8 @@
               { text: `${m.clave} (#${m.idAlin})`, options: { bold: true, color: '004B87', fill: bg } },
               { text: `${formatShortDireccion(m.direccion)}: ${shortMeta}`, options: { color: '334155', fill: bg } },
               { text: fmtInt(m.metaAnual), options: { align: 'right', color: '475569', fill: bg } },
-              { text: fmtInt(m.realizado), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
-              { text: `${m.pct.toFixed(1)}%`, options: { align: 'right', bold: true, color: m.pct >= 100 ? '047857' : 'B45309', fill: bg } }
+              { text: m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
+              { text: m.pct === null ? 'Por confirmar' : `${m.pct.toFixed(1)}%`, options: { align: 'right', bold: true, color: m.pct >= 100 ? '047857' : 'B45309', fill: bg } }
             ];
           })
         ];
@@ -3287,7 +3303,7 @@
         addKpiCardToSlide(slide6, pptx, 0.40, 0.98, 3.00, 1.00, 'Archivos de Evidencia', txt('kpi-evi-total'), 'Documentos y registros en Drive', '0D9488');
         addKpiCardToSlide(slide6, pptx, 3.58, 0.98, 3.00, 1.00, 'Cobertura Documental', `${txt('kpi-evi-cov-pct')} (${txt('kpi-evi-cov-ratio')})`, txt('kpi-evi-missing'), '004B87');
         addKpiCardToSlide(slide6, pptx, 6.76, 0.98, 3.00, 1.00, 'Evidencia Fotográfica', txt('kpi-evi-fotos'), 'Memoria gráfica de actividades', 'F59E0B');
-        addKpiCardToSlide(slide6, pptx, 9.94, 0.98, 3.00, 1.00, 'Registros en Conciliación', txt('badge-audit'), 'Con variación Territorial vs. Demográfico', '7C3AED');
+        addKpiCardToSlide(slide6, pptx, 9.94, 0.98, 3.00, 1.00, 'Registros en Conciliación', txt('badge-audit'), 'Con datos o cantidades por revisar', '7C3AED');
 
         slide6.addShape(pptx.ShapeType.roundRect, { x: 0.40, y: 2.12, w: 7.45, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
         slide6.addText('Cumplimiento de Evidencia Documental por Dirección General', { x: 0.56, y: 2.22, w: 7.1, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
@@ -3307,10 +3323,12 @@
         slide6.addShape(pptx.ShapeType.roundRect, { x: 8.20, y: 4.92, w: 4.56, h: 1.88, rectRadius: 0.06, fill: { color: 'FFFBEB' }, line: { color: 'FDE68A', width: 1 } });
         slide6.addText('Resumen de Conciliación Operativa', { x: 8.35, y: 5.02, w: 4.25, h: 0.25, fontSize: 9.5, bold: true, color: '92400E', fontFace: 'Arial' });
         slide6.addText(
-          `• Total Territorial Filtrado: ${txt('btn-pop-ter').replace('Territorial ', '')}\n` +
-          `• Total Demográfico Filtrado: ${txt('btn-pop-pob').replace('Demográfico ', '')}\n` +
-          `• Actividades con observación de captura: ${auditList.length}\n` +
-          `• Cobertura estatal activa: ${txt('kpi-mun-ratio')} municipios (${txt('kpi-mun-pct')})`,
+          `• Cifras discrepantes: ${txt('audit-count-diferencias')}\n` +
+          `• Datos por completar: ${txt('audit-count-faltantes')}\n` +
+          `• Sin evidencia: ${txt('audit-count-evidencias')}\n` +
+          `• Cantidades por revisar: ${txt('audit-count-concentrados')}\n` +
+          `• Posible duplicación: ${txt('audit-count-identidad')}\n` +
+          'Las alertas se superponen; no deben sumarse.',
           { x: 8.35, y: 5.32, w: 4.25, h: 1.35, fontSize: 8.5, color: '475569', fontFace: 'Arial' }
         );
 
