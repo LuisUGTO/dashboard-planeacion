@@ -549,7 +549,7 @@
                 <span id="kpi-sesiones-total" class="text-emerald-600 font-bold">0</span> sesiones reportadas
               </p>
               <p id="kpi-actividades-reportadas" class="text-[10px] text-slate-500 mt-1"></p>
-              <button id="kpi-cantidades-alerta" onclick="document.getElementById('filter-audit-kind').value='concentrados'; switchTab('tab-auditoria'); renderAuditTable();" class="hidden text-[10px] font-bold text-amber-800 mt-1 underline text-left"></button>
+              <button id="kpi-cantidades-alerta" onclick="openAuditQuantities()" class="hidden text-[10px] font-bold text-amber-800 mt-1 underline text-left"></button>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner">
               <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
@@ -923,7 +923,10 @@
           <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-1">Atención a Zonas de Atención Prioritaria por Municipio</h3>
             <p class="text-xs text-slate-400 mb-3">Distribución de actividades en zonas prioritarias por demarcación</p>
-            <div class="h-72"><canvas id="chart-ter-zap-mun"></canvas></div>
+            <p id="chart-ter-zap-hint" class="text-[11px] text-slate-500 mb-2 hidden">Desplázate para ver todos los municipios. Pasa sobre una barra para consultar sus cifras.</p>
+            <div class="h-72 overflow-y-auto custom-scroll" tabindex="0" role="region" aria-label="Actividades en zonas prioritarias por municipio">
+              <div id="chart-ter-zap-wrap" class="relative h-72"><canvas id="chart-ter-zap-mun"></canvas></div>
+            </div>
           </div>
 
           <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
@@ -1199,22 +1202,28 @@
               </p>
             </div>
           </div>
-          <button onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+          <button id="btn-export-audit" onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
             <i data-lucide="download" class="w-4 h-4"></i>
-            Descargar reporte CSV
+            <span id="lbl-export-audit">Descargar reporte CSV</span>
           </button>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-5 gap-3" aria-label="Resumen de calidad">
-          <div class="bg-white rounded-xl p-4 border border-rose-200"><p class="text-xs font-bold text-slate-600">Cifras discrepantes</p><p id="audit-count-diferencias" class="text-2xl font-black text-rose-700 mt-1">0</p></div>
-          <div class="bg-white rounded-xl p-4 border border-amber-200"><p class="text-xs font-bold text-slate-600">Datos por completar</p><p id="audit-count-faltantes" class="text-2xl font-black text-amber-700 mt-1">0</p></div>
-          <div class="bg-white rounded-xl p-4 border border-slate-200"><p class="text-xs font-bold text-slate-600">Sin evidencia</p><p id="audit-count-evidencias" class="text-2xl font-black text-slate-700 mt-1">0</p></div>
-          <div class="bg-white rounded-xl p-4 border border-blue-200"><p class="text-xs font-bold text-slate-600">Revisar cantidades</p><p id="audit-count-concentrados" class="text-2xl font-black text-gto-blue mt-1">0</p></div>
-          <div class="bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></div>
+          <button type="button" id="audit-card-diferencias" onclick="toggleAuditKind('diferencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-rose-200"><p class="text-xs font-bold text-slate-600">Cifras discrepantes</p><p id="audit-count-diferencias" class="text-2xl font-black text-rose-700 mt-1">0</p></button>
+          <button type="button" id="audit-card-faltantes" onclick="toggleAuditKind('faltantes')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-amber-200"><p class="text-xs font-bold text-slate-600">Datos por completar</p><p id="audit-count-faltantes" class="text-2xl font-black text-amber-700 mt-1">0</p></button>
+          <button type="button" id="audit-card-evidencias" onclick="toggleAuditKind('evidencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-slate-200"><p class="text-xs font-bold text-slate-600">Sin evidencia</p><p id="audit-count-evidencias" class="text-2xl font-black text-slate-700 mt-1">0</p></button>
+          <button type="button" id="audit-card-concentrados" onclick="toggleAuditKind('concentrados')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-blue-200"><p class="text-xs font-bold text-slate-600">Revisar cantidades</p><p id="audit-count-concentrados" class="text-2xl font-black text-gto-blue mt-1">0</p></button>
+          <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
         </div>
+        <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
         <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
           <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
           <div class="flex flex-wrap gap-3 mb-3">
+            <label class="text-xs font-bold text-slate-600">Usuario responsable
+              <select id="filter-audit-user" onchange="renderAuditTable()" class="block mt-1 max-w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
+                <option value="ALL">Todos los usuarios</option>
+              </select>
+            </label>
             <label class="text-xs font-bold text-slate-600">Tipo de alerta
               <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
                 <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option>
@@ -1224,6 +1233,7 @@
               <input id="search-audit" oninput="renderAuditTable()" type="search" placeholder="Escribe para buscar…" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs" />
             </label>
           </div>
+          <button type="button" onclick="resetAuditFilters()" class="text-xs font-bold text-gto-blue underline mb-3">Limpiar usuario, alerta y búsqueda</button>
           <p id="audit-visible-count" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
           <div class="overflow-x-auto max-h-[500px] custom-scroll">
             <table class="w-full text-left border-collapse text-xs">
@@ -1620,6 +1630,7 @@
       document.getElementById('f-eje').value = 'ALL';
       document.getElementById('f-enfoque').value = 'ALL';
       document.getElementById('f-zap').value = 'ALL';
+      resetAuditFilters();
       applyFilters();
     }
 
@@ -2238,6 +2249,8 @@
       document.getElementById('kpi-ter-pop').textContent = fmtInt(totalPopTer);
 
       const sortedMuns = Object.entries(munStats).sort((a, b) => b[1].total - a[1].total);
+      document.getElementById('chart-ter-zap-wrap').style.height = `${Math.max(288, sortedMuns.length * 28 + 85)}px`;
+      document.getElementById('chart-ter-zap-hint').classList.toggle('hidden', sortedMuns.length <= 7);
 
       renderChart('chart-ter-zap-mun', 'bar', {
         labels: sortedMuns.map(x => x[0]),
@@ -2247,12 +2260,27 @@
         ]
       }, {
         indexAxis: 'y',
-        scales: { x: { stacked: true }, y: { stacked: true, ticks: { font: { size: 10 } } } },
+        datasets: { bar: { maxBarThickness: 16 } },
+        scales: {
+          x: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
+          y: { stacked: true, grid: { display: false }, ticks: {
+            autoSkip: false, font: { size: 11 },
+            callback: function(value) {
+              const label = this.getLabelForValue(value);
+              return label.length > 24 ? label.slice(0, 23) + '…' : label;
+            }
+          } }
+        },
         plugins: {
           datalabels: {
             color: '#FFFFFF',
-            font: { size: 9.5, weight: 'bold' },
-            formatter: (v) => v >= 8 ? fmtInt(v) : ''
+            font: { size: 10, weight: 'bold' },
+            display: context => {
+              const value = context.dataset.data[context.dataIndex];
+              const scale = context.chart.scales.x;
+              return value > 0 && Math.abs(scale.getPixelForValue(value) - scale.getPixelForValue(0)) >= fmtInt(value).length * 7 + 10;
+            },
+            formatter: v => fmtInt(v)
           }
         }
       });
@@ -2672,6 +2700,39 @@
     // VISTA 6: CONCILIACIÓN OPERATIVA
     // =========================================================
     const auditEscape = value => cleanStr(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+    const auditKinds = ['diferencias', 'faltantes', 'evidencias', 'concentrados', 'identidad'];
+    const auditUserKey = value => cleanStr(value).toLocaleLowerCase('es') || '__SIN_USUARIO__';
+    const auditCategoryCount = (kind, rows = auditList) => new Set(rows.filter(r => r.categories.includes(kind)).map(r => r.id)).size;
+
+    function populateAuditUsers() {
+      const select = document.getElementById('filter-audit-user');
+      const selected = select.value || 'ALL';
+      const users = new Set(rawDB.actividades.map(a => auditUserKey(a.Usuario_Registra)));
+      // Preserve an existing selection even when a refresh contains no rows for it.
+      if (selected !== 'ALL') users.add(selected);
+      select.innerHTML = '<option value="ALL">Todos los usuarios</option>' + [...users].sort().map(user => `<option value="${auditEscape(user)}">${auditEscape(user === '__SIN_USUARIO__' ? 'Sin usuario registrado' : user)}</option>`).join('');
+      select.value = selected;
+    }
+
+    function toggleAuditKind(kind) {
+      const select = document.getElementById('filter-audit-kind');
+      select.value = select.value === kind ? 'ALL' : kind;
+      renderAuditTable();
+    }
+
+    function resetAuditFilters() {
+      document.getElementById('filter-audit-user').value = 'ALL';
+      document.getElementById('filter-audit-kind').value = 'ALL';
+      document.getElementById('search-audit').value = '';
+      renderAuditTable();
+    }
+
+    function openAuditQuantities() {
+      resetAuditFilters();
+      document.getElementById('filter-audit-kind').value = 'concentrados';
+      switchTab('tab-auditoria');
+      renderAuditTable();
+    }
 
     function renderAuditoria(actF) {
       // Keep full child records: a municipal filter must not compare a partial
@@ -2679,9 +2740,7 @@
       auditList = CulturaCalidad.audit(actF, rawDB.territorio, rawDB.poblacion, rawDB.evidencia, rawDB.alineacion);
       auditList.sort((a, b) => Math.abs(b.diff || 0) - Math.abs(a.diff || 0));
       document.getElementById('badge-audit').textContent = new Set(auditList.map(r => r.id)).size;
-      ['diferencias', 'faltantes', 'evidencias', 'concentrados', 'identidad'].forEach(kind => {
-        document.getElementById('audit-count-' + kind).textContent = fmtInt(new Set(auditList.filter(r => r.categories.includes(kind)).map(r => r.id)).size);
-      });
+      populateAuditUsers();
       const quantityCount = new Set(auditList.filter(r => r.categories.includes('concentrados')).map(r => r.id)).size;
       const quantityButton = document.getElementById('kpi-cantidades-alerta');
       quantityButton.classList.toggle('hidden', quantityCount === 0);
@@ -2689,15 +2748,34 @@
       renderAuditTable();
     }
 
+    function filteredAuditContextRows() {
+      const user = document.getElementById('filter-audit-user').value;
+      const search = cleanStr(document.getElementById('search-audit').value).toLocaleLowerCase('es');
+      return auditList.filter(r => (user === 'ALL' || auditUserKey(r.usuario) === user) && (!search || [r.id, r.folio, r.nombre, r.direccion, r.usuario, r.mun, r.diag].join(' ').toLocaleLowerCase('es').includes(search)));
+    }
+
     function filteredAuditRows() {
       const kind = document.getElementById('filter-audit-kind').value;
-      const search = cleanStr(document.getElementById('search-audit').value).toLocaleLowerCase('es');
-      return auditList.filter(r => (kind === 'ALL' || r.categories.includes(kind)) && (!search || [r.id, r.folio, r.nombre, r.direccion, r.usuario, r.mun, r.diag].join(' ').toLocaleLowerCase('es').includes(search)));
+      return filteredAuditContextRows().filter(r => kind === 'ALL' || r.categories.includes(kind));
     }
 
     function renderAuditTable() {
       const rows = filteredAuditRows();
-      document.getElementById('audit-visible-count').textContent = `Mostrando ${Math.min(rows.length, 250)} de ${rows.length} registros con alertas. El CSV incluye todos los resultados de esta búsqueda.`;
+      const contextRows = filteredAuditContextRows();
+      const kind = document.getElementById('filter-audit-kind').value;
+      auditKinds.forEach(category => {
+        document.getElementById('audit-count-' + category).textContent = fmtInt(auditCategoryCount(category, contextRows));
+        const card = document.getElementById('audit-card-' + category);
+        card.setAttribute('aria-pressed', String(kind === category));
+        card.classList.toggle('ring-2', kind === category);
+        card.classList.toggle('ring-blue-600', kind === category);
+        card.classList.toggle('bg-blue-50', kind === category);
+      });
+      const user = document.getElementById('filter-audit-user').value;
+      const scope = user === 'ALL' ? 'Todos los usuarios' : user === '__SIN_USUARIO__' ? 'Sin usuario registrado' : user;
+      document.getElementById('audit-visible-count').textContent = `${scope}. Mostrando ${Math.min(rows.length, 250)} de ${rows.length} registros con alertas. El CSV incluye todos los resultados de esta selección, incluidos los que no se muestran en pantalla.`;
+      document.getElementById('btn-export-audit').disabled = rows.length === 0;
+      document.getElementById('lbl-export-audit').textContent = `Descargar CSV (${fmtInt(rows.length)})`;
       const total = n => n === null ? '<span class="text-amber-700">No disponible</span>' : fmtInt(n);
       document.getElementById('tbl-auditoria').innerHTML = rows.length ? rows.slice(0, 250).map(r => `
         <tr class="hover:bg-amber-50/30">
@@ -2721,7 +2799,10 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Conciliacion_Operativa_Cultura_GTO.csv';
+      const user = document.getElementById('filter-audit-user').value;
+      const kind = document.getElementById('filter-audit-kind').value;
+      const scope = [user === 'ALL' ? 'Todos' : user, kind === 'ALL' ? 'Todas_alertas' : kind].join('_').replace(/[^a-zA-Z0-9_.-]/g, '_');
+      a.download = `Conciliacion_Cultura_GTO_${scope}.csv`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
@@ -3323,11 +3404,11 @@
         slide6.addShape(pptx.ShapeType.roundRect, { x: 8.20, y: 4.92, w: 4.56, h: 1.88, rectRadius: 0.06, fill: { color: 'FFFBEB' }, line: { color: 'FDE68A', width: 1 } });
         slide6.addText('Resumen de Conciliación Operativa', { x: 8.35, y: 5.02, w: 4.25, h: 0.25, fontSize: 9.5, bold: true, color: '92400E', fontFace: 'Arial' });
         slide6.addText(
-          `• Cifras discrepantes: ${txt('audit-count-diferencias')}\n` +
-          `• Datos por completar: ${txt('audit-count-faltantes')}\n` +
-          `• Sin evidencia: ${txt('audit-count-evidencias')}\n` +
-          `• Cantidades por revisar: ${txt('audit-count-concentrados')}\n` +
-          `• Posible duplicación: ${txt('audit-count-identidad')}\n` +
+          `• Cifras discrepantes: ${fmtInt(auditCategoryCount('diferencias'))}\n` +
+          `• Datos por completar: ${fmtInt(auditCategoryCount('faltantes'))}\n` +
+          `• Sin evidencia: ${fmtInt(auditCategoryCount('evidencias'))}\n` +
+          `• Cantidades por revisar: ${fmtInt(auditCategoryCount('concentrados'))}\n` +
+          `• Posible duplicación: ${fmtInt(auditCategoryCount('identidad'))}\n` +
           'Las alertas se superponen; no deben sumarse.',
           { x: 8.35, y: 5.32, w: 4.25, h: 1.35, fontSize: 8.5, color: '475569', fontFace: 'Arial' }
         );

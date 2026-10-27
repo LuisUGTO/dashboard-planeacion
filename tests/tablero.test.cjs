@@ -7,7 +7,7 @@ const main = [...fs.readFileSync(require('node:path').join(__dirname, '../index.
 function setup() {
   const nodes = new Map();
   const document = { getElementById(id) {
-    if (!nodes.has(id)) nodes.set(id, { value: 'ALL', textContent: '', innerHTML: '', classList: { toggle() {}, add() {}, remove() {} } });
+    if (!nodes.has(id)) nodes.set(id, { value: id === 'search-audit' ? '' : 'ALL', textContent: '', innerHTML: '', style: {}, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, classList: { toggle() {}, add() {}, remove() {} } });
     return nodes.get(id);
   } };
   const context = vm.createContext({ window: { addEventListener() {} }, document, CulturaCalidad: quality, console, setTimeout, URL, Blob });
@@ -23,6 +23,42 @@ test('la matriz usa talleres reportados y no sesiones para el cumplimiento', () 
   const result = JSON.parse(vm.runInContext('JSON.stringify(cachedMetasCatalogoRows)', s.context))[0];
   assert.equal(result.actCount, 1); assert.equal(result.realizado, 1000); assert.equal(result.pct, 50);
   assert.match(s.nodes.get('lbl-avance-meta-global').textContent, /50.0%/);
+});
+
+test('CSV y tarjetas respetan usuario, búsqueda y alerta incluso con más de 250 resultados', () => {
+  const s = setup(); let exported; let download;
+  s.context.Papa = { unparse(rows, options) { exported = rows; assert.equal(options.escapeFormulae, true); return 'csv'; } };
+  s.context.URL = { createObjectURL() { return 'blob:test'; }, revokeObjectURL() {} };
+  s.document.createElement = () => ({ click() { download = this.download; } });
+  s.context.fixture = Array.from({ length: 260 }, (_, i) => ({ id: 'A'+i, folio: 'F'+i, usuario: ' IYSALAZARH@guanajuato.gob.mx ', nombre: 'Taller música', direccion: 'Área', mun: 'León', sT: 1, sP: 2, diff: -1, categories: ['diferencias', 'evidencias'], diag: 'Revisar' }));
+  s.context.fixture.push({ ...s.context.fixture[0], id: 'OTRO', usuario: 'otra@guanajuato.gob.mx' }, { ...s.context.fixture[0], id: 'SIN_DIF', categories: ['evidencias'] });
+  s.document.getElementById('filter-audit-user').value = 'iysalazarh@guanajuato.gob.mx';
+  s.document.getElementById('search-audit').value = 'música';
+  vm.runInContext('auditList = fixture; toggleAuditKind("diferencias"); exportAuditCSV();', s.context);
+  assert.equal(exported.length, 260);
+  assert.ok(exported.every(r => r.ID_Actividad !== 'OTRO' && r.ID_Actividad !== 'SIN_DIF'));
+  assert.match(download, /iysalazarh_guanajuato.gob.mx_diferencias/);
+  assert.equal(s.nodes.get('audit-count-evidencias').textContent, '261');
+  assert.equal(s.nodes.get('audit-card-diferencias').attributes['aria-pressed'], 'true');
+  assert.match(s.nodes.get('audit-visible-count').textContent, /250 de 260/);
+  vm.runInContext('toggleAuditKind("diferencias")', s.context);
+  assert.equal(s.nodes.get('filter-audit-kind').value, 'ALL');
+  assert.equal(s.nodes.get('filter-audit-user').value, 'iysalazarh@guanajuato.gob.mx');
+  assert.equal(vm.runInContext('filteredAuditRows().length', s.context), 261);
+  exported = undefined;
+  s.document.getElementById('search-audit').value = 'sin coincidencias';
+  vm.runInContext('renderAuditTable(); exportAuditCSV();', s.context);
+  assert.equal(exported, undefined);
+  assert.equal(s.nodes.get('btn-export-audit').disabled, true);
+});
+
+test('el usuario seleccionado no se pierde cuando no aparece en una actualización', () => {
+  const s = setup();
+  s.document.getElementById('filter-audit-user').value = 'iysalazarh@guanajuato.gob.mx';
+  s.context.fixture = [{ Usuario_Registra: 'otra@guanajuato.gob.mx' }];
+  vm.runInContext('rawDB.actividades = fixture; populateAuditUsers();', s.context);
+  assert.equal(s.nodes.get('filter-audit-user').value, 'iysalazarh@guanajuato.gob.mx');
+  assert.match(s.nodes.get('filter-audit-user').innerHTML, /iysalazarh@guanajuato.gob.mx/);
 });
 test('un concentrado sin cantidad no produce cero ni un porcentaje ficticio', () => {
   const s = setup(); s.context.act = [{ ...a, Tipo_Registro: 'Concentrado mensual' }]; s.context.cat = cat;
