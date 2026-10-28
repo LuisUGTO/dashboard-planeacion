@@ -1202,6 +1202,15 @@
               </p>
             </div>
           </div>
+          <label class="text-xs font-bold text-amber-900">Hoja para descargar
+            <select id="filter-audit-export" onchange="renderAuditTable()" class="block mt-1 bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs">
+              <option value="actividades">Actividades · A a BN</option>
+              <option value="territorio">Territorio · A a L</option>
+              <option value="poblacion">Población · A a H</option>
+              <option value="evidencia">Evidencias · A a E</option>
+              <option value="resumen">Resumen de alertas</option>
+            </select>
+          </label>
           <button id="btn-export-audit" onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span id="lbl-export-audit">Descargar reporte CSV</span>
@@ -1216,6 +1225,7 @@
           <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
         </div>
         <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
+        <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes en el orden de la base, los IDs y los folios. Son registros existentes: corrige sobre el mismo ID; no los agregues como altas nuevas. El resumen de alertas se descarga por separado.</p>
         <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
           <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
           <div class="flex flex-wrap gap-3 mb-3">
@@ -1365,6 +1375,8 @@
     const MUNICIPIOS_GTO = new Set(Object.keys(GTO_COORDS_NORM).filter(m => m !== 'pueblonuevo'));
 
     let rawDB = { actividades: [], territorio: [], poblacion: [], evidencia: [], alineacion: [] };
+    let exportDB = {};
+    const auditExportWidths = { actividades: 66, territorio: 12, poblacion: 8, evidencia: 5 };
     let filteredActIds = new Set();
     let popMode = 'territorio';
     let charts = {};
@@ -1535,7 +1547,7 @@
                 loadedCount++;
                 const st = document.getElementById('loader-status');
                 if (st) st.textContent = `Sincronizando módulos de información (${loadedCount}/5)...`;
-                resolve(res.data);
+                resolve({ rows: res.data, fields: res.meta.fields || [] });
               },
               error: (err) => reject(err)
             });
@@ -1561,13 +1573,16 @@
       document.getElementById('loader-status').textContent = 'Conectando con la base de datos institucional (0/5)...';
 
       try {
-        const [act, ter, pob, evi, catAl] = await Promise.all([
+        const [actSource, terSource, pobSource, eviSource, catSource] = await Promise.all([
           fetchSheetCSV(SHEETS.actividades),
           fetchSheetCSV(SHEETS.territorio),
           fetchSheetCSV(SHEETS.poblacion),
           fetchSheetCSV(SHEETS.evidencia),
           fetchSheetCSV(SHEETS.alineacion)
         ]);
+        const [act, ter, pob, evi, catAl] = [actSource, terSource, pobSource, eviSource, catSource].map(source => source.rows);
+        // Preserve the source order and values separately from dashboard helpers.
+        exportDB = { actividades: actSource, territorio: terSource, poblacion: pobSource, evidencia: eviSource };
 
         rawDB.actividades = act
           .filter(r => cleanStr(r.ID_Actividad) !== '')
@@ -2777,9 +2792,10 @@
       });
       const user = document.getElementById('filter-audit-user').value;
       const scope = user === 'ALL' ? 'Todos los usuarios' : user === '__SIN_USUARIO__' ? 'Sin usuario registrado' : user;
-      document.getElementById('audit-visible-count').textContent = `${scope}. Mostrando ${Math.min(rows.length, 250)} de ${rows.length} registros con alertas. El CSV incluye todos los resultados de esta selección, incluidos los que no se muestran en pantalla.`;
-      document.getElementById('btn-export-audit').disabled = rows.length === 0;
-      document.getElementById('lbl-export-audit').textContent = `Descargar CSV (${fmtInt(rows.length)})`;
+      const download = getAuditExportData();
+      document.getElementById('audit-visible-count').textContent = `${scope}. Mostrando ${Math.min(rows.length, 250)} de ${rows.length} actividades con alertas. ${download.label}: ${download.data.length} filas para descargar, incluidas las que no se muestran en pantalla.${rows.length && !download.data.length ? ' No hay registros existentes en esta hoja para la selección; deben completarse en la captura.' : ''}`;
+      document.getElementById('btn-export-audit').disabled = download.data.length === 0;
+      document.getElementById('lbl-export-audit').textContent = `Descargar CSV (${fmtInt(download.data.length)})`;
       const total = n => n === null ? '<span class="text-amber-700">No disponible</span>' : fmtInt(n);
       document.getElementById('tbl-auditoria').innerHTML = rows.length ? rows.slice(0, 250).map(r => `
         <tr class="hover:bg-amber-50/30">
@@ -2795,18 +2811,34 @@
         </tr>`).join('') : '<tr><td colspan="9" class="p-6 text-center text-slate-500">No hay alertas para esta selección y búsqueda.</td></tr>';
     }
 
+    function getAuditExportData() {
+      const selected = document.getElementById('filter-audit-export').value;
+      const key = selected === 'resumen' || auditExportWidths[selected] ? selected : 'actividades';
+      const auditRows = filteredAuditRows();
+      if (key === 'resumen') {
+        const fields = ['ID_Actividad', 'Folio', 'Direccion', 'Usuario', 'Actividad', 'Municipios', 'Total_Territorial', 'Total_Demografico', 'Diferencia', 'Tipos_Alerta', 'Que_Revisar'];
+        return { key, label: 'Resumen de alertas', fields, data: auditRows.map(r => [r.id, r.folio, r.direccion, r.usuario, r.nombre, r.mun, r.sT, r.sP, r.diff, r.categories.join(' | '), r.diag]) };
+      }
+      const ids = new Set(auditRows.map(r => cleanStr(r.id)));
+      const source = exportDB[key] || { rows: rawDB[key], fields: Object.keys(rawDB[key][0] || {}).filter(field => field !== 'Fecha_Inicio_ISO') };
+      const fields = source.fields.slice(0, auditExportWidths[key]);
+      const user = document.getElementById('filter-audit-user').value;
+      const matches = source.rows.filter(r => ids.has(cleanStr(r.ID_Actividad)) && (key !== 'actividades' || user === 'ALL' || auditUserKey(r.Usuario_Registra) === user));
+      return { key, label: SHEETS[key], fields, data: matches.map(row => fields.map(field => row[field] == null ? '' : row[field])) };
+    }
+
     function exportAuditCSV() {
-      const rows = filteredAuditRows();
-      if (!rows.length) return;
-      const csv = Papa.unparse(rows.map(r => ({ ID_Actividad: r.id, Folio: r.folio, Direccion: r.direccion, Usuario: r.usuario, Actividad: r.nombre, Municipios: r.mun, Total_Territorial: r.sT, Total_Demografico: r.sP, Diferencia: r.diff, Tipos_Alerta: r.categories.join(' | '), Que_Revisar: r.diag })), { escapeFormulae: true });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const download = getAuditExportData();
+      if (!download.data.length) return;
+      const csv = Papa.unparse({ fields: download.fields, data: download.data }, { escapeFormulae: true, newline: '\r\n' });
+      const blob = new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       const user = document.getElementById('filter-audit-user').value;
       const kind = document.getElementById('filter-audit-kind').value;
       const scope = [user === 'ALL' ? 'Todos' : user, kind === 'ALL' ? 'Todas_alertas' : kind].join('_').replace(/[^a-zA-Z0-9_.-]/g, '_');
-      a.download = `Conciliacion_Cultura_GTO_${scope}.csv`;
+      a.download = `${download.key === 'resumen' ? 'Conciliacion' : download.label}_Cultura_GTO_${scope}.csv`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }

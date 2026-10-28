@@ -46,12 +46,13 @@ test('la matriz usa talleres reportados y no sesiones para el cumplimiento', () 
 
 test('CSV y tarjetas respetan usuario, búsqueda y alerta incluso con más de 250 resultados', () => {
   const s = setup(); let exported; let download;
-  s.context.Papa = { unparse(rows, options) { exported = rows; assert.equal(options.escapeFormulae, true); return 'csv'; } };
+  s.context.Papa = { unparse(payload, options) { exported = payload.data.map(row => Object.fromEntries(payload.fields.map((h,i) => [h,row[i]]))); assert.equal(options.escapeFormulae, true); return 'csv'; } };
   s.context.URL = { createObjectURL() { return 'blob:test'; }, revokeObjectURL() {} };
   s.document.createElement = () => ({ click() { download = this.download; } });
   s.context.fixture = Array.from({ length: 260 }, (_, i) => ({ id: 'A'+i, folio: 'F'+i, usuario: ' IYSALAZARH@guanajuato.gob.mx ', nombre: 'Taller música', direccion: 'Área', mun: 'León', sT: 1, sP: 2, diff: -1, categories: ['diferencias', 'evidencias'], diag: 'Revisar' }));
   s.context.fixture.push({ ...s.context.fixture[0], id: 'OTRO', usuario: 'otra@guanajuato.gob.mx' }, { ...s.context.fixture[0], id: 'SIN_DIF', categories: ['evidencias'] });
   s.document.getElementById('filter-audit-user').value = 'iysalazarh@guanajuato.gob.mx';
+  s.document.getElementById('filter-audit-export').value = 'resumen';
   s.document.getElementById('search-audit').value = 'música';
   vm.runInContext('auditList = fixture; toggleAuditKind("diferencias"); exportAuditCSV();', s.context);
   assert.equal(exported.length, 260);
@@ -69,6 +70,44 @@ test('CSV y tarjetas respetan usuario, búsqueda y alerta incluso con más de 25
   vm.runInContext('renderAuditTable(); exportAuditCSV();', s.context);
   assert.equal(exported, undefined);
   assert.equal(s.nodes.get('btn-export-audit').disabled, true);
+});
+
+test('la descarga para corregir mantiene orden, IDs y valores de cada hoja sin columnas del resumen', () => {
+  const s = setup();
+  s.context.source = {
+    actividades: { fields: ['ID_Actividad','Folio','Usuario_Registra','Fecha_Inicio','Total_Sesiones','Nombre_Actividad'], rows: [
+      { ID_Actividad:'A1', Folio:'F1', Usuario_Registra:'adriana@ejemplo.mx', Fecha_Inicio:'09/02/2026',Total_Sesiones:'0',Nombre_Actividad:'Taller' },
+      { ID_Actividad:'OTRO',Folio:'F2',Usuario_Registra:'otra@ejemplo.mx' },
+      { ID_Actividad:'A1',Folio:'COLISION',Usuario_Registra:'otra@ejemplo.mx' }
+    ] },
+    territorio: { fields:['ID_Territorio','ID_Actividad','Municipio','Cantidad'],rows:[
+      { ID_Territorio:'T1',ID_Actividad:'A1',Municipio:'León',Cantidad:'0' },
+      { ID_Territorio:'T2',ID_Actividad:'A1',Municipio:'Guanajuato',Cantidad:'' },
+      { ID_Territorio:'T3',ID_Actividad:'OTRO',Municipio:'León',Cantidad:'99' }
+    ] },
+    poblacion: { fields:['ID_Poblacion','ID_Actividad','Cantidad_Poblacion'],rows:[] },
+    evidencia: { fields:['ID_Evidencia','ID_Actividad','Archivo_Evidencia'],rows:[{ID_Evidencia:'E1',ID_Actividad:'A1',Archivo_Evidencia:'archivo.pdf'}] }
+  };
+  s.context.alerts=[{id:'A1',usuario:'adriana@ejemplo.mx',categories:['faltantes'],nombre:'Taller'}];
+  s.document.getElementById('filter-audit-user').value='adriana@ejemplo.mx';
+  s.document.getElementById('filter-audit-kind').value='faltantes';
+  s.document.getElementById('filter-audit-export').value='actividades';
+  vm.runInContext('exportDB=source; auditList=alerts;',s.context);
+  const data=()=>JSON.parse(vm.runInContext('JSON.stringify(getAuditExportData())',s.context));
+  let result=data();
+  assert.deepEqual(result.fields,s.context.source.actividades.fields);
+  assert.deepEqual(result.data,[['A1','F1','adriana@ejemplo.mx','09/02/2026','0','Taller']]);
+  s.document.getElementById('filter-audit-export').value='territorio';
+  result=data();
+  assert.deepEqual(result.data,[['T1','A1','León','0'],['T2','A1','Guanajuato','']]);
+  assert.ok(!result.fields.includes('Que_Revisar'));
+  s.document.getElementById('filter-audit-export').value='evidencia';
+  assert.deepEqual(data().data,[['E1','A1','archivo.pdf']]);
+  s.document.getElementById('filter-audit-export').value='poblacion';
+  vm.runInContext('renderAuditTable()',s.context);
+  assert.equal(data().data.length,0);
+  assert.equal(s.nodes.get('btn-export-audit').disabled,true);
+  assert.match(s.nodes.get('audit-visible-count').textContent,/No hay registros existentes/);
 });
 
 test('el usuario seleccionado no se pierde cuando no aparece en una actualización', () => {
