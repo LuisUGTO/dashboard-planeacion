@@ -3,14 +3,15 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const quality = require('../assets/js/calidad-datos.js');
+const ficha = require('../assets/js/ficha-actividad.js');
 const main = [...fs.readFileSync(require('node:path').join(__dirname, '../index.html'), 'utf8').matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m => m[1]).find(s => s.includes('const SHEET_ID'));
 function setup() {
   const nodes = new Map();
   const document = { getElementById(id) {
-    if (!nodes.has(id)) nodes.set(id, { value: id === 'search-audit' ? '' : 'ALL', textContent: '', innerHTML: '', style: {}, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, classList: { toggle() {}, add() {}, remove() {} } });
+    if (!nodes.has(id)) nodes.set(id, { value: id === 'search-audit' ? '' : 'ALL', textContent: '', innerHTML: '', style: {}, attributes: {}, focus() {}, setAttribute(key, value) { this.attributes[key] = value; }, classList: { toggle() {}, add() {}, remove() {} } });
     return nodes.get(id);
   } };
-  const context = vm.createContext({ window: { addEventListener() {} }, document, CulturaCalidad: quality, console, setTimeout, URL, Blob });
+  const context = vm.createContext({ window: { addEventListener() {} }, document, CulturaCalidad: quality, CulturaFicha: ficha, console, setTimeout, URL, Blob });
   vm.runInContext(main, context);
   vm.runInContext('renderChart = () => {}; renderDoughnutWithHtmlLegend = () => {}; renderStrategicDirections = () => {};', context);
   return { context, nodes, document };
@@ -133,4 +134,18 @@ test('el filtro municipal compara toda la actividad, no una fracción del territ
   s.context.fixture = { actividades: [{ ...a, Total_Sesiones: 1 }], territorio: [{ ID_Actividad: 'A1', Municipio: 'León', Otra_Comunidad: 'Centro', Cantidad: 20 }, { ID_Actividad: 'A1', Municipio: 'Silao', Otra_Comunidad: 'Centro', Cantidad: 30 }], poblacion: [{ ID_Actividad: 'A1', Cantidad_Poblacion: 50, Cantidad_Participacion: 0, Cantidad_Acceso: 50 }], evidencia: [], alineacion: cat };
   vm.runInContext('rawDB = fixture; renderVisionGeneral = () => {}; renderMatrizEstrategica = () => {}; renderCoberturaTerritorial = () => {}; renderPerfilPoblacion = () => {}; renderRepositorioEvidencias = () => {}; applyFilters();', s.context);
   assert.equal(vm.runInContext('auditList.length', s.context), 0);
+});
+
+test('la ficha conserva todos los hijos y detecta duplicación fuera del filtro activo', () => {
+  const s = setup();
+  s.context.fixture = { actividades: [{ ...a, Total_Sesiones: 1, Clave_Proceso_Txt: 'PB1' }, { ...a, ID_Actividad: 'A2', Folio: 'F2', Total_Sesiones: 1 }], territorio: [{ ID_Territorio: 'T1', ID_Actividad: 'A1', Municipio: 'León', Cantidad: 20 }, { ID_Territorio: 'T2', ID_Actividad: 'A1', Municipio: 'Silao', Cantidad: 30 }], poblacion: [{ ID_Poblacion: 'P1', ID_Actividad: 'A1', Cantidad_Poblacion: 50, Cantidad_Participacion: 0, Cantidad_Acceso: 50 }], evidencia: [], alineacion: cat };
+  s.document.getElementById('f-municipio').value = 'León';
+  vm.runInContext('rawDB = fixture; auditList = []; openExpedienteModal("A1");', s.context);
+  const html = s.nodes.get('mod-body').innerHTML;
+  assert.match(html, /Silao/); assert.match(html, /T2/);
+  assert.match(html, /Mismo nombre, fecha y sede/);
+  assert.match(html, /Total territorial[\s\S]*?>50<\/p>/);
+  assert.match(html, /Diferencia[\s\S]*?>0<\/p>/);
+  assert.equal(s.nodes.get('mod-id').textContent, 'A1 • Folio: F1');
+  assert.equal(s.nodes.get('mod-body').scrollTop, 0);
 });

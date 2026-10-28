@@ -27,7 +27,9 @@ Registros capturados, actividades reportadas y sesiones se mantienen separados. 
 
 `_config.yml` excluye las carpetas de trabajo del proceso de GitHub Pages. Se debe subir también este archivo para que Jekyll no intente procesar dependencias y documentos temporales. `.gitignore` previene agregar nuevos temporales, pero no retira los que ya estaban versionados.
 
-Comprobación local de conciliación y cantidades en la matriz: `node --test tests/calidad-datos.test.cjs tests/tablero.test.cjs`.
+La ficha de actividad incluye alertas, comparación de totales, usuario y fecha de captura, periodo completo, clasificación, acciones PG y sede/tipo/detalle del espacio por separado. Los detalles territoriales y demográficos permiten localizar cada registro por su ID. Las cantidades ausentes se distinguen de los ceros informados; una fila vacía de evidencia no cuenta como archivo. La presentación está en `assets/js/ficha-actividad.js`, que debe publicarse junto con `index.html` y `assets/js/calidad-datos.js`. No modifica datos de la base ni el exportador CSV.
+
+Comprobación local de conciliación, matriz y fichas: `node --test tests/calidad-datos.test.cjs tests/tablero.test.cjs tests/ficha-actividad.test.cjs`.
 
 ## Flujo recomendado de edición
 

@@ -1270,22 +1270,23 @@
   </div>
 
   <!-- VENTANA MODAL: EXPEDIENTE DE ACTIVIDAD -->
-  <div id="modal-expediente" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+  <div id="modal-expediente" role="dialog" aria-modal="true" aria-labelledby="mod-title" onkeydown="handleExpedienteKeys(event)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
       <div class="bg-gto-blue text-white px-5 py-4 flex items-center justify-between">
-        <div>
-          <span id="mod-id" class="text-[11px] font-mono uppercase bg-white/20 px-2 py-0.5 rounded font-bold">ACT00000</span>
+        <div class="min-w-0 pr-3">
+          <span id="mod-id" class="inline-block max-w-full break-all text-[11px] font-mono uppercase bg-white/20 px-2 py-0.5 rounded font-bold">ACT00000</span>
           <h3 id="mod-title" class="text-base sm:text-lg font-vollkorn font-extrabold mt-1 leading-snug">Detalle de la Actividad</h3>
         </div>
-        <button onclick="closeExpedienteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
+        <button id="mod-close" aria-label="Cerrar ficha" onclick="closeExpedienteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div id="mod-body" class="p-4 sm:p-6 overflow-y-auto custom-scroll space-y-5 text-xs"></div>
+      <div id="mod-body" class="min-h-0 p-4 sm:p-6 overflow-y-auto custom-scroll space-y-5 text-sm"></div>
     </div>
   </div>
 
   <script src="assets/js/calidad-datos.js"></script>
+  <script src="assets/js/ficha-actividad.js"></script>
   <script>
     if (window.Chart && window.ChartDataLabels) {
       Chart.register(ChartDataLabels);
@@ -2846,89 +2847,42 @@
     // =========================================================
     // VENTANA MODAL: EXPEDIENTE
     // =========================================================
+    let expedienteReturnFocus = null;
     function openExpedienteModal(idAct) {
       const a = rawDB.actividades.find(x => cleanStr(x.ID_Actividad) === idAct);
       if (!a) return;
       const tRows = rawDB.territorio.filter(x => cleanStr(x.ID_Actividad) === idAct);
       const pRows = rawDB.poblacion.filter(x => cleanStr(x.ID_Actividad) === idAct);
       const eRows = rawDB.evidencia.filter(x => cleanStr(x.ID_Actividad) === idAct);
-
-      document.getElementById('mod-id').textContent = `${idAct} • Folio: ${cleanStr(a.Folio) || 'S/F'}`;
+      // Audit the complete source so filters cannot hide other locations or duplicate IDs.
+      const review = CulturaCalidad.audit(rawDB.actividades, rawDB.territorio, rawDB.poblacion, rawDB.evidencia, rawDB.alineacion).find(r => r.id === idAct) || null;
+      expedienteReturnFocus = document.activeElement;
+      document.getElementById('mod-id').textContent = `${idAct} • Folio: ${cleanStr(a.Folio) || 'Sin folio'}`;
       document.getElementById('mod-title').textContent = cleanStr(a.Nombre_Actividad) || 'Actividad sin título';
-
-      const evHtml = eRows.length > 0
-        ? eRows.map(e => {
-            const path = cleanStr(e.Archivo_Evidencia);
-            const fName = path.split('/').pop() || path;
-            const dUrl = getDriveSearchUrl(path);
-            return `
-              <div class="flex items-center justify-between p-2.5 rounded-lg bg-teal-50/70 border border-teal-200">
-                <div class="pr-3 min-w-0">
-                  <div class="font-bold text-teal-900 truncate">${fName}</div>
-                  <div class="text-[11px] text-teal-700">${cleanStr(e.Tipo_Evidencia) || 'Archivo'} ${cleanStr(e.Descripcion) ? '• ' + cleanStr(e.Descripcion) : ''}</div>
-                </div>
-                <a href="${dUrl}" target="_blank" rel="noopener" class="shrink-0 bg-gto-blue hover:bg-gto-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">
-                  Abrir en Drive
-                </a>
-              </div>
-            `;
-          }).join('')
-        : `<div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 font-semibold">Esta actividad aún no cuenta con archivos cargados en el sistema.</div>`;
-
-      document.getElementById('mod-body').innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Dirección General</span><b class="text-slate-800">${cleanStr(a.Direccion) || 'No especificada'}</b></div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Disciplina / Tipo</span><b class="text-slate-800">${cleanStr(a.Disciplina)} • ${cleanStr(a.Tipo_Actividad)}</b></div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Fecha y Sesiones</span><b class="text-slate-800">${a.Fecha_Inicio_ISO || cleanStr(a.Fecha_Inicio)} (${CulturaCalidad.count(a.Total_Sesiones) === null ? 'Sesiones no informadas' : fmtInt(CulturaCalidad.count(a.Total_Sesiones)) + ' sesiones'})</b></div>
-          <div class="md:col-span-2"><span class="text-slate-400 font-bold block text-[10px] uppercase">Clave de Proceso y Meta</span><b class="text-gto-blue">${cleanStr(a.Clave_Proceso_Txt)}</b> — ${cleanStr(a.Nombre_Meta)}</div>
-          <div><span class="text-slate-400 font-bold block text-[10px] uppercase">Recinto / Espacio</span><b class="text-slate-800">${cleanStr(a.Nombre_Espacio) || cleanStr(a.Especifique_Espacio) || cleanStr(a.Tipo_Espacio)}</b></div>
-        </div>
-
-        ${cleanStr(a.Descripcion_Breve) ? `
-          <div>
-            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1">Descripción de la Actividad</h4>
-            <p class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">${cleanStr(a.Descripcion_Breve)}</p>
-          </div>
-        ` : ''}
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Cobertura Territorial (${tRows.length})</h4>
-            <div class="space-y-1.5">
-              ${tRows.map(t => `
-                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex justify-between">
-                  <div><b>${cleanStr(t.Municipio)}</b> •${normalizeCommunityName(t.Nombre_Comunidad_Final)}</div>
-                  <div class="font-bold text-gto-blue">${fmtInt(toNum(t.Cantidad))} pers.</div>
-                </div>
-              `).join('') || '<div class="text-slate-400">Sin registro territorial</div>'}
-            </div>
-          </div>
-
-          <div>
-            <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Desglose Demográfico (${pRows.length})</h4>
-            <div class="space-y-1.5">
-              ${pRows.map(p => `
-                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex justify-between">
-                  <div><b>${cleanStr(p.Grupo_Etario)}</b> (${cleanStr(p.Genero)})</div>
-                  <div class="font-bold text-rose-600">${fmtInt(toNum(p.Cantidad_Poblacion))} pers.</div>
-                </div>
-              `).join('') || '<div class="text-slate-400">Sin desglose demográfico</div>'}
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-gto-blue uppercase text-[11px] mb-1.5">Archivos de Evidencia Documental (${eRows.length})</h4>
-          <div class="space-y-2">${evHtml}</div>
-        </div>
-      `;
-
+      const body = document.getElementById('mod-body');
+      body.innerHTML = CulturaFicha.render({ activity: a, territory: tRows, population: pRows, evidence: eRows, review, evidenceUrl: getDriveSearchUrl });
+      body.scrollTop = 0;
       document.getElementById('modal-expediente').classList.remove('hidden');
+      document.getElementById('mod-close').focus();
       safeCreateIcons();
     }
 
     function closeExpedienteModal() {
       document.getElementById('modal-expediente').classList.add('hidden');
+      if (expedienteReturnFocus?.isConnected) expedienteReturnFocus.focus();
+      expedienteReturnFocus = null;
+    }
+
+    function handleExpedienteKeys(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeExpedienteModal();
+      } else if (event.key === 'Tab') {
+        const targets = [...document.getElementById('modal-expediente').querySelectorAll('button, a[href], summary, [tabindex]')].filter(el => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length);
+        const first = targets[0], last = targets[targets.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
     }
 
     // =========================================================
