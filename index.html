@@ -1361,7 +1361,8 @@
       return GTO_COORDS_NORM[norm] || null;
     }
 
-    const MUNICIPIOS_FORANEOS = ['ciudad de mexico', 'cdmx', 'foraneo'];
+    // Pueblonuevo is an alias of Pueblo Nuevo in the coordinate lookup.
+    const MUNICIPIOS_GTO = new Set(Object.keys(GTO_COORDS_NORM).filter(m => m !== 'pueblonuevo'));
 
     let rawDB = { actividades: [], territorio: [], poblacion: [], evidencia: [], alineacion: [] };
     let filteredActIds = new Set();
@@ -1468,10 +1469,13 @@
       return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     }
 
+    function normalizeMunicipioName(mun) {
+      const name = cleanStr(mun).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ');
+      return name === 'pueblonuevo' ? 'pueblo nuevo' : name;
+    }
+
     function isMunicipioGTO(mun) {
-      const m = cleanStr(mun).toLowerCase();
-      if (!m || m === 'null' || m === 'nan') return false;
-      return !MUNICIPIOS_FORANEOS.includes(m);
+      return MUNICIPIOS_GTO.has(normalizeMunicipioName(mun));
     }
 
     function getDriveSearchUrl(rawPath) {
@@ -1825,7 +1829,7 @@
       terF.forEach(t => {
         const m = cleanStr(t.Municipio);
         if (!m) return;
-        if (isMunicipioGTO(m)) munsGTO.add(m);
+        if (isMunicipioGTO(m)) munsGTO.add(normalizeMunicipioName(m));
         else munsForaneos.add(m);
       });
 
@@ -1848,7 +1852,7 @@
       document.getElementById('kpi-mun-ratio').textContent = `${munsGTO.size}/46`;
       document.getElementById('kpi-mun-pct').textContent = `${pctGto}%`;
       document.getElementById('kpi-mun-foraneo').textContent = munsForaneos.size > 0
-        ? `+ ${munsForaneos.size} sede nacional (${[...munsForaneos].join(', ')})`
+        ? `Otros alcances: ${[...munsForaneos].join(', ')}`
         : 'Cobertura Estatal en Guanajuato';
 
       document.getElementById('sub-mun-gto').textContent = `${munsGTO.size} de 46`;
@@ -2211,7 +2215,7 @@
 
       terF.forEach(t => {
         const mun = cleanStr(t.Municipio) || 'Sin municipio';
-        if (isMunicipioGTO(mun)) munsGTO.add(mun);
+        if (isMunicipioGTO(mun)) munsGTO.add(normalizeMunicipioName(mun));
 
         const comNorm = normalizeCommunityName(t.Nombre_Comunidad_Final);
         comSet.add(`${mun}|${comNorm}`);

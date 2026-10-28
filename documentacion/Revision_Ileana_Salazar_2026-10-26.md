@@ -2,6 +2,17 @@
 
 Responsable confirmado por Luis: **iysalazarh@guanajuato.gob.mx**.
 
+## Respuestas recibidas el 27 de octubre de 2026
+
+Luis compartió las siguientes aclaraciones del área, pendientes de contrastar contra el documento actualizado antes de regenerar la carga:
+
+- La columna Cantidad ya se especificó en el documento nuevo; las fechas, sedes y municipios se actualizaron. Algunos proyectos solo tienen municipio.
+- La población se adecuó. El área declara que cuando solo recibe hombres/mujeres los clasifica como adultos. Se conservará como criterio declarado, sin presentarlo como edad comprobada ni extenderlo a otros expedientes.
+- Festival Escenautas y 2do Festival Escenautas son el mismo evento y se eliminó uno en el documento nuevo. El total procede de la empresa ejecutora; el área desconoce si incluye el público de las funciones reportadas por Marcelina. Sigue pendiente evitar el doble conteo entre concentrado y funciones.
+- GA2477.2600 corresponde al Despacho de la Subsecretaría de Desarrollo y Promoción Artística y Cultural. QC4051 corresponde a Formación e Investigación. PB3571.2600 corresponde al Forum. Esto aclara responsabilidad, pero no selecciona por sí solo una meta entre varias ni crea una clave ausente en el catálogo.
+
+Estas respuestas corresponden a Ileana, no a los concentrados de Adriana Ugalde. No se modificó la base ni se generó otra carga con ellas todavía.
+
 Se revisó `archivos_base/Ileana Salazar/Reporte de programación SDPAC.xlsx`, hoja `Hoja1`, rango A1:Y27. Contiene 26 renglones de programación, que mezclan eventos, talleres, jurados, apoyos y beneficiarios. No equivalen necesariamente a 26 actividades nuevas para importar.
 
 ## Qué se puede recuperar sin pedir otra captura completa

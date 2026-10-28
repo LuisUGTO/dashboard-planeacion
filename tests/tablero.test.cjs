@@ -17,6 +17,25 @@ function setup() {
 }
 const a = { ID_Actividad: 'A1', Folio: 'F1', Nombre_Actividad: 'Taller', Fecha_Inicio: '2026-01-15', Fecha_Inicio_ISO: '2026-01-15', Fecha_Fin: '2026-01-31', Direccion: 'Museos', Clave_Proceso: 1, Nombre_Meta: 'Talleres', Acciones_PG: 'Acción PG', Acciones_PEC: 'Acción PEC', Disciplina: 'Música', Subdisciplina: 'Orquestas', Nombre_Espacio: 'Museo', Total_Sesiones: 3000, Foto_Evidencia: 'foto.jpg' };
 const cat = [{ ID_Alineacion: 1, Clave_Proceso: 'PB1', Direccion: 'Museos', Nombre_Meta: 'Talleres', Unidad_Medida: 'Talleres realizados', Meta_Anual: 2000 }];
+
+test('la cobertura reconoce solo los 46 municipios y conserva categorías externas fuera del denominador', () => {
+  const s = setup();
+  assert.equal(vm.runInContext('MUNICIPIOS_GTO.size', s.context), 46);
+  s.context.names = ['Fuera del estado', 'Fuera del país', 'Ciudad de México', 'Cobertura estatal', 'Sin municipio', 'Municipio inexistente', '', null];
+  assert.equal(vm.runInContext('names.some(isMunicipioGTO)', s.context), false);
+  assert.equal(vm.runInContext('isMunicipioGTO("  LEON  ") && isMunicipioGTO("Pueblonuevo") && isMunicipioGTO("San   José Iturbide")', s.context), true);
+  s.context.fixture = JSON.parse(vm.runInContext('JSON.stringify([...MUNICIPIOS_GTO].map(Municipio => ({Municipio, Cantidad: 1})))', s.context));
+  s.context.fixture.push(...['Fuera del estado', 'Fuera del país', 'Ciudad de México', 'Cobertura estatal'].map(Municipio => ({Municipio, Cantidad: 10})), { Municipio: 'LEÓN', Cantidad: 1 }, { Municipio: 'Pueblonuevo', Cantidad: 1 });
+  s.document.getElementById('search-comunidad').value = '';
+  vm.runInContext('renderCoberturaTerritorial([], fixture);', s.context);
+  assert.equal(s.nodes.get('kpi-ter-mun').textContent, '46');
+  assert.equal(s.nodes.get('kpi-ter-pop').textContent, '88');
+  vm.runInContext('updateMapMarkers = () => {}; renderVisionGeneral([], fixture, []);', s.context);
+  assert.equal(s.nodes.get('kpi-mun-ratio').textContent, '46/46');
+  assert.equal(s.nodes.get('kpi-mun-pct').textContent, '100.0%');
+  assert.match(s.nodes.get('kpi-mun-foraneo').textContent, /Fuera del país/);
+  assert.doesNotMatch(s.nodes.get('kpi-mun-foraneo').textContent, /sede nacional/);
+});
 test('la matriz usa talleres reportados y no sesiones para el cumplimiento', () => {
   const s = setup(); s.context.act = [{ ...a, Tipo_Registro: 'Concentrado mensual', Cantidad_Actividades: 1000 }]; s.context.cat = cat;
   vm.runInContext('rawDB.alineacion = cat; renderMatrizEstrategica(act, [], [], cat);', s.context);
