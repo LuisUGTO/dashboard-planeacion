@@ -697,7 +697,7 @@
               </div>
               <div>
                 <h3 class="text-base font-extrabold text-gto-blue leading-none">Evolución Mensual de Actividades y Público Atendido</h3>
-                <p class="text-xs text-slate-400 mt-0.5">Comportamiento cronológico de la programación cultural y alcance ciudadano</p>
+                <p class="text-xs text-slate-400 mt-0.5">Registros por inicio y público de actividades contenidas en un mismo mes</p>
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -712,6 +712,7 @@
             </div>
           </div>
           <div class="h-64"><canvas id="chart-evolucion-mensual"></canvas></div>
+          <p id="monthly-population-note" aria-live="polite" class="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900"></p>
         </div>
       </section>
 
@@ -1589,7 +1590,8 @@
           .filter(r => cleanStr(r.ID_Actividad) !== '')
           .map(r => ({
             ...r,
-            Fecha_Inicio_ISO: normalizeDateISO(r.Fecha_Inicio)
+            Fecha_Inicio_ISO: normalizeDateISO(r.Fecha_Inicio),
+            Fecha_Fin_ISO: normalizeDateISO(r.Fecha_Fin)
           }));
 
         rawDB.territorio = ter.filter(r => cleanStr(r.ID_Actividad) !== '');
@@ -1928,35 +1930,25 @@
       renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981']);
 
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-      const actPorMes = new Array(12).fill(0);
-      const popPorMes = new Array(12).fill(0);
-
-      const popByAct = {};
-      if (popMode === 'territorio') {
-        terF.forEach(t => { popByAct[cleanStr(t.ID_Actividad)] = (popByAct[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
-      } else {
-        pobF.forEach(p => { popByAct[cleanStr(p.ID_Actividad)] = (popByAct[cleanStr(p.ID_Actividad)] || 0) + toNum(p.Cantidad_Poblacion); });
-      }
-
-      actF.forEach(a => {
-        const fIso = a.Fecha_Inicio_ISO || '';
-        if (!fIso) return;
-        const parts = fIso.split('-');
-        if (parts.length >= 2) {
-          const mIdx = parseInt(parts[1], 10) - 1;
-          if (mIdx >= 0 && mIdx < 12) {
-            actPorMes[mIdx]++;
-            popPorMes[mIdx] += (popByAct[cleanStr(a.ID_Actividad)] || 0);
-          }
-        }
-      });
+      const monthly = CulturaCalidad.monthlyPopulation(actF,
+        popMode === 'territorio' ? terF : pobF,
+        popMode === 'territorio' ? 'Cantidad' : 'Cantidad_Poblacion');
+      const actPorMes = monthly.records;
+      const popPorMes = monthly.people;
+      const missingMonthly = monthly.missing.reduce((sum, n) => sum + n, 0) + monthly.unallocatedMissing;
+      const accumulatedNote = monthly.unallocatedRecords
+        ? `${fmtInt(monthly.unallocatedPeople)} asistencias reportadas en ${fmtInt(monthly.unallocatedRecords)} registros sin desglose mensual: se conservan en los totales generales y se muestran aparte de la línea mensual.`
+        : 'No hay registros con público pendiente de asignar a un mes por su periodo.';
+      document.getElementById('monthly-population-note').textContent = accumulatedNote
+        + (missingMonthly ? ` Además, ${fmtInt(missingMonthly)} registros no tienen un total completo de público; no se interpretan como cero.` : '')
+        + ' Los registros se cuentan por mes de inicio. Las asistencias no equivalen a personas únicas.';
 
       renderChart('chart-evolucion-mensual', 'bar', {
         labels: MESES,
         datasets: [
           {
             type: 'line',
-            label: 'Personas beneficiadas en el mes',
+            label: 'Público con dato mensual',
             data: popPorMes,
             borderColor: '#0D9488',
             backgroundColor: 'rgba(13, 148, 136, 0.12)',
@@ -2009,6 +2001,16 @@
         ]
       }, {
         interaction: { mode: 'index', intersect: false },
+        plugins: {
+          subtitle: {
+            display: true,
+            position: 'bottom',
+            text: monthly.unallocatedRecords
+              ? `${fmtInt(monthly.unallocatedPeople)} asistencias acumuladas sin desglose mensual (${fmtInt(monthly.unallocatedRecords)} registros), fuera de la línea.`
+              : 'La línea incluye solo registros con público informado y periodo contenido en un mes.',
+            font: { size: 10 }, color: '#92400E', padding: { top: 8 }
+          }
+        },
         scales: {
           y: {
             type: 'linear',
@@ -2021,7 +2023,7 @@
             position: 'right',
             grace: '22%',
             grid: { drawOnChartArea: false },
-            title: { display: true, text: 'Personas beneficiadas', color: '#0D9488', font: { weight: 'bold' } }
+            title: { display: true, text: 'Público con dato mensual', color: '#0D9488', font: { weight: 'bold' } }
           }
         }
       });

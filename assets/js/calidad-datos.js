@@ -59,6 +59,26 @@
     });
     return { records: activities.length, activities: activitiesTotal, unresolved, sessions, missingSessions };
   }
+  function monthlyPopulation(activities, rows, field) {
+    const linked = group(rows);
+    const records = new Array(12).fill(0), people = new Array(12).fill(null);
+    const missing = new Array(12).fill(0);
+    let unallocatedPeople = 0, unallocatedRecords = 0, unallocatedMissing = 0;
+    activities.forEach(a => {
+      const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio);
+      const end = dateISO(a.Fecha_Fin_ISO || a.Fecha_Fin);
+      const month = start ? Number(start.slice(5, 7)) - 1 : null;
+      if (month !== null) records[month]++;
+      const total = sum(linked.get(text(a.ID_Actividad)) || [], field);
+      // An interval spanning months does not establish attendance in any one month.
+      if (!start || !end || end < start || start.slice(0, 7) !== end.slice(0, 7)) {
+        unallocatedRecords++;
+        if (total === null) unallocatedMissing++; else unallocatedPeople += total;
+      } else if (total === null) missing[month]++;
+      else people[month] = (people[month] ?? 0) + total;
+    });
+    return { records, people, missing, unallocatedPeople, unallocatedRecords, unallocatedMissing };
+  }
   function audit(activities, territory, population, evidence, catalog = []) {
     const ters = group(territory), pops = group(population), evis = group(evidence);
     const metas = new Set(catalog.map(c => text(c.ID_Alineacion)));
@@ -130,5 +150,5 @@
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, dateISO, quantity, metrics, audit };
+  return { number, count, dateISO, quantity, metrics, monthlyPopulation, audit };
 });

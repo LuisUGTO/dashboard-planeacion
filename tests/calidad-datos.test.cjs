@@ -53,3 +53,20 @@ test('sesiones iguales al total de asistentes requieren confirmar el significado
   assert.ok(a.diag.includes('asistentes en ese campo'));
   assert.ok(!a.categories.includes('diferencias'));
 });
+test('el público acumulado de enero a septiembre no se presenta como público de enero', () => {
+  const acts = [activity({ ID_Actividad: 'ACUM', Fecha_Inicio: '2026-01-01', Fecha_Fin: '2026-09-30' }), activity({ ID_Actividad: 'ENE', Fecha_Inicio: '2026-01-01', Fecha_Fin: '2026-01-31' }), activity({ ID_Actividad: 'FEB', Fecha_Inicio: '2026-02-01', Fecha_Fin: '2026-02-28' })];
+  const result = q.monthlyPopulation(acts, [t(351071, { ID_Actividad: 'ACUM' }), t(16903, { ID_Actividad: 'ENE' }), t(8209, { ID_Actividad: 'FEB' })], 'Cantidad');
+  assert.deepEqual(result.records.slice(0, 2), [2, 1]);
+  assert.deepEqual(result.people.slice(0, 3), [16903, 8209, null]);
+  assert.equal(result.unallocatedPeople, 351071); assert.equal(result.unallocatedRecords, 1);
+  assert.equal(result.people.reduce((s, n) => s + (n ?? 0), 0) + result.unallocatedPeople, 376183);
+});
+test('la serie mensual distingue un cero declarado de población ausente o parcial', () => {
+  const acts = ['CERO', 'FALTA', 'PARCIAL', 'SIN_FIN', 'CRUZA_ANIO'].map(ID_Actividad => activity({ ID_Actividad }));
+  acts[3].Fecha_Fin = ''; acts[4].Fecha_Fin = '2027-01-15';
+  const rows = [p(0, { ID_Actividad: 'CERO' }), p(9, { ID_Actividad: 'PARCIAL' }), p('', { ID_Actividad: 'PARCIAL' }), p(10, { ID_Actividad: 'SIN_FIN' }), p(20, { ID_Actividad: 'CRUZA_ANIO' })];
+  const result = q.monthlyPopulation(acts, rows, 'Cantidad_Poblacion');
+  assert.equal(result.people[0], 0); assert.equal(result.people[1], null); assert.equal(result.missing[0], 2);
+  assert.equal(result.unallocatedPeople, 30); assert.equal(result.unallocatedRecords, 2);
+  assert.equal(q.monthlyPopulation([acts[1]], [], 'Cantidad_Poblacion').people[0], null);
+});
