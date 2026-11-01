@@ -7,3 +7,6 @@ __pycache__/
 *.pyc
 _site/
 .jekyll-cache/
+
+# Respaldo privado de la carga autorizada del 01/11/2026.
+/respaldo/privado_cargas_2026-11-01/

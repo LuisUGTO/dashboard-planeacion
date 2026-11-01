@@ -1,5 +1,17 @@
 # Edith: revisión de visitantes y preparación de la normalización
 
+**Corrección ejecutada el 01/11/2026, autorizada por Luis:** se contrastaron los cinco totales de visitantes de `Concentrado 2026!AF45:AF49` con R604/R605/R607/R608/R609 de Registro_Actividades. Al coincidir exactamente y no ser sesiones reportadas en la fuente, se dejó Total_Sesiones vacío en esas cinco actividades, con respaldo y lectura nativa posterior. Se conservaron IDs, territorios, población y el otro registro de Cañada enero–junio. Las discrepancias de visitantes y solapamientos siguen pendientes; no se hicieron altas ni se certificaron los públicos. La tabla de sesiones del diagnóstico histórico de abajo ya no representa esos cinco valores vigentes. Detalle en [resultado integral](../../documentacion/Resultado_Cargas_y_Pendientes_2026-11-01.md).
+
+## Contraste con WhatsApp — 31/10/2026
+
+Se leyeron las dos exportaciones del chat, con mensajes del 26/10. Edith se identifica como enlace del tema de Zonas Arqueológicas en Patrimonio Cultural y entrega `CONCENTRADO VISITANTES Trimestres 2026.xlsx`, advirtiendo que contiene **información oculta utilizada para generar el concentrado**. Al revisar el libro, incluir filas, columnas y hojas ocultas; no usar solo la vista visible como fuente exhaustiva.
+
+El chat no contiene respuestas a las discrepancias mensuales/trimestrales, virtuales repetidos, sesiones ni posible solapamiento de Cañada descritos abajo. No hay nuevas cifras validadas ni aprobación para otra carga. La corrección de la gráfica mensual se documenta aparte en `Revision_Pico_Enero_2026-10-29.md`; no corrige por sí sola las cifras de origen.
+
+La tabla de otras cargas del texto original corresponde al 27/10: los informes del 29/10 de Adriana Ugalde e Ileana sustituyen sus estados antiguos de preparación. No reutilizar esos lotes. Las dos exportaciones se eliminan tras conservar este resumen, por instrucción del usuario; no se conservan datos de reuniones. No se consultó ni modificó producción.
+
+## Revisión original
+
 Revisión: **2026-10-27T20:28:03-06:00**. Fuente: `CONCENTRADO VISITANTES Trimestres 2026.xlsx`, única hoja visible `Concentrado 2026`, rango A1:AK66. El original no se modificó.
 
 ## Resultado

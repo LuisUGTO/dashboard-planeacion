@@ -1,3 +1,5 @@
+> **Actualización de lectura al 31/10/2026:** resumen histórico de los entregables, conservado sin regenerar sus archivos. El estado técnico vigente está en [CONTEXTO_PROYECTO.md](../CONTEXTO_PROYECTO.md). Las cifras, cobertura e integridad del texto son del corte original. El nombre de hoja usado por el código es `Regitro_Evidencia`; Google Sheets no impone integridad SQL. El tablero señala diferencias, pero no garantiza que toda captura cuadre. El exportador convierte gráficas a imágenes, por lo que no debe prometerse que sean vectoriales. La publicación remota y el funcionamiento actual de AppSheet no se certificaron durante esta auditoría.
+
 ================================================================================
               PULSO Q — CONSULTORÍA EN SISTEMAS Y GESTIÓN PÚBLICA
        PROYECTO: SISTEMA INTEGRAL DE INFORMACIÓN Y PLANEACIÓN CULTURAL

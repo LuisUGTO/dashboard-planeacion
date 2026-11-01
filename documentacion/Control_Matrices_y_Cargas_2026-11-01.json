@@ -1,0 +1,430 @@
+{
+  "date": "2026-11-01",
+  "cutoff": "2026-09-30",
+  "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4/edit",
+  "counts": {
+    "activities": 1472,
+    "territory": 1510,
+    "population": 2394,
+    "evidence": 520
+  },
+  "activity_additions": [
+    {
+      "id": "ACT-SCOH08277",
+      "name": "Un viaje con ritmo, ESCENAS AL VUELO",
+      "date_serial": 46269,
+      "source": "Hoja3!A6:AH6; julio - sep!A89:AH89",
+      "attendances_reported": 608,
+      "alignment_id": 10
+    },
+    {
+      "id": "ACT-SCGK69033",
+      "name": "Viva la Ópera",
+      "date_serial": 46270,
+      "source": "Hoja3!A8:AH8; julio - sep!A91:AH91",
+      "attendances_reported": 118,
+      "alignment_id": 83
+    }
+  ],
+  "new_rows": {
+    "activities": 2,
+    "territory": 3,
+    "population": 4,
+    "evidence": 0
+  },
+  "corrections": {
+    "numeric_cells": [
+      {
+        "sheet": "Registro_Territorio",
+        "row": 611,
+        "col": 9,
+        "to": 1155,
+        "from": 1.155
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 611,
+        "col": 11,
+        "to": 1155,
+        "from": 1.155
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 613,
+        "col": 9,
+        "to": 1353,
+        "from": 1.353
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 613,
+        "col": 11,
+        "to": 1353,
+        "from": 1.353
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 621,
+        "col": 9,
+        "to": 1251,
+        "from": 1.251
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 621,
+        "col": 11,
+        "to": 1251,
+        "from": 1.251
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 623,
+        "col": 9,
+        "to": 10355,
+        "from": 10.355
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 623,
+        "col": 11,
+        "to": 10355,
+        "from": 10.355
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 697,
+        "col": 9,
+        "to": 1389,
+        "from": 1.389
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 697,
+        "col": 11,
+        "to": 1389,
+        "from": 1.389
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 794,
+        "col": 9,
+        "to": 1022,
+        "from": 1.022
+      },
+      {
+        "sheet": "Registro_Territorio",
+        "row": 794,
+        "col": 11,
+        "to": 1022,
+        "from": 1.022
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1131,
+        "col": 6,
+        "to": 5600,
+        "from": 5.6
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1131,
+        "col": 7,
+        "to": 5600,
+        "from": 5.6
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1133,
+        "col": 6,
+        "to": 4600,
+        "from": 4.6
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1133,
+        "col": 7,
+        "to": 4600,
+        "from": 4.6
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1480,
+        "col": 6,
+        "to": 1100,
+        "from": 1.1
+      },
+      {
+        "sheet": "Registro_Poblacion",
+        "row": 1480,
+        "col": 7,
+        "to": 1100,
+        "from": 1.1
+      }
+    ],
+    "sessions": [
+      {
+        "id": "ACT-SCQZ00697",
+        "row": 604,
+        "from": 69395,
+        "to": "",
+        "source": "Concentrado 2026!AF45",
+        "reason": "La fuente rotula la cifra como total de visitantes presenciales y virtuales; no informa sesiones."
+      },
+      {
+        "id": "ACT-SCAC38909",
+        "row": 605,
+        "from": 57652,
+        "to": "",
+        "source": "Concentrado 2026!AF46",
+        "reason": "La fuente rotula la cifra como total de visitantes presenciales y virtuales; no informa sesiones."
+      },
+      {
+        "id": "ACT-SCYP66179",
+        "row": 607,
+        "from": 68385,
+        "to": "",
+        "source": "Concentrado 2026!AF47",
+        "reason": "La fuente rotula la cifra como total de visitantes presenciales y virtuales; no informa sesiones."
+      },
+      {
+        "id": "ACT-SCCS51664",
+        "row": 608,
+        "from": 61362,
+        "to": "",
+        "source": "Concentrado 2026!AF48",
+        "reason": "La fuente rotula la cifra como total de visitantes presenciales y virtuales; no informa sesiones."
+      },
+      {
+        "id": "ACT-SCOT28274",
+        "row": 609,
+        "from": 44812,
+        "to": "",
+        "source": "Concentrado 2026!AF49",
+        "reason": "La fuente rotula la cifra como total de visitantes presenciales y virtuales; no informa sesiones."
+      }
+    ]
+  },
+  "verification": {
+    "data_diff_count": 0,
+    "duplicate_ids": 0,
+    "orphans": 0,
+    "all_preexisting_values_preserved_except_23_planned_cell_corrections": true,
+    "unused_columns_touched": false,
+    "dashboard_master_touched": false,
+    "visual_browser_check": false
+  },
+  "backup_private": "respaldo/privado_cargas_2026-11-01/",
+  "inventory": [
+    {
+      "file": "archivos_base/Adriana Escamilla/Revision_Conciliacion_Adriana_Escamilla_Formato_DB_2026-10-27.xlsx",
+      "sha256": "b49a9e2cae29c7c599b430591fdddd858e9c4207cc1e99b903f6d5a73a49ee51",
+      "role": "Conciliación de existentes",
+      "status": "7/7 actividades presentes; no es lote de altas",
+      "source_unchanged": true,
+      "parent_activity_ids": {
+        "prepared": 7,
+        "present": 7
+      }
+    },
+    {
+      "file": "archivos_base/Adriana Ugalde/Avance de metas DGVDC 2026.xlsx",
+      "sha256": "3cb750a39151fd8bce43c52ad878d37554affcde0e558287d777af9cabcfd0c8",
+      "role": "Fuente vigente",
+      "status": "Adriana Ugalde: avance mensual; 60 registros ya presentes",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Adriana Ugalde/Captura Plataforma Gestión de Metas Cultura .xlsx",
+      "sha256": "e2787be05aa357a6e25f5687f03400401c13737f9cde0de24e30afd9d77bbb5c",
+      "role": "Fuente vigente",
+      "status": "Adriana Ugalde: detalle complementario, no duplicar el avance",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Avance de metas DGVDC 2026.xlsx",
+      "sha256": "3cb750a39151fd8bce43c52ad878d37554affcde0e558287d777af9cabcfd0c8",
+      "role": "Copia idéntica",
+      "status": "Mismo SHA-256 que archivo 01; no duplicar carga",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Captura Plataforma Gestión de Metas Cultura .xlsx",
+      "sha256": "e2787be05aa357a6e25f5687f03400401c13737f9cde0de24e30afd9d77bbb5c",
+      "role": "Copia idéntica",
+      "status": "Mismo SHA-256 que archivo 02; no duplicar carga",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/CEARG/Actividades Enero-Septiembre CEARG.xlsx",
+      "sha256": "1aab5e62a2484fd8418a2c9bd09c70817899bef019f45f21b30fccbd043791f1",
+      "role": "Fuente vigente",
+      "status": "CEARG: 75 filas, lote parcial de 5 ya presente; otras con coincidencias o aclaraciones",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/DB_Sistema_Cultura_GTO_V1.xlsx",
+      "sha256": "ffaa00464025cdb519d3cf95d834f771499a7de9f207b99ff1a52158f4292de8",
+      "role": "Respaldo histórico",
+      "status": "Excel local de DB; no sustituye la base en vivo",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Edith/CONCENTRADO VISITANTES Trimestres 2026.xlsx",
+      "sha256": "a0435cacd778b0e531392a269b5d731c4a5e0f1557db66bc7f170fe6838bf217",
+      "role": "Fuente con discrepancias",
+      "status": "Edith: 6 actividades existentes; 5 sesiones corregidas; cifras por conciliar",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Fatima Molinar/Actividades editoriales DGEP 2026 (18).xlsx",
+      "sha256": "c4c284ac8f03f80e74bd0001984e73fd788f9403201003dcff4aef9389e76973",
+      "role": "Fuente anterior",
+      "status": "Editorial: preferir matriz en vivo; 67 altas previas verificadas",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Ileana Salazar/Carga_Parcial_Ileana_Enero_Septiembre_2026.xlsx",
+      "sha256": "28ece3a64513cc80b696d0c6f8da68be17e5a8b9829036898bdb8695824c0214",
+      "role": "Preparación sustituida",
+      "status": "Ileana: IDs previos sustituidos por 8 altas directas del 29/10",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Ileana Salazar/Reporte de programación SDPAC.xlsx",
+      "sha256": "e4463e5abdca179b07abc81c5d897b393fbc84381e3ef92541fdc622a9104bdc",
+      "role": "Fuente anterior",
+      "status": "Ileana: consultar versión actualizada",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Ileana Salazar/Reporte de programación SDPAC_actualizado.xlsx",
+      "sha256": "64355a0e7a595fa6749010183238fa2e29b5ea2f1b2ecb8bfc210a9d23f54ec3",
+      "role": "Fuente vigente",
+      "status": "Ileana: 28 filas; 8 altas directas presentes, otras 20 apartadas",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Marce Chagoya/Matriz_PG_PEC_para_revision 2027.xlsx",
+      "sha256": "78c301c23300a6c8dfd9d82a369bd3d2c07221fae515f4f59aaaf94ec0bdd635",
+      "role": "Referencia 2027",
+      "status": "Fuera del corte; no cargar en 2026",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Marce Chagoya/Matriz_PG_PEC_para_revision.xlsx",
+      "sha256": "5ebc72f8b7ed8de3f89d788d8c72d9301cb234e1d011cf56bfd52767ea9ca2d8",
+      "role": "Referencia 2026",
+      "status": "Catálogos/plantilla; no contiene nuevas actividades ejecutadas",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Marcelina/resumen mio, DGPA.xlsx",
+      "sha256": "6c99ad0b3d1f8b8a25ea061d65bb40182ef5ad093fd326ef9f7cf814e5e3b851",
+      "role": "Fuente vigente",
+      "status": "Marcelina: 229 altas antiguas verificadas y 2 de septiembre añadidas hoy",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Myrna/Formato Interno de Indicadores  DGPC-CC 29-10-26.xlsx",
+      "sha256": "f9cb8472198838bdf8204bd2e48b75cca7e3de8c8307b87c6505ef40c3dea535",
+      "role": "Funciones anuales",
+      "status": "Myrna: 17 funciones sin avance ejecutado identificable; sin nuevas altas",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/resumen mio, DGPA.xlsx",
+      "sha256": "b55d8aab947674789a03eea1d6a21bb3206f9379e702b64c4ef4dbb8ee955769",
+      "role": "Fuente anterior",
+      "status": "Marcelina: 13 filas más que versión de su carpeta; no reimportar automáticamente",
+      "source_unchanged": true
+    },
+    {
+      "file": "archivos_base/Soraya Villegas/Formato Interno de Indicadores  (2).xlsx",
+      "sha256": "2a0e5d319501a99f7dff71cdeaa87a9f78d6b5df7ffccc5f6b4a9265bf90291e",
+      "role": "Fuente vigente",
+      "status": "Soraya: 292 actividades presentes; un territorio repuesto",
+      "source_unchanged": true
+    },
+    {
+      "file": "outputs/01a157b5-4b5c-7dc2-a3d8-393848e44b3f/normalizacion_adriana_2026-10-27/Preparacion_Adriana_Concentrados_Enero_Septiembre_2026.xlsx",
+      "sha256": "3022bf991df04e4c244fffe8ad0fb5ff3fa253669df73a980765a6a554d027cf",
+      "role": "Preparación sustituida",
+      "status": "Adriana Ugalde: 47 IDs de preparación sustituidos por carga directa de 60",
+      "source_unchanged": true
+    },
+    {
+      "file": "outputs/01a157b5-4b5c-7dc2-a3d8-393848e44b3f/normalizacion_cearg_2026-10-26/Carga_Parcial_CEARG_Enero_Septiembre_2026.xlsx",
+      "sha256": "874021231744f5662ec5c078bd78ae5189cf80f620a18d13b1cd5c66df7569bf",
+      "role": "Lote ya cargado",
+      "status": "CEARG: 5/5 IDs presentes",
+      "source_unchanged": true,
+      "parent_activity_ids": {
+        "prepared": 5,
+        "present": 5
+      }
+    },
+    {
+      "file": "outputs/01a157b5-4b5c-7dc2-a3d8-393848e44b3f/normalizacion_marcelina_2026-10-23/Carga_Marcelina_Enero_Agosto_2026.xlsx",
+      "sha256": "cf44eb8880e20ac93d2a56363b6cc284cff0be229c30fb2a5c144c2a221c2827",
+      "role": "Preparación sustituida",
+      "status": "Marcelina: lote anterior de 242 sustituido por revisión de 229",
+      "source_unchanged": true
+    },
+    {
+      "file": "outputs/01a157b5-4b5c-7dc2-a3d8-393848e44b3f/normalizacion_marcelina_2026-10-26/Carga_Marcelina_Enero_Agosto_2026.xlsx",
+      "sha256": "3033879016c15141177d90b0e0874629665e3e893276527bfa3197432d830161",
+      "role": "Lote ya cargado",
+      "status": "Marcelina: 229/229 IDs presentes",
+      "source_unchanged": true,
+      "parent_activity_ids": {
+        "prepared": 229,
+        "present": 229
+      }
+    },
+    {
+      "file": "outputs/01a157b5-4b5c-7dc2-a3d8-393848e44b3f/normalizacion_soraya_2026-10-26/Carga_Soraya_Enero_Septiembre_2026.xlsx",
+      "sha256": "f7ddcd1337357f4621de03edf2785d83aa09ef8d1bd039e6c31d8ffc0092effa",
+      "role": "Lote ya cargado",
+      "status": "Soraya: 292/292 IDs presentes",
+      "source_unchanged": true,
+      "parent_activity_ids": {
+        "prepared": 292,
+        "present": 292
+      }
+    }
+  ],
+  "direct_lineage_checks": [
+    {
+      "source": "Fatima Molinar",
+      "entries": 67,
+      "ids_present": 67
+    },
+    {
+      "source": "Ileana Salazar",
+      "entries": 8,
+      "ids_present": 8
+    },
+    {
+      "source": "Adriana Ugalde",
+      "entries": 60,
+      "ids_present": 60
+    }
+  ],
+  "editorial_live": {
+    "title_rows": 200,
+    "previous_trace_rows": 198,
+    "unmatched_previous_title_occurrences": 0,
+    "additional_rows": [
+      {
+        "row": 186,
+        "date": "2026-10-27",
+        "status": "Fuera del corte"
+      },
+      {
+        "row": 187,
+        "date": "2026-10-28",
+        "status": "Fuera del corte"
+      }
+    ]
+  }
+}

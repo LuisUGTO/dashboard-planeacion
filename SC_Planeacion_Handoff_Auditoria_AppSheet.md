@@ -1,5 +1,8 @@
 # Secretaría de Cultura de Guanajuato — Transferencia técnica y auditoría AppSheet
 
+> **Continuidad al 31/10/2026:** consultar [CONTEXTO_PROYECTO.md](CONTEXTO_PROYECTO.md) y [AGENTS.md](AGENTS.md). Este handoff y su prompt se conservan como antecedentes del 21/10, no como prueba de una auditoría AppSheet completa. `Application Documentation.pdf` está en la raíz del repositorio: no depende de volver a adjuntarlo a un chat. El código actual es un tablero estático de lectura CSV de Sheets; no se identificó integración activa con Supabase. Las alternativas A/B/C siguen sujetas a evaluación. Las cargas directas descritas en informes posteriores fueron operaciones históricas; no autorizan nuevas escrituras. En esta actualización documental no se alteró producción.
+
+
 **Fecha:** 21 de octubre de 2026  
 **Proyecto:** Sistema de Información Cultural / Planeación  
 **Estado:** análisis de arquitectura; AppSheet continúa en producción.  

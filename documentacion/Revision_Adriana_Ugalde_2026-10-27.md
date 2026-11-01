@@ -1,5 +1,8 @@
 # Adriana Ugalde: actualización de normalización
 
+> **Seguimiento documental al 31/10/2026:** la preparación descrita abajo fue seguida por la [actualización directa del 29/10](../archivos_base/Adriana%20Ugalde/Resultado_Carga_Directa_2026-10-29.md), que registra 60 concentrados mensuales y las columnas nuevas en Sheets. No reutilizar el lote del 27/10 como altas nuevas ni interpretar que Sheets aún carece de BU/BV. El esquema AppSheet sigue pendiente de revisión. Se conserva el texto siguiente como antecedente de preparación; no se repitió la carga durante esta auditoría.
+
+
 Se habían revisado los dos archivos el 23 de octubre. Los archivos de la nueva carpeta `archivos_base/Adriana Ugalde` tienen el mismo contenido que esas versiones. Se incorporaron las respuestas de Adriana transmitidas por Luis el 27 de octubre.
 
 Responsable identificado en la base actual: **augalde@guanajuato.gob.mx**.

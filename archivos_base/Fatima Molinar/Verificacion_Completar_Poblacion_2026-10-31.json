@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31",
+  "activitiesUpdated": 53,
+  "activityRowsAdded": 0,
+  "territoryTotalsUpdated": 53,
+  "descriptionsUpdated": 52,
+  "populationRowsAdded": 106,
+  "populationRange": "Registro_Poblacion!A2296:H2401",
+  "reportedAttendances": 1694,
+  "existingCellsPreserved": 5657,
+  "changedExistingCells": 105,
+  "writtenPopulationCells": 848,
+  "errors": [],
+  "allPreexistingPopulationRowsCompared": 2295,
+  "preexistingPopulationDiscrepancies": [],
+  "duplicatePopulationIds": [],
+  "newIdsNotUnique": []
+}

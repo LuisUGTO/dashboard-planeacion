@@ -37,7 +37,7 @@ Para consolidaciones futuras, el tablero admite estas dos columnas opcionales:
 
 La suma de actividades para metas utiliza Cantidad_Actividades cuando está informada. Un concentrado identificado sin cantidad válida se muestra «Por confirmar», sin convertirlo en cero ni sustituirlo por sesiones. Para registros anteriores sin estas columnas se conserva el conteo de una fila por registro; no se puede reconstruir una cantidad de talleres que no fue capturada.
 
-**Estas columnas aún no se añadieron a Google Sheets ni a AppSheet.** Se debe acordar su uso y ajustar el formulario antes de capturar concentrados con este esquema. No reemplazar ni reutilizar columnas rojas. Tampoco se modificó automáticamente la carga de Marcelina ni otros registros productivos.
+**Actualización documental al 31/10/2026:** el [resultado de carga del 29/10](../archivos_base/Adriana%20Ugalde/Resultado_Carga_Directa_2026-10-29.md) registra que estas columnas ya se añadieron al final de Google Sheets en BU/BV y se usaron en concentrados mensuales. También registra la categoría Cobertura estatal y ajustes de catálogo. No se regeneró ni modificó el esquema de AppSheet: revisar su reconocimiento y reglas antes de editar estos datos desde formularios. La propuesta de este documento describe el diseño del 26/10; ya no debe interpretarse como ausencia de esas columnas en Sheets. No reemplazar ni reutilizar columnas rojas. No se realizaron nuevas escrituras durante esta actualización documental.
 
 Se alerta con 100 o más sesiones para confirmar el significado de la cifra; ese umbral es una regla de revisión y no determina que un dato sea incorrecto. También se señala cuando sesiones coincide con el total de público. Un curso largo puede tener muchas sesiones válidas.
 

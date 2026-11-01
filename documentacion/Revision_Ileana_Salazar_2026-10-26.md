@@ -1,5 +1,10 @@
 # Revisión para preparar la carga de Ileana Salazar
 
+> Fuente recuperada el 01/11/2026: `archivos_base/Marce Chagoya/Matriz_PG_PEC_para_revision.xlsx` permite revisar nuevamente las claves completas de la hoja Listas. No se certificó identidad con la copia antes citada en Downloads ni aprobación vigente. No resuelve por sí sola la meta de GA2477.2600, cantidades, territorio o posibles solapamientos; no usar el libro 2027 para completar 2026.
+
+> **Seguimiento documental al 31/10/2026:** consultar el [resultado de la carga directa del 29/10](../archivos_base/Ileana%20Salazar/Resultado_Carga_Directa_2026-10-29.md). Registra ocho altas y sus pendientes; el Excel de preparación anterior no debe pegarse de nuevo. Este documento conserva el análisis previo y sus aclaraciones. El informe posterior y sus respaldos estaban sin seguimiento Git al inicio de esta auditoría: incluirlos o respaldarlos de forma autorizada antes del traslado. No se ejecutaron nuevas cargas.
+
+
 Responsable confirmado por Luis: **iysalazarh@guanajuato.gob.mx**.
 
 ## Respuestas recibidas el 27 de octubre de 2026

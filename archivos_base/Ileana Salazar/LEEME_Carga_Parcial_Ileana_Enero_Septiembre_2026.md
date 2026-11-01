@@ -1,3 +1,5 @@
+> **ACTUALIZACIÓN 29/10/2026: LAS OCHO ACTIVIDADES YA FUERON CARGADAS DIRECTAMENTE EN LA BASE. NO PEGAR EL EXCEL ANTERIOR.** Se generaron nuevos IDs y folios; dos poblaciones quedaron pendientes. Consultar Resultado_Carga_Directa_2026-10-29.md para los IDs vigentes. Lo que sigue describe la preparación histórica del 27 de octubre.
+
 # Ileana Salazar: carga parcial enero–septiembre de 2026
 
 **Resultado:** 8 actividades nuevas preparadas, 8 filas de territorio, 14 de población y ninguna evidencia. Las otras 20 filas del actualizado están identificadas abajo; no se descartaron ni se mezclaron con las altas.

@@ -1,5 +1,7 @@
 # Revisión de CEARG para preparar la normalización
 
+> Fuente recuperada el 01/11/2026: está disponible `archivos_base/Marce Chagoya/Matriz_PG_PEC_para_revision.xlsx`, hoja Listas. La ruta histórica de Downloads citada abajo se conserva como antecedente; no se comprobó que ambas copias sean idénticas. Consultar el informe de hallazgos de Marce: el catálogo actual conserva una coincidencia ambigua de mantenimiento y la versión 2027 no debe usarse para cargas 2026.
+
 Fecha de revisión: 26 de octubre de 2026.
 
 Responsable confirmado por Luis para los nuevos registros de CEARG: **claudia.ramirezm@guanajuato.gob.mx**. Esta confirmación no cambia la autoría de los registros ya existentes.

@@ -1,4 +1,7 @@
 # PULSO Q | Consultoría en Sistemas de Información e Inteligencia Institucional
+
+> **Nota de auditoría al 31/10/2026.** Este documento conserva el diagnóstico histórico del 19/10. Para continuar el desarrollo consultar [CONTEXTO_PROYECTO.md](../CONTEXTO_PROYECTO.md). Las cifras de registros, catálogos, metas y cero huérfanos corresponden al corte descrito, no a una certificación actual. Los tiempos de respuesta no se volvieron a medir. Google Sheets contiene relaciones de aplicación, sin garantías SQL de transacciones, 3FN o integridad referencial impuesta por un motor. El tablero actual consulta cinco hojas mediante CSV sin backend propio ni login. Las columnas Tipo_Registro/Cantidad_Actividades ya constan como añadidas a Sheets en el informe de 29/10; AppSheet está pendiente. La gráfica mensual separa público multimes. La exportación usa imágenes de gráficas; su calidad visual y el despliegue remoto no se verificaron en esta auditoría. Las afirmaciones de implementación del texto deben leerse con estas limitaciones y su fecha original.
+
 ## Documento Técnico y Metodológico: Arquitectura, Diagnóstico y Auditoría del Sistema Estatal de Inteligencia Cultural
 
 ---
@@ -193,7 +196,7 @@ Se ejecutó una auditoría automatizada de llaves primarias y foráneas (`ID_Act
 
 ### 5.2 Cobertura Geoespacial Completa de los 46 Municipios (`GTO_COORDS`)
 - **Hallazgo corregido:** La versión preliminar del tablero contenía únicamente 19 coordenadas municipales en `GTO_COORDS`, lo que dejaba fuera de la visualización cartográfica a 8 municipios que ya registraban actividad en la base de datos (*Abasolo, Apaseo el Grande, Cuerámaro, Doctor Mora, Jerécuaro, San Felipe, Valle de Santiago y Villagrán*).
-- **Mejora implementada:** Se integró en [`index.html`](file:///d:/Proyectos/dashboard-planeacion/index.html) el diccionario completo de coordenadas geográficas (`[latitud, longitud]`) para las **46 cabeceras municipales del Estado de Guanajuato**, junto con el motor de resolución normalizada `getMunicipioCoords(mun)` (tolerante a mayúsculas, acentos y variantes como `Pueblo Nuevo` / `Pueblonuevo`).
+- **Mejora implementada:** Se integró en [`index.html`](../index.html) el diccionario completo de coordenadas geográficas (`[latitud, longitud]`) para las **46 cabeceras municipales del Estado de Guanajuato**, junto con el motor de resolución normalizada `getMunicipioCoords(mun)` (tolerante a mayúsculas, acentos y variantes como `Pueblo Nuevo` / `Pueblonuevo`).
 - **Resultado:** Coincidencia del **100%** entre el indicador numérico de cobertura estatal (`25/46` municipios activos, `54.3%`) y los marcadores interactivos renderizados en el mapa de Leaflet.
 
 ### 5.3 Implementación del Motor de Exportación Ejecutiva Widescreen (`PptxGenJS`)

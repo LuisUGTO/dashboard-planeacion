@@ -1,5 +1,19 @@
 # Conciliación de Adriana Escamilla en formato de la base
 
+## Seguimiento recuperado de WhatsApp — 31/10/2026
+
+Se leyeron `chat.txt` y `chat.md` (mensajes del 1 al 29/10). Se conserva solo el contenido técnico; las exportaciones completas se eliminan por instrucción del usuario. No hubo lectura ni escritura de producción en este contraste.
+
+- El 7/10 Luis comunicó haber agregado Centro de las Artes de Guanajuato y selección múltiple de espacios; son cambios históricos comunicados, no configuración AppSheet comprobada hoy. La solicitud de incluir Capacitación y otros ajustes de municipios requiere verificar la configuración real, sin inferir su implementación individual de una respuesta genérica.
+- El 27/10 Adriana confirmó que del Conservatorio de Música de Celaya es enlace y no dispone de sesiones. Se acordaron concentrados por meta y mes para capacitaciones, audiciones y conciertos, con asistentes y cantidad realizada separados de sesiones. Los ejemplos de tres capacitaciones/diez audiciones no son cifras autorizadas para cargar. Siguen pendientes las tres metas oficiales y el periodo atribuible al apoyo recibido a mediados de año.
+- El campo de cantidad ya consta como añadido a Sheets en el informe de Adriana Ugalde del 29/10; verificar su reconocimiento/formulario en AppSheet antes de capturar. Esto actualiza la condición histórica descrita más abajo, sin resolver las metas del Conservatorio.
+- Sigue sin resolverse en el chat la coincidencia entre Encuentro de Orquestas del 20–21/06 y el registro PB3574 del 21/06 en Teatro Juárez. Distinguir funciones y públicos; no borrar/fusionar por compartir nombre.
+- El 29/10 se acordó conservar el desglose general por edad/género ya capturado, siempre que represente el mismo periodo y actividades. Ese desglose corresponde al total de la actividad y **no identifica población por municipio**; hacerlo requiere ajuste de modelo/formulario.
+- Para el folio **SC-261007-060154**, Adriana solicitó retirar **Apaseo el Grande y Cuerámaro**. Tras una discrepancia inicial y capturas omitidas, Luis comunicó el 29/10 a las 15:56 que retiró Apaseo el Grande y a las 20:21 que también retiró Cuerámaro. Registrar como corrección histórica comunicada; comprobar folio/IDs e hijos vigentes antes de otra intervención. No repetir eliminaciones sin revisar. Las imágenes omitidas no permiten reconstruir qué fila cambió.
+- La consulta de Drive fue un mensaje al chat equivocado, según aclaró Adriana; no constituye una solicitud de compartir carpetas de este proyecto.
+
+## Revisión original del 27/10
+
 Este Excel es una copia para revisar los siete IDs del CSV compartido, obtenida de la base conectada durante la revisión. Tiene 7 filas en Registro_Actividades, 13 en Registro_Territorio, 8 en Registro_Poblacion y ninguna evidencia vinculada para esos IDs. Cada hoja conserva las columnas vigentes y su orden en la base (A:BN, A:L, A:H y A:E).
 
 **No es un lote de altas nuevas.** No se generaron IDs ni folios, no se cambiaron cifras y no se añadieron filas de población o evidencia donde no existían. Para corregir, localizar el mismo ID en la base y actualizar solo sus celdas. No pegar estas filas al final como si fueran nuevas; las filas filtradas pueden estar separadas en la base.

@@ -1,0 +1,1996 @@
+{
+  "date": "2026-11-01",
+  "method": "Comparación por descripción normalizada (mayúsculas, acentos, espacios y puntuación), sin asignación automática por fila",
+  "source": "Matriz_PG_PEC_para_revision.xlsx",
+  "sourceSheet": "Listas",
+  "sourceRange": "AY3:BE98",
+  "sourceRowsWithDescription": 96,
+  "liveCatalogUrl": "https://docs.google.com/spreadsheets/d/1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4/edit",
+  "liveCatalogRange": "Cat_Alineacion!A1:R110",
+  "liveRows": 99,
+  "matches": [
+    {
+      "sourceRow": 3,
+      "cells": {
+        "AY": "QC4102.2601",
+        "AZ": "Fondo Estatal para la Cultura y las Artes",
+        "BA": "QC4102.2601",
+        "BB": "Capacitación teórico-práctica a personas creadoras, gestoras, promotoras y productoras culturales a través de talleres para fortalecer sus capacidades en la formulación, planeación y evaluación de proyectos culturales y artísticos.",
+        "BC": 0,
+        "BD": "Talleres realizados",
+        "BE": 20
+      },
+      "live": [
+        {
+          "id": 1,
+          "process": "QC4102",
+          "annual": 20,
+          "unit": "Talleres realizados",
+          "name": "Capacitación teórico-práctica a personas creadoras, gestoras, promotoras y productoras culturales a través de talleres para fortalecer sus capacidades en la formulación, planeación y evaluación de proyectos culturales y artísticos."
+        }
+      ]
+    },
+    {
+      "sourceRow": 4,
+      "cells": {
+        "AY": "QC4102.2602",
+        "AZ": "Fondo Estatal para la Cultura y las Artes",
+        "BA": "QC4102.2602",
+        "BB": "Apoyos económicos a personas físicas y morales para la producción de proyectos culturales y artísticos, en disciplinas como artes visuales, escénicas, música, arte sonoro, literatura, medios audiovisuales e interdisciplina, festivales y espacios independientes.",
+        "BC": 0,
+        "BD": "Proyectos culturales apoyados",
+        "BE": 15
+      },
+      "live": [
+        {
+          "id": 2,
+          "process": "QC4102",
+          "annual": 15,
+          "unit": "Proyectos culturales apoyados",
+          "name": "Apoyos económicos a personas físicas y morales para la producción de proyectos culturales y artísticos, en disciplinas como artes visuales, escénicas, música, arte sonoro, literatura, medios audiovisuales e interdisciplina, festivales y espacios independientes."
+        }
+      ]
+    },
+    {
+      "sourceRow": 5,
+      "cells": {
+        "AY": "QC4102.2603",
+        "AZ": "Fondo Estatal para la Cultura y las Artes",
+        "BA": "QC4102.2603",
+        "BB": "Apoyos económicos para la movilidad y circulación de agentes culturales de Guanajuato en circuitos artísticos y culturales a nivel nacional e internacional.",
+        "BC": 0,
+        "BD": "Agentes culturales apoyados",
+        "BE": 16
+      },
+      "live": [
+        {
+          "id": 3,
+          "process": "QC4102",
+          "annual": 16,
+          "unit": "Agentes culturales apoyados",
+          "name": "Apoyos económicos para la movilidad y circulación de agentes culturales de Guanajuato en circuitos artísticos y culturales a nivel nacional e internacional."
+        }
+      ]
+    },
+    {
+      "sourceRow": 6,
+      "cells": {
+        "AY": "QC4139.2601",
+        "AZ": "Cultura Inclusión y Dignidad: Participación Cultural desde la Igualdad Sustantiva",
+        "BA": "QC4139.2601",
+        "BB": "Eventos culturales con perspectiva de género y enfoque de derechos humanos, dirigidos a mujeres, niñas, niños y adolescentes, así como a sus redes de cuidado (laboratorios, pensatorios y talleres)",
+        "BC": 0,
+        "BD": "Personas atendidas",
+        "BE": 1500
+      },
+      "live": [
+        {
+          "id": 4,
+          "process": "QC4139",
+          "annual": 1500,
+          "unit": "Personas atendidas",
+          "name": "Eventos culturales con perspectiva de género y enfoque de derechos humanos, dirigidos a mujeres, niñas, niños y adolescentes, así como a sus redes de cuidado (laboratorios, pensatorios y talleres)"
+        }
+      ]
+    },
+    {
+      "sourceRow": 7,
+      "cells": {
+        "AY": "QC4140.2601",
+        "AZ": "Festivales, Encuentros y Ferias Culturales y Artísticas",
+        "BA": "QC4140.2601",
+        "BB": "Asistentes a Festivales de música, artes visuales, infancias, artes vivas y literatura, incluye actividades escénicas, exposiciones, talleres, conciertos o experiencias participativas, incorporando a artistas y colectivos locales y nacionales.",
+        "BC": 0,
+        "BD": "Asistentes y participantes de los festivales",
+        "BE": 10000
+      },
+      "live": [
+        {
+          "id": 5,
+          "process": "QC4140",
+          "annual": 10000,
+          "unit": "Asistentes y participantes de los festivales",
+          "name": "Asistentes a Festivales de música, artes visuales, infancias, artes vivas y literatura, incluye actividades escénicas, exposiciones, talleres, conciertos o experiencias participativas, incorporando a artistas y colectivos locales y nacionales."
+        }
+      ]
+    },
+    {
+      "sourceRow": 8,
+      "cells": {
+        "AY": "QC4140.2602",
+        "AZ": "Festivales, Encuentros y Ferias Culturales y Artísticas",
+        "BA": "QC4140.2602",
+        "BB": "Encuentros culturales enfocados en la formación, reflexión y profesionalización de artistas, investigadoras, creadoras, docentes, promotoras culturales, gestoras y editoras, con actividades como talleres, clases magistrales.",
+        "BC": 0,
+        "BD": "Asistentes y participantes de los encuentros",
+        "BE": 6000
+      },
+      "live": [
+        {
+          "id": 6,
+          "process": "QC4140",
+          "annual": 6000,
+          "unit": "Asistentes y participantes de los encuentros",
+          "name": "Encuentros culturales enfocados en la formación, reflexión y profesionalización de artistas, investigadoras, creadoras, docentes, promotoras culturales, gestoras y editoras, con actividades como talleres, clases magistrales."
+        }
+      ]
+    },
+    {
+      "sourceRow": 9,
+      "cells": {
+        "AY": "QC4140.2603",
+        "AZ": "Festivales, Encuentros y Ferias Culturales y Artísticas",
+        "BA": "QC4140.2603",
+        "BB": "Participación de la Secretaría de Cultura del Estado de Guanajuato en ferias y mercados culturales estratégicos como ferias nacionales de arte, encuentros de galerías o bienales con componente de mercado",
+        "BC": 0,
+        "BD": "Pabellones instalados",
+        "BE": 5
+      },
+      "live": [
+        {
+          "id": 7,
+          "process": "QC4140",
+          "annual": 5,
+          "unit": "Pabellones instalados",
+          "name": "Participación de la Secretaría de Cultura del Estado de Guanajuato en ferias y mercados culturales estratégicos como ferias nacionales de arte, encuentros de galerías o bienales con componente de mercado"
+        }
+      ]
+    },
+    {
+      "sourceRow": 10,
+      "cells": {
+        "AY": "QC4141.2601",
+        "AZ": "Programa de Impulso a la Creatividad y Reflexión Artística en Guanajuato",
+        "BA": "QC4141.2601",
+        "BB": "Espacios de experimentación artística dirigidos a creadores, artistas, colectivos emergentes y comunidades con menor oferta cultural donde puedan crear y desarrollar procesos culturales colaborativos en disciplinas como danza, teatro, música, artes visuales, escritura, fotografía",
+        "BC": 0,
+        "BD": "Personas atendidas",
+        "BE": 1800
+      },
+      "live": []
+    },
+    {
+      "sourceRow": 11,
+      "cells": {
+        "AY": "QC4141.2602",
+        "AZ": "Programa de Impulso a la Creatividad y Reflexión Artística en Guanajuato",
+        "BA": "QC4141.2602",
+        "BB": "Eventos de reflexión artística como clínicas, pensatorios y encuentros enfocados en el análisis colectivo donde se visibilizan prácticas y trayectorias de personas de la diversidad sexual, con discapacidad y comunidades históricamente excluidas del discurso artístico",
+        "BC": 0,
+        "BD": "Personas atendidas",
+        "BE": 1200
+      },
+      "live": []
+    },
+    {
+      "sourceRow": 12,
+      "cells": {
+        "AY": "QC4142.2601",
+        "AZ": "Ventanas al Territorio",
+        "BA": "QC4142.2601",
+        "BB": "Programa literario en los 46 municipios con actividades como lecturas, talleres, círculos, presentaciones y narración oral, promoviendo la lectura, la creación comunitaria y la difusión del fondo editorial estatal en coordinación con bibliotecas, casas de cultura y escuelas",
+        "BC": 0,
+        "BD": "Eventos realizados",
+        "BE": 50
+      },
+      "live": [
+        {
+          "id": 8,
+          "process": "QC4142",
+          "annual": 50,
+          "unit": "Eventos realizados",
+          "name": "Programa literario en los 46 municipios con actividades como lecturas, talleres, círculos, presentaciones y narración oral, promoviendo la lectura, la creación comunitaria y la difusión del fondo editorial estatal en coordinación con bibliotecas, casas de cultura y escuelas"
+        }
+      ]
+    },
+    {
+      "sourceRow": 13,
+      "cells": {
+        "AY": "QC4142.2602",
+        "AZ": "Ventanas al Territorio",
+        "BA": "QC4142.2602",
+        "BB": "Programa expositivo estatal, mediante la circulación y montaje de contenidos visuales y patrimoniales, en espacios culturales y municipales, con exposiciones de arte contemporáneo, fotografía, gráfica y cultura regional, acompañadas de mediación, visitas comentadas y actividades educativas",
+        "BC": 0,
+        "BD": "Exposiciones realizadas",
+        "BE": 40
+      },
+      "live": [
+        {
+          "id": 9,
+          "process": "QC4142",
+          "annual": 40,
+          "unit": "Exposiciones realizadas",
+          "name": "Programa expositivo estatal, mediante la circulación y montaje de contenidos visuales y patrimoniales, en espacios culturales y municipales, con exposiciones de arte contemporáneo, fotografía, gráfica y cultura regional, acompañadas de mediación, visitas comentadas y actividades educativas"
+        }
+      ]
+    },
+    {
+      "sourceRow": 14,
+      "cells": {
+        "AY": "QC4142.2603",
+        "AZ": "Ventanas al Territorio",
+        "BA": "QC4142.2603",
+        "BB": "Programa de artes vivas en los 46 municipios, con presentaciones, talleres y procesos creativos de teatro, música, danza, narración oral y arte circense, participan agrupaciones locales, estatales e invitadas, articulada con espacios culturales y acompañada de mediación y formación comunitaria",
+        "BC": 0,
+        "BD": "Presentaciones realizadas",
+        "BE": 20
+      },
+      "live": [
+        {
+          "id": 10,
+          "process": "QC4142",
+          "annual": 20,
+          "unit": "Presentaciones realizadas",
+          "name": "Programa de artes vivas en los 46 municipios, con presentaciones, talleres y procesos creativos de teatro, música, danza, narración oral y arte circense, participan agrupaciones locales, estatales e invitadas, articulada con espacios culturales y acompañada de mediación y formación comunitaria"
+        }
+      ]
+    },
+    {
+      "sourceRow": 15,
+      "cells": {
+        "AY": "QC4143.2601",
+        "AZ": "Fortalecimiento Integral de la Banda de Música del Estado de Guanajuato",
+        "BA": "QC4143.2601",
+        "BB": "Adquisición de instrumentos musicales (percusiones) para la Banda de Música del Estado de Guanajuato",
+        "BC": 0,
+        "BD": "Instrumentos musicales entregados",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 11,
+          "process": "QC4143",
+          "annual": 3,
+          "unit": "Instrumentos musicales entregados",
+          "name": "Adquisición de instrumentos musicales (percusiones) para la Banda de Música del Estado de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 16,
+      "cells": {
+        "AY": "QC4051.2601",
+        "AZ": "Instituciones Estatales de Cultura",
+        "BA": "QC4051.2601",
+        "BB": "Apoyos económicos para el desarrollo de proyectos artísticos y culturales coordinados por la Secretaría de Cultura estatal",
+        "BC": 0,
+        "BD": "Proyectos desarrollados",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 12,
+          "process": "QC4051",
+          "annual": 3,
+          "unit": "Proyectos desarrollados",
+          "name": "Apoyos económicos para el desarrollo de proyectos artísticos y culturales coordinados por la Secretaría de Cultura estatal"
+        }
+      ]
+    },
+    {
+      "sourceRow": 17,
+      "cells": {
+        "AY": "QC4042.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Cañada de la Virgen",
+        "BA": "QC4042.2601",
+        "BB": "Atención a personas para conocer el Sitio Arqueológico Cañada de la Virgen en San Miguel de Allende tanto de forma presencial como por medios electrónicos.",
+        "BC": 0,
+        "BD": "Personas atendidas de manera presencial y virtual",
+        "BE": 105000
+      },
+      "live": [
+        {
+          "id": 13,
+          "process": "QC4042",
+          "annual": 105000,
+          "unit": "Personas atendidas de manera presencial y virtual",
+          "name": "Atención a personas para conocer el Sitio Arqueológico Cañada de la Virgen en San Miguel de Allende tanto de forma presencial como por medios electrónicos."
+        }
+      ]
+    },
+    {
+      "sourceRow": 18,
+      "cells": {
+        "AY": "QC4042.2602",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Cañada de la Virgen",
+        "BA": "QC4042.2602",
+        "BB": "Acciones de preservación de la zona Arqueológica Cañada de la Virgen en San Miguel de Allende.",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 14,
+          "process": "QC4042",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Acciones de preservación de la zona Arqueológica Cañada de la Virgen en San Miguel de Allende."
+        }
+      ]
+    },
+    {
+      "sourceRow": 19,
+      "cells": {
+        "AY": "QC4043.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico El Cóporo",
+        "BA": "QC4043.2601",
+        "BB": "Atención a personas para conocer el Sitio Arqueológico El Cóporo en Ocampo, tanto de forma presencial como medios a a través de recorridos virtuales y fotografías de 360 grados además de actividades complementarias",
+        "BC": 0,
+        "BD": "Personas atendidas de manera presencial y virtual",
+        "BE": 80000
+      },
+      "live": [
+        {
+          "id": 15,
+          "process": "QC4043",
+          "annual": 80000,
+          "unit": "Personas atendidas de manera presencial y virtual",
+          "name": "Atención a personas para conocer el Sitio Arqueológico El Cóporo en Ocampo, tanto de forma presencial  como  medios a a través  de recorridos virtuales y fotografías de 360 grados además de actividades complementarias"
+        }
+      ]
+    },
+    {
+      "sourceRow": 20,
+      "cells": {
+        "AY": "QC4043.2602",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico El Cóporo",
+        "BA": "QC4043.2602",
+        "BB": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de El Cóporo, Ocampo, Gto.",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 16,
+          "process": "QC4043",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de  El Cóporo, Ocampo, Gto."
+        }
+      ]
+    },
+    {
+      "sourceRow": 21,
+      "cells": {
+        "AY": "QC4044.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Cerro de los Remedios",
+        "BA": "QC4044.2601",
+        "BB": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de Cerro de los Remedios, Comonfort, Gto.",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 17,
+          "process": "QC4044",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de Cerro de los Remedios, Comonfort, Gto."
+        }
+      ]
+    },
+    {
+      "sourceRow": 22,
+      "cells": {
+        "AY": "QC4045.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Plazuelas",
+        "BA": "QC4045.2601",
+        "BB": "Atención a personas para conocer el Sitio Arqueológico Plazuelas en Pénjamo, tanto de forma presencial y virtual por medios electrónicos.",
+        "BC": 0,
+        "BD": "Personas atendidas de manera presencial y virtual",
+        "BE": 90000
+      },
+      "live": [
+        {
+          "id": 18,
+          "process": "QC4045",
+          "annual": 90000,
+          "unit": "Personas atendidas de manera presencial y virtual",
+          "name": "Atención a personas para conocer el Sitio Arqueológico Plazuelas en Pénjamo, tanto de forma presencial  y virtual por medios electrónicos."
+        }
+      ]
+    },
+    {
+      "sourceRow": 23,
+      "cells": {
+        "AY": "QC4045.2602",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Plazuelas",
+        "BA": "QC4045.2602",
+        "BB": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de Plazuelas, Pénjamo, Gto.",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 19,
+          "process": "QC4045",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico de Plazuelas, Pénjamo, Gto."
+        }
+      ]
+    },
+    {
+      "sourceRow": 24,
+      "cells": {
+        "AY": "QC4046.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Peralta",
+        "BA": "QC4046.2601",
+        "BB": "Atención a personas para conocer el Sitio Arqueológico Peralta en Abasolo, tanto de forma presencial y virtual por medios electrónicos.",
+        "BC": 0,
+        "BD": "Personas atendidas de manera presencial y virtual",
+        "BE": 95000
+      },
+      "live": [
+        {
+          "id": 20,
+          "process": "QC4046",
+          "annual": 95000,
+          "unit": "Personas atendidas de manera presencial y virtual",
+          "name": "Atención a personas para conocer el Sitio Arqueológico Peralta en Abasolo, tanto de forma presencial  y virtual por medios electrónicos."
+        }
+      ]
+    },
+    {
+      "sourceRow": 25,
+      "cells": {
+        "AY": "QC4046.2602",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Sitio Arqueológico Peralta",
+        "BA": "QC4046.2602",
+        "BB": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico Peralta, Abasolo, Gto.",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 21,
+          "process": "QC4046",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Intervenciones para rehabilitar y preservar el Sitio Arqueológico Peralta, Abasolo, Gto."
+        }
+      ]
+    },
+    {
+      "sourceRow": 26,
+      "cells": {
+        "AY": "QC4048.2601",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Arroyo Seco en Victoria",
+        "BA": "QC4048.2601",
+        "BB": "Atención a personas para conocer el Sitio Arqueológico Arroyo seco en Victoria, tanto de forma presencial y por medios electrónicos",
+        "BC": 0,
+        "BD": "Personas atendidas de manera presencial y virtual",
+        "BE": 45000
+      },
+      "live": [
+        {
+          "id": 22,
+          "process": "QC4048",
+          "annual": 45000,
+          "unit": "Personas atendidas de manera presencial y virtual",
+          "name": "Atención a personas para conocer el Sitio Arqueológico Arroyo seco en Victoria, tanto de forma presencial y por medios electrónicos"
+        }
+      ]
+    },
+    {
+      "sourceRow": 27,
+      "cells": {
+        "AY": "QC4048.2602",
+        "AZ": "Preservación de Zonas Arqueológicas de Guanajuato, Arroyo Seco en Victoria",
+        "BA": "QC4048.2602",
+        "BB": "Intervenciones para rehabilitar y preservar la zona Arqueológica Arroyo seco en Victoria",
+        "BC": 0,
+        "BD": "Intervenciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 23,
+          "process": "QC4048",
+          "annual": 2,
+          "unit": "Intervenciones realizadas",
+          "name": "Intervenciones para rehabilitar y preservar la zona Arqueológica Arroyo seco en Victoria"
+        }
+      ]
+    },
+    {
+      "sourceRow": 28,
+      "cells": {
+        "AY": "QC4048.2603",
+        "AZ": "Conservación del Camino Real Tierra Adentro",
+        "BA": "QC4048.2603",
+        "BB": "Conservar el Camino Real Tierra Adentro en el estado de Guanajuato mediante aportación económica a los municipios",
+        "BC": 0,
+        "BD": "Proyectos apoyados",
+        "BE": 2
+      },
+      "live": []
+    },
+    {
+      "sourceRow": 29,
+      "cells": {
+        "AY": "QC4047.2601",
+        "AZ": "Vientos Musicales para la Gente",
+        "BA": "QC4047.2601",
+        "BB": "Capacitación a alumnado en el método multinivel en Bandas Sinfónicas, Orquestas Sinfónicas y Camerata",
+        "BC": 0,
+        "BD": "Personas capacitadas",
+        "BE": 1240
+      },
+      "live": [
+        {
+          "id": 24,
+          "process": "QC4047",
+          "annual": 1240,
+          "unit": "Personas capacitadas",
+          "name": "Capacitación a alumnado en el método multinivel en Bandas Sinfónicas, Orquestas Sinfónicas y Camerata"
+        }
+      ]
+    },
+    {
+      "sourceRow": 30,
+      "cells": {
+        "AY": "QC4047.2602",
+        "AZ": "Vientos Musicales para la Gente",
+        "BA": "QC4047.2602",
+        "BB": "Capacitación a alumnado en el método multinivel en ensambles corales",
+        "BC": 0,
+        "BD": "Personas capacitadas",
+        "BE": 700
+      },
+      "live": [
+        {
+          "id": 25,
+          "process": "QC4047",
+          "annual": 700,
+          "unit": "Personas capacitadas",
+          "name": "Capacitación a alumnado en el método multinivel en ensambles corales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 31,
+      "cells": {
+        "AY": "QC4047.2603",
+        "AZ": "Vientos Musicales para la Gente",
+        "BA": "QC4047.2603",
+        "BB": "Capacitación docente y a personas beneficiarias de ensambles representativos en temas especializados a través de la enseñanza por competencias.",
+        "BC": 0,
+        "BD": "Personas capacitadas",
+        "BE": 400
+      },
+      "live": [
+        {
+          "id": 26,
+          "process": "QC4047",
+          "annual": 400,
+          "unit": "Personas capacitadas",
+          "name": "Capacitación docente y a personas beneficiarias de ensambles representativos en temas especializados a través de la enseñanza por competencias."
+        }
+      ]
+    },
+    {
+      "sourceRow": 32,
+      "cells": {
+        "AY": "QC4049.2601",
+        "AZ": "Centro de las Artes de Guanajuato, Claustro Mayor",
+        "BA": "QC4049.2601",
+        "BB": "Rehabilitación y mantenimiento de espacios interiores y exteriores, el Claustro Mayor del ex convento Fray Juan de Sahagún, en Salamanca",
+        "BC": 0,
+        "BD": "Acciones realizadas",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 27,
+          "process": "QC4049",
+          "annual": 6.3,
+          "unit": "Acciones realizadas",
+          "name": "Rehabilitación y mantenimiento de espacios interiores y exteriores, el Claustro Mayor del ex convento Fray Juan de Sahagún, en Salamanca"
+        },
+        {
+          "id": 28,
+          "process": "QC4049",
+          "annual": 3,
+          "unit": "Acciones realizadas",
+          "name": "Rehabilitación y mantenimiento de espacios interiores y exteriores, el Claustro Mayor del ex convento Fray Juan de Sahagún, en Salamanca"
+        }
+      ]
+    },
+    {
+      "sourceRow": 33,
+      "cells": {
+        "AY": "QC4049.2602",
+        "AZ": "Centro de las Artes de Guanajuato, Claustro Mayor",
+        "BA": "QC4049.2602",
+        "BB": "Programa académico del Centro de las Artes de Guanajuato, Claustro Mayor, incluye: cursos y talleres de especialización en las disciplinas de artes escénicas, visuales, plásticas, patrimonio cultural inmaterial y públicos específicos, en Salamanca",
+        "BC": 0,
+        "BD": "Actividades realizadas",
+        "BE": 16
+      },
+      "live": [
+        {
+          "id": 29,
+          "process": "QC4049",
+          "annual": 16,
+          "unit": "Actividades realizadas",
+          "name": "Programa académico del Centro de las Artes de Guanajuato, Claustro Mayor, incluye: cursos y talleres de especialización en las disciplinas de artes escénicas, visuales, plásticas, patrimonio cultural inmaterial y públicos específicos, en Salamanca"
+        }
+      ]
+    },
+    {
+      "sourceRow": 34,
+      "cells": {
+        "AY": "QC4049.2603",
+        "AZ": "Centro de las Artes de Guanajuato, Claustro Mayor",
+        "BA": "QC4049.2603",
+        "BB": "Programa artístico del Centro de las Artes de Guanajuato en el Claustro Mayor, consistente en presentaciones de danza, teatro y música en Salamanca",
+        "BC": 0,
+        "BD": "Eventos realizados",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 30,
+          "process": "QC4049",
+          "annual": 4,
+          "unit": "Eventos realizados",
+          "name": "Programa artístico del Centro de las Artes de Guanajuato en el Claustro Mayor, consistente en presentaciones de danza, teatro y música en Salamanca"
+        }
+      ]
+    },
+    {
+      "sourceRow": 35,
+      "cells": {
+        "AY": "QC4049.2604",
+        "AZ": "Centro de las Artes de Guanajuato, Claustro Mayor",
+        "BA": "QC4049.2604",
+        "BB": "Programa anual expositivo del Centro de las Artes de Guanajuato, Claustro Mayor, con exposiciones temporales de artes plásticas y de los acervos CEARG en Salamanca",
+        "BC": 0,
+        "BD": "Exposiciones realizadas",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 31,
+          "process": "QC4049",
+          "annual": 3,
+          "unit": "Exposiciones realizadas",
+          "name": "Programa anual expositivo del Centro de las Artes de Guanajuato, Claustro Mayor, con exposiciones temporales de artes plásticas y de los acervos CEARG en Salamanca"
+        }
+      ]
+    },
+    {
+      "sourceRow": 36,
+      "cells": {
+        "AY": "QC4061.2601",
+        "AZ": "Programa de Estímulos a la Creación y Desarrollo Artístico",
+        "BA": "QC4061.2601",
+        "BB": "Apoyos económicos para el desarrollo de proyectos artísticos en alguna de las siguientes disciplinas: artes plásticas, danza, literatura, medios audiovisuales y alternativos, música, patrimonio cultural o teatro",
+        "BC": 0,
+        "BD": "Apoyos otorgados",
+        "BE": 42
+      },
+      "live": [
+        {
+          "id": 32,
+          "process": "QC4061",
+          "annual": 42,
+          "unit": "Apoyos otorgados",
+          "name": "Apoyos económicos para el desarrollo de proyectos artísticos en alguna de las siguientes disciplinas: artes plásticas, danza, literatura, medios audiovisuales y alternativos, música, patrimonio cultural o teatro"
+        }
+      ]
+    },
+    {
+      "sourceRow": 37,
+      "cells": {
+        "AY": "QC4062.2601",
+        "AZ": "Programa de Apoyo a las Culturas Municipales y Comunitarias PACMYC",
+        "BA": "QC4062.2601",
+        "BB": "Apoyos económicos para el desarrollo de proyectos culturales o intervenciones culturales comunitarias dirigidos a personas portadoras de la cultura popular",
+        "BC": 0,
+        "BD": "Apoyos otorgados",
+        "BE": 8
+      },
+      "live": [
+        {
+          "id": 33,
+          "process": "QC4062",
+          "annual": 8,
+          "unit": "Apoyos otorgados",
+          "name": "Apoyos económicos para el desarrollo de proyectos culturales o intervenciones culturales comunitarias dirigidos a personas portadoras de la cultura popular"
+        }
+      ]
+    },
+    {
+      "sourceRow": 38,
+      "cells": {
+        "AY": "QC4062.2601",
+        "AZ": "Programa de Apoyo a las Culturas Municipales y Comunitarias PACMYC",
+        "BA": "QC4062.2601",
+        "BB": "Apoyos económicos para el desarrollo de proyectos culturales o intervenciones culturales comunitarias dirigidos a personas portadoras de la cultura popular",
+        "BC": 0,
+        "BD": "Apoyos otorgados",
+        "BE": 8
+      },
+      "live": [
+        {
+          "id": 33,
+          "process": "QC4062",
+          "annual": 8,
+          "unit": "Apoyos otorgados",
+          "name": "Apoyos económicos para el desarrollo de proyectos culturales o intervenciones culturales comunitarias dirigidos a personas portadoras de la cultura popular"
+        }
+      ]
+    },
+    {
+      "sourceRow": 39,
+      "cells": {
+        "AY": "QC4055.2601",
+        "AZ": "Fortalecimiento de Ediciones La Rana",
+        "BA": "QC4055.2601",
+        "BB": "Equipar con mobiliario el espacio de la librería institucional en el Fórum, para fortalecer su gestión como un foro cultural vivo, versátil y moderno",
+        "BC": 0,
+        "BD": "Equipamiento de librería realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 37,
+          "process": "QC4045",
+          "annual": 1,
+          "unit": "Equipamiento de librería realizado",
+          "name": "Equipar con mobiliario el espacio de la librería institucional en el Fórum, para fortalecer su gestión como un foro cultural vivo, versátil y moderno"
+        }
+      ]
+    },
+    {
+      "sourceRow": 40,
+      "cells": {
+        "AY": "QC4055.2602",
+        "AZ": "Fortalecimiento de Ediciones La Rana",
+        "BA": "QC4055.2602",
+        "BB": "Dictamen de la convocatoria de Premio Nacional de Cuento, premiar al autor seleccionado y gestionar la publicación de texto ganador",
+        "BC": 0,
+        "BD": "Dictamen de la convocatoria por tres jurados para otorgar premio",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 38,
+          "process": "QC4045",
+          "annual": 1,
+          "unit": "Dictamen de la convocatoria por tres jurados para otorgar premio",
+          "name": "Dictamen de la convocatoria de Premio Nacional de Cuento, premiar al autor seleccionado y gestionar la publicación de texto ganador"
+        }
+      ]
+    },
+    {
+      "sourceRow": 41,
+      "cells": {
+        "AY": "QC4056.2601",
+        "AZ": "Taller sobre Técnica Madonnari",
+        "BA": "QC4056.2601",
+        "BB": "Participación de artistas en los festivales municipales Madonnari 2026, consistente en la exhibición - concurso de composiciones de arte efímero con la técnica de gis pastel sobre piso.",
+        "BC": 0,
+        "BD": "Participantes del festival",
+        "BE": 121
+      },
+      "live": []
+    },
+    {
+      "sourceRow": 42,
+      "cells": {
+        "AY": "QC4056.2602",
+        "AZ": "Circuito Estatal de Exposiciones",
+        "BA": "QC4056.2602",
+        "BB": "Exposiciones temporales de arte de diversas disciplinas: pintura, fotografía, escultura, instalación gráfica en los Museos administrados por la Secretaría de Cultura",
+        "BC": 0,
+        "BD": "Exposiciones realizadas",
+        "BE": 15
+      },
+      "live": []
+    },
+    {
+      "sourceRow": 43,
+      "cells": {
+        "AY": "PB3576",
+        "AZ": "Comunicación y difusión cultural",
+        "BA": "PB3576",
+        "BB": "Gestión para la realización de campañas de difusión de actividades culturales.",
+        "BC": 0,
+        "BD": "Campañas gestionadas.",
+        "BE": 12
+      },
+      "live": [
+        {
+          "id": 44,
+          "process": "PB3576",
+          "annual": 12,
+          "unit": "Campañas gestionadas.",
+          "name": "Gestión para la realización de campañas de difusión de actividades culturales."
+        }
+      ]
+    },
+    {
+      "sourceRow": 44,
+      "cells": {
+        "AY": "PB3576",
+        "AZ": "Comunicación y difusión cultural",
+        "BA": "PB3576",
+        "BB": "Gestión para la realización de campañas de difusión Institucional.",
+        "BC": 0,
+        "BD": "Campañas gestionadas.",
+        "BE": 8
+      },
+      "live": [
+        {
+          "id": 45,
+          "process": "PB3576",
+          "annual": 8,
+          "unit": "Campañas gestionadas.",
+          "name": "Gestión para la realización de campañas de difusión Institucional."
+        }
+      ]
+    },
+    {
+      "sourceRow": 45,
+      "cells": {
+        "AY": "PB3576",
+        "AZ": "Comunicación y difusión cultural",
+        "BA": "PB3576",
+        "BB": "Elaboración del documento del Plan Anual de Comunicación de la Secretaría de Cultura.",
+        "BC": 0,
+        "BD": "Plan realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 46,
+          "process": "PB3576",
+          "annual": 1,
+          "unit": "Plan realizado",
+          "name": "Elaboración del documento del Plan Anual de Comunicación de la Secretaría de Cultura."
+        }
+      ]
+    },
+    {
+      "sourceRow": 46,
+      "cells": {
+        "AY": "PB3575",
+        "AZ": "Impulso de la Economía Creativa e Inteligencia Cultural",
+        "BA": "PB3575",
+        "BB": "Cursos y talleres especializados orientados a fortalecer los factores clave para el crecimiento de las economías creativas para agentes culturales",
+        "BC": 0,
+        "BD": "Cursos y Talleres realizados",
+        "BE": 5
+      },
+      "live": [
+        {
+          "id": 47,
+          "process": "PB3575",
+          "annual": 5,
+          "unit": "Cursos y Talleres realizados",
+          "name": "Cursos y talleres especializados orientados a fortalecer los factores clave para el crecimiento de las economías creativas para agentes culturales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 47,
+      "cells": {
+        "AY": "PB3575",
+        "AZ": "Impulso de la Economía Creativa e Inteligencia Cultural",
+        "BA": "PB3575",
+        "BB": "Colaboraciones con instituciones educativas, organismos empresariales y entidades públicas para desarrollar programas de capacitación y mentoría en los ámbitos de las economías creativas.",
+        "BC": 0,
+        "BD": "Colaboraciones realizadas",
+        "BE": 10
+      },
+      "live": [
+        {
+          "id": 48,
+          "process": "PB3575",
+          "annual": 10,
+          "unit": "Colaboraciones realizadas",
+          "name": "Colaboraciones con instituciones educativas, organismos empresariales y entidades públicas para desarrollar programas de capacitación y mentoría en los ámbitos de las economías creativas."
+        }
+      ]
+    },
+    {
+      "sourceRow": 48,
+      "cells": {
+        "AY": "PB3575",
+        "AZ": "Impulso de la Economía Creativa e Inteligencia Cultural",
+        "BA": "PB3575",
+        "BB": "Encuentros temáticos de diálogo y reflexión, presenciales o virtuales, en distintos ámbitos de las economías creativas (ejemplo: diseño y moda; gastronomía y artesanías; música y artes escénicas), fomentando la generación de redes y propuestas de política pública.",
+        "BC": 0,
+        "BD": "Encuentros realizados",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 49,
+          "process": "PB3575",
+          "annual": 3,
+          "unit": "Encuentros realizados",
+          "name": "Encuentros temáticos de diálogo y reflexión, presenciales o virtuales, en distintos ámbitos de las economías creativas (ejemplo: diseño y moda; gastronomía y artesanías; música y artes escénicas), fomentando la generación de redes y propuestas de política pública."
+        }
+      ]
+    },
+    {
+      "sourceRow": 49,
+      "cells": {
+        "AY": "PB3562",
+        "AZ": "Integración de nodos creativos y formativos",
+        "BA": "PB3562",
+        "BB": "Cursos y talleres para promotores culturales e instructores de casas de la cultura",
+        "BC": 0,
+        "BD": "Cursos y talleres realizados",
+        "BE": 138
+      },
+      "live": [
+        {
+          "id": 50,
+          "process": "PB3562",
+          "annual": 138,
+          "unit": "Cursos y talleres realizados",
+          "name": "Cursos y talleres para promotores culturales e instructores de casas de la cultura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 50,
+      "cells": {
+        "AY": "PB3562",
+        "AZ": "Integración de nodos creativos y formativos",
+        "BA": "PB3562",
+        "BB": "Talleres de educación artística y cultural no formales impartidos en casas de cultura y salones culturales",
+        "BC": 0,
+        "BD": "Talleres realizados",
+        "BE": 3800
+      },
+      "live": [
+        {
+          "id": 51,
+          "process": "PB3562",
+          "annual": 3800,
+          "unit": "Talleres realizados",
+          "name": "Talleres de educación artística y cultural no formales impartidos en casas de cultura y salones culturales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 51,
+      "cells": {
+        "AY": "PB3562",
+        "AZ": "Integración de nodos creativos y formativos",
+        "BA": "PB3562",
+        "BB": "Cursos y talleres de formación lectora para bibliotecarios, niños narradores y escritores, padres de familia y promotores de lectura",
+        "BC": 0,
+        "BD": "Cursos y talleres realizados",
+        "BE": 90
+      },
+      "live": [
+        {
+          "id": 52,
+          "process": "PB3562",
+          "annual": 90,
+          "unit": "Cursos y talleres realizados",
+          "name": "Cursos y talleres de formación lectora para bibliotecarios, niños narradores y escritores, padres de familia y promotores de lectura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 52,
+      "cells": {
+        "AY": "PB3562",
+        "AZ": "Integración de nodos creativos y formativos",
+        "BA": "PB3562",
+        "BB": "Talleres de seguimiento a la implementación del programa curricular para la asignatura de artes en la educación básica",
+        "BC": 0,
+        "BD": "Talleres realizados",
+        "BE": 20
+      },
+      "live": [
+        {
+          "id": 53,
+          "process": "PB3562",
+          "annual": 20,
+          "unit": "Talleres realizados",
+          "name": "Talleres de seguimiento a la implementación del programa curricular para la asignatura de artes en la educación básica"
+        }
+      ]
+    },
+    {
+      "sourceRow": 53,
+      "cells": {
+        "AY": "PB3562",
+        "AZ": "Integración de nodos creativos y formativos",
+        "BA": "PB3562",
+        "BB": "Capacitaciones en danza folclórica dirigido a directores, maestros y ejecutantes del estado de Guanajuato",
+        "BC": 0,
+        "BD": "Capacitaciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 54,
+          "process": "PB3562",
+          "annual": 2,
+          "unit": "Capacitaciones realizadas",
+          "name": "Capacitaciones en danza folclórica dirigido a directores, maestros y ejecutantes del estado de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 54,
+      "cells": {
+        "AY": "PB3563",
+        "AZ": "Coordinación y vinculación de redes de mediación cultural municipal",
+        "BA": "PB3563",
+        "BB": "Apoyos especiales a organismos culturales municipales",
+        "BC": 0,
+        "BD": "Apoyos otorgados",
+        "BE": 74
+      },
+      "live": [
+        {
+          "id": 55,
+          "process": "PB3563",
+          "annual": 94,
+          "unit": "Apoyos otorgados",
+          "name": "Apoyos especiales a organismos culturales municipales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 55,
+      "cells": {
+        "AY": "PB3563",
+        "AZ": "Coordinación y vinculación de redes de mediación cultural municipal",
+        "BA": "PB3563",
+        "BB": "Actividades colaborativas de la red de identidad cultura y memoria",
+        "BC": 0,
+        "BD": "Acciones realizadas",
+        "BE": 495
+      },
+      "live": [
+        {
+          "id": 56,
+          "process": "PB3563",
+          "annual": 495,
+          "unit": "Acciones realizadas",
+          "name": "Actividades colaborativas de la red de identidad cultura y memoria"
+        }
+      ]
+    },
+    {
+      "sourceRow": 56,
+      "cells": {
+        "AY": "PB3563",
+        "AZ": "Coordinación y vinculación de redes de mediación cultural municipal",
+        "BA": "PB3563",
+        "BB": "Visitas escolares a zonas arqueológicas y recintos culturales del estado para impulsar aprendizajes significativos en alumnos de educación básica",
+        "BC": 0,
+        "BD": "Visitas realizadas",
+        "BE": 30
+      },
+      "live": [
+        {
+          "id": 57,
+          "process": "PB3563",
+          "annual": 30,
+          "unit": "Visitas realizadas",
+          "name": "Visitas escolares a zonas arqueológicas y recintos culturales del estado para impulsar aprendizajes significativos en alumnos de educación básica"
+        }
+      ]
+    },
+    {
+      "sourceRow": 57,
+      "cells": {
+        "AY": "PB3563",
+        "AZ": "Coordinación y vinculación de redes de mediación cultural municipal",
+        "BA": "PB3563",
+        "BB": "Actividades de promoción y animación lectora para público en general",
+        "BC": 0,
+        "BD": "Actividades realizadas",
+        "BE": 125
+      },
+      "live": [
+        {
+          "id": 58,
+          "process": "PB3563",
+          "annual": 4800,
+          "unit": "Actividades realizadas",
+          "name": "Actividades de promoción y animación lectora para público en general"
+        }
+      ]
+    },
+    {
+      "sourceRow": 58,
+      "cells": {
+        "AY": "PB3563",
+        "AZ": "Coordinación y vinculación de redes de mediación cultural municipal",
+        "BA": "PB3563",
+        "BB": "Encuentros y capacitaciones del personal bibliotecario incorporado a la red estatal de bibliotecas públicas del estado de Guanajuato",
+        "BC": 0,
+        "BD": "Encuentros y capacitaciones realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 59,
+          "process": "PB3563",
+          "annual": 15,
+          "unit": "Encuentros y capacitaciones realizadas",
+          "name": "Encuentros y capacitaciones del personal bibliotecario incorporado a la red estatal de bibliotecas públicas del estado de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 59,
+      "cells": {
+        "AY": "PB3564",
+        "AZ": "Fortalecimiento de procesos participativos municipales",
+        "BA": "PB3564",
+        "BB": "Proyectos culturales interinstitucionales y comunitarios dirigidos a públicos vulnerables",
+        "BC": 0,
+        "BD": "Proyectos realizados",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 60,
+          "process": "PB3564",
+          "annual": 3,
+          "unit": "Proyectos realizados",
+          "name": "Proyectos culturales interinstitucionales y comunitarios dirigidos a públicos vulnerables"
+        }
+      ]
+    },
+    {
+      "sourceRow": 60,
+      "cells": {
+        "AY": "PB3564",
+        "AZ": "Fortalecimiento de procesos participativos municipales",
+        "BA": "PB3564",
+        "BB": "Proyectos socioculturales en barrios, colonias, periferias y/o comunidades",
+        "BC": 0,
+        "BD": "Proyectos realizados",
+        "BE": 10
+      },
+      "live": [
+        {
+          "id": 61,
+          "process": "PB3564",
+          "annual": 1,
+          "unit": "Proyectos realizados",
+          "name": "Proyectos socioculturales en barrios, colonias, periferias y/o comunidades"
+        }
+      ]
+    },
+    {
+      "sourceRow": 61,
+      "cells": {
+        "AY": "PB3564",
+        "AZ": "Fortalecimiento de procesos participativos municipales",
+        "BA": "PB3564",
+        "BB": "Encuentros de lectores y círculos de lectura para usuarios de la red estatal de bibliotecas públicas",
+        "BC": 0,
+        "BD": "Encuentros y círculos realizados",
+        "BE": 95
+      },
+      "live": [
+        {
+          "id": 62,
+          "process": "PB3564",
+          "annual": 95,
+          "unit": "Encuentros y círculos realizados",
+          "name": "Encuentros de lectores y círculos de lectura para usuarios de la red estatal de bibliotecas públicas"
+        }
+      ]
+    },
+    {
+      "sourceRow": 62,
+      "cells": {
+        "AY": "PB3565",
+        "AZ": "Preservación y divulgación del Patrimonio Cultural",
+        "BA": "PB3565",
+        "BB": "Programa y listado de asistentes al Curso taller para la difusión del patrimonio cultural de la entidad.",
+        "BC": 0,
+        "BD": "Curso taller realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 63,
+          "process": "PB3565",
+          "annual": 1,
+          "unit": "Curso taller realizado",
+          "name": "Programa y listado de asistentes al Curso taller para la difusión del patrimonio cultural de la entidad."
+        }
+      ]
+    },
+    {
+      "sourceRow": 63,
+      "cells": {
+        "AY": "PB3565",
+        "AZ": "Preservación y divulgación del Patrimonio Cultural",
+        "BA": "PB3565",
+        "BB": "Programa y listado de asistentes al Curso del Patrimonio cultural tangible del estado de Guanajuato",
+        "BC": 0,
+        "BD": "Curso realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 64,
+          "process": "PB3565",
+          "annual": 1,
+          "unit": "Curso realizado",
+          "name": "Programa y listado de asistentes al Curso del Patrimonio cultural tangible del estado de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 64,
+      "cells": {
+        "AY": "PB3565",
+        "AZ": "Preservación y divulgación del Patrimonio Cultural",
+        "BA": "PB3565",
+        "BB": "Acta de entrega recepción de las acciones de mantenimiento menor a los inmuebles bajo el resguardo de la Secretaría de Cultura",
+        "BC": 0,
+        "BD": "Acciones de mantenimiento menor realizadas",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 65,
+          "process": "PB3565",
+          "annual": 2,
+          "unit": "Acciones de mantenimiento menor realizadas",
+          "name": "Acta de entrega recepción de las acciones de mantenimiento menor a los inmuebles bajo el resguardo de la Secretaría de Cultura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 65,
+      "cells": {
+        "AY": "PB3566",
+        "AZ": "Fortalecimiento y divulgación del Patrimonio Arqueológico a través de los Centros de Atención a Visitantes",
+        "BA": "PB3566",
+        "BB": "Charlas y conferencias del patrimonio arqueológico del Estado de Guanajuato.",
+        "BC": 0,
+        "BD": "Charlas y conferencias realizadas.",
+        "BE": 15
+      },
+      "live": [
+        {
+          "id": 66,
+          "process": "PB3566",
+          "annual": 15,
+          "unit": "Charlas y conferencias realizadas.",
+          "name": "Charlas y conferencias del patrimonio arqueológico del Estado de Guanajuato."
+        }
+      ]
+    },
+    {
+      "sourceRow": 66,
+      "cells": {
+        "AY": "PB3566",
+        "AZ": "Fortalecimiento y divulgación del Patrimonio Arqueológico a través de los Centros de Atención a Visitantes",
+        "BA": "PB3566",
+        "BB": "Ferias de la cocina tradicional y/o de la artesanía del Estado de Guanajuato en los sitios arqueológicos en coordinación con otras instituciones privadas y de gobierno.",
+        "BC": 0,
+        "BD": "Ferias de la cocina tradicional y de la artesanía realizadas.",
+        "BE": 5
+      },
+      "live": [
+        {
+          "id": 67,
+          "process": "PB3566",
+          "annual": 5,
+          "unit": "Ferias de la cocina tradicional y de la artesanía realizadas.",
+          "name": "Ferias de la cocina tradicional y/o de la artesanía del Estado de Guanajuato en los sitios arqueológicos en coordinación con otras instituciones privadas y de gobierno."
+        }
+      ]
+    },
+    {
+      "sourceRow": 67,
+      "cells": {
+        "AY": "PB3566",
+        "AZ": "Fortalecimiento y divulgación del Patrimonio Arqueológico a través de los Centros de Atención a Visitantes",
+        "BA": "PB3566",
+        "BB": "Evento de Equinoccio y/o Solsticio en los sitios arqueológicos del Estado de Guanajuato.",
+        "BC": 0,
+        "BD": "Equinoccio y/o Solsticios astronómicas realizados.",
+        "BE": 5
+      },
+      "live": [
+        {
+          "id": 68,
+          "process": "PB3566",
+          "annual": 5,
+          "unit": "Equinoccio y/o Solsticios astronómicas realizados.",
+          "name": "Evento de Equinoccio y/o Solsticio en los sitios arqueológicos del Estado de Guanajuato."
+        }
+      ]
+    },
+    {
+      "sourceRow": 68,
+      "cells": {
+        "AY": "PB3566",
+        "AZ": "Fortalecimiento y divulgación del Patrimonio Arqueológico a través de los Centros de Atención a Visitantes",
+        "BA": "PB3566",
+        "BB": "Talleres lúdicos interactivos para difundir el patrimonio arqueológico del Estado de Guanajuato.",
+        "BC": 0,
+        "BD": "Talleres lúdicos interactivos realizados",
+        "BE": 10
+      },
+      "live": [
+        {
+          "id": 69,
+          "process": "PB3566",
+          "annual": 10,
+          "unit": "Talleres lúdicos interactivos realizados",
+          "name": "Talleres lúdicos interactivos para difundir el patrimonio arqueológico del Estado de Guanajuato."
+        }
+      ]
+    },
+    {
+      "sourceRow": 69,
+      "cells": {
+        "AY": "PB3566",
+        "AZ": "Fortalecimiento y divulgación del Patrimonio Arqueológico a través de los Centros de Atención a Visitantes",
+        "BA": "PB3566",
+        "BB": "Exposiciones del patrimonio arqueológico del Estado de Guanajuato.",
+        "BC": 0,
+        "BD": "Exposiciones realizadas.",
+        "BE": 15
+      },
+      "live": [
+        {
+          "id": 70,
+          "process": "PB3566",
+          "annual": 15,
+          "unit": "Exposiciones realizadas.",
+          "name": "Exposiciones del patrimonio arqueológico del Estado de Guanajuato."
+        }
+      ]
+    },
+    {
+      "sourceRow": 70,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos, talleres, y diplomados en la disciplina de las artes escénicas y multidisciplinares. Teatro, danza y artes vivas.",
+        "BC": 0,
+        "BD": "Cursos, talleres, diplomados realizados",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 71,
+          "process": "PB3567",
+          "annual": 4,
+          "unit": "Cursos, talleres, diplomados realizados",
+          "name": "Cursos, talleres, y diplomados en la disciplina de las artes escénicas y multidisciplinares. Teatro, danza y artes vivas."
+        }
+      ]
+    },
+    {
+      "sourceRow": 71,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos, talleres, y diplomados en la disciplina de las artes plásticas, sobre distintas técnicas del grabado",
+        "BC": 0,
+        "BD": "Cursos, talleres, diplomados realizados",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 72,
+          "process": "PB3567",
+          "annual": 4,
+          "unit": "Cursos, talleres, diplomados realizados",
+          "name": "Cursos, talleres, y diplomados en la disciplina de las artes plásticas, sobre distintas técnicas del grabado"
+        }
+      ]
+    },
+    {
+      "sourceRow": 72,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos, talleres, y diplomados en patrimonio cultural inmaterial, sobre territorio y comunidad.",
+        "BC": 0,
+        "BD": "Cursos, talleres, diplomados realizados",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 73,
+          "process": "PB3567",
+          "annual": 2,
+          "unit": "Cursos, talleres, diplomados realizados",
+          "name": "Cursos, talleres, y diplomados en patrimonio cultural inmaterial, sobre territorio y comunidad."
+        }
+      ]
+    },
+    {
+      "sourceRow": 73,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos, talleres, y diplomados en los distintos ámbitos de la gestión cultura. Gestión de recursos y elaboración de proyectos.",
+        "BC": 0,
+        "BD": "Cursos, talleres, diplomados realizados",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 74,
+          "process": "PB3567",
+          "annual": 2,
+          "unit": "Cursos, talleres, diplomados realizados",
+          "name": "Cursos, talleres, y diplomados en los distintos ámbitos de la gestión cultura. Gestión de recursos y elaboración de proyectos."
+        }
+      ]
+    },
+    {
+      "sourceRow": 74,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos, talleres, y diplomados en la disciplina de las artes visuales, digitales y sonoras. Cine y sonorización.",
+        "BC": 0,
+        "BD": "Cursos, talleres, diplomados realizados",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 75,
+          "process": "PB3567",
+          "annual": 4,
+          "unit": "Cursos, talleres, diplomados realizados",
+          "name": "Cursos, talleres, y diplomados en la disciplina de las artes visuales, digitales y sonoras. Cine y sonorización."
+        }
+      ]
+    },
+    {
+      "sourceRow": 75,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Exposiciones temporales en distintas disciplinas artísticas.",
+        "BC": 0,
+        "BD": "Exposiciones realizadas",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 76,
+          "process": "PB3567",
+          "annual": 3,
+          "unit": "Exposiciones realizadas",
+          "name": "Exposiciones temporales en distintas disciplinas artísticas."
+        }
+      ]
+    },
+    {
+      "sourceRow": 76,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Presentaciones artísticas de teatro, música y danza, editoriales, conversatorios, conferencias y charlas",
+        "BC": 0,
+        "BD": "Presentaciones realizadas",
+        "BE": 20
+      },
+      "live": [
+        {
+          "id": 77,
+          "process": "PB3567",
+          "annual": 20,
+          "unit": "Presentaciones realizadas",
+          "name": "Presentaciones artísticas de teatro, música y danza, editoriales, conversatorios, conferencias y charlas"
+        }
+      ]
+    },
+    {
+      "sourceRow": 77,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Cursos y talleres de iniciación artística para infantes y adolescentes. Artes plásticas, teatro, danza y arte popular.",
+        "BC": 0,
+        "BD": "Curso y talleres artísticos realizados",
+        "BE": 15
+      },
+      "live": [
+        {
+          "id": 78,
+          "process": "PB3567",
+          "annual": 15,
+          "unit": "Curso y talleres artísticos realizados",
+          "name": "Cursos y talleres de iniciación artística para infantes y adolescentes. Artes plásticas, teatro, danza y arte popular."
+        }
+      ]
+    },
+    {
+      "sourceRow": 78,
+      "cells": {
+        "AY": "PB3567",
+        "AZ": "Formación e Investigación Artística",
+        "BA": "PB3567",
+        "BB": "Residencias, Laboratorios, tutorías de cruces disciplinares de la experimentación e investigación artística. Artes vivas.",
+        "BC": 0,
+        "BD": "Laboratorios y residencias artísticas realizadas",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 79,
+          "process": "PB3567",
+          "annual": 1,
+          "unit": "Laboratorios y residencias artísticas realizadas",
+          "name": "Residencias, Laboratorios, tutorías de cruces disciplinares de la experimentación e investigación artística. Artes vivas."
+        }
+      ]
+    },
+    {
+      "sourceRow": 79,
+      "cells": {
+        "AY": "PB3568",
+        "AZ": "Coordinación de Cultura y Arte Popular",
+        "BA": "PB3568",
+        "BB": "Concursos realizados que promuevan a los creadores, artesanos y portadores de saberes con apoyos",
+        "BC": 0,
+        "BD": "Concursos realizados",
+        "BE": 12
+      },
+      "live": [
+        {
+          "id": 80,
+          "process": "PB3568",
+          "annual": 12,
+          "unit": "Concursos realizados",
+          "name": "Concursos realizados que promuevan a los creadores, artesanos y portadores de saberes con apoyos"
+        }
+      ]
+    },
+    {
+      "sourceRow": 80,
+      "cells": {
+        "AY": "PB3568",
+        "AZ": "Coordinación de Cultura y Arte Popular",
+        "BA": "PB3568",
+        "BB": "Curso o taller de apoyo a los creadores y artesanos de arte popular",
+        "BC": 0,
+        "BD": "Curso o taller realizado",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 81,
+          "process": "PB3568",
+          "annual": 2,
+          "unit": "Curso o taller realizado",
+          "name": "Curso o taller de apoyo a los creadores y artesanos de arte popular"
+        }
+      ]
+    },
+    {
+      "sourceRow": 81,
+      "cells": {
+        "AY": "PB3568",
+        "AZ": "Coordinación de Cultura y Arte Popular",
+        "BA": "PB3568",
+        "BB": "Exposiciones muestra de arte popular",
+        "BC": 0,
+        "BD": "Exposiciones muestra realizadas",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 82,
+          "process": "PB3568",
+          "annual": 4,
+          "unit": "Exposiciones muestra realizadas",
+          "name": "Exposiciones muestra de arte popular"
+        }
+      ]
+    },
+    {
+      "sourceRow": 82,
+      "cells": {
+        "AY": "PB3574",
+        "AZ": "Operación del Sistema Estatal de Espacios Escénicos y Artes Vivas",
+        "BA": "PB3574",
+        "BB": "Actividades de artes vivas y eventos culturales en el estado de Guanajuato.",
+        "BC": 0,
+        "BD": "Actividades realizadas",
+        "BE": 46
+      },
+      "live": [
+        {
+          "id": 83,
+          "process": "PB3574",
+          "annual": 46,
+          "unit": "Actividades realizadas",
+          "name": "Actividades de artes vivas y eventos culturales en el estado de Guanajuato."
+        }
+      ]
+    },
+    {
+      "sourceRow": 83,
+      "cells": {
+        "AY": "PB3574",
+        "AZ": "Operación del Sistema Estatal de Espacios Escénicos y Artes Vivas",
+        "BA": "PB3574",
+        "BB": "Circulación de creadores y artistas guanajuatenses en el país y el extranjero.",
+        "BC": 0,
+        "BD": "Circulación de creadores y artistas guanajuatenses",
+        "BE": 3
+      },
+      "live": [
+        {
+          "id": 84,
+          "process": "PB3574",
+          "annual": 3,
+          "unit": "Circulación de creadores y artistas guanajuatenses",
+          "name": "Circulación de creadores y artistas guanajuatenses en el país y el extranjero."
+        }
+      ]
+    },
+    {
+      "sourceRow": 84,
+      "cells": {
+        "AY": "PB3569",
+        "AZ": "Coordinación artística y operativa de la Banda de Música del Estado de Guanajuato",
+        "BA": "PB3569",
+        "BB": "Conciertos de la Banda de Música del Estado de Guanajuato en municipios del estado.",
+        "BC": 0,
+        "BD": "Conciertos",
+        "BE": 25
+      },
+      "live": [
+        {
+          "id": 85,
+          "process": "PB3569",
+          "annual": 25,
+          "unit": "Conciertos",
+          "name": "Conciertos de la Banda de Música del Estado de Guanajuato en municipios del estado."
+        }
+      ]
+    },
+    {
+      "sourceRow": 85,
+      "cells": {
+        "AY": "PB3570",
+        "AZ": "Vinculación y Gestión para la realización del Festival Internacional Cervantino",
+        "BA": "PB3570",
+        "BB": "Equipos de apoyo de gobierno del estado coordinados para las actividades operativas y de logistica encaminadas a la realización del festival",
+        "BC": 0,
+        "BD": "Equipos de apoyo coordinados",
+        "BE": 18
+      },
+      "live": [
+        {
+          "id": 86,
+          "process": "PB3570",
+          "annual": 18,
+          "unit": "Equipos de apoyo coordinados",
+          "name": "Equipos de apoyo de gobierno del estado coordinados para las actividades operativas y de logistica encaminadas a la realización del festival"
+        }
+      ]
+    },
+    {
+      "sourceRow": 86,
+      "cells": {
+        "AY": "PB3573",
+        "AZ": "Fortalecimiento del libro y sus plataformas: creación, producción, distribución e impulso a creadores",
+        "BA": "PB3573",
+        "BB": "Participación en ferias de libro nacionales e internacionales",
+        "BC": 0,
+        "BD": "Ferias de libros en las que se participa",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 87,
+          "process": "PB3573",
+          "annual": 4,
+          "unit": "Ferias de libros en las que se participa",
+          "name": "Participación en ferias de libro nacionales e internacionales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 87,
+      "cells": {
+        "AY": "PB3573",
+        "AZ": "Fortalecimiento del libro y sus plataformas: creación, producción, distribución e impulso a creadores",
+        "BA": "PB3573",
+        "BB": "Actividades de promoción y difusión de productos editoriales de manera presencial como son presentaciones de libros en diferentes municipios.",
+        "BC": 0,
+        "BD": "Presentaciones realizadas",
+        "BE": 92
+      },
+      "live": [
+        {
+          "id": 88,
+          "process": "PB3573",
+          "annual": 92,
+          "unit": "Presentaciones realizadas",
+          "name": "Actividades de promoción y difusión de productos editoriales de manera presencial como son presentaciones de libros en diferentes municipios."
+        }
+      ]
+    },
+    {
+      "sourceRow": 88,
+      "cells": {
+        "AY": "PB3573",
+        "AZ": "Fortalecimiento del libro y sus plataformas: creación, producción, distribución e impulso a creadores",
+        "BA": "PB3573",
+        "BB": "Encuentros profesionales de la cadena del valor del libro.",
+        "BC": 0,
+        "BD": "Encuentros realizados",
+        "BE": 2
+      },
+      "live": [
+        {
+          "id": 89,
+          "process": "PB3573",
+          "annual": 2,
+          "unit": "Encuentros realizados",
+          "name": "Encuentros profesionales de la cadena del valor del libro."
+        }
+      ]
+    },
+    {
+      "sourceRow": 89,
+      "cells": {
+        "AY": "PB3573",
+        "AZ": "Fortalecimiento del libro y sus plataformas: creación, producción, distribución e impulso a creadores",
+        "BA": "PB3573",
+        "BB": "Foro virtual de libro con invitados nacionales e internacionales",
+        "BC": 0,
+        "BD": "Foro realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 90,
+          "process": "PB3573",
+          "annual": 1,
+          "unit": "Foro realizado",
+          "name": "Foro virtual de libro con invitados nacionales e internacionales"
+        }
+      ]
+    },
+    {
+      "sourceRow": 90,
+      "cells": {
+        "AY": "PB3572",
+        "AZ": "Gestión de programas de exposiciones, actividades formativas y académicas en los Museos de la Secretaría de Cultura y actividades extramuros",
+        "BA": "PB3572",
+        "BB": "Exposiciones permanentes y la producción de exposiciones temporales de los museos adscritos a la Secretaria de Cultura de Guanajuato",
+        "BC": 0,
+        "BD": "Número de Exposiciones inauguradas",
+        "BE": 28
+      },
+      "live": [
+        {
+          "id": 91,
+          "process": "PB3572",
+          "annual": 28,
+          "unit": "Número de Exposiciones inauguradas",
+          "name": "Exposiciones permanentes y la producción de exposiciones temporales de los museos adscritos a la Secretaria de Cultura de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 91,
+      "cells": {
+        "AY": "PB3572",
+        "AZ": "Gestión de programas de exposiciones, actividades formativas y académicas en los Museos de la Secretaría de Cultura y actividades extramuros",
+        "BA": "PB3572",
+        "BB": "Creación y participación en actividades formativas y académicas de los museos adscritos a la Secretaria de Cultura",
+        "BC": 0,
+        "BD": "Número de Actividades realizadas",
+        "BE": 800
+      },
+      "live": [
+        {
+          "id": 92,
+          "process": "PB3572",
+          "annual": 800,
+          "unit": "Número de Actividades realizadas",
+          "name": "Creación y participación en actividades formativas y académicas de los museos adscritos a la Secretaria de Cultura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 92,
+      "cells": {
+        "AY": "PB3572",
+        "AZ": "Gestión de programas de exposiciones, actividades formativas y académicas en los Museos de la Secretaría de Cultura y actividades extramuros",
+        "BA": "PB3572",
+        "BB": "Participación de artistas en las actividades extramuros en municipios del Estado de Guanajuato",
+        "BC": 0,
+        "BD": "Número de Actividades realizadas",
+        "BE": 10
+      },
+      "live": [
+        {
+          "id": 93,
+          "process": "PB3572",
+          "annual": 10,
+          "unit": "Número de Actividades realizadas",
+          "name": "Participación de artistas en las actividades extramuros en municipios del Estado de Guanajuato"
+        }
+      ]
+    },
+    {
+      "sourceRow": 93,
+      "cells": {
+        "AY": "PB3572",
+        "AZ": "Gestión de programas de exposiciones, actividades formativas y académicas en los Museos de la Secretaría de Cultura y actividades extramuros",
+        "BA": "PB3572",
+        "BB": "Creación de actividades para poblaciones especificas como mujeres, niños y niñas, adultos mayores y discapacidad en los Museos adscritos a la Secretaria de Cultura",
+        "BC": 0,
+        "BD": "Número de Actividades realizadas",
+        "BE": 12
+      },
+      "live": [
+        {
+          "id": 94,
+          "process": "PB3572",
+          "annual": 12,
+          "unit": "Número de Actividades realizadas",
+          "name": "Creación de actividades para poblaciones especificas como mujeres, niños y niñas, adultos mayores y discapacidad en los Museos adscritos a la Secretaria de Cultura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 94,
+      "cells": {
+        "AY": "PB3572",
+        "AZ": "Gestión de programas de exposiciones, actividades formativas y académicas en los Museos de la Secretaría de Cultura y actividades extramuros",
+        "BA": "PB3572",
+        "BB": "Mantenimiento de los museos adscritos a la Secretaria de Cultura",
+        "BC": 0,
+        "BD": "Reportes de mantenimiento realizado",
+        "BE": 4
+      },
+      "live": [
+        {
+          "id": 95,
+          "process": "PB3572",
+          "annual": 4,
+          "unit": "Reportes de mantenimiento realizado",
+          "name": "Mantenimiento de los museos adscritos a la Secretaria de Cultura"
+        }
+      ]
+    },
+    {
+      "sourceRow": 95,
+      "cells": {
+        "AY": "PB3571",
+        "AZ": "Gestión de programa de Actividades Artísticas y Culturales del FORUM",
+        "BA": "PB3571",
+        "BB": "Programa anual de actividades artísticas y culturales de la Dirección General del Forum",
+        "BC": 0,
+        "BD": "Programa realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 96,
+          "process": "PB3571",
+          "annual": 1,
+          "unit": "Programa realizado",
+          "name": "Programa anual de actividades artísticas y culturales de la Dirección General del Forum"
+        }
+      ]
+    },
+    {
+      "sourceRow": 96,
+      "cells": {
+        "AY": "PB3571",
+        "AZ": "Gestión de programa de Actividades Artísticas y Culturales del FORUM",
+        "BA": "PB3571",
+        "BB": "Actividades artísticas y culturales: escénicas, comunitarias, incluyentes, formativas, extramuros de la Dirección General del Forum durante el año",
+        "BC": 0,
+        "BD": "Actividades realizadas",
+        "BE": 70
+      },
+      "live": [
+        {
+          "id": 97,
+          "process": "PB3571",
+          "annual": 70,
+          "unit": "Actividades realizadas",
+          "name": "Actividades artísticas y culturales: escénicas, comunitarias, incluyentes, formativas, extramuros de la Dirección General del Forum durante el año"
+        }
+      ]
+    },
+    {
+      "sourceRow": 97,
+      "cells": {
+        "AY": "PB3571",
+        "AZ": "Gestión de programa de Actividades Artísticas y Culturales del FORUM",
+        "BA": "PB3571",
+        "BB": "Actividades públicas y privadas realizadas en el Forum, solicitadas por terceros",
+        "BC": 0,
+        "BD": "Actividades realizadas",
+        "BE": 30
+      },
+      "live": [
+        {
+          "id": 98,
+          "process": "PB3571",
+          "annual": 30,
+          "unit": "Actividades realizadas",
+          "name": "Actividades públicas y privadas realizadas en el Forum, solicitadas por terceros"
+        }
+      ]
+    },
+    {
+      "sourceRow": 98,
+      "cells": {
+        "AY": "PB3571",
+        "AZ": "Gestión de programa de Actividades Artísticas y Culturales del FORUM",
+        "BA": "PB3571",
+        "BB": "Mantenimiento preventivo y correctivo a la infraestructura y equipos de la Dirección General del Forum para su correcto funcionamiento",
+        "BC": 0,
+        "BD": "Mantenimiento Preventivo y Correctivo Realizado",
+        "BE": 1
+      },
+      "live": [
+        {
+          "id": 99,
+          "process": "PB3571",
+          "annual": 1,
+          "unit": "Mantenimiento Preventivo y Correctivo Realizado",
+          "name": "Mantenimiento preventivo y correctivo a la infraestructura y equipos de la Dirección General del Forum para su correcto funcionamiento"
+        }
+      ]
+    }
+  ]
+}

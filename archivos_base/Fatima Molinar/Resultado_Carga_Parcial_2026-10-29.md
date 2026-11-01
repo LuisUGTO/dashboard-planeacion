@@ -1,5 +1,25 @@
 # Resultado de la carga parcial — Fátima Molinar
 
+## Seguimiento recuperado de WhatsApp — 31/10/2026
+
+### Comprobación posterior de la matriz en vivo — 31/10/2026
+
+Tras recibir nuevamente la liga del usuario, se comprobó acceso de lectura mediante el conector a la matriz editorial (ID `1yijOsrhXcpSx_CSn5qVSch9lg22sBqstY1DnQ8R-h64`), pestaña **Actividades 2026**, sheetId 0, cuadrícula de 1081 filas y 42 columnas. Se inspeccionó **A1:AP7**, con valores y fórmulas. Esta lectura sustituye únicamente el estado anterior de acceso no verificado; no demuestra equivalencia con el adjunto `(20)` ni constituye análisis completo del libro.
+
+Ahora existen rótulos de asistentes por sexo, edades y grupos, pero su alineación requiere comprobación: los títulos de fila 1 comienzan en AA y dicen total en AL, mientras la fila 2 sitúa mujer/hombre en AB/AC y las primeras filas calculan el total en AM como `AC+AB`. No asignar columnas solo por la fila 1. En fila 7, AM muestra 13 y AN muestra 14 mediante suma AD:AL; confirmar cómo interpretar edades/grupos antes de sumar o importar. Una suma de grupos prioritarios y edades puede solapar a las mismas personas.
+
+Se puede continuar usando la matriz en vivo como fuente, sin exigir el Excel `(20)` para acceder a los datos actuales. Falta revisar el resto, reconciliar los encabezados con las fórmulas y contrastar contra los registros ya cargados. No se modificó ni la matriz ni la base maestra.
+
+Se leyeron `chat.txt` y `chat.md`, con mensajes del 26 al 30/10. El aviso de Luis del 29/10 sobre 67 presentaciones nuevas y nueve previas coincide con este informe; la carga sigue siendo parcial.
+
+**Nueva fuente por recuperar/revisar:** el 30/10 Fátima compartió `Actividades editoriales DGEP 2026 (20).xlsx`. En el inventario local revisado solo aparece la versión `(18)` dentro de esta carpeta; la exportación omite el adjunto y no demuestra que `(20)` resuelva los encabezados AA:AM ni las demás dudas. También compartió la [matriz en Google Sheets](https://docs.google.com/spreadsheets/d/1yijOsrhXcpSx_CSn5qVSch9lg22sBqstY1DnQ8R-h64/edit). Se conserva como referencia de origen para la siguiente revisión; no se abrió ni verificó su acceso/contenido en este contraste. No confundir esta matriz editorial con la base maestra del sistema.
+
+El 30/10 Luis indicó que Fátima podía seguir cargando octubre, y que de septiembre hacia atrás evitaran captura simultánea porque él prepararía el histórico desde su matriz. Antes de continuar, comprobar lo capturado desde entonces para evitar duplicados. El acuerdo no acredita que octubre ya esté cargado ni que el histórico esté completo.
+
+Las dos exportaciones omiten cinco mensajes de voz y una imagen: su contenido no se recuperó y no se infieren aclaraciones de población, metas o ciclos a partir de ellos. Quedan vigentes los pendientes del informe hasta contrastar una fuente actualizada y las respuestas del área. Las exportaciones completas se eliminan por instrucción del usuario después de guardar este resumen, sin copiar datos ajenos al análisis. No hubo cambios a Google Sheets.
+
+## Resultado original del 29/10
+
 Fecha: 29 de octubre de 2026. Corte: enero–septiembre de 2026. Responsable: fmolinar@guanajuato.gob.mx.
 
 Base actualizada: [Google Sheets](https://docs.google.com/spreadsheets/d/1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4/edit).
