@@ -8,6 +8,8 @@ Consultar [CONTEXTO_PROYECTO.md](CONTEXTO_PROYECTO.md) para arquitectura vigente
 
 **Última actualización de datos — 01/11/2026:** dos altas de septiembre de Marcelina, un territorio de Soraya y 23 celdas existentes corregidas, con respaldo y verificación. Consultar el [resultado y pendientes por expediente](documentacion/Resultado_Cargas_y_Pendientes_2026-11-01.md) y el [inventario de los 23 libros](documentacion/Control_Matrices_y_Cargas_2026-11-01.json). Las cargas siguen siendo parciales; no volver a pegar preparaciones sustituidas.
 
+**Aclaraciones listas para revisión — 01/11/2026:** [guías PDF y Excel para responder por expediente](documentacion/Paquetes_Pendientes_por_Area_2026-11-01.md), guardados en las carpetas de cada enlace. Los Excel son formularios de respuesta de una hoja, no archivos para importar directamente a la DB.
+
 El tablero es HTML/JavaScript estático y consulta cinco hojas de Google Sheets; no requiere `npm install` ni compilación. Usa bibliotecas CDN y necesita red y acceso de lectura a las fuentes. No implementa login ni escrituras a la base. AppSheet mantiene la captura operativa; Supabase/SQL son alternativas documentadas, sin integración activa identificada.
 
 Para abrirlo, usar `index.html` en un navegador moderno. Con Python instalado, opcionalmente servir la raíz con `py -m http.server 8000 --bind 127.0.0.1` y abrir `http://127.0.0.1:8000/`. Las 28 pruebas existentes pasan con Node v24.22.1 en el corte de auditoría. Esto no certifica permisos, datos productivos ni publicación remota.
