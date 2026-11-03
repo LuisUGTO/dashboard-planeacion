@@ -1042,6 +1042,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-7 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-2">Composición de Público por Enfoque</h3>
+            <p class="text-xs text-slate-400 mb-2">Pasa el cursor sobre cada segmento para consultar la cifra completa.</p>
             <div class="h-60"><canvas id="chart-pob-enfoque-stack"></canvas></div>
           </div>
           <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
@@ -2454,11 +2455,26 @@
         plugins: {
           legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
           datalabels: {
+            anchor: 'center',
+            align: 'center',
+            display: 'auto',
+            clamp: true,
+            clip: true,
             color: '#FFFFFF',
-            font: { size: 9.5, weight: 'bold' },
+            font: { family: 'Arial', size: 9.5, weight: 'bold' },
             textStrokeColor: 'rgba(0,0,0,0.35)',
             textStrokeWidth: 2,
-            formatter: (v) => v >= 3500 ? fmtCompact(v) : ''
+            formatter: (v, context) => {
+              if (v < 3500) return '';
+              const label = fmtCompact(v);
+              const { ctx, scales } = context.chart;
+              const width = Math.abs(scales.x.getPixelForValue(v) - scales.x.getPixelForValue(0));
+              ctx.save();
+              ctx.font = 'bold 9.5px Arial';
+              const neededWidth = ctx.measureText(label).width + 16;
+              ctx.restore();
+              return width >= neededWidth ? label : '';
+            }
           }
         }
       });
