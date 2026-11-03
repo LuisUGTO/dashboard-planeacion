@@ -1,0 +1,408 @@
+{
+  "date": "2026-11-03",
+  "state": "cargado parcialmente y verificado",
+  "response_path": "archivos_base\\Marce Chagoya\\Respuestas_Marcelina_DGPA_2026-11-01_contestado.xlsx",
+  "response_sha256": "756abadcaf72857d95551c3f02c9307876b1728117893850f3d9e3c4d50b8278",
+  "matrix_sha256": "14cae42d3d374691135b826d0ca1d4941e31f6cca2655b4751b44f0b62d3eb65",
+  "verification": {
+    "date": "2026-11-03",
+    "status": "verified",
+    "new_activities": 11,
+    "new_territories": 11,
+    "new_population_rows": 18,
+    "confirmed_population_activities": 9,
+    "attendance": 2194,
+    "population_pending_activities": 2,
+    "preexisting_value_changes": 0,
+    "unexpected_changes": 0,
+    "duplicate_ids": 0,
+    "orphans": 0,
+    "new_populated_cells": 434,
+    "native_structure_verified": true,
+    "counts": {
+      "activities": 1483,
+      "territory": 1521,
+      "population": 2430,
+      "evidence": 520
+    },
+    "checks": [
+      {
+        "id": "ACT-SCBX04667",
+        "source_row": 3,
+        "confirmed_total": 118,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCLT83210",
+        "source_row": 4,
+        "confirmed_total": 127,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCDT17517",
+        "source_row": 5,
+        "confirmed_total": 301,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCIZ55117",
+        "source_row": 7,
+        "confirmed_total": null,
+        "population_rows": 0
+      },
+      {
+        "id": "ACT-SCRK85015",
+        "source_row": 9,
+        "confirmed_total": 70,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCLH52235",
+        "source_row": 10,
+        "confirmed_total": 65,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCNT80981",
+        "source_row": 11,
+        "confirmed_total": 279,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCKA81366",
+        "source_row": 12,
+        "confirmed_total": 77,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCTW24581",
+        "source_row": 13,
+        "confirmed_total": 509,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCUL87230",
+        "source_row": 14,
+        "confirmed_total": 648,
+        "population_rows": 2
+      },
+      {
+        "id": "ACT-SCUD02459",
+        "source_row": 15,
+        "confirmed_total": null,
+        "population_rows": 0
+      }
+    ]
+  },
+  "activities": [
+    {
+      "id": "ACT-SCBX04667",
+      "source_row": 3,
+      "activity_row": 1477,
+      "territory_row": 1518,
+      "name": "Sinfonietta del MIQ",
+      "date": "2026-09-02",
+      "meta": 83,
+      "total": 118,
+      "women": 65,
+      "men": 53,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCLT83210",
+      "source_row": 4,
+      "activity_row": 1478,
+      "territory_row": 1519,
+      "name": "Sobre la imposibilidad de ser actriz sin temor a la vida",
+      "date": "2026-09-03",
+      "meta": 83,
+      "total": 127,
+      "women": 75,
+      "men": 52,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCDT17517",
+      "source_row": 5,
+      "activity_row": 1479,
+      "territory_row": 1520,
+      "name": "El Ogrito, ESCENAS AL VUELO",
+      "date": "2026-09-04",
+      "meta": 10,
+      "total": 301,
+      "women": 160,
+      "men": 141,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCIZ55117",
+      "source_row": 7,
+      "activity_row": 1480,
+      "territory_row": 1521,
+      "name": "Programa no.4",
+      "date": "2026-09-04",
+      "meta": 83,
+      "total": null,
+      "women": null,
+      "men": null,
+      "population_pending": true
+    },
+    {
+      "id": "ACT-SCRK85015",
+      "source_row": 9,
+      "activity_row": 1481,
+      "territory_row": 1522,
+      "name": "Teatrando Barrio",
+      "date": "2026-09-07",
+      "meta": 83,
+      "total": 70,
+      "women": 40,
+      "men": 30,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCLH52235",
+      "source_row": 10,
+      "activity_row": 1482,
+      "territory_row": 1523,
+      "name": "Teatrando Barrio",
+      "date": "2026-09-09",
+      "meta": 83,
+      "total": 65,
+      "women": 35,
+      "men": 30,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCNT80981",
+      "source_row": 11,
+      "activity_row": 1483,
+      "territory_row": 1524,
+      "name": "Programa no. 5 Paisajes del Alma",
+      "date": "2026-09-11",
+      "meta": 83,
+      "total": 279,
+      "women": 138,
+      "men": 141,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCKA81366",
+      "source_row": 12,
+      "activity_row": 1484,
+      "territory_row": 1525,
+      "name": "Al son de México",
+      "date": "2026-09-12",
+      "meta": 83,
+      "total": 77,
+      "women": 42,
+      "men": 35,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCTW24581",
+      "source_row": 13,
+      "activity_row": 1485,
+      "territory_row": 1526,
+      "name": "Vida y obra de Ignacio de Allende",
+      "date": "2026-09-12",
+      "meta": 83,
+      "total": 509,
+      "women": 313,
+      "men": 196,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCUL87230",
+      "source_row": 14,
+      "activity_row": 1486,
+      "territory_row": 1527,
+      "name": "Al Son de México",
+      "date": "2026-09-15",
+      "meta": 83,
+      "total": 648,
+      "women": 410,
+      "men": 238,
+      "population_pending": false
+    },
+    {
+      "id": "ACT-SCUD02459",
+      "source_row": 15,
+      "activity_row": 1487,
+      "territory_row": 1528,
+      "name": "Teatrando Barrio",
+      "date": "2026-09-21",
+      "meta": 83,
+      "total": null,
+      "women": null,
+      "men": null,
+      "population_pending": true
+    }
+  ],
+  "already_existing": [
+    {
+      "source_row": 6,
+      "id": "ACT-SCOH08277",
+      "row": 1475
+    },
+    {
+      "source_row": 8,
+      "id": "ACT-SCGK69033",
+      "row": 1476
+    }
+  ],
+  "queries": [
+    {
+      "question": 1,
+      "name": "Sinfonietta del MIQ",
+      "response_row": 7,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCBX04667",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 2,
+      "name": "Sobre la imposibilidad de ser actriz sin temor a la vida",
+      "response_row": 8,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCLT83210",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 3,
+      "name": "El Ogrito, ESCENAS AL VUELO",
+      "response_row": 9,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCDT17517",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 4,
+      "name": "Programa no.4",
+      "response_row": 10,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCIZ55117",
+      "result": "Actividad cargada; público pendiente por contradicción"
+    },
+    {
+      "question": 5,
+      "name": "Programa no.",
+      "response_row": 11,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCNT80981",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 6,
+      "name": "Al son de México",
+      "response_row": 12,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCKA81366",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 7,
+      "name": "Vida y obra de Ignacio de Allende",
+      "response_row": 13,
+      "status_declared": "Pendiente",
+      "activity_id": "ACT-SCTW24581",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 8,
+      "name": "Al son de México",
+      "response_row": 14,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCUL87230",
+      "result": "Actividad, territorio y público cargados y verificados"
+    },
+    {
+      "question": 9,
+      "name": "Matinata",
+      "response_row": 15,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCUO63965",
+      "result": "Respuesta genérica sobre ceros no resuelve la discrepancia numérica; valores existentes conservados"
+    },
+    {
+      "question": 10,
+      "name": "Sangre Negra JORNADAS DID 2026",
+      "response_row": 16,
+      "status_declared": "Pendiente",
+      "activity_id": "ACT-SCGL45187",
+      "result": "Público sigue sin dato; no se convirtió vacío en cero"
+    },
+    {
+      "question": 11,
+      "name": "Programa no. 9",
+      "response_row": 17,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCFL27345",
+      "result": "Público sigue sin dato; no se convirtió vacío en cero"
+    },
+    {
+      "question": 12,
+      "name": "El mundo de la imaginación de Francisco Gabilondo Soler",
+      "response_row": 18,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCYO58287",
+      "result": "Respuesta genérica sobre ceros no resuelve la discrepancia numérica; valores existentes conservados"
+    },
+    {
+      "question": 13,
+      "name": "Cantatas Clausura FESTIVAL BACH",
+      "response_row": 19,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCYP51812",
+      "result": "Respuesta genérica sobre ceros no resuelve la discrepancia numérica; valores existentes conservados"
+    },
+    {
+      "question": 14,
+      "name": "Apertura de la Presa de la Olla",
+      "response_row": 20,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCPD08021",
+      "result": "Respuesta genérica sobre ceros no resuelve la discrepancia numérica; valores existentes conservados"
+    },
+    {
+      "question": 15,
+      "name": "El Diario de Un Loco",
+      "response_row": 21,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCAM69927",
+      "result": "Público sigue sin dato; no se convirtió vacío en cero"
+    },
+    {
+      "question": 16,
+      "name": "Hechicera que cambia los rostros ESCENAS A VUELO",
+      "response_row": 22,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCHM08845",
+      "result": "Público sigue sin dato; no se convirtió vacío en cero"
+    },
+    {
+      "question": 17,
+      "name": "GIFF",
+      "response_row": 23,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCLV36964",
+      "result": "Público sigue sin dato; no se convirtió vacío en cero"
+    },
+    {
+      "question": 18,
+      "name": "Asistencia a San Miguel de Allende",
+      "response_row": 24,
+      "status_declared": "Respondido",
+      "activity_id": "ACT-SCQX11642",
+      "result": "Respuesta genérica sobre ceros no resuelve la discrepancia numérica; valores existentes conservados"
+    },
+    {
+      "question": 19,
+      "name": "Reporte de la segunda mitad de septiembre",
+      "response_row": 25,
+      "status_declared": "Respondido",
+      "activity_id": null,
+      "result": "Fuente actualizada localizada; 13 funciones de septiembre presentes, cobertura completa del mes no certificada expresamente"
+    }
+  ]
+}

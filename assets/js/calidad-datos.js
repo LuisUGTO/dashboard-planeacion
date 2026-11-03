@@ -16,6 +16,9 @@
     return Number.isFinite(n) ? n : null;
   }
   const count = value => { const n = number(value); return n !== null && n >= 0 && Number.isInteger(n) ? n : null; };
+  // Explicit, reversible marker in an operative field. Ordinary mentions of
+  // cancellation (or a matching title on another date) do not change status.
+  const isCancelled = activity => /^\[CANCELAD[AO]\]/i.test(text(activity.Descripcion_Breve));
   function dateISO(value) {
     const s = text(value);
     let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
@@ -50,21 +53,22 @@
     return { value: malformed || (consolidated && (explicit === null || explicit === 0)) ? null : (explicit === null ? 1 : explicit), consolidated, explicit, malformed };
   }
   function metrics(activities) {
+    const active = activities.filter(a => !isCancelled(a));
     let activitiesTotal = 0, unresolved = 0, sessions = 0, missingSessions = 0;
-    activities.forEach(a => {
+    active.forEach(a => {
       const q = quantity(a);
       if (q.value === null) unresolved++; else activitiesTotal += q.value;
       const n = count(a.Total_Sesiones);
       if (n === null || n === 0) missingSessions++; else sessions += n;
     });
-    return { records: activities.length, activities: activitiesTotal, unresolved, sessions, missingSessions };
+    return { records: active.length, activities: activitiesTotal, unresolved, sessions, missingSessions };
   }
   function monthlyPopulation(activities, rows, field) {
     const linked = group(rows);
     const records = new Array(12).fill(0), people = new Array(12).fill(null);
     const missing = new Array(12).fill(0);
     let unallocatedPeople = 0, unallocatedRecords = 0, unallocatedMissing = 0;
-    activities.forEach(a => {
+    activities.filter(a => !isCancelled(a)).forEach(a => {
       const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio);
       const end = dateISO(a.Fecha_Fin_ISO || a.Fecha_Fin);
       const month = start ? Number(start.slice(5, 7)) - 1 : null;
@@ -98,6 +102,13 @@
       const st = sum(tr, 'Cantidad'), sp = sum(pr, 'Cantidad_Poblacion');
       const categories = new Set(), reasons = [];
       const add = (category, reason) => { categories.add(category); reasons.push(reason); };
+      if (isCancelled(a)) {
+        add('canceladas', 'Actividad cancelada: se conserva el historial y se excluye de los indicadores de ejecución');
+        if ((st !== null && st > 0) || (sp !== null && sp > 0)) add('diferencias', 'La actividad cancelada conserva cifras de público: revisar su origen sin contarlas como ejecución');
+        if (idCounts.get(id) > 1) add('identidad', 'ID repetido');
+        if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
+        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
+      }
       const missing = [];
       if (absent(a.Nombre_Actividad)) missing.push('nombre');
       const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), end = dateISO(a.Fecha_Fin);
@@ -150,5 +161,5 @@
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, dateISO, quantity, metrics, monthlyPopulation, audit };
+  return { number, count, isCancelled, dateISO, quantity, metrics, monthlyPopulation, audit };
 });

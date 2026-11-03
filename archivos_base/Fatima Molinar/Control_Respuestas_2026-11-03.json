@@ -1,0 +1,2086 @@
+{
+  "date": "2026-11-03",
+  "status": "parcial",
+  "cut": "enero-septiembre 2026",
+  "source_sha256": "2d7640bf50a75e4d2b47b53fed6aa0fd9039f688e0c079dede890a8d8af431ce",
+  "verification": {
+    "status": "verified",
+    "date": "2026-11-03",
+    "counts": {
+      "activities": 1472,
+      "territory": 1510,
+      "population": 2412,
+      "evidence": 520
+    },
+    "existing_cells_updated": 20,
+    "new_population_rows": 18,
+    "new_populated_cells": 90,
+    "population_completed": 9,
+    "attendance": 260,
+    "cancellation_descriptions": 2,
+    "unexpected_changes": 0,
+    "duplicate_ids": 0,
+    "orphans": 0,
+    "native_metadata_preserved": true,
+    "new_rows_structure_verified": true,
+    "conciliation": [
+      {
+        "id": "ACT-SCNG78657",
+        "total": 10,
+        "population": 10,
+        "territory": 10
+      },
+      {
+        "id": "ACT-SCKK84243",
+        "total": 13,
+        "population": 13,
+        "territory": 13
+      },
+      {
+        "id": "ACT-SCBA83203",
+        "total": 25,
+        "population": 25,
+        "territory": 25
+      },
+      {
+        "id": "ACT-SCZL50998",
+        "total": 30,
+        "population": 30,
+        "territory": 30
+      },
+      {
+        "id": "ACT-SCKF49301",
+        "total": 16,
+        "population": 16,
+        "territory": 16
+      },
+      {
+        "id": "ACT-SCNF29598",
+        "total": 26,
+        "population": 26,
+        "territory": 26
+      },
+      {
+        "id": "ACT-SCQZ19279",
+        "total": 45,
+        "population": 45,
+        "territory": 45
+      },
+      {
+        "id": "ACT-SCSA41335",
+        "total": 45,
+        "population": 45,
+        "territory": 45
+      },
+      {
+        "id": "ACT-SCGQ39271",
+        "total": 50,
+        "population": 50,
+        "territory": 50
+      }
+    ],
+    "changes": [
+      {
+        "sheet": "activities",
+        "row": 1348,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1349,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1360,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1362,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1366,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1378,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1392,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1397,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1398,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1403,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "activities",
+        "row": 1413,
+        "col": 14,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1388,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1389,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1400,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1402,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1406,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1432,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1437,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1438,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "territory",
+        "row": 1443,
+        "col": 10,
+        "new_population": false
+      },
+      {
+        "sheet": "population",
+        "row": 2406,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2406,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2406,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2406,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2406,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2407,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2407,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2407,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2407,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2407,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2408,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2408,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2408,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2408,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2408,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2409,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2409,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2409,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2409,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2409,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2410,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2410,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2410,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2410,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2410,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2411,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2411,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2411,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2411,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2411,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2412,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2412,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2412,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2412,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2412,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2413,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2413,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2413,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2413,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2413,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2414,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2414,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2414,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2414,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2414,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2415,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2415,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2415,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2415,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2415,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2416,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2416,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2416,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2416,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2416,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2417,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2417,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2417,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2417,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2417,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2418,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2418,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2418,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2418,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2418,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2419,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2419,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2419,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2419,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2419,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2420,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2420,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2420,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2420,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2420,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2421,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2421,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2421,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2421,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2421,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2422,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2422,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2422,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2422,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2422,
+        "col": 8,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2423,
+        "col": 1,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2423,
+        "col": 2,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2423,
+        "col": 3,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2423,
+        "col": 4,
+        "new_population": true
+      },
+      {
+        "sheet": "population",
+        "row": 2423,
+        "col": 8,
+        "new_population": true
+      }
+    ]
+  },
+  "queries": [
+    {
+      "question": 1,
+      "source_row": 7,
+      "activity": "Fanta CBrew",
+      "id": "ACT-SCNG78657",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 10",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 2,
+      "source_row": 8,
+      "activity": "Saturno en Llamas",
+      "id": "ACT-SCKK84243",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 11",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 3,
+      "source_row": 9,
+      "activity": "Focus, una historia de la fotografia de Guanajuato",
+      "id": "ACT-SCAU04088",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 17",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Focus actualizado y verificado: 10 mujeres, 15 hombres, total 25"
+    },
+    {
+      "question": 4,
+      "source_row": 10,
+      "activity": "Con una lampara encendida",
+      "id": "ACT-SCBA83203",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 23",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 5,
+      "source_row": 11,
+      "activity": ";r Ha muerto | La mugre",
+      "id": "ACT-SCWO87363",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 25",
+      "response_present": true,
+      "response_status": "No tengo el dato",
+      "result": "Raúl busca el público; mantener desconocido"
+    },
+    {
+      "question": 6,
+      "source_row": 12,
+      "activity": "Estilo libre",
+      "id": "ACT-SCZL50998",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 26",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 7,
+      "source_row": 13,
+      "activity": "Crimenes y ensueños, Pájaros humanos",
+      "id": "ACT-SCXA65014",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 27",
+      "response_present": false,
+      "response_status": "Pendiente",
+      "result": "Raúl busca el público; mantener desconocido"
+    },
+    {
+      "question": 8,
+      "source_row": 14,
+      "activity": ";r Ha muerto",
+      "id": "ACT-SCKF49301",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 31",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 9,
+      "source_row": 15,
+      "activity": "Cartas al joven violinista",
+      "id": "ACT-SCKR86602",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 92",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Cancelación anotada en DB; exclusión implementada en código local, pendiente de publicación"
+    },
+    {
+      "question": 10,
+      "source_row": 16,
+      "activity": "La noche de los Axolotes",
+      "id": "ACT-SCNF29598",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 118",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 11,
+      "source_row": 17,
+      "activity": "Las hadasverdaderas son de madera",
+      "id": "ACT-SCQZ19279",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 123",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 12,
+      "source_row": 18,
+      "activity": "Invierno mágico",
+      "id": "ACT-SCSA41335",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 124",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 13,
+      "source_row": 19,
+      "activity": "El loco libro de las pastorelas y Rock es puro cuento",
+      "id": "ACT-SCGQ39271",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 129",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Población actualizada y verificada"
+    },
+    {
+      "question": 14,
+      "source_row": 20,
+      "activity": "Memorias de un hombre importante, Años de papel y Cita Analema",
+      "id": "ACT-SCKT70901",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 165",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Cancelación anotada en DB; exclusión implementada en código local, pendiente de publicación"
+    },
+    {
+      "question": 15,
+      "source_row": 21,
+      "activity": "Tamaliza literaria",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 3",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 16,
+      "source_row": 22,
+      "activity": "Entrega de reconocimiento",
+      "id": "ACT-SCXX09472",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 4",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 17,
+      "source_row": 23,
+      "activity": "La memoria como constructo de una identidad fememnia",
+      "id": "ACT-SCHG41917",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 5",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 18,
+      "source_row": 24,
+      "activity": "Escrbir desde la corporalidad",
+      "id": "ACT-SCHG41917",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 6",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 19,
+      "source_row": 25,
+      "activity": "¿Literatura femenina o hecha por mujeres?",
+      "id": "ACT-SCHG41917",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 7",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 20,
+      "source_row": 26,
+      "activity": "Por mi abuela y por mi madres, soy",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 8",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 21,
+      "source_row": 27,
+      "activity": "Este País",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 9",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 22,
+      "source_row": 28,
+      "activity": "Ceremonia de constancias XI Generación del Fondo para las letras Guanajuatenses",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 12",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 23,
+      "source_row": 29,
+      "activity": "La voz de las mujeres: Transgresión de estereotipos",
+      "id": "ACT-SCHG41917",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 24",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 24,
+      "source_row": 30,
+      "activity": "Lectura en voz alta \"Este país\"",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 30",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 25,
+      "source_row": 31,
+      "activity": "Conversatorio, xI Generación del Fondo para las letras Guanajuatenses",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 32",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 26,
+      "source_row": 32,
+      "activity": "Charla, Agua para Nescafé",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 34",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 27,
+      "source_row": 33,
+      "activity": "Conversatorio, Cuando hablamos de literartura regional ¿ Donde queda el centro?",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 35",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 28,
+      "source_row": 34,
+      "activity": "Concierto Chimalmaanimalses",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 36",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 29,
+      "source_row": 35,
+      "activity": "La leyenda de la mexicanidad y la reconstrucción de la identidad nacional",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 37",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 30,
+      "source_row": 36,
+      "activity": "El cuento como registro de lo imposible",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 39",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 31,
+      "source_row": 37,
+      "activity": "kraken",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 40",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 32,
+      "source_row": 38,
+      "activity": "Los premios Nacionales de Litearatura como estartegia de promoción de la lectura",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 41",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 33,
+      "source_row": 39,
+      "activity": "Voces de Guanajuato, lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 42",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 34,
+      "source_row": 40,
+      "activity": "Encuentro Intercultural. México - Colombia. Conferencia Sonora",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 43",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 35,
+      "source_row": 41,
+      "activity": "Intercambio Literario Plata, sol y acero El trabajo regional, los circuitos independientes",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 44",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 36,
+      "source_row": 42,
+      "activity": "Amor y Rabia",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 45",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 37,
+      "source_row": 43,
+      "activity": "El diccionario Dadivano",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 46",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 38,
+      "source_row": 44,
+      "activity": "Historial clinoco",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 47",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 39,
+      "source_row": 45,
+      "activity": "En el nombre de pi",
+      "id": "ACT-SCTQ57837",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 48",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 40,
+      "source_row": 46,
+      "activity": "Voces Guanajuato- lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 49",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 41,
+      "source_row": 47,
+      "activity": "Aqui los muertos no cantan",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 50",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 42,
+      "source_row": 48,
+      "activity": "Encuentro Intercultural México- Colombia Charla",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 51",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 43,
+      "source_row": 49,
+      "activity": "Intercambio literario Plata sol y acero recital poetico",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 52",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 44,
+      "source_row": 50,
+      "activity": "Intercambio litearrio México- colombia",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 53",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 45,
+      "source_row": 51,
+      "activity": "Cine, Cerazón sobre Efrén Hernández",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 55",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 46,
+      "source_row": 52,
+      "activity": "Marca de agua",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 56",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 47,
+      "source_row": 53,
+      "activity": "Intercambio Académico Literario México – Colombia. Academia Boyacense de la Lengua Conversatorio",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 58",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 48,
+      "source_row": 54,
+      "activity": "Lecturas Academia Colombiana de la Lengua",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 59",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 49,
+      "source_row": 55,
+      "activity": "Obra poética de Cristina Maya - María Clara Ospina / Cecilia Caicedo",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 60",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 50,
+      "source_row": 56,
+      "activity": "Qué culpa si es cierto. Jaime Panqueva",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 61",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 51,
+      "source_row": 57,
+      "activity": "Encuentro Intercultural. México - Colombia. Presentaciones de libros Julia Cuéllar Diego García",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 62",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 52,
+      "source_row": 58,
+      "activity": "Fondo editorial Guanajuato",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 63",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 53,
+      "source_row": 59,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 64",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 54,
+      "source_row": 60,
+      "activity": "Intercambio Literario Plata, sol y acero Recital poético",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 65",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 55,
+      "source_row": 61,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 66",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 56,
+      "source_row": 62,
+      "activity": "Tulipanes",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 67",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 57,
+      "source_row": 63,
+      "activity": "Una aventura por el microrrelato: cuando los jóvenes abren la ventana de la creación (taller y lectura)",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 68",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 58,
+      "source_row": 64,
+      "activity": "El corrido tambien es parte del paisaje",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 69",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 59,
+      "source_row": 65,
+      "activity": "Presentación en Matorral Macarena",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 70",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 60,
+      "source_row": 66,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 71",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 61,
+      "source_row": 67,
+      "activity": "una aventura por el microrrelato: cuando los jóvenes abren la ventana de la creación (taller y lectura)",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 72",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 62,
+      "source_row": 68,
+      "activity": "ntercambio Literario Plata, sol y acero Presentación de libros",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 73",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 63,
+      "source_row": 69,
+      "activity": "; r ha muerto",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 74",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 64,
+      "source_row": 70,
+      "activity": "Voces Guanajuato",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 75",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 65,
+      "source_row": 71,
+      "activity": "La publicación hoy: un universo en consonancia con la tecnología (taller y lectura de fragmentos de ebooks)",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 76",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 66,
+      "source_row": 72,
+      "activity": "Presentacion Corridos tomo 2",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 77",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 67,
+      "source_row": 73,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 78",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 68,
+      "source_row": 74,
+      "activity": "Encuentro Intercultural. México - Colombia. Charla",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 79",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 69,
+      "source_row": 75,
+      "activity": "Intercambio Literario Plata, sol y acero Presentación de libros",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 80",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 70,
+      "source_row": 76,
+      "activity": "Marmol (ensayos)",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 81",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 71,
+      "source_row": 77,
+      "activity": "Intercambio Académico Literario Plata, sol y acero",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 86",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 72,
+      "source_row": 78,
+      "activity": "Encuentro Intercultural. México - Colombia. Rap-oemas",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 87",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 73,
+      "source_row": 79,
+      "activity": "Voces Guanajuato",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 88",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 74,
+      "source_row": 80,
+      "activity": "Melodiosa",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 93",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 75,
+      "source_row": 81,
+      "activity": "Encuentro Intercultural",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 95",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 76,
+      "source_row": 82,
+      "activity": "este país",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 96",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 77,
+      "source_row": 83,
+      "activity": "Charlas interculturales: El cine mexicano de la época de oro y la violencia en Colombia. Jaime Andrés Táutiva",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 97",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 78,
+      "source_row": 84,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 98",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 79,
+      "source_row": 85,
+      "activity": "Intercambio Literario Plata, sol y acero Recital Poético",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 99",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 80,
+      "source_row": 86,
+      "activity": "Voces de Guanajuato - Lectura",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 106",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 81,
+      "source_row": 87,
+      "activity": "Intercambio Literario Plata, sol y acero Homenaje a Fernando Soto Aparicio",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 107",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 82,
+      "source_row": 88,
+      "activity": "Mutaciones del prontuario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 108",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 83,
+      "source_row": 89,
+      "activity": "Cronicas de la tierra llana II",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 111",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 84,
+      "source_row": 90,
+      "activity": "Antología floral: primavera",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 113",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 85,
+      "source_row": 91,
+      "activity": "Pudiera estar",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 116",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Cancelada, sin alta nueva"
+    },
+    {
+      "question": 86,
+      "source_row": 92,
+      "activity": "Agrupaciones musicalescomunitarias y perspectiva de género: Un relato colectivo sobre los recorrdios de la Camareta Femenil Vientos Musicales",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 131",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 87,
+      "source_row": 93,
+      "activity": "Composisiciones colectiva en coros infantiles- juveniles en el programa de vientos Musicales para la gente: Prácticas de creatividad particiátiva",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 133",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 88,
+      "source_row": 94,
+      "activity": "Cartogrfia de la virgenes",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 134",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 89,
+      "source_row": 95,
+      "activity": "¿Cómo escapar de un bucle temporal?",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 137",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 90,
+      "source_row": 96,
+      "activity": "Discentrcas , Circulos de agua, Poesía reciente",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 141",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 91,
+      "source_row": 97,
+      "activity": "Open Mic",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 142",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 92,
+      "source_row": 98,
+      "activity": "Maricore",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 143",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 93,
+      "source_row": 99,
+      "activity": "Encuentro de lectores y escritores",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 144",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 94,
+      "source_row": 100,
+      "activity": "La hora del cuento",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 145",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 95,
+      "source_row": 101,
+      "activity": "Lectura de Textos Curatoriales",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 146",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 96,
+      "source_row": 102,
+      "activity": "Música",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 147",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 97,
+      "source_row": 103,
+      "activity": "Bailemos Cumbia | Desde el fuego",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 148",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 98,
+      "source_row": 104,
+      "activity": "Un vago temblor de estrella: Trayectoria de una artista transcultural",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 149",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 99,
+      "source_row": 105,
+      "activity": "Escritura de Personajes LGBT en Medios Audiovisuales",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 150",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 100,
+      "source_row": 106,
+      "activity": "Open Mic",
+      "id": "ACT-SCWI08231",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 151",
+      "response_present": true,
+      "response_status": "No tengo el dato",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 101,
+      "source_row": 107,
+      "activity": "Escritoras en Santo Domingo",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 153",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Fecha 11/07/2026 y ciudad/país confirmados; sin alta nueva, pendiente alineación y alcance"
+    },
+    {
+      "question": 102,
+      "source_row": 108,
+      "activity": "Conversatorio. Tres mujeres guanajuatenses",
+      "id": "ACT-SCIG15181",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 154",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 103,
+      "source_row": 109,
+      "activity": "Lectura de obra. Voces de Guanajuato",
+      "id": "ACT-SCIG15181",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 155",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 104,
+      "source_row": 110,
+      "activity": "Premiación, Premio Nacional de Cuento",
+      "id": "ACT-SCCO91399",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 157",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 105,
+      "source_row": 111,
+      "activity": "Lectura y entrega de obra",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 158",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+    },
+    {
+      "question": 106,
+      "source_row": 112,
+      "activity": "Mesa de trabajo",
+      "id": "ACT-SCOL44580",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 159",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 107,
+      "source_row": 113,
+      "activity": "Mesa de trabajo",
+      "id": "ACT-SCOL44580",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 160",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 108,
+      "source_row": 114,
+      "activity": "La región de San Felipe",
+      "id": "ACT-SCJQ53039",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 161",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 109,
+      "source_row": 115,
+      "activity": "Mesa de trabajo",
+      "id": "ACT-SCOL44580",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 162",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 110,
+      "source_row": 116,
+      "activity": "Mesa de trabajo",
+      "id": "ACT-SCOL44580",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 163",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 111,
+      "source_row": 117,
+      "activity": "¿Cómo escapar de un bucle temporal?",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 167",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 112,
+      "source_row": 118,
+      "activity": "La virtud de lo imperfecto",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 170",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Fuera del corte: 01/10/2026; no cargar"
+    },
+    {
+      "question": 113,
+      "source_row": 119,
+      "activity": "Desarrollar las técnicas necesarias para aplicarlas en la redacción de un guion literario profesional.",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 192",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Tipo/alcance parcialmente aclarado; pendiente meta y representación de talleres/sesiones sin duplicar público"
+    },
+    {
+      "question": 114,
+      "source_row": 120,
+      "activity": "Taller de escritura creativa y memoria comunitaria para niños, jóvenes o personas de la comunidad que tengan el gusto por la escritura para formar una antología del lugar donde viven",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 193",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 115,
+      "source_row": 121,
+      "activity": "Taller Literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 194",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 116,
+      "source_row": 122,
+      "activity": "Festival de escritores",
+      "id": "ACT-SCFB82875",
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 195",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+    },
+    {
+      "question": 117,
+      "source_row": 123,
+      "activity": "Explora tus sentidos, encuentra tu voz. Taller de lectura en voz alta.",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 196",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 118,
+      "source_row": 124,
+      "activity": "Taller literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 197",
+      "response_present": true,
+      "response_status": "Pendiente",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 119,
+      "source_row": 125,
+      "activity": "“Cada cómic es un segundo acto”: Edición de Narrativa Gráfica",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 198",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 120,
+      "source_row": 126,
+      "activity": "Acompañamiento para la producción escrita",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 199",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 121,
+      "source_row": 127,
+      "activity": "Versos a la naturaleza: creación poética y resistencia cultural",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 200",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 122,
+      "source_row": 128,
+      "activity": "Taller literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 201",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 123,
+      "source_row": 129,
+      "activity": "El barrio en donde vivo: laboratorio de fanzine comunitario.",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 202",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 124,
+      "source_row": 130,
+      "activity": "Taller literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 203",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 125,
+      "source_row": 131,
+      "activity": "Taller literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 204",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 126,
+      "source_row": 132,
+      "activity": "Taller literario",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 205",
+      "response_present": true,
+      "response_status": "Pendiente",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 127,
+      "source_row": 133,
+      "activity": "Taller de escritura creativa y memoria comunitaria para niños, jóvenes o personas de la comunidad que tengan el gusto por la escritura para formar una antología del lugar donde viven",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 206",
+      "response_present": true,
+      "response_status": "Respondido",
+      "result": "Remite a Subsecretaría/Ileana; pendiente de conciliar responsable, meta y cobertura, sin alta duplicada"
+    },
+    {
+      "question": 128,
+      "source_row": 134,
+      "activity": "Carta al amor propio",
+      "id": null,
+      "reference": "Matriz editorial en vivo / Actividades 2026 / fila 207",
+      "response_present": false,
+      "response_status": "No tengo el dato",
+      "result": "Realización antes del corte declarada, aproximadamente marzo; día no confirmado, sin alta nueva"
+    }
+  ],
+  "local_cancellation_handling": {
+    "state": "implementado localmente",
+    "published": false,
+    "tests_passed": 32,
+    "visual_remote_verified": false
+  },
+  "aclaraciones_posteriores_2026_11_03": {
+    "focus": {
+      "estado": "actualizado y verificado en DB",
+      "id": "ACT-SCAU04088",
+      "mujeres": 10,
+      "hombres": 15,
+      "total": 25,
+      "poblacion_nueva": "A2442:H2443"
+    },
+    "publicos_26_marzo": "Fátima informa que Raúl está buscando el dato; siguen desconocidos",
+    "santo_domingo": {
+      "fecha_confirmada": "2026-07-11",
+      "ciudad": "Santo Domingo",
+      "pais": "República Dominicana",
+      "alcance_declarado": "una fecha",
+      "alta_nueva": false,
+      "pendiente": "alineación y alcance operativo; una fecha no confirma cantidad de actividades"
+    },
+    "carta_al_amor_propio": {
+      "periodo_aproximado": "marzo, antes del 30 de septiembre, según recuerdo del área",
+      "dia_confirmado": false,
+      "alta_nueva": false,
+      "nota": "La matriz ya contiene un renglón del título sin fecha; no duplicarlo ni inventar día"
+    }
+  },
+  "enfoque_actividad_2026_11_03": {
+    "range": "Registro_Actividades!L1348:L1414",
+    "value": "Cultural",
+    "cells": 67,
+    "status": "aplicado y verificado",
+    "basis": "Promoción y difusión del libro; criterio operativo consistente con tres precedentes, uno de Fátima en meta 88",
+    "institutional_confirmation": false,
+    "unexpected_changes": 0
+  },
+  "aclaracion_presupuestal_posterior": {
+    "Santo Domingo": {
+      "familia": "Q",
+      "clave_completa": null
+    },
+    "Lectura y entrega de obra": {
+      "familia": "P",
+      "clave_completa": null
+    },
+    "Talleristas": {
+      "familia": "Q",
+      "clave_completa": null
+    },
+    "Encuentro de lectores y escritores": {
+      "familia": "P",
+      "clave_completa": null,
+      "pago": "Fátima comunica que no se les pagó, según consulta contable; no se infiere cancelación, deuda, monto ni causa"
+    }
+  }
+}

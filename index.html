@@ -680,9 +680,9 @@
                 </div>
                 <h3 class="text-base font-extrabold text-gto-blue">Distribución por Programa de Gobierno</h3>
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-3">
-                <div class="sm:col-span-5 h-36"><canvas id="chart-eje-dona"></canvas></div>
-                <div id="legend-eje-dona" class="sm:col-span-7 space-y-1.5"></div>
+              <div class="grid grid-cols-1 items-center gap-3">
+                <div class="h-36 w-full max-w-[180px] mx-auto"><canvas id="chart-eje-dona"></canvas></div>
+                <div id="legend-eje-dona" class="min-w-0 space-y-1.5"></div>
               </div>
             </div>
           </div>
@@ -806,13 +806,13 @@
             </div>
 
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
-              <div class="flex items-center justify-between mb-1">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
                 <h3 class="text-sm font-extrabold text-gto-blue">Distribución del Enfoque</h3>
                 <span class="text-[10px] text-slate-400 font-semibold">Cultural vs. Artística</span>
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-2 my-auto">
-                <div class="sm:col-span-5 h-28"><canvas id="chart-mat-enfoque"></canvas></div>
-                <div id="legend-mat-enfoque" class="sm:col-span-7 space-y-1.5"></div>
+              <div class="grid grid-cols-1 items-center gap-3 my-auto">
+                <div class="h-32 w-full max-w-[180px] mx-auto"><canvas id="chart-mat-enfoque"></canvas></div>
+                <div id="legend-mat-enfoque" class="min-w-0 space-y-1.5"></div>
               </div>
             </div>
           </div>
@@ -1200,7 +1200,7 @@
             <div>
               <h3 class="text-base font-extrabold text-gto-blue">Conciliación y calidad de la información</h3>
               <p class="text-xs text-slate-600 mt-0.5">
-                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Cada actividad puede tener más de una alerta.
+                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Las canceladas conservan su historial aquí y se excluyen de los indicadores y la presentación ejecutiva.
               </p>
             </div>
           </div>
@@ -1238,7 +1238,7 @@
             </label>
             <label class="text-xs font-bold text-slate-600">Tipo de alerta
               <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
-                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option>
+                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option><option value="canceladas">Actividades canceladas</option>
               </select>
             </label>
             <label class="text-xs font-bold text-slate-600 flex-1">Buscar actividad, folio, dirección o responsable
@@ -1727,10 +1727,12 @@
         return true;
       });
 
-      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
-      const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
-      const pobF = rawDB.poblacion.filter(p => filteredActIds.has(cleanStr(p.ID_Actividad)));
-      const eviF = rawDB.evidencia.filter(e => filteredActIds.has(cleanStr(e.ID_Actividad)));
+      const actAudit = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
+      const actF = actAudit.filter(a => !CulturaCalidad.isCancelled(a));
+      const executionIds = new Set(actF.map(a => cleanStr(a.ID_Actividad)));
+      const terF = rawDB.territorio.filter(t => executionIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
+      const pobF = rawDB.poblacion.filter(p => executionIds.has(cleanStr(p.ID_Actividad)));
+      const eviF = rawDB.evidencia.filter(e => executionIds.has(cleanStr(e.ID_Actividad)));
 
       const sumTerAll = terF.reduce((s, r) => s + toNum(r.Cantidad), 0);
       const sumPobAll = pobF.reduce((s, r) => s + toNum(r.Cantidad_Poblacion), 0);
@@ -1743,7 +1745,7 @@
       renderCoberturaTerritorial(actF, terF);
       renderPerfilPoblacion(actF, terF, pobF, eviF);
       renderRepositorioEvidencias(actF, terF, eviF);
-      renderAuditoria(actF);
+      renderAuditoria(actAudit);
       safeCreateIcons();
     }
 
@@ -1771,7 +1773,9 @@
       };
     }
 
-    function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false) {
+    const formatPGDistributionLabel = value => cleanStr(value).replace(/^[1-5](?:[.)])?\s+/, '');
+
+    function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false, fullLabels = false) {
       const total = entries.reduce((s, e) => s + e[1], 0) || 1;
       renderChart(canvasId, isPie ? 'pie' : 'doughnut', {
         labels: entries.map(e => e[0]),
@@ -1805,11 +1809,12 @@
       legEl.innerHTML = entries.map(([label, count], idx) => {
         const pct = ((count / total) * 100).toFixed(1);
         const c = colors[idx % colors.length];
+        const safeLabel = auditEscape(label);
         return `
-          <div class="flex items-center justify-between text-xs bg-slate-50/80 px-2 py-1 rounded-md border border-slate-100">
+          <div class="${fullLabels ? 'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2' : 'flex items-center justify-between'} text-xs bg-slate-50/80 px-2 py-1 rounded-md border border-slate-100">
             <div class="flex items-center gap-1.5 min-w-0 pr-1.5">
               <span class="w-2.5 h-2.5 rounded-sm shrink-0" style="background:${c}"></span>
-              <span class="font-semibold text-slate-700 truncate" title="${label}">${label}</span>
+              <span class="font-semibold text-slate-700 ${fullLabels ? 'whitespace-normal break-words leading-snug' : 'truncate'}" title="${safeLabel}">${safeLabel}</span>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
               <span class="font-extrabold text-gto-blue">${fmtInt(count)}</span>
@@ -1952,8 +1957,8 @@
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
         ejeCount[e] = (ejeCount[e] || 0) + 1;
       });
-      const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
-      renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981']);
+      const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]).map(([label, count]) => [formatPGDistributionLabel(label), count]);
+      renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true);
 
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const monthly = CulturaCalidad.monthlyPopulation(actF,
@@ -2174,9 +2179,9 @@
       renderDoughnutWithHtmlLegend('chart-mat-pec', 'legend-mat-pec', pecEntries, ['#84CC16', '#A855F7', '#F97316'], true);
 
       const enfMap = {};
-      actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No esp.'; enfMap[e] = (enfMap[e] || 0) + 1; });
+      actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No especificado'; enfMap[e] = (enfMap[e] || 0) + 1; });
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
-      renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false);
+      renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false, true);
 
       const alinMap = {};
       actF.forEach(a => {

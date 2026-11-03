@@ -4,6 +4,36 @@ const q = require('../assets/js/calidad-datos.js');
 const activity = extra => ({ ID_Actividad: 'A1', Folio: 'F1', Nombre_Actividad: 'Taller', Fecha_Inicio: '2026-01-15', Fecha_Fin: '2026-01-15', Direccion: 'Museos', Clave_Proceso: 1, Acciones_PG: 'Acción PG', Acciones_PEC: 'Acción PEC', Disciplina: 'Música', Subdisciplina: 'Orquestas', Nombre_Espacio: 'Museo', Total_Sesiones: 1, Foto_Evidencia: 'foto.jpg', ...extra });
 const t = (n, extra = {}) => ({ ID_Actividad: 'A1', Municipio: 'León', Otra_Comunidad: 'Centro', Cantidad: n, ...extra });
 const p = (n, extra = {}) => ({ ID_Actividad: 'A1', Cantidad_Poblacion: n, Cantidad_Participacion: 0, Cantidad_Acceso: n, ...extra });
+
+test('solo una marca explícita al inicio de la descripción confirma cancelación', () => {
+  for (const description of ['[CANCELADA] Confirmada por el área', '  [cancelado] No se realizó']) {
+    assert.equal(q.isCancelled(activity({ Descripcion_Breve: description })), true);
+  }
+  for (const description of ['', undefined, 'No fue cancelada', 'Se canceló otra función', 'Libro [CANCELADA]']) {
+    assert.equal(q.isCancelled(activity({ Descripcion_Breve: description, Nombre_Actividad: '[CANCELADA]' })), false);
+  }
+});
+
+test('las canceladas no aportan registros, actividades, sesiones o público a las series', () => {
+  const active = activity();
+  const cancelled = activity({ ID_Actividad: 'CANCEL', Descripcion_Breve: '[CANCELADA] Confirmada', Total_Sesiones: 10, Cantidad_Actividades: 40 });
+  assert.deepEqual(q.metrics([active, cancelled]), q.metrics([active]));
+  const rows = [p(5), p(900, { ID_Actividad: 'CANCEL' })];
+  assert.deepEqual(q.monthlyPopulation([active, cancelled], rows, 'Cantidad_Poblacion'), q.monthlyPopulation([active], rows, 'Cantidad_Poblacion'));
+  assert.deepEqual(q.metrics([cancelled]), { records: 0, activities: 0, unresolved: 0, sessions: 0, missingSessions: 0 });
+});
+
+test('la cancelación conserva trazabilidad y no pide inventar público de una actividad no realizada', () => {
+  const cancelled = activity({ Descripcion_Breve: '[CANCELADA] Confirmada', Fecha_Inicio: '', Fecha_Fin: '', Acciones_PG: '', Total_Sesiones: '', Foto_Evidencia: '' });
+  const alert = q.audit([cancelled], [], [], [])[0];
+  assert.deepEqual(alert.categories, ['canceladas']);
+  assert.equal(alert.sT, null);
+  assert.equal(alert.sP, null);
+  assert.match(alert.diag, /se excluye de los indicadores/);
+  const withPeople = q.audit([cancelled], [t(10)], [p(10)], [])[0];
+  assert.ok(withPeople.categories.includes('diferencias'));
+  assert.equal(withPeople.sP, 10);
+});
 test('un cero válido no es un faltante; un vacío no se convierte en cero', () => {
   assert.equal(q.audit([activity()], [t(0)], [p('0')], []).length, 0);
   const a = q.audit([activity()], [t('')], [p(0)], [])[0];
