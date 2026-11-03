@@ -40,6 +40,23 @@ test('un cero válido no es un faltante; un vacío no se convierte en cero', () 
   assert.equal(a.sT, null); assert.equal(a.diff, null); assert.ok(a.categories.includes('faltantes'));
   assert.ok(!a.categories.includes('diferencias'));
 });
+
+test('una captura sustituida explícitamente conserva cifras y referencia sin aportar ejecución', () => {
+  const replacement = activity({ ID_Actividad: 'ACT-SCQZ00697' });
+  const old = activity({ ID_Actividad: 'ACT-SCBV52724', Folio: 'OLD', Descripcion_Breve: '[SUSTITUIDO:ACT-SCQZ00697] Ejercicio confirmado por el área', Total_Sesiones: 9 });
+  assert.equal(q.supersededBy(old), replacement.ID_Actividad);
+  assert.equal(q.isCancelled(old), false);
+  assert.deepEqual(q.metrics([replacement, old]), q.metrics([replacement]));
+  const tr = [t(49465, { ID_Actividad: old.ID_Actividad }), t(5, { ID_Actividad: replacement.ID_Actividad })];
+  assert.deepEqual(q.monthlyPopulation([replacement, old], tr, 'Cantidad'), q.monthlyPopulation([replacement], tr, 'Cantidad'));
+  const row = q.audit([replacement, old], tr, [p(211, { ID_Actividad: old.ID_Actividad })], []).find(r => r.id === old.ID_Actividad);
+  assert.deepEqual(row.categories, ['sustituidos']);
+  assert.equal(row.sT, 49465);
+  assert.equal(row.sP, 211);
+  assert.match(row.diag, /ACT-SCQZ00697/);
+  for (const desc of ['Sustituido por otro registro', 'Ejemplo [SUSTITUIDO:ACT-SCQZ00697]', '[SUSTITUIDO:otro]', '[SUSTITUIDO:ACT-SCBV52724]']) assert.equal(q.isExcluded({ ...old, Descripcion_Breve: desc }), false);
+  assert.ok(q.audit([old], tr, [], [])[0].diag.includes('No se encuentra'));
+});
 test('suma todas las localidades antes de comparar una actividad', () => {
   assert.equal(q.audit([activity()], [t(20), t(30, { Municipio: 'Silao' })], [p(50)], []).length, 0);
   assert.equal(q.audit([activity()], [t(20), t(30)], [p(40)], [])[0].diff, 10);
@@ -82,6 +99,30 @@ test('sesiones iguales al total de asistentes requieren confirmar el significado
   const a = q.audit([activity({ Total_Sesiones: 69395 })], [t(69395)], [p(69395)], [])[0];
   assert.ok(a.diag.includes('asistentes en ese campo'));
   assert.ok(!a.categories.includes('diferencias'));
+});
+
+test('funciones con horas explícitas distintas conservan ambos registros sin alerta de coincidencia', () => {
+  const a = activity({ Descripcion_Breve: 'Artista: Grupo. Hora: 13:00:00. Nota: convenio' });
+  const b = activity({ ID_Actividad: 'A2', Folio: 'F2', Descripcion_Breve: 'Artista: Grupo. Hora: 18:00:00' });
+  const result = q.audit([a, b], [], [], []);
+  assert.equal(result.length, 2);
+  assert.ok(result.every(r => !r.categories.includes('identidad')));
+  assert.equal(q.metrics([a, b]).records, 2);
+});
+
+test('horario igual, faltante, inválido o ambiguo mantiene la revisión de coincidencias', () => {
+  for (const description of ['Hora: 13:00', '', 'Hora: 25:00:00', 'Hora: 13:70', 'Hora: 09:00. Hora: 18:00.', 'Hora: 18:00 pm']) {
+    const rows = q.audit([activity({ Descripcion_Breve: 'Hora: 13:00:00' }), activity({ ID_Actividad: 'A2', Folio: 'F2', Descripcion_Breve: description })], [], [], []);
+    assert.ok(rows.every(r => r.categories.includes('identidad')), description);
+  }
+});
+
+test('el horario distingue pares dentro de grupos y no oculta IDs o folios repetidos', () => {
+  const rows = q.audit([activity({ Descripcion_Breve: 'Hora: 13:00' }), activity({ ID_Actividad: 'A2', Folio: 'F2', Descripcion_Breve: 'Hora: 18:00' }), activity({ ID_Actividad: 'A3', Folio: 'F3', Descripcion_Breve: 'Hora: 18:00:00' })], [], [], []);
+  assert.ok(!rows.find(r => r.id === 'A1').categories.includes('identidad'));
+  assert.ok(rows.filter(r => r.id !== 'A1').every(r => r.categories.includes('identidad')));
+  const repeated = q.audit([activity({ Descripcion_Breve: 'Hora: 13:00' }), activity({ Descripcion_Breve: 'Hora: 18:00' })], [], [], []);
+  assert.ok(repeated.every(r => r.diag.includes('ID repetido') && r.diag.includes('Folio repetido')));
 });
 test('el público acumulado de enero a septiembre no se presenta como público de enero', () => {
   const acts = [activity({ ID_Actividad: 'ACUM', Fecha_Inicio: '2026-01-01', Fecha_Fin: '2026-09-30' }), activity({ ID_Actividad: 'ENE', Fecha_Inicio: '2026-01-01', Fecha_Fin: '2026-01-31' }), activity({ ID_Actividad: 'FEB', Fecha_Inicio: '2026-02-01', Fecha_Fin: '2026-02-28' })];

@@ -1,5 +1,12 @@
 {
   "date": "2026-11-03",
+  "aclaraciones_posteriores_1426_1436": {
+    "canada_digital_confirmado": 62054,
+    "plazuelas_mayo_confirmado": { "presencial": 397, "digital": 7918, "total": 8315 },
+    "diferencias_aritmeticas": "resueltas; se conserva la transcripción original como antecedente",
+    "metodologia_digital": "Difusión específica por zona y publicaciones generales en varias redes; sin acreditación de personas únicas ni desglose para descontar componentes compartidos",
+    "escritura": "Solo N604/N607 actualizadas; totales combinados ya coincidentes sin cambios. Verificado con respaldo privado ae_edith_before/after.json. No certifica visitantes únicos ni retira la captura sustituida."
+  },
   "source": "Respuestas_Edith_2026-11-01_contestado.xlsx",
   "sha256": "f4edc6134f071bf121db2d005ffe1f61ab671aaa133b2eb5c78f9fc36c404dfc",
   "sites": [

@@ -2,6 +2,16 @@
   "date": "2026-11-03",
   "status": "parcial",
   "cut": "enero-septiembre 2026",
+  "aclaraciones_20261103_1421": {
+    "procedencia": "Mensajes de Fátima aportados por Luis: 14:12, 14:15 y 14:21; corroborados con la matriz viva y Cat_Alineacion",
+    "claves_integras": { "Santo Domingo": "Q c41392601", "Talleristas": "Q c41422601", "Lectura y entrega de obra": "Pb35732600", "Encuentro de lectores": "Pb35732600" },
+    "procesos_catalogo": { "Santo Domingo": "QC4139 / meta 4", "Talleristas": "QC4142 / rama literaria candidata meta 8; lote aún en conciliación", "Lectura y entrega de obra": "PB3573 / meta 88", "Encuentro de lectores": "PB3573 / meta 88" },
+    "actividades_cargadas": ["ACT-SCWM53099", "ACT-SCJP60059", "ACT-SCID10817"],
+    "san_felipe": "ACT-SCJQ53039: los 40 incluyen a todos; se corrigen territorio y población a 40, sin sumar nuevamente al ponente. 25 mujeres y 15 hombres; 1 participación masculina y 39 accesos calculados desde esa inclusión y la participación existente.",
+    "carta_al_amor_propio": "No tiene evidencia/fecha precisa adicional. Mantener pendiente, sin inventar fecha ni crear alta.",
+    "festival": "No comprendió la referencia. Aclarar que 28/Guanajuato y 300/San Miguel son cantidades de dos filas del mismo ACT-SCFB82875, no dos festivales confirmados.",
+    "verificacion": "Tres altas, tres territorios, cinco poblaciones de las altas y una de corrección, tres carpetas vinculadas; cero cambios fuera del plan en valores y estructura nativa. No se modificó la fuente. Continúa parcial la dirección completa."
+  },
   "source_sha256": "2d7640bf50a75e4d2b47b53fed6aa0fd9039f688e0c079dede890a8d8af431ce",
   "verification": {
     "status": "verified",
@@ -1667,11 +1677,11 @@
       "question": 93,
       "source_row": 99,
       "activity": "Encuentro de lectores y escritores",
-      "id": null,
+      "id": "ACT-SCWM53099",
       "reference": "Matriz editorial en vivo / Actividades 2026 / fila 144",
       "response_present": true,
       "response_status": "Respondido",
-      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+      "result": "Cargada tras confirmación PB35732600 y respuesta presentación individual/charla: meta 88, 220 asistentes (115 mujeres y 105 hombres), con territorio, dos poblaciones y carpeta vinculada. Mantiene pendientes de PG/PEC, localidad y participación/acceso."
     },
     {
       "question": 94,
@@ -1747,11 +1757,11 @@
       "question": 101,
       "source_row": 107,
       "activity": "Escritoras en Santo Domingo",
-      "id": null,
+      "id": "ACT-SCJP60059",
       "reference": "Matriz editorial en vivo / Actividades 2026 / fila 153",
       "response_present": true,
       "response_status": "Respondido",
-      "result": "Fecha 11/07/2026 y ciudad/país confirmados; sin alta nueva, pendiente alineación y alcance"
+      "result": "Cargada con QC41392601, meta 4 única de QC4139, 11/07/2026 Santo Domingo República Dominicana, una presentación y total confirmado 130 mujeres. Carpeta vinculada; dirección conserva SIN ASIGNAR del catálogo, recinto y participación/acceso no informados. No atribuir automáticamente a Editorial ni afirmar cierre institucional."
     },
     {
       "question": 102,
@@ -1787,11 +1797,11 @@
       "question": 105,
       "source_row": 111,
       "activity": "Lectura y entrega de obra",
-      "id": null,
+      "id": "ACT-SCID10817",
       "reference": "Matriz editorial en vivo / Actividades 2026 / fila 158",
       "response_present": true,
       "response_status": "Respondido",
-      "result": "Contexto aclarado parcialmente; aún requiere meta/alcance inequívoco antes de cargar"
+      "result": "Cargada tras confirmación PB35732600 y 12 asistentes: 08/09/2026, meta 88, 10 mujeres y 2 hombres, Claustro Sor Juana y ciudad México literal de la fuente. Carpeta vinculada. Mantiene pendientes de PG/PEC, localidad y participación/acceso."
     },
     {
       "question": 106,
@@ -1821,7 +1831,7 @@
       "reference": "Matriz editorial en vivo / Actividades 2026 / fila 161",
       "response_present": true,
       "response_status": "Respondido",
-      "result": "Contenido confirmado en ID existente; no importar otra vez ni sumar su público"
+      "result": "Actualizado el mismo ID: 40 personas incluyendo al ponente, 25 mujeres y 15 hombres. Territorio J514:L514=40/1/39; población 949 corregida a Hombre 15 (1 participación, 14 acceso) y una nueva Mujer 25 (0/25), Población General sin asignar edades. Sin alertas en recálculo posterior. No duplicar actividad."
     },
     {
       "question": 109,

@@ -34,7 +34,7 @@
   function render({ activity: a, territory = [], population = [], evidence = [], review = null, evidenceUrl }) {
     const st = sum(territory, 'Cantidad'), sp = sum(population, 'Cantidad_Poblacion');
     const diff = st !== null && sp !== null ? st - sp : null;
-    const categories = { diferencias: 'Cifras discrepantes', faltantes: 'Datos por completar', evidencias: 'Sin evidencia', concentrados: 'Revisar cantidades', identidad: 'Posible duplicación', canceladas: 'Actividad cancelada' };
+    const categories = { diferencias: 'Cifras discrepantes', faltantes: 'Datos por completar', evidencias: 'Sin evidencia', concentrados: 'Revisar cantidades', identidad: 'Posible duplicación', canceladas: 'Actividad cancelada', sustituidos: 'Captura sustituida' };
     const reasons = review ? review.diag.split(' · ').filter(Boolean) : [];
     const badges = review ? review.categories.map(k => `<span class="inline-block px-2 py-1 rounded-full text-[11px] font-bold ${k === 'diferencias' || k === 'identidad' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-900'}">${categories[k] || escape(k)}</span>`).join(' ') : '';
     const files = evidence.filter(e => !unavailable(e.Archivo_Evidencia));

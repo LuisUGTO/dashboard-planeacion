@@ -1200,7 +1200,7 @@
             <div>
               <h3 class="text-base font-extrabold text-gto-blue">Conciliación y calidad de la información</h3>
               <p class="text-xs text-slate-600 mt-0.5">
-                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Las canceladas conservan su historial aquí y se excluyen de los indicadores y la presentación ejecutiva.
+                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Las canceladas y capturas sustituidas conservan su historial aquí y se excluyen de los indicadores y la presentación ejecutiva.
               </p>
             </div>
           </div>
@@ -1238,7 +1238,7 @@
             </label>
             <label class="text-xs font-bold text-slate-600">Tipo de alerta
               <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
-                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option><option value="canceladas">Actividades canceladas</option>
+                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option><option value="canceladas">Actividades canceladas</option><option value="sustituidos">Capturas sustituidas</option>
               </select>
             </label>
             <label class="text-xs font-bold text-slate-600 flex-1">Buscar actividad, folio, dirección o responsable
@@ -1287,8 +1287,8 @@
     </div>
   </div>
 
-  <script src="assets/js/calidad-datos.js"></script>
-  <script src="assets/js/ficha-actividad.js"></script>
+  <script src="assets/js/calidad-datos.js?v=20261103-conciliacion"></script>
+  <script src="assets/js/ficha-actividad.js?v=20261103-conciliacion"></script>
   <script>
     if (window.Chart && window.ChartDataLabels) {
       Chart.register(ChartDataLabels);
@@ -1745,7 +1745,7 @@
       });
 
       const actAudit = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
-      const actF = actAudit.filter(a => !CulturaCalidad.isCancelled(a));
+      const actF = actAudit.filter(a => !CulturaCalidad.isExcluded(a));
       const executionIds = new Set(actF.map(a => cleanStr(a.ID_Actividad)));
       const terF = rawDB.territorio.filter(t => executionIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
       const pobF = rawDB.poblacion.filter(p => executionIds.has(cleanStr(p.ID_Actividad)));

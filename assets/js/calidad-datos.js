@@ -19,6 +19,20 @@
   // Explicit, reversible marker in an operative field. Ordinary mentions of
   // cancellation (or a matching title on another date) do not change status.
   const isCancelled = activity => /^\[CANCELAD[AO]\]/i.test(text(activity.Descripcion_Breve));
+  const supersededBy = activity => {
+    const m = text(activity.Descripcion_Breve).match(/^\[SUSTITUIDO:(ACT-SC[A-Z]{2}\d{5})\]/);
+    return m && m[1] !== text(activity.ID_Actividad) ? m[1] : '';
+  };
+  const isExcluded = activity => isCancelled(activity) || !!supersededBy(activity);
+  function reportedTime(activity) {
+    // Import descriptions carry the explicit start time. Unknown, malformed or
+    // multiple times cannot establish that two otherwise matching records differ.
+    const matches = [...text(activity.Descripcion_Breve).matchAll(/\bHora:\s*(\d{1,2}):(\d{2})(?::(\d{2}))?(?=\s*(?:\.|$))/gi)];
+    if (matches.length !== 1) return null;
+    const [, h, m, s = '0'] = matches[0];
+    if (+h > 23 || +m > 59 || +s > 59) return null;
+    return `${h.padStart(2, '0')}:${m}`;
+  }
   function dateISO(value) {
     const s = text(value);
     let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
@@ -53,7 +67,7 @@
     return { value: malformed || (consolidated && (explicit === null || explicit === 0)) ? null : (explicit === null ? 1 : explicit), consolidated, explicit, malformed };
   }
   function metrics(activities) {
-    const active = activities.filter(a => !isCancelled(a));
+    const active = activities.filter(a => !isExcluded(a));
     let activitiesTotal = 0, unresolved = 0, sessions = 0, missingSessions = 0;
     active.forEach(a => {
       const q = quantity(a);
@@ -68,7 +82,7 @@
     const records = new Array(12).fill(0), people = new Array(12).fill(null);
     const missing = new Array(12).fill(0);
     let unallocatedPeople = 0, unallocatedRecords = 0, unallocatedMissing = 0;
-    activities.filter(a => !isCancelled(a)).forEach(a => {
+    activities.filter(a => !isExcluded(a)).forEach(a => {
       const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio);
       const end = dateISO(a.Fecha_Fin_ISO || a.Fecha_Fin);
       const month = start ? Number(start.slice(5, 7)) - 1 : null;
@@ -92,9 +106,9 @@
       idCounts.set(id, (idCounts.get(id) || 0) + 1);
       if (folio) folios.set(folio, (folios.get(folio) || 0) + 1);
       const key = [dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), norm(a.Nombre_Actividad), norm(a.Nombre_Espacio || a.Especifique_Espacio)].join('|');
-      if (key.split('|').every(Boolean)) {
-        if (!identities.has(key)) identities.set(key, new Set());
-        identities.get(key).add(id);
+      if (!isExcluded(a) && key.split('|').every(Boolean)) {
+        if (!identities.has(key)) identities.set(key, []);
+        identities.get(key).push({ id, time: reportedTime(a) });
       }
     });
     return activities.map(a => {
@@ -102,6 +116,14 @@
       const st = sum(tr, 'Cantidad'), sp = sum(pr, 'Cantidad_Poblacion');
       const categories = new Set(), reasons = [];
       const add = (category, reason) => { categories.add(category); reasons.push(reason); };
+      const replacement = supersededBy(a);
+      if (replacement) {
+        add('sustituidos', `Captura sustituida por ${replacement}: historial conservado, excluido de los indicadores de ejecución`);
+        if (!idCounts.has(replacement)) add('identidad', 'No se encuentra el registro que sustituye esta captura');
+        if (idCounts.get(id) > 1) add('identidad', 'ID repetido');
+        if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
+        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
+      }
       if (isCancelled(a)) {
         add('canceladas', 'Actividad cancelada: se conserva el historial y se excluye de los indicadores de ejecución');
         if ((st !== null && st > 0) || (sp !== null && sp > 0)) add('diferencias', 'La actividad cancelada conserva cifras de público: revisar su origen sin contarlas como ejecución');
@@ -157,9 +179,10 @@
       if (idCounts.get(id) > 1) add('identidad', 'ID repetido');
       if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
       const key = [start, norm(a.Nombre_Actividad), norm(a.Nombre_Espacio || a.Especifique_Espacio)].join('|');
-      if ((identities.get(key)?.size || 0) > 1) add('identidad', 'Mismo nombre, fecha y sede en otro ID: revisar posible duplicado o participación de otra área');
+      const time = reportedTime(a);
+      if ((identities.get(key) || []).some(other => other.id !== id && (!time || !other.time || time === other.time))) add('identidad', 'Mismo nombre, fecha y sede en otro ID sin horario distinto confirmado: revisar posible duplicado o participación de otra área');
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, isCancelled, dateISO, quantity, metrics, monthlyPopulation, audit };
+  return { number, count, isCancelled, supersededBy, isExcluded, dateISO, quantity, metrics, monthlyPopulation, audit };
 });

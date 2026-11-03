@@ -279,6 +279,35 @@ test('el usuario seleccionado no se pierde cuando no aparece en una actualizaci�
   assert.equal(s.nodes.get('filter-audit-user').value, 'iysalazarh@guanajuato.gob.mx');
   assert.match(s.nodes.get('filter-audit-user').innerHTML, /iysalazarh@guanajuato.gob.mx/);
 });
+
+test('las capturas sustituidas salen de las cinco vistas pero conservan su ficha y CSV histórico', () => {
+  const s = setup();
+  const active = { ...a, ID_Actividad: 'ACT-SCQZ00697', Total_Sesiones: 1 };
+  const old = { ...active, ID_Actividad: 'ACT-SCBV52724', Folio: 'OLD', Descripcion_Breve: '[SUSTITUIDO:ACT-SCQZ00697] Ejercicio confirmado', Total_Sesiones: 9 };
+  s.context.fixture = { actividades: [active, old], territorio: [{ ID_Actividad: active.ID_Actividad, Municipio: 'León', Otra_Comunidad: 'Centro', Cantidad: 5 }, { ID_Actividad: old.ID_Actividad, Municipio: 'León', Cantidad: 49465 }], poblacion: [{ ID_Actividad: active.ID_Actividad, Cantidad_Poblacion: 5, Cantidad_Participacion: 0, Cantidad_Acceso: 5 }, { ID_Actividad: old.ID_Actividad, Cantidad_Poblacion: 211 }], evidencia: [], alineacion: cat };
+  s.context.selections = [];
+  for (const id of ['f-municipio','f-direccion','f-disciplina','f-eje','f-enfoque','f-zap']) s.document.getElementById(id).value = 'ALL';
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-09-30';
+  vm.runInContext(`rawDB=fixture;
+    renderVisionGeneral=(a,t,p)=>selections.push([a,t,p]);
+    renderMatrizEstrategica=(a,p,t)=>selections.push([a,t,p]);
+    renderCoberturaTerritorial=(a,t)=>selections.push([a,t]);
+    renderPerfilPoblacion=(a,t,p,e)=>selections.push([a,t,p,e]);
+    renderRepositorioEvidencias=(a,t,e)=>selections.push([a,t,e]);
+    applyFilters();`,s.context);
+  const selections=JSON.parse(vm.runInContext('JSON.stringify(selections)',s.context));
+  assert.equal(selections.length,5);
+  for(const view of selections) for(const rows of view) assert.ok(rows.every(row=>row.ID_Actividad===active.ID_Actividad));
+  assert.equal(vm.runInContext('rawDB.actividades.length',s.context),2);
+  s.document.getElementById('filter-audit-kind').value='sustituidos';
+  s.document.getElementById('filter-audit-export').value='actividades';
+  const exported=JSON.parse(vm.runInContext('JSON.stringify(getAuditExportData())',s.context));
+  assert.equal(exported.data.length,1);
+  assert.equal(exported.data[0][0],old.ID_Actividad);
+  vm.runInContext('openExpedienteModal("ACT-SCBV52724")',s.context);
+  assert.match(s.nodes.get('mod-body').innerHTML,/Captura sustituida/);
+});
 test('un concentrado sin cantidad no produce cero ni un porcentaje ficticio', () => {
   const s = setup(); s.context.act = [{ ...a, Tipo_Registro: 'Concentrado mensual' }]; s.context.cat = cat;
   vm.runInContext('rawDB.alineacion = cat; renderMatrizEstrategica(act, [], [], cat);', s.context);

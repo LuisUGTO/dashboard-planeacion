@@ -1,5 +1,13 @@
 # Respuestas de Edith — 03/11/2026
 
+## Aclaraciones posteriores recibidas y aplicadas
+
+Mensajes aportados por Luis, 03/11/2026 14:26–14:36 y capturas: **Cañada digital62054 confirmado; Plazuelas mayo397 presencial+7918 digital=8315 confirmado**, con suma digital anual62313. Se cierran las dos diferencias aritméticas del texto histórico siguiente. N604/N607 actualizadas con esta aclaración y conservación del antecedente. Los totales combinados de ambas actividades ya coinciden con esos resultados: no se añadieron asistentes ni se duplicaron cargas.
+
+Edith describe publicaciones específicas por zona y publicaciones generales difundidas en varias redes, sumadas en su reporte; la captura mensual de septiembre rotula22260 como visitantes virtuales. Esto explica el origen, **sin acreditar personas únicas, exclusividad por zona o un desglose que permita descontar publicaciones compartidas**. No deduplicar por cifras iguales, dividir entre cinco ni sumar alcance/reacciones como visitantes físicos. La separación de indicadores y la captura de prueba sustituida siguen pendientes de resolución interna; las dos correcciones aritméticas no las resuelven. No pedir de nuevo las cifras ya confirmadas.
+
+Respaldo y comprobación conjunta con Adriana Escamilla: ae_edith_before/after.json en carpeta privada excluida del03/11. Cero cambios de valores fuera del plan; formato/validación/chips preservados. Sin altas, cambios de código, mensajes, commits o publicación por estas aclaraciones.
+
 **Estado: revisado y aclaraciones aplicadas; sin nuevas actividades ni cambios numéricos.** Luis informó la recepción del archivo contestado. Se preservaron sus fuentes y los seis IDs existentes. No equivale a información conciliada al 100%.
 
 Fuente: `Respuestas_Edith_2026-11-01_contestado.xlsx`, Pendientes filas 7:13. SHA-256 `f4edc6134f071bf121db2d005ffe1f61ab671aaa133b2eb5c78f9fc36c404dfc`. Las siete respuestas dicen Atendido; se revisó su contenido, sin convertir ese estado en certificación de cifras o cierre automático.
