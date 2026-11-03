@@ -14,6 +14,8 @@ Consultar [CONTEXTO_PROYECTO.md](CONTEXTO_PROYECTO.md) para arquitectura vigente
 
 **Leyendas y otros enfoques — 03/11/2026:** leyendas PG de Inicio y Enfoque de Matriz ajustadas localmente para mostrar nombres completos; solo en esa distribución PG se omite la numeración inicial, conservando los datos. Pasaron 34 pruebas. En DB se completaron ocho de los doce enfoques vacíos; cuatro requieren confirmación por fuente ambigua. [Detalle y pendientes](documentacion/Ajuste_Leyendas_y_Enfoques_2026-11-03.md). Sin publicación ni validación visual del sitio remoto/PPTX.
 
+**Mapa de Inicio — ajuste local posterior del 03/11/2026:** el mapa ocupa el espacio disponible de la tarjeta al crecer las gráficas vecinas, manteniendo un mínimo de 340 px; Leaflet se reajusta al tamaño del contenedor. Pasaron 35 pruebas. No cambia datos de cobertura. Publicación y revisión visual de navegador/exportación pendientes.
+
 **Actualización anterior — 01/11/2026:** dos altas de septiembre de Marcelina, un territorio de Soraya y 23 celdas existentes corregidas. Consultar el [resultado por expediente](documentacion/Resultado_Cargas_y_Pendientes_2026-11-01.md) y el [inventario de los 23 libros](documentacion/Control_Matrices_y_Cargas_2026-11-01.json). No volver a pegar preparaciones sustituidas.
 
 **Aclaraciones listas para revisión — 01/11/2026:** [guías PDF y Excel para responder por expediente](documentacion/Paquetes_Pendientes_por_Area_2026-11-01.md), guardados en las carpetas de cada enlace. Los Excel son formularios de respuesta de una hoja, no archivos para importar directamente a la DB.

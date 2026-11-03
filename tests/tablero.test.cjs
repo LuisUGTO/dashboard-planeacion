@@ -20,6 +20,24 @@ function setup({ keepHtmlLegend = false } = {}) {
 const a = { ID_Actividad: 'A1', Folio: 'F1', Nombre_Actividad: 'Taller', Fecha_Inicio: '2026-01-15', Fecha_Inicio_ISO: '2026-01-15', Fecha_Fin: '2026-01-31', Direccion: 'Museos', Clave_Proceso: 1, Nombre_Meta: 'Talleres', Acciones_PG: 'Acción PG', Acciones_PEC: 'Acción PEC', Disciplina: 'Música', Subdisciplina: 'Orquestas', Nombre_Espacio: 'Museo', Total_Sesiones: 3000, Foto_Evidencia: 'foto.jpg' };
 const cat = [{ ID_Alineacion: 1, Clave_Proceso: 'PB1', Direccion: 'Museos', Nombre_Meta: 'Talleres', Unidad_Medida: 'Talleres realizados', Meta_Anual: 2000 }];
 
+test('el mapa reajusta sus teselas cuando cambia su contenedor sin reinicializarlo ni desplazarlo', () => {
+  const s = setup();
+  const callbacks = [], targets = [], invalidations = [];
+  let creations = 0;
+  const map = { setView() { return this; }, invalidateSize(options) { invalidations.push(options); } };
+  const leaflet = { map() { creations++; return map; }, tileLayer() { return { addTo() {} }; }, layerGroup() { return { addTo() { return {}; } }; } };
+  s.context.L = leaflet;
+  s.context.window.L = leaflet;
+  s.context.ResizeObserver = class { constructor(callback) { callbacks.push(callback); } observe(target) { targets.push(target); } };
+  vm.runInContext('initLeafletMap(); initLeafletMap();', s.context);
+  assert.equal(creations, 1);
+  assert.equal(callbacks.length, 1);
+  assert.equal(targets[0], s.document.getElementById('mapGto'));
+  callbacks[0]();
+  assert.equal(invalidations.length, 1);
+  assert.equal(invalidations[0].pan, false);
+});
+
 test('las leyendas completas permiten varias líneas y escapan las etiquetas sin alterar cantidades', () => {
   const s = setup({ keepHtmlLegend: true });
   s.context.entries = [['Artística', 2], ['No especificado', 1], ['<img src=x onerror="alert(1)">', 1]];
