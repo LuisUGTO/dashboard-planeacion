@@ -1138,7 +1138,7 @@
           <div class="lg:col-span-7 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <h3 class="text-base font-extrabold text-gto-blue mb-1">Cumplimiento de Evidencia Documental por Dirección General</h3>
             <p class="text-xs text-slate-400 mb-3">Comparativa de actividades con respaldo documental vs. pendientes de carga</p>
-            <div class="h-60"><canvas id="chart-evi-direccion"></canvas></div>
+            <div class="h-80"><canvas id="chart-evi-direccion"></canvas></div>
           </div>
 
           <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
@@ -2613,15 +2613,42 @@
         ]
       }, {
         indexAxis: 'y',
-        layout: { padding: { left: 160 } },
-        scales: { x: { stacked: true, grace: '10%' }, y: { stacked: true, ticks: { mirror: true, labelOffset: -14, align: 'right' } } },
+        layout: { padding: { right: 8 } },
+        scales: {
+          x: { stacked: true, grace: '10%', ticks: { precision: 0 } },
+          y: {
+            stacked: true,
+            grid: { display: false },
+            ticks: {
+              mirror: false,
+              autoSkip: false,
+              padding: 10,
+              font: { size: 11 },
+              callback: function(value) {
+                const lines = [''];
+                String(this.getLabelForValue(value)).split(/\s+/).forEach(word => {
+                  const last = lines.length - 1;
+                  const next = `${lines[last]} ${word}`.trim();
+                  if (next.length > 24 && lines[last]) lines.push(word);
+                  else lines[last] = next;
+                });
+                return lines;
+              }
+            }
+          }
+        },
         plugins: {
           legend: { position: 'top' },
           tooltip: { callbacks: { title: (items) => fullDirNames[items[0].label] || items[0].label } },
           datalabels: {
             color: '#FFFFFF',
             font: { size: 10, weight: 'bold' },
-            formatter: (v) => v >= 5 ? fmtInt(v) : ''
+            formatter: (v, context) => {
+              const label = fmtInt(v);
+              const x = context.chart.scales.x;
+              const width = Math.abs(x.getPixelForValue(v) - x.getPixelForValue(0));
+              return v >= 5 && width >= label.length * 7 + 8 ? label : '';
+            }
           }
         }
       });
