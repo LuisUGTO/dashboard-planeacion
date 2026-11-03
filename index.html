@@ -670,7 +670,7 @@
                 </div>
                 <h3 class="text-base font-extrabold text-gto-blue">Registros por Disciplina</h3>
               </div>
-              <div class="h-48"><canvas id="chart-disciplinas"></canvas></div>
+              <div class="h-64"><canvas id="chart-disciplinas"></canvas></div>
             </div>
 
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
@@ -1919,7 +1919,32 @@
           backgroundColor: topDisc.map((_, i) => VIBRANT_PALETTE[i % VIBRANT_PALETTE.length]),
           borderRadius: 5
         }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({
+        layout: { padding: { right: 58, left: 8 } },
+        scales: {
+          x: { grace: '22%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 }, precision: 0 } },
+          y: {
+            grid: { display: false },
+            ticks: {
+              mirror: false,
+              labelOffset: 0,
+              autoSkip: false,
+              padding: 8,
+              font: { size: 11 },
+              callback: function(value) {
+                const lines = [''];
+                String(this.getLabelForValue(value)).split(/\s+/).forEach(word => {
+                  const last = lines.length - 1;
+                  const next = `${lines[last]} ${word}`.trim();
+                  if (next.length > 18 && lines[last]) lines.push(word);
+                  else lines[last] = next;
+                });
+                return lines;
+              }
+            }
+          }
+        }
+      }));
 
       const ejeCount = {};
       actF.forEach(a => {
