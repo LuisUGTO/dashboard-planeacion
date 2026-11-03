@@ -11,7 +11,7 @@ function setup({ keepHtmlLegend = false } = {}) {
     if (!nodes.has(id)) nodes.set(id, { value: id === 'search-audit' ? '' : 'ALL', textContent: '', innerHTML: '', style: {}, attributes: {}, focus() {}, setAttribute(key, value) { this.attributes[key] = value; }, classList: { toggle() {}, add() {}, remove() {} } });
     return nodes.get(id);
   } };
-  const context = vm.createContext({ window: { addEventListener() {} }, document, CulturaCalidad: quality, CulturaFicha: ficha, console, setTimeout, URL, Blob });
+  const context = vm.createContext({ window: { addEventListener() {} }, document, CulturaCalidad: quality, CulturaFicha: ficha, console, setTimeout, clearTimeout, AbortController, URL, Blob });
   vm.runInContext(main, context);
   vm.runInContext('renderChart = () => {}; renderStrategicDirections = () => {};', context);
   if (!keepHtmlLegend) vm.runInContext('renderDoughnutWithHtmlLegend = () => {};', context);
@@ -19,6 +19,59 @@ function setup({ keepHtmlLegend = false } = {}) {
 }
 const a = { ID_Actividad: 'A1', Folio: 'F1', Nombre_Actividad: 'Taller', Fecha_Inicio: '2026-01-15', Fecha_Inicio_ISO: '2026-01-15', Fecha_Fin: '2026-01-31', Direccion: 'Museos', Clave_Proceso: 1, Nombre_Meta: 'Talleres', Acciones_PG: 'Acción PG', Acciones_PEC: 'Acción PEC', Disciplina: 'Música', Subdisciplina: 'Orquestas', Nombre_Espacio: 'Museo', Total_Sesiones: 3000, Foto_Evidencia: 'foto.jpg' };
 const cat = [{ ID_Alineacion: 1, Clave_Proceso: 'PB1', Direccion: 'Museos', Nombre_Meta: 'Talleres', Unidad_Medida: 'Talleres realizados', Meta_Anual: 2000 }];
+
+test('las cinco lecturas usan exportación CSV con límites operativos y preservan texto, ceros y vacíos', async () => {
+  const s = setup();
+  const sheets = [
+    ['Registro_Actividades', '0', 'A:BN', 66, 'ID_Actividad'],
+    ['Registro_Territorio', '375614539', 'A:L', 12, 'ID_Territorio'],
+    ['Registro_Poblacion', '1598177756', 'A:H', 8, 'ID_Poblacion'],
+    ['Regitro_Evidencia', '219249658', 'A:E', 5, 'ID_Evidencia'],
+    ['Cat_Alineacion', '923865401', 'A:R', 18, 'ID_Alineacion']
+  ];
+  for (const [name, gid, range, columns, id] of sheets) {
+    let requested;
+    s.context.fetch = async (url, options) => {
+      requested = new URL(url);
+      assert.equal(options.cache, 'no-store');
+      assert.ok(options.signal);
+      return { ok: true, text: async () => 'csv-result' };
+    };
+    const row = { [id]: 'TEST', Nombre_Espacio: 'Museo del Pueblo de Guanajuato', Cantidad_Participacion: '0', Cantidad_Acceso: '' };
+    s.context.Papa = { parse(csv, options) {
+      assert.equal(csv, 'csv-result');
+      assert.equal(options.header, true);
+      assert.equal(options.skipEmptyLines, true);
+      assert.equal(options.transformHeader(' ID_Actividad '), 'ID_Actividad');
+      options.complete({ data: [row], errors: [], meta: { fields: [id, ...Array.from({ length: columns - 1 }, (_, i) => `Campo${i}`)] } });
+    } };
+    s.context.sheetName = name;
+    const result = await vm.runInContext('fetchSheetCSV(sheetName)', s.context);
+    assert.equal(requested.pathname.endsWith('/export'), true);
+    assert.equal(requested.searchParams.get('format'), 'csv');
+    assert.equal(requested.searchParams.get('gid'), gid);
+    assert.equal(requested.searchParams.get('range'), range);
+    assert.equal(result.rows[0].Nombre_Espacio, row.Nombre_Espacio);
+    assert.equal(result.rows[0].Cantidad_Participacion, '0');
+    assert.equal(result.rows[0].Cantidad_Acceso, '');
+  }
+  let fetched = false;
+  s.context.fetch = async () => { fetched = true; };
+  await assert.rejects(vm.runInContext('fetchSheetCSV("Dashboard_Master")', s.context), /sin fuente operativa/);
+  assert.equal(fetched, false);
+});
+
+test('un CSV con columnas históricas, errores de parseo o encabezado incorrecto no se acepta como lectura válida', async () => {
+  for (const [columns, first, errors] of [[74, 'ID_Actividad', []], [66, 'Login', []], [66, 'ID_Actividad', [{ code: 'TooManyFields' }]]]) {
+    const s = setup();
+    let attempts = 0;
+    s.context.fetch = async () => { attempts++; return { ok: true, text: async () => 'invalid-csv' }; };
+    s.context.Papa = { parse(csv, options) { options.complete({ data: [], errors, meta: { fields: [first, ...Array.from({ length: columns - 1 }, (_, i) => `Campo${i}`)] } }); } };
+    await assert.rejects(vm.runInContext('fetchSheetCSV("Registro_Actividades")', s.context), /CSV inválido/);
+    assert.equal(attempts, 2);
+    assert.equal(vm.runInContext('loadedCount', s.context), 0);
+  }
+});
 
 test('el mapa reajusta sus teselas cuando cambia su contenedor sin reinicializarlo ni desplazarlo', () => {
   const s = setup();

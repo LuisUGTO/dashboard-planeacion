@@ -1,5 +1,15 @@
 # Fátima: aclaraciones posteriores y Focus actualizado — 03/11/2026
 
+**Actualización posterior, públicos ya aplicados:** el mensaje de las 14:06 y la matriz viva confirman 32 asistentes en ;r Ha muerto / La mugre (14 mujeres, 18 hombres) y 30 en Crímenes y ensueños (15 y 15). Se cargaron cuatro poblaciones A2457:H2460, dos totales territoriales J1401/J1403 y dos descripciones N1361/N1363. Primera carpeta de fotos vinculada en evidencia fila 525 con acceso/contenido pendientes de verificar (404); segunda fuente declara ausencia de fotos. **El pendiente de Raúl queda sustituido: 65 presentaciones realizadas con público y dos canceladas en el lote de 67.** No volver a pedir esos dos públicos. [Resultado y verificación](Resultado_Publicos_32_30_2026-11-03.md). Los párrafos siguientes que indican dos públicos desconocidos conservan el estado anterior, sustituido por esta actualización.
+
+## Revisión posterior: población desde territorio y pendiente de San Felipe
+
+Por autorización de Luis se completó población de seis actividades editoriales existentes a partir de cantidades territoriales válidas: Premio Efraín Huerta, mesa de diálogo, Foro virtual del libro, Premiación, Voces Guanajuato y Rumbo al encuentro de escritoras de septiembre. No son nuevas actividades ni cambios de público de las 67 presentaciones. Criterios, filas y respaldo en `documentacion/Conciliacion_Poblacion_desde_Territorio_2026-11-03.md` y su control JSON.
+
+Relectura posterior de la fuente viva: **La región de San Felipe, 25/09, fila 161**, reporta 25 mujeres + 15 hombres = 40; edades suman 40. El ID existente ACT-SCJQ53039 tiene territorio 42 (1 participación + 41 acceso) y población 41 (1 + 40). La respuesta al Excel solo dice «Presentación de libro, un solo evento»: resuelve identidad, no total o inclusión del ponente. Confirmar si los 40 son exclusivamente público y si debe sumarse una persona participante, o cuál es el total correcto. No sobrescribir cifras por intuición.
+
+Para cerrar Editorial no basta que los 63 públicos estén informados: siguen dos públicos del 26/03, fecha precisa de Carta al amor propio, alcance/meta de las actividades apartadas y el caso de San Felipe. Festival de Escritores tiene dos territorios con 28/300 y requiere verificar su alcance acumulable. La alineación PG/PEC, localidades y participación/acceso también siguen parciales; separar preparación institucional/técnica de los datos que solo el área puede confirmar. No pedir nuevamente la clave P/Q ni fecha/ciudad de Santo Domingo ya confirmadas; cuando exista, la clave completa/nombre oficial del programa permite resolver la correspondencia de meta.
+
 **Estado: Focus aplicado y verificado en DB; otras aclaraciones registradas, sin altas nuevas.** Continuación de la autorización de Luis para actualizar lo respaldado por las respuestas de Fátima. Se mantuvo el corte enero–septiembre y no se modificaron fuentes del área.
 
 ## Focus resuelto

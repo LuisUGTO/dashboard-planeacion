@@ -1,0 +1,480 @@
+{
+  "date": "2026-11-03",
+  "source": "Respuestas_Edith_2026-11-01_contestado.xlsx",
+  "sha256": "f4edc6134f071bf121db2d005ffe1f61ab671aaa133b2eb5c78f9fc36c404dfc",
+  "sites": [
+    {
+      "sourceRow": 7,
+      "query": 1,
+      "site": "CAÑADA DE LA VIRGEN",
+      "id": "ACT-SCQZ00697",
+      "statusReported": "Atendido",
+      "monthly": [
+        {
+          "month": 1,
+          "physical": 1587,
+          "digitalReported": 4624,
+          "totalReported": 6211,
+          "sumMatches": true
+        },
+        {
+          "month": 2,
+          "physical": 274,
+          "digitalReported": 912,
+          "totalReported": 1186,
+          "sumMatches": true
+        },
+        {
+          "month": 3,
+          "physical": 185,
+          "digitalReported": 434,
+          "totalReported": 619,
+          "sumMatches": true
+        },
+        {
+          "month": 4,
+          "physical": 0,
+          "digitalReported": 13023,
+          "totalReported": 13023,
+          "sumMatches": true
+        },
+        {
+          "month": 5,
+          "physical": 476,
+          "digitalReported": 21725,
+          "totalReported": 22201,
+          "sumMatches": true
+        },
+        {
+          "month": 6,
+          "physical": 890,
+          "digitalReported": 5335,
+          "totalReported": 6225,
+          "sumMatches": true
+        },
+        {
+          "month": 7,
+          "physical": 1695,
+          "digitalReported": 6160,
+          "totalReported": 7855,
+          "sumMatches": true
+        },
+        {
+          "month": 8,
+          "physical": 1529,
+          "digitalReported": 5301,
+          "totalReported": 6830,
+          "sumMatches": true
+        },
+        {
+          "month": 9,
+          "physical": 705,
+          "digitalReported": 4540,
+          "totalReported": 5245,
+          "sumMatches": true
+        }
+      ],
+      "annualReported": [
+        7341,
+        62052,
+        69395
+      ],
+      "annualCalculated": {
+        "physical": 7341,
+        "digitalReported": 62054,
+        "totalReported": 69395
+      }
+    },
+    {
+      "sourceRow": 8,
+      "query": 2,
+      "site": "EL CÓPORO",
+      "id": "ACT-SCAC38909",
+      "statusReported": "Atendido",
+      "monthly": [
+        {
+          "month": 1,
+          "physical": 351,
+          "digitalReported": 4624,
+          "totalReported": 4975,
+          "sumMatches": true
+        },
+        {
+          "month": 2,
+          "physical": 160,
+          "digitalReported": 509,
+          "totalReported": 669,
+          "sumMatches": true
+        },
+        {
+          "month": 3,
+          "physical": 1129,
+          "digitalReported": 1158,
+          "totalReported": 2287,
+          "sumMatches": true
+        },
+        {
+          "month": 4,
+          "physical": 424,
+          "digitalReported": 13023,
+          "totalReported": 13447,
+          "sumMatches": true
+        },
+        {
+          "month": 5,
+          "physical": 375,
+          "digitalReported": 7919,
+          "totalReported": 8294,
+          "sumMatches": true
+        },
+        {
+          "month": 6,
+          "physical": 318,
+          "digitalReported": 5335,
+          "totalReported": 5653,
+          "sumMatches": true
+        },
+        {
+          "month": 7,
+          "physical": 443,
+          "digitalReported": 6160,
+          "totalReported": 6603,
+          "sumMatches": true
+        },
+        {
+          "month": 8,
+          "physical": 407,
+          "digitalReported": 9701,
+          "totalReported": 10108,
+          "sumMatches": true
+        },
+        {
+          "month": 9,
+          "physical": 176,
+          "digitalReported": 5440,
+          "totalReported": 5616,
+          "sumMatches": true
+        }
+      ],
+      "annualReported": [
+        3783,
+        53869,
+        57652
+      ],
+      "annualCalculated": {
+        "physical": 3783,
+        "digitalReported": 53869,
+        "totalReported": 57652
+      }
+    },
+    {
+      "sourceRow": 9,
+      "query": 3,
+      "site": "PLAZUELAS",
+      "id": "ACT-SCYP66179",
+      "statusReported": "Atendido",
+      "monthly": [
+        {
+          "month": 1,
+          "physical": 679,
+          "digitalReported": 4624,
+          "totalReported": 5303,
+          "sumMatches": true
+        },
+        {
+          "month": 2,
+          "physical": 485,
+          "digitalReported": 762,
+          "totalReported": 1247,
+          "sumMatches": true
+        },
+        {
+          "month": 3,
+          "physical": 807,
+          "digitalReported": 692,
+          "totalReported": 1499,
+          "sumMatches": true
+        },
+        {
+          "month": 4,
+          "physical": 813,
+          "digitalReported": 21025,
+          "totalReported": 21838,
+          "sumMatches": true
+        },
+        {
+          "month": 5,
+          "physical": 397,
+          "digitalReported": 7919,
+          "totalReported": 8315,
+          "sumMatches": false
+        },
+        {
+          "month": 6,
+          "physical": 509,
+          "digitalReported": 5335,
+          "totalReported": 5844,
+          "sumMatches": true
+        },
+        {
+          "month": 7,
+          "physical": 845,
+          "digitalReported": 6160,
+          "totalReported": 7005,
+          "sumMatches": true
+        },
+        {
+          "month": 8,
+          "physical": 1071,
+          "digitalReported": 9857,
+          "totalReported": 10928,
+          "sumMatches": true
+        },
+        {
+          "month": 9,
+          "physical": 466,
+          "digitalReported": 5940,
+          "totalReported": 6406,
+          "sumMatches": true
+        }
+      ],
+      "annualReported": [
+        6072,
+        62313,
+        68385
+      ],
+      "annualCalculated": {
+        "physical": 6072,
+        "digitalReported": 62314,
+        "totalReported": 68385
+      }
+    },
+    {
+      "sourceRow": 10,
+      "query": 4,
+      "site": "PERALTA",
+      "id": "ACT-SCCS51664",
+      "statusReported": "Atendido",
+      "monthly": [
+        {
+          "month": 1,
+          "physical": 929,
+          "digitalReported": 4624,
+          "totalReported": 5553,
+          "sumMatches": true
+        },
+        {
+          "month": 2,
+          "physical": 767,
+          "digitalReported": 830,
+          "totalReported": 1597,
+          "sumMatches": true
+        },
+        {
+          "month": 3,
+          "physical": 1005,
+          "digitalReported": 452,
+          "totalReported": 1457,
+          "sumMatches": true
+        },
+        {
+          "month": 4,
+          "physical": 999,
+          "digitalReported": 13023,
+          "totalReported": 14022,
+          "sumMatches": true
+        },
+        {
+          "month": 5,
+          "physical": 690,
+          "digitalReported": 7918,
+          "totalReported": 8608,
+          "sumMatches": true
+        },
+        {
+          "month": 6,
+          "physical": 894,
+          "digitalReported": 5363,
+          "totalReported": 6257,
+          "sumMatches": true
+        },
+        {
+          "month": 7,
+          "physical": 1211,
+          "digitalReported": 10315,
+          "totalReported": 11526,
+          "sumMatches": true
+        },
+        {
+          "month": 8,
+          "physical": 822,
+          "digitalReported": 5481,
+          "totalReported": 6303,
+          "sumMatches": true
+        },
+        {
+          "month": 9,
+          "physical": 499,
+          "digitalReported": 5540,
+          "totalReported": 6039,
+          "sumMatches": true
+        }
+      ],
+      "annualReported": [
+        7816,
+        53546,
+        61362
+      ],
+      "annualCalculated": {
+        "physical": 7816,
+        "digitalReported": 53546,
+        "totalReported": 61362
+      }
+    },
+    {
+      "sourceRow": 11,
+      "query": 5,
+      "site": "ARROYO SECO",
+      "id": "ACT-SCOT28274",
+      "statusReported": "Atendido",
+      "monthly": [
+        {
+          "month": 1,
+          "physical": 148,
+          "digitalReported": 4624,
+          "totalReported": 4772,
+          "sumMatches": true
+        },
+        {
+          "month": 2,
+          "physical": 90,
+          "digitalReported": 1662,
+          "totalReported": 1752,
+          "sumMatches": true
+        },
+        {
+          "month": 3,
+          "physical": 335,
+          "digitalReported": 434,
+          "totalReported": 769,
+          "sumMatches": true
+        },
+        {
+          "month": 4,
+          "physical": 256,
+          "digitalReported": 16027,
+          "totalReported": 16283,
+          "sumMatches": true
+        },
+        {
+          "month": 5,
+          "physical": 77,
+          "digitalReported": 7920,
+          "totalReported": 7997,
+          "sumMatches": true
+        },
+        {
+          "month": 6,
+          "physical": 116,
+          "digitalReported": 5335,
+          "totalReported": 5451,
+          "sumMatches": true
+        },
+        {
+          "month": 7,
+          "physical": 342,
+          "digitalReported": 6160,
+          "totalReported": 6502,
+          "sumMatches": true
+        },
+        {
+          "month": 8,
+          "physical": 181,
+          "digitalReported": 201,
+          "totalReported": 382,
+          "sumMatches": true
+        },
+        {
+          "month": 9,
+          "physical": 104,
+          "digitalReported": 800,
+          "totalReported": 904,
+          "sumMatches": true
+        }
+      ],
+      "annualReported": [
+        1649,
+        43163,
+        44812
+      ],
+      "annualCalculated": {
+        "physical": 1649,
+        "digitalReported": 43163,
+        "totalReported": 44812
+      }
+    }
+  ],
+  "clarifications": [
+    {
+      "sourceRow": 12,
+      "query": 6,
+      "answer": "Derivado de la baja de la página exclusiva de Zonas Arqueológicas de Guanajuato a falta de recorridos virtuales, por ahora se ha estado considerando el alcance, comentarios y reacciones en redes de las publicaciones exclusivas de eventos o difusión para las zonas arqueológicas. Se reportan por cada una de las 5 zonas abiertas al público o Q´s unicamente en un P de zonas se manejan las cifra total de virtuales.",
+      "id": null,
+      "statusReported": "Atendido"
+    },
+    {
+      "sourceRow": 13,
+      "query": 7,
+      "answer": "esta capyura fue realizada anteriomente como ejercicio para alimentar la plataforma ante la solicitud de Planeaci{on, son embargo la captura se realizó nuevamente con el reporte de enero a septiembre del 2026 por lo que este anterior, puede ser eliminado de la plataforma.",
+      "id": "ACT-SCBV52724",
+      "statusReported": "Atendido"
+    }
+  ],
+  "status": "revisado_aclaraciones_aplicadas_sin_cargas_numericas",
+  "changes": [
+    {
+      "id": "ACT-SCQZ00697",
+      "cell": "N604",
+      "value": "[REVISIÓN DE VISITANTES 03/11/2026] Edith aporta desglose de enero a septiembre para CAÑADA DE LA VIRGEN: 7341 visitantes presenciales. La cifra virtual corresponde a métricas de redes (alcance, comentarios y reacciones), no acredita personas únicas ni público presencial. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 7. El total combinado histórico se conserva pendiente de separar métricas; no se convierte en sesiones ni se inventa desglose demográfico. La suma mensual virtual es 62054, frente a 62052 en la frase de cierre; diferencia 2 pendiente de confirmar. | Descripción anterior: Servicio a visitantes a CAV y Zonas arqueológicas abiertas al público en el Estado de Guanajuato."
+    },
+    {
+      "id": "ACT-SCAC38909",
+      "cell": "N605",
+      "value": "[REVISIÓN DE VISITANTES 03/11/2026] Edith aporta desglose de enero a septiembre para EL CÓPORO: 3783 visitantes presenciales. La cifra virtual corresponde a métricas de redes (alcance, comentarios y reacciones), no acredita personas únicas ni público presencial. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 8. El total combinado histórico se conserva pendiente de separar métricas; no se convierte en sesiones ni se inventa desglose demográfico. | Descripción anterior: Servicio a visitantes a CAV y Zonas arqueológicas abiertas al público en el Estado de Guanajuato."
+    },
+    {
+      "id": "ACT-SCYP66179",
+      "cell": "N607",
+      "value": "[REVISIÓN DE VISITANTES 03/11/2026] Edith aporta desglose de enero a septiembre para PLAZUELAS: 6072 visitantes presenciales. La cifra virtual corresponde a métricas de redes (alcance, comentarios y reacciones), no acredita personas únicas ni público presencial. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 9. El total combinado histórico se conserva pendiente de separar métricas; no se convierte en sesiones ni se inventa desglose demográfico. Mayo: 397 presenciales + 7919 virtuales = 8316, frente a 8315 reportado; suma virtual mensual 62314 frente a 62313 anual. Diferencia 1 pendiente. | Descripción anterior: Servicio a visitantes a CAV y Zonas arqueológicas abiertas al público en el Estado de Guanajuato."
+    },
+    {
+      "id": "ACT-SCCS51664",
+      "cell": "N608",
+      "value": "[REVISIÓN DE VISITANTES 03/11/2026] Edith aporta desglose de enero a septiembre para PERALTA: 7816 visitantes presenciales. La cifra virtual corresponde a métricas de redes (alcance, comentarios y reacciones), no acredita personas únicas ni público presencial. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 10. El total combinado histórico se conserva pendiente de separar métricas; no se convierte en sesiones ni se inventa desglose demográfico. | Descripción anterior: Servicio a visitantes a CAV y Zonas arqueológicas abiertas al público en el Estado de Guanajuato."
+    },
+    {
+      "id": "ACT-SCOT28274",
+      "cell": "N609",
+      "value": "[REVISIÓN DE VISITANTES 03/11/2026] Edith aporta desglose de enero a septiembre para ARROYO SECO: 1649 visitantes presenciales. La cifra virtual corresponde a métricas de redes (alcance, comentarios y reacciones), no acredita personas únicas ni público presencial. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 11. El total combinado histórico se conserva pendiente de separar métricas; no se convierte en sesiones ni se inventa desglose demográfico. | Descripción anterior: Servicio a visitantes a CAV y Zonas arqueológicas abiertas al público en el Estado de Guanajuato."
+    },
+    {
+      "id": "ACT-SCBV52724",
+      "cell": "N331",
+      "value": "[SOLAPAMIENTO CONFIRMADO 03/11/2026] Edith identifica esta captura enero-junio como un ejercicio de alimentación de la plataforma, sustituido por el reporte enero-septiembre ACT-SCQZ00697. Conservar trazabilidad; no sumar como ejecución independiente. Esta anotación por sí sola no excluye automáticamente del tablero. Fuente: Respuestas_Edith_2026-11-01_contestado.xlsx, Pendientes fila 13. | Descripción anterior: La atención al público es de martes a domingo de 10:00 a 18:00 horas, se otorga con servicios como; estacionamiento, transporte para traslado a la zona, taquilla, paquetería, sala introductoria, salas de exposición permanente y temporal, sanitarios, para proporcionar de la mejor manera, la atención a visitantes. Atención a grupos escolares de cualquier nivel. Las Zonas arqueológicas trabajan a través de un FIDEICOMISO, los lineamientos con los que operan permiten la exención de pago para grupos escolares únicamente los días miércoles."
+    }
+  ],
+  "verification": {
+    "native": true,
+    "activities": true,
+    "territory": true,
+    "population": true
+  },
+  "newActivities": 0,
+  "numericChanges": 0,
+  "pending": [
+    "Cañada: virtual mensual 62054 frente a 62052 en frase anual",
+    "Plazuelas mayo: 397 + 7919 = 8316, frente a 8315; virtual anual 62313 frente a suma mensual 62314",
+    "Separar visitantes presenciales de alcance/comentarios/reacciones; confirmar aditividad del componente digital por zona",
+    "Resolver exclusión reversible del registro de prueba ACT-SCBV52724, conservando trazabilidad e hijos; anotación no excluye automáticamente"
+  ]
+}

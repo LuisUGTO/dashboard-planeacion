@@ -1,0 +1,195 @@
+{
+  "date": "2026-11-03",
+  "status": "revisado_sin_escrituras_DB",
+  "source": "Respuestas_Adriana_Ugalde_2026-11-01_contesto.xlsx",
+  "sha256": "868689ece786705a604b78c00d5e803495e0cafeeb237ed29d67752e0c0cda92",
+  "programConfirmed": "QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad",
+  "answers": [
+    {
+      "sourceRow": 7,
+      "query": 1,
+      "id": "ACT-SCNE12157",
+      "statusReported": "No tengo el dato",
+      "answer": "Solcité la información a la coordinadora, pero no me respode. ",
+      "resolved": false,
+      "resolvedFields": [],
+      "remaining": [
+        "publico_mensual_confirmado"
+      ]
+    },
+    {
+      "sourceRow": 8,
+      "query": 2,
+      "id": "ACT-SCQI37596",
+      "statusReported": "No tengo el dato",
+      "answer": "Solcité la información a la coordinadora, pero no me respode. ",
+      "resolved": false,
+      "resolvedFields": [],
+      "remaining": [
+        "publico_mensual_confirmado"
+      ]
+    },
+    {
+      "sourceRow": 9,
+      "query": 3,
+      "id": "ACT-SCHT70836",
+      "statusReported": "Respondido",
+      "answer": "No se cuenta aún con los reportes por parte de los municipios, pese a que ya se les ha solicitado la información. ",
+      "resolved": false,
+      "resolvedFields": [],
+      "remaining": [
+        "publico_mensual_confirmado"
+      ]
+    },
+    {
+      "sourceRow": 10,
+      "query": 4,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 11,
+      "query": 5,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 12,
+      "query": 6,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 13,
+      "query": 7,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 14,
+      "query": 8,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 15,
+      "query": 9,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 16,
+      "query": 10,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 17,
+      "query": 11,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 18,
+      "query": 12,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    },
+    {
+      "sourceRow": 19,
+      "query": 13,
+      "id": null,
+      "statusReported": "Respondido",
+      "answer": "Clave correcta: QC4098 Talleres Artísticos Dirigidos a Personas Privadas de la Libertad. No se cuenta con número de beneficiarios aún, ya que están pendientes las listas de asistencia por parte de los talleristas del bloque 1 y 2; y el tercero aún está en curso. Aún no tengo el avance de octubre",
+      "resolved": false,
+      "resolvedFields": [
+        "clave_programa"
+      ],
+      "remaining": [
+        "beneficiarios",
+        "representacion_concentrados_y_meta_interna"
+      ]
+    }
+  ]
+}
