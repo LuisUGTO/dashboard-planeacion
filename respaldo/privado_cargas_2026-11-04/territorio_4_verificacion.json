@@ -1,0 +1,137 @@
+{
+  "timestamp": "2026-11-04T16:24:21.401Z",
+  "target_spreadsheet": "1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4",
+  "sheet": "Registro_Territorio",
+  "verification_status": "SUCCESS",
+  "rows_verified": [
+    {
+      "row": 164,
+      "id_actividad": "ACT-SCMV29363",
+      "id_territorio": "cc9907d0",
+      "expected": {
+        "J": "3",
+        "K": "",
+        "L": "3"
+      },
+      "live": {
+        "J": "3",
+        "K": "",
+        "L": "3"
+      },
+      "full_row": [
+        "cc9907d0",
+        "ACT-SCMV29363",
+        "Silao de la Victoria",
+        "Urbano",
+        "215",
+        "Silao",
+        "",
+        "Si",
+        "Si",
+        "3",
+        "",
+        "3"
+      ]
+    },
+    {
+      "row": 650,
+      "id_actividad": "ACT-SCUO63965",
+      "id_territorio": "ef2c77b2",
+      "expected": {
+        "J": "197",
+        "K": "0",
+        "L": "197"
+      },
+      "live": {
+        "J": "197",
+        "K": "0",
+        "L": "197"
+      },
+      "full_row": [
+        "ef2c77b2",
+        "ACT-SCUO63965",
+        "Guanajuato",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "197",
+        "0",
+        "197"
+      ]
+    },
+    {
+      "row": 768,
+      "id_actividad": "ACT-SCYP51812",
+      "id_territorio": "03b9d962",
+      "expected": {
+        "J": "361",
+        "K": "0",
+        "L": "361"
+      },
+      "live": {
+        "J": "361",
+        "K": "0",
+        "L": "361"
+      },
+      "full_row": [
+        "03b9d962",
+        "ACT-SCYP51812",
+        "Guanajuato",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "361",
+        "0",
+        "361"
+      ]
+    },
+    {
+      "row": 1510,
+      "id_actividad": "ACT-SCDD82613",
+      "id_territorio": "2aa7b1cc",
+      "expected": {
+        "J": "35",
+        "K": "",
+        "L": "35"
+      },
+      "live": {
+        "J": "35",
+        "K": "",
+        "L": "35"
+      },
+      "full_row": [
+        "2aa7b1cc",
+        "ACT-SCDD82613",
+        "Silao de la Victoria",
+        "Urbano",
+        "",
+        "",
+        "",
+        "No",
+        "No",
+        "35",
+        "",
+        "35"
+      ]
+    }
+  ],
+  "unmodified_pending": [
+    {
+      "row": 335,
+      "id_actividad": "ACT-SCMI05636",
+      "id_territorio": "d8507719",
+      "status": "PENDING_USER_DECISION",
+      "live": {
+        "J": "8",
+        "K": "3",
+        "L": "5"
+      }
+    }
+  ]
+}

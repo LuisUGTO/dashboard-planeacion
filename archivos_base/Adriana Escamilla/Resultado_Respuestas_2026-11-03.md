@@ -1,5 +1,7 @@
 # Adriana Escamilla y conciliación — 03/11/2026
 
+**Aclaración posterior15:01–15:03:** Adriana confirma sesiones1020/170 como cálculo de clases semanales por municipio multiplicadas por semanas del semestre. Se registra validación declarada y método, sin afirmar comprobación sesión por sesión. TeatroJuárez800 se identifica expresamente como estimado por tanteo; no resuelve547 del otro reporte ni autoriza sumarlos o borrar. Actualizadas solo N475/N554/N557 con respaldo privado ae_sesiones_estimados.json y relectura posterior. Los avisos del código no se desactivan automáticamente por estas notas. No volver a preguntar si las sesiones son alumnos/talleres: esa duda queda aclarada; una comprobación documental de ejecución sigue siendo distinta. Fátima no recuerda28 del Festival: mantener alcance pendiente sin borrar ni sumar por intuición.
+
 Estado: dos discrepancias corregidas y verificadas; demás respuestas revisadas, sin nuevas actividades. Fuente contestado SHA-256 ce372a3634d72a47aaeb4eb91db37d9537678a9373aa0a9ed3f72fc34cd2a5cb. Fuentes intactas.
 
 ## Aplicado

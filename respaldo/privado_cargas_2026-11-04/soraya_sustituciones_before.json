@@ -1,0 +1,215 @@
+{
+  "timestamp": "2026-11-04T19:44:50.403Z",
+  "targetSheet": "Registro_Actividades",
+  "totalSubstitutions": 26,
+  "items": [
+    {
+      "id": "ACT-SCQU71740",
+      "row": 862,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCYQ25428",
+      "replacementRow": 861,
+      "newDesc": "[SUSTITUIDO:ACT-SCYQ25428] Visita mediada"
+    },
+    {
+      "id": "ACT-SCVI99252",
+      "row": 870,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCUK25967",
+      "replacementRow": 869,
+      "newDesc": "[SUSTITUIDO:ACT-SCUK25967] Visita mediada"
+    },
+    {
+      "id": "ACT-SCVV75111",
+      "row": 872,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCUV86759",
+      "replacementRow": 871,
+      "newDesc": "[SUSTITUIDO:ACT-SCUV86759] Visita mediada"
+    },
+    {
+      "id": "ACT-SCNA19945",
+      "row": 874,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCOI81145",
+      "replacementRow": 873,
+      "newDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada"
+    },
+    {
+      "id": "ACT-SCEB99555",
+      "row": 875,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCOI81145",
+      "replacementRow": 873,
+      "newDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada"
+    },
+    {
+      "id": "ACT-SCOF77862",
+      "row": 889,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCFL63749",
+      "replacementRow": 884,
+      "newDesc": "[SUSTITUIDO:ACT-SCFL63749] Visita mediada"
+    },
+    {
+      "id": "ACT-SCLH71384",
+      "row": 894,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCOL05853",
+      "replacementRow": 893,
+      "newDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada"
+    },
+    {
+      "id": "ACT-SCFS39255",
+      "row": 895,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCOL05853",
+      "replacementRow": 893,
+      "newDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada"
+    },
+    {
+      "id": "ACT-SCHF14108",
+      "row": 906,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCUM49337",
+      "replacementRow": 905,
+      "newDesc": "[SUSTITUIDO:ACT-SCUM49337] Visita mediada"
+    },
+    {
+      "id": "ACT-SCIU85655",
+      "row": 908,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCST29154",
+      "replacementRow": 907,
+      "newDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada"
+    },
+    {
+      "id": "ACT-SCOK94797",
+      "row": 909,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCST29154",
+      "replacementRow": 907,
+      "newDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada"
+    },
+    {
+      "id": "ACT-SCGK77088",
+      "row": 931,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCRB11632",
+      "replacementRow": 930,
+      "newDesc": "[SUSTITUIDO:ACT-SCRB11632] Visita mediada"
+    },
+    {
+      "id": "ACT-SCHN68767",
+      "row": 941,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCSA87938",
+      "replacementRow": 940,
+      "newDesc": "[SUSTITUIDO:ACT-SCSA87938] Visita mediada"
+    },
+    {
+      "id": "ACT-SCIC96809",
+      "row": 947,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCOW24790",
+      "replacementRow": 946,
+      "newDesc": "[SUSTITUIDO:ACT-SCOW24790] Visita mediada"
+    },
+    {
+      "id": "ACT-SCOF03596",
+      "row": 951,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCUR56844",
+      "replacementRow": 950,
+      "newDesc": "[SUSTITUIDO:ACT-SCUR56844] Visita mediada"
+    },
+    {
+      "id": "ACT-SCVP88098",
+      "row": 953,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCXJ70814",
+      "replacementRow": 952,
+      "newDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada"
+    },
+    {
+      "id": "ACT-SCWS17352",
+      "row": 954,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCXJ70814",
+      "replacementRow": 952,
+      "newDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada"
+    },
+    {
+      "id": "ACT-SCLP33110",
+      "row": 956,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCAQ43276",
+      "replacementRow": 955,
+      "newDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada"
+    },
+    {
+      "id": "ACT-SCNQ44331",
+      "row": 958,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCAQ43276",
+      "replacementRow": 955,
+      "newDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada"
+    },
+    {
+      "id": "ACT-SCQE06079",
+      "row": 960,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCRG34496",
+      "replacementRow": 959,
+      "newDesc": "[SUSTITUIDO:ACT-SCRG34496] Visita mediada"
+    },
+    {
+      "id": "ACT-SCLS54531",
+      "row": 964,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCTR77257",
+      "replacementRow": 963,
+      "newDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada"
+    },
+    {
+      "id": "ACT-SCSK90288",
+      "row": 966,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCTR77257",
+      "replacementRow": 963,
+      "newDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada"
+    },
+    {
+      "id": "ACT-SCBW22460",
+      "row": 968,
+      "currentDesc": "Visita mediada",
+      "replacementId": "ACT-SCHD41399",
+      "replacementRow": 967,
+      "newDesc": "[SUSTITUIDO:ACT-SCHD41399] Visita mediada"
+    },
+    {
+      "id": "ACT-SCLZ69224",
+      "row": 1044,
+      "currentDesc": "Recorrido guiado por el museo",
+      "replacementId": "ACT-SCFN14990",
+      "replacementRow": 1043,
+      "newDesc": "[SUSTITUIDO:ACT-SCFN14990] Recorrido guiado por el museo"
+    },
+    {
+      "id": "ACT-SCBK71518",
+      "row": 1052,
+      "currentDesc": "Recorrido guiado por el museo",
+      "replacementId": "ACT-SCFP60419",
+      "replacementRow": 1050,
+      "newDesc": "[SUSTITUIDO:ACT-SCFP60419] Recorrido guiado por el museo"
+    },
+    {
+      "id": "ACT-SCMY03003",
+      "row": 44,
+      "currentDesc": "Apelando al poema del maestro Carlos Pellicer C├ímara, la exposici├│n Po├®tica del Paisaje, vuelve a reunir a los ciudadanos tabasque├▒os con el acervo que resguarda el Museo Nacional de Arte, perteneciente a la red de museos del Instituto Nacional de Bellas Artes y Literatura.",
+      "replacementId": "ACT-SCEV02279",
+      "replacementRow": 141,
+      "newDesc": "[SUSTITUIDO:ACT-SCEV02279] Apelando al poema del maestro Carlos Pellicer C├ímara, la exposici├│n Po├®tica del Paisaje, vuelve a reunir a los ciudadanos tabasque├▒os con el acervo que resguarda el Museo Nacional de Arte, perteneciente a la red de museos del Instituto Nacional de Bellas Artes y Literatura."
+    }
+  ]
+}

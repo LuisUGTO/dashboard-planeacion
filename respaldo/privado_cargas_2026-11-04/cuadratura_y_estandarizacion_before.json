@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-11-04T20:25:00-06:00",
+  "motivo": "Cuadratura total de Poblacion Territorial vs Demografica (Diferencia = 0) y estandarizacion de municipios Otros Alcances",
+  "estado_anterior": {
+    "total_territorio_crudo": 962757,
+    "total_territorio_filtrado": 962619,
+    "total_demografico_crudo": 963693,
+    "total_demografico_filtrado": 963555,
+    "diferencia_neta": 936,
+    "filas_territorio_modificadas": {
+      "R734": { "id_act": "ACT-SCML05482", "id_ter": "0cbc21ce", "cant": "", "part": "", "acc": "" },
+      "R778": { "id_act": "ACT-SCYQ82180", "id_ter": "89faafc7", "cant": "", "part": "", "acc": "" },
+      "R1113": { "id_act": "ACT-SCNO29257", "id_ter": "60f76cc2", "cant": "", "part": "", "acc": "" },
+      "R333": { "id_act": "ACT-SCIG15181", "id_ter": "f8723946", "municipio": "Ciudad de mexico" },
+      "R1227": { "id_act": "ACT-SCMG32181", "id_ter": "73187b9e", "municipio": "León" },
+      "R1533": { "id_act": "ACT-SCID10817", "id_ter": "4b86f209", "municipio": "México" }
+    },
+    "filas_territorio_agregadas_proyectadas": ["R1535 (ACT-SCLF83323, León, 212)", "R1536 (ACT-SCNO25177, Guanajuato, 100)"],
+    "filas_poblacion_agregadas_proyectadas": [
+      "R2547 (ACT-SCFB82875, General, 28)",
+      "R2548 (ACT-SCFB82875, General, 300)",
+      "R2549 (ACT-SCPP44354, General, 19)",
+      "R2550 (ACT-SCRB87201, General, 39)",
+      "R2551 (ACT-SCOH37318, General, 7)"
+    ]
+  }
+}

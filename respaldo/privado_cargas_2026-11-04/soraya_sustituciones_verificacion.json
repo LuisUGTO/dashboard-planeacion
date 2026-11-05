@@ -1,0 +1,236 @@
+[
+  {
+    "row": 862,
+    "expectedId": "ACT-SCQU71740",
+    "actualId": "ACT-SCQU71740",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCYQ25428] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCYQ25428] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 870,
+    "expectedId": "ACT-SCVI99252",
+    "actualId": "ACT-SCVI99252",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCUK25967] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCUK25967] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 872,
+    "expectedId": "ACT-SCVV75111",
+    "actualId": "ACT-SCVV75111",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCUV86759] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCUV86759] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 874,
+    "expectedId": "ACT-SCNA19945",
+    "actualId": "ACT-SCNA19945",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 875,
+    "expectedId": "ACT-SCEB99555",
+    "actualId": "ACT-SCEB99555",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCOI81145] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 889,
+    "expectedId": "ACT-SCOF77862",
+    "actualId": "ACT-SCOF77862",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCFL63749] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCFL63749] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 894,
+    "expectedId": "ACT-SCLH71384",
+    "actualId": "ACT-SCLH71384",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 895,
+    "expectedId": "ACT-SCFS39255",
+    "actualId": "ACT-SCFS39255",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCOL05853] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 906,
+    "expectedId": "ACT-SCHF14108",
+    "actualId": "ACT-SCHF14108",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCUM49337] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCUM49337] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 908,
+    "expectedId": "ACT-SCIU85655",
+    "actualId": "ACT-SCIU85655",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 909,
+    "expectedId": "ACT-SCOK94797",
+    "actualId": "ACT-SCOK94797",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCST29154] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 931,
+    "expectedId": "ACT-SCGK77088",
+    "actualId": "ACT-SCGK77088",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCRB11632] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCRB11632] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 941,
+    "expectedId": "ACT-SCHN68767",
+    "actualId": "ACT-SCHN68767",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCSA87938] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCSA87938] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 947,
+    "expectedId": "ACT-SCIC96809",
+    "actualId": "ACT-SCIC96809",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCOW24790] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCOW24790] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 951,
+    "expectedId": "ACT-SCOF03596",
+    "actualId": "ACT-SCOF03596",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCUR56844] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCUR56844] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 953,
+    "expectedId": "ACT-SCVP88098",
+    "actualId": "ACT-SCVP88098",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 954,
+    "expectedId": "ACT-SCWS17352",
+    "actualId": "ACT-SCWS17352",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCXJ70814] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 956,
+    "expectedId": "ACT-SCLP33110",
+    "actualId": "ACT-SCLP33110",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 958,
+    "expectedId": "ACT-SCNQ44331",
+    "actualId": "ACT-SCNQ44331",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCAQ43276] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 960,
+    "expectedId": "ACT-SCQE06079",
+    "actualId": "ACT-SCQE06079",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCRG34496] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCRG34496] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 964,
+    "expectedId": "ACT-SCLS54531",
+    "actualId": "ACT-SCLS54531",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 966,
+    "expectedId": "ACT-SCSK90288",
+    "actualId": "ACT-SCSK90288",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCTR77257] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 968,
+    "expectedId": "ACT-SCBW22460",
+    "actualId": "ACT-SCBW22460",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCHD41399] Visita mediada",
+    "actualDesc": "[SUSTITUIDO:ACT-SCHD41399] Visita mediada",
+    "descMatches": true
+  },
+  {
+    "row": 1044,
+    "expectedId": "ACT-SCLZ69224",
+    "actualId": "ACT-SCLZ69224",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCFN14990] Recorrido guiado por el museo",
+    "actualDesc": "[SUSTITUIDO:ACT-SCFN14990] Recorrido guiado por el museo",
+    "descMatches": true
+  },
+  {
+    "row": 1052,
+    "expectedId": "ACT-SCBK71518",
+    "actualId": "ACT-SCBK71518",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCFP60419] Recorrido guiado por el museo",
+    "actualDesc": "[SUSTITUIDO:ACT-SCFP60419] Recorrido guiado por el museo",
+    "descMatches": true
+  },
+  {
+    "row": 44,
+    "expectedId": "ACT-SCMY03003",
+    "actualId": "ACT-SCMY03003",
+    "idMatches": true,
+    "expectedDesc": "[SUSTITUIDO:ACT-SCEV02279] Apelando al poema del maestro Carlos Pellicer C├ímara, la exposici├│n Po├®tica del Paisaje, vuelve a reunir a los ciudadanos tabasque├▒os con el acervo que resguarda el Museo Nacional de Arte, perteneciente a la red de museos del Instituto Nacional de Bellas Artes y Literatura.",
+    "actualDesc": "[SUSTITUIDO:ACT-SCEV02279] Apelando al poema del maestro Carlos Pellicer CÔö£├¡mara, la exposiciÔö£Ôöén PoÔö£┬«tica del Paisaje, vuelve a reunir a los ciudadanos tabasqueÔö£ÔûÆos con el acervo que resguarda el Museo Nacional de Arte, perteneciente a la red de museos del Instituto Nacional de Bellas Artes y Literatura.",
+    "descMatches": false
+  }
+]

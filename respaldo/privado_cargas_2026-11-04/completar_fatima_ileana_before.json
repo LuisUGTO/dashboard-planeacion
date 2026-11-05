@@ -1,0 +1,1438 @@
+{
+  "timestamp": "2026-11-04T17:19:04.241Z",
+  "target_spreadsheet": "1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4",
+  "operations_count": 41,
+  "fatima_rows_count": 67,
+  "ileana_rows_count": 8,
+  "fatima_before": [
+    {
+      "id": "ACT-SCNG78657",
+      "folio": "SC-261029-205220-FM-8B3B87",
+      "nombre": "Presentación editorial: Fanta CBrew",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCKK84243",
+      "folio": "SC-261029-205220-FM-9C3592",
+      "nombre": "Presentación editorial: Saturno en Llamas",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCUL90815",
+      "folio": "SC-261029-205220-FM-85F13C",
+      "nombre": "Presentación editorial: El brillo intermitente",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCQJ54092",
+      "folio": "SC-261029-205220-FM-FEC0A0",
+      "nombre": "Presentación editorial: Donde las Penas se olvidan",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCTS39997",
+      "folio": "SC-261029-205220-FM-9AB90B",
+      "nombre": "Presentación editorial: El hijo de la muerte de Tessa Gasde",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCEH65666",
+      "folio": "SC-261029-205220-FM-692A8A",
+      "nombre": "Presentación editorial: Un sol entre el cárbon y las cenizas",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCAU04088",
+      "folio": "SC-261029-205220-FM-C8CB4D",
+      "nombre": "Presentación editorial: Focus, una historia de la fotografia de Guanajuato",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCJS22138",
+      "folio": "SC-261029-205220-FM-52D411",
+      "nombre": "Presentación editorial: Amor y rabia",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCPH59385",
+      "folio": "SC-261029-205220-FM-4D21C5",
+      "nombre": "Presentación editorial: El ángel sin cabeza",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCMH93796",
+      "folio": "SC-261029-205220-FM-147973",
+      "nombre": "Presentación editorial: Sobre la encáustica y el fresco",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCVM79291",
+      "folio": "SC-261029-205220-FM-A7D65F",
+      "nombre": "Presentación editorial: Del mar los sueños",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCHC86674",
+      "folio": "SC-261029-205220-FM-77AC85",
+      "nombre": "Presentación editorial: Politicamente incorrecto,",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCBA83203",
+      "folio": "SC-261029-205220-FM-C35C01",
+      "nombre": "Presentación editorial: Con una lampara encendida",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWO87363",
+      "folio": "SC-261029-205220-FM-AC5943",
+      "nombre": "Presentación editorial: ;r Ha muerto | La mugre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCZL50998",
+      "folio": "SC-261029-205220-FM-5F982F",
+      "nombre": "Presentación editorial: Estilo libre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCXA65014",
+      "folio": "SC-261029-205220-FM-458888",
+      "nombre": "Presentación editorial: Crimenes y ensueños, Pájaros humanos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCEJ19378",
+      "folio": "SC-261029-205220-FM-E6B71E",
+      "nombre": "Presentación editorial: Tratado de lingúistica y soledad",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCRX88310",
+      "folio": "SC-261029-205220-FM-0252E3",
+      "nombre": "Presentación editorial: El beneficio de la duda",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCKF49301",
+      "folio": "SC-261029-205220-FM-8F5E65",
+      "nombre": "Presentación editorial: ;r Ha muerto",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCNT15252",
+      "folio": "SC-261029-205220-FM-4A38FE",
+      "nombre": "Presentación editorial: Mujer nacida bruja",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCIR94821",
+      "folio": "SC-261029-205220-FM-549D60",
+      "nombre": "Presentación editorial: Estilo libre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCXQ32222",
+      "folio": "SC-261029-205220-FM-2BA1AD",
+      "nombre": "Presentación editorial: La mugre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCFM35136",
+      "folio": "SC-261029-205220-FM-159EC3",
+      "nombre": "Presentación editorial: Crimenes y ensueños/ pajaros humanos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCIF20611",
+      "folio": "SC-261029-205220-FM-CA3E4E",
+      "nombre": "Presentación editorial: Happines Hacs La guía definitiva para desatar tu dopamina",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCHA70026",
+      "folio": "SC-261029-205220-FM-30CB51",
+      "nombre": "Presentación editorial: Estilo libre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCYU82980",
+      "folio": "SC-261029-205220-FM-55C28A",
+      "nombre": "Presentación editorial: Miguel en busca de sentido",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCOL75398",
+      "folio": "SC-261029-205220-FM-53C3D9",
+      "nombre": "Presentación editorial: El hijo de la muerte, El ultimo lugar seguro huellas de acuarela, plantas de la ciudad",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCJD57743",
+      "folio": "SC-261029-205220-FM-233031",
+      "nombre": "Presentación editorial: Sonoridad y misticismo de los caninos mexicanos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCDK31376",
+      "folio": "SC-261029-205220-FM-E1B658",
+      "nombre": "Presentación editorial: Otilia o la temporada cóncava",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCIF66078",
+      "folio": "SC-261029-205220-FM-77319A",
+      "nombre": "Presentación editorial: Las cochinadas y asquerosas burbujas de Max",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCKR86602",
+      "folio": "SC-261029-205220-FM-4A5753",
+      "nombre": "Presentación editorial: Cartas al joven violinista",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCLE89923",
+      "folio": "SC-261029-205220-FM-F0D331",
+      "nombre": "Presentación editorial: La casa de cristal",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWH25522",
+      "folio": "SC-261029-205220-FM-D5A2D9",
+      "nombre": "Presentación editorial: Barbie, el vestido y el destino",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCNV08805",
+      "folio": "SC-261029-205220-FM-3047A9",
+      "nombre": "Presentación editorial: El ocaso de atlas, La casa de las paredes, La escalera del segundo piso, Las hormigas saben a tierra",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCOI83481",
+      "folio": "SC-261029-205220-FM-57BBA0",
+      "nombre": "Presentación editorial: De lo negro a lo siniestro",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCLS58214",
+      "folio": "SC-261029-205220-FM-A032DF",
+      "nombre": "Presentación editorial: Los sabores de Léon",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCLV80850",
+      "folio": "SC-261029-205220-FM-DAB688",
+      "nombre": "Presentación editorial: Focus, una historia de la fotografía en Guanajuato",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCZV35320",
+      "folio": "SC-261029-205220-FM-4DFFAE",
+      "nombre": "Presentación editorial: Entrañas de tierra",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWA16444",
+      "folio": "SC-261029-205220-FM-3BBF7E",
+      "nombre": "Presentación editorial: Disoluta",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCGF36053",
+      "folio": "SC-261029-205220-FM-44A5F0",
+      "nombre": "Presentación editorial: Buenas practicas docentes",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCHQ80352",
+      "folio": "SC-261029-205220-FM-7162B1",
+      "nombre": "Presentación editorial: El papel de lo extraño",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCBQ31477",
+      "folio": "SC-261029-205220-FM-332B1B",
+      "nombre": "Presentación editorial: Lo que callamos los estudiantes de Derecho",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCHL29895",
+      "folio": "SC-261029-205220-FM-741D84",
+      "nombre": "Presentación editorial: Aurora enamorada en la escuela/ series crónicas de aurora adolescete",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWW62735",
+      "folio": "SC-261029-205220-FM-006EFC",
+      "nombre": "Presentación editorial: Guanajuato, ¡No te rajes !",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCNF29598",
+      "folio": "SC-261029-205220-FM-70162E",
+      "nombre": "Presentación editorial: La noche de los Axolotes",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCPU20407",
+      "folio": "SC-261029-205220-FM-C45F08",
+      "nombre": "Presentación editorial: La saga de los Houtlon Poeta de Barrio",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWB06112",
+      "folio": "SC-261029-205220-FM-A6F1CF",
+      "nombre": "Presentación editorial: Celaya: Memoria, historia y palabra",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCSG02807",
+      "folio": "SC-261029-205220-FM-8EF655",
+      "nombre": "Presentación editorial: De terapia a guíon",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCSX20134",
+      "folio": "SC-261029-205220-FM-1E42DC",
+      "nombre": "Presentación editorial: Hamlet (escrito en un bar) y una clase de Historia. os monologos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCQZ19279",
+      "folio": "SC-261029-205220-FM-010B09",
+      "nombre": "Presentación editorial: Las hadasverdaderas son de madera",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCSA41335",
+      "folio": "SC-261029-205220-FM-C4734C",
+      "nombre": "Presentación editorial: Invierno mágico",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCST82174",
+      "folio": "SC-261029-205220-FM-FDDA05",
+      "nombre": "Presentación editorial: El brillo intermitente",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCUQ61968",
+      "folio": "SC-261029-205220-FM-F0475B",
+      "nombre": "Presentación editorial: Amor y rabia",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCCM30061",
+      "folio": "SC-261029-205220-FM-94D764",
+      "nombre": "Presentación editorial: La Mugre",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCJC87215",
+      "folio": "SC-261029-205220-FM-AD959F",
+      "nombre": "Presentación editorial: este país",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCGQ39271",
+      "folio": "SC-261029-205220-FM-AC9B93",
+      "nombre": "Presentación editorial: El loco libro de las pastorelas y Rock es puro cuento",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCXZ78266",
+      "folio": "SC-261029-205220-FM-B20F45",
+      "nombre": "Presentación editorial: Crímenes y ensueños. Pájaros humanos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCVS84373",
+      "folio": "SC-261029-205220-FM-95D2EF",
+      "nombre": "Presentación editorial: :R ha muerto",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCCZ43743",
+      "folio": "SC-261029-205220-FM-211131",
+      "nombre": "Presentación editorial: Ronroneo de un gato en celo",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCZK72693",
+      "folio": "SC-261029-205220-FM-53C7B5",
+      "nombre": "Presentación editorial: Verdades de adopción",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCPS96603",
+      "folio": "SC-261029-205220-FM-02B82E",
+      "nombre": "Presentación editorial: Poemas en línea nigra",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCFV51557",
+      "folio": "SC-261029-205220-FM-B72A32",
+      "nombre": "Presentación editorial: Energia potencial Escalar por los peldaños de la sangre al sol",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCWO40818",
+      "folio": "SC-261029-205220-FM-7C5F63",
+      "nombre": "Presentación editorial: Jardín de los tiempos",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCOU49209",
+      "folio": "SC-261029-205220-FM-32CE9E",
+      "nombre": "Presentación editorial: Conferencia y presentación editorial",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCHN20347",
+      "folio": "SC-261029-205220-FM-B670B6",
+      "nombre": "Presentación editorial: Presentación del libro \"Amor y rabia\"",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCKT70901",
+      "folio": "SC-261029-205220-FM-FB6334",
+      "nombre": "Presentación editorial: Memorias de un hombre importante, Años de papel y Cita Analema",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "ACT-SCLB41708",
+      "folio": "SC-261029-205220-FM-A8FD29",
+      "nombre": "Presentación editorial: Cartas al joven violinista",
+      "cols_AM_AW_before": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "ileana_before": [
+    {
+      "id": "ACT-SCYG88344",
+      "folio": "SC-261029-213918-IS-2F57EC",
+      "nombre": "Erase una vez RAP",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "Música",
+      "subdisc_before": "",
+      "tipo_before": "",
+      "espacio_before": [
+        "",
+        "",
+        "Poliforum"
+      ],
+      "cols_AM_AW_before": [
+        "Programa “Arte en tu plaza”: A. Apreciación del arte y la cultura en plazas públicas (canto, baile, poesía, oratoria, pintura, etc.). B. Exhibición de artesanos y artistas locales en escuelas, plazas cívicas y centros comerciales.",
+        "2 Igualdad",
+        "2.2 Fortalecer cohesión social",
+        "2.2 Fortalecer cohesión social",
+        "2.2.3.2 Promover la participación de grupos prioritarios en actividades culturales",
+        "",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Fortalecimiento del diálogo, la mediación y las capacidades de las redes comunitarias.",
+        "Diseñar e impartir talleres de formación en derechos culturales",
+        "Incrementar en 25% la oferta cultural realizada en los municipios."
+      ]
+    },
+    {
+      "id": "ACT-SCSD72334",
+      "folio": "SC-261029-213918-IS-82F79E",
+      "nombre": "Festival Medieval",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "",
+      "subdisc_before": "",
+      "tipo_before": "Festival",
+      "espacio_before": [
+        "Espacio a Cargo de la Secretaría",
+        "Museo Regional de Guanajuato Alhóndiga de Granaditas",
+        "Alhóndiga de Granaditas"
+      ],
+      "cols_AM_AW_before": [
+        "Apoyos para artistas populares.",
+        "2 Igualdad",
+        "2.2 Fortalecer cohesión social",
+        "2.2.1 Participación social comunitaria",
+        "2.2.1 Participación social comunitaria",
+        "",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Impulso a la ampliación de la oferta cultural en los territorios.",
+        "Impulsar los proyectos culturales itinerantes.",
+        "Incrementar en 25% la oferta cultural realizada en los municipios."
+      ]
+    },
+    {
+      "id": "ACT-SCQN89121",
+      "folio": "SC-261029-213918-IS-69EE83",
+      "nombre": "Trío Guanaxteco",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "Música",
+      "subdisc_before": "",
+      "tipo_before": "Presentación artística",
+      "espacio_before": [
+        "",
+        "",
+        "Centro Histórico"
+      ],
+      "cols_AM_AW_before": [
+        "Leer para crecer.",
+        "2 Igualdad",
+        "2.4 Reducir brechas de desigualdad",
+        "2.4.2 Seguridad alimentaria",
+        "2.4.2 Seguridad alimentaria",
+        "",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Impulso a la ampliación de la oferta cultural en los territorios.",
+        "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+        "Incrementar en 25% la oferta cultural realizada en los municipios."
+      ]
+    },
+    {
+      "id": "ACT-SCGK12176",
+      "folio": "SC-261029-213918-IS-905795",
+      "nombre": "Flor de Autonomía",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "Música",
+      "subdisc_before": "",
+      "tipo_before": "Presentación artística",
+      "espacio_before": [
+        "",
+        "",
+        "Centro Histórico"
+      ],
+      "cols_AM_AW_before": [
+        "Leer para crecer.",
+        "2 Igualdad",
+        "2.4 Reducir brechas de desigualdad",
+        "2.4.2 Seguridad alimentaria",
+        "2.4.2 Seguridad alimentaria",
+        "",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Impulso a la ampliación de la oferta cultural en los territorios.",
+        "Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.",
+        "Incrementar en 25% la oferta cultural realizada en los municipios."
+      ]
+    },
+    {
+      "id": "ACT-SCNU71129",
+      "folio": "SC-261029-213918-IS-869A18",
+      "nombre": "Taller de novela",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "Literatura",
+      "subdisc_before": "Narrativa",
+      "tipo_before": "Taller",
+      "espacio_before": [
+        "Otros Espacios Culturales",
+        "Casa de cultura",
+        "Casa de la Cultura de Valle de Santiago"
+      ],
+      "cols_AM_AW_before": [
+        "Promover visitas de autores locales, regionales y nacionales a las escuelas.",
+        "2 Igualdad",
+        "2.4 Reducir brechas de desigualdad",
+        "2.4.3 Descentralización de la oferta cultural",
+        "2.4.3.3 Incidir en el involucramiento de las personas con el ecosistema cultural",
+        "",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Adaptación de la oferta cultural a los territorios.",
+        "Desarrollar investigación de la oferta cultural.",
+        "Incrementar un 25% la participación de grupos prioritarios en prácticas culturales al 2030."
+      ]
+    },
+    {
+      "id": "ACT-SCCF54781",
+      "folio": "SC-261029-213918-IS-4F44A5",
+      "nombre": "WAPA - Taller de coplas y décimas del huapango",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "",
+      "subdisc_before": "",
+      "tipo_before": "Taller",
+      "espacio_before": [
+        "",
+        "",
+        "Casa Mariel"
+      ],
+      "cols_AM_AW_before": [
+        "Mayor inversión en conservación del patrimonio artístico y cultural.",
+        "4 Vocación",
+        "4.4 Reforzar competencias lectoras y lógico matemáticas",
+        "4.4.1 Competencias y habilidades",
+        "4.4.1 Competencias y habilidades",
+        "",
+        "",
+        "Impulso a la educación artística y a la profesionalización del sector cultural",
+        "Impulso a programas de formación y profesionalización para agentes culturales.",
+        "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación.",
+        "Incrementar un 30% la oferta de formación y profesionalización para agentes culturales."
+      ]
+    },
+    {
+      "id": "ACT-SCIH64446",
+      "folio": "SC-261029-213918-IS-02FE16",
+      "nombre": "Concierto San Felipe",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "Música",
+      "subdisc_before": "",
+      "tipo_before": "Presentación artística",
+      "espacio_before": [
+        "",
+        "",
+        ""
+      ],
+      "cols_AM_AW_before": [
+        "Mayor inversión en conservación del patrimonio artístico y cultural.",
+        "4 Vocación",
+        "4.4 Reforzar competencias lectoras y lógico matemáticas",
+        "4.4.1 Competencias y habilidades",
+        "4.4.1 Competencias y habilidades",
+        "",
+        "",
+        "Impulso a la educación artística y a la profesionalización del sector cultural",
+        "Impulso a programas de formación y profesionalización para agentes culturales.",
+        "Promover alianzas para becas y estímulos con enfoque en grupos prioritarios y municipios con menor acceso a programas de formación.",
+        "Incrementar un 30% la oferta de formación y profesionalización para agentes culturales."
+      ]
+    },
+    {
+      "id": "ACT-SCYR45800",
+      "folio": "SC-261029-213918-IS-0A024C",
+      "nombre": "Taller FECA",
+      "dir_before": "SIN ASIGNAR",
+      "disc_before": "",
+      "subdisc_before": "",
+      "tipo_before": "Taller",
+      "espacio_before": [
+        "",
+        "",
+        ""
+      ],
+      "cols_AM_AW_before": [
+        "Difusión de atractivos culturales y turísticos en plataformas digitales, inteligencia artificial y chatbots de fácil acceso.",
+        "1 Tranquilidad",
+        "1.2 Fortalecer prevención del delito",
+        "1.2.2 Fortalecimiento del tejido social",
+        "1.2.3.4 Promover una cultura de paz desde las expresiones artísticas y culturales",
+        "Cooperación ",
+        "",
+        "Fortalecimiento de la participación ciudadana y la mediación cultural",
+        "Fortalecimiento del diálogo, la mediación y las capacidades de las redes comunitarias.",
+        "Impulsar programas de mediación con líneas de trabajo enfocadas a la participación y acceso de grupos prioritarios y población de zonas prioritarias",
+        "Incrementar en 25% la oferta cultural realizada en los municipios."
+      ]
+    }
+  ],
+  "territorio_feca_before": [
+    "c52b255b",
+    "ACT-SCYR45800",
+    "León"
+  ]
+}

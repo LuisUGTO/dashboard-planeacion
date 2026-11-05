@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-11-04T17:21:20.884Z",
+  "target_spreadsheet": "1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4",
+  "status": "SUCCESS",
+  "summary": {
+    "fatima_rows_updated": 67,
+    "ileana_rows_updated": 8,
+    "territorio_feca_updated": 1,
+    "poblacion_feca_added": 2,
+    "total_operations_executed": 41
+  }
+}

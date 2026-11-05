@@ -1,5 +1,15 @@
 # Dashboard de Planeación de Cultura
 
+**04/11/2026 (11:20):** completadas75 actividades en un solo lote (*batch* de41 operaciones) sin solicitudes celda por celda:67 de Fátima Molinar con alineación PG/PEC de fomento al libro y lectura;8 de Ileana Salazar con direcciones, disciplinas, espacios, PG/PEC y55 asistentes de FECA en territorio/población. Relectura nativa API verificada; 42 pruebas pasaron. [Verificación](documentacion/Completar_Actividades_Fatima_Ileana_2026-11-04.md).
+
+**04/11/2026 (10:25):** aplicados cuatro ajustes en Registro_Territorio desde población (ACT-SCMV29363, ACT-SCUO63965, ACT-SCYP51812, ACT-SCDD82613) con respaldo y relectura nativa; ACT-SCPD08021 ya había sido ajustado por Luis. Recálculo diferencias 6→1, identidad 284 sin cambio; ACT-SCMI05636 queda pendiente de decisión. [Verificación](documentacion/Conciliacion_Territorio_Cuatro_Casos_2026-11-04.md).
+
+**04/11/2026:** completados48 faltantes de población general por diferencia territorial, a solicitud de Luis. Recálculo diferencias54→6, identidad284 sin cambio; el complemento no certifica las fuentes. [Verificación](documentacion/Complementos_Poblacion_2026-11-04.md).
+
+**Conciliación adicional del03/11:** DB verificada, diferencias72→54 y coincidencias286→284. Doce formaciones y cinco repeticiones de total corregidas; tres respuestas de septiembre recuperadas y un par confirmado sustituido.24 poblaciones nuevas, cero actividades nuevas;42 pruebas pasaron. [Resultado y límites](documentacion/Conciliacion_Adicional_Fuentes_2026-11-03.md).
+
+**03/11, 15:28 — respuestas de Ileana y Soraya aplicadas parcialmente:** WAPA conciliado a94 asistentes sin duplicar; siete desgloses corregidos, dos fechas y dos totales de Museos incorporados; tres duplicados confirmados conservados como sustituidos. Diferencias79→72 e identidad292→286 en recálculo comparable; 42 pruebas pasaron. [Resultado y límites](documentacion/Aplicacion_Ileana_Soraya_2026-11-03.md).
+
 El tablero se abre desde `index.html`, que permanece en la raíz del proyecto.
 
 ## Contexto y continuidad — 31 de octubre de 2026

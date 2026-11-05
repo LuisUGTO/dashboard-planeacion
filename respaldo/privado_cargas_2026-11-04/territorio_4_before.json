@@ -1,0 +1,123 @@
+{
+  "timestamp": "2026-11-04T16:15:51.936Z",
+  "target_spreadsheet": "1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4",
+  "sheet": "Registro_Territorio",
+  "rows": [
+    {
+      "row": 164,
+      "id_actividad": "ACT-SCMV29363",
+      "id_territorio": "cc9907d0",
+      "before": {
+        "J_Cantidad": "2",
+        "K_Participacion": "",
+        "L_Acceso": "2"
+      },
+      "after": {
+        "J_Cantidad": 3,
+        "K_Participacion": "",
+        "L_Acceso": 3
+      },
+      "full_row_before": [
+        "cc9907d0",
+        "ACT-SCMV29363",
+        "Silao de la Victoria",
+        "Urbano",
+        "215",
+        "Silao",
+        "",
+        "Si",
+        "Si",
+        "2",
+        "",
+        "2"
+      ]
+    },
+    {
+      "row": 650,
+      "id_actividad": "ACT-SCUO63965",
+      "id_territorio": "ef2c77b2",
+      "before": {
+        "J_Cantidad": "195",
+        "K_Participacion": "0",
+        "L_Acceso": "195"
+      },
+      "after": {
+        "J_Cantidad": 197,
+        "K_Participacion": "0",
+        "L_Acceso": 197
+      },
+      "full_row_before": [
+        "ef2c77b2",
+        "ACT-SCUO63965",
+        "Guanajuato",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "195",
+        "0",
+        "195"
+      ]
+    },
+    {
+      "row": 768,
+      "id_actividad": "ACT-SCYP51812",
+      "id_territorio": "03b9d962",
+      "before": {
+        "J_Cantidad": "164",
+        "K_Participacion": "0",
+        "L_Acceso": "164"
+      },
+      "after": {
+        "J_Cantidad": 361,
+        "K_Participacion": "0",
+        "L_Acceso": 361
+      },
+      "full_row_before": [
+        "03b9d962",
+        "ACT-SCYP51812",
+        "Guanajuato",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "164",
+        "0",
+        "164"
+      ]
+    },
+    {
+      "row": 1510,
+      "id_actividad": "ACT-SCDD82613",
+      "id_territorio": "2aa7b1cc",
+      "before": {
+        "J_Cantidad": "32",
+        "K_Participacion": "",
+        "L_Acceso": "32"
+      },
+      "after": {
+        "J_Cantidad": 35,
+        "K_Participacion": "",
+        "L_Acceso": 35
+      },
+      "full_row_before": [
+        "2aa7b1cc",
+        "ACT-SCDD82613",
+        "Silao de la Victoria",
+        "Urbano",
+        "",
+        "",
+        "",
+        "No",
+        "No",
+        "32",
+        "",
+        "32"
+      ]
+    }
+  ]
+}
