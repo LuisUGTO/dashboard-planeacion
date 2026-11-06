@@ -1,8 +1,9 @@
 (function (root, factory) {
-  const api = factory();
+  const reviews = typeof module === 'object' && module.exports ? require('./revisiones-identidad.js') : root.CulturaRevisionesIdentidad;
+  const api = factory(reviews || []);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.CulturaCalidad = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (identityReviews) {
   'use strict';
   const text = value => value == null ? '' : String(value).trim();
   const norm = value => text(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -58,6 +59,15 @@
   function sum(rows, field) {
     const values = rows.map(r => count(r[field]));
     return rows.length && values.every(v => v !== null) ? values.reduce((s, v) => s + v, 0) : null;
+  }
+  function identitySnapshot(a, territories, population) {
+    const fields = (r, names) => names.map(n => text(r[n]));
+    const sorted = (rows, names) => rows.map(r => fields(r, names)).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+    return JSON.stringify([text(a.ID_Actividad), text(a.Nombre_Actividad), dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), dateISO(a.Fecha_Fin), text(a.Nombre_Espacio || a.Especifique_Espacio), text(a.Descripcion_Breve), text(a.Total_Sesiones), sorted(territories, ['ID_Territorio','Municipio','Tipo_Asentamiento','Comunidad','Nombre_Comunidad','Otra_Comunidad','Cantidad','Cantidad_Participacion','Cantidad_Acceso']), sorted(population, ['ID_Poblacion','Grupo_Etario','Genero','Grupo_Prioritario','Cantidad_Participacion','Cantidad_Acceso','Cantidad_Poblacion'])]);
+  }
+  function confirmedDistinct(a, b, ters, pops) {
+    const aid = text(a.ID_Actividad), bid = text(b.ID_Actividad);
+    return identityReviews.some(r => Array.isArray(r.ids) && r.ids.includes(aid) && r.ids.includes(bid) && r.snapshots && r.snapshots[aid] === identitySnapshot(a, ters.get(aid) || [], pops.get(aid) || []) && r.snapshots[bid] === identitySnapshot(b, ters.get(bid) || [], pops.get(bid) || []));
   }
   function quantity(activity) {
     // A reported workshop quantity must never be guessed from Total_Sesiones.
@@ -117,7 +127,7 @@
       const key = [dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), norm(a.Nombre_Actividad), norm(a.Nombre_Espacio || a.Especifique_Espacio)].join('|');
       if (!isExcluded(a) && key.split('|').every(Boolean)) {
         if (!identities.has(key)) identities.set(key, []);
-        identities.get(key).push({ id, time: reportedTime(a) });
+        identities.get(key).push({ id, time: reportedTime(a), activity: a });
       }
     });
     return activities.map(a => {
@@ -189,7 +199,7 @@
       if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
       const key = [start, norm(a.Nombre_Actividad), norm(a.Nombre_Espacio || a.Especifique_Espacio)].join('|');
       const time = reportedTime(a);
-      if ((identities.get(key) || []).some(other => other.id !== id && (!time || !other.time || time === other.time))) add('identidad', 'Mismo nombre, fecha y sede en otro ID sin horario distinto confirmado: revisar posible duplicado o participación de otra área');
+      if ((identities.get(key) || []).some(other => other.id !== id && (!time || !other.time || time === other.time) && !confirmedDistinct(a, other.activity, ters, pops))) add('identidad', 'Mismo nombre, fecha y sede en otro ID sin horario distinto confirmado: revisar posible duplicado o participación de otra área');
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }

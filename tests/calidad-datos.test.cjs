@@ -95,6 +95,28 @@ test('un ID distinto no elimina la posible duplicación del evento', () => {
   const rows = q.audit([activity(), activity({ ID_Actividad: 'A2', Folio: 'F2' })], [t(0), t(0, { ID_Actividad: 'A2' })], [p(0), p(0, { ID_Actividad: 'A2' })], []);
   assert.equal(rows.length, 2); assert.ok(rows.every(r => r.categories.includes('identidad')));
 });
+
+test('una revisión por par solo aplica a datos cotejados y no cubre terceros', () => {
+  const reviewed = require('../assets/js/revisiones-identidad.js')[0];
+  const territoryFields = ['ID_Territorio','Municipio','Tipo_Asentamiento','Comunidad','Nombre_Comunidad','Otra_Comunidad','Cantidad','Cantidad_Participacion','Cantidad_Acceso'];
+  const populationFields = ['ID_Poblacion','Grupo_Etario','Genero','Grupo_Prioritario','Cantidad_Participacion','Cantidad_Acceso','Cantidad_Poblacion'];
+  const activities = [], territories = [], population = [];
+  for (const id of reviewed.ids) {
+    const [key, name, start, end, site, desc, sessions, tr, po] = JSON.parse(reviewed.snapshots[id]);
+    activities.push(activity({ ID_Actividad: key, Folio: 'F-' + key, Nombre_Actividad: name, Fecha_Inicio: start, Fecha_Fin: end, Nombre_Espacio: site, Descripcion_Breve: desc, Total_Sesiones: sessions }));
+    for (const values of tr) territories.push({ ID_Actividad: id, ...Object.fromEntries(territoryFields.map((f, i) => [f, values[i]])) });
+    for (const values of po) population.push({ ID_Actividad: id, ...Object.fromEntries(populationFields.map((f, i) => [f, values[i]])) });
+  }
+  const flagged = (acts, tr, po) => q.audit(acts, tr, po, []).filter(r => r.categories.includes('identidad')).map(r => r.id);
+  assert.deepEqual(flagged(activities, territories, population), []);
+  const changed = territories.map((r, i) => i === 0 ? { ...r, Cantidad: String(Number(r.Cantidad) + 1) } : r);
+  assert.equal(flagged(activities, changed, population).length, 2);
+  assert.equal(flagged(activities, territories, population.map((r, i) => i === 0 ? { ...r, Genero: 'Otro' } : r)).length, 2);
+  assert.equal(flagged([activities[0], { ...activities[1], Fecha_Fin: '2026-12-30' }], territories, population).length, 2);
+  const third = { ...activities[0], ID_Actividad: 'TERCERO', Folio: 'F-TERCERO' };
+  assert.equal(flagged([...activities, third], territories, population).length, 3);
+  assert.equal(flagged([activities[0], { ...activities[1], Folio: activities[0].Folio }], territories, population).length, 2);
+});
 test('sesiones iguales al total de asistentes requieren confirmar el significado', () => {
   const a = q.audit([activity({ Total_Sesiones: 69395 })], [t(69395)], [p(69395)], [])[0];
   assert.ok(a.diag.includes('asistentes en ese campo'));

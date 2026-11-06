@@ -1,5 +1,9 @@
 # Dashboard de Planeación de Cultura
 
+**05/11/2026:** revisiones documentadas de grupos distintos implementadas localmente; recálculo de identidad242→206, sin borrar actividades. Pendiente publicación y verificación visual. [Detalle y límites](documentacion/Revisiones_Grupos_Distintos_2026-11-05.md).
+
+**05/11/2026:** cruce documental inicial de242 alertas con respuestas de Soraya y Claudia; se identificaron casos con contraparte y respuestas que aún requieren cotejo. [Detalle por ID](documentacion/Cruce_Duplicaciones_2026-11-05.md). Sin cambios en DB.
+
 **05/11/2026:** dos declaraciones de sesiones de Adriana Escamilla reconocidas localmente; 66→64 avisos en recálculo, 43 pruebas pasaron. Falta publicar y verificar visualmente. [Detalle](documentacion/Revision_Sesiones_Adriana_Escamilla_2026-11-05.md).
 
 **04/11/2026 (11:20):** completadas75 actividades en un solo lote (*batch* de41 operaciones) sin solicitudes celda por celda:67 de Fátima Molinar con alineación PG/PEC de fomento al libro y lectura;8 de Ileana Salazar con direcciones, disciplinas, espacios, PG/PEC y55 asistentes de FECA en territorio/población. Relectura nativa API verificada; 42 pruebas pasaron. [Verificación](documentacion/Completar_Actividades_Fatima_Ileana_2026-11-04.md).
