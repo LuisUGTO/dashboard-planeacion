@@ -2082,8 +2082,9 @@
     // VISTA 2: MATRIZ ESTRATÉGICA (TEXTOS EJECUTIVOS SIN JERGA)
     // =========================================================
     function renderMatrizEstrategica(actF, pobF, terF, catAlF) {
-      const dirsActivas = new Set(actF.map(a => cleanStr(a.Direccion)).filter(Boolean));
-      const dirsCatalogo = new Set(catAlF.map(c => cleanStr(c.Direccion)).filter(Boolean));
+      const directionKey = value => cleanStr(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
+      const dirsCatalogo = new Set(catAlF.map(c => directionKey(c.Direccion)).filter(d => d && d !== 'SIN ASIGNAR'));
+      const dirsActivas = new Set(actF.map(a => directionKey(a.Direccion)).filter(d => dirsCatalogo.has(d)));
 
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
@@ -2161,7 +2162,7 @@
       document.getElementById('lbl-avance-meta-activas').textContent = pendingQuantities ? 'Por confirmar: hay concentrados sin cuantificar' : `${pctActivasOperacion}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActOperacion)})`;
 
       document.getElementById('kpi-mat-act').textContent = fmtInt(actF.length);
-      document.getElementById('kpi-mat-dir').textContent = `${dirsActivas.size}/${dirsCatalogo.size || dirsActivas.size}`;
+      document.getElementById('kpi-mat-dir').textContent = `${dirsActivas.size}/${dirsCatalogo.size}`;
       document.getElementById('kpi-mat-metas').textContent = `${metasConRegistro}/${totalMetasCat}`;
       document.getElementById('kpi-mat-metas-pct').textContent = `${pctMetasAtendidas}%`;
       document.getElementById('kpi-mat-procesos').textContent = `Sobre ${procesosCatTotal} procesos estratégicos`;

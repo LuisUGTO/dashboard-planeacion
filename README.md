@@ -1,5 +1,7 @@
 # Dashboard de Planeación de Cultura
 
+**05/11/2026:** indicador de direcciones corregido localmente para excluir SIN ASIGNAR y contar solo direcciones del catálogo; lectura actual2026:6/8. 45 pruebas pasaron; pendiente publicar y verificar visualmente.
+
 **05/11/2026:** revisiones documentadas de grupos distintos implementadas localmente; recálculo de identidad242→206, sin borrar actividades. Pendiente publicación y verificación visual. [Detalle y límites](documentacion/Revisiones_Grupos_Distintos_2026-11-05.md).
 
 **05/11/2026:** cruce documental inicial de242 alertas con respuestas de Soraya y Claudia; se identificaron casos con contraparte y respuestas que aún requieren cotejo. [Detalle por ID](documentacion/Cruce_Duplicaciones_2026-11-05.md). Sin cambios en DB.

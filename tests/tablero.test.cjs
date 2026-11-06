@@ -188,6 +188,13 @@ test('la matriz usa talleres reportados y no sesiones para el cumplimiento', () 
   assert.equal(result.actCount, 1); assert.equal(result.realizado, 1000); assert.equal(result.pct, 50);
   assert.match(s.nodes.get('lbl-avance-meta-global').textContent, /50.0%/);
 });
+test('direcciones activas cuenta solo direcciones del catálogo y excluye sin asignar', () => {
+  const s = setup();
+  s.context.cat = [{ ...cat[0], Direccion: 'DIRECCIÓN GENERAL DE MUSEOS ' }, { ...cat[0], ID_Alineacion: 2, Direccion: 'COORDINACIÓN DE COMUNICACIÓN SOCIAL' }, { ...cat[0], ID_Alineacion: 3, Direccion: 'SIN ASIGNAR' }];
+  s.context.act = [{ ...a, Direccion: 'Dirección General de Museos' }, { ...a, ID_Actividad: 'B', Direccion: 'SIN ASIGNAR' }, { ...a, ID_Actividad: 'C', Direccion: 'DIRECCIÓN DE MÚSICA' }];
+  vm.runInContext('rawDB.alineacion = cat; renderMatrizEstrategica(act, [], [], cat);', s.context);
+  assert.equal(s.nodes.get('kpi-mat-dir').textContent, '1/2');
+});
 test('la gráfica separa los acumulados sin perder los registros ni mezclar las fuentes de público', () => {
   const s = setup(); const plots = {};
   s.context.capturePlot = (id, type, data, options) => { plots[id] = { data, options }; };
