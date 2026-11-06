@@ -734,7 +734,7 @@
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-purple-600 border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase text-slate-400">Direcciones Generales</p>
+              <p class="text-[11px] font-bold uppercase text-slate-400">Direcciones y coordinación</p>
               <p id="kpi-mat-dir" class="kpi-number text-3xl font-black text-purple-700 mt-1">0</p>
               <p id="kpi-mat-dir-sub" class="text-xs text-slate-500 mt-1">Con registro activo en el periodo</p>
             </div>
@@ -2083,8 +2083,11 @@
     // =========================================================
     function renderMatrizEstrategica(actF, pobF, terF, catAlF) {
       const directionKey = value => cleanStr(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
-      const dirsCatalogo = new Set(catAlF.map(c => directionKey(c.Direccion)).filter(d => d && d !== 'SIN ASIGNAR'));
-      const dirsActivas = new Set(actF.map(a => directionKey(a.Direccion)).filter(d => dirsCatalogo.has(d)));
+      const validDirection = d => d && d !== 'SIN ASIGNAR';
+      const dirsActivas = new Set(actF.map(a => directionKey(a.Direccion)).filter(validDirection));
+      const selectedDirection = directionKey(document.getElementById('f-direccion')?.value || 'ALL');
+      const knownDirections = [...rawDB.actividades, ...actF].filter(a => !CulturaCalidad.isExcluded(a)).map(a => directionKey(a.Direccion)).filter(d => selectedDirection === 'ALL' || d === selectedDirection);
+      const dirsCatalogo = new Set([...catAlF.map(c => directionKey(c.Direccion)), ...knownDirections].filter(validDirection));
 
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
@@ -3369,7 +3372,7 @@
         addExecutiveSlideHeader(slide3, pptx, '2. Matriz Estratégica y Cumplimiento de Metas', filterSummaryLine, shieldDataUrl, 3);
 
         addKpiCardToSlide(slide3, pptx, 0.40, 0.98, 3.00, 1.00, 'Actividades Estratégicas', txt('kpi-mat-act'), 'Alineadas al Programa de Gobierno', '004B87');
-        addKpiCardToSlide(slide3, pptx, 3.58, 0.98, 3.00, 1.00, 'Direcciones Generales', txt('kpi-mat-dir'), 'Con registro activo en el periodo', '7C3AED');
+        addKpiCardToSlide(slide3, pptx, 3.58, 0.98, 3.00, 1.00, 'Direcciones y coordinación', txt('kpi-mat-dir'), 'Con registro activo en el periodo', '7C3AED');
         addKpiCardToSlide(slide3, pptx, 6.76, 0.98, 3.00, 1.00, 'Metas Institucionales Activas', `${txt('kpi-mat-metas')} (${txt('kpi-mat-metas-pct')})`, txt('kpi-mat-procesos'), 'F59E0B');
         addKpiCardToSlide(slide3, pptx, 9.94, 0.98, 3.00, 1.00, 'Avance Meta Anual', txt('kpi-mat-cumplimiento'), `${txt('kpi-mat-cumplimiento-activas')} • ${txt('kpi-mat-cumplimiento-sub')}`, '10B981');
 
