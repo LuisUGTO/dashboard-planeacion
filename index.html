@@ -543,7 +543,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-slate-200/80 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Registros de actividades</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Fichas capturadas</p>
               <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
               <p class="text-xs text-slate-500 font-semibold mt-1">
                 <span id="kpi-sesiones-total" class="text-emerald-600 font-bold">0</span> sesiones reportadas
@@ -3330,7 +3330,7 @@
         slide2.background = { color: 'F4F7FB' };
         addExecutiveSlideHeader(slide2, pptx, '1. Visión General del Ecosistema Cultural', filterSummaryLine, shieldDataUrl, 2);
 
-        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Registros de actividades', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones reportadas`, '004B87');
+        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Fichas capturadas', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones reportadas`, '004B87');
         addKpiCardToSlide(slide2, pptx, 3.58, 0.98, 3.00, 1.00, 'Personas Beneficiadas', txt('kpi-pop-total'), txt('kpi-pop-sub'), 'F59E0B');
         addKpiCardToSlide(slide2, pptx, 6.76, 0.98, 3.00, 1.00, 'Ingresos Generados', txt('kpi-ingresos'), txt('kpi-contratado'), '10B981');
         addKpiCardToSlide(slide2, pptx, 9.94, 0.98, 3.00, 1.00, 'Cobertura Municipal', `${txt('kpi-mun-ratio')} (${txt('kpi-mun-pct')})`, txt('kpi-mun-foraneo'), '7C3AED');
