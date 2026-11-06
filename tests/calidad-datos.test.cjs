@@ -101,6 +101,18 @@ test('sesiones iguales al total de asistentes requieren confirmar el significado
   assert.ok(!a.categories.includes('diferencias'));
 });
 
+test('dos declaraciones revisadas solo aplican a su ID, periodo, cantidad y fundamento', () => {
+  const description = 'Adriana Escamilla confirma el 03/11/2026 a las15:01 que las sesiones corresponden a capacitaciones del primer semestre: clases semanales por municipio multiplicadas por semanas de trabajo. Total declarado por el área; cálculo por programación, sin verificación individual de cada sesión.';
+  for (const [id, count] of [['ACT-SCOG94069', 1020], ['ACT-SCIN39392', 170]]) {
+    const a = activity({ ID_Actividad: id, Total_Sesiones: count, Fecha_Inicio: '2026-03-20', Fecha_Fin: '2026-06-30', Descripcion_Breve: description });
+    const flag = x => q.audit([x], [t(5, { ID_Actividad: x.ID_Actividad })], [p(5, { ID_Actividad: x.ID_Actividad })], []).some(r => r.diag.includes('100 o más sesiones'));
+    assert.equal(flag(a), false);
+    for (const change of [{ ID_Actividad: 'OTRO' }, { Total_Sesiones: count + 1 }, { Fecha_Fin: '2026-07-01' }, { Descripcion_Breve: 'Sin confirmación' }]) assert.equal(flag({ ...a, ...change }), true);
+    const equal = q.audit([a], [t(count, { ID_Actividad: id })], [p(count, { ID_Actividad: id })], [])[0];
+    assert.match(equal.diag, /asistentes en ese campo/);
+  }
+});
+
 test('funciones con horas explícitas distintas conservan ambos registros sin alerta de coincidencia', () => {
   const a = activity({ Descripcion_Breve: 'Artista: Grupo. Hora: 13:00:00. Nota: convenio' });
   const b = activity({ ID_Actividad: 'A2', Folio: 'F2', Descripcion_Breve: 'Artista: Grupo. Hora: 18:00:00' });

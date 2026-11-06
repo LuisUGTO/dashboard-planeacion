@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-11-05T18:33:00-06:00",
+  "motivo": "Actualizacion de fechas de corte y monto contratado de las actividades base de Myrna Montero (Patrimonio Cultural)",
+  "filas_afectadas": {
+    "R603": {
+      "id_actividad": "ACT-SCWE59577",
+      "nombre": "Mantenimiento a inmuebles históricos a cargo de la SCUL",
+      "fecha_fin_anterior": "18/12/2026",
+      "fecha_fin_nueva": "30/09/2026",
+      "monto_contratado_anterior": "",
+      "monto_contratado_nuevo": "1112416.39"
+    },
+    "R606": {
+      "id_actividad": "ACT-SCSY89615",
+      "nombre": "Convenio SCUL - GPH",
+      "fecha_fin_anterior": "18/12/2026",
+      "fecha_fin_nueva": "30/09/2026"
+    }
+  }
+}

@@ -23,7 +23,7 @@ const cat = [{ ID_Alineacion: 1, Clave_Proceso: 'PB1', Direccion: 'Museos', Nomb
 test('las cinco lecturas usan exportación CSV con límites operativos y preservan texto, ceros y vacíos', async () => {
   const s = setup();
   const sheets = [
-    ['Registro_Actividades', '0', 'A:BN', 66, 'ID_Actividad'],
+    ['Registro_Actividades', '0', 'A:BV', 74, 'ID_Actividad'],
     ['Registro_Territorio', '375614539', 'A:L', 12, 'ID_Territorio'],
     ['Registro_Poblacion', '1598177756', 'A:H', 8, 'ID_Poblacion'],
     ['Regitro_Evidencia', '219249658', 'A:E', 5, 'ID_Evidencia'],
@@ -62,7 +62,7 @@ test('las cinco lecturas usan exportación CSV con límites operativos y preserv
 });
 
 test('un CSV con columnas históricas, errores de parseo o encabezado incorrecto no se acepta como lectura válida', async () => {
-  for (const [columns, first, errors] of [[74, 'ID_Actividad', []], [66, 'Login', []], [66, 'ID_Actividad', [{ code: 'TooManyFields' }]]]) {
+  for (const [columns, first, errors] of [[80, 'ID_Actividad', []], [74, 'Login', []], [74, 'ID_Actividad', [{ code: 'TooManyFields' }]]]) {
     const s = setup();
     let attempts = 0;
     s.context.fetch = async () => { attempts++; return { ok: true, text: async () => 'invalid-csv' }; };

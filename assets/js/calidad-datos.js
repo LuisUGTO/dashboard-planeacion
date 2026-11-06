@@ -66,6 +66,15 @@
     const malformed = text(activity.Cantidad_Actividades) !== '' && explicit === null;
     return { value: malformed || (consolidated && (explicit === null || explicit === 0)) ? null : (explicit === null ? 1 : explicit), consolidated, explicit, malformed };
   }
+  // Declaraciones documentadas por el área: una revisión aplica solo al ID,
+  // periodo, cifra y texto que fueron contrastados. No acredita cada sesión.
+  function sessionsReviewed(activity) {
+    const confirmed = { 'ACT-SCOG94069': 1020, 'ACT-SCIN39392': 170 };
+    return confirmed[text(activity.ID_Actividad)] === count(activity.Total_Sesiones)
+      && dateISO(activity.Fecha_Inicio_ISO || activity.Fecha_Inicio) === '2026-03-20'
+      && dateISO(activity.Fecha_Fin) === '2026-06-30'
+      && text(activity.Descripcion_Breve).startsWith('Adriana Escamilla confirma el 03/11/2026 a las15:01 que las sesiones corresponden a capacitaciones del primer semestre: clases semanales por municipio multiplicadas por semanas de trabajo. Total declarado por el área; cálculo por programación, sin verificación individual de cada sesión.');
+  }
   function metrics(activities) {
     const active = activities.filter(a => !isExcluded(a));
     let activitiesTotal = 0, unresolved = 0, sessions = 0, missingSessions = 0;
@@ -173,7 +182,7 @@
       if (q.value === null) add('concentrados', 'Concentrado sin cantidad válida de actividades reportadas');
       if (q.explicit === 0 && !q.consolidated) add('concentrados', 'Cantidad de actividades reportada en cero: confirmar');
       if (q.consolidated && start && end && start.slice(0, 7) !== end.slice(0, 7)) add('concentrados', 'Concentrado de varios meses: requiere desglose mensual; no se distribuye automáticamente');
-      if (sessions !== null && sessions >= 100) add('concentrados', '100 o más sesiones: confirmar que no sea cantidad de talleres; no implica un error por sí solo');
+      if (sessions !== null && sessions >= 100 && !sessionsReviewed(a)) add('concentrados', '100 o más sesiones: confirmar que no sea cantidad de talleres; no implica un error por sí solo');
       if (sessions !== null && sessions > 1 && (sessions === st || sessions === sp)) add('concentrados', 'La cantidad de sesiones coincide con el público total: confirmar que no se hayan capturado asistentes en ese campo');
       if (/concentrad|acumulad|enero\s*(a|-)\s*septiembre/.test(norm(a.Nombre_Actividad)) && !q.consolidated) add('concentrados', 'Posible concentrado: confirmar tipo de registro y cantidad de actividades');
       if (idCounts.get(id) > 1) add('identidad', 'ID repetido');

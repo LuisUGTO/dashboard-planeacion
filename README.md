@@ -1,5 +1,7 @@
 # Dashboard de Planeación de Cultura
 
+**05/11/2026:** dos declaraciones de sesiones de Adriana Escamilla reconocidas localmente; 66→64 avisos en recálculo, 43 pruebas pasaron. Falta publicar y verificar visualmente. [Detalle](documentacion/Revision_Sesiones_Adriana_Escamilla_2026-11-05.md).
+
 **04/11/2026 (11:20):** completadas75 actividades en un solo lote (*batch* de41 operaciones) sin solicitudes celda por celda:67 de Fátima Molinar con alineación PG/PEC de fomento al libro y lectura;8 de Ileana Salazar con direcciones, disciplinas, espacios, PG/PEC y55 asistentes de FECA en territorio/población. Relectura nativa API verificada; 42 pruebas pasaron. [Verificación](documentacion/Completar_Actividades_Fatima_Ileana_2026-11-04.md).
 
 **04/11/2026 (10:25):** aplicados cuatro ajustes en Registro_Territorio desde población (ACT-SCMV29363, ACT-SCUO63965, ACT-SCYP51812, ACT-SCDD82613) con respaldo y relectura nativa; ACT-SCPD08021 ya había sido ajustado por Luis. Recálculo diferencias 6→1, identidad 284 sin cambio; ACT-SCMI05636 queda pendiente de decisión. [Verificación](documentacion/Conciliacion_Territorio_Cuatro_Casos_2026-11-04.md).

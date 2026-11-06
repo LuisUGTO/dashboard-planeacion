@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-11-05T18:42:00-06:00",
+  "motivo": "Completar espacios y sedes de las 4 actividades de julio del CEARG segun archivo Actividades Julio CEARG enviado por Claudia Ramirez",
+  "filas_afectadas": {
+    "R451": {
+      "id_actividad": "ACT-SCZI57224",
+      "nombre": "Taller de improvisación Freeform + función escénica SOL",
+      "espacio_nuevo": "CEARG",
+      "sede_nueva": "Avenida Revolución # 204, Centro, Salamanca"
+    },
+    "R453": {
+      "id_actividad": "ACT-SCXY70009",
+      "nombre": "Ciclo Arte, juego y aprendizaje del Patrimonio Vivo",
+      "espacio_nuevo": "Centro Nuevo Comienzo San Javier",
+      "sede_nueva": "Del Santuario s/n, Col. Rinconada de San Javier, Salamanca"
+    },
+    "R459": {
+      "id_actividad": "ACT-SCTJ40380",
+      "nombre": "Exposición \"Muñecas. Hilo y tela\"",
+      "espacio_nuevo": "CEARG",
+      "sede_nueva": "Claustro Mayor, Sala de Gráfica, Av Revolución 204, Salamanca"
+    },
+    "R460": {
+      "id_actividad": "ACT-SCCR51057",
+      "nombre": "Inauguración Exposición \"Territorios habitados, PECDA Guanajuato 2025\"",
+      "espacio_nuevo": "CEARG",
+      "sede_nueva": "Claustro Mayor, Salas de Gráfica y Fotografía, Av Revolución 204, Salamanca"
+    }
+  }
+}
