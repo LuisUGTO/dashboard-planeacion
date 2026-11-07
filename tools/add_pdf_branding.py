@@ -53,14 +53,14 @@ def main():
     parser = argparse.ArgumentParser(description="Añade encabezado y pie institucionales a un entregable.")
     parser.add_argument("input_pdf", type=Path)
     parser.add_argument("output_pdf", type=Path)
-    parser.add_argument("--deliverable", default="1", choices=("1", "2", "4"))
+    parser.add_argument("--deliverable", default="1", choices=("1", "2", "3", "4", "5"))
     args = parser.parse_args()
 
     reader = PdfReader(str(args.input_pdf))
     writer = PdfWriter()
     for number, page in enumerate(reader.pages, 1):
-        page.merge_page(overlay_for_page(number, args.deliverable), over=True)
-        writer.add_page(page)
+        added_page = writer.add_page(page)
+        added_page.merge_page(overlay_for_page(number, args.deliverable), over=True)
     args.output_pdf.parent.mkdir(parents=True, exist_ok=True)
     with args.output_pdf.open("wb") as handle:
         writer.write(handle)

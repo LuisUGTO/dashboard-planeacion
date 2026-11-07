@@ -17,7 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     ("Entregable_1_Diagnostico_Informacion_Institucional.html", "Entregable_1_Diagnostico_Informacion_Institucional.docx"),
     ("Entregable_2_Modelo_Informacion_Institucional.html", "Entregable_2_Modelo_Informacion_Institucional.docx"),
+    ("Entregable_3_Informacion_Institucional_Sistematizada_y_Homologada.html", "Entregable_3_Informacion_Institucional_Sistematizada_y_Homologada.docx"),
     ("Entregable_4_Mapa_Procesos_y_Flujos_Informacion.html", "Entregable_4_Mapa_Procesos_y_Flujos_Informacion.docx"),
+    ("Entregable_5_Diseno_Funcional_Sistema_Informacion_Cultural.html", "Entregable_5_Diseno_Funcional_Sistema_Informacion_Cultural.docx"),
 ]
 SOURCE_DIR = ROOT / "entregables" / "fuentes"
 WORD_DIR = ROOT / "entregables" / "word"
@@ -162,6 +164,81 @@ class Converter:
             cap.runs[0].italic = True
             cap.runs[0].font.size = Pt(8)
 
+    def add_letterhead_table(self, node):
+        table = self.doc.add_table(rows=1, cols=3)
+        table.alignment = WD_TABLE_ALIGNMENT.CENTER
+        table.autofit = False
+        row = table.rows[0]
+        c_left, c_center, c_right = row.cells
+        c_left.width = Inches(1.5)
+        c_center.width = Inches(4.26)
+        c_right.width = Inches(1.5)
+        c_left.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+        c_center.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+        c_right.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+
+        # Left logo
+        logo_path = ROOT / "assets" / "identidad" / "Logo.png"
+        p_left = c_left.paragraphs[0]
+        p_left.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p_left.paragraph_format.space_after = Pt(0)
+        p_left.add_run().add_picture(str(logo_path), height=Inches(0.66))
+
+        # Center text
+        dep_sup = clean_text(node.xpath("string(.//*[contains(@class, 'dep-sup')])"))
+        dep_sub = clean_text(node.xpath("string(.//*[contains(@class, 'dep-sub')])"))
+        doc_title = clean_text(node.xpath("string(.//*[contains(@class, 'doc-title')])"))
+
+        p_center = c_center.paragraphs[0]
+        p_center.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_center.paragraph_format.space_after = Pt(1)
+        r_sup = p_center.add_run(dep_sup or "SECRETARÍA DE CULTURA DEL ESTADO DE GUANAJUATO")
+        r_sup.font.name = "Helvetica Neue"
+        r_sup.font.size = Pt(8.5)
+        r_sup.font.bold = True
+        r_sup.font.color.rgb = RGBColor.from_string("004B87")
+
+        p_sub = c_center.add_paragraph()
+        p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_sub.paragraph_format.space_after = Pt(2)
+        r_sub = p_sub.add_run(dep_sub or "DIRECCIÓN DE PLANEACIÓN • SISTEMA DE INFORMACIÓN CULTURAL")
+        r_sub.font.name = "Helvetica Neue"
+        r_sub.font.size = Pt(7.5)
+        r_sub.font.bold = True
+        r_sub.font.color.rgb = RGBColor.from_string("475569")
+
+        p_title = c_center.add_paragraph()
+        p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_title.paragraph_format.space_after = Pt(0)
+        r_title = p_title.add_run(doc_title)
+        r_title.font.name = "Helvetica Neue"
+        r_title.font.size = Pt(11)
+        r_title.font.bold = True
+        r_title.font.color.rgb = RGBColor.from_string("004B87")
+
+        # Right logo (colorful)
+        pulso_path = ROOT / "assets" / "identidad" / "pulso-q-logo.png"
+        p_right = c_right.paragraphs[0]
+        p_right.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        p_right.paragraph_format.space_after = Pt(0)
+        p_right.add_run().add_picture(str(pulso_path), height=Inches(0.48))
+
+        p_cap = c_right.add_paragraph()
+        p_cap.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        p_cap.paragraph_format.space_after = Pt(0)
+        r_cap = p_cap.add_run("PULSO Q")
+        r_cap.font.name = "Helvetica Neue"
+        r_cap.font.size = Pt(7)
+        r_cap.font.bold = True
+        r_cap.font.color.rgb = RGBColor.from_string("004B87")
+
+        set_cell_bottom_border(c_left, color="69B3E7", size="12")
+        set_cell_bottom_border(c_center, color="69B3E7", size="12")
+        set_cell_bottom_border(c_right, color="69B3E7", size="12")
+
+        p_space = self.doc.add_paragraph()
+        p_space.paragraph_format.space_after = Pt(4)
+
     def add_table(self, node):
         is_signature = "signature-table" in set((node.get("class") or "").split())
         rows = node.xpath(".//tr")
@@ -194,7 +271,46 @@ class Converter:
                 target.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 images = source_cell.xpath(".//img")
                 target.text = ""
-                if images:
+                if is_signature and r == 1:
+                    target.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.BOTTOM
+                    p_space = target.paragraphs[0]
+                    p_space.paragraph_format.space_before = Pt(48)
+                    p_space.paragraph_format.space_after = Pt(2)
+                    
+                    p_line = target.add_paragraph()
+                    p_line.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    p_line.paragraph_format.space_after = Pt(4)
+                    r_line = p_line.add_run("________________________________________")
+                    r_line.font.name = "Helvetica Neue"
+                    r_line.font.size = Pt(8)
+                    r_line.font.bold = True
+                    r_line.font.color.rgb = RGBColor.from_string("004B87")
+
+                    sig_name = clean_text(source_cell.xpath("string(.//*[contains(@class, 'sig-name')])"))
+                    if sig_name:
+                        p_name = target.add_paragraph()
+                        p_name.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                        p_name.paragraph_format.space_after = Pt(2)
+                        r_name = p_name.add_run(sig_name)
+                        r_name.font.name = "Helvetica Neue"
+                        r_name.font.size = Pt(8.5)
+                        r_name.bold = True
+                        r_name.font.color.rgb = RGBColor.from_string("0F172A")
+
+                    sig_role_node = source_cell.xpath(".//*[contains(@class, 'sig-role')]")
+                    if sig_role_node:
+                        role_text = sig_role_node[0].text_content()
+                        for line in [l.strip() for l in role_text.split("\n") if l.strip()]:
+                            p_role = target.add_paragraph()
+                            p_role.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                            p_role.paragraph_format.space_after = Pt(1)
+                            r_role = p_role.add_run(line)
+                            r_role.font.name = "Helvetica Neue"
+                            r_role.font.size = Pt(7.4)
+                            r_role.font.color.rgb = RGBColor.from_string("334155")
+                            if "Directora" in line or "Persona Física" in line:
+                                r_role.bold = True
+                elif images:
                     for image_node in images:
                         src = image_node.get("src")
                         path = (self.source.parent / src).resolve() if src else None
@@ -209,14 +325,15 @@ class Converter:
                     text_p = target.add_paragraph(clean_text(source_cell.text_content()))
                 else:
                     target.text = clean_text(source_cell.text_content())
-                for paragraph in target.paragraphs:
-                    paragraph.paragraph_format.space_after = Pt(1)
-                    for run in paragraph.runs:
-                        run.font.name = "Helvetica Neue"
-                        run.font.size = Pt(7.2 if cols >= 5 else 8)
-                        if source_cell.tag.lower() == "th" or r == 0:
-                            run.bold = True
-                            run.font.color.rgb = RGBColor(255, 255, 255)
+                if not (is_signature and r == 1):
+                    for paragraph in target.paragraphs:
+                        paragraph.paragraph_format.space_after = Pt(1)
+                        for run in paragraph.runs:
+                            run.font.name = "Helvetica Neue"
+                            run.font.size = Pt(7.2 if cols >= 5 else 8)
+                            if source_cell.tag.lower() == "th" or r == 0:
+                                run.bold = True
+                                run.font.color.rgb = RGBColor(255, 255, 255)
                 if source_cell.tag.lower() == "th" or r == 0:
                     set_cell_shading(target, "004B87")
         self.doc.add_paragraph().paragraph_format.space_after = Pt(1)
@@ -254,13 +371,13 @@ class Converter:
             return
         if "area-block" in classes or "safe-page-break" in classes:
             self.doc.add_page_break()
+        if tag == "header" and "letterhead" in classes:
+            self.add_letterhead_table(node)
+            return
         if tag == "img":
             self.add_picture(node)
             return
         if tag == "table":
-            if "signature-table" in classes and not self.source.name.startswith("Entregable_1_"):
-                signature_title = self.doc.add_paragraph("Constancia de entrega para revisión", style="Heading 1")
-                signature_title.paragraph_format.page_break_before = True
             self.add_table(node)
             return
         if tag in {"h1", "h2", "h3", "h4"}:
@@ -316,7 +433,7 @@ class Converter:
 
 
 parser = argparse.ArgumentParser(description="Convierte las fuentes HTML de los entregables a Word editable.")
-parser.add_argument("--only", choices=("1", "2", "4"), help="Convierte únicamente el entregable indicado.")
+parser.add_argument("--only", choices=("1", "2", "3", "4", "5"), help="Convierte únicamente el entregable indicado.")
 parser.add_argument("--output-suffix", default="", help="Texto que se agrega antes de la extensión .docx.")
 args = parser.parse_args()
 

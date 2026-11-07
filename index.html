@@ -1446,18 +1446,45 @@
     }
 
     function formatShortDireccion(rawDir) {
-      const u = cleanStr(rawDir).toUpperCase();
+      const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
       if (!u || u === 'SIN ASIGNAR') return 'Sin Asignar';
-      if (u.includes('MUSEOS')) return 'DG Museos y Artes Visuales';
-      if (u.includes('FORMACIÓN') || u.includes('FORMACION')) return 'DG Formación e Inv.';
-      if (u.includes('EDITORIAL') || u.includes('PUBLICACIONES')) return 'DG Editorial y Publicaciones';
+      if (u.includes('MUSEO')) return 'DG Museos y Artes Visuales';
+      if (u.includes('FORMACION')) return 'DG Formación e Inv.';
+      if (u.includes('EDITORIAL') || u.includes('PUBLICACION')) return 'DG Editorial y Publicaciones';
       if (u.includes('PATRIMONIO')) return 'DG Patrimonio Cultural';
-      if (u.includes('PRODUCCIÓN') || u.includes('PRODUCCION')) return 'DG Producción Artística';
-      if (u.includes('VINCULACIÓN') || u.includes('VINCULACION')) return 'DG Vinculación Cultural';
+      if (u.includes('PRODUCCION')) return 'DG Producción Artística';
+      if (u.includes('VINCULACION')) return 'DG Vinculación Cultural';
       if (u.includes('FORUM')) return 'DG Forum Cultural';
-      if (u.includes('COMUNICACIÓN') || u.includes('COMUNICACION')) return 'Coord. Comunicación Social';
+      if (u.includes('COMUNICACION')) return 'Coord. Comunicación Social';
       const cleaned = cleanStr(rawDir).replace(/DIRECCIÓN GENERAL DE /i, 'DG ');
       return cleaned.length > 26 ? cleaned.substring(0, 24) + '…' : cleaned;
+    }
+
+    function getCanonicalDirection(rawDir, claveProceso, claveProcesoTxt, optCatalog) {
+      const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+      if (u.includes('MUSEO')) return 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES';
+      if (u.includes('FORMACION')) return 'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN';
+      if (u.includes('EDITORIAL') || u.includes('PUBLICACION')) return 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES';
+      if (u.includes('PATRIMONIO')) return 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL';
+      if (u.includes('PRODUCCION')) return 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA';
+      if (u.includes('VINCULACION')) return 'DIRECCIÓN GENERAL DE VINCULACIÓN Y DESARROLLO CULTURAL';
+      if (u.includes('FORUM')) return 'DIRECCIÓN GENERAL DE FORUM';
+      if (u.includes('COMUNICACION')) return 'COORDINACIÓN DE COMUNICACIÓN SOCIAL';
+
+      const catList = optCatalog || (typeof rawDB !== 'undefined' && rawDB && Array.isArray(rawDB.alineacion) ? rawDB.alineacion : []);
+      if (catList && catList.length) {
+        const fkId = String(Math.round(toNum(claveProceso)));
+        const txt = cleanStr(claveProcesoTxt);
+        const match = catList.find(c => {
+          const catId = String(Math.round(toNum(c.ID_Alineacion)));
+          const catCode = cleanStr(c.Clave_Proceso);
+          return (fkId && fkId !== '0' && catId === fkId) || (txt && catCode === txt);
+        });
+        if (match && cleanStr(match.Direccion) && cleanStr(match.Direccion) !== 'SIN ASIGNAR') {
+          return getCanonicalDirection(match.Direccion);
+        }
+      }
+      return 'SIN ASIGNAR';
     }
 
     function normalizeDateISO(val) {
@@ -1646,10 +1673,9 @@
         });
       };
 
-      const allDirs = new Set([
-        ...rawDB.actividades.map(r => cleanStr(r.Direccion)),
-        ...rawDB.alineacion.map(r => cleanStr(r.Direccion))
-      ]);
+      const allDirs = new Set(
+        rawDB.alineacion.map(r => getCanonicalDirection(r.Direccion)).filter(Boolean)
+      );
       const allEjes = new Set([
         ...rawDB.actividades.map(r => cleanStr(r.Eje_PG)),
         ...rawDB.alineacion.map(r => cleanStr(r.Eje_PG))
@@ -1713,7 +1739,7 @@
         const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
         if (dStart && fIso && fIso < dStart) return;
         if (dEnd && fIso && fIso > dEnd) return;
-        if (fDir !== 'ALL' && cleanStr(a.Direccion) !== fDir) return;
+        if (fDir !== 'ALL' && getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) !== fDir) return;
         if (fDisc !== 'ALL' && cleanStr(a.Disciplina) !== fDisc) return;
         if (fEje !== 'ALL' && cleanStr(a.Eje_PG) !== fEje) return;
         if (fEnf !== 'ALL' && cleanStr(a.Enfoque_Actividad) !== fEnf) return;
@@ -1740,7 +1766,7 @@
       });
 
       const catAlF = rawDB.alineacion.filter(c => {
-        if (fDir !== 'ALL' && cleanStr(c.Direccion) !== fDir) return false;
+        if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
         if (fEje !== 'ALL' && cleanStr(c.Eje_PG) !== fEje) return false;
         return true;
       });
@@ -2084,10 +2110,9 @@
     function renderMatrizEstrategica(actF, pobF, terF, catAlF) {
       const directionKey = value => cleanStr(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
       const validDirection = d => d && d !== 'SIN ASIGNAR';
-      const dirsActivas = new Set(actF.map(a => directionKey(a.Direccion)).filter(validDirection));
-      const selectedDirection = directionKey(document.getElementById('f-direccion')?.value || 'ALL');
-      const knownDirections = [...rawDB.actividades, ...actF].filter(a => !CulturaCalidad.isExcluded(a)).map(a => directionKey(a.Direccion)).filter(d => selectedDirection === 'ALL' || d === selectedDirection);
-      const dirsCatalogo = new Set([...catAlF.map(c => directionKey(c.Direccion)), ...knownDirections].filter(validDirection));
+      const sourceCat = catAlF.length > 0 ? catAlF : (typeof rawDB !== 'undefined' && rawDB && rawDB.alineacion ? rawDB.alineacion : []);
+      const dirsCatalogo = new Set(sourceCat.map(c => directionKey(getCanonicalDirection(c.Direccion))).filter(validDirection));
+      const dirsActivas = new Set(actF.map(a => directionKey(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, sourceCat))).filter(d => dirsCatalogo.has(d)));
 
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
@@ -2124,7 +2149,6 @@
         }
       });
 
-      const sourceCat = catAlF.length > 0 ? catAlF : rawDB.alineacion;
       cachedMetasCatalogoRows = sourceCat.map(c => {
         const idAlin = String(Math.round(toNum(c.ID_Alineacion)));
         const clave = cleanStr(c.Clave_Proceso) || 'S/C';
@@ -2190,7 +2214,7 @@
       // Mantiene actF como fuente: todos los filtros del dashboard siguen aplicándose.
       const dirMap = new Map();
       actF.forEach(a => {
-        const name = cleanStr(a.Direccion) || 'SIN ASIGNAR';
+        const name = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, sourceCat);
         dirMap.set(name, (dirMap.get(name) || 0) + 1);
       });
       renderStrategicDirections([...dirMap].sort((a, b) => b[1] - a[1]));

@@ -193,7 +193,7 @@ test('cuenta áreas del catálogo y áreas registradas, sin contar sin asignar',
   s.context.cat = [{ ...cat[0], Direccion: 'DIRECCIÓN GENERAL DE MUSEOS ' }, { ...cat[0], ID_Alineacion: 2, Direccion: 'COORDINACIÓN DE COMUNICACIÓN SOCIAL' }, { ...cat[0], ID_Alineacion: 3, Direccion: 'SIN ASIGNAR' }];
   s.context.act = [{ ...a, Direccion: 'Dirección General de Museos' }, { ...a, ID_Actividad: 'B', Direccion: 'SIN ASIGNAR' }, { ...a, ID_Actividad: 'C', Direccion: 'DIRECCIÓN DE MÚSICA' }];
   vm.runInContext('rawDB.alineacion = cat; renderMatrizEstrategica(act, [], [], cat);', s.context);
-  assert.equal(s.nodes.get('kpi-mat-dir').textContent, '2/3');
+  assert.equal(s.nodes.get('kpi-mat-dir').textContent, '1/2');
 });
 test('la gráfica separa los acumulados sin perder los registros ni mezclar las fuentes de público', () => {
   const s = setup(); const plots = {};

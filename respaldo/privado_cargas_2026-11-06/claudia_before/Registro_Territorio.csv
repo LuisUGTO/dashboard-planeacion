@@ -1,0 +1,1548 @@
+ID_Territorio,ID_Actividad,Municipio,Tipo_Asentamiento,Comunidad,Nombre_Comunidad,Otra_Comunidad,ZAP_Nuevo_Comienzo,ZAP_SSyP,Cantidad,Cantidad_Participacion,Cantidad_Acceso
+4db1e6e8,ACT00031,León,Periurbano,100,Las Joyas,,Si,No,11,11,0
+2d81693b,ACT00032,León,Periurbano,115,El Carmen,,Si,No,8,,8
+635c2bd3,ACT00033,Silao de la Victoria,Urbano,215,Silao,,Si,Si,15,15,0
+9803f503,ACT00034,Silao de la Victoria,Urbano,215,Silao,,Si,Si,12,12,0
+c28cdb33,ACT00035,Silao de la Victoria,Urbano,215,Silao,,Si,Si,28,28,0
+88f64665,ACT00036,León,Periurbano,100,Las Joyas,,Si,No,24,24,0
+6143a7e4,ACT00037,León,Periurbano,100,Las Joyas,,Si,No,10,10,0
+bfb569f3,ACT00038,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,101,0
+0229b757,ACT00039,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,101,0
+230eb128,ACT00040,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+1aadd56c,ACT00041,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,101,0
+5d4f3ca5,ACT00042,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+73fac33e,ACT00043,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+36df9867,ACT00044,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+d41e5cba,ACT00045,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+615b692e,ACT00046,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+8fadd5d8,ACT00017,León,Urbano,,,La Martinica,No,No,62,20,42
+6a4f19f2,ACT00018,León,Urbano,,,La Martinica,No,No,146,17,129
+ff181aeb,ACT00019,León,Urbano,,,La Martinica,No,No,26,26,0
+ae5f76ef,ACT00020,León,Urbano,,,La Martinica,No,No,16,16,0
+7e8b2e19,ACT00021,León,Urbano,,,La Martinica,No,No,146,17,129
+3b2905c8,ACT00023,León,Urbano,,,La Martinica,No,No,352,,352
+f64e11ca,ACT00024,León,Urbano,,,La Martinica,No,No,214,,214
+28aa1a2e,ACT00025,León,Urbano,,,La Martinica,No,No,30,1,29
+94c7aafa,ACT00026,León,Urbano,,,La Martinica,No,No,7,7,0
+8e7764b4,ACT00027,León,Urbano,,,La Martinica,No,No,119,,119
+53fe3fb0,ACT00028,León,Urbano,,,La Martinica,No,No,67,8,59
+9d52d8b6,ACT00029,León,Urbano,,,La Martinica,No,No,44,1,43
+45d69317,ACT00030,León,Urbano,,,La Martinica,No,No,82,1,81
+45d6931x,ACT-SCYJ01916,Guanajuato,Urbano,,Guanajuato,,Si,Si,18,0,18
+4c11174b,ACT-SCHP41657,Guanajuato,Urbano,49,Guanajuato,,Si,Si,33,,33
+9d2da3d8,ACT-SCXD05649,Guanajuato,Urbano,49,Guanajuato,,Si,Si,11,11,0
+565f3868,ACT-SCQF07472,Guanajuato,Urbano,49,Guanajuato,,Si,Si,20,,20
+a2236ecd,ACT-SCNJ91361,Guanajuato,Urbano,49,Guanajuato,,Si,Si,53,53,0
+80ad4989,ACT-SCNO77641,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,49,,49
+0c520435,ACT-SCEB55079,Guanajuato,Urbano,49,Guanajuato,,Si,Si,44,44,0
+fd8fa7a8,ACT-SCAN56678,Guanajuato,Urbano,49,Guanajuato,,Si,Si,3,,3
+7ab0d684,ACT-SCFI49355,Guanajuato,Urbano,49,Guanajuato,,Si,Si,15,,15
+1301aa39,ACT-SCJD19095,Guanajuato,Urbano,49,Guanajuato,,Si,Si,16,,16
+e7564688,ACT-SCZZ10210,Guanajuato,Urbano,49,Guanajuato,,Si,Si,42,,42
+5dbe9294,ACT-SCGV04211,Guanajuato,Urbano,49,Guanajuato,,Si,Si,13,13,0
+0270c462,ACT-SCMY03003,Guanajuato,Urbano,49,Guanajuato,,Si,Si,78,,78
+b3e84801,ACT-SCKO16141,Guanajuato,Urbano,49,Guanajuato,,Si,Si,4,4,0
+10b2ece4,ACT-SCJC28810,Guanajuato,Urbano,49,Guanajuato,,Si,Si,3,3,0
+c00ccf39,ACT-SCWL91147,Guanajuato,Urbano,49,Guanajuato,,Si,Si,22,22,0
+4a84c156,ACT-SCFA11501,Guanajuato,Urbano,49,Guanajuato,,Si,Si,79,79,0
+7ec2fd5b,ACT-SCSV85618,Guanajuato,Urbano,49,Guanajuato,,Si,Si,115,115,0
+be305719,ACT-SCQV21814,Guanajuato,Urbano,49,Guanajuato,,Si,Si,170,170,0
+9794e7bf,ACT-SCVO74171,Guanajuato,Urbano,49,Guanajuato,,Si,Si,4,4,0
+e6696ec0,ACT-SCUZ80082,Guanajuato,Urbano,49,Guanajuato,,Si,Si,40,,40
+332249d0,ACT-SCRE54917,Guanajuato,Urbano,49,Guanajuato,,Si,Si,5,5,0
+9d74ad68,ACT-SCJS28324,Guanajuato,Urbano,49,Guanajuato,,Si,Si,8,8,0
+ccfb0687,ACT-SCQW88822,Guanajuato,Urbano,49,Guanajuato,,Si,Si,2,2,0
+731ebe28,ACT-SCGF02574,Guanajuato,Urbano,49,Guanajuato,,Si,Si,42,42,0
+67d2e2c5,ACT-SCDO56831,Guanajuato,Urbano,49,Guanajuato,,Si,Si,15,15,0
+fc4923ff,ACT-SCID52619,Guanajuato,Urbano,49,Guanajuato,,Si,Si,5,5,0
+a941cafd,ACT-SCFY90265,Guanajuato,Urbano,49,Guanajuato,,Si,Si,4,4,0
+e9575eb8,ACT-SCRR27760,Guanajuato,Urbano,49,Guanajuato,,Si,Si,4,4,0
+43160394,ACT-SCAF80267,Guanajuato,Urbano,49,Guanajuato,,Si,Si,50,50,0
+f5562d24,ACT-SCCR74811,Guanajuato,Rural,49,Guanajuato,,Si,Si,41,41,0
+3a2d8a91,ACT-SCFB28687,Guanajuato,Urbano,49,Guanajuato,,Si,Si,18,18,0
+ad3cadd4,ACT-SCEY53656,Guanajuato,Urbano,49,Guanajuato,,Si,Si,29,29,0
+27b2dc0e,ACT-SCLN82017,Guanajuato,Urbano,49,Guanajuato,,No,No,29,29,0
+6508bb72,ACT-SCOL36987,Guanajuato,Rural,49,Guanajuato,,Si,Si,86,86,0
+f51f95aa,ACT-SCPT13660,Guanajuato,Urbano,49,Guanajuato,,Si,Si,22,22,0
+870a1955,ACT-SCJK83217,Guanajuato,Urbano,,,,No,No,22,22,0
+fbad417a,ACT-SCAP74839,Guanajuato,Urbano,,,,No,No,61,61,0
+b973695e,ACT-SCZY13401,Guanajuato,Urbano,,,,No,No,92,,92
+3a35508f,ACT-SCSH02504,Guanajuato,Urbano,,,,No,No,45,45,0
+cd440d34,ACT-SCZG64402,Guanajuato,Urbano,,,,No,No,20,20,0
+ae8faa78,ACT-SCRW57264,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,24,24,0
+82929300,ACT-SCRO46689,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,22,,22
+69975b12,ACT-SCWW16326,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,26,,26
+b7ade0ed,ACT-SCSX44941,Guanajuato,Urbano,,,ZONA CENTRO,No,No,20,,20
+894316cb,ACT-SCMS43271,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,50,,50
+82f493d3,ACT-SCPY84321,Guanajuato,Urbano,,,,No,No,375,,375
+1a52a00a,ACT-SCCK59938,Guanajuato,Urbano,,,ZONA CENTRO,No,No,31,,31
+263eb7e9,ACT-SCHE27788,Guanajuato,Urbano,,,ZONA CENTRO,No,No,268,,268
+9eba1084,ACT-SCQN89526,Guanajuato,Urbano,,,ZONA CENTRO,No,No,12,,12
+aeaf18e1,ACT-SCQZ87444,Guanajuato,Urbano,,,ZONA CENTRO,No,No,13,,13
+d8423119,ACT-SCZI86402,Guanajuato,Urbano,,,,No,No,0,,0
+21d9139f,ACT-SCHH09885,Guanajuato,Urbano,,,ZONA CENTRO,No,No,255,,255
+bb3f44b9,ACT-SCAZ01656,Guanajuato,Urbano,,,ZONA CENTRO,No,No,3,,3
+30456bd0,ACT-SCKW17009,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,4,,4
+574483d1,ACT-SCXT69671,Guanajuato,Urbano,,,ZONA CENTRO,No,No,3,,3
+47e3da24,ACT-SCCB66394,Guanajuato,Urbano,,,,No,No,2,,2
+fc3409ac,ACT-SCVT09644,Guanajuato,Urbano,,,,No,No,2,,2
+99a1872c,ACT-SCRN21273,Guanajuato,Urbano,,,,No,No,2,,2
+e61a5b85,ACT-SCQL83167,Guanajuato,Urbano,,,,No,No,2,,2
+db49b355,ACT-SCMZ54375,Guanajuato,Urbano,,,,No,No,2,,2
+668b4560,ACT-SCVP20410,Guanajuato,Urbano,,,,No,No,26,,26
+11611566,ACT-SCWC72951,Guanajuato,Urbano,,,,No,No,17,,17
+a1a8569e,ACT-SCOJ61319,Guanajuato,Urbano,,,,No,No,22,,22
+89c2ab17,ACT-SCQS70160,Guanajuato,Urbano,,,ZONA CENTRO,No,No,74,,74
+811dd022,ACT-SCQP56334,Guanajuato,Urbano,,,,No,No,65,,65
+19cf0142,ACT-SCWW65984,Guanajuato,Urbano,,,ZONA CENTRO,No,No,8,,8
+7c75805d,ACT-SCKC43099,Guanajuato,Urbano,,,ZONA CENTRO,No,No,12,,12
+9539284d,ACT-SCJK78780,Guanajuato,Urbano,,,ZONA CENTRO,No,No,13,,13
+b2532d76,ACT-SCTN33043,Guanajuato,Urbano,,,ZONA CENTRO,No,No,27,27,0
+5734f4fa,ACT-SCFT66371,Guanajuato,Urbano,,,ZONA CENTRO,No,No,19,,19
+7138c6eb,ACT-SCDW48745,Guanajuato,Urbano,,,ZONA CENTRO,No,No,7,7,0
+95b6639e,ACT-SCXA58208,Guanajuato,Rural,,,ZONA CENTRO,No,No,19,19,0
+afc08eaa,ACT-SCGA50478,Guanajuato,Urbano,,,ZONA CENTRO,No,No,103,,103
+12882c4e,ACT-SCTP89307,Purísima del Rincón,Urbano,171,Purísima,,Si,No,55,,55
+10e8cda5,ACT-SCGW11311,Purísima del Rincón,Urbano,171,Purísima,,Si,No,22,22,0
+1cd76cc8,ACT-SCZD01303,Purísima del Rincón,Urbano,171,Purísima,,Si,No,159,,159
+b6f30544,ACT-SCNQ95807,Purísima del Rincón,Urbano,171,Purísima,,Si,No,32,32,0
+d7a91201,ACT-SCAL57574,Purísima del Rincón,Urbano,171,Purísima,,Si,No,32,32,0
+c1c268b3,ACT-SCCA19851,Purísima del Rincón,Urbano,171,Purísima,,Si,No,15,15,0
+714bdf49,ACT-SCWV81142,Purísima del Rincón,Urbano,171,Purísima,,Si,No,61,61,0
+39e676a2,ACT-SCOL78465,Purísima del Rincón,Urbano,171,Purísima,,Si,No,30,30,0
+67f17129,ACT-SCBL86377,Purísima del Rincón,Urbano,171,Purísima,,Si,No,4,4,0
+ac9d9c08,ACT-SCKA45847,Purísima del Rincón,Urbano,171,Purísima,,Si,No,15,,15
+ae752625,ACT-SCFB65135,Purísima del Rincón,Urbano,171,Purísima,,Si,No,27,27,0
+6a66f295,ACT-SCMK74426,Purísima del Rincón,Urbano,171,Purísima,,Si,No,54,54,0
+44fb5da6,ACT-SCTH69990,Purísima del Rincón,Urbano,171,Purísima,,Si,No,45,45,0
+fda7b47d,ACT-SCSH86841,Purísima del Rincón,Urbano,171,Purísima,,Si,No,30,30,0
+65e57eb0,ACT-SCJJ15015,Purísima del Rincón,Urbano,171,Purísima,,Si,No,70,70,0
+1f4c7c70,ACT-SCAE27878,Purísima del Rincón,Urbano,171,Purísima,,Si,No,43,43,0
+f4909de3,ACT-SCGU37117,Purísima del Rincón,Urbano,171,Purísima,,Si,No,18,18,0
+b98b2b6d,ACT-SCNM90733,Purísima del Rincón,Urbano,171,Purísima,,Si,No,29,29,0
+dc84feee,ACT-SCEK01502,Purísima del Rincón,Urbano,171,Purísima,,Si,No,14,14,0
+adcab8cb,ACT-SCAQ65320,Purísima del Rincón,Urbano,171,Purísima,,Si,No,67,67,0
+cd916466,ACT-SCUZ08441,Purísima del Rincón,Urbano,171,Purísima,,Si,No,19,19,0
+60ee583a,ACT-SCLW02149,Purísima del Rincón,Urbano,171,Purísima,,Si,No,78,,78
+4a3dd377,ACT-SCOX41959,Purísima del Rincón,Urbano,171,Purísima,,Si,No,54,54,0
+c0e9390d,ACT-SCSI98628,Tierra Blanca,Urbano,223,Tierra Blanca,,Si,No,10900,,10900
+32395642,ACT-SCRP99464,San Luis de la Paz,Urbano,201,San Luis de la Paz,,Si,Si,61000,,61000
+73b9b9af,ACT-SCBT53042,Purísima del Rincón,Urbano,171,Purísima,,Si,No,2,2,0
+894063ee,ACT-SCLF06356,Purísima del Rincón,Urbano,171,Purísima,,Si,No,23,,23
+7691a6e9,ACT-SCOF92079,Purísima del Rincón,Urbano,171,Purísima,,Si,No,4,4,0
+,,,,,,,,,,,
+0ddbbd0c,ACT-SCGN01852,Guanajuato,Urbano,49,Guanajuato,,Si,Si,2180,,2180
+839d049a,ACT-SCFU00828,Guanajuato,Urbano,49,Guanajuato,,Si,Si,2180,,2180
+e620ece0,ACT-SCMA89737,Guanajuato,Urbano,49,Guanajuato,,Si,Si,150,,150
+0b7d49ed,ACT-SCGD31598,Guanajuato,Urbano,,,ZONA CENTRO,No,No,100,,100
+43e1d354,ACT-SCCM74525,Guanajuato,Urbano,49,Guanajuato,,Si,Si,2180,,2180
+08c4a117,ACT-SCQU60313,Guanajuato,Urbano,49,Guanajuato,,Si,Si,2180,,2180
+a38c33f5,ACT-SCEV02279,Guanajuato,Urbano,49,Guanajuato,,Si,Si,78,,78
+0c51bad6,ACT-SCVU78547,Guanajuato,Urbano,,,GUANAJUATO CENTRO,No,No,40,,40
+e6f444c3,ACT-SCIE43011,Guanajuato,Urbano,49,Guanajuato,,Si,Si,268,,268
+bc79c9f4,ACT-SCSC42201,Guanajuato,Urbano,,,,No,No,103,,103
+edafee0a,ACT-SCZJ59182,Purísima del Rincón,Urbano,171,Purísima,,Si,No,23,23,0
+32300ea8,ACT-SCIN28718,Guanajuato,Urbano,49,Guanajuato,,Si,Si,60,,60
+d25c5b3f,ACT-SCSM43229,León,Urbano,,,La Martinica,No,No,24,,24
+b0c86ee3,ACT-SCBC60407,León,Urbano,,,La Martinica,No,No,8,,8
+0f0ae30d,ACT-SCOE58638,León,Urbano,,,La Martinica,No,No,34,,34
+0d7a02e2,ACT-SCQQ30458,León,Urbano,,,La Martinica,No,No,7,,7
+a23d91db,ACT-SCGL39605,León,Urbano,,,La Martinica,No,No,70,,70
+9d2f7f65,ACT-SCWD48387,León,Urbano,,,La Martinica,No,No,30,,30
+69c9d5d1,ACT-SCWJ67413,León,Urbano,,,La Martinica,No,No,23,,23
+37d9626a,ACT-SCIE30645,León,Urbano,,,La Martinica,No,No,142,,142
+63884486,ACT-SCUF74629,Silao de la Victoria,Urbano,215,Silao,,Si,Si,13,13,0
+655d5e7d,ACT-SCQD94004,Silao de la Victoria,Urbano,215,Silao,,Si,Si,37,37,0
+a885fee5,ACT-SCWK91279,Silao de la Victoria,Urbano,215,Silao,,Si,Si,80,80,0
+6b193619,ACT-SCGZ69056,Silao de la Victoria,Urbano,215,Silao,,Si,Si,25,25,0
+c30746ff,ACT-SCIZ23576,Silao de la Victoria,Urbano,215,Silao,,Si,Si,31,31,0
+85e30a41,ACT-SCXV96959,Silao de la Victoria,Urbano,215,Silao,,Si,Si,29,29,0
+cf1530f2,ACT-SCKC53281,Silao de la Victoria,Urbano,215,Silao,,Si,Si,15,,15
+802ec2c9,ACT-SCDN33785,Silao de la Victoria,Urbano,215,Silao,,Si,Si,29,,29
+e5328b82,ACT-SCCA07519,Silao de la Victoria,Urbano,215,Silao,,Si,Si,28,28,0
+9348a770,ACT-SCSJ46627,Silao de la Victoria,Urbano,215,Silao,,Si,Si,6,6,0
+cc9907d0,ACT-SCMV29363,Silao de la Victoria,Urbano,215,Silao,,Si,Si,3,,3
+df3951b4,ACT-SCIP85126,Silao de la Victoria,Urbano,215,Silao,,Si,Si,155,,155
+1d43e932,ACT-SCBC19659,Silao de la Victoria,Urbano,215,Silao,,Si,Si,89,,89
+24416ad8,ACT-SCBT73191,Silao de la Victoria,Urbano,215,Silao,,Si,Si,82,,82
+72ad69b3,ACT-SCDB68442,Silao de la Victoria,Urbano,215,Silao,,Si,Si,101,,101
+5a7e5eb9,ACT-SCFF91218,Silao de la Victoria,Urbano,215,Silao,,Si,Si,4,4,0
+d87315a1,ACT-SCSR73635,Silao de la Victoria,Urbano,215,Silao,,Si,Si,27,,27
+e7247faa,ACT-SCZR48473,Silao de la Victoria,Urbano,215,Silao,,Si,Si,34,,34
+13b3b6cf,ACT-SCMR72135,Silao de la Victoria,Urbano,215,Silao,,Si,Si,25,,25
+d3201ec0,ACT-SCWY89313,Silao de la Victoria,Urbano,215,Silao,,Si,Si,29,29,0
+f0b514e7,ACT-SCYM74376,Silao de la Victoria,Urbano,215,Silao,,Si,Si,18,18,0
+e8c24494,ACT-SCUW89025,Silao de la Victoria,Urbano,215,Silao,,Si,Si,16,16,0
+4860c88b,ACT-SCRV34557,Silao de la Victoria,Urbano,215,Silao,,Si,Si,18,,18
+af5603db,ACT-SCBR42021,Silao de la Victoria,Urbano,215,Silao,,Si,Si,34,,34
+6ef0c93e,ACT-SCNR35912,Silao de la Victoria,Urbano,215,Silao,,Si,Si,29,,29
+deb62fcd,ACT-SCKK48572,Salvatierra,Urbano,187,Salvatierra,,Si,Si,34255,,34255
+3ed4adda,ACT-SCVW61936,Ciudad Manuel Doblado,Urbano,,,,No,No,33843,,33843
+67814c53,ACT-SCZL12704,Salvatierra,Urbano,187,Salvatierra,,Si,Si,40,40,0
+14ffd676,ACT-SCIW12431,Ciudad Manuel Doblado,Urbano,,,,No,No,11,11,0
+7dd24e9e,ACT-SCKP18157,Ciudad Manuel Doblado,Urbano,,,,No,No,22,22,0
+476ae39f,ACT-SCJN51368,Ciudad Manuel Doblado,Urbano,,,,No,No,11,11,0
+0863ea19,ACT-SCPE48487,Purísima del Rincón,Urbano,171,Purísima,,Si,No,21,21,0
+429df696,ACT-SCFP85411,San Luis de la Paz,Urbano,201,San Luis de la Paz,,Si,Si,7,7,0
+a6078a54,ACT-SCQI25133,León,Urbano,,,La Martinica,No,No,52,52,0
+01f19e80,ACT-SCCQ09985,León,Urbano,,,La Martinica,No,No,40,40,0
+9c844ef5,ACT-SCVH91156,León,Urbano,,,La Martinica,No,No,45,45,0
+f99b5ab6,ACT-SCLB21945,León,Urbano,,,La Martinica,No,No,62,62,0
+5c21f7fc,ACT-SCJB27190,León,Urbano,,,La Martinica,No,No,20,20,0
+23ae19ac,ACT-SCEO45859,León,Urbano,,,La Martinica,No,No,45,45,0
+a07f9b5e,ACT-SCJW36296,León,Urbano,,,La Martinica,No,No,50,,50
+25b47f2c,ACT-SCPH90627,León,Urbano,,,La Martinica,No,No,50,,50
+ea8501d9,ACT-SCPN85383,León,Urbano,,,La Martinica,No,No,42,,42
+c9427865,ACT-SCAD89173,León,Urbano,,,La Martinica,No,No,43,,43
+b38f2f94,ACT-SCFR38877,León,Urbano,,,La Martinica,No,No,50,,50
+492b84a0,ACT-SCOC68941,León,Urbano,,,La Martinica,No,No,51,,51
+f60c1105,ACT-SCUD84258,León,Urbano,,,La Martinica,No,No,43,,43
+7c1bd3dc,ACT-SCUI45342,León,Urbano,,,La Martinica,No,No,70,,70
+2f9a81d5,ACT-SCBR82299,León,Urbano,,,La Martinica,No,No,60,,60
+c07af695,ACT-SCWV39108,León,Urbano,,,La Martinica,No,No,42,,42
+95144d5a,ACT-SCFY04264,León,Urbano,,,La Martinica,No,No,42,,42
+0d7ba978,ACT-SCID84291,León,Urbano,,,La Martinica,No,No,220,220,0
+7e3ff1fb,ACT-SCVP63501,León,Urbano,,,La Martinica,No,No,75,,75
+cbf5d6b6,ACT-SCYN16296,León,Urbano,,,La Martinica,No,No,43,,43
+58772078,ACT-SCWK56570,León,Urbano,,,La Martinica,No,No,41,,41
+13e4c0a0,ACT-SCAX49507,León,Urbano,,,La Martinica,No,No,49,,49
+570cfba6,ACT-SCBV35787,León,Urbano,,,La Martinica,No,No,8,8,0
+eb438725,ACT-SCCG56880,León,Urbano,,,La Martinica,No,No,41,41,0
+102cf3cf,ACT-SCGH08916,León,Urbano,,,La Martinica,No,No,43,,43
+d7a737e1,ACT-SCCT66497,León,Urbano,,,La Martinica,No,No,39,,39
+fe27bd99,ACT-SCPA84703,León,Urbano,,,La Martinica,No,No,52,,52
+96e25dfd,ACT-SCNX70930,León,Urbano,,,La Martinica,No,No,52,,52
+138abada,ACT-SCXF06033,León,Urbano,,,La Martinica,No,No,135,,135
+c36dbb30,ACT-SCYE97931,León,Urbano,,,La Martinica,No,No,83,,83
+c98e0fa8,ACT-SCYZ76922,León,Urbano,,,La Martinica,No,No,92,,92
+459aac2c,ACT-SCYV98198,León,Urbano,,,La Martinica,No,No,83,,83
+234b1ad8,ACT-SCGK42453,León,Urbano,,,La Martinica,No,No,47,,47
+cd2b4d63,ACT-SCHE24369,León,Urbano,,,La Martinica,No,No,37,,37
+2d380e90,ACT-SCMQ02384,León,Urbano,,,La Martinica,No,No,122,,122
+7549335b,ACT-SCXN37407,León,Urbano,,,La Martinica,No,No,4,4,0
+07c5fdb3,ACT-SCVB95206,León,Urbano,,,La Martinica,No,No,24,24,0
+717fd5b4,ACT-SCEP49266,León,Urbano,,,La Martinica,No,No,19,19,0
+e4989bb4,ACT-SCWB71791,León,Urbano,,,La Martinica,No,No,25,25,0
+67602eee,ACT-SCRL38727,León,Urbano,,,La Martinica,No,No,369,,369
+125efa4c,ACT-SCUA40620,León,Urbano,,,La Martinica,No,No,9,,9
+e949d942,ACT-SCSN66813,León,Urbano,,,La Martinica,No,No,40,,40
+0aeeecf8,ACT-SCJW65154,León,Urbano,,,La Martinica,No,No,220,,220
+479b0f8c,ACT-SCVZ34613,Silao de la Victoria,Urbano,215,Silao,,Si,Si,234,,234
+65a4ee9b,ACT-SCOW48414,Purísima del Rincón,Urbano,171,Purísima,,Si,No,5,,5
+d0abd86c,ACT-SCSV85126,Guanajuato,Urbano,49,Guanajuato,,Si,Si,26,26,0
+3f2afba5,ACT-SCVE80091,León,Urbano,,,La Martinica,No,No,44,,44
+52dbbc59,ACT-SCYL97728,León,Urbano,,,La Martinica,No,No,29,,29
+416bb468,ACT-SCOG95384,León,Urbano,,,La Martinica,No,No,21,,21
+15b0477b,ACT-SCHN23680,León,Urbano,,,La Martinica,No,No,9,,9
+8922953a,ACT-SCND30007,León,Urbano,,,La Martinica,No,No,9,,9
+c1ef70c5,ACT-SCUF33401,León,Urbano,,,La Martinica,No,No,26,,26
+c30a8f3f,ACT-SCUY62458,Silao de la Victoria,Urbano,215,Silao,,Si,Si,11,11,0
+a4b3c1b4,ACT-SCDO40520,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,66,66,0
+545cec37,ACT-SCDP05616,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,38,38,0
+f1945a01,ACT-SCEO07614,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,1,,1
+631ee54d,ACT-SCWX99960,León,Urbano,,,La Martinica,No,No,44,,44
+b8054aec,ACT-SCGS78184,León,Urbano,,,La Martinica,No,No,29,,29
+92f49eb8,ACT-SCMS87299,León,Urbano,,,La Martinica,No,No,21,,21
+d36a61d4,ACT-SCDK66386,León,Urbano,,,La Martinica,No,No,9,,9
+e2bf7f9f,ACT-SCXR04810,León,Urbano,,,La Martinica,No,No,9,,9
+9b104c91,ACT-SCZC82172,León,Urbano,,,La Martinica,No,No,26,,26
+e2c320cb,ACT-SCMX20599,León,Urbano,,,,No,No,30,,30
+ad544491,ACT-SCRS70126,León,Urbano,,,,No,No,2,,2
+a1e60d22,ACT-SCTK25725,León,Urbano,,,,No,No,30,,30
+8832c3bf,ACT-SCOC09402,León,Urbano,,,,No,No,10,10,0
+ff8d8104,ACT-SCCP67857,León,Urbano,,,,No,No,11,,11
+f8141f58,ACT-SCCS62268,León,Urbano,,,,No,No,17,,17
+0ca4a839,ACT-SCNW14743,León,Urbano,,,,No,No,2,,2
+40efc309,ACT-SCLT40746,León,Urbano,,,,No,No,27,,27
+08eaab98,ACT-SCOZ36852,León,Urbano,,,,No,No,214,,214
+b7149333,ACT-SCVP57572,León,Urbano,,,,No,No,8,,8
+7649794b,ACT-SCIO65695,León,Urbano,,,,No,No,8,,8
+875c60b6,ACT-SCVZ90691,León,Urbano,,,,No,No,26,,26
+fec03aeb,ACT-SCMD86853,León,Urbano,,,,No,No,26,,26
+ee46ec4a,ACT-SCBM83374,León,Urbano,,,,No,No,49,,49
+3ea8800b,ACT-SCRQ30368,León,Urbano,,,,No,No,49,,49
+55d5e9d0,ACT-SCYT87172,León,Urbano,,,,No,No,19,,19
+5b50f843,ACT-SCOL16601,León,Urbano,,,,No,No,3,,3
+6e812b7c,ACT-SCRP08378,León,Urbano,,,,No,No,4,,4
+1e9ae1b0,ACT-SCRE99313,León,Urbano,,,,No,No,9,,9
+cfc2ab83,ACT-SCAH67848,León,Urbano,,,,No,No,31,,31
+334c72f4,ACT-SCAH55092,León,Urbano,,,,No,No,6,,6
+f2087ce0,ACT-SCVR60755,León,Urbano,,,,No,No,7,7,0
+edaf2b5a,ACT-SCZJ44226,Huanímaro,Urbano,,,,No,No,13117,,13117
+24c9ca1e,ACT-SCTR14537,Jaral del Progreso,Urbano,84,Jaral del Progreso,,Si,Si,20960,,20960
+153d6c9a,ACT-SCJY66694,Jaral del Progreso,Urbano,84,Jaral del Progreso,,Si,Si,15,,15
+7fe1cf30,ACT-SCVX69015,Huanímaro,Urbano,55,Huanímaro,,Si,No,34,,34
+dd6bb46f,ACT-SCPO47673,Silao de la Victoria,Urbano,215,Silao,,Si,Si,31,31,0
+3f0dcc9e,ACT-SCSM61699,Silao de la Victoria,Urbano,215,Silao,,Si,Si,15,15,0
+da8c9e92,ACT-SCEC78279,Silao de la Victoria,Urbano,215,Silao,,Si,Si,35,,35
+b5a60c3d,ACT-SCIA91121,Silao de la Victoria,Urbano,215,Silao,,Si,Si,18,,18
+6da85f76,ACT-SCNU32492,León,Urbano,,,,No,No,15,15,0
+7d87080a,ACT-SCFL23776,León,Urbano,,,,No,No,10,10,0
+547003d1,ACT-SCJI40826,León,Urbano,,,,No,No,38,,38
+b49660f0,ACT-SCQP93296,León,Urbano,,,,No,No,51,,51
+814f73ad,ACT-SCYW55899,León,Urbano,,,,No,No,34,,34
+5f4f1cfd,ACT-SCWZ49328,León,Urbano,,,,No,No,23,,23
+4c43202e,ACT-SCBS15027,León,Urbano,,,,No,No,18,18,0
+3187ef2b,ACT-SCRN39622,León,Urbano,,,,No,No,7,7,0
+6cfe6dd8,ACT-SCMN07435,León,Urbano,,,,No,No,7,7,0
+37d9eca4,ACT-SCNF61446,León,Urbano,,,,No,No,10,10,0
+5262f1b4,ACT-SCDZ82003,León,Urbano,,,,No,No,55,55,0
+dd1f8590,ACT-SCOJ18223,León,Urbano,,,,No,No,9,9,0
+438f0292,ACT-SCYI34868,León,Urbano,,,,No,No,96,,96
+b7cc9e90,ACT-SCLZ98766,León,Urbano,,,,No,No,96,,96
+c9f2322b,ACT-SCZY20708,León,Urbano,,,,No,No,87,,87
+8b73568c,ACT-SCPR20785,León,Urbano,,,,No,No,130,,130
+40b591ee,ACT-SCEM90365,León,Urbano,,,,No,No,15,,15
+d47ba2c2,ACT-SCZA06114,León,Urbano,,,,No,No,46,46,0
+0e63da2a,ACT-SCLR62190,León,Urbano,,,,No,No,14,,14
+f1269da0,ACT-SCNH26698,León,Urbano,,,,No,No,141,,141
+037d8151,ACT-SCYI20383,León,Urbano,,,,No,No,21,,21
+23e3f879,ACT-SCHW41152,León,Urbano,,,,No,No,136,0,136
+44317a5c,ACT-SCXE00182,León,Urbano,,,,No,No,47,,47
+f4cb14a7,ACT-SCLZ36153,Guanajuato,Urbano,,,,No,No,71,,71
+b9ad008a,ACT-SCIW82641,Guanajuato,Urbano,49,Guanajuato,,Si,Si,24,,24
+4ca4a50a,ACT-SCTW87174,Guanajuato,Urbano,,,,No,No,19,19,0
+9283d901,ACT-SCMI23044,Guanajuato,Urbano,,,,No,No,35,35,0
+64a0d378,ACT-SCRK24440,Guanajuato,Urbano,,,,No,No,13,,13
+b0fa9ab2,ACT-SCAS85845,Guanajuato,Urbano,,,,No,No,55,55,0
+e7f61cf4,ACT-SCZE71261,Guanajuato,Urbano,49,Guanajuato,,Si,Si,17,17,0
+7ea7981f,ACT-SCIT34845,Guanajuato,Urbano,49,Guanajuato,,Si,Si,19,,19
+ef05730f,ACT-SCHK67760,Guanajuato,Urbano,,,,No,No,19,,19
+57187227,ACT-SCAX15944,Guanajuato,Urbano,,,,No,No,19,19,0
+55085379,ACT-SCLB87432,Silao de la Victoria,Urbano,215,Silao,,Si,Si,10,,10
+26ca7707,ACT-SCQN00282,Guanajuato,Urbano,49,Guanajuato,,Si,Si,30,30,0
+f7d40f48,ACT-SCHU10776,Guanajuato,Urbano,,,,No,No,3,,3
+60c1efc7,ACT-SCDT56541,Guanajuato,Urbano,,,,No,No,31,31,0
+f89db9f9,ACT-SCFC55475,Guanajuato,Urbano,,,,No,No,9,9,0
+822740a7,ACT-SCGS74384,Guanajuato,Urbano,,,,No,No,18,,18
+c670cb86,ACT-SCNF45811,Guanajuato,Urbano,,,,No,No,25,,25
+41817708,ACT-SCML75018,Guanajuato,Urbano,,,,No,No,10,,10
+1abb1273,ACT-SCOW93048,Guanajuato,Urbano,,,,No,No,18,,18
+617e136c,ACT-SCCL84222,Guanajuato,Urbano,,,,No,No,13,,13
+a32a788c,ACT-SCSL55418,Guanajuato,Urbano,,,,No,No,6,,6
+48c9364b,ACT-SCMG26633,Guanajuato,Urbano,,,,No,No,4,,4
+f62c562b,ACT-SCBR91119,Guanajuato,Urbano,,,,No,No,13,,13
+f56c88d0,ACT-SCXX09472,Guanajuato,Urbano,0,Zona centro,,,,22,1,21
+3fde7cdc,ACT-SCHG41917,Guanajuato,Urbano,0,Zona centro,,,,63,13,50
+e1294bb5,ACT-SCTQ57837,Guanajuato,Urbano,0,Zona centro,,,,5969,14,5955
+086d77b6,ACT-SCWI08231,León,Urbano,,Zona centro,,No,No,118,,118
+35b295f4,ACT-SCBV52724,San Miguel de Allende,Rural,204,San Miguel de Allende,,Si,Si,49465,0,49465
+a8b80110,ACT-SCCO91399,León,Urbano,93,Leon 1,,Si,Si,6,1,5
+672e67ac,ACT-SCFB82875,Guanajuato,Urbano,49,Guanajuato,,Si,Si,28,27,1
+466e653b,ACT-SCFB82875,San Miguel de Allende,Urbano,204,San Miguel de Allende,,Si,Si,300,,300
+f8723946,ACT-SCIG15181,Ciudad de México,Urbano,,Zona centro,,No,No,300,,300
+8f6806e9,ACT-SCDJ57410,Comonfort,Urbano,28,Comonfort,,Si,Si,20,20,0
+d8507719,ACT-SCMI05636,Acámbaro,Periurbano,,Zona centro,ftgfdgfdg,No,No,16,3,13
+1a1bb7cb,ACT-SCDR96816,Guanajuato,Urbano,,Zona centro,,No,No,4,4,0
+08d11cbf,ACT-SCHD32027,Guanajuato,Urbano,,Zona centro,,No,No,3,3,0
+9446b28f,ACT-SCTH51490,Guanajuato,Urbano,,Zona centro,,No,No,13,13,0
+8b9c93df,ACT-SCNE08864,Guanajuato,Urbano,,Zona centro,,No,No,40,40,0
+2afb1b26,ACT-SCIS40701,Guanajuato,Urbano,,Zona centro,,No,No,15,15,0
+781b65d5,ACT-SCSC14496,Guanajuato,Urbano,,Zona centro,,No,No,13,13,0
+f1a6e0f7,ACT-SCOF01844,Guanajuato,Urbano,,Zona centro,,No,No,3,3,0
+2840729e,ACT-SCIP21079,Guanajuato,Urbano,,Zona centro,,No,No,9,9,0
+dd4d6928,ACT-SCNM26421,León,Urbano,,Zona centro,,No,No,9,9,0
+fd987758,ACT-SCIV93284,León,Urbano,,,,No,No,9,9,0
+f54ac447,ACT-SCOV13911,Silao de la Victoria,Urbano,215,Silao,,Si,Si,52755,,52755
+8268de0a,ACT-SCEF46739,Comonfort,Urbano,28,Comonfort,,Si,Si,24873,,24873
+e503f9a6,ACT-SCFB30098,Guanajuato,Urbano,,,,No,No,11,11,0
+87ce72ec,ACT-SCUX59265,Guanajuato,Urbano,,,,No,No,13,13,0
+961571fe,ACT-SCOA06513,Guanajuato,Urbano,49,Guanajuato,,Si,Si,130,,130
+8f339163,ACT-SCSO91081,Guanajuato,Urbano,,,,No,No,36,,36
+665d868e,ACT-SCNK13055,Guanajuato,Urbano,,,,No,No,15,,15
+cc7ef046,ACT-SCJS75643,Guanajuato,Urbano,,,,No,No,15,,15
+2c7714fd,ACT-SCTU54508,Guanajuato,Urbano,,,,No,No,22,,22
+57e172bb,ACT-SCNV23326,Guanajuato,Urbano,,,,No,No,3,3,0
+0184cdfd,ACT-SCKX77224,Guanajuato,Urbano,,,,No,No,24,,24
+2a7311c5,ACT-SCHN00336,Guanajuato,Urbano,,,,No,No,5,5,0
+02a319f3,ACT-SCGN42034,Guanajuato,Urbano,,,,No,No,28,,28
+d9208971,ACT-SCSV41561,Guanajuato,Urbano,,,,No,No,26,,26
+4b1e7ace,ACT-SCQW89910,Guanajuato,Urbano,,,,No,No,4,4,0
+11c77a24,ACT-SCAC96318,Guanajuato,Urbano,49,Guanajuato,,Si,Si,40,,40
+d16be8b7,ACT-SCAS88315,Guanajuato,Urbano,,,,No,No,13,13,0
+b17aae3c,ACT-SCNW78674,Guanajuato,Urbano,,,,No,No,29,,29
+ae5dcd15,ACT-SCDD20458,Guanajuato,Urbano,,,,No,No,4,,4
+ff28049b,ACT-SCZY03455,Guanajuato,Urbano,,,,No,No,6,,6
+9953eeee,ACT-SCKA20778,Guanajuato,Urbano,49,Guanajuato,,Si,Si,11,,11
+e0b64e99,ACT-SCEG52588,Guanajuato,Urbano,,,,No,No,32,,32
+9101655b,ACT-SCVL18515,Guanajuato,Urbano,,,,No,No,9,,9
+fbacc731,ACT-SCIV31392,Guanajuato,Urbano,,,,No,No,3,,3
+b46e8ce7,ACT-SCDN84830,Guanajuato,Urbano,,,,No,No,3,,3
+a0e7c5b3,ACT-SCMT80704,Guanajuato,Urbano,49,Guanajuato,,Si,Si,12,,12
+1c544e0e,ACT-SCSE03136,Guanajuato,Urbano,,,,No,No,12,,12
+,,,,,,,,,,,
+1f9cd7c5,ACT-SCHE47742,Guanajuato,Urbano,,,,No,No,23,,23
+1220a149,ACT-SCMH52052,Guanajuato,Urbano,,,,No,No,250,,250
+a3e8ced4,ACT-SCEO23171,Guanajuato,Urbano,,,,No,No,82,,82
+ab6a1461,ACT-SCRK60862,Guanajuato,Urbano,49,Guanajuato,,Si,Si,28,,28
+640b8f95,ACT-SCQE64976,Guanajuato,Urbano,,,,No,No,20,,20
+fb97b50a,ACT-SCZY90747,Guanajuato,Urbano,,,,No,No,4,,4
+6aeef4af,ACT-SCKC19065,Guanajuato,Urbano,49,Guanajuato,,Si,Si,19,,19
+c2e8a242,ACT-SCKL99207,Guanajuato,Urbano,,,,No,No,4,,4
+dfa36800,ACT-SCJS85381,Guanajuato,Urbano,,,,No,No,1,,1
+20f259aa,ACT-SCJA53450,Guanajuato,Urbano,,,,No,No,2,,2
+b3c15138,ACT-SCAD02703,Guanajuato,Urbano,,,,No,No,2,,2
+e59cc6b3,ACT-SCLV27428,Guanajuato,Urbano,49,Guanajuato,,Si,Si,1,,1
+5fd1823a,ACT-SCBI74655,Guanajuato,Urbano,,,,No,No,4,,4
+f8a08eec,ACT-SCNB99509,Guanajuato,Urbano,,,,No,No,3,,3
+160dfc71,ACT-SCGP32952,León,Urbano,,,,No,No,103,,103
+6d6d4f34,ACT-SCLX68215,León,Urbano,,,,No,No,87,,87
+5c8b4229,ACT-SCLU07350,León,Urbano,,,,No,No,67,,67
+d4e1c865,ACT-SCUI68875,León,Urbano,,,,No,No,138,,138
+ced8a940,ACT-SCTW29397,León,Urbano,,,,No,No,52,4,48
+d12515e3,ACT-SCKY93862,León,Urbano,,,,No,No,80,2,78
+010e00bc,ACT-SCJY84263,León,Urbano,,,,No,No,216,6,210
+fce2ef2c,ACT-SCZY58450,León,Urbano,,,,No,No,164,0,164
+def8e747,ACT-SCYM51625,León,Urbano,,,,No,No,180,25,155
+48fa5082,ACT-SCUF24467,León,Urbano,,,,No,No,132,,132
+4f830032,ACT-SCZJ24932,León,Urbano,,,,No,No,18,,18
+b075a994,ACT-SCYH28131,León,Urbano,,,,No,No,80,,80
+aaef127e,ACT-SCNC66983,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,30,,30
+7b793fec,ACT-SCBV35426,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,17,,17
+85bbba35,ACT-SCKJ13536,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,19,,19
+6f410dd6,ACT-SCRB24293,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,35,,35
+cf1351c8,ACT-SCQB51111,Purísima del Rincón,Periurbano,171,Purísima,,Si,No,3,,3
+,,,,,,,,,,,
+cf5d9a8c,ACT-SCMV84403,Purísima del Rincón,Periurbano,,,,No,No,83,,83
+b2689729,ACT-SCMY17952,Silao de la Victoria,Urbano,,,,No,No,6,,6
+c7041758,ACT-SCMY83187,Silao de la Victoria,Urbano,,,,No,No,6,,6
+dd87757b,ACT-SCSN19355,Silao de la Victoria,Urbano,,,,No,No,10,,10
+a1e6f39b,ACT-SCEQ46334,Silao de la Victoria,Urbano,,,,No,No,34,34,0
+b31e0e43,ACT-SCUH29282,Silao de la Victoria,Urbano,,,,No,No,31,31,0
+2fdb5e7d,ACT-SCNO55541,Silao de la Victoria,Urbano,,,,No,No,34,34,0
+03c6b31d,ACT-SCUX09615,Silao de la Victoria,Urbano,,,,No,No,26,,26
+58d37c0f,ACT-SCAE51563,Silao de la Victoria,Urbano,215,Silao,,Si,Si,2,,2
+44f6ff1a,ACT-SCTZ58716,Silao de la Victoria,Urbano,215,Silao,,Si,Si,3,,3
+7edcd39e,ACT-SCQU72854,Silao de la Victoria,Urbano,,,,No,No,3,,3
+f3efec83,ACT-SCWD89991,Salamanca,Urbano,181,Salamanca,,Si,Si,1368,,1368
+331e8fd5,ACT-SCOF39726,Silao de la Victoria,Urbano,,,,No,No,6,,6
+b57250d5,ACT-SCVS48670,Silao de la Victoria,Urbano,,,,No,No,5,,5
+b545989a,ACT-SCNY62875,Silao de la Victoria,Urbano,,,,No,No,9,,9
+735015a3,ACT-SCKJ18026,Silao de la Victoria,Urbano,,,,No,No,7,,7
+8edcff76,ACT-SCSG23490,Silao de la Victoria,Urbano,,,,No,No,21,,21
+0abc69ed,ACT-SCSA90746,Salamanca,Urbano,181,Salamanca,,Si,Si,9,9,0
+1d29ccde,ACT-SCJW46062,Salamanca,Urbano,181,Salamanca,,Si,Si,20,20,0
+65281850,ACT-SCBC66974,Salamanca,Urbano,181,Salamanca,,Si,Si,10,2,8
+4b020bfe,ACT-SCHO27779,Salamanca,Urbano,181,Salamanca,,Si,Si,13,13,0
+00ca5cc3,ACT-SCSU96183,Salamanca,Urbano,181,Salamanca,,Si,Si,7,7,0
+b2f1464e,ACT-SCRN10556,Salamanca,Urbano,181,Salamanca,,Si,Si,10,1,9
+5f1b44ac,ACT-SCWB12949,Salamanca,Urbano,181,Salamanca,,Si,Si,19,19,0
+46e0a60a,ACT-SCJH52543,Salamanca,Urbano,181,Salamanca,,Si,Si,10,1,9
+c835215b,ACT-SCCL28269,Salamanca,Urbano,181,Salamanca,,Si,Si,18,2,16
+69427062,ACT-SCPE79917,Salamanca,Urbano,181,Salamanca,,Si,Si,19,19,0
+9e15d826,ACT-SCVU63289,Salamanca,Urbano,181,Salamanca,,Si,Si,24,1,23
+ed4b2e62,ACT-SCLV97219,Salamanca,Urbano,181,Salamanca,,Si,Si,18,18,0
+ac2dd1b5,ACT-SCTP93796,Salamanca,Urbano,181,Salamanca,,Si,Si,21,3,18
+e27d16dd,ACT-SCZN45583,Salamanca,Urbano,181,Salamanca,,Si,Si,185,3,182
+cef7d0a1,ACT-SCAM76227,Salamanca,Urbano,181,Salamanca,,Si,Si,50,19,31
+eda958f9,ACT-SCWW82026,Guanajuato,Urbano,49,Guanajuato,,Si,Si,157,30,127
+,,,,,,,,,,,
+4726fd87,ACT-SCCV58393,Salamanca,Urbano,181,Salamanca,,Si,Si,225,25,200
+05b52a88,ACT-SCAP97980,Salamanca,Urbano,181,Salamanca,,Si,Si,61,30,31
+d6aac67e,ACT-SCTS87185,Salamanca,Urbano,181,Salamanca,,Si,Si,30,30,0
+ec02d0c9,ACT-SCMQ74551,Silao de la Victoria,Urbano,215,Silao,,Si,Si,15,,15
+1e36e2be,ACT-SCKZ58880,Silao de la Victoria,Urbano,,,,No,No,8,,8
+d43936bc,ACT-SCCN06688,Silao de la Victoria,Urbano,,,,No,No,6,,6
+e6ee3886,ACT-SCJU79713,Salamanca,Urbano,181,Salamanca,,Si,Si,3298,,3298
+c9f4098d,ACT-SCZI57224,Salamanca,Urbano,181,Salamanca,,Si,Si,14,1,13
+15791d20,ACT-SCBB41292,Salamanca,Urbano,181,Salamanca,,Si,Si,31,0,31
+888539cc,ACT-SCXY70009,Salamanca,Urbano,181,Salamanca,,Si,Si,57,1,56
+90b21d76,ACT-SCSA27668,San Francisco del Rincón,Urbano,195,San Francisco,,Si,No,35,1,34
+bdd588aa,ACT-SCSL85903,Silao de la Victoria,Urbano,215,Silao,,Si,Si,2,,2
+63221f2c,ACT-SCTH89398,Salamanca,Urbano,181,Salamanca,,Si,Si,751,,751
+7748a096,ACT-SCMO35805,Silao de la Victoria,Urbano,215,Silao,,Si,Si,7,,7
+c8770d72,ACT-SCZI44962,Silao de la Victoria,Urbano,,,,No,No,21,21,0
+958f902c,ACT-SCTJ40380,Salamanca,Urbano,181,Salamanca,,Si,Si,1338,,1338
+fd59fbbc,ACT-SCCR51057,Salamanca,Urbano,181,Salamanca,,Si,Si,445,,445
+38d9c0f6,ACT-SCIB95757,Silao de la Victoria,Urbano,215,Silao,,Si,Si,12,,12
+c509d402,ACT-SCNK06395,Silao de la Victoria,Urbano,215,Silao,,Si,Si,11,,11
+d31966bb,ACT-SCNZ60763,Silao de la Victoria,Urbano,,,,No,No,8,,8
+6d267520,ACT-SCJQ99794,Salamanca,Urbano,181,Salamanca,,Si,Si,46,1,45
+7a623ce2,ACT-SCFZ57344,Salamanca,Urbano,181,Salamanca,,Si,Si,50,19,31
+604e73b6,ACT-SCBF91981,Salamanca,Urbano,181,Salamanca,,Si,Si,31,,31
+ff8d2997,ACT-SCKT28647,Salamanca,Urbano,181,Salamanca,,Si,Si,61,30,31
+4ddc6f27,ACT-SCWH81648,Santa Catarina,Rural,209,Zona Rural,,Si,No,252,84,168
+a7c66982,ACT-SCES26665,Purísima del Rincón,Urbano,171,Purísima,,Si,No,42,18,24
+df0b0043,ACT-SCRG36310,Purísima del Rincón,Urbano,171,Purísima,,Si,No,102,,102
+4c70a290,ACT-SCPI11207,Abasolo,Urbano,3,Abasolo,,Si,Si,7,6,1
+d1b08e3b,ACT-SCFU79713,Abasolo,Urbano,3,Abasolo,,Si,Si,11,11,0
+dcf185cd,ACT-SCPP90088,San Luis de la Paz,Urbano,201,San Luis de la Paz,,Si,Si,25,25,0
+6e2bd820,ACT-SCOG94069,Abasolo,Urbano,,,,No,No,14,14,0
+df899876,ACT-SCJS30123,Silao de la Victoria,Urbano,,,,No,No,11,11,0
+5113460d,ACT-SCCN32873,Silao de la Victoria,Urbano,,,,No,No,6,,6
+4e2e3d36,ACT-SCTP98926,Silao de la Victoria,Urbano,,,,No,No,31,,31
+d96cbb89,ACT-SCQP92821,Silao de la Victoria,Urbano,,,,No,No,2,,2
+c214a740,ACT-SCYX71100,Silao de la Victoria,Urbano,,,,No,No,2,,2
+c8ec9d9b,ACT-SCMB16984,Salamanca,Urbano,181,Salamanca,,Si,Si,12,1,11
+846f01d3,ACT-SCIR74848,Salamanca,Urbano,181,Salamanca,,Si,Si,19,1,18
+494ba882,ACT-SCKE58665,Salamanca,Urbano,181,Salamanca,,Si,Si,23,1,22
+4b6be4d9,ACT-SCRP83395,Salamanca,Urbano,181,Salamanca,,Si,Si,9,1,8
+5c708b2b,ACT-SCAD32283,Salamanca,Urbano,181,Salamanca,,Si,Si,9,8,1
+0843d5be,ACT-SCWP52765,Salamanca,Urbano,181,Salamanca,,Si,Si,29,2,27
+dd94e26e,ACT-SCAA07550,Salamanca,Urbano,181,Salamanca,,Si,Si,72,2,70
+9e260de4,ACT-SCSC67260,Villagrán,Urbano,232,Villagrán,,Si,Si,40,4,36
+fe7dd62d,ACT-SCGR50284,Salamanca,Urbano,181,Salamanca,,Si,Si,84,4,80
+632790eb,ACT-SCRK04291,Salamanca,Urbano,181,Salamanca,,Si,Si,44,4,40
+6a75d402,ACT-SCBB74452,Salamanca,Urbano,181,Salamanca,,Si,Si,44,4,40
+9e20f945,ACT-SCQZ71776,Salamanca,Urbano,181,Salamanca,,Si,Si,44,4,40
+d7fec039,ACT-SCXI88562,Guanajuato,Urbano,,,,No,No,3,,3
+c19b57df,ACT-SCYA08501,Guanajuato,Urbano,,,,No,No,2,,2
+3faec726,ACT-SCSN82816,Guanajuato,Urbano,,,,No,No,3,,3
+41df3d77,ACT-SCDG78924,Guanajuato,Urbano,,,,No,No,5,,5
+583eb682,ACT-SCVX90182,Guanajuato,Urbano,,,,No,No,4,0,4
+f4111343,ACT-SCIR07558,Guanajuato,Urbano,,,,No,No,3,,3
+4944eaa8,ACT-SCFR24702,Guanajuato,Urbano,,,,No,No,2,,2
+a58f3d82,ACT-SCVR72910,Guanajuato,Urbano,,,,No,No,2,,2
+f8502c10,ACT-SCWN41231,Guanajuato,Urbano,,,,No,No,6,,6
+ca5f428f,ACT-SCFD64081,Guanajuato,Urbano,,,,No,No,9,,9
+5b886de6,ACT-SCMO58522,Guanajuato,Urbano,,,,No,No,3,,3
+0452361e,ACT-SCAL82876,Guanajuato,Urbano,,,,No,No,2,,2
+a19059ab,ACT-SCNP58131,Guanajuato,Urbano,,,,No,No,2,,2
+850eb029,ACT-SCPT19980,Guanajuato,Urbano,,,,No,No,7,,7
+a3b4ec7a,ACT-SCLF07599,Guanajuato,Urbano,,,,No,No,3,,3
+3e0772be,ACT-SCYY62075,Guanajuato,Urbano,,,,No,No,3,,3
+feab2597,ACT-SCDH11554,Guanajuato,Urbano,,,,No,No,2,,2
+479c3891,ACT-SCFV66869,Guanajuato,Urbano,,,,No,No,4,,4
+b16f9c88,ACT-SCWJ23456,Salamanca,Urbano,181,Salamanca,,Si,Si,7,1,6
+d669c157,ACT-SCRW71537,Guanajuato,Urbano,,,,No,No,2,,2
+403a8060,ACT-SCHL56287,Guanajuato,Urbano,,,,No,No,5,,5
+4f17bb11,ACT-SCVH99141,Guanajuato,Urbano,,,,No,No,4,,4
+dc5e1e0b,ACT-SCCQ25265,Guanajuato,Urbano,,,,No,No,3,,3
+7a01893f,ACT-SCOL44580,Dolores Hidalgo Cuna de la Independencia Nacional,Urbano,,,,No,No,31,2,29
+0f500036,ACT-SCWM44500,Guanajuato,Urbano,,,,No,No,4,,4
+131ff2b0,ACT-SCJT61532,Guanajuato,Urbano,,,,No,No,5,5,0
+42b8efe4,ACT-SCJQ53039,San Felipe,Urbano,192,San Felipe,,Si,Si,40,1,39
+6c785b36,ACT-SCAI04033,Guanajuato,Urbano,,,,No,No,9,,9
+3cb0e228,ACT-SCMS48317,Guanajuato,Urbano,,,,No,No,250,,250
+f8e09a59,ACT-SCLH69157,Guanajuato,Urbano,,,,No,No,60,,60
+624de54d,ACT-SCIE51380,Guanajuato,Urbano,,,,No,No,38,,38
+d7f2d19e,ACT-SCBK14914,Guanajuato,Urbano,,,,No,No,4,4,0
+98429c56,ACT-SCPE86392,Salamanca,Urbano,181,Salamanca,,Si,Si,136,7,129
+e1e9913b,ACT-SCVL27603,Guanajuato,Urbano,,,,No,No,14,14,0
+91ed3a16,ACT-SCEH72319,Guanajuato,Urbano,,,,No,No,19,19,0
+f6d7cf72,ACT-SCAK52512,Guanajuato,Urbano,,,,No,No,7,,7
+c486e90e,ACT-SCYN03633,Guanajuato,Urbano,,,,No,No,25,,25
+a480738e,ACT-SCWM36595,Guanajuato,Urbano,,,,No,No,28,,28
+6200c91d,ACT-SCDK79609,Guanajuato,Urbano,,,,No,No,12,,12
+cd74a5e4,ACT-SCRS96271,Valle de Santiago,Urbano,227,Valle de Santiago,,Si,Si,27,27,0
+1af5a63a,ACT-SCBW36284,Doctor Mora,Urbano,41,Doctor Mora,,Si,No,11,1,10
+0414163f,ACT-SCKS34336,Salvatierra,Urbano,187,Salvatierra,,Si,Si,19,1,18
+9667d715,ACT-SCHC75119,Ciudad Manuel Doblado,Urbano,,,Manuel Doblado,No,No,32,1,31
+d3711ac1,ACT-SCLA99017,Salamanca,Urbano,181,Salamanca,,Si,Si,106,1,105
+25519da3,ACT-SCJX43524,Guanajuato,Urbano,,,,No,No,10,,10
+a53500cf,ACT-SCBY16288,Guanajuato,Urbano,,,,No,No,17,,17
+b59e0f66,ACT-SCRY05562,Guanajuato,Urbano,,,,No,No,26,,26
+0a778d1c,ACT-SCEE03529,Guanajuato,Urbano,,,,No,No,28,28,0
+6ae9de66,ACT-SCNV66062,Guanajuato,Urbano,,,,No,No,10,,10
+9c6d497e,ACT-SCBM04283,Salamanca,Urbano,181,Salamanca,,Si,Si,71,1,70
+ddd340d7,ACT-SCRU82988,Guanajuato,Urbano,,,,No,No,187,,187
+4326e64d,ACT-SCIR27388,León,Urbano,,,,No,No,2,,2
+94ca90cb,ACT-SCUZ23637,León,Urbano,,,,No,No,3,,3
+a95d6ec7,ACT-SCJH49562,León,Urbano,,,,No,No,11,,11
+fc9f41fd,ACT-SCPD16906,Salamanca,Urbano,181,Salamanca,,Si,Si,22,1,21
+b0a40ae3,ACT-SCEV04930,Salamanca,Urbano,181,Salamanca,,Si,Si,16,16,0
+4fee0a01,ACT-SCFX97585,Salamanca,Urbano,181,Salamanca,,Si,Si,19,19,0
+6e0d2de8,ACT-SCLW62426,León,Urbano,,,,No,No,9,9,0
+587ea571,ACT-SCJU55686,Salamanca,Urbano,181,Salamanca,,Si,Si,19,19,0
+3da4db74,ACT-SCYI89333,Salamanca,Urbano,181,Salamanca,,Si,Si,36,36,0
+8c3f24c8,ACT-SCIN39392,Apaseo el Grande,Urbano,12,Apaseo el Grande,,Si,Si,20,20,0
+d964b109,ACT-SCKI42814,León,Urbano,,,,No,No,19,,19
+9354ff18,ACT-SCLE86988,León,Urbano,,,,No,No,240,5,235
+dc7d9cf9,ACT-SCOG94069,Jerécuaro,Urbano,86,Jerecuaro,,Si,No,26,26,0
+771784ad,ACT-SCZR98192,León,Urbano,,,,No,No,339,,339
+9c983222,ACT-SCZR98192,Guanajuato,Urbano,,,,No,No,800,,800
+53abb9b2,ACT-SCDB29664,Apaseo el Grande,Urbano,,,,No,No,144,,144
+c7463ab4,ACT-SCDB29664,Cuerámaro,Urbano,,,,No,No,70,,70
+d893b9db,ACT-SCPP14762,Guanajuato,Urbano,49,Guanajuato,,Si,Si,1874,12,1862
+5ae78c2b,ACT-SCID00018,León,Urbano,,,,No,No,10,,10
+660145da,ACT-SCQG28945,León,Urbano,,,,No,No,86,,86
+4cd2c418,ACT-SCXA33583,León,Urbano,,,,No,No,15,,15
+22188bd5,ACT-SCCS60210,León,Urbano,,,,No,No,10,,10
+fc6d9a38,ACT-SCTO13032,León,Urbano,,,,No,No,34,,34
+8515ccd9,ACT-SCBL64940,León,Urbano,,,,No,No,15,,15
+1a72d095,ACT-SCVB22709,León,Urbano,,,,No,No,21,,21
+11a40578,ACT-SCPY05941,León,Urbano,,,,No,No,21,,21
+d76aa026,ACT-SCNB74103,León,Urbano,,,,No,No,10,,10
+d097d9aa,ACT-SCKP12636,León,Urbano,,,,No,No,27,,27
+a0021896,ACT-SCDB57542,León,Urbano,,,,No,No,26,26,0
+0b961fd4,ACT-SCNL75473,Guanajuato,Urbano,,,,No,No,77,,77
+1395c929,ACT-SCTR53613,Guanajuato,Urbano,,,,No,No,708,,708
+0da5f660,ACT-SCBG58553,Guanajuato,Urbano,,,,No,No,43,,43
+ff7882a9,ACT-SCSM54851,León,Urbano,,,,No,No,36,36,0
+3ecceb5a,ACT-SCJG05812,León,Urbano,,,,No,No,4,4,0
+6a83f6bd,ACT-SCKS19373,León,Urbano,,,,No,No,4,4,0
+7f0d4ed1,ACT-SCRV11027,León,Urbano,,,,No,No,5,5,0
+15dbe9db,ACT-SCCS95646,Uriangato,Urbano,,,,No,No,12542,,12542
+fbf883d1,ACT-SCRU37929,Guanajuato,Urbano,,,,No,No,5,,5
+d3419531,ACT-SCST39394,Guanajuato,Urbano,,,,No,No,15,15,0
+6f288e2c,ACT-SCRL25642,Guanajuato,Urbano,,,,No,No,23,23,0
+7591733f,ACT-SCBV34476,Guanajuato,Urbano,,,,No,No,11,11,0
+c35cf418,ACT-SCUT25950,Guanajuato,Urbano,,,,No,No,4,4,0
+e3d4c5dc,ACT-SCDD95654,Guanajuato,Urbano,,,,No,No,14,14,0
+db65a049,ACT-SCFB83750,Guanajuato,Urbano,,,,No,No,25,25,0
+f449ed87,ACT-SCCW50829,Guanajuato,Urbano,,,,No,No,4,4,0
+988c1e81,ACT-SCYI32876,Guanajuato,Urbano,,,,No,No,16,16,0
+c0915348,ACT-SCTR91697,Guanajuato,Urbano,,,,No,No,52,,52
+9432ee1c,ACT-SCML00255,Guanajuato,Urbano,,,,No,No,15,,15
+34446713,ACT-SCCU88388,Guanajuato,Urbano,,,,No,No,34,34,0
+b9fa04a5,ACT-SCVC31610,Guanajuato,Urbano,,,,No,No,19,19,0
+26b36e43,ACT-SCFH09646,Guanajuato,Urbano,,,,No,No,13,13,0
+fbd6d729,ACT-SCHJ17496,Guanajuato,Urbano,,,,No,No,4,4,0
+7d9ae033,ACT-SCCH70156,Guanajuato,Urbano,,,,No,No,2,2,0
+3730dca2,ACT-SCAK96271,Guanajuato,Urbano,,,,No,No,16,16,0
+7bfc42cd,ACT-SCQZ00697,San Miguel de Allende,Periurbano,204,San Miguel de Allende,,Si,Si,69395,69395,0
+53dc3005,ACT-SCAC38909,Ocampo,Rural,167,Ocampo,,Si,No,57652,57652,0
+eb9ee212,ACT-SCYP66179,Pénjamo,Periurbano,805,Plazuelas,,,,68385,68385,0
+f0291b4e,ACT-SCCS51664,Abasolo,Periurbano,3,Abasolo,,Si,Si,61362,61362,0
+dc82aa3b,ACT-SCOT28274,Victoria,Periurbano,230,Victoria,,Si,No,44812,44812,0
+be5073a7,ACT-SCBE33341,San Miguel de Allende,,,,,,,480,0,480
+4bcdffa7,ACT-SCMZ50247,Purísima del Rincón,,,,,,,252,0,252
+24327798,ACT-SCWM41523,Guanajuato,,,,,,,174,0,174
+e8923557,ACT-SCGT61230,Guanajuato,,,,,,,409,0,409
+7f568742,ACT-SCWK37742,Guanajuato,,,,,,,162,0,162
+c768f584,ACT-SCVW81170,Guanajuato,,,,,,,132,0,132
+7b3faed9,ACT-SCPN40683,Guanajuato,,,,,,,372,0,372
+58200359,ACT-SCMN11238,Guanajuato,,,,,,,384,0,384
+268b8c34,ACT-SCWK62730,San Felipe,,,,,,,86,0,86
+cd20430b,ACT-SCGL78199,Ocampo,,,,,,,189,0,189
+918a5c7a,ACT-SCVG39993,Guanajuato,,,,,,,408,0,408
+abf32760,ACT-SCNM00903,Purísima del Rincón,,,,,,,146,0,146
+38bd6799,ACT-SCOO10213,Guanajuato,,,,,,,556,0,556
+16a80d9f,ACT-SCEN97364,Irapuato,,,,,,,1155,0,1155
+22a06b85,ACT-SCQM16766,Guanajuato,,,,,,,354,0,354
+5ce98117,ACT-SCCS76063,León,,,,,,,1353,0,1353
+9ce8256d,ACT-SCXX04210,León,,,,,,,414,0,414
+970880af,ACT-SCCU28465,Tarimoro,,,,,,,184,0,184
+85686a35,ACT-SCWV04407,Santiago Maravatío,,,,,,,120,0,120
+9124c455,ACT-SCJO67681,Tarandacuao,,,,,,,189,0,189
+6e5e892d,ACT-SCGW91179,Jerécuaro,,,,,,,110,0,110
+b704724f,ACT-SCID80640,Guanajuato,,,,,,,524,0,524
+22aee516,ACT-SCHD83358,Guanajuato,,,,,,,,,
+806be801,ACT-SCVV75829,Guanajuato,,,,,,,1251,0,1251
+ffb856e0,ACT-SCCC63144,León,,,,,,,40,0,40
+f3dc2014,ACT-SCIS69956,León,,,,,,,10355,0,10355
+211af264,ACT-SCRE00032,Irapuato,,,,,,,166,0,166
+9af0dc49,ACT-SCNC46986,Irapuato,,,,,,,500,0,500
+c7062908,ACT-SCXU87195,Salamanca,,,,,,,188,0,188
+3afaee71,ACT-SCXH73671,Acámbaro,,,,,,,425,0,425
+d2f29471,ACT-SCVB58993,Acámbaro,,,,,,,60,0,60
+715ac00a,ACT-SCWX28670,Cortazar,,,,,,,554,0,554
+f5a160b2,ACT-SCHA08839,Valle de Santiago,,,,,,,562,0,562
+ec79c7b4,ACT-SCFM07970,Doctor Mora,,,,,,,373,0,373
+e0b42a52,ACT-SCFY68268,Purísima del Rincón,,,,,,,0,0,0
+907cd914,ACT-SCPU46060,Guanajuato,,,,,,,281,0,281
+bfa74b3f,ACT-SCLX24540,Irapuato,,,,,,,412,0,412
+0daf9282,ACT-SCXS79422,Irapuato,,,,,,,417,0,417
+f326546c,ACT-SCNA55273,Irapuato,,,,,,,211,0,211
+3e414332,ACT-SCHD27834,Guanajuato,,,,,,,502,0,502
+be32ba43,ACT-SCBG61331,Purísima del Rincón,,,,,,,209,0,209
+6518d523,ACT-SCGX19362,Guanajuato,,,,,,,218,0,218
+a6ab352c,ACT-SCAQ28202,Santa Catarina,,,,,,,205,0,205
+fda2f950,ACT-SCJS14875,Apaseo el Grande,,,,,,,171,0,171
+4056da66,ACT-SCBG71126,Guanajuato,,,,,,,103,0,103
+c3c19195,ACT-SCRV06714,Purísima del Rincón,,,,,,,97,0,97
+1b562f1a,ACT-SCFM34492,Doctor Mora,,,,,,,373,0,373
+0e7e1ee0,ACT-SCZD76778,Comonfort,,,,,,,238,0,238
+76fa3e1b,ACT-SCZZ65213,Comonfort,,,,,,,150,0,150
+24bf9780,ACT-SCHF87926,Guanajuato,,,,,,,343,0,343
+57c173b5,ACT-SCIF67715,Guanajuato,,,,,,,212,0,212
+fcbc6a09,ACT-SCGA84676,Purísima del Rincón,,,,,,,127,0,127
+ef2c77b2,ACT-SCUO63965,Guanajuato,,,,,,,197,0,197
+9ed61056,ACT-SCWT24919,Victoria,,,,,,,155,0,155
+11f59a06,ACT-SCRO69830,Victoria,,,,,,,44,0,44
+6cc1a139,ACT-SCLP99244,Guanajuato,,,,,,,173,0,173
+37cca95a,ACT-SCHW75777,San Luis de la Paz,,,,,,,107,0,107
+378ee1da,ACT-SCSM04714,Guanajuato,,,,,,,452,0,452
+490b4cbd,ACT-SCLH37151,Guanajuato,,,,,,,86,0,86
+1ca21569,ACT-SCBH42486,Guanajuato,,,,,,,942,0,942
+7429a578,ACT-SCRK68212,Coroneo,,,,,,,278,0,278
+fe7e0c19,ACT-SCGV94241,Jerécuaro,,,,,,,100,0,100
+8d8a90a8,ACT-SCPD84866,Guanajuato,,,,,,,189,0,189
+ed37078c,ACT-SCFE92337,Guanajuato,,,,,,,800,0,800
+eb9c2760,ACT-SCHR95405,Purísima del Rincón,,,,,,,114,0,114
+b0a3bcb5,ACT-SCPN58493,Guanajuato,,,,,,,427,0,427
+7fcf7aac,ACT-SCUI57271,Salamanca,,,,,,,48,0,48
+e3c2bfcb,ACT-SCXR47386,Purísima del Rincón,,,,,,,230,0,230
+977e380d,ACT-SCVE30233,Guanajuato,,,,,,,503,0,503
+37e433da,ACT-SCQY53295,San Francisco del Rincón,,,,,,,270,0,270
+acb80933,ACT-SCKR15635,Villagrán,,,,,,,140,0,140
+2527a640,ACT-SCYK93926,Celaya,,,,,,,393,0,393
+08b85ba5,ACT-SCHR97739,Celaya,,,,,,,100,0,100
+670dcd29,ACT-SCCW53985,Salamanca,,,,,,,,,
+e17275d6,ACT-SCGP24769,Guanajuato,,,,,,,327,0,327
+b2569f66,ACT-SCGL45187,Salamanca,,,,,,,,,
+be1cc886,ACT-SCIJ39753,Irapuato,,,,,,,155,0,155
+e220de6f,ACT-SCIU98249,Purísima del Rincón,,,,,,,35,0,35
+acba4bad,ACT-SCFL27345,Guanajuato,,,,,,,,,
+6ea11dd5,ACT-SCIS62407,Tarandacuao,,,,,,,313,0,313
+1edb3186,ACT-SCUC83261,Irapuato,,,,,,,950,0,950
+8840150c,ACT-SCXB57445,Guanajuato,,,,,,,136,0,136
+d1887aff,ACT-SCDB34994,Purísima del Rincón,,,,,,,166,0,166
+1c969e62,ACT-SCTC68513,Guanajuato,,,,,,,487,0,487
+5af34941,ACT-SCOW82489,Purísima del Rincón,,,,,,,65,0,65
+9d369715,ACT-SCEG90193,Guanajuato,,,,,,,376,0,376
+169005c6,ACT-SCTD81554,Romita,,,,,,,900,0,900
+c67c529e,ACT-SCBH18108,Guanajuato,,,,,,,294,0,294
+984f7bb6,ACT-SCWS57805,Atarjea,,,,,,,120,0,120
+f3869b11,ACT-SCWW82438,Guanajuato,,,,,,,222,0,222
+cd2209d9,ACT-SCCE14498,Guanajuato,,,,,,,80,0,80
+7a16c382,ACT-SCAF21446,Guanajuato,,,,,,,646,0,646
+d5e9d714,ACT-SCCP44615,Guanajuato,,,,,,,528,0,528
+ca843e33,ACT-SCBM27426,Guanajuato,,,,,,,233,0,233
+3d7a8c5a,ACT-SCIQ51357,Guanajuato,,,,,,,276,0,276
+c5a5784c,ACT-SCKA89291,Abasolo,,,,,,,460,0,460
+d518b907,ACT-SCYF91006,Guanajuato,,,,,,,307,0,307
+e0e047b8,ACT-SCKC59266,Purísima del Rincón,,,,,,,58,0,58
+804c5c45,ACT-SCED34215,Guanajuato,,,,,,,384,0,384
+bbbeae5a,ACT-SCMH85463,Celaya,,,,,,,1389,0,1389
+f65dd336,ACT-SCND03690,Celaya,,,,,,,494,0,494
+c9e50dce,ACT-SCSK32663,Celaya,,,,,,,230,0,230
+b34ecb7e,ACT-SCPL91698,Santiago Maravatío,,,,,,,200,0,200
+4a1ff2c3,ACT-SCFQ21613,Guanajuato,,,,,,,0,0,0
+0c4babef,ACT-SCBD69014,Purísima del Rincón,,,,,,,59,0,59
+ba7b60e4,ACT-SCRI92889,Purísima del Rincón,,,,,,,75,0,75
+4cd36a1d,ACT-SCQB84033,Guanajuato,,,,,,,0,0,0
+d0184f1e,ACT-SCJO17369,Guanajuato,,,,,,,312,0,312
+a8d0b1e6,ACT-SCEJ23108,Purísima del Rincón,,,,,,,302,0,302
+af4a3f42,ACT-SCAL52723,Purísima del Rincón,,,,,,,194,0,194
+1fabf07b,ACT-SCFS59836,Guanajuato,,,,,,,296,0,296
+fcfa3e6f,ACT-SCXX55925,Guanajuato,,,,,,,277,0,277
+25226d64,ACT-SCZL07793,Guanajuato,,,,,,,295,0,295
+bcb4fe36,ACT-SCQO55097,Guanajuato,,,,,,,427,0,427
+065468d3,ACT-SCCQ44193,Guanajuato,,,,,,,112,0,112
+d37db809,ACT-SCXH04524,Guanajuato,,,,,,,278,0,278
+49f06464,ACT-SCFT93131,Irapuato,,,,,,,0,0,0
+fb40a7a1,ACT-SCNZ66851,Irapuato,,,,,,,0,0,0
+ed70eeeb,ACT-SCUH39063,San Luis de la Paz,,,,,,,174,0,174
+ae7d4bcb,ACT-SCNY07070,Purísima del Rincón,,,,,,,162,0,162
+041e4e23,ACT-SCDV45811,Guanajuato,,,,,,,0,0,0
+054f91ec,ACT-SCYS27073,Purísima del Rincón,,,,,,,19,0,19
+cbf3fb2d,ACT-SCHH22868,Purísima del Rincón,,,,,,,112,0,112
+8b6c85b4,ACT-SCWJ22047,Purísima del Rincón,,,,,,,129,0,129
+bde376c6,ACT-SCNH31908,Jaral del Progreso,,,,,,,120,0,120
+8304aed6,ACT-SCUR04549,Doctor Mora,,,,,,,348,0,348
+ef3bcb1a,ACT-SCPO81154,Guanajuato,,,,,,,298,0,298
+603ecb50,ACT-SCSU78291,Acámbaro,,,,,,,190,0,190
+94df1d18,ACT-SCMU14231,Guanajuato,,,,,,,446,0,446
+1e031a12,ACT-SCNA47081,Cuerámaro,,,,,,,234,0,234
+a93d01e9,ACT-SCDG65803,Cuerámaro,,,,,,,83,0,83
+18cd9da9,ACT-SCDA20719,Cuerámaro,,,,,,,55,0,55
+53e3c8d8,ACT-SCUS83687,Cuerámaro,,,,,,,107,0,107
+1df4c3c4,ACT-SCRB79793,Cuerámaro,,,,,,,220,0,220
+6dc0aaf0,ACT-SCQR10269,Cuerámaro,,,,,,,220,0,220
+2a77e268,ACT-SCEN99536,Purísima del Rincón,,,,,,,72,0,72
+0cbc21ce,ACT-SCML05482,Guanajuato,,,,,,,524,0,524
+e2d63ffb,ACT-SCWG49909,Guanajuato,,,,,,,308,0,308
+239d4d8c,ACT-SCMQ99836,Moroleón,,,,,,,0,0,0
+fbb474bb,ACT-SCFQ87564,Purísima del Rincón,,,,,,,50,0,50
+c1d2e493,ACT-SCCH86928,Acámbaro,,,,,,,163,0,163
+cd340a81,ACT-SCDW98202,Guanajuato,,,,,,,67,0,67
+202f5441,ACT-SCYO58287,León,,,,,,,340,0,340
+4f71ea18,ACT-SCRF35473,Guanajuato,,,,,,,242,0,242
+eee0d918,ACT-SCDZ64261,Guanajuato,,,,,,,547,0,547
+445dbfd3,ACT-SCOC82619,Apaseo el Grande,,,,,,,138,0,138
+51a5ca21,ACT-SCLB91123,Guanajuato,,,,,,,155,0,155
+28058d1d,ACT-SCBH01307,Guanajuato,,,,,,,244,0,244
+5f6099b2,ACT-SCPP23752,Irapuato,,,,,,,205,0,205
+b7bbcfdf,ACT-SCAV14272,Irapuato,,,,,,,32,0,32
+98092694,ACT-SCBQ35251,Acámbaro,,,,,,,0,0,0
+2e466daf,ACT-SCWW96495,Purísima del Rincón,,,,,,,523,0,523
+d5133ff5,ACT-SCTQ25637,Irapuato,,,,,,,112,0,112
+163706ec,ACT-SCUD70946,Irapuato,,,,,,,101,0,101
+dd1acca6,ACT-SCWF62150,Irapuato,,,,,,,61,0,61
+74ec7719,ACT-SCLQ79045,Acámbaro,,,,,,,204,0,204
+dde5fc8b,ACT-SCXR78434,Irapuato,,,,,,,94,0,94
+f6fa3672,ACT-SCEC37280,Irapuato,,,,,,,94,0,94
+0fe244cf,ACT-SCDE32414,Purísima del Rincón,,,,,,,,,
+168eacfa,ACT-SCUO57314,Purísima del Rincón,,,,,,,,,
+2213d993,ACT-SCNO44484,Guanajuato,,,,,,,,,
+5a834621,ACT-SCJI35457,Purísima del Rincón,,,,,,,261,0,261
+a9e96ec3,ACT-SCLP09778,Guanajuato,,,,,,,,,
+1e547353,ACT-SCNU29961,Guanajuato,,,,,,,,,
+1fd91e4e,ACT-SCHJ20823,Tierra Blanca,,,,,,,768,0,768
+b9007cd5,ACT-SCXA98253,San José Iturbide,,,,,,,300,0,300
+647923d2,ACT-SCUD50103,Guanajuato,,,,,,,0,0,0
+ebf1986d,ACT-SCMM42665,Jaral del Progreso,,,,,,,0,0,0
+13fe2c04,ACT-SCYT15181,Guanajuato,,,,,,,90,0,90
+"5,36E+50",ACT-SCXY00654,Purísima del Rincón,,,,,,,,,
+03b9d962,ACT-SCYP51812,Guanajuato,,,,,,,361,0,361
+a2197fc0,ACT-SCVG93690,Purísima del Rincón,,,,,,,,,
+ae6f2463,ACT-SCPD08021,Guanajuato,,,,,,,1990,0,1990
+3eba2ce6,ACT-SCFC42071,Guanajuato,,,,,,,507,0,507
+c117148b,ACT-SCAM69927,Purísima del Rincón,,,,,,,,,
+9857cab7,ACT-SCKE91577,Atarjea,,,,,,,233,0,233
+9b08869b,ACT-SCCW57575,Guanajuato,,,,,,,223,0,223
+2cce5bf0,ACT-SCHM08845,Jaral del Progreso,,,,,,,,,
+4664f929,ACT-SCKS18108,Victoria,,,,,,,200,0,200
+1fd43ed9,ACT-SCMM89627,Purísima del Rincón,,,,,,,193,0,193
+89faafc7,ACT-SCYQ82180,Pénjamo,,,,,,,470,0,470
+fd0b9178,ACT-SCIH43410,Purísima del Rincón,,,,,,,69,0,69
+d4caec94,ACT-SCRO87772,Purísima del Rincón,,,,,,,175,0,175
+4063110e,ACT-SCPA71056,Purísima del Rincón,,,,,,,146,0,146
+ca028a27,ACT-SCKO96345,Purísima del Rincón,,,,,,,197,0,197
+099c4856,ACT-SCBY88246,Purísima del Rincón,,,,,,,151,0,151
+05cbb914,ACT-SCFX23092,Purísima del Rincón,,,,,,,256,0,256
+562063fa,ACT-SCPI17433,Purísima del Rincón,,,,,,,176,0,176
+68a546bf,ACT-SCEA76467,Purísima del Rincón,,,,,,,238,0,238
+6ca599d6,ACT-SCKW71636,Victoria,,,,,,,400,0,400
+ca58fdfc,ACT-SCXU12640,Purísima del Rinc����n,,,,,,,187,0,187
+5a06133c,ACT-SCJP56717,Guanajuato,,,,,,,0,0,0
+b130b033,ACT-SCFU02245,Guanajuato,,,,,,,0,0,0
+6d6af16a,ACT-SCZM32807,Jaral del Progreso,,,,,,,0,0,0
+da50ddab,ACT-SCGA68180,Purísima del Rincón,,,,,,,126,0,126
+9ffd50d0,ACT-SCQN09687,Purísima del Rincón,,,,,,,183,0,183
+5b8df4d5,ACT-SCZM13538,Coroneo,,,,,,,1022,0,1022
+fbc3dfb9,ACT-SCWU15449,Coroneo,,,,,,,364,0,364
+b7c3c0bf,ACT-SCCS95461,Guanajuato,,,,,,,,,
+666af7ba,ACT-SCHU18365,Purísima del Rincón,,,,,,,69,0,69
+496c3540,ACT-SCMR91715,Purísima del Rincón,,,,,,,163,0,163
+d31e4391,ACT-SCLV36964,Guanajuato,,,,,,,,,
+1b41dc02,ACT-SCWQ58288,Apaseo el Grande,,,,,,,128,0,128
+017aebb7,ACT-SCOE39019,Purísima del Rincón,,,,,,,84,0,84
+c1cf6ab7,ACT-SCFF24332,Purísima del Rincón,,,,,,,48,0,48
+"2,33E+05",ACT-SCEW97517,Purísima del Rincón,,,,,,,76,0,76
+d23e0874,ACT-SCCA50664,Purísima del Rincón,,,,,,,97,0,97
+7e47360b,ACT-SCQX11642,San Miguel de Allende,,,,,,,462,0,462
+6bd45d10,ACT-SCFJ06404,Guanajuato,,,,,,,239,0,239
+4f1cd749,ACT-SCLN11543,Santiago Maravatío,,,,,,,230,0,230
+29984ca7,ACT-SCZD10247,Guanajuato,,,,,,,370,0,370
+034a189e,ACT-SCBW26144,Guanajuato,,,,,,,409,0,409
+6994e9b6,ACT-SCLA87587,Guanajuato,,,,,,,127,0,127
+3d068341,ACT-SCTQ35868,Guanajuato,,,,,,,407,0,407
+a193e94f,ACT-SCSJ47839,San Luis de la Paz,,,,,,,984,0,984
+7ae6ac0d,ACT-SCKY24762,Guanajuato,,,,,,,42,0,42
+5c6bbb40,ACT-SCKE42582,San Luis de la Paz,,,,,,,500,0,500
+de1bfe1a,ACT-SCZW04663,Apaseo el Alto,,,,,,,0,0,0
+b0247209,ACT-SCWQ34721,Guanajuato,,,,,,,452,0,452
+6a12e51b,ACT-SCXD75308,Guanajuato,,,,,,,54,0,54
+f3430b9f,ACT-SCWN91888,Guanajuato,,,,,,,78,0,78
+4143612b,ACT-SCYQ62535,Guanajuato,,,,,,,44,0,44
+6a72b472,ACT-SCVA57617,Guanajuato,,,,,,,28,0,28
+cd4e56cf,ACT-SCTJ75644,Guanajuato,,,,,,,126,0,126
+f1ba5ab5,ACT-SCXF01974,San Luis de la Paz,,,,,,,365,0,365
+52991aa2,ACT-SCYU08771,Guanajuato,,,,,,,189,0,189
+1cb379af,ACT-SCUK56289,Guanajuato,,,,,,,53,0,53
+0062273b,ACT-SCAQ03662,Guanajuato,,,,,,,322,0,322
+1b38ad42,ACT-SCWN79482,Guanajuato,,,,,,,63,0,63
+5f0e2479,ACT-SCPZ17424,León,Urbano,,,,,,146,17,129
+2f519843,ACT-SCAO61041,León,Urbano,,,,,,11,0,11
+ba59aa7b,ACT-SCIU92114,León,Urbano,,,,,,16,0,16
+1d1f073b,ACT-SCUY86942,León,Urbano,,,,,,23,0,23
+bbe40589,ACT-SCCO65544,León,Urbano,,,,,,96,0,96
+419edf91,ACT-SCKF25368,León,Urbano,,,,,,15,15,0
+7fbbe6d2,ACT-SCOF43756,Guanajuato,Urbano,,,,,,,,
+15f8f4ac,ACT-SCHN23366,Guanajuato,Urbano,,,,,,8722,,
+c9be1a41,ACT-SCTU77851,Guanajuato,Urbano,,,,,,,,
+3185a73b,ACT-SCLF10400,Guanajuato,Urbano,,,,,,,,
+c6af93f8,ACT-SCPO46050,Guanajuato,Urbano,,,,,,,,
+e5678fff,ACT-SCUY55121,Guanajuato,Urbano,,,,,,,,
+60f9df76,ACT-SCRS73128,Guanajuato,Urbano,,,,,,,,
+c4f86b4f,ACT-SCMI87432,Guanajuato,Urbano,,,,,,,,
+67cd49d4,ACT-SCPF61747,León,Urbano,,,,,,45,,
+"4,71E+18",ACT-SCXE90838,León,Urbano,,,,,,50,,
+67410dd5,ACT-SCQR88797,León,Urbano,,,,,,50,,
+f18a90d0,ACT-SCQX28667,León,Urbano,,,,,,42,,
+5e26a6a6,ACT-SCZG96247,León,Urbano,,,,,,42,,
+a77bc8cd,ACT-SCMQ97380,León,Urbano,,,,,,50,,
+9cc38d9e,ACT-SCXU06032,León,Urbano,,,,,,51,,
+b07b376c,ACT-SCFE91615,León,Urbano,,,,,,43,,
+69b42fa5,ACT-SCYQ25428,León,Urbano,,,,,,70,,
+b6926327,ACT-SCQU71740,León,Urbano,,,,,,60,,
+7452610a,ACT-SCRP58292,León,Urbano,,,,,,42,,
+d98eac99,ACT-SCNL24195,León,Urbano,,,,,,42,,
+167692b4,ACT-SCRI76762,León,Urbano,,,,,,75,,
+1bb101df,ACT-SCRA39908,León,Urbano,,,,,,43,,
+6bf40fbb,ACT-SCRN05061,León,Urbano,,,,,,41,,
+ba9332a1,ACT-SCXI04343,León,Urbano,,,,,,49,,
+596b5fa2,ACT-SCUK25967,León,Urbano,,,,,,43,,
+1162be60,ACT-SCVI99252,León,Urbano,,,,,,39,,
+33a3ee82,ACT-SCUV86759,León,Urbano,,,,,,52,,
+05c2ce64,ACT-SCVV75111,León,Urbano,,,,,,52,,
+d084f513,ACT-SCOI81145,León,Urbano,,,,,,45,,
+8302afef,ACT-SCNA19945,León,Urbano,,,,,,45,,
+9df0705c,ACT-SCEB99555,León,Urbano,,,,,,45,,
+9c8d6a01,ACT-SCVU58310,León,Urbano,,,,,,48,,
+98e2468d,ACT-SCHR06694,León,Urbano,,,,,,35,,
+d3f1694d,ACT-SCGZ13635,León,Urbano,,,,,,92,,
+bffaa51f,ACT-SCAE22197,León,Urbano,,,,,,83,,
+5a6c8391,ACT-SCXI09265,León,Urbano,,,,,,47,,
+98e1cc25,ACT-SCJD07751,León,Urbano,,,,,,37,,
+50f9bafd,ACT-SCYX01736,León,Urbano,,,,,,122,,
+5ec1c486,ACT-SCZW67478,León,Urbano,,,,,,44,,
+f2b59a4d,ACT-SCFL63749,León,Urbano,,,,,,29,,
+23e30cc1,ACT-SCIU62573,León,Urbano,,,,,,21,,
+62dde70f,ACT-SCLN47636,León,Urbano,,,,,,9,,
+283d4c3a,ACT-SCEC59494,León,Urbano,,,,,,9,,
+32551234,ACT-SCID20527,León,Urbano,,,,,,26,,
+e7768dbd,ACT-SCOF77862,León,Urbano,,,,,,29,,
+5b9525e8,ACT-SCWL17736,León,Urbano,,,,,,9,,
+8d389ebf,ACT-SCQA46763,León,Urbano,,,,,,26,,
+df8818b0,ACT-SCWX09742,León,Urbano,,,,,,30,,
+de87d5c0,ACT-SCOL05853,León,Urbano,,,,,,2,,
+99ca7b30,ACT-SCLH71384,León,Urbano,,,,,,2,,
+820e7e3e,ACT-SCFS39255,León,Urbano,,,,,,2,,
+a4ee7df0,ACT-SCSM37747,León,Urbano,,,,,,30,,
+928cc8cb,ACT-SCHA79294,León,Urbano,,,,,,10,,
+5e4677c8,ACT-SCNX48386,León,Urbano,,,,,,45,,
+820560bc,ACT-SCYR59532,León,Urbano,,,,,,11,,
+fa660b1f,ACT-SCWP47300,León,Urbano,,,,,,17,,
+492e457a,ACT-SCPG48234,León,Urbano,,,,,,2,,
+9313d982,ACT-SCCC72626,León,Urbano,,,,,,27,,
+1632d4c8,ACT-SCTE83691,León,Urbano,,,,,,8,,
+248c2268,ACT-SCKO17136,León,Urbano,,,,,,8,,
+329cf4e7,ACT-SCUM49337,León,Urbano,,,,,,26,,
+c319cc92,ACT-SCHF14108,León,Urbano,,,,,,26,,
+f05d84e3,ACT-SCST29154,León,Urbano,,,,,,49,,
+"9,68E+45",ACT-SCIU85655,León,Urbano,,,,,,49,,
+ce83ce82,ACT-SCOK94797,León,Urbano,,,,,,19,,
+c801eaeb,ACT-SCWM63580,León,Urbano,,,,,,3,,
+becf01fe,ACT-SCJC32309,León,Urbano,,,,,,4,,
+1d6c5b6c,ACT-SCEX74581,León,Urbano,,,,,,9,,
+35b860d7,ACT-SCJB24725,León,Urbano,,,,,,31,,
+5b4d4fc8,ACT-SCVJ56701,León,Urbano,,,,,,10,,
+aac7b7fc,ACT-SCLF71421,León,Urbano,,,,,,34,,
+a519870a,ACT-SCWZ47070,León,Urbano,,,,,,23,,
+a08f3d2e,ACT-SCQG53896,León,Urbano,,,,,,18,,
+4b351c67,ACT-SCXA40559,León,Urbano,,,,,,10,,
+12a61688,ACT-SCIH03404,León,Urbano,,,,,,55,,
+e7393d57,ACT-SCXB46118,León,Urbano,,,,,,25,,
+9da58b67,ACT-SCXO47326,León,Urbano,,,,,,71,,
+6acd747e,ACT-SCBX48618,León,Urbano,,,,,,57,,
+d3751e2e,ACT-SCKE52232,León,Urbano,,,,,,54,,
+df4b9b8d,ACT-SCSC24290,León,Urbano,,,,,,46,,
+030f81c9,ACT-SCTI21727,León,Urbano,,,,,,39,,
+3c713379,ACT-SCDG16874,León,Urbano,,,,,,57,,
+60e9cc23,ACT-SCRT71813,León,Urbano,,,,,,24,,
+ca25e0e2,ACT-SCDV43231,León,Urbano,,,,,,23,,
+4ab8f3e5,ACT-SCBB20275,León,Urbano,,,,,,19,,
+4e01724e,ACT-SCRB11632,León,Urbano,,,,,,41,,
+66d7fd9b,ACT-SCGK77088,León,Urbano,,,,,,41,,
+c76fe3b6,ACT-SCNQ12340,León,Urbano,,,,,,39,,
+0e1b33fe,ACT-SCDY31161,León,Urbano,,,,,,14,,
+08418cf0,ACT-SCFZ35446,León,Urbano,,,,,,15,,
+50cc046f,ACT-SCLL05400,León,Urbano,,,,,,4,,
+7049b3b1,ACT-SCLX80397,León,Urbano,,,,,,27,,
+c243dc2f,ACT-SCVB63030,León,Urbano,,,,,,3,,
+bede140e,ACT-SCHK73032,León,Urbano,,,,,,2,,
+6b64028d,ACT-SCDL48719,León,Urbano,,,,,,3,,
+bde80f57,ACT-SCSA87938,León,Urbano,,,,,,11,,
+7b7dc17a,ACT-SCHN68767,León,Urbano,,,,,,11,,
+8cf3044f,ACT-SCBK39493,León,Urbano,,,,,,19,,
+99aefef5,ACT-SCWN16131,León,Urbano,,,,,,22,,
+f50785b1,ACT-SCNR03519,León,Urbano,,,,,,22,,
+5a01495d,ACT-SCMS71876,León,Urbano,,,,,,22,,
+86805993,ACT-SCOW24790,León,Urbano,,,,,,10,,
+da98e7fc,ACT-SCIC96809,León,Urbano,,,,,,10,,
+7da54b80,ACT-SCXF44752,León,Urbano,,,,,,10,,
+7f503c13,ACT-SCVG45701,León,Urbano,,,,,,10,,
+07c9fc9b,ACT-SCUR56844,León,Urbano,,,,,,86,,
+93069636,ACT-SCOF03596,León,Urbano,,,,,,86,,
+a74f2007,ACT-SCXJ70814,León,Urbano,,,,,,15,,
+23428448,ACT-SCVP88098,León,Urbano,,,,,,15,,
+ecb700bf,ACT-SCWS17352,León,Urbano,,,,,,15,,
+f20c95a7,ACT-SCAQ43276,León,Urbano,,,,,,10,,
+5032b7f4,ACT-SCLP33110,León,Urbano,,,,,,10,,
+68d3258d,ACT-SCWW25709,León,Urbano,,,,,,10,,
+91f7d13e,ACT-SCNQ44331,León,Urbano,,,,,,10,,
+eb53acea,ACT-SCRG34496,León,Urbano,,,,,,34,,
+d4a927dd,ACT-SCQE06079,León,Urbano,,,,,,34,,
+53e17057,ACT-SCCG07185,León,Urbano,,,,,,15,,
+9de2dff3,ACT-SCAN49585,León,Urbano,,,,,,21,,
+00a36692,ACT-SCTR77257,León,Urbano,,,,,,10,,
+f5253542,ACT-SCLS54531,León,Urbano,,,,,,10,,
+1d3a7b9a,ACT-SCXB66922,León,Urbano,,,,,,10,,
+ac642434,ACT-SCSK90288,León,Urbano,,,,,,10,,
+b545ab86,ACT-SCHD41399,León,Urbano,,,,,,27,,
+328e2fff,ACT-SCBW22460,León,Urbano,,,,,,27,,
+a37e60fd,ACT-SCKF15287,León,Urbano,,,,,,43,,
+3157ba42,ACT-SCRM91374,León,Periurbano,,,Nuevo Amanecer,,,10,10,0
+aa7349f8,ACT-SCTT59086,Guanajuato,Urbano,,,,,,26,,
+7244b82d,ACT-SCWO79422,Huanímaro,Urbano,,,,,,13116,,
+fb8a3ab8,ACT-SCTS46081,Huanímaro,Urbano,,,,,,34,,
+3a183bc4,ACT-SCRP37151,León,Urbano,,,,,,369,,
+3af6b941,ACT-SCNH21397,León,Urbano,,,,,,9,,
+b4737861,ACT-SCWP52672,León,Urbano,,,,,,40,,
+fafbae84,ACT-SCGZ16088,Silao de la Victoria,Urbano,,,,,,234,,
+5c76824c,ACT-SCVE84312,León,Urbano,,,,,,353,,
+530a3d9c,ACT-SCPB70657,Guanajuato,Urbano,,,,,,150,150,0
+"0,00E+00",ACT-SCKQ07454,Guanajuato,Urbano,,,,,,13,13,0
+09dd875f,ACT-SCWR46777,Guanajuato,Urbano,,,,,,38,38,0
+0dec5916,ACT-SCYZ30303,Guanajuato,Urbano,,,,,,7,7,0
+145c03cb,ACT-SCIY65965,Guanajuato,Urbano,,,,,,25,25,0
+7807eed2,ACT-SCFA60499,Guanajuato,Urbano,,,,,,28,28,0
+6e8ee910,ACT-SCAT63785,Guanajuato,Urbano,,,,,,12,12,0
+f9669ea3,ACT-SCTY90935,Guanajuato,Urbano,,,,,,18,18,0
+98568060,ACT-SCRR49219,Guanajuato,Urbano,,,,,,17,17,0
+2b508436,ACT-SCIC52126,Guanajuato,Urbano,,,,,,71,71,0
+4f0b0449,ACT-SCDY94333,Guanajuato,Urbano,,,,,,1,1,0
+ce1bf4e9,ACT-SCFF27378,Guanajuato,Urbano,,,,,,5,5,0
+fa4d5c07,ACT-SCCM31574,Guanajuato,Urbano,,,,,,4,4,0
+ccad1a7c,ACT-SCMS10299,Guanajuato,Urbano,,,,,,13,13,0
+a2633c79,ACT-SCVL07006,Guanajuato,Urbano,,,,,,2,2,0
+8b43fbcf,ACT-SCWB31313,Guanajuato,Urbano,,,,,,6,6,0
+0a3bb408,ACT-SCYY20286,Guanajuato,Urbano,,,,,,11,11,0
+1f4c7d72,ACT-SCUG70486,Guanajuato,Urbano,,,,,,2,2,0
+d40a2aba,ACT-SCTD96194,Guanajuato,Urbano,,,,,,4,4,0
+e14e7e2c,ACT-SCJF91946,Guanajuato,Urbano,,,,,,2,2,0
+f8f17efe,ACT-SCCI55611,Guanajuato,Urbano,,,,,,6,6,0
+cb6514c2,ACT-SCBK85596,Guanajuato,Urbano,,,,,,15,15,0
+9de3b0a5,ACT-SCCJ96299,Guanajuato,Urbano,,,,,,10,10,0
+aa03f65d,ACT-SCZR35037,Guanajuato,Urbano,,,,,,30,30,0
+0073101e,ACT-SCDD46576,Guanajuato,Urbano,,,,,,12,12,0
+099cda4a,ACT-SCRM78932,Guanajuato,Urbano,,,,,,16,16,0
+fc196392,ACT-SCRS76701,Guanajuato,Urbano,,,,,,2,2,0
+7e635236,ACT-SCYL18280,Guanajuato,Urbano,,,,,,2,2,0
+76bf4dce,ACT-SCQP18262,Guanajuato,Urbano,,,,,,9,9,0
+b367531d,ACT-SCHM11033,Guanajuato,Urbano,,,,,,9,9,0
+7d951805,ACT-SCOP01093,Guanajuato,Urbano,,,,,,3,3,0
+646af36c,ACT-SCAE90848,Guanajuato,Urbano,,,,,,80,80,0
+357f6db2,ACT-SCJS91096,Guanajuato,Urbano,,,,,,13,13,0
+867a68ae,ACT-SCRG16177,Guanajuato,Urbano,,,,,,12,12,0
+5fed7252,ACT-SCRD35570,Guanajuato,Urbano,,,,,,25,25,0
+36ffa62e,ACT-SCXZ05565,Guanajuato,Urbano,,,,,,6,6,0
+126cbd76,ACT-SCPU42921,Guanajuato,Urbano,,,,,,2,2,0
+09f23acc,ACT-SCCO81814,Guanajuato,Urbano,,,,,,2,2,0
+2f43a2c2,ACT-SCFR72450,Guanajuato,Urbano,,,,,,2,2,0
+599bfb74,ACT-SCBI39264,Guanajuato,Urbano,,,,,,3,3,0
+6f8eb249,ACT-SCSK13712,Guanajuato,Urbano,,,,,,2,2,0
+281a35fd,ACT-SCOE35202,Guanajuato,Urbano,,,,,,2,2,0
+151650ad,ACT-SCNF11223,Guanajuato,Urbano,,,,,,2,2,0
+fc0ee810,ACT-SCIY92512,Guanajuato,Urbano,,,,,,5,5,0
+9d1f5164,ACT-SCYR77313,Guanajuato,Urbano,,,,,,12,12,0
+e69d650a,ACT-SCWL29449,Guanajuato,Urbano,,,,,,1,1,0
+fa8399e9,ACT-SCVC16818,Guanajuato,Urbano,,,,,,2,2,0
+ce92e7ca,ACT-SCHL28991,Guanajuato,Urbano,,,,,,5,5,0
+d0701ab7,ACT-SCEC08568,Guanajuato,Urbano,,,,,,2,2,0
+46b038ab,ACT-SCTI30510,Guanajuato,Urbano,,,,,,2,2,0
+46aa0e5d,ACT-SCCG69694,Guanajuato,Urbano,,,,,,3,3,0
+204080fb,ACT-SCEK85092,Guanajuato,Urbano,,,,,,2,2,0
+3c42ee3d,ACT-SCLF73249,Guanajuato,Urbano,,,,,,2,2,0
+d59268e6,ACT-SCQG32270,Guanajuato,Urbano,,,,,,2,2,0
+6188434f,ACT-SCZC19616,Guanajuato,Urbano,,,,,,4,4,0
+ae19804b,ACT-SCDF52076,Guanajuato,Urbano,,,,,,1,1,0
+b3158cce,ACT-SCGO67828,Guanajuato,Urbano,,,,,,3,3,0
+d6b7bdaf,ACT-SCPW42925,Guanajuato,Urbano,,,,,,2,2,0
+714d3e8b,ACT-SCNA55939,Guanajuato,Urbano,,,,,,2,2,0
+3dfcff9e,ACT-SCIA81020,Guanajuato,Urbano,,,,,,1,1,0
+ac60c306,ACT-SCBS46929,Guanajuato,Urbano,,,,,,1,1,0
+8219636f,ACT-SCBB68314,Guanajuato,Urbano,,,,,,16,16,0
+94c0af3f,ACT-SCGK42132,Guanajuato,Urbano,,,,,,20,20,0
+97f564ec,ACT-SCIM79162,Guanajuato,Urbano,,,,,,3,3,0
+bb71b8b5,ACT-SCFN14990,Guanajuato,Urbano,,,,,,3,3,0
+94b10151,ACT-SCLZ69224,Guanajuato,Urbano,,,,,,3,3,0
+145d3e54,ACT-SCDP88452,Guanajuato,Urbano,,,,,,2,2,0
+b3639cf9,ACT-SCPW91712,Guanajuato,Urbano,,,,,,4,4,0
+1967e73f,ACT-SCIN76554,Guanajuato,Urbano,,,,,,2,2,0
+4277cbd6,ACT-SCOE23523,Guanajuato,Urbano,,,,,,11,11,0
+dc7f5d3e,ACT-SCTF94480,Guanajuato,Urbano,,,,,,9,9,0
+dec21779,ACT-SCFP60419,Guanajuato,Urbano,,,,,,5,5,0
+d2d3ecc1,ACT-SCOZ68311,Guanajuato,Urbano,,,,,,7,7,0
+b791f739,ACT-SCBK71518,Guanajuato,Urbano,,,,,,5,5,0
+9d24b1f0,ACT-SCAJ52970,Guanajuato,Urbano,,,,,,7,7,0
+156b7ac9,ACT-SCLG96107,Guanajuato,Urbano,,,,,,5,5,0
+7b1e6d91,ACT-SCOB53637,Guanajuato,Urbano,,,,,,34,34,0
+aa703b72,ACT-SCIM36171,Guanajuato,Urbano,,,,,,44,44,0
+d0f9f8e0,ACT-SCFL57625,Guanajuato,Urbano,,,,,,6,6,0
+3fb5a462,ACT-SCGL69862,Guanajuato,Urbano,,,,,,3,3,0
+a7994dbe,ACT-SCVE44886,Guanajuato,Urbano,,,,,,7,7,0
+01e5f029,ACT-SCZM10990,Guanajuato,Urbano,,,,,,29,29,0
+4e488670,ACT-SCMF36897,Guanajuato,Urbano,,,,,,131,131,0
+e8737427,ACT-SCFQ64798,Guanajuato,Urbano,,,,,,5,5,0
+7b5bad22,ACT-SCKS90162,Guanajuato,Urbano,,,,,,10,10,0
+b6463857,ACT-SCCD44321,Guanajuato,Urbano,,,,,,21,21,0
+1b1fdca7,ACT-SCGH78821,Guanajuato,Urbano,,,,,,36,36,0
+d9c44af8,ACT-SCKJ85023,Guanajuato,Urbano,,,,,,35,35,0
+f68fa261,ACT-SCRO06991,Guanajuato,Urbano,,,,,,25,25,0
+576e911d,ACT-SCXH78469,Guanajuato,Urbano,,,,,,10,10,0
+65142654,ACT-SCFU87796,Silao de la Victoria,Urbano,,,,,,1,,
+c1ce2b00,ACT-SCSF73879,Silao de la Victoria,Urbano,,,,,,4,,
+52173b17,ACT-SCTB85459,Silao de la Victoria,Urbano,,,,,,4,,
+532b1e80,ACT-SCVL48124,Silao de la Victoria,Urbano,,,,,,101,,
+54a31728,ACT-SCWZ10989,Silao de la Victoria,Urbano,,,,,,18,,
+dd119828,ACT-SCIT93215,Silao de la Victoria,Urbano,,,,,,18,,
+5efb320e,ACT-SCJO26685,Silao de la Victoria,Urbano,,,,,,27,,
+4985e0f0,ACT-SCFI93148,Guanajuato,Urbano,,,,,,34,,
+ad3cabc1,ACT-SCOX33073,Silao de la Victoria,Urbano,,,,,,25,,
+a0a9c3f9,ACT-SCSV37476,,Urbano,,,,,,34,,
+822e3515,ACT-SCFC50070,,Urbano,,,,,,29,,
+d402b2df,ACT-SCCO99201,,Urbano,,,,,,35,,
+f46bb0d7,ACT-SCFT85443,,Urbano,,,,,,2,,
+2a8b03ff,ACT-SCUA50507,,Urbano,,,,,,10,,
+a9c0561a,ACT-SCEB89086,,Urbano,,,,,,4,,
+1c8c9473,ACT-SCTY36726,,Urbano,,,,,,9,,
+268fa31d,ACT-SCMV32773,,Urbano,,,,,,3,,
+e289b514,ACT-SCFR56250,,Urbano,,,,,,4,,
+7eb34a3e,ACT-SCAK70782,,Urbano,,,,,,3,,
+a67e2c68,ACT-SCQT76448,,Urbano,,,,,,2,,
+a93953af,ACT-SCUG05590,,Urbano,,,,,,2,,
+a9bb1785,ACT-SCXP94647,,Urbano,,,,,,3,,
+e6489444,ACT-SCUM91210,,Urbano,,,,,,3,,
+98061c7a,ACT-SCBS28751,,Urbano,,,,,,6,,
+4a3f31e2,ACT-SCEK07509,,Urbano,,,,,,5,,
+e51e8682,ACT-SCKA01347,,Urbano,,,,,,9,,
+94031006,ACT-SCTW88932,,Urbano,,,,,,7,,
+02fbdb2c,ACT-SCMV80498,,Urbano,,,,,,21,,
+c26cb378,ACT-SCDP28039,,Urbano,,,,,,8,,
+f9d5015c,ACT-SCTV82164,,Urbano,,,,,,1,,
+f619f25c,ACT-SCZK92079,,Urbano,,,,,,3,,
+a08fa0dc,ACT-SCKG42796,,Urbano,,,,,,3,,
+0584838f,ACT-SCDN73789,,Urbano,,,,,,5,,
+4e5b3eb8,ACT-SCEJ08838,,Urbano,,,,,,2,,
+f5838caf,ACT-SCQC76801,,Urbano,,,,,,3,,
+21b3cf5b,ACT-SCDY40904,,Urbano,,,,,,11,,
+b584a98c,ACT-SCQU69292,,Urbano,,,,,,8,,
+b43e8615,ACT-SCAT63508,,Urbano,,,,,,2,,
+3ec1d6b9,ACT-SCWX88850,,Urbano,,,,,,2,,
+e60b8bf3,ACT-SCNG52489,,Urbano,,,,,,24,,
+5115ba51,ACT-SCMQ77525,,Urbano,,,,,,3,,
+c3ac25b7,ACT-SCNZ87862,,Urbano,,,,,,3,,
+5bbe4708,ACT-SCUM91078,,Urbano,,,,,,5,,
+6058f415,ACT-SCCY84221,,Urbano,,,,,,4,,
+56a7e90a,ACT-SCTF15422,,Urbano,,,,,,26,,
+d504da8d,ACT-SCKD36987,,Urbano,,,,,,2,,
+286583a6,ACT-SCKT73108,,Urbano,,,,,,3,,
+451df436,ACT-SCVG16691,,Urbano,,,,,,1,,
+4c85b997,ACT-SCZN30924,,Urbano,,,,,,2,,
+6329b3f9,ACT-SCJB65964,,Urbano,,,,,,2,,
+d537d9b6,ACT-SCDA95565,,Urbano,,,,,,41,,
+bebe8121,ACT-SCRN56558,,Urbano,,,,,,18,,
+5e84a512,ACT-SCHZ69552,,Urbano,,,,,,22,,
+2e220bc4,ACT-SCHP88716,,Urbano,,,,,,5,,
+7190324,ACT-SCCX63144,Purísima del Rincón,Periurbano,,,,,,30,30,0
+d6ee5994,ACT-SCWR52731,Purísima del Rincón,Periurbano,,,,,,15,15,0
+60f76cc2,ACT-SCNO29257,Purísima del Rincón,Periurbano,,,,,,23,23,0
+d8296611,ACT-SCHF84120,Purísima del Rincón,Periurbano,,,,,,153,153,0
+02ea4622,ACT-SCKG42349,Purísima del Rincón,Periurbano,,,Estudiantil,,,29,29,0
+407620fc,ACT-SCRN16755,Purísima del Rincón,Periurbano,,,,,,0,0,0
+a3c7cf4b,ACT-SCCG42184,Purísima del Rincón,Periurbano,,,,,,15,15,0
+3a6244bf,ACT-SCZX20278,Purísima del Rincón,Periurbano,,,Estudiantil,,,20,19,1
+95e358f9,ACT-SCQB78176,Salamanca,,,,Salamanca,,,23,0,23
+b87a7250,ACT-SCEZ98681,Salamanca,,,,Salamanca,,,82,0,82
+1bc06ff7,ACT-SCRP19963,Purísima del Rincón,,,,Purísima de Bustos,,,171,0,171
+c12c8f2d,ACT-SCZO04190,Salamanca,,,,Salamanca,,,48,0,48
+f03002bf,ACT-SCEM45304,San Felipe,,,,San Felipe,,,57,,
+a13ee52a,ACT-SCHI12422,Guanajuato,Urbano,,,,No,No,80,,80
+522b7ed9,ACT-SCJI30340,Guanajuato,Urbano,,,,No,No,13,13,0
+d6b91325,ACT-SCCE06530,Guanajuato,Urbano,,,,No,No,12,,12
+09a74e9a,ACT-SCLX00349,Guanajuato,Urbano,,,,No,No,25,25,0
+a1578ae8,ACT-SCCL43083,Guanajuato,Urbano,,,,No,No,6,6,0
+7360492e,ACT-SCVL31633,Guanajuato,Urbano,,,,No,No,2,2,0
+07de84c6,ACT-SCDX59361,Guanajuato,Urbano,,,,No,No,2,,2
+f3e40357,ACT-SCHJ12700,Guanajuato,Urbano,,,,No,No,2,,2
+e0ea9c21,ACT-SCMR53192,Guanajuato,Urbano,,,,No,No,2,0,2
+bfca4daa,ACT-SCFL91154,Guanajuato,Urbano,,,,No,No,3,,3
+2681814d,ACT-SCYQ35736,Guanajuato,Urbano,,,,No,No,2,,2
+fde95026,ACT-SCIB60935,Guanajuato,Urbano,,,,No,No,2,,2
+318f1687,ACT-SCTV01547,Guanajuato,Urbano,,,,No,No,3,,3
+a4db274b,ACT-SCZO37643,Guanajuato,Urbano,,,,No,No,2,,2
+33f37e10,ACT-SCTH19826,Guanajuato,Urbano,,,,No,No,2,,2
+ceb12003,ACT-SCNE19268,Guanajuato,Urbano,,,,No,No,5,,5
+7141da21,ACT-SCID67034,Guanajuato,Urbano,,,,No,No,2,,2
+cb9dffb5,ACT-SCSA62604,Guanajuato,Urbano,,,,No,No,12,,12
+f07ce740,ACT-SCOU46139,Guanajuato,Urbano,,,,No,No,1,0,1
+982d3e69,ACT-SCGH94125,Guanajuato,Urbano,,,,No,No,2,,2
+a6591da6,ACT-SCMX38137,Guanajuato,Urbano,,,,No,No,5,,5
+010922b4,ACT-SCZS99846,Guanajuato,Urbano,,,,No,No,2,,2
+ee2814bd,ACT-SCTZ62968,Guanajuato,Urbano,,,,No,No,2,,2
+4e8edd9b,ACT-SCDV44025,Guanajuato,Urbano,,,,No,No,3,,3
+b661eb39,ACT-SCGX47131,Guanajuato,Urbano,,,,No,No,2,,2
+5f15fe8a,ACT-SCXA74826,Guanajuato,Urbano,,,,No,No,2,,2
+c8752792,ACT-SCQO63697,Guanajuato,Urbano,,,,No,No,2,,2
+34e36f32,ACT-SCMW54741,Guanajuato,Urbano,,,,No,No,4,,4
+788f9701,ACT-SCHV20717,Guanajuato,Urbano,,,,No,No,1,,1
+6708bb09,ACT-SCJT42832,Guanajuato,Urbano,,,,No,No,3,,3
+20d47a42,ACT-SCAV88186,Guanajuato,Urbano,,,,No,No,2,0,2
+6e8a7d05,ACT-SCKN83999,Guanajuato,Urbano,,,,No,No,2,,2
+c54e2786,ACT-SCAZ76555,Guanajuato,Urbano,,,,No,No,1,,1
+0d4ea5d1,ACT-SCCZ67506,Guanajuato,Urbano,,,,No,No,1,,1
+ad684cd5,ACT-SCGX32408,Guanajuato,Urbano,,,,No,No,16,,16
+eb4ac6ef,ACT-SCIO80250,Guanajuato,Urbano,,,,No,No,20,,20
+2ae87418,ACT-SCTE00904,Guanajuato,Urbano,,,,No,No,3,,3
+57ff5c26,ACT-SCAL76444,Guanajuato,Urbano,,,,No,No,3,,3
+a1ce965c,ACT-SCRR14190,Guanajuato,Urbano,,,,No,No,3,,3
+423eed26,ACT-SCEX56937,Guanajuato,Urbano,,,,No,No,2,,2
+90d09779,ACT-SCHA46004,Guanajuato,Urbano,,,,No,No,4,,4
+4ef5d37f,ACT-SCEW85688,Guanajuato,Urbano,,,,No,No,2,,2
+aa53f198,ACT-SCLG54959,Guanajuato,Urbano,,,,No,No,11,,11
+e38a855a,ACT-SCDG74167,Guanajuato,Urbano,,,,No,No,3,,3
+cfa2fa66,ACT-SCAU79423,Guanajuato,Urbano,,,,No,No,9,,9
+e09eb776,ACT-SCMC57756,Guanajuato,Urbano,,,,No,No,5,,5
+a45e0270,ACT-SCEE94813,Guanajuato,Urbano,,,,No,No,7,,7
+f2742a43,ACT-SCUS55400,Guanajuato,Urbano,,,,No,No,5,,5
+0a683a62,ACT-SCLI35264,Guanajuato,Urbano,,,,No,No,7,,7
+5ee6408a,ACT-SCBF61058,Guanajuato,Urbano,,,,No,No,5,,5
+8bf52ac6,ACT-SCXF82432,Guanajuato,Urbano,,,,No,No,34,,34
+6bc0fc4d,ACT-SCSJ03323,Guanajuato,Urbano,,,,No,No,44,,44
+501f9e4b,ACT-SCQT55050,Guanajuato,Urbano,,,,No,No,6,,6
+bad7c21a,ACT-SCRH24545,Guanajuato,Urbano,,,,No,No,3,,3
+037d07d2,ACT-SCSH45048,Guanajuato,Urbano,,,,No,No,7,,7
+0094aa93,ACT-SCVP97218,Guanajuato,Urbano,,,,No,No,29,,29
+fe5e7405,ACT-SCDZ98265,Guanajuato,Urbano,,,,No,No,131,,131
+bf7fd116,ACT-SCVT83549,Guanajuato,Urbano,,,,No,No,5,,5
+81c5b1ed,ACT-SCGA19365,Guanajuato,Urbano,,,,No,No,10,10,0
+eddb3413,ACT-SCTQ65597,Guanajuato,Urbano,,,,No,No,21,,21
+5793a4b3,ACT-SCGC81939,Guanajuato,Urbano,,,,No,No,36,,36
+defe5535,ACT-SCGC19270,Guanajuato,Urbano,,,,No,No,35,,35
+d01febd0,ACT-SCPL00698,Guanajuato,Urbano,,,,No,No,25,,25
+05b47b6a,ACT-SCQM99881,Guanajuato,Urbano,,,,No,No,10,,10
+51af0a38,ACT-SCNN79818,Guanajuato,Urbano,,,,No,No,2,,2
+de06c48d,ACT-SCIQ99625,Guanajuato,Urbano,,,,No,No,2,,2
+0ed6a662,ACT-SCLC59494,Guanajuato,Urbano,,,,No,No,198,,198
+a104cae3,ACT-SCWV41094,Guanajuato,Urbano,,,,No,No,228,,228
+2f6c65d9,ACT-SCZT10846,Guanajuato,Urbano,,,,No,No,9,,9
+1e4b8506,ACT-SCUD44738,Guanajuato,Urbano,,,,No,No,77,,77
+6d16055e,ACT-SCHS04773,Guanajuato,Urbano,,,,No,No,18,18,0
+d1552eca,ACT-SCHX23915,Guanajuato,Urbano,,,,No,No,5,5,0
+fd193446,ACT-SCZU26953,Salamanca,Urbano,181,Salamanca,,Si,Si,25,1,24
+9db12965,ACT-SCEN83894,Guanajuato,Urbano,,,,No,No,25,,25
+adf90d72,ACT-SCDA68968,Guanajuato,Urbano,,,,No,No,20,,20
+d0c50c18,ACT-SCRT98593,Guanajuato,Urbano,,,,No,No,19,,19
+d0b36e3d,ACT-SCOG94069,Moroleón,Urbano,165,Moroleon,,Si,Si,9,9,0
+be32c1e3,ACT-SCOG94069,Salamanca,Urbano,181,Salamanca,,Si,Si,26,26,0
+903c7000,ACT-SCOG94069,Salvatierra,Urbano,187,Salvatierra,,Si,Si,40,40,0
+8cd54dde,ACT-SCLO03085,Purísima del Rincón,Urbano,,,,No,No,27,,27
+350ac6ef,ACT-SCMB37331,Purísima del Rincón,Urbano,,,,No,No,84,,84
+bfc9d659,ACT-SCDW60028,Purísima del Rincón,Urbano,,,,No,No,25,,25
+04f6df90,ACT-SCXQ08411,Purísima del Rincón,Urbano,,,,No,No,23,,23
+d8cf354c,ACT-SCEK37665,Purísima del Rincón,Urbano,,,,No,No,12,,12
+557c614d,ACT-SCMR77176,Purísima del Rincón,Urbano,,,,No,No,10,,10
+156ad959,ACT-SCUB79887,León,Urbano,,,,No,No,123,,123
+76997254,ACT-SCFK93457,León,Urbano,,,,No,No,95,31,64
+844589f2,ACT-SCRL19616,León,Urbano,,,,No,No,90,,90
+506e795a,ACT-SCHX25434,León,Urbano,,,,No,No,70,,70
+27f71110,ACT-SCSU97834,León,Urbano,,,,No,No,129,,129
+7d8d91ae,ACT-SCZS97468,León,Urbano,,,,No,No,158,,158
+f3cdfb4f,ACT-SCIH53972,León,Urbano,,,,No,No,9,,9
+f7cb52de,ACT-SCJW80078,León,Urbano,,,,No,No,333,6,327
+55d0800f,ACT-SCTA04470,León,Urbano,,,,No,No,273,1,272
+51af1713,ACT-SCPF07271,León,Urbano,,,,No,No,279,1,278
+db8b6ee1,ACT-SCHL51218,León,Urbano,,,,No,No,193,1,192
+a19fd94c,ACT-SCRP77146,León,Urbano,,,,No,No,178,1,177
+17eb6296,ACT-SCFY07903,León,Urbano,,,,No,No,255,1,254
+d3310a39,ACT-SCXR82537,León,Urbano,,,,No,No,235,1,234
+5be2704a,ACT-SCST83407,León,Urbano,,,,No,No,164,1,163
+f1f1c152,ACT-SCVQ17632,León,Urbano,,,,No,No,134,1,133
+fafbc59a,ACT-SCKQ31426,León,Urbano,,,,No,No,185,1,184
+9ab249de,ACT-SCCU65175,León,Urbano,,,,No,No,169,1,168
+73187b9e,ACT-SCMG32181,León,Urbano,,,,No,No,136,1,135
+eabb728e,ACT-SCPG27666,León,Urbano,,,,No,No,6,,6
+23a13f4b,ACT-SCAS77684,León,Urbano,,,,No,No,40,,40
+6a447741,ACT-SCGT11592,León,Urbano,,,,No,No,38,,38
+9fa4dd0d,ACT-SCAK14118,León,Urbano,,,,No,No,41,,41
+fd494c94,ACT-SCIQ28477,León,Urbano,,,,No,No,31,,31
+36076b34,ACT-SCED00204,León,Urbano,,,,No,No,11,,11
+ee7290d8,ACT-SCVC41805,León,Urbano,,,,No,No,53,,53
+e0c8e6e4,ACT-SCBT52872,León,Urbano,,,,No,No,54,,54
+6c70f47e,ACT-SCEQ59384,León,Urbano,,,,No,No,13,,13
+5ba25525,ACT-SCBX93780,León,Urbano,,,,No,No,40,,40
+11ddbe2d,ACT-SCOG94069,San Luis de la Paz,Urbano,201,San Luis de la Paz,,Si,Si,14,14,0
+9add86e3,ACT-SCOG94069,Santa Cruz de Juventino Rosas,Urbano,,,,No,No,19,19,0
+0e768a98,ACT-SCOG94069,Valle de Santiago,Urbano,227,Valle de Santiago,,Si,Si,21,21,0
+10170288,ACT-SCOG94069,Acámbaro,Urbano,7,Acambaro,,Si,Si,47,47,0
+ca8f830e,ACT-SCOG94069,Cortazar,Urbano,34,Cortazar,,Si,Si,46,46,0
+be0cba4f,ACT-SCOG94069,Irapuato,Urbano,,,,No,No,54,54,0
+dc5c629c,ACT-SCOG94069,Jaral del Progreso,Urbano,84,Jaral del Progreso,,Si,Si,35,35,0
+a6d501a4,ACT-SCOG94069,León,Urbano,,,,No,No,87,87,0
+305683c7,ACT-SCOG94069,Purísima del Rincón,Urbano,,,,No,No,50,50,0
+12818ccf,ACT-SCOG94069,San José Iturbide,Urbano,199,San José Iturbide,,Si,Si,29,29,0
+dc3c8bf7,ACT-SCOG94069,Tarimoro,Urbano,221,Tarimoro,,Si,Si,13,13,0
+8d3db680,ACT-SCOG94069,Uriangato,Urbano,225,Uriangato,,Si,Si,39,39,0
+3e5f59e9,ACT-SCSQ40985,León,Urbano,,,,No,No,29,,29
+9c0d6adc,ACT-SCIN39392,Comonfort,Urbano,28,Comonfort,,Si,Si,23,23,0
+b9274b44,ACT-SCIN39392,Cuerámaro,Urbano,39,Cueramaro,,Si,No,11,11,0
+b1ae7e3b,ACT-SCIN39392,Doctor Mora,Urbano,41,Doctor Mora,,Si,No,82,82,0
+92d101fc,ACT-SCIN39392,Ciudad Manuel Doblado,Urbano,,,,No,No,21,21,0
+4e0be0e1,ACT-SCIN39392,Salamanca,Urbano,181,Salamanca,,Si,Si,27,27,0
+b470ebb8,ACT-SCIN39392,San Felipe,Urbano,192,San Felipe,,Si,Si,11,11,0
+d6b13dbb,ACT-SCIN39392,Santiago Maravatío,Urbano,213,Santiago Maravatio,,Si,No,28,28,0
+a22fa470,ACT-SCIN39392,Tarandacuao,Urbano,219,Tarandacuao,,Si,No,34,34,0
+2ad6284f,ACT-SCIN39392,Tierra Blanca,Urbano,223,Tierra Blanca,,Si,No,47,47,0
+11d1574d,ACT-SCHQ32709,León,Urbano,,,,No,No,33,,33
+f86e9b84,ACT-SCGR53088,León,Urbano,,,,No,No,24,,24
+114c298e,ACT-SCZK59562,León,Urbano,,,,No,No,27,,27
+7022fdea,ACT-SCDV69674,León,Urbano,,,,No,No,22,,22
+5ab87027,ACT-SCEK06205,León,Urbano,,,,No,No,22,,22
+1dd6c022,ACT-SCKO50723,León,Urbano,,,,No,No,30,,30
+31a522d6,ACT-SCRO59354,León,Urbano,,,,No,No,13,,13
+daee167f,ACT-SCXG95370,León,Urbano,,,,No,No,17,,17
+580bfba1,ACT-SCZN12518,León,Urbano,,,,No,No,30,,30
+96489407,ACT-SCBC34336,Salamanca,Urbano,181,Salamanca,,Si,Si,2228,,2228
+b138cd21,ACT-SCAQ60152,Salamanca,Urbano,181,Salamanca,,Si,Si,2228,,2228
+c2ee3354,ACT-SCAH64970,Salamanca,Urbano,181,Salamanca,,Si,Si,271,,271
+cab637ee,ACT-SCEM34948,Salamanca,Urbano,181,Salamanca,,Si,Si,50,,50
+4cd3a226,ACT-SCZD11467,Salamanca,Urbano,181,Salamanca,,Si,Si,30,,30
+93290a03,ACT-SCKK34173,Salamanca,Urbano,181,Salamanca,,Si,Si,17,,17
+bbf04f2a,ACT-SCTN60936,Salamanca,Urbano,181,Salamanca,,Si,Si,18,,18
+86fdd2c4,ACT-SCQT40121,León,Urbano,,,,No,No,51,,51
+695dbe18,ACT-SCNN53248,León,Urbano,,,,No,No,13,,13
+ad5bd551,ACT-SCKL65399,León,Urbano,,,,No,No,30,,30
+ba95b776,ACT-SCWB65062,León,Urbano,,,,No,No,18,,18
+5d011597,ACT-SCSK90316,León,Urbano,,,,No,No,12,,12
+4f5d1e74,ACT-SCPJ00076,León,Urbano,,,,No,No,2,2,0
+00f373f1,ACT-SCFV97815,León,Urbano,,,,No,No,26,26,0
+6bcc38ec,ACT-SCTH91346,León,Urbano,,,,No,No,8,8,0
+6cc47ff7,ACT-SCJY66351,León,Urbano,,,,No,No,71,71,0
+da6548c0,ACT-SCLJ26393,Jerécuaro,Urbano,,,,No,No,353,,353
+959a326f,ACT-SCLJ26393,Acámbaro,Urbano,,,,No,No,95,,95
+6aa0c9e8,ACT-SCLJ26393,Santa Cruz de Juventino Rosas,Urbano,,,,No,No,173,,173
+d74d2491,ACT-SCLJ26393,Purísima del Rincón,Urbano,,,,No,No,107,,107
+ceaf3d56,ACT-SCLJ26393,Salamanca,Urbano,,,,No,No,251,,251
+28594c3e,ACT-SCLJ26393,San José Iturbide,Urbano,,,,No,No,63,,63
+fe337181,ACT-SCLJ26393,Jaral del Progreso,Urbano,,,,No,No,34,,34
+fc9b5f59,ACT-SCLJ26393,Cortazar,Urbano,,,,No,No,93,,93
+6122b42f,ACT-SCLJ26393,Salvatierra,Urbano,,,,No,No,86,,86
+98caadbe,ACT-SCLJ26393,Abasolo,Urbano,,,,No,No,34,,34
+2e5be620,ACT-SCLJ26393,San Luis de la Paz,Urbano,,,,No,No,35,,35
+8677ef4f,ACT-SCLJ26393,Valle de Santiago,Urbano,,,,No,No,41,,41
+159199d7,ACT-SCLJ26393,Tarimoro,Urbano,,,,No,No,10,,10
+7b9feaac,ACT-SCLJ26393,Uriangato,Urbano,,,,No,No,104,,104
+696eb8b5,ACT-SCLJ26393,Irapuato,Urbano,,,,No,No,62,,62
+db58d793,ACT-SCLJ26393,Moroleón,Urbano,,,,No,No,119,,119
+9b0e7dde,ACT-SCLJ26393,Moroleón,Urbano,,,,No,No,48,,48
+93936f08,ACT-SCDB29664,Ciudad Manuel Doblado,Urbano,,,,No,No,82,,82
+6ae40ae7,ACT-SCDB29664,Doctor Mora,Urbano,,,,No,No,97,,97
+fb277183,ACT-SCDB29664,Santiago Maravatío,Urbano,,,,No,No,210,,210
+25953564,ACT-SCDB29664,Tierra Blanca,Urbano,,,,No,No,146,,146
+10c3951d,ACT-SCDB29664,Tarandacuao,Urbano,,,,No,No,66,,66
+b47eaa22,ACT-SCDB29664,Comonfort,Urbano,,,,No,No,78,,78
+2657b6f0,ACT-SCXJ62889,Silao de la Victoria,Urbano,,,,No,No,2,,2
+225991ad,ACT-SCQH00200,Silao de la Victoria,Urbano,,,,No,No,24,,24
+e4440308,ACT-SCSQ29641,Silao de la Victoria,Urbano,,,,No,No,3,,3
+4fd5e0e3,ACT-SCKI49213,León,Urbano,,,,No,No,353,,353
+3a706905,ACT-SCRY44673,León,Urbano,,,,No,No,195,,195
+18ffd3ab,ACT-SCFL26451,Purísima del Rincón,Urbano,,,,No,No,10,,10
+88f574dc,ACT-SCZC52380,Silao de la Victoria,Urbano,,,,No,No,8,,8
+dc947ac4,ACT-SCIV47727,León,Urbano,,,,No,No,75,,75
+223f24fd,ACT-SCPZ67255,León,Urbano,,,,No,No,91,,91
+35ef3777,ACT-SCGM25993,Acámbaro,Urbano,,,,No,No,5660,,5660
+84fca180,ACT-SCVA51840,Yuriria,Urbano,,,,No,No,23090,,23090
+ac33d854,ACT-SCLO47843,Salamanca,Urbano,,,,No,No,294,,294
+2881a8b4,ACT-SCNE61183,León,Urbano,,,,No,No,7,7,0
+6343cc95,ACT-SCSW77630,Tarandacuao,Urbano,,,,No,No,297,,297
+81caf00a,ACT-SCDJ88045,Salamanca,Urbano,181,Salamanca,,Si,Si,300,,300
+3f39ce92,ACT-SCUQ80549,Salamanca,Urbano,181,Salamanca,,Si,Si,52,,52
+323e05f0,ACT-SCHM54541,Salamanca,Urbano,181,Salamanca,,Si,Si,158,,158
+11b60d4a,ACT-SCZF90716,Salamanca,Urbano,181,Salamanca,,Si,Si,733,,733
+a33c4d8f,ACT-SCLQ88281,Salamanca,Urbano,181,Salamanca,,Si,Si,250,,250
+e40faab0,ACT-SCKO44883,Salamanca,Urbano,,,,No,No,54,54,0
+cc65ab21,ACT-SCWL65120,Cobertura estatal,,,,,,,1544,,
+c8c5a0dd,ACT-SCSG66023,Cobertura estatal,,,,,,,0,,
+c7ce3a3e,ACT-SCHD90521,Cobertura estatal,,,,,,,0,,
+c53e3d74,ACT-SCZE71743,Cobertura estatal,,,,,,,0,,
+c727ade5,ACT-SCSQ54906,Cobertura estatal,,,,,,,138,,
+c564e199,ACT-SCNJ03592,Cobertura estatal,,,,,,,222,,
+c2615c0b,ACT-SCRM12098,Cobertura estatal,,,,,,,179,,
+c7c4a9c3,ACT-SCXT56205,Cobertura estatal,,,,,,,195,,
+c56d7ccf,ACT-SCYE65097,Cobertura estatal,,,,,,,2250,,
+c1954e94,ACT-SCVP01041,Cobertura estatal,,,,,,,356,,
+c5d5f08a,ACT-SCTF68299,Cobertura estatal,,,,,,,281,,
+c93d5677,ACT-SCHE65571,Cobertura estatal,,,,,,,144,,
+c1ed0170,ACT-SCIF86806,Cobertura estatal,,,,,,,51211,,
+c5ef0ff5,ACT-SCHT70836,Cobertura estatal,,,,,,,,,
+c6a77000,ACT-SCQW71150,Cobertura estatal,,,,,,,4071,,
+c3ecd19a,ACT-SCTZ59767,Cobertura estatal,,,,,,,4598,,
+c6a8a675,ACT-SCHY86566,Cobertura estatal,,,,,,,11138,,
+ceda0893,ACT-SCNE12157,Cobertura estatal,,,,,,,,,
+c4a7e40c,ACT-SCQI37596,Cobertura estatal,,,,,,,,,
+c7a88080,ACT-SCSP87078,Cobertura estatal,,,,,,,6094,,
+c4d80198,ACT-SCQQ05005,Cobertura estatal,,,,,,,8219,,
+c994ad03,ACT-SCGH37675,Cobertura estatal,,,,,,,300,,
+c607f441,ACT-SCFD32421,Cobertura estatal,,,,,,,5,,
+c016168b,ACT-SCMK91568,Cobertura estatal,,,,,,,12,,
+c9b85d2c,ACT-SCFF97408,Cobertura estatal,,,,,,,30,,
+ce4cfee7,ACT-SCIP60658,Cobertura estatal,,,,,,,26,,
+c7711941,ACT-SCSF21390,Cobertura estatal,,,,,,,20,,
+c54b86fa,ACT-SCYQ40561,Cobertura estatal,,,,,,,116,116,0
+cd3ce3bf,ACT-SCWY71017,Cobertura estatal,,,,,,,377,,
+c986a0a4,ACT-SCZJ65688,Cobertura estatal,,,,,,,146,,
+c7f3d285,ACT-SCOV92626,Cobertura estatal,,,,,,,322,,
+c59fc0ab,ACT-SCEU14973,Cobertura estatal,,,,,,,13,,
+c283a042,ACT-SCBV15924,Cobertura estatal,,,,,,,74,,
+cbbb8f33,ACT-SCRH20065,Cobertura estatal,,,,,,,135,,
+c3862fee,ACT-SCQY94016,Cobertura estatal,,,,,,,310,,
+cbcc37a3,ACT-SCQN95689,Cobertura estatal,,,,,,,16765,16765,0
+c50225d0,ACT-SCMD03315,Cobertura estatal,,,,,,,2914,,
+c8d5597e,ACT-SCSJ60076,Cobertura estatal,,,,,,,16107,,
+cecbfceb,ACT-SCGD04522,Cobertura estatal,,,,,,,9395,,
+c0ca7020,ACT-SCCH59826,Cobertura estatal,,,,,,,2061,,
+c957cfc9,ACT-SCXE12583,Cobertura estatal,,,,,,,255,,
+c6de2794,ACT-SCNQ24885,Cobertura estatal,,,,,,,7458,,
+ce35fddd,ACT-SCID07879,Cobertura estatal,,,,,,,20940,,
+c19651da,ACT-SCMA26787,Cobertura estatal,,,,,,,17206,,
+c59a9ba8,ACT-SCVZ93952,Cobertura estatal,,,,,,,406,406,0
+cb30d2be,ACT-SCNA75885,Cobertura estatal,,,,,,,406,,
+c0637de6,ACT-SCEI93651,Cobertura estatal,,,,,,,230,,
+cf70d489,ACT-SCVH80307,Cobertura estatal,,,,,,,1967,,
+cb1c9da3,ACT-SCIR02255,Cobertura estatal,,,,,,,2270,,
+c399ab96,ACT-SCIC87477,Cobertura estatal,,,,,,,2000,,
+c0bd302f,ACT-SCKK85034,Cobertura estatal,,,,,,,0,,
+c5ff47ef,ACT-SCYY07745,Cobertura estatal,,,,,,,88,88,0
+cc5e3f3e,ACT-SCMN42479,Cobertura estatal,,,,,,,248,,
+c9e17458,ACT-SCAG47824,Cobertura estatal,,,,,,,23,,
+ca66c7d4,ACT-SCNK85553,Cobertura estatal,,,,,,,180,,
+c1c060dd,ACT-SCIJ63523,Cobertura estatal,,,,,,,148,,
+c3a997b4,ACT-SCOX70322,Cobertura estatal,,,,,,,100,,
+ca0bd74d,ACT-SCPV86411,Cobertura estatal,,,,,,,210,,
+cae80578,ACT-SCJQ30535,Cobertura estatal,,,,,,,220,,
+c9f75217,ACT-SCBE73821,Cobertura estatal,,,,,,,180,,
+ca799d98,ACT-SCNG78657,Guanajuato,,,,,,,10,,
+c9cf17f8,ACT-SCKK84243,Guanajuato,,,,,,,13,,
+cd4d94fe,ACT-SCUL90815,Guanajuato,,,,,,,6,,
+c3b2c4db,ACT-SCQJ54092,Guanajuato,,,,,,,12,,
+c005cba8,ACT-SCTS39997,Guanajuato,,,,,,,11,,
+c3151253,ACT-SCEH65666,Guanajuato,,,,,,,9,,
+caf6116d,ACT-SCAU04088,Guanajuato,,,,,,,25,,
+cd3b13ef,ACT-SCJS22138,Guanajuato,,,,,,,17,,
+c7a17327,ACT-SCPH59385,Guanajuato,,,,,,,4,,
+cb97fe50,ACT-SCMH93796,Guanajuato,,,,,,,13,,
+cab786e9,ACT-SCVM79291,Guanajuato,,,,,,,8,,
+c06afc40,ACT-SCHC86674,Guanajuato,,,,,,,8,,
+c50fdef1,ACT-SCBA83203,Guanajuato,,,,,,,25,,
+cd9d28ab,ACT-SCWO87363,Guanajuato,,,,,,,32,,
+ce108f2d,ACT-SCZL50998,Guanajuato,,,,,,,30,,
+cae04fca,ACT-SCXA65014,Guanajuato,,,,,,,30,,
+c530c31b,ACT-SCEJ19378,Guanajuato,,,,,,,21,,
+cb41bd9b,ACT-SCRX88310,Guanajuato,,,,,,,21,,
+c06a7fdc,ACT-SCKF49301,Irapuato,,,,,,,16,,
+cc58ad9f,ACT-SCNT15252,Irapuato,,,,,,,50,,
+c411a174,ACT-SCIR94821,Irapuato,,,,,,,25,,
+c80e9057,ACT-SCXQ32222,Irapuato,,,,,,,25,,
+c3c5e31a,ACT-SCFM35136,Irapuato,,,,,,,35,,
+c3f89b12,ACT-SCIF20611,León,,,,,,,45,,
+c8d5d4fe,ACT-SCHA70026,León,,,,,,,50,,
+c0216998,ACT-SCYU82980,León,,,,,,,45,,
+cd828445,ACT-SCOL75398,León,,,,,,,35,,
+c09e2327,ACT-SCJD57743,León,,,,,,,30,,
+c771198e,ACT-SCDK31376,León,,,,,,,25,,
+cbb5ad87,ACT-SCIF66078,León,,,,,,,40,,
+cdb842fc,ACT-SCKR86602,León,,,,,,,,,
+c545dea9,ACT-SCLE89923,León,,,,,,,25,,
+c86ebaa5,ACT-SCWH25522,León,,,,,,,54,,
+cb449fbb,ACT-SCNV08805,León,,,,,,,30,,
+c0cb5fe8,ACT-SCOI83481,León,,,,,,,47,,
+c55ea931,ACT-SCLS58214,León,,,,,,,45,,
+c72f6907,ACT-SCLV80850,León,,,,,,,47,,
+cbcbd32e,ACT-SCZV35320,León,,,,,,,25,,
+cdd58491,ACT-SCWA16444,León,,,,,,,27,,
+c81419d8,ACT-SCGF36053,León,,,,,,,60,,
+c76d67ed,ACT-SCHQ80352,León,,,,,,,39,,
+cac41fdf,ACT-SCBQ31477,León,,,,,,,25,,
+c4c97825,ACT-SCHL29895,León,,,,,,,40,,
+c0897356,ACT-SCWW62735,León,,,,,,,47,,
+cfa79167,ACT-SCNF29598,León,,,,,,,26,,
+c94d89e1,ACT-SCPU20407,León,,,,,,,56,,
+c0b6e142,ACT-SCWB06112,León,,,,,,,51,,
+cee9e0eb,ACT-SCSG02807,León,,,,,,,15,,
+cc5508f7,ACT-SCSX20134,León,,,,,,,45,,
+ca668f15,ACT-SCQZ19279,León,,,,,,,45,,
+ccef514f,ACT-SCSA41335,León,,,,,,,45,,
+c25c6495,ACT-SCST82174,León,,,,,,,46,,
+cf288dd2,ACT-SCUQ61968,León,,,,,,,10,,
+c7225e1f,ACT-SCCM30061,León,,,,,,,30,,
+c0f4ee5f,ACT-SCJC87215,León,,,,,,,21,,
+c74c2d4a,ACT-SCGQ39271,León,,,,,,,50,,
+c7a1abde,ACT-SCXZ78266,León,,,,,,,35,,
+c0b4f368,ACT-SCVS84373,León,,,,,,,40,,
+c75a2bee,ACT-SCCZ43743,León,,,,,,,75,,
+c7805761,ACT-SCZK72693,León,,,,,,,40,,
+cc881a16,ACT-SCPS96603,León,,,,,,,25,,
+c57d1819,ACT-SCFV51557,León,,,,,,,35,,
+c6a419c4,ACT-SCWO40818,León,,,,,,,25,,
+c50b5e0f,ACT-SCOU49209,León,,,,,,,27,,
+c7fc7e4f,ACT-SCHN20347,Ciudad de México,,,,,,,28,,
+cb7216ec,ACT-SCKT70901,Celaya,,,,,,,,,
+c67039a4,ACT-SCLB41708,Celaya,,,,,,,44,,
+c452d528,ACT-SCYG88344,León,,,,,,,180,,
+c8767bac,ACT-SCSD72334,Guanajuato,,,,,,,500,,
+cb21bace,ACT-SCQN89121,Irapuato,,,,,,,3000,,
+cce71005,ACT-SCGK12176,Irapuato,,,,,,,3000,,
+ce97417e,ACT-SCNU71129,Valle de Santiago,,,,,,,7,,
+c1ee01a6,ACT-SCCF54781,Guanajuato,,,,,,,70,,
+c97b937f,ACT-SCIH64446,San Felipe,,,,,,,,,
+c52b255b,ACT-SCYR45800,León,,,,,,,55,,55
+3e3a22b1,ACT-SCXE29071,Silao de la Victoria,Urbano,,,,No,No,26,,26
+495f545d,ACT-SCKL19741,Silao de la Victoria,Urbano,,,,No,No,3,,3
+96ad94d6,ACT-SCVY62253,Silao de la Victoria,Urbano,,,,No,No,5,,5
+183bab3e,ACT-SCLM28051,Silao de la Victoria,Urbano,,,,No,No,4,,4
+f1df5641,ACT-SCHU14125,Silao de la Victoria,Urbano,,,,No,No,26,,26
+d6bc68dd,ACT-SCON68976,Silao de la Victoria,Urbano,,,,No,No,2,,2
+7e48a648,ACT-SCWZ07430,Silao de la Victoria,Urbano,,,,No,No,3,,3
+4cea943f,ACT-SCNO48465,Silao de la Victoria,Urbano,,,,No,No,1,,1
+63477a4d,ACT-SCET66762,Silao de la Victoria,Urbano,,,,No,No,2,,2
+147e2f12,ACT-SCMX23045,Silao de la Victoria,Urbano,,,,No,No,2,,2
+2e84236b,ACT-SCZZ26041,Silao de la Victoria,Urbano,,,,No,No,41,,41
+088dcc9b,ACT-SCSI77241,Silao de la Victoria,Urbano,,,,No,No,18,,18
+2596fb3a,ACT-SCXF27069,Silao de la Victoria,Urbano,,,,No,No,24,,24
+7042da68,ACT-SCYQ62237,Silao de la Victoria,Urbano,,,,No,No,5,,5
+e2259500,ACT-SCQG52989,Silao de la Victoria,Urbano,,,,No,No,9,,9
+f8c713b3,ACT-SCTX31444,Silao de la Victoria,Urbano,,,,No,No,14,,14
+fa1abeb4,ACT-SCIF80615,Salamanca,Urbano,,,,No,No,37,37,0
+ef644d38,ACT-SCOY71181,Silao de la Victoria,Urbano,,,,No,No,7,7,0
+2e3eb7d8,ACT-SCIK52463,Silao de la Victoria,Urbano,,,,No,No,60,60,0
+33f89c7d,ACT-SCTL07153,Silao de la Victoria,Urbano,,,,No,No,42,42,0
+7397f290,ACT-SCTE03400,Silao de la Victoria,Urbano,,,,No,No,42,,42
+c59eb0da,ACT-SCTW08486,Silao de la Victoria,Urbano,,,,No,No,21,,21
+794bea9e,ACT-SCKW95444,Silao de la Victoria,Urbano,,,,No,No,16,,16
+8af3889c,ACT-SCSK31268,Silao de la Victoria,Urbano,,,,No,No,37,,37
+a79b618c,ACT-SCWX57850,Silao de la Victoria,Urbano,,,,No,No,30,,30
+e146116d,ACT-SCIY60435,Silao de la Victoria,Urbano,,,,No,No,22,22,0
+fea94d85,ACT-SCJD45224,Silao de la Victoria,Urbano,,,,No,No,19,,19
+c95898bd,ACT-SCMV86897,Silao de la Victoria,Urbano,215,Silao,,Si,Si,19,,19
+1d12db83,ACT-SCXA00565,Silao de la Victoria,Urbano,,,,No,No,76,,76
+7649b470,ACT-SCLC20840,Silao de la Victoria,Urbano,,,,No,No,8,,8
+9d7eeb78,ACT-SCRP67521,Silao de la Victoria,Urbano,215,Silao,,Si,Si,17,,17
+f5fe00da,ACT-SCPB53168,Silao de la Victoria,Urbano,,,,No,No,38,,38
+1579d914,ACT-SCPR14977,Silao de la Victoria,Urbano,,,,No,No,20,,20
+5ad62d1a,ACT-SCNA89396,Silao de la Victoria,Urbano,,,,No,No,24,,24
+f599c847,ACT-SCGP69340,Silao de la Victoria,Urbano,,,,No,No,38,,38
+7e64490d,ACT-SCGY90569,Silao de la Victoria,Urbano,,,,No,No,42,,42
+c3f6e73b,ACT-SCNS56701,Guanajuato,Urbano,49,Guanajuato,,Si,Si,26,1,25
+21557b94,ACT-SCPK98694,Silao de la Victoria,Urbano,,,,No,No,26,,26
+546f3e35,ACT-SCOD22164,Silao de la Victoria,Urbano,,,,No,No,20,,20
+9bcc47f6,ACT-SCDE18173,Silao de la Victoria,Urbano,,,,No,No,13,,13
+2837828e,ACT-SCZQ01739,Silao de la Victoria,Urbano,,,,No,No,16,,16
+5a4a3c05,ACT-SCSU39723,Silao de la Victoria,Urbano,,,,No,No,10,,10
+f11c52cd,ACT-SCCL89594,Silao de la Victoria,Urbano,,,,No,No,36,,36
+e7e90ce4,ACT-SCUW47757,Silao de la Victoria,Urbano,,,,No,No,38,,38
+0ada3a36,ACT-SCCY69530,Silao de la Victoria,Urbano,,,,No,No,12,,12
+03780d86,ACT-SCCK28026,Silao de la Victoria,Urbano,,,,No,No,4,,4
+646ab9be,ACT-SCPX10170,Silao de la Victoria,Urbano,,,,No,No,18,,18
+2aa7b1cc,ACT-SCDD82613,Silao de la Victoria,Urbano,,,,No,No,35,,35
+6f0079c9,ACT-SCEM27313,Silao de la Victoria,Urbano,,,,No,No,78,,78
+84159ef1,ACT-SCXV78896,Silao de la Victoria,Urbano,,,,No,No,24,,24
+0c8e4f46,ACT-SCZZ01989,Silao de la Victoria,Urbano,,,,No,No,74,,74
+6c80dbd0,ACT-SCXA37212,Silao de la Victoria,Urbano,,,,No,No,28,,28
+7f3a6a41,ACT-SCOH08277,Silao de la Victoria,,,,,,,608,,
+14347359,ACT-SCGK69033,Guanajuato,,,,,,,118,,
+d1645941,ACT-SCBX04667,Guanajuato,,,,,,,118,,
+8413f9e7,ACT-SCLT83210,Purísima del Rincón,,,,,,,127,,
+f03f4d84,ACT-SCDT17517,Celaya,,,,,,,301,,
+002730dc,ACT-SCIZ55117,Guanajuato,,,,,,,,,
+6b754704,ACT-SCRK85015,León,,,,,,,70,,
+d7016760,ACT-SCLH52235,León,,,,,,,65,,
+a9cd1da5,ACT-SCNT80981,Guanajuato,,,,,,,279,,
+36289409,ACT-SCKA81366,Purísima del Rincón,,,,,,,77,,
+4e16c289,ACT-SCTW24581,Guanajuato,,,,,,,509,,
+cdaae754,ACT-SCUL87230,Guanajuato,,,,,,,648,,
+d541402b,ACT-SCUD02459,León,,,,,,,,,
+8a381728,ACT-SCPP44354,Salamanca,Urbano,181,Salamanca,,Si,Si,19,,19
+900b4ecf,ACT-SCRB87201,Jaral del Progreso,Urbano,84,Jaral del Progreso,,Si,Si,39,,39
+21a2db40,ACT-SCOH37318,Acámbaro,Urbano,7,Acambaro,,Si,Si,7,,7
+080e7371,ACT-SCWM53099,Celaya,,,,,,,220,,
+3b5feb1e,ACT-SCJP60059,"Santo Domingo, República Dominicana",,,,,,,130,,
+4b86f209,ACT-SCID10817,Ciudad de México,,,,,,,12,,
+a8f31201,ACT-SCDW90018,Guanajuato,,,,,,,94,,
+03e2aae3,ACT-SCLF83323,León,Urbano,,,,,,212,0,212
+a197cf9a,ACT-SCNO25177,Guanajuato,Urbano,,,,,,100,0,100
+949e927f,ACT-SCLX64147,Comonfort,Urbano,28,Comonfort,,Si,Si,75,0,75
+f8a9fa1a,ACT-SCXM32788,León,Urbano,146,Zona Centro,CENTRO,No,Si,50,,50
+8e9f3fd1,ACT-SCZU03885,León,Urbano,146,Zona Centro,,No,Si,65,,65
+19f1364a,ACT-SCSR55141,León,Urbano,146,Zona Centro,,No,Si,60,,60
+953761fb,ACT-SCBX82448,Guanajuato,Guanajuato,,,,,Teatro Juárez,27,27,0
+026c0a2a,ACT-SCSY89615,San Miguel de Allende,Atotonilco,,,,,Capilla del Rosario del Santuario de Jesús de Nazareno,82,82,0
+5b9e6912,ACT-SCSY89615,Guanajuato,Guanajuato,,,,,Templo de San Francisco de Asís / Basílica / Cata / Valenciana,69,69,0
+f1ba2273,ACT-SCSY89615,León,León,,,,,Catedral Basílica de León,63,63,0
+c13858e4,ACT-SCSY89615,Salamanca,Salamanca,,,,,Templo de San Juan de Sahagún (San Agustín),81,81,0
+a184231e,ACT-SCMY88001,Salamanca,Salamanca,,,,,Centro de las Artes de Guanajuato,30,30,0
+8b5bfb2a,ACT-SCMY88002,Guanajuato,Guanajuato,,,,,Oficinas de la Dirección General de Patrimonio Cultural,41,41,0
+31c8b795,ACT-SCMY88003,Guanajuato,Santa Rosa de Lima,,,,,Comunidad de Santa Rosa de Lima,200,200,0
