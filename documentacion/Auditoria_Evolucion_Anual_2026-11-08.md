@@ -1,11 +1,13 @@
 # Auditoría de Evolución Anual · 08/11/2026
 
+**Ajuste de gráficas y conteo anual.** Lectura de Registro_Actividades A:P: 1,708 filas vigentes con fecha de 2026, con 1,660 IDs distintos, y siete filas vigentes sin fecha. Inicio cuenta 1,715 filas. Evolución Anual aplica el mismo criterio en el corte 2026 y documenta la diferencia entre filas e IDs. Públicos distingue visitas históricas y alcance territorial 2026 en series separadas; la línea muestra etiquetas por punto y las cifras de las tarjetas se ajustan al ancho. Cambios locales, sin verificación visual en navegador.
+
 **Ajuste visual de Evolución Anual:** se recuperaron la cabecera con fotografía, el panel plegable y la distribución anterior con tres gráficas, comparativo y logros. Conserva los filtros por año, programa, área y municipio; las gráficas usan el alcance documentado de la selección. Las fuentes se consultan en un panel plegable. Verificación automatizada, pendiente prueba visual en navegador.
 
 ## Implementado localmente
 
 - La pantalla tiene filtros propios de año, programa o proyecto P/Q, dirección y municipio. Las tarjetas, tabla, cobertura y gráfica se vuelven a calcular desde la misma selección. La gráfica usa un indicador a la vez. Se separan fichas, visitas, asistencias, talleres, metas programadas y otras unidades.
-- 2026 usa fichas vigentes por fecha de inicio y alcance de Registro_Territorio. La selección municipal usa solo filas de ese municipio y cuenta una ficha una sola vez. Los resultados 2026 de la presentación se muestran como datos de esa fuente, separados de la operación. Los filtros de 2026 siguen dependiendo de las claves registradas y sus alineaciones.
+- 2026 usa filas de fichas vigentes con inicio en 2026 o sin fecha válida, y alcance de Registro_Territorio. La selección municipal usa solo filas territoriales de ese municipio y cuenta cada fila de ficha una vez, aunque tenga varios renglones territoriales. Los resultados 2026 de la presentación se muestran como datos de esa fuente, separados de la operación. Los filtros de 2026 siguen dependiendo de las claves registradas y sus alineaciones.
 - Las series históricas conservan su alcance y su referencia. Los cruces sin desglose muestran una raya o un estado sin datos. La imagen de WhatsApp orientó la cabecera, los cuatro filtros, el color y la distribución de tarjetas, evolución y cobertura. El mapa y la reproducción visual completa siguen pendientes.
 
 ## Cotejos

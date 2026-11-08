@@ -1409,7 +1409,7 @@
                 <i data-lucide="bar-chart-3" class="w-4 h-4 text-purple-600"></i>
                 Públicos y Poblaciones Prioritarias
               </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Serie de asistencia o alcance con su unidad de origen</p>
+                <p id="annual-attendance-note" class="text-xs text-slate-500 mt-0.5">Asistencia o alcance según la fuente</p>
             </div>
               <div id="annual-card-participaciones" class="relative h-56 w-full my-auto mt-2">
               <canvas id="chart-anual-participaciones"></canvas>
@@ -1932,6 +1932,10 @@
       applyFilters();
     }
 
+    function matchesActivityPeriod(date, start, end) {
+      return !date || ((!start || date >= start) && (!end || date <= end));
+    }
+
     function applyFilters() {
       const dStart = document.getElementById('f-date-start').value;
       const dEnd = document.getElementById('f-date-end').value;
@@ -1954,8 +1958,7 @@
       rawDB.actividades.forEach(a => {
         const id = cleanStr(a.ID_Actividad);
         const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
-        if (dStart && fIso && fIso < dStart) return;
-        if (dEnd && fIso && fIso > dEnd) return;
+        if (!matchesActivityPeriod(fIso, dStart, dEnd)) return;
         if (fDir !== 'ALL' && getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) !== fDir) return;
         if (fDisc !== 'ALL' && cleanStr(a.Disciplina) !== fDisc) return;
         if (fEje !== 'ALL' && cleanStr(a.Eje_PG) !== fEje) return;
@@ -3782,13 +3785,13 @@
       };
       const programCodes = (...values) => new Set(values.join(' ').toUpperCase().match(/\b(?:PB|Q[A-Z])\d{4}(?=(?:\d{2}|\d{4})?\b)/g) || []);
       const catalog = new Map(rawDB.alineacion.filter(c => cleanStr(c.ID_Alineacion)).map(c => [cleanStr(c.ID_Alineacion), c]));
-      const activities = rawDB.actividades.filter(a =>
-        (a.Fecha_Inicio_ISO || '').startsWith('2026-') && !CulturaCalidad.isExcluded(a)
-      ).map(a => ({
+      const activities = rawDB.actividades.map(a => ({
         id: cleanStr(a.ID_Actividad),
+        date: CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '',
+        excluded: CulturaCalidad.isExcluded(a),
         area: areaLabel(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt)),
         programs: programCodes(a.Clave_Proceso_Txt, ...Object.values(catalog.get(cleanStr(a.Clave_Proceso)) || {}))
-      }));
+      })).filter(a => !a.excluded && matchesActivityPeriod(a.date, '2026-01-01', '2026-12-31'));
       const territory = rawDB.territorio.filter(t => cleanStr(t.Municipio));
       const historical = annual.historical;
       function fill(id, values, label) {
@@ -3814,13 +3817,19 @@
       const allTerritory = rawDB.territorio.filter(t => ids.has(cleanStr(t.ID_Actividad)) &&
         (!municipality || normalizeMunicipioName(t.Municipio) === normalizeMunicipioName(municipality)));
       const territorialIds = new Set(allTerritory.map(t => cleanStr(t.ID_Actividad)));
-      const count = municipality ? territorialIds.size : ids.size;
+      const scopedActivities = municipality ? matched.filter(a => territorialIds.has(a.id)) : matched;
+      const count = scopedActivities.length;
+      const undated = scopedActivities.filter(a => !a.date).length;
       const covered = new Set(allTerritory.map(t => cleanStr(t.Municipio)).filter(isMunicipioGTO).map(normalizeMunicipioName));
       const recordedTotals = allTerritory.filter(t => cleanStr(t.Cantidad) !== '');
       const total = recordedTotals.length ? recordedTotals.reduce((sum, t) => sum + toNum(t.Cantidad), 0) : null;
       if (years.includes(2026) && count) {
-        const source = 'Sistema 2026 · fichas vigentes por fecha de inicio';
-        rows.push({ year: 2026, metric: 'Fichas capturadas', value: count, source });
+        const note = undated ? 'Incluye ' + fmtInt(undated) + ' sin fecha válida' : '';
+        const uniqueIds = new Set(scopedActivities.map(a => a.id)).size;
+        const source = 'Sistema · filas vigentes, criterio de Inicio para el corte 2026' +
+          (note ? ' · ' + note : '') +
+          (uniqueIds < count ? ' · ' + fmtInt(uniqueIds) + ' IDs distintos' : '');
+        rows.push({ year: 2026, metric: 'Fichas capturadas', value: count, source, note });
         if (total !== null) rows.push({ year: 2026, metric: 'Alcance territorial registrado', value: total, source: 'Sistema 2026 · Registro_Territorio, incluye alcances reportados' });
         if (covered.size) rows.push({ year: 2026, metric: 'Municipios de Guanajuato con registro', value: covered.size, source: 'Sistema 2026 · municipios distintos en Registro_Territorio' });
       }
@@ -3837,10 +3846,12 @@
       const cardColors = ['text-gto-blue', 'text-purple-700', 'text-indigo-700', 'text-emerald-600', 'text-amber-600', 'text-rose-600', 'text-sky-600'];
       el('badge-anual-periodo').textContent = year === 'todos' ? 'Periodo: 2024 – 2026' : 'Ejercicio: ' + year;
       el('annual-kpis').innerHTML = cards.map((row, index) =>
-        '<div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between">' +
+        '<div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between min-w-0" style="container-type:inline-size">' +
         '<p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">' +
-        escape(row.metric) + '</p><p class="text-2xl font-black mt-1 ' + cardColors[index] + '">' +
-        display(row.value) + '</p><p class="text-xs text-slate-500">' + row.year + '</p></div>').join('');
+        escape(row.metric) + '</p><p class="font-black mt-1 ' + cardColors[index] +
+        '" style="font-size:clamp(1rem, 15cqi, 1.5rem);overflow-wrap:anywhere">' +
+        display(row.value) + '</p><p class="text-xs text-slate-500">' + row.year +
+        (row.note ? ' · ' + escape(row.note) : '') + '</p></div>').join('');
 
       const historicCoverage = historical.filter(r => r.municipality && years.includes(r.year) &&
         (!area || area === r.area) && (!program || program === r.program) &&
@@ -3888,24 +3899,30 @@
 
       const attendance = [metric, ...priority, ...metrics].find(name =>
         metrics.includes(name) && /Asistencias|Participaciones|Visitas|Alcance/.test(name));
+      const reach = 'Alcance territorial registrado';
+      const attendanceMetrics = [...new Set([attendance, metrics.includes(reach) ? reach : null].filter(Boolean))];
+      el('annual-attendance-note').textContent = attendanceMetrics.length > 1
+        ? 'Series de distinto alcance. Cada color corresponde a su propia fuente.'
+        : 'Asistencia o alcance según la fuente';
       el('annual-card-participaciones').classList.toggle('hidden', !attendance);
       el('annual-empty-participaciones').classList.toggle('hidden', !!attendance);
       if (attendance) renderChart('chart-anual-participaciones', 'bar', {
         labels: years.map(String),
-        datasets: [{ label: attendance, data: years.map(y => valueFor(attendance, y)), backgroundColor: '#a21caf', borderRadius: 5 }]
+        datasets: attendanceMetrics.map(name => ({
+          label: name, data: years.map(y => valueFor(name, y)),
+          backgroundColor: name === reach ? '#004b87' : '#a21caf', borderRadius: 5
+        }))
       }, { scales: { y: { beginAtZero: true } }, plugins: { legend: { position: 'bottom' }, datalabels: { display: false } } });
 
       const composition = new Map();
       let compositionTitle = '';
       if (years.includes(2026) && count) {
         compositionTitle = 'Fichas 2026 por área';
-        for (const activity of matched) {
-          if (municipality && !territorialIds.has(activity.id)) continue;
-          if (!composition.has(activity.area)) composition.set(activity.area, new Set());
-          composition.get(activity.area).add(activity.id);
+        for (const activity of scopedActivities) {
+          composition.set(activity.area, (composition.get(activity.area) || 0) + 1);
         }
       }
-      let compositionData = [...composition].map(([name, areaIds]) => [name, areaIds.size]);
+      let compositionData = [...composition];
       const museumYear = years.findLast(y => valueFor('Visitas a exposiciones', y) !== null);
       if (!compositionData.length && !municipality && museumYear) {
         compositionTitle = 'Visitas por tipo de exposición · ' + museumYear;
@@ -3932,7 +3949,18 @@
             label: metric, data: years.map(y => valueFor(metric, y)), borderColor: '#78234f',
             backgroundColor: '#78234f24', pointRadius: 5, tension: 0.2, fill: true
           }]
-        }, { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { display: false } } });
+        }, {
+          layout: { padding: { top: 8, left: 18, right: 22 } },
+          scales: { x: { offset: true }, y: { beginAtZero: true, grace: '18%' } },
+          plugins: {
+            legend: { display: false },
+            datalabels: {
+              display: context => context.dataset.data[context.dataIndex] !== null,
+              align: 'top', anchor: 'end', offset: 5, color: '#561537',
+              font: { weight: 'bold' }, formatter: fmtInt
+            }
+          }
+        });
       }
     }
 

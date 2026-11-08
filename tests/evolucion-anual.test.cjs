@@ -8,6 +8,8 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
   const html = readFileSync('index.html', 'utf8');
   const start = html.indexOf('    function renderVistaAnual()');
   const end = html.indexOf('    function switchTab(', start);
+  const periodStart = html.indexOf('    function matchesActivityPeriod(');
+  const periodEnd = html.indexOf('    function applyFilters(', periodStart);
   const elements = new Map();
   const element = id => {
     if (!elements.has(id)) elements.set(id, {
@@ -24,13 +26,14 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
     Option: function Option(label, value) { this.label = label; this.value = value; },
     cleanStr: value => String(value ?? '').trim(), normalizeMunicipioName: norm, isMunicipioGTO: () => true,
     formatShortDireccion: value => value, getCanonicalDirection: value => value,
-    toNum: Number, fmtInt: String, CulturaCalidad: { isExcluded: row => row.excluded },
+    toNum: Number, fmtInt: String, CulturaCalidad: { isExcluded: row => row.excluded, dateISO: value => value },
     rawDB: {
       alineacion: [],
       actividades: [
         { ID_Actividad: 'A', Fecha_Inicio_ISO: '2026-01-01', Direccion: 'Editorial y Publicaciones', Clave_Proceso_Txt: 'PB35732600' },
         { ID_Actividad: 'B', Fecha_Inicio_ISO: '2024-01-01', Direccion: 'Editorial y Publicaciones' },
-        { ID_Actividad: 'C', Fecha_Inicio_ISO: '2026-01-01', Direccion: 'Editorial y Publicaciones', excluded: true }
+        { ID_Actividad: 'C', Fecha_Inicio_ISO: '2026-01-01', Direccion: 'Editorial y Publicaciones', excluded: true },
+        { ID_Actividad: 'D', Direccion: 'Editorial y Publicaciones' }
       ],
       territorio: [
         { ID_Actividad: 'A', Municipio: 'León', Cantidad: '10' },
@@ -45,7 +48,7 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
     for (const [id, value] of Object.entries({
       'select-filtro-anio': year, 'annual-area': area, 'annual-program': program, 'annual-municipality': municipality
     })) element(id).value = value;
-    runInNewContext(html.slice(start, end) + '\nrenderVistaAnual()', context);
+    runInNewContext(html.slice(periodStart, periodEnd) + html.slice(start, end) + '\nrenderVistaAnual()', context);
     return element('annual-results').innerHTML;
   };
   assert.match(render('2024'), /490350/);
@@ -66,4 +69,7 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
   assert.equal(charts.get('chart-anual-participaciones').datasets[0].data.join(), '10');
   assert.equal(charts.get('chart-anual-ambitos').datasets[0].data.join(), '1');
   assert.match(render('2026', 'Editorial y Publicaciones', 'PB3573'), />32<.*>30</);
+  assert.match(render('todos'), /Incluye 1 sin fecha válida/);
+  assert.deepEqual(JSON.parse(JSON.stringify(charts.get('chart-anual-participaciones').datasets.map(d => d.data))),
+    [[490350, 602389, null], [null, null, 30]]);
 });
