@@ -438,7 +438,7 @@
 
         <!-- Controles Superiores Fijos a la Derecha: Población y Pantalla Completa -->
         <div id="top-filter-controls" class="flex items-center gap-1.5 shrink-0">
-          <div class="flex items-center bg-slate-100 p-0.5 sm:p-1 rounded-lg border border-slate-200 text-xs">
+          <div id="operational-population" class="flex items-center bg-slate-100 p-0.5 sm:p-1 rounded-lg border border-slate-200 text-xs">
             <span class="hidden md:flex px-1.5 text-[10.5px] font-bold text-gto-blue items-center gap-1">
               <i data-lucide="users-round" class="w-3 h-3 text-gto-sky"></i>
               Población:
@@ -462,7 +462,7 @@
       <div id="filters-drawer" class="pt-2 border-t border-slate-100 mt-2 transition-all duration-200">
         <!-- Fila de Acciones: Borrar filtros, Exportar PPTX, PDF, Selector de Periodo Trienal -->
         <div class="flex flex-wrap items-center justify-end gap-1.5 pb-2">
-          <button onclick="resetFilters()" class="flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg text-xs font-bold transition">
+          <button id="btn-reset-filters" onclick="resetFilters()" class="flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg text-xs font-bold transition">
             <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
             <span>Borrar filtros</span>
           </button>
@@ -478,21 +478,11 @@
             PDF
           </button>
 
-          <!-- Selector de Periodo para Evolución Trienal -->
-          <div id="box-filtro-anual" class="hidden flex items-center gap-1 bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 rounded-lg text-xs font-bold text-indigo-900 shadow-2xs">
-            <i data-lucide="calendar" class="w-3 h-3 text-indigo-600"></i>
-            <span class="hidden sm:inline">Periodo:</span>
-            <select id="select-filtro-anio" onchange="renderVistaAnual(this.value)" class="bg-white border border-indigo-200 text-indigo-900 font-semibold rounded px-2 py-0.5 text-xs focus:ring-1 focus:ring-indigo-500 cursor-pointer">
-              <option value="todos">Periodo Trienal (2024 – 2026)</option>
-              <option value="2026">2026 (Operación en Vivo)</option>
-              <option value="2025">2025 (Informe Oficial)</option>
-              <option value="2024">2024 (Línea Base)</option>
-            </select>
-          </div>
+
         </div>
 
         <!-- Cuadrícula de los 7 Filtros Operativos -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
+        <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
           <div class="col-span-2 sm:col-span-1">
             <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
               <i data-lucide="calendar" class="w-3 h-3 text-gto-blue"></i> Periodo 2026
@@ -1304,232 +1294,57 @@
       </section>
 
       <!-- SECCIÓN: EVOLUCIÓN TRIENAL Y RESULTADOS INSTITUCIONALES (2024 - 2026) -->
-      <section id="tab-anual" class="hidden space-y-6">
-        <!-- Banner Institucional con Vista Colonial de Guanajuato -->
-        <div class="relative overflow-hidden rounded-2xl p-6 sm:p-7 text-white shadow-xl border border-amber-500/25"
-             style="background: linear-gradient(105deg, #1A1635 0%, #2E1A47 40%, #38154A 65%, #4A1A4E 100%);">
-          <!-- Fotografía Histórica de Guanajuato con degradado suave hacia la izquierda -->
-          <div class="absolute right-0 top-0 bottom-0 w-full sm:w-3/5 lg:w-3/5 pointer-events-none overflow-hidden">
-            <img
-              src="assets/interfaz/guanajuato.webp"
-              alt="Callejón y Templo de Guanajuato"
-              class="w-full h-full object-cover object-left lg:object-[22%_center] opacity-75 lg:opacity-85 filter contrast-105 saturate-110"
-              style="mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.95) 75%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.95) 75%, black 100%);"
-            />
-          </div>
+      <section id="tab-anual" class="hidden space-y-5">
+        <div class="rounded-2xl bg-[#561537] text-white p-6 sm:p-8">
+          <p class="text-sm text-rose-100">Resultados institucionales · 2024–2026</p>
+          <h2 class="font-vollkorn text-3xl font-bold mt-1">Gestión Cultural en Guanajuato</h2>
+          <p class="text-sm text-rose-100 mt-2">Acciones, cobertura y asistencias documentadas por ejercicio.</p>
+        </div>
 
-          <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div class="max-w-2xl">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 backdrop-blur-xs text-xs font-bold text-amber-200 mb-2.5 border border-amber-300/30 shadow-xs">
-                <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-300"></i>
-                <span>Resultados Institucionales y Metas Trienales</span>
-                <span class="text-white/40">•</span>
-                <span id="badge-anual-periodo" class="font-mono text-amber-100">Periodo: 2024 – 2026</span>
-              </div>
-              <h2 class="text-2xl sm:text-3xl font-extrabold font-vollkorn tracking-tight text-white drop-shadow">
-                Gestión Cultural en Guanajuato
-              </h2>
-              <p class="text-xs sm:text-sm text-purple-100/90 mt-1.5 font-montserrat leading-relaxed">
-                Acciones, cobertura, visitantes en museos y personas beneficiadas a lo largo del tiempo.
-              </p>
-            </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="annual-filters">
+            <label class="text-sm font-semibold">Año
+              <select id="select-filtro-anio" class="block w-full rounded border p-2" onchange="renderVistaAnual()">
+                <option value="todos">2024–2026</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </select>
+            </label>
+            <label class="text-sm font-semibold">Programa o proyecto P/Q
+              <select id="annual-program" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+            <label class="text-sm font-semibold">Dirección o área
+              <select id="annual-area" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+            <label class="text-sm font-semibold">Municipio
+              <select id="annual-municipality" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <p class="text-xs text-slate-600">Los resultados históricos solo se filtran cuando la fuente identifica el programa, área o municipio. Una raya indica que la fuente no ofrece un dato para esa selección.</p>
+            <button type="button" class="rounded border border-slate-200 px-2 py-1 text-xs font-semibold" onclick="resetAnnualFilters()">Borrar filtros de Evolución Anual</button>
           </div>
         </div>
 
-        <!-- 7 KPIs Superiores Reales -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3.5">
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Visitantes Museos</div>
-            <div id="kpi-anual-act" class="text-2xl font-black text-gto-blue mt-1 font-montserrat">602,389</div>
-            <div id="kpi-anual-act-sub" class="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
-              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> +22.8% vs 2024
-            </div>
-          </div>
+        <div id="annual-kpis" class="grid grid-cols-1 sm:grid-cols-3 gap-4" aria-live="polite"></div>
 
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div id="kpi-anual-part-lbl" class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Asistencias Totales</div>
-            <div id="kpi-anual-part" class="text-2xl font-black text-purple-700 mt-1 font-montserrat">1.03 M</div>
-            <div id="kpi-anual-part-sub" class="text-[11px] text-slate-500 font-medium mt-1">1,028,146 verificados</div>
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+          <div id="annual-chart-card" class="xl:col-span-2 bg-white rounded-xl border border-slate-200 p-4">
+            <label class="block font-semibold text-slate-800">Evolución por indicador
+              <select id="annual-metric" class="block rounded border p-2 mt-2 max-w-full" onchange="renderVistaAnual()"></select>
+            </label>
+            <div class="relative h-64 mt-3"><canvas id="chart-anual-evolucion" role="img" aria-label="Evolución del indicador seleccionado"></canvas></div>
           </div>
-
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div id="kpi-anual-acttotal-lbl" class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Actividades Realizadas</div>
-            <div id="kpi-anual-acttotal" class="text-2xl font-black text-indigo-700 mt-1 font-montserrat">1,753</div>
-            <div id="kpi-anual-acttotal-sub" class="text-[11px] text-indigo-700 font-medium mt-1">Operación en vivo</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Cobertura Estatal</div>
-            <div class="text-2xl font-black text-emerald-600 mt-1 font-montserrat">44 / 46</div>
-            <div class="text-[11px] text-emerald-700 font-medium mt-1">Municipios activos</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Museos y Zonas</div>
-            <div class="text-2xl font-black text-amber-600 mt-1 font-montserrat">12 / 5</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-1">12 museos • 5 zonas arq.</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Forum Cultural</div>
-            <div class="text-2xl font-black text-rose-600 mt-1 font-montserrat">174</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-1">67,285 asistentes</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Vientos Musicales</div>
-            <div class="text-2xl font-black text-sky-600 mt-1 font-montserrat">27</div>
-            <div class="text-[11px] text-sky-700 font-semibold mt-1">1,885 NNAJ activos</div>
+          <div class="bg-white rounded-xl border border-slate-200 p-4">
+            <h3 class="font-semibold text-slate-800">Cobertura documentada</h3>
+            <p id="annual-coverage" class="mt-2 text-sm text-slate-600"></p>
           </div>
         </div>
 
-        <!-- Fila Media: Línea de Evolución y Comparativo -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-8 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
-              <div>
-                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                  <i data-lucide="line-chart" class="w-4 h-4 text-gto-blue"></i>
-                  Evolución Trienal de Resultados Culturales (2024 – 2026)
-                </h3>
-                <p class="text-xs text-slate-500 mt-0.5">Afluencia comprobada en museos, recintos y actividades operadas en vivo</p>
-              </div>
-              <div class="flex items-center gap-3 text-xs">
-                <span class="inline-flex items-center gap-1.5 text-gto-blue font-semibold">
-                  <span class="w-2.5 h-2.5 rounded-full bg-gto-blue"></span> Museos / Asistentes (miles)
-                </span>
-                <span class="inline-flex items-center gap-1.5 text-purple-600 font-semibold">
-                  <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> Actividades Realizadas
-                </span>
-              </div>
-            </div>
-            <div class="relative h-72 sm:h-80 w-full mt-4">
-              <canvas id="chart-anual-evolucion"></canvas>
-            </div>
-          </div>
-
-          <div class="lg:col-span-4 flex flex-col gap-4">
-            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex-1 flex flex-col justify-between">
-              <h3 class="font-bold text-slate-800 text-sm pb-2 border-b border-slate-100 flex items-center gap-2">
-                <i data-lucide="arrow-left-right" class="w-4 h-4 text-indigo-600"></i>
-                Comparativa Trienal 2024 vs 2025 vs 2026
-              </h3>
-              <div class="space-y-3.5 my-auto py-2">
-                <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/60">
-                  <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
-                    <span>Afluencia en Museos y Recintos</span>
-                    <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">+22.85%</span>
-                  </div>
-                  <div class="flex items-center justify-between mt-2">
-                    <div>
-                      <span class="text-[10px] text-slate-500 block">2024</span>
-                      <span class="text-sm font-bold text-slate-700">490,350</span>
-                    </div>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                    <div class="text-right">
-                      <span class="text-[10px] text-slate-500 block">2025 (Oficial)</span>
-                      <span class="text-base font-black text-gto-blue">602,389</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/60">
-                  <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
-                    <span>Forum Cultural Guanajuato</span>
-                    <span class="px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 font-bold">+148.6% act.</span>
-                  </div>
-                  <div class="flex items-center justify-between mt-2">
-                    <div>
-                      <span class="text-[10px] text-slate-500 block">2024</span>
-                      <span class="text-sm font-bold text-slate-700">70 act.</span>
-                    </div>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                    <div class="text-right">
-                      <span class="text-[10px] text-slate-500 block">2025 (67.3k asist.)</span>
-                      <span class="text-base font-black text-purple-700">174 act.</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/60">
-                  <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
-                    <span>Operación en Vivo 2026</span>
-                    <span class="px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-800 font-bold">Verificado</span>
-                  </div>
-                  <div class="flex items-center justify-between mt-2">
-                    <div>
-                      <span class="text-[10px] text-slate-500 block">Actividades únicas</span>
-                      <span class="text-sm font-bold text-slate-700">1,753</span>
-                    </div>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                    <div class="text-right">
-                      <span class="text-[10px] text-slate-500 block">Asistentes en campo</span>
-                      <span class="text-base font-black text-indigo-700">1,028,146</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-[11px] text-slate-500 text-center pt-2 border-t border-slate-100">
-                <span class="block font-semibold text-slate-700">Fuente Oficial y Trazabilidad</span>
-                <span class="text-[10px] text-slate-400 mt-0.5 block leading-tight">Cifras oficiales de 2024–2025 extraídas del Informe de Resultados de la Dirección de Planeación. Datos 2026 verificados directamente en la base de datos operativa institucional.</span>
-              </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-emerald-900 to-teal-800 text-white rounded-2xl p-4 shadow-xs">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-emerald-300"></i>
-                  </div>
-                  <div>
-                    <div class="text-xs font-bold leading-tight">Cobertura Territorial 2026</div>
-                    <div class="text-[11px] text-emerald-200">Presencia directa en municipios</div>
-                  </div>
-                </div>
-                <span class="text-2xl font-black font-montserrat text-emerald-200">44 / 46</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fila Inferior: Ámbitos, Participaciones y Logros -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
-            <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                <i data-lucide="pie-chart" class="w-4 h-4 text-fuchsia-600"></i>
-                Distribución por Ámbito de Acción
-              </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Porcentaje de metas y actividades estratégicas</p>
-            </div>
-            <div class="relative h-56 w-full my-auto mt-2">
-              <canvas id="chart-anual-ambitos"></canvas>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
-            <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                <i data-lucide="bar-chart-3" class="w-4 h-4 text-purple-600"></i>
-                Públicos y Poblaciones Prioritarias
-              </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Atención social reportada (Informe 2025)</p>
-            </div>
-            <div class="relative h-56 w-full my-auto mt-2">
-              <canvas id="chart-anual-participaciones"></canvas>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
-            <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
-                Principales Logros del Periodo
-              </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Hitos consolidados (Informe de Planeación)</p>
-            </div>
-            <div class="space-y-2.5 my-auto py-2 text-xs text-slate-700" id="lista-anual-logros"></div>
-          </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4">
+          <h3 class="font-semibold text-slate-800">Resultados y fuentes</h3>
+          <div class="overflow-x-auto mt-3" id="annual-results" aria-live="polite"></div>
         </div>
       </section>
 
@@ -1555,7 +1370,7 @@
   <script src="assets/js/revisiones-identidad.js?v=20261105-grupos"></script>
   <script src="assets/js/calidad-datos.js?v=20261105-grupos"></script>
   <script src="assets/js/ficha-actividad.js?v=20261103-conciliacion"></script>
-  <script src="assets/js/datos-anuales.js?v=20261107"></script>
+  <script src="assets/js/datos-anuales.js?v=20261108"></script>
   <script>
     if (window.Chart && window.ChartDataLabels) {
       Chart.register(ChartDataLabels);
@@ -3860,200 +3675,108 @@
       }
     }
 
-    function renderVistaAnual(anioFiltro = 'todos') {
-      const d = window.DatosAnuales;
-      if (!d) return;
-
-      const badgePeriodo = document.getElementById('badge-anual-periodo');
-      const kpiAct = document.getElementById('kpi-anual-act');
-      const kpiActSub = document.getElementById('kpi-anual-act-sub');
-      const kpiPart = document.getElementById('kpi-anual-part');
-      const kpiPartSub = document.getElementById('kpi-anual-part-sub');
-      const kpiActTotal = document.getElementById('kpi-anual-acttotal');
-      const kpiActTotalSub = document.getElementById('kpi-anual-acttotal-sub');
-
-      // Visitantes en museos en 2026 (357,986 registrados en campo o dinámico de rawDB)
-      let museos2026 = (d.kpis && d.kpis.visitantesMuseos2026Live) || 357986;
-      if (typeof rawDB !== 'undefined' && rawDB.actividades && rawDB.territorio && rawDB.actividades.length > 0) {
-        const museoIds = new Set(
-          rawDB.actividades
-            .filter(a => ((a.Direccion || '') + ' ' + (a.Clave_Proceso_Txt || '')).toUpperCase().includes('MUSEO'))
-            .map(a => cleanStr(a.ID_Actividad))
-        );
-        if (museoIds.size > 0) {
-          const sumTer = rawDB.territorio
-            .filter(t => museoIds.has(cleanStr(t.ID_Actividad)))
-            .reduce((s, r) => s + toNum(r.Cantidad), 0);
-          if (sumTer > 0) museos2026 = sumTer;
-        }
+    function resetAnnualFilters() {
+      document.getElementById('select-filtro-anio').value = 'todos';
+      for (const id of ['annual-program', 'annual-area', 'annual-municipality', 'annual-metric']) {
+        document.getElementById(id).value = '';
       }
+      renderVistaAnual();
+    }
 
-      if (anioFiltro === 'todos') {
-        if (badgePeriodo) badgePeriodo.textContent = 'Periodo: 2024 – 2026';
-        if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.visitantesMuseos2025);
-        if (kpiActSub) kpiActSub.innerHTML = '<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> +22.8% vs 2024';
-        if (kpiPart) kpiPart.textContent = d.kpis.participaciones2026Texto;
-        if (kpiPartSub) kpiPartSub.textContent = '1,028,146 verificados en vivo';
-        if (kpiActTotal) kpiActTotal.textContent = fmtInt(d.kpis.actividades2026Live);
-        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Operación en vivo';
-      } else if (anioFiltro === '2026') {
-        if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2026 (Operación en Vivo)';
-        if (kpiAct) kpiAct.textContent = fmtInt(museos2026);
-        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-indigo-600 font-semibold">357.9k asistentes en museos</span>';
-        if (kpiPart) kpiPart.textContent = d.kpis.participaciones2026Texto;
-        if (kpiPartSub) kpiPartSub.textContent = '1,028,146 asistentes comprobados';
-        if (kpiActTotal) kpiActTotal.textContent = fmtInt(d.kpis.actividades2026Live);
-        if (kpiActTotalSub) kpiActTotalSub.textContent = '1,753 actividades operativas';
-      } else if (anioFiltro === '2025') {
-        if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2025 (Informe Oficial)';
-        if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.visitantesMuseos2025);
-        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-emerald-600 font-semibold">+22.85% vs 2024</span>';
-        if (kpiPart) kpiPart.textContent = fmtInt(d.comparativoTrienal.forum.asistentes2025);
-        if (kpiPartSub) kpiPartSub.textContent = 'Asistentes Forum Cultural';
-        if (kpiActTotal) kpiActTotal.textContent = String(d.comparativoTrienal.forum.act2025);
-        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Forum y muestras 2025';
-      } else if (anioFiltro === '2024') {
-        if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2024 (Línea Base)';
-        if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.visitantesMuseos2024);
-        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-slate-500 font-semibold">Línea base oficial</span>';
-        if (kpiPart) kpiPart.textContent = String(d.comparativoTrienal.forum.act2024);
-        if (kpiPartSub) kpiPartSub.textContent = 'Actividades Forum reportadas';
-        if (kpiActTotal) kpiActTotal.textContent = String(d.comparativoTrienal.forum.act2024);
-        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Línea base reportada';
+    function renderVistaAnual() {
+      const annual = window.DatosAnuales;
+      if (!annual) return;
+      const el = id => document.getElementById(id);
+      const year = el('select-filtro-anio').value;
+      const years = year === 'todos' ? [2024, 2025, 2026] : [Number(year)];
+      const areaLabel = value => {
+        const short = formatShortDireccion(value).replace(/^DG /, '');
+        return short === 'Forum Cultural' || short === 'Museos y Artes Visuales' || short === 'Editorial y Publicaciones'
+          ? short : value || 'Sin asignar';
+      };
+      const programCodes = (...values) => new Set(values.join(' ').toUpperCase().match(/\b(?:PB|Q[A-Z])\d{4}(?=(?:\d{2}|\d{4})?\b)/g) || []);
+      const catalog = new Map(rawDB.alineacion.filter(c => cleanStr(c.ID_Alineacion)).map(c => [cleanStr(c.ID_Alineacion), c]));
+      const activities = rawDB.actividades.filter(a =>
+        (a.Fecha_Inicio_ISO || '').startsWith('2026-') && !CulturaCalidad.isExcluded(a)
+      ).map(a => ({
+        id: cleanStr(a.ID_Actividad),
+        area: areaLabel(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt)),
+        programs: programCodes(a.Clave_Proceso_Txt, ...Object.values(catalog.get(cleanStr(a.Clave_Proceso)) || {}))
+      }));
+      const territory = rawDB.territorio.filter(t => cleanStr(t.Municipio));
+      const historical = annual.historical;
+      function fill(id, values, label) {
+        const select = el(id);
+        const previous = select.value;
+        select.replaceChildren(new Option(label, ''));
+        [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'))
+          .forEach(value => select.add(new Option(value, value)));
+        if ([...select.options].some(option => option.value === previous)) select.value = previous;
+        return select.value;
       }
-
-      const listaEl = document.getElementById('lista-anual-logros');
-      if (listaEl && d.logros) {
-        listaEl.innerHTML = d.logros.map(logro => `
-          <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 border border-slate-100">
-            <div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-              <i data-lucide="check" class="w-3 h-3"></i>
-            </div>
-            <span class="font-medium text-slate-700 leading-snug">${logro}</span>
-          </div>
-        `).join('');
+      // Keep selections when changing year. Missing cross-tabs are shown explicitly.
+      const program = fill('annual-program', [...historical.map(r => r.program), ...activities.flatMap(a => [...a.programs])], 'Todos');
+      const area = fill('annual-area', [...historical.map(r => r.area), ...activities.map(a => a.area)], 'Todas');
+      const municipalityOptions = new Map();
+      [...historical.map(r => r.municipality), ...territory.map(t => cleanStr(t.Municipio))].filter(Boolean)
+        .forEach(name => municipalityOptions.set(normalizeMunicipioName(name), name));
+      const municipality = fill('annual-municipality', [...municipalityOptions.values()], 'Todos');
+      const filters = { year, program, area, municipality };
+      const rows = annual.selectHistorical(filters, normalizeMunicipioName);
+      const matched = activities.filter(a => (!area || area === a.area) && (!program || a.programs.has(program)));
+      const ids = new Set(matched.map(a => a.id));
+      const allTerritory = rawDB.territorio.filter(t => ids.has(cleanStr(t.ID_Actividad)) &&
+        (!municipality || normalizeMunicipioName(t.Municipio) === normalizeMunicipioName(municipality)));
+      const territorialIds = new Set(allTerritory.map(t => cleanStr(t.ID_Actividad)));
+      const count = municipality ? territorialIds.size : ids.size;
+      const covered = new Set(allTerritory.map(t => cleanStr(t.Municipio)).filter(isMunicipioGTO).map(normalizeMunicipioName));
+      const recordedTotals = allTerritory.filter(t => cleanStr(t.Cantidad) !== '');
+      const total = recordedTotals.length ? recordedTotals.reduce((sum, t) => sum + toNum(t.Cantidad), 0) : null;
+      if (years.includes(2026) && count) {
+        const source = 'Sistema 2026 · fichas vigentes por fecha de inicio';
+        rows.push({ year: 2026, metric: 'Fichas capturadas', value: count, source });
+        if (total !== null) rows.push({ year: 2026, metric: 'Alcance territorial registrado', value: total, source: 'Sistema 2026 · Registro_Territorio, incluye alcances reportados' });
+        if (covered.size) rows.push({ year: 2026, metric: 'Municipios de Guanajuato con registro', value: covered.size, source: 'Sistema 2026 · municipios distintos en Registro_Territorio' });
       }
+      const metrics = [...new Set(rows.map(r => r.metric))];
+      const valueFor = (metric, y) => rows.find(r => r.metric === metric && r.year === y)?.value ?? null;
+      const display = value => value === null ? '—' : fmtInt(value);
+      const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+      const recent = metrics.map(metric => rows.filter(r => r.metric === metric).at(-1));
+      const liveKpis = recent.filter(row => row.year === 2026 && row.source.startsWith('Sistema'));
+      el('annual-kpis').innerHTML = (liveKpis.length ? liveKpis : recent).slice(0, 3).map(row =>
+        '<div class="bg-white border border-slate-200 rounded-xl p-4"><p class="text-sm text-slate-600">' +
+        escape(row.metric) + ' · ' + row.year + '</p><p class="text-2xl font-bold text-[#561537] mt-1">' +
+        display(row.value) + '</p></div>').join('');
 
-      // Gráfica 1: Evolución Trienal (Museos / Asistencias y Actividades)
-      const labels = ['2024 (Base)', '2025 (Oficial)', '2026 (En vivo)'];
-      const dataAsistMiles = [490.4, 602.4, +(museos2026 / 1000).toFixed(1)];
-      const dataAct = [70, 174, 1753];
+      const historicCoverage = historical.filter(r => r.municipality && years.includes(r.year) &&
+        (!area || area === r.area) && (!program || program === r.program) &&
+        (!municipality || normalizeMunicipioName(r.municipality) === normalizeMunicipioName(municipality)));
+      const coverageLines = [];
+      for (const areaName of new Set(historicCoverage.map(r => r.area))) {
+        const names = new Set(historicCoverage.filter(r => r.area === areaName).map(r => r.municipality));
+        coverageLines.push(areaName + ' (2025): ' + names.size + ' municipios con desglose.');
+      }
+      if (years.includes(2026) && count) coverageLines.push('Sistema 2026: ' + covered.size + ' de 46 municipios de Guanajuato.');
+      el('annual-coverage').textContent = coverageLines.join(' ') || 'Sin desglose municipal en las fuentes para esta selección.';
+      el('annual-results').innerHTML = metrics.length ?
+        '<table class="w-full text-sm text-left"><thead><tr><th scope="col" class="p-2">Indicador</th>' +
+        years.map(y => '<th scope="col" class="p-2 text-right">' + y + '</th>').join('') +
+        '<th scope="col" class="p-2">Fuente</th></tr></thead><tbody>' + metrics.map(metric =>
+          '<tr class="border-t"><th scope="row" class="p-2 font-medium">' + escape(metric) + '</th>' +
+          years.map(y => '<td class="p-2 text-right">' + display(valueFor(metric, y)) + '</td>').join('') +
+          '<td class="p-2 text-xs text-slate-600">' + [...new Set(rows.filter(r => r.metric === metric).map(r => r.source))].map(escape).join(' · ') +
+          '</td></tr>').join('') + '</tbody></table>' :
+        '<p class="py-3 text-sm text-slate-600">Sin datos documentados para esta combinación de filtros.</p>';
 
-      renderChart('chart-anual-evolucion', 'bar', {
-        labels,
-        datasets: [
-          {
-            type: 'line',
-            label: 'Museos / Asistentes (miles)',
-            data: dataAsistMiles,
-            borderColor: '#004B87',
-            backgroundColor: 'rgba(0, 75, 135, 0.1)',
-            borderWidth: 3,
-            fill: false,
-            tension: 0.3,
-            yAxisID: 'yAsist',
-            pointRadius: 6,
-            pointBackgroundColor: '#004B87'
-          },
-          {
-            type: 'bar',
-            label: 'Actividades Documentadas / Operadas',
-            data: dataAct,
-            backgroundColor: ['rgba(126, 34, 206, 0.6)', 'rgba(126, 34, 206, 0.75)', 'rgba(0, 75, 135, 0.85)'],
-            borderRadius: 6,
-            yAxisID: 'yAct'
-          }
-        ]
-      }, {
-        scales: {
-          yAsist: {
-            type: 'linear',
-            position: 'left',
-            title: { display: true, text: 'Miles de Personas', color: '#004B87', font: { weight: 'bold', size: 10 } },
-            grid: { color: 'rgba(0,0,0,0.05)' }
-          },
-          yAct: {
-            type: 'linear',
-            position: 'right',
-            title: { display: true, text: 'Actividades', color: '#7E22CE', font: { weight: 'bold', size: 10 } },
-            grid: { drawOnChartArea: false }
-          }
-        },
-        plugins: {
-          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
-          datalabels: { display: false }
-        }
-      });
-
-      // Gráfica 2: Ámbitos de Acción
-      const ambitosLabels = d.ambitos.map(a => a.nombre);
-      const ambitosData = d.ambitos.map(a => a.pct);
-      const ambitosColors = d.ambitos.map(a => a.color);
-
-      renderChart('chart-anual-ambitos', 'doughnut', {
-        labels: ambitosLabels,
-        datasets: [{
-          data: ambitosData,
-          backgroundColor: ambitosColors,
-          borderWidth: 2,
-          borderColor: '#ffffff'
-        }]
-      }, {
-        plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 }, padding: 6 } },
-          datalabels: {
-            formatter: (val) => val + '%',
-            color: '#ffffff',
-            font: { weight: 'bold', size: 10 }
-          }
-        },
-        cutout: '55%'
-      });
-
-      // Gráfica 3: Poblaciones y Públicos Prioritarios (Informe Oficial 2025)
-      const popLabels = ['Migrantes EUA', 'Mujeres / Niñas', 'Forum Cultural', 'NNAJ Formación', 'Vientos Musicales'];
-      const popData = [d.kpis.migrantesAtendidos, d.kpis.mujeresParticipantes, d.comparativoTrienal.forum.asistentes2025, d.kpis.nnajParticipantes, d.kpis.nnajVientosMusicales];
-
-      renderChart('chart-anual-participaciones', 'bar', {
-        labels: popLabels,
-        datasets: [{
-          label: 'Personas Beneficiadas',
-          data: popData,
-          backgroundColor: [
-            'rgba(14, 165, 233, 0.8)',
-            'rgba(236, 72, 153, 0.8)',
-            'rgba(126, 34, 206, 0.8)',
-            'rgba(245, 158, 11, 0.8)',
-            'rgba(16, 185, 129, 0.8)'
-          ],
-          borderRadius: 6,
-          borderSkipped: false
-        }]
-      }, {
-        indexAxis: 'y',
-        scales: {
-          x: {
-            beginAtZero: true,
-            grid: { color: 'rgba(0,0,0,0.05)' }
-          },
-          y: {
-            ticks: { font: { size: 9.5 } }
-          }
-        },
-        plugins: {
-          legend: { display: false },
-          datalabels: {
-            anchor: 'end',
-            align: 'right',
-            formatter: (val) => val >= 1000 ? (val / 1000).toFixed(1) + 'k' : val,
-            font: { weight: 'bold', size: 9 },
-            color: '#4B5563'
-          }
-        }
-      });
-
-      if (window.lucide && typeof window.lucide.createIcons === 'function') {
-        window.lucide.createIcons();
+      const metric = fill('annual-metric', metrics, 'Selecciona un indicador') || metrics[0];
+      el('annual-chart-card').classList.toggle('hidden', !metric);
+      if (metric) {
+        el('annual-metric').value = metric;
+        renderChart('chart-anual-evolucion', 'bar', {
+          labels: years.map(String),
+          datasets: [{ label: metric, data: years.map(y => valueFor(metric, y)), backgroundColor: '#78234f', borderRadius: 5 }]
+        }, { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { display: false } } });
       }
     }
 
@@ -4075,10 +3798,11 @@
         if (btn) btn.classList.toggle('active', id === tabId);
       });
 
-      const boxFiltroAnual = document.getElementById('box-filtro-anual');
-      if (boxFiltroAnual) {
-        boxFiltroAnual.classList.toggle('hidden', tabId !== 'tab-anual');
+      const isAnnual = tabId === 'tab-anual';
+      for (const id of ['operational-filters', 'operational-population', 'btn-toggle-filters', 'btn-export-pptx']) {
+        document.getElementById(id).classList.toggle('hidden', isAnnual);
       }
+      document.getElementById('btn-reset-filters').classList.toggle('hidden', isAnnual);
 
       document.getElementById('view-title').textContent = titles[tabId] || 'Evolución Plurianual';
       toggleMobileSidebar(false);
@@ -4087,9 +3811,7 @@
         setTimeout(() => leafletMap.invalidateSize(), 150);
       }
       if (tabId === 'tab-anual') {
-        const sel = document.getElementById('select-filtro-anio');
-        const val = sel ? sel.value : 'todos';
-        setTimeout(() => renderVistaAnual(val), 50);
+        renderVistaAnual();
       }
     }
 

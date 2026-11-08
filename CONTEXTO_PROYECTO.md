@@ -1,5 +1,7 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**08/11/2026 — Evolución Anual, implementación local parcial.** Filtros propios de año, proyecto P/Q, área y municipio. Se sustituyeron cifras fijas por series con fuente y métricas operativas de 2026. Cotejos, cobertura pendiente y estado de verificación en [Auditoría de Evolución Anual](documentacion/Auditoria_Evolucion_Anual_2026-11-08.md).
+
 **05/11/2026: criterio de áreas actualizado por solicitud de Luis.** Indicador combina nombres únicos del catálogo y áreas presentes en registros operativos, excluye SIN ASIGNAR y cuenta como activas las del periodo; lectura actual8/10. Incluye Música y Creatividad y Talento, que no aparecen con esos nombres en Cat_Alineacion. No implica que las diez sean direcciones generales equivalentes; el título ahora dice Direcciones y coordinación. Sustituye el criterio6/8 del siguiente párrafo. Implementado localmente, sin publicación ni verificación visual.
 
 **05/11/2026: indicador de direcciones corregido localmente.** Se excluye SIN ASIGNAR y se cuenta una dirección activa solo si coincide con el catálogo, normalizando mayúsculas, acentos y espacios. La lectura actual con periodo2026 da6/8: Comunicación Social y Forum sin fichas activas; direcciones subordinadas no se convierten automáticamente en direcciones generales. 45 pruebas pasaron. Sin publicación ni verificación visual o de exportación.

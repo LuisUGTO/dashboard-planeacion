@@ -1,5 +1,7 @@
 # Dashboard de Planeación de Cultura
 
+**08/11/2026 — Evolución Anual, implementación local parcial.** Filtros propios de año, proyecto P/Q, área y municipio. Se sustituyeron cifras fijas por series con fuente y métricas operativas de 2026. Cotejos, cobertura pendiente y estado de verificación en [Auditoría de Evolución Anual](documentacion/Auditoria_Evolucion_Anual_2026-11-08.md).
+
 **05/11/2026:** por solicitud de Luis, el indicador integra áreas del catálogo y de los registros, excluye SIN ASIGNAR y da8/10 en lectura actual. El título es Direcciones y coordinación; no certifica una estructura institucional oficial. Cambio local pendiente de publicar.
 
 **05/11/2026:** indicador de direcciones corregido localmente para excluir SIN ASIGNAR y contar solo direcciones del catálogo; lectura actual2026:6/8. 45 pruebas pasaron; pendiente publicar y verificar visualmente.
