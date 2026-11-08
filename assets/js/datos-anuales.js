@@ -20,6 +20,7 @@
       // Impacto y Afluencia en Museos y Zonas Arqueológicas
       visitantesMuseos2025: 602389,
       visitantesMuseos2024: 490350,
+      visitantesMuseos2026Live: 357986,
       crecimientoMuseosPct: 22.85,
 
       // Operación en vivo 2026 (Base de datos del Sistema Cultura GTO)
@@ -90,13 +91,14 @@
       {
         anio: 2026,
         titulo: '2026 (Operación en Vivo)',
-        visitantesMuseos: 0, // En curso
+        visitantesMuseos: 357986,
+        visitantesMuseosMiles: 358.0,
         actividadesReportadas: 1753, // Actividades únicas validadas en el tablero
         participacionesValidadas: 1028146, // Asistentes comprobados
         participacionesMiles: 1028.1,
         municipiosConPresencia: 44,
         metasCumplidas: 6,
-        destacado: '1,753 actividades operativas únicas en 44 municipios, con 1,028,146 asistentes verificados.'
+        destacado: '1,753 actividades operativas únicas en 44 municipios, con 1,028,146 asistentes verificados y 357,986 asistentes en museos.'
       }
     ],
 

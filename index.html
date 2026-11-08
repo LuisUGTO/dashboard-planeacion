@@ -1347,15 +1347,15 @@
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Asistencias 2026</div>
+            <div id="kpi-anual-part-lbl" class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Asistencias Totales</div>
             <div id="kpi-anual-part" class="text-2xl font-black text-purple-700 mt-1 font-montserrat">1.03 M</div>
             <div id="kpi-anual-part-sub" class="text-[11px] text-slate-500 font-medium mt-1">1,028,146 verificados</div>
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Actividades 2026</div>
-            <div class="text-2xl font-black text-indigo-700 mt-1 font-montserrat">1,753</div>
-            <div class="text-[11px] text-indigo-700 font-medium mt-1">Operación en vivo</div>
+            <div id="kpi-anual-acttotal-lbl" class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Actividades Realizadas</div>
+            <div id="kpi-anual-acttotal" class="text-2xl font-black text-indigo-700 mt-1 font-montserrat">1,753</div>
+            <div id="kpi-anual-acttotal-sub" class="text-[11px] text-indigo-700 font-medium mt-1">Operación en vivo</div>
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
@@ -3869,6 +3869,24 @@
       const kpiActSub = document.getElementById('kpi-anual-act-sub');
       const kpiPart = document.getElementById('kpi-anual-part');
       const kpiPartSub = document.getElementById('kpi-anual-part-sub');
+      const kpiActTotal = document.getElementById('kpi-anual-acttotal');
+      const kpiActTotalSub = document.getElementById('kpi-anual-acttotal-sub');
+
+      // Visitantes en museos en 2026 (357,986 registrados en campo o dinámico de rawDB)
+      let museos2026 = (d.kpis && d.kpis.visitantesMuseos2026Live) || 357986;
+      if (typeof rawDB !== 'undefined' && rawDB.actividades && rawDB.territorio && rawDB.actividades.length > 0) {
+        const museoIds = new Set(
+          rawDB.actividades
+            .filter(a => ((a.Direccion || '') + ' ' + (a.Clave_Proceso_Txt || '')).toUpperCase().includes('MUSEO'))
+            .map(a => cleanStr(a.ID_Actividad))
+        );
+        if (museoIds.size > 0) {
+          const sumTer = rawDB.territorio
+            .filter(t => museoIds.has(cleanStr(t.ID_Actividad)))
+            .reduce((s, r) => s + toNum(r.Cantidad), 0);
+          if (sumTer > 0) museos2026 = sumTer;
+        }
+      }
 
       if (anioFiltro === 'todos') {
         if (badgePeriodo) badgePeriodo.textContent = 'Periodo: 2024 – 2026';
@@ -3876,24 +3894,32 @@
         if (kpiActSub) kpiActSub.innerHTML = '<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> +22.8% vs 2024';
         if (kpiPart) kpiPart.textContent = d.kpis.participaciones2026Texto;
         if (kpiPartSub) kpiPartSub.textContent = '1,028,146 verificados en vivo';
+        if (kpiActTotal) kpiActTotal.textContent = fmtInt(d.kpis.actividades2026Live);
+        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Operación en vivo';
       } else if (anioFiltro === '2026') {
         if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2026 (Operación en Vivo)';
-        if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.actividades2026Live);
-        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-indigo-600 font-semibold">1,753 actividades únicas</span>';
+        if (kpiAct) kpiAct.textContent = fmtInt(museos2026);
+        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-indigo-600 font-semibold">357.9k asistentes en museos</span>';
         if (kpiPart) kpiPart.textContent = d.kpis.participaciones2026Texto;
         if (kpiPartSub) kpiPartSub.textContent = '1,028,146 asistentes comprobados';
+        if (kpiActTotal) kpiActTotal.textContent = fmtInt(d.kpis.actividades2026Live);
+        if (kpiActTotalSub) kpiActTotalSub.textContent = '1,753 actividades operativas';
       } else if (anioFiltro === '2025') {
         if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2025 (Informe Oficial)';
         if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.visitantesMuseos2025);
         if (kpiActSub) kpiActSub.innerHTML = '<span class="text-emerald-600 font-semibold">+22.85% vs 2024</span>';
         if (kpiPart) kpiPart.textContent = fmtInt(d.comparativoTrienal.forum.asistentes2025);
         if (kpiPartSub) kpiPartSub.textContent = 'Asistentes Forum Cultural';
+        if (kpiActTotal) kpiActTotal.textContent = String(d.comparativoTrienal.forum.act2025);
+        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Forum y muestras 2025';
       } else if (anioFiltro === '2024') {
         if (badgePeriodo) badgePeriodo.textContent = 'Ejercicio: 2024 (Línea Base)';
         if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.visitantesMuseos2024);
-        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-slate-500 font-semibold">Visitantes en museos</span>';
+        if (kpiActSub) kpiActSub.innerHTML = '<span class="text-slate-500 font-semibold">Línea base oficial</span>';
         if (kpiPart) kpiPart.textContent = String(d.comparativoTrienal.forum.act2024);
         if (kpiPartSub) kpiPartSub.textContent = 'Actividades Forum reportadas';
+        if (kpiActTotal) kpiActTotal.textContent = String(d.comparativoTrienal.forum.act2024);
+        if (kpiActTotalSub) kpiActTotalSub.textContent = 'Línea base reportada';
       }
 
       const listaEl = document.getElementById('lista-anual-logros');
@@ -3910,8 +3936,7 @@
 
       // Gráfica 1: Evolución Trienal (Museos / Asistencias y Actividades)
       const labels = ['2024 (Base)', '2025 (Oficial)', '2026 (En vivo)'];
-      // En 2024: 490.4k museos, 2025: 602.4k museos, 2026: 1028.1k asistentes validados en vivo
-      const dataAsistMiles = [490.4, 602.4, 1028.1];
+      const dataAsistMiles = [490.4, 602.4, +(museos2026 / 1000).toFixed(1)];
       const dataAct = [70, 174, 1753];
 
       renderChart('chart-anual-evolucion', 'bar', {
