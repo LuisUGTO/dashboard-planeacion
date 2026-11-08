@@ -1,5 +1,7 @@
 # Auditoría de Evolución Anual · 08/11/2026
 
+**Ajuste visual de Evolución Anual:** se recuperaron la cabecera con fotografía, el panel plegable y la distribución anterior con tres gráficas, comparativo y logros. Conserva los filtros por año, programa, área y municipio; las gráficas usan el alcance documentado de la selección. Las fuentes se consultan en un panel plegable. Verificación automatizada, pendiente prueba visual en navegador.
+
 ## Implementado localmente
 
 - La pantalla tiene filtros propios de año, programa o proyecto P/Q, dirección y municipio. Las tarjetas, tabla, cobertura y gráfica se vuelven a calcular desde la misma selección. La gráfica usa un indicador a la vez. Se separan fichas, visitas, asistencias, talleres, metas programadas y otras unidades.

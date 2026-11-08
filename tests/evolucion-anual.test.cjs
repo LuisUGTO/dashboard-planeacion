@@ -18,7 +18,7 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
     return elements.get(id);
   };
   const norm = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  let chart;
+  const charts = new Map();
   const context = {
     window: { DatosAnuales: annual }, document: { getElementById: element },
     Option: function Option(label, value) { this.label = label; this.value = value; },
@@ -39,7 +39,7 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
         { ID_Actividad: 'C', Municipio: 'León', Cantidad: '999' }
       ]
     },
-    renderChart: (_id, _type, data) => { chart = data; }
+    renderChart: (id, type, data) => { charts.set(id, { type, ...data }); }
   };
   const render = (year, area = '', program = '', municipality = '') => {
     for (const [id, value] of Object.entries({
@@ -49,7 +49,9 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
     return element('annual-results').innerHTML;
   };
   assert.match(render('2024'), /490350/);
-  assert.equal(chart.labels.join(), '2024');
+  assert.equal(charts.get('chart-anual-evolucion').labels.join(), '2024');
+  assert.equal(charts.get('chart-anual-ambitos').datasets[0].data.join(), '161816,328534');
+  assert.equal(charts.get('chart-anual-participaciones').labels.join(), '2024');
   assert.match(render('2024', '', '', 'León'), /Sin datos documentados/);
   const museums = render('2025', 'Museos y Artes Visuales', '', 'León');
   assert.match(museums, /293156/);
@@ -61,5 +63,7 @@ test('Evolución Anual cruza los cuatro filtros y mantiene separados los alcance
   assert.match(live, /Fichas capturadas/);
   assert.match(live, />10</);
   assert.doesNotMatch(live, />30<|999|Presentaciones editoriales/);
+  assert.equal(charts.get('chart-anual-participaciones').datasets[0].data.join(), '10');
+  assert.equal(charts.get('chart-anual-ambitos').datasets[0].data.join(), '1');
   assert.match(render('2026', 'Editorial y Publicaciones', 'PB3573'), />32<.*>30</);
 });

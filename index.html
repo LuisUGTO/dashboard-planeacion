@@ -481,6 +481,32 @@
 
         </div>
 
+        <div id="annual-filter-controls" class="hidden space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="annual-filters">
+            <label class="text-sm font-semibold">Año
+              <select id="select-filtro-anio" class="block w-full rounded border p-2" onchange="renderVistaAnual()">
+                <option value="todos">2024–2026</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </select>
+            </label>
+            <label class="text-sm font-semibold">Programa o proyecto P/Q
+              <select id="annual-program" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+            <label class="text-sm font-semibold">Dirección o área
+              <select id="annual-area" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+            <label class="text-sm font-semibold">Municipio
+              <select id="annual-municipality" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
+            </label>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <p class="text-xs text-slate-600">Los resultados históricos solo se filtran cuando la fuente identifica el programa, área o municipio. Una raya indica que la fuente no ofrece un dato para esa selección.</p>
+            <button type="button" class="rounded border border-slate-200 px-2 py-1 text-xs font-semibold" onclick="resetAnnualFilters()">Borrar filtros de Evolución Anual</button>
+          </div>
+        </div>
+
         <!-- Cuadrícula de los 7 Filtros Operativos -->
         <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
           <div class="col-span-2 sm:col-span-1">
@@ -1294,58 +1320,118 @@
       </section>
 
       <!-- SECCIÓN: EVOLUCIÓN TRIENAL Y RESULTADOS INSTITUCIONALES (2024 - 2026) -->
-      <section id="tab-anual" class="hidden space-y-5">
-        <div class="rounded-2xl bg-[#561537] text-white p-6 sm:p-8">
-          <p class="text-sm text-rose-100">Resultados institucionales · 2024–2026</p>
-          <h2 class="font-vollkorn text-3xl font-bold mt-1">Gestión Cultural en Guanajuato</h2>
-          <p class="text-sm text-rose-100 mt-2">Acciones, cobertura y asistencias documentadas por ejercicio.</p>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="annual-filters">
-            <label class="text-sm font-semibold">Año
-              <select id="select-filtro-anio" class="block w-full rounded border p-2" onchange="renderVistaAnual()">
-                <option value="todos">2024–2026</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-              </select>
-            </label>
-            <label class="text-sm font-semibold">Programa o proyecto P/Q
-              <select id="annual-program" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
-            </label>
-            <label class="text-sm font-semibold">Dirección o área
-              <select id="annual-area" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
-            </label>
-            <label class="text-sm font-semibold">Municipio
-              <select id="annual-municipality" class="block w-full rounded border p-2" onchange="renderVistaAnual()"></select>
-            </label>
+      <section id="tab-anual" class="hidden space-y-6">
+        <!-- Banner Institucional con Vista Colonial de Guanajuato -->
+        <div class="relative overflow-hidden rounded-2xl p-6 sm:p-7 text-white shadow-xl border border-amber-500/25"
+             style="background: linear-gradient(105deg, #1A1635 0%, #2E1A47 40%, #38154A 65%, #4A1A4E 100%);">
+          <!-- Fotografía Histórica de Guanajuato con degradado suave hacia la izquierda -->
+          <div class="absolute right-0 top-0 bottom-0 w-full sm:w-3/5 lg:w-3/5 pointer-events-none overflow-hidden">
+            <img
+              src="assets/interfaz/guanajuato.webp"
+              alt="Callejón y Templo de Guanajuato"
+              class="w-full h-full object-cover object-left lg:object-[22%_center] opacity-75 lg:opacity-85 filter contrast-105 saturate-110"
+              style="mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.95) 75%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.95) 75%, black 100%);"
+            />
           </div>
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <p class="text-xs text-slate-600">Los resultados históricos solo se filtran cuando la fuente identifica el programa, área o municipio. Una raya indica que la fuente no ofrece un dato para esa selección.</p>
-            <button type="button" class="rounded border border-slate-200 px-2 py-1 text-xs font-semibold" onclick="resetAnnualFilters()">Borrar filtros de Evolución Anual</button>
-          </div>
-        </div>
 
-        <div id="annual-kpis" class="grid grid-cols-1 sm:grid-cols-3 gap-4" aria-live="polite"></div>
-
-        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-          <div id="annual-chart-card" class="xl:col-span-2 bg-white rounded-xl border border-slate-200 p-4">
-            <label class="block font-semibold text-slate-800">Evolución por indicador
-              <select id="annual-metric" class="block rounded border p-2 mt-2 max-w-full" onchange="renderVistaAnual()"></select>
-            </label>
-            <div class="relative h-64 mt-3"><canvas id="chart-anual-evolucion" role="img" aria-label="Evolución del indicador seleccionado"></canvas></div>
-          </div>
-          <div class="bg-white rounded-xl border border-slate-200 p-4">
-            <h3 class="font-semibold text-slate-800">Cobertura documentada</h3>
-            <p id="annual-coverage" class="mt-2 text-sm text-slate-600"></p>
+          <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 backdrop-blur-xs text-xs font-bold text-amber-200 mb-2.5 border border-amber-300/30 shadow-xs">
+                <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Resultados Institucionales y Metas Trienales</span>
+                <span class="text-white/40">•</span>
+                <span id="badge-anual-periodo" class="font-mono text-amber-100">Periodo: 2024 – 2026</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold font-vollkorn tracking-tight text-white drop-shadow">
+                Gestión Cultural en Guanajuato
+              </h2>
+              <p class="text-xs sm:text-sm text-purple-100/90 mt-1.5 font-montserrat leading-relaxed">
+                Acciones, cobertura, visitantes en museos y personas beneficiadas a lo largo del tiempo.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-slate-200 p-4">
-          <h3 class="font-semibold text-slate-800">Resultados y fuentes</h3>
+        <div id="annual-kpis" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3.5" aria-live="polite"></div>
+
+        <!-- Fila Media: Línea de Evolución y Comparativo -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i data-lucide="line-chart" class="w-4 h-4 text-gto-blue"></i>
+                  Evolución Trienal de Resultados Culturales (2024 – 2026)
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">Una serie por indicador y unidad</p>
+              </div>
+              <label class="text-xs font-semibold">Indicador
+                <select id="annual-metric" class="block rounded border p-1 max-w-full" onchange="renderVistaAnual()"></select>
+              </label>
+            </div>
+            <p id="annual-chart-empty" class="hidden text-sm text-slate-500 mt-3">Sin datos documentados para esta selección.</p>
+            <div id="annual-chart-card" class="relative h-72 sm:h-80 w-full mt-4">
+              <canvas id="chart-anual-evolucion"></canvas>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex-1 flex flex-col justify-between">
+              <h3 class="font-bold text-slate-800 text-sm pb-2 border-b border-slate-100 flex items-center gap-2">
+                <i data-lucide="arrow-left-right" class="w-4 h-4 text-indigo-600"></i>
+                Comparativo del periodo
+              </h3>
+              <div id="annual-comparison" class="space-y-3 my-auto py-2"></div>
+              <p id="annual-coverage" class="text-xs text-slate-600 border-t border-slate-100 pt-2"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila Inferior: Ámbitos, Participaciones y Logros -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-fuchsia-600"></i>
+                Distribución por Ámbito de Acción
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Composición de la fuente disponible para el periodo</p>
+            </div>
+              <div id="annual-card-ambitos" class="relative h-56 w-full my-auto mt-2">
+              <canvas id="chart-anual-ambitos"></canvas>
+            </div>
+              <p id="annual-empty-ambitos" class="hidden text-sm text-slate-500 mt-3">Sin desglose comparable para esta selección.</p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="bar-chart-3" class="w-4 h-4 text-purple-600"></i>
+                Públicos y Poblaciones Prioritarias
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Serie de asistencia o alcance con su unidad de origen</p>
+            </div>
+              <div id="annual-card-participaciones" class="relative h-56 w-full my-auto mt-2">
+              <canvas id="chart-anual-participaciones"></canvas>
+            </div>
+              <p id="annual-empty-participaciones" class="hidden text-sm text-slate-500 mt-3">Sin asistencias o alcance documentado para esta selección.</p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+                Principales Logros del Periodo
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Resultados destacados de la selección</p>
+            </div>
+            <div class="space-y-2.5 my-auto py-2 text-xs text-slate-700" id="lista-anual-logros"></div>
+          </div>
+        </div>
+        <details class="bg-white rounded-xl border border-slate-200 p-4">
+          <summary class="cursor-pointer font-semibold text-slate-800">Consultar resultados y fuentes</summary>
           <div class="overflow-x-auto mt-3" id="annual-results" aria-live="polite"></div>
-        </div>
+        </details>
       </section>
 
     </main>
@@ -3743,11 +3829,18 @@
       const display = value => value === null ? '—' : fmtInt(value);
       const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
       const recent = metrics.map(metric => rows.filter(r => r.metric === metric).at(-1));
-      const liveKpis = recent.filter(row => row.year === 2026 && row.source.startsWith('Sistema'));
-      el('annual-kpis').innerHTML = (liveKpis.length ? liveKpis : recent).slice(0, 3).map(row =>
-        '<div class="bg-white border border-slate-200 rounded-xl p-4"><p class="text-sm text-slate-600">' +
-        escape(row.metric) + ' · ' + row.year + '</p><p class="text-2xl font-bold text-[#561537] mt-1">' +
-        display(row.value) + '</p></div>').join('');
+      const priority = ['Visitas a exposiciones', 'Alcance territorial registrado', 'Fichas capturadas',
+        'Municipios de Guanajuato con registro', 'Actividades de Forum y Teatro',
+        'Asistencias a Forum y Teatro', 'Metas editoriales programadas'];
+      const cards = [...priority.map(metric => recent.find(row => row.metric === metric)).filter(Boolean),
+        ...recent.filter(row => !priority.includes(row.metric))].slice(0, 7);
+      const cardColors = ['text-gto-blue', 'text-purple-700', 'text-indigo-700', 'text-emerald-600', 'text-amber-600', 'text-rose-600', 'text-sky-600'];
+      el('badge-anual-periodo').textContent = year === 'todos' ? 'Periodo: 2024 – 2026' : 'Ejercicio: ' + year;
+      el('annual-kpis').innerHTML = cards.map((row, index) =>
+        '<div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between">' +
+        '<p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">' +
+        escape(row.metric) + '</p><p class="text-2xl font-black mt-1 ' + cardColors[index] + '">' +
+        display(row.value) + '</p><p class="text-xs text-slate-500">' + row.year + '</p></div>').join('');
 
       const historicCoverage = historical.filter(r => r.municipality && years.includes(r.year) &&
         (!area || area === r.area) && (!program || program === r.program) &&
@@ -3771,11 +3864,74 @@
 
       const metric = fill('annual-metric', metrics, 'Selecciona un indicador') || metrics[0];
       el('annual-chart-card').classList.toggle('hidden', !metric);
+      el('annual-chart-empty').classList.toggle('hidden', !!metric);
+      const comparisons = [...new Set([metric, ...priority])].filter(name => metrics.includes(name)).slice(0, 3);
+      el('annual-comparison').innerHTML = comparisons.map(name => {
+        const documentedYears = years.filter(y => valueFor(name, y) !== null);
+        const first = valueFor(name, documentedYears[0]);
+        const last = valueFor(name, documentedYears.at(-1));
+        const change = documentedYears.length > 1 && first > 0
+          ? ((last / first - 1) * 100).toLocaleString('es-MX', { maximumFractionDigits: 1, signDisplay: 'always' }) +
+            '% (' + documentedYears[0] + '–' + documentedYears.at(-1) + ')' : '';
+        return '<div class="bg-slate-50 rounded-xl p-3 border border-slate-200/60">' +
+          '<p class="font-semibold text-xs text-slate-700">' + escape(name) +
+          (change ? ' <span class="text-indigo-700">' + change + '</span>' : '') + '</p>' +
+          '<div class="flex flex-wrap gap-3 mt-2 text-sm">' + years.map(y =>
+            '<span>' + y + ' <strong>' + display(valueFor(name, y)) + '</strong></span>').join('') +
+          '</div></div>';
+      }).join('');
+      el('lista-anual-logros').innerHTML = cards.length ? cards.slice(0, 5).map(row =>
+        '<div class="flex gap-2 bg-slate-50 border border-slate-100 rounded-lg p-2">' +
+        '<span class="text-emerald-700" aria-hidden="true">✓</span><span><strong>' + display(row.value) +
+        '</strong> · ' + escape(row.metric) + ' (' + row.year + ')</span></div>').join('') :
+        '<p>Sin resultados documentados para esta selección.</p>';
+
+      const attendance = [metric, ...priority, ...metrics].find(name =>
+        metrics.includes(name) && /Asistencias|Participaciones|Visitas|Alcance/.test(name));
+      el('annual-card-participaciones').classList.toggle('hidden', !attendance);
+      el('annual-empty-participaciones').classList.toggle('hidden', !!attendance);
+      if (attendance) renderChart('chart-anual-participaciones', 'bar', {
+        labels: years.map(String),
+        datasets: [{ label: attendance, data: years.map(y => valueFor(attendance, y)), backgroundColor: '#a21caf', borderRadius: 5 }]
+      }, { scales: { y: { beginAtZero: true } }, plugins: { legend: { position: 'bottom' }, datalabels: { display: false } } });
+
+      const composition = new Map();
+      let compositionTitle = '';
+      if (years.includes(2026) && count) {
+        compositionTitle = 'Fichas 2026 por área';
+        for (const activity of matched) {
+          if (municipality && !territorialIds.has(activity.id)) continue;
+          if (!composition.has(activity.area)) composition.set(activity.area, new Set());
+          composition.get(activity.area).add(activity.id);
+        }
+      }
+      let compositionData = [...composition].map(([name, areaIds]) => [name, areaIds.size]);
+      const museumYear = years.findLast(y => valueFor('Visitas a exposiciones', y) !== null);
+      if (!compositionData.length && !municipality && museumYear) {
+        compositionTitle = 'Visitas por tipo de exposición · ' + museumYear;
+        compositionData = museumYear === 2025
+          ? [['Permanentes', 250974], ['Temporales', 351415]]
+          : [['Permanentes', 161816], ['Temporales', 328534]];
+      }
+      el('annual-card-ambitos').classList.toggle('hidden', !compositionData.length);
+      el('annual-empty-ambitos').classList.toggle('hidden', !!compositionData.length);
+      if (compositionData.length) renderChart('chart-anual-ambitos', 'doughnut', {
+        labels: compositionData.map(([name]) => name),
+        datasets: [{
+          data: compositionData.map(([, value]) => value),
+          backgroundColor: compositionData.map((_, index) =>
+            ['#701a75', '#a21caf', '#c084fc', '#f472b6', '#004b87', '#38bdf8', '#fb7185'][index % 7])
+        }]
+      }, { plugins: { title: { display: true, text: compositionTitle }, legend: { position: 'bottom' }, datalabels: { display: false } } });
+
       if (metric) {
         el('annual-metric').value = metric;
-        renderChart('chart-anual-evolucion', 'bar', {
+        renderChart('chart-anual-evolucion', 'line', {
           labels: years.map(String),
-          datasets: [{ label: metric, data: years.map(y => valueFor(metric, y)), backgroundColor: '#78234f', borderRadius: 5 }]
+          datasets: [{
+            label: metric, data: years.map(y => valueFor(metric, y)), borderColor: '#78234f',
+            backgroundColor: '#78234f24', pointRadius: 5, tension: 0.2, fill: true
+          }]
         }, { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { display: false } } });
       }
     }
@@ -3799,10 +3955,11 @@
       });
 
       const isAnnual = tabId === 'tab-anual';
-      for (const id of ['operational-filters', 'operational-population', 'btn-toggle-filters', 'btn-export-pptx']) {
+      for (const id of ['operational-filters', 'operational-population', 'btn-export-pptx']) {
         document.getElementById(id).classList.toggle('hidden', isAnnual);
       }
       document.getElementById('btn-reset-filters').classList.toggle('hidden', isAnnual);
+      document.getElementById('annual-filter-controls').classList.toggle('hidden', !isAnnual);
 
       document.getElementById('view-title').textContent = titles[tabId] || 'Evolución Plurianual';
       toggleMobileSidebar(false);

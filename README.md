@@ -1,5 +1,7 @@
 # Dashboard de Planeación de Cultura
 
+**Ajuste visual de Evolución Anual:** se recuperaron la cabecera con fotografía, el panel plegable y la distribución anterior con tres gráficas, comparativo y logros. Conserva los filtros por año, programa, área y municipio; las gráficas usan el alcance documentado de la selección. Las fuentes se consultan en un panel plegable. Verificación automatizada, pendiente prueba visual en navegador.
+
 **08/11/2026 — Evolución Anual, implementación local parcial.** Filtros propios de año, proyecto P/Q, área y municipio. Se sustituyeron cifras fijas por series con fuente y métricas operativas de 2026. Cotejos, cobertura pendiente y estado de verificación en [Auditoría de Evolución Anual](documentacion/Auditoria_Evolucion_Anual_2026-11-08.md).
 
 **05/11/2026:** por solicitud de Luis, el indicador integra áreas del catálogo y de los registros, excluye SIN ASIGNAR y da8/10 en lectura actual. El título es Direcciones y coordinación; no certifica una estructura institucional oficial. Cambio local pendiente de publicar.
