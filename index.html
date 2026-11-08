@@ -464,6 +464,23 @@
               <i data-lucide="printer" class="w-3.5 h-3.5"></i>
               PDF
             </button>
+
+          <!-- Selector de Año para Evolución Anual -->
+          <div id="box-filtro-anual" class="hidden flex items-center gap-1.5 bg-indigo-50 border border-indigo-200/80 px-2.5 py-1 rounded-lg text-xs font-bold text-indigo-900 shadow-2xs">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600"></i>
+            <span class="hidden sm:inline">Año:</span>
+            <select id="select-filtro-anio" onchange="renderVistaAnual(this.value)" class="bg-white border border-indigo-200 text-indigo-900 font-semibold rounded px-2 py-0.5 text-xs focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+              <option value="todos">Todos (2019 – 2026)</option>
+              <option value="2026">2026 (SED)</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+            </select>
+          </div>
           </div>
         </div>
       </div>
@@ -1295,7 +1312,7 @@
             </p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <span class="px-3.5 py-1.5 rounded-lg bg-white/10 text-xs font-mono font-medium border border-white/20">
+            <span id="badge-anual-periodo" class="px-3.5 py-1.5 rounded-lg bg-white/10 text-xs font-mono font-medium border border-white/20">
               Periodo: 2019 – 2026
             </span>
           </div>
@@ -1305,16 +1322,16 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3.5">
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
             <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Actividades</div>
-            <div class="text-2xl font-black text-gto-blue mt-1 font-montserrat">56,328</div>
-            <div class="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
+            <div id="kpi-anual-act" class="text-2xl font-black text-gto-blue mt-1 font-montserrat">56,328</div>
+            <div id="kpi-anual-act-sub" class="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
               <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> +178% crec.
             </div>
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
             <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Participaciones</div>
-            <div class="text-2xl font-black text-purple-700 mt-1 font-montserrat">3.9 M</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-1">Asistencias</div>
+            <div id="kpi-anual-part" class="text-2xl font-black text-purple-700 mt-1 font-montserrat">3.9 M</div>
+            <div id="kpi-anual-part-sub" class="text-[11px] text-slate-500 font-medium mt-1">Asistencias</div>
           </div>
 
           <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition">
@@ -1417,7 +1434,8 @@
                 </div>
               </div>
               <div class="text-[11px] text-slate-500 text-center pt-2 border-t border-slate-100">
-                Incremento acumulado en capacidad de atención institucional
+                <span class="block font-semibold text-slate-700">Metas SED (Finanzas) vs. Operación Tablero</span>
+                <span class="text-[10px] text-slate-400 mt-0.5 block leading-tight">10,766 actividades y 3.9M asistencias corresponden a las metas plurianuales reportadas ante SED (acumulando sesiones/servicios). El tablero 2026 registra 1,753 actividades operativas únicas y 1.02M de asistentes comprobados en campo.</span>
               </div>
             </div>
 
@@ -1735,7 +1753,10 @@
     }
 
     function normalizeMunicipioName(mun) {
-      const name = cleanStr(mun).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ');
+      let name = cleanStr(mun).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ');
+      name = name.replace(/\uFFFD/g, '');
+      if (name.includes('purisima') && name.includes('rinc')) return 'purisima del rincon';
+      if (name.includes('san francisco') && name.includes('rinc')) return 'san francisco del rincon';
       return name === 'pueblonuevo' ? 'pueblo nuevo' : name;
     }
 
@@ -3752,9 +3773,32 @@
       }
     }
 
-    function renderVistaAnual() {
+    function renderVistaAnual(anioFiltro = 'todos') {
       const d = window.DatosAnuales;
       if (!d) return;
+
+      const badgePeriodo = document.getElementById('badge-anual-periodo');
+      const kpiAct = document.getElementById('kpi-anual-act');
+      const kpiActSub = document.getElementById('kpi-anual-act-sub');
+      const kpiPart = document.getElementById('kpi-anual-part');
+      const kpiPartSub = document.getElementById('kpi-anual-part-sub');
+
+      if (anioFiltro === 'todos') {
+        if (badgePeriodo) badgePeriodo.textContent = 'Periodo: 2019 – 2026';
+        if (kpiAct) kpiAct.textContent = fmtInt(d.kpis.actividadesRealizadas);
+        if (kpiActSub) kpiActSub.innerHTML = '<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> +178% crec.';
+        if (kpiPart) kpiPart.textContent = d.kpis.participacionesAsistencias;
+        if (kpiPartSub) kpiPartSub.textContent = 'Asistencias acumuladas';
+      } else {
+        const item = d.serieAnual.find(s => String(s.anio) === String(anioFiltro));
+        if (item) {
+          if (badgePeriodo) badgePeriodo.textContent = `Ejercicio: ${item.anio}`;
+          if (kpiAct) kpiAct.textContent = fmtInt(item.actividades);
+          if (kpiActSub) kpiActSub.innerHTML = item.anio === 2026 ? '<span class="text-indigo-600 font-semibold">Meta SED Finanzas</span>' : `<span class="text-slate-500 font-semibold">Año ${item.anio}</span>`;
+          if (kpiPart) kpiPart.textContent = `${(item.participaciones / 1000000).toFixed(2)} M`;
+          if (kpiPartSub) kpiPartSub.textContent = `${fmtInt(item.participacionesMiles)} mil asistencias`;
+        }
+      }
 
       const listaEl = document.getElementById('lista-anual-logros');
       if (listaEl && d.logros) {
@@ -3783,8 +3827,14 @@
             fill: true,
             tension: 0.35,
             yAxisID: 'yAct',
-            pointRadius: 4,
-            pointBackgroundColor: '#004B87'
+            pointRadius: (ctx) => {
+              if (anioFiltro !== 'todos' && labels[ctx.dataIndex] === +anioFiltro) return 8;
+              return 4;
+            },
+            pointBackgroundColor: (ctx) => {
+              if (anioFiltro !== 'todos' && labels[ctx.dataIndex] === +anioFiltro) return '#EA580C';
+              return '#004B87';
+            }
           },
           {
             label: 'Participaciones (miles)',
@@ -3795,8 +3845,14 @@
             fill: false,
             tension: 0.35,
             yAxisID: 'yPart',
-            pointRadius: 4,
-            pointBackgroundColor: '#7E22CE'
+            pointRadius: (ctx) => {
+              if (anioFiltro !== 'todos' && labels[ctx.dataIndex] === +anioFiltro) return 8;
+              return 4;
+            },
+            pointBackgroundColor: (ctx) => {
+              if (anioFiltro !== 'todos' && labels[ctx.dataIndex] === +anioFiltro) return '#EA580C';
+              return '#7E22CE';
+            }
           }
         ]
       }, {
@@ -3850,7 +3906,10 @@
         datasets: [{
           label: 'Millones de Asistencias',
           data: partMillones,
-          backgroundColor: 'rgba(126, 34, 206, 0.75)',
+          backgroundColor: (ctx) => {
+            if (anioFiltro !== 'todos' && labels[ctx.dataIndex] === +anioFiltro) return 'rgba(234, 88, 12, 0.85)';
+            return 'rgba(126, 34, 206, 0.75)';
+          },
           borderRadius: 6,
           borderSkipped: false
         }]
@@ -3897,6 +3956,11 @@
         if (btn) btn.classList.toggle('active', id === tabId);
       });
 
+      const boxFiltroAnual = document.getElementById('box-filtro-anual');
+      if (boxFiltroAnual) {
+        boxFiltroAnual.classList.toggle('hidden', tabId !== 'tab-anual');
+      }
+
       document.getElementById('view-title').textContent = titles[tabId] || 'Evolución Plurianual';
       toggleMobileSidebar(false);
 
@@ -3904,7 +3968,9 @@
         setTimeout(() => leafletMap.invalidateSize(), 150);
       }
       if (tabId === 'tab-anual') {
-        setTimeout(renderVistaAnual, 50);
+        const sel = document.getElementById('select-filtro-anio');
+        const val = sel ? sel.value : 'todos';
+        setTimeout(() => renderVistaAnual(val), 50);
       }
     }
 
