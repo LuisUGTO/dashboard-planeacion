@@ -10,5 +10,7 @@ exclude:
   - documentacion
   - tools
   - tests
+  - avances_anuales
+  - apoyo
   - SC_Planeacion_Handoff_Auditoria_AppSheet.md
   - Application Documentation.pdf
