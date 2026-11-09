@@ -3472,6 +3472,15 @@
       acts.forEach(a => {
         if (typeof CulturaCalidad !== 'undefined' && CulturaCalidad.isExcluded && CulturaCalidad.isExcluded(a)) return;
         const id = cleanStr(a.ID_Actividad);
+        const folio = cleanStr(a.Folio);
+        const nom = cleanStr(a.Nombre_Actividad);
+        const desc = cleanStr(a.Descripcion_Breve || a.Descripcion_Actividad);
+
+        // Excluir notas de auditoría, borradores o filas desactivadas que no son fichas operativas
+        if (/^\[(?:Soraya|Conciliaci[oó]n|Ajuste|Nota|Hist[oó]rico)/i.test(id)) return;
+        if (/^\[(?:Soraya|Conciliaci[oó]n|Ajuste|Nota|Hist[oó]rico)/i.test(folio)) return;
+        if (/^\[(?:CANCELAD[AO]|SUSTITUID[AO])/i.test(desc) || /^\[(?:CANCELAD[AO]|SUSTITUID[AO])/i.test(nom)) return;
+
         const tRows = ters.get(id) || [];
         const pRows = pops.get(id) || [];
         const cpTxt = cleanStr(a.Clave_Proceso_Txt || a.Clave_Proceso);
