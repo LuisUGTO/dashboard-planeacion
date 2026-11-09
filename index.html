@@ -3832,9 +3832,21 @@
       const year = el('select-filtro-anio').value;
       const years = year === 'todos' ? [2024, 2025, 2026] : [Number(year)];
       const areaLabel = value => {
-        const short = formatShortDireccion(value).replace(/^DG /, '');
-        return short === 'Forum Cultural' || short === 'Museos y Artes Visuales' || short === 'Editorial y Publicaciones'
-          ? short : value || 'Sin asignar';
+        if (!value || /SIN ASIGNAR/i.test(value)) return 'Sin Asignar';
+        const clean = cleanStr(value);
+        const norm = clean.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+        if (norm.includes('MUSEO')) return 'Museos y Artes Visuales';
+        if (norm.includes('FORMACION')) return 'Formación e Inv.';
+        if (norm.includes('EDITORIAL') || norm.includes('PUBLICACION')) return 'Editorial y Publicaciones';
+        if (norm.includes('PATRIMONIO')) return 'Patrimonio Cultural';
+        if (norm.includes('PRODUCCION')) return 'Producción Artística';
+        if (norm.includes('VINCULACION')) return 'Vinculación Cultural';
+        if (norm.includes('FORUM')) return 'Forum Cultural';
+        if (norm.includes('COMUNICACION')) return 'Comunicación Social';
+        if (norm.includes('ARTES ESCENICAS') || norm.includes('TEATRO')) return 'Artes Escénicas';
+        if (norm.includes('MUSICA')) return 'Música y Vientos';
+        const short = formatShortDireccion(clean).replace(/^DG /, '');
+        return short || clean;
       };
       const programCodes = (...values) => new Set(values.join(' ').toUpperCase().match(/\b(?:PB|Q[A-Z])\d{4}(?=(?:\d{2}|\d{4})?\b)/g) || []);
       const catalog = new Map(rawDB.alineacion.filter(c => cleanStr(c.ID_Alineacion)).map(c => [cleanStr(c.ID_Alineacion), c]));
@@ -3937,25 +3949,35 @@
       const metric = fill('annual-metric', metrics, 'Selecciona un indicador') || metrics[0];
       el('annual-chart-card').classList.toggle('hidden', !metric);
       el('annual-chart-empty').classList.toggle('hidden', !!metric);
-      const comparisons = [...new Set([metric, ...priority])].filter(name => metrics.includes(name)).slice(0, 3);
+      const multiYearMetrics = metrics.filter(name => years.filter(y => valueFor(name, y) !== null).length > 1);
+      const candidateComparisons = [...new Set([metric, ...priority, ...metrics])].filter(name => multiYearMetrics.includes(name));
+      const comparisons = (candidateComparisons.length ? candidateComparisons : [...new Set([metric, ...priority])].filter(name => metrics.includes(name))).slice(0, 3);
+
+      if (el('comp-legend-base')) {
+        el('comp-legend-base').textContent = years.length > 1 ? 'Línea base (' + years[0] + ')' : 'Ejercicio ' + (years[0] || '2026');
+      }
+      if (el('comp-legend-curr')) {
+        el('comp-legend-curr').textContent = years.length > 1 ? 'Corte (' + years.at(-1) + ')' : 'Actual';
+      }
+
       el('annual-comparison').innerHTML = comparisons.map(name => {
         const documentedYears = years.filter(y => valueFor(name, y) !== null);
-        const first = valueFor(name, documentedYears[0]);
-        const last = valueFor(name, documentedYears.at(-1));
-        const hasChange = documentedYears.length > 1 && first > 0;
+        const firstYear = documentedYears[0];
+        const lastYear = documentedYears.at(-1);
+        const first = valueFor(name, firstYear);
+        const last = valueFor(name, lastYear);
+        const isMulti = documentedYears.length > 1;
+        const hasChange = isMulti && first > 0;
         const changeNum = hasChange ? ((last / first - 1) * 100) : null;
         const changeStr = changeNum !== null
           ? (changeNum >= 0 ? '+' : '') + changeNum.toLocaleString('es-MX', { maximumFractionDigits: 0 }) + '%'
-          : '';
+          : (isMulti ? '0%' : '');
 
         const maxVal = Math.max(first || 0, last || 0, 1);
         const pctFirst = Math.max(Math.round(((first || 0) / maxVal) * 100), 12);
         const pctLast = Math.max(Math.round(((last || 0) / maxVal) * 100), 12);
 
-        if (el('comp-legend-base') && documentedYears.length) el('comp-legend-base').textContent = String(documentedYears[0]);
-        if (el('comp-legend-curr') && documentedYears.length) el('comp-legend-curr').textContent = String(documentedYears.at(-1));
-
-        return '<div class="space-y-1 pb-1">' +
+        return '<div class="space-y-1 pb-1.5 border-b border-slate-100 last:border-0">' +
           '<div class="flex items-center justify-between text-xs font-bold text-slate-700">' +
             '<span class="truncate max-w-[150px] sm:max-w-[180px]">' + escape(name) + '</span>' +
             (changeStr ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shrink-0 font-mono">' + changeStr + '</span>' : '') +
@@ -3963,17 +3985,17 @@
           '<div class="space-y-1 mt-1">' +
             '<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden flex items-center p-0.5">' +
               '<div class="bg-[#f2d8e4] h-full rounded-full transition-all duration-500 flex items-center justify-between px-2" style="width: ' + pctFirst + '%">' +
-                '<span class="text-[10px] font-bold text-slate-800 font-mono">' + display(first) + '</span>' +
+                '<span class="text-[10px] font-bold text-slate-800 font-mono">' + (firstYear ? firstYear + ' · ' : '') + display(first) + '</span>' +
               '</div>' +
             '</div>' +
             '<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden flex items-center p-0.5">' +
               '<div class="bg-[#701a75] h-full rounded-full transition-all duration-500 flex items-center justify-between px-2" style="width: ' + pctLast + '%">' +
-                '<span class="text-[10px] font-bold text-white font-mono">' + display(last) + '</span>' +
+                '<span class="text-[10px] font-bold text-white font-mono">' + (lastYear && lastYear !== firstYear ? lastYear + ' · ' : '') + display(last) + '</span>' +
               '</div>' +
             '</div>' +
           '</div>' +
         '</div>';
-      }).join('');
+      }).join('') || '<p class="text-xs text-slate-400 py-2 text-center">Sin series comparables para esta selección.</p>';
 
       // Cobertura territorial en mapa SVG
       const munActivityCount = new Map();
@@ -4052,7 +4074,26 @@
 
       const composition = new Map();
       let compositionTitle = '';
-      if (years.includes(2026) && count) {
+      if (year === 'todos') {
+        compositionTitle = 'Acumulado trienal por área (2024 – 2026)';
+        // Sum documented historical activities for 2024 and 2025
+        const histTotals = historical.filter(r =>
+          (r.year === 2024 || r.year === 2025) &&
+          (!area || r.area === area) &&
+          (!program || r.program === program) &&
+          (!municipality || normalizeMunicipioName(r.municipality) === normalizeMunicipioName(municipality)) &&
+          (!r.municipality || municipality) &&
+          /Eventos|Actividades|Cursos/.test(r.metric)
+        );
+        for (const r of histTotals) {
+          const lbl = areaLabel(r.area);
+          composition.set(lbl, (composition.get(lbl) || 0) + (r.value || 0));
+        }
+        // Sum live activities from 2026
+        for (const activity of scopedActivities) {
+          composition.set(activity.area, (composition.get(activity.area) || 0) + 1);
+        }
+      } else if (years.includes(2026) && count) {
         compositionTitle = 'Fichas 2026 por área';
         for (const activity of scopedActivities) {
           composition.set(activity.area, (composition.get(activity.area) || 0) + 1);
