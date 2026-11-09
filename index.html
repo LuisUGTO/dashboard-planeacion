@@ -749,7 +749,7 @@
               </div>
               <div>
                 <h3 class="text-base font-extrabold text-gto-blue leading-none">Evolución Mensual de Actividades y Público Atendido</h3>
-                <p class="text-xs text-slate-400 mt-0.5">Registros por inicio y público de actividades contenidas en un mismo mes</p>
+                <p class="text-xs text-slate-400 mt-0.5">Actividades por inicio y público de actividades contenidas en un mismo mes</p>
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -2249,7 +2249,15 @@
       };
     }
 
-    const formatPGDistributionLabel = value => cleanStr(value).replace(/^[1-5](?:[.)])?\s+/, '');
+    const formatPGDistributionLabel = value => {
+      const s = cleanStr(value).replace(/^[1-5](?:[.)])?\s+/, '');
+      if (/^vocaci/i.test(s)) return 'Vocación';
+      if (/^tranquil/i.test(s)) return 'Tranquilidad';
+      if (/^igualdad/i.test(s)) return 'Igualdad';
+      if (/^prosper/i.test(s)) return 'Prosperidad';
+      if (/^sustent/i.test(s)) return 'Sustentabilidad';
+      return s;
+    };
 
     function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false, fullLabels = false) {
       const total = entries.reduce((s, e) => s + e[1], 0) || 1;
@@ -2435,18 +2443,27 @@
 
       const ejeCount = {};
       actF.forEach(a => {
-        const e = cleanStr(a.Eje_PG) || 'Sin asignar';
+        const rawE = cleanStr(a.Eje_PG);
+        const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin asignar';
         const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
         ejeCount[e] = (ejeCount[e] || 0) + q;
       });
-      const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]).map(([label, count]) => [formatPGDistributionLabel(label), count]);
+      const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true);
 
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const monthly = CulturaCalidad.monthlyPopulation(actF,
         popMode === 'territorio' ? terF : pobF,
         popMode === 'territorio' ? 'Cantidad' : 'Cantidad_Poblacion');
-      const actPorMes = monthly.records;
+      const actPorMes = new Array(12).fill(0);
+      actF.forEach(a => {
+        const start = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio);
+        const month = start ? Number(start.slice(5, 7)) - 1 : null;
+        if (month !== null && month >= 0 && month < 12) {
+          const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+          actPorMes[month] += q;
+        }
+      });
       const popPorMes = monthly.people;
       const missingMonthly = monthly.missing.reduce((sum, n) => sum + n, 0) + monthly.unallocatedMissing;
       const accumulatedNote = monthly.unallocatedRecords
@@ -2454,7 +2471,7 @@
         : 'No hay registros con público pendiente de asignar a un mes por su periodo.';
       document.getElementById('monthly-population-note').textContent = accumulatedNote
         + (missingMonthly ? ` Además, ${fmtInt(missingMonthly)} registros no tienen un total completo de público; no se interpretan como cero.` : '')
-        + ' Los registros se cuentan por mes de inicio. Las asistencias no equivalen a personas únicas.';
+        + ' Las actividades se cuantifican por mes de inicio. Las asistencias no equivalen a personas únicas.';
 
       renderChart('chart-evolucion-mensual', 'bar', {
         labels: MESES,
@@ -2492,7 +2509,7 @@
           },
           {
             type: 'bar',
-            label: 'Registros por mes de inicio',
+            label: 'Actividades por mes de inicio',
             data: actPorMes,
             backgroundColor: '#F59E0B',
             hoverBackgroundColor: '#D97706',
@@ -2529,7 +2546,7 @@
             type: 'linear',
             position: 'left',
             grace: '18%',
-            title: { display: true, text: 'Registros por mes de inicio', color: '#D97706', font: { weight: 'bold' } }
+            title: { display: true, text: 'Actividades por mes de inicio', color: '#D97706', font: { weight: 'bold' } }
           },
           y1: {
             type: 'linear',
@@ -2644,7 +2661,8 @@
 
       const ejeMap = {};
       actF.forEach(a => {
-        const e = cleanStr(a.Eje_PG) || 'Sin Eje';
+        const rawE = cleanStr(a.Eje_PG);
+        const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin Eje';
         const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
         ejeMap[e] = (ejeMap[e] || 0) + q;
       });

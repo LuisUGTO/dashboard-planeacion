@@ -171,3 +171,11 @@ test('el filtro por usuario y la exportación CSV respetan el usuario selecciona
   assert.ok(exportedData.fields.includes('Clave_Proceso_Txt'));
   assert.ok(exportedData.fields.includes('Nombre_Meta'));
 });
+
+test('normaliza caracteres corruptos en Ejes PG y limpia duplicados', () => {
+  const { context } = setupFaltantes();
+  assert.equal(vm.runInContext('formatPGDistributionLabel("Vocaci??n")', context), 'Vocación');
+  assert.equal(vm.runInContext('formatPGDistributionLabel("3 Vocaci\\uFFFD\\uFFFDn")', context), 'Vocación');
+  assert.equal(vm.runInContext('formatPGDistributionLabel("1 Tranquilidad")', context), 'Tranquilidad');
+  assert.equal(vm.runInContext('formatPGDistributionLabel("2. Igualdad")', context), 'Igualdad');
+});
