@@ -118,9 +118,9 @@ test('el control de faltantes detecta municipio vacío, sin comunidad, sin pobla
   assert.match(tableHtml, /ACT-02/);
   assert.match(tableHtml, /marce\.chagoya@guanajuato\.gob\.mx/);
   assert.match(tableHtml, /laura@guanajuato\.gob\.mx/);
-  assert.match(tableHtml, /Sin localidad/);
-  assert.match(tableHtml, /Descuadre \+10/);
-  assert.match(tableHtml, /Sin población/);
+  assert.match(tableHtml, /Falta Localidad/);
+  assert.match(tableHtml, /\+10/);
+  assert.match(tableHtml, /Sin Población/);
 });
 
 test('el filtro por usuario y la exportación CSV respetan el usuario seleccionado', () => {

@@ -1455,16 +1455,16 @@
                 <thead class="bg-slate-50 text-slate-700 sticky top-0 shadow-xs z-10">
                   <tr>
                     <th class="p-2.5 font-bold">ID / Folio</th>
+                    <th class="p-2.5 font-bold min-w-[180px]">Nombre de la Actividad</th>
                     <th class="p-2.5 font-bold">Responsable de Captura</th>
                     <th class="p-2.5 font-bold">Dirección / Área</th>
-                    <th class="p-2.5 font-bold min-w-[200px]">Nombre de la Actividad</th>
-                    <th class="p-2.5 font-bold min-w-[180px]">Clave Proceso & Meta</th>
-                    <th class="p-2.5 font-bold">Municipio / Sede</th>
-                    <th class="p-2.5 font-bold min-w-[170px]">Diagnóstico</th>
-                    <th class="p-2.5 font-bold text-right">Territorio</th>
+                    <th class="p-2.5 font-bold min-w-[150px]">Clave & Meta</th>
+                    <th class="p-2.5 font-bold">Municipio</th>
+                    <th class="p-2.5 font-bold">Localidad</th>
                     <th class="p-2.5 font-bold text-right">Población</th>
-                    <th class="p-2.5 font-bold text-right">Dif.</th>
-                    <th class="p-2.5 font-bold text-center">Ficha</th>
+                    <th class="p-2.5 font-bold text-right">Territorio</th>
+                    <th class="p-2.5 font-bold text-right">Diferencia</th>
+                    <th class="p-2.5 font-bold text-center">Expediente</th>
                   </tr>
                 </thead>
                 <tbody id="tbl-faltantes" class="divide-y divide-slate-100 bg-white"></tbody>
@@ -2394,7 +2394,8 @@
       const discCount = {};
       actF.forEach(a => {
         const d = cleanStr(a.Disciplina) || 'Sin disciplina';
-        discCount[d] = (discCount[d] || 0) + 1;
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+        discCount[d] = (discCount[d] || 0) + q;
       });
       const topDisc = Object.entries(discCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
       renderChart('chart-disciplinas', 'bar', {
@@ -2435,7 +2436,8 @@
       const ejeCount = {};
       actF.forEach(a => {
         const e = cleanStr(a.Eje_PG) || 'Sin asignar';
-        ejeCount[e] = (ejeCount[e] || 0) + 1;
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+        ejeCount[e] = (ejeCount[e] || 0) + q;
       });
       const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]).map(([label, count]) => [formatPGDistributionLabel(label), count]);
       renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true);
@@ -2624,7 +2626,13 @@
       document.getElementById('lbl-avance-meta-global').textContent = pendingQuantities ? 'Por confirmar: hay concentrados sin cuantificar' : `${pctGlobalCatalogo}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)})`;
       document.getElementById('lbl-avance-meta-activas').textContent = pendingQuantities ? 'Por confirmar: hay concentrados sin cuantificar' : `${pctActivasOperacion}% (${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActOperacion)})`;
 
-      document.getElementById('kpi-mat-act').textContent = fmtInt(actF.length);
+      const matTotalAct = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.metrics === 'function')
+        ? (CulturaCalidad.metrics(actF).activities || actF.length)
+        : actF.length;
+      document.getElementById('kpi-mat-act').textContent = fmtInt(matTotalAct);
+      if (document.getElementById('kpi-mat-act-sub')) {
+        document.getElementById('kpi-mat-act-sub').textContent = `${fmtInt(actF.length)} fichas alineadas al Programa de Gobierno`;
+      }
       document.getElementById('kpi-mat-dir').textContent = `${dirsActivas.size}/${dirsCatalogo.size}`;
       document.getElementById('kpi-mat-metas').textContent = `${metasConRegistro}/${totalMetasCat}`;
       document.getElementById('kpi-mat-metas-pct').textContent = `${pctMetasAtendidas}%`;
@@ -2635,7 +2643,11 @@
       document.getElementById('kpi-mat-cumplimiento-sub').textContent = pendingQuantities ? 'Revisar cantidades en conciliación' : `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial`;
 
       const ejeMap = {};
-      actF.forEach(a => { const e = cleanStr(a.Eje_PG) || 'Sin Eje'; ejeMap[e] = (ejeMap[e] || 0) + 1; });
+      actF.forEach(a => {
+        const e = cleanStr(a.Eje_PG) || 'Sin Eje';
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+        ejeMap[e] = (ejeMap[e] || 0) + q;
+      });
       const ejeSort = Object.entries(ejeMap).sort((a, b) => b[1] - a[1]);
       renderChart('chart-mat-eje', 'bar', {
         labels: ejeSort.map(x => x[0]),
@@ -3624,42 +3636,43 @@
       const totalNum = n => n === null ? '<span class="text-slate-400 font-normal">N/A</span>' : fmtInt(n);
 
       tbody.innerHTML = filtered.length ? filtered.slice(0, 250).map(r => `
-        <tr class="hover:bg-slate-50/80 transition">
-          <td class="p-2.5 font-mono font-bold text-gto-blue whitespace-nowrap">
-            ${auditEscape(r.id)}
-            <div class="text-[10px] text-slate-400 font-normal font-sans">${auditEscape(r.folio)}</div>
+        <tr class="hover:bg-slate-50/80 transition text-xs">
+          <td class="p-2.5 max-w-[140px] align-top">
+            <div class="font-mono font-bold text-gto-blue text-xs truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
+            <div class="text-[10px] text-slate-400 font-normal">${auditEscape(r.folio)}</div>
           </td>
-          <td class="p-2.5 text-slate-700 font-medium whitespace-nowrap">
-            ${auditEscape(r.usuario)}
+          <td class="p-2.5 min-w-[200px] max-w-[280px] align-top">
+            <div class="font-semibold text-slate-800 leading-snug line-clamp-2" title="${auditEscape(r.nombre)}">${auditEscape(r.nombre)}</div>
           </td>
-          <td class="p-2.5 text-slate-600 text-[11px] whitespace-nowrap">
-            ${auditEscape(r.direccion)}
+          <td class="p-2.5 max-w-[160px] align-top text-slate-700">
+            <div class="truncate text-xs font-medium" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
           </td>
-          <td class="p-2.5 font-medium text-slate-800 min-w-[200px]">
-            ${auditEscape(r.nombre)}
+          <td class="p-2.5 max-w-[140px] align-top text-slate-500 text-[11px]">
+            <div class="truncate" title="${auditEscape(r.direccion)}">${auditEscape(r.direccion)}</div>
           </td>
-          <td class="p-2.5 min-w-[180px]">
-            <div class="font-mono text-[10px] font-bold text-slate-600">${auditEscape(r.clave)}</div>
-            <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${auditEscape(r.nombreMeta || r.meta)}</div>
+          <td class="p-2.5 max-w-[170px] align-top">
+            <div class="font-mono text-[10px] font-bold text-slate-700">${auditEscape(r.clave)}</div>
+            <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${r.sinMeta ? '<span class="text-rose-600 font-bold">Sin Meta</span>' : auditEscape(r.nombreMeta || r.meta)}</div>
           </td>
-          <td class="p-2.5 text-slate-600 whitespace-nowrap">
-            <div class="font-semibold text-slate-700">${auditEscape(r.municipio)}</div>
-            <div class="text-[10px] text-slate-400">${auditEscape(r.comunidad)}</div>
+          <td class="p-2.5 align-top whitespace-nowrap">
+            ${r.sinMun ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Falta Municipio</span>' : `<span class="font-medium text-slate-700">${auditEscape(r.municipio)}</span>`}
           </td>
-          <td class="p-2.5 min-w-[170px]">
-            <div class="flex flex-wrap gap-1">
-              ${r.issues.map(i => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${i.badge}">${auditEscape(i.label)}</span>`).join('')}
-            </div>
+          <td class="p-2.5 max-w-[140px] align-top">
+            ${r.sinCom ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Falta Localidad</span>' : `<div class="truncate text-slate-600" title="${auditEscape(r.comunidad)}">${auditEscape(r.comunidad)}</div>`}
           </td>
-          <td class="p-2.5 text-right font-semibold text-slate-700 whitespace-nowrap">${totalNum(r.sumT)}</td>
-          <td class="p-2.5 text-right font-semibold text-slate-700 whitespace-nowrap">${totalNum(r.sumP)}</td>
-          <td class="p-2.5 text-right font-bold whitespace-nowrap ${r.diff ? 'text-rose-600' : 'text-slate-400'}">
-            ${r.diff === null ? '—' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}
+          <td class="p-2.5 align-top text-right whitespace-nowrap">
+            ${r.sinPob ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Sin Población</span>' : `<span class="font-bold text-slate-800">${fmtInt(r.sumP)}</span>${r.sinDesglose ? '<div class="text-[9px] text-purple-700 font-bold">Sin Part/Acceso</div>' : ''}`}
           </td>
-          <td class="p-2.5 text-center whitespace-nowrap">
+          <td class="p-2.5 align-top text-right whitespace-nowrap font-semibold text-slate-700">
+            ${r.sumT == null ? '<span class="text-slate-400">N/A</span>' : fmtInt(r.sumT)}
+          </td>
+          <td class="p-2.5 align-top text-right whitespace-nowrap">
+            ${r.diff === null ? '<span class="text-slate-400">—</span>' : (r.diff === 0 ? '<span class="text-emerald-700 font-bold">0</span>' : `<span class="px-1.5 py-0.5 rounded text-xs font-black bg-rose-100 text-rose-700">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</span>`)}
+          </td>
+          <td class="p-2.5 align-top text-center whitespace-nowrap">
             <button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)"
               class="px-2.5 py-1 rounded-lg bg-gto-blue/10 hover:bg-gto-blue/20 text-gto-blue font-bold text-[10px] transition">
-              Revisar ficha
+              Revisar
             </button>
           </td>
         </tr>
@@ -4355,6 +4368,7 @@
         date: CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '',
         excluded: CulturaCalidad.isExcluded(a),
         area: areaLabel(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt)),
+        qty: (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1,
         programs: programCodes(a.Clave_Proceso_Txt, ...Object.values(catalog.get(cleanStr(a.Clave_Proceso)) || {}))
       })).filter(a => !a.excluded && matchesActivityPeriod(a.date, '2026-01-01', '2026-12-31'));
       const territory = rawDB.territorio.filter(t => cleanStr(t.Municipio));
@@ -4591,12 +4605,12 @@
         }
         // Sum live activities from 2026
         for (const activity of scopedActivities) {
-          composition.set(activity.area, (composition.get(activity.area) || 0) + 1);
+          composition.set(activity.area, (composition.get(activity.area) || 0) + (activity.qty || 1));
         }
       } else if (years.includes(2026) && count) {
-        compositionTitle = 'Fichas 2026 por área';
+        compositionTitle = 'Actividades 2026 por área';
         for (const activity of scopedActivities) {
-          composition.set(activity.area, (composition.get(activity.area) || 0) + 1);
+          composition.set(activity.area, (composition.get(activity.area) || 0) + (activity.qty || 1));
         }
       }
       let compositionData = [...composition];
