@@ -1246,76 +1246,230 @@
            VISTA 6: CONCILIACIÓN OPERATIVA
       ========================================================== -->
       <section id="tab-auditoria" class="hidden space-y-6">
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-start gap-3">
-            <i data-lucide="clipboard-check" class="w-6 h-6 text-amber-600 shrink-0 mt-0.5"></i>
-            <div>
-              <h3 class="text-base font-extrabold text-gto-blue">Conciliación y calidad de la información</h3>
-              <p class="text-xs text-slate-600 mt-0.5">
-                Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Las canceladas y capturas sustituidas conservan su historial aquí y se excluyen de los indicadores y la presentación ejecutiva.
-              </p>
-            </div>
+        <!-- Sub-navegación dentro de Conciliación -->
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2">
+            <button type="button" id="subtab-btn-general" onclick="switchAuditSubtab('general')"
+              class="px-4 py-2 text-xs font-bold rounded-xl bg-gto-blue text-white shadow-sm transition flex items-center gap-2">
+              <i data-lucide="list-checks" class="w-4 h-4"></i>
+              <span>Conciliación General de Registros</span>
+            </button>
+            <button type="button" id="subtab-btn-faltantes" onclick="switchAuditSubtab('faltantes')"
+              class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-2">
+              <i data-lucide="map-pin-off" class="w-4 h-4 text-rose-600"></i>
+              <span>Control de Faltantes de Territorio y Población</span>
+              <span id="badge-faltantes-count" class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full text-[10px] font-black">0</span>
+            </button>
           </div>
-          <label class="text-xs font-bold text-amber-900">Hoja para descargar
-            <select id="filter-audit-export" onchange="renderAuditTable()" class="block mt-1 bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs">
-              <option value="actividades">Actividades · A a BN</option>
-              <option value="territorio">Territorio · A a L</option>
-              <option value="poblacion">Población · A a H</option>
-              <option value="evidencia">Evidencias · A a E</option>
-              <option value="resumen">Resumen de alertas</option>
-            </select>
-          </label>
-          <button id="btn-export-audit" onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            <span id="lbl-export-audit">Descargar reporte CSV</span>
-          </button>
+          <div id="subtab-faltantes-export-btn" class="hidden">
+            <button onclick="exportFaltantesCSV()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm transition flex items-center gap-1.5">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Descargar reporte de faltantes (CSV)</span>
+            </button>
+          </div>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3" aria-label="Resumen de calidad">
-          <button type="button" id="audit-card-diferencias" onclick="toggleAuditKind('diferencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-rose-200"><p class="text-xs font-bold text-slate-600">Cifras discrepantes</p><p id="audit-count-diferencias" class="text-2xl font-black text-rose-700 mt-1">0</p></button>
-          <button type="button" id="audit-card-faltantes" onclick="toggleAuditKind('faltantes')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-amber-200"><p class="text-xs font-bold text-slate-600">Datos por completar</p><p id="audit-count-faltantes" class="text-2xl font-black text-amber-700 mt-1">0</p></button>
-          <button type="button" id="audit-card-evidencias" onclick="toggleAuditKind('evidencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-slate-200"><p class="text-xs font-bold text-slate-600">Sin evidencia</p><p id="audit-count-evidencias" class="text-2xl font-black text-slate-700 mt-1">0</p></button>
-          <button type="button" id="audit-card-concentrados" onclick="toggleAuditKind('concentrados')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-blue-200"><p class="text-xs font-bold text-slate-600">Revisar cantidades</p><p id="audit-count-concentrados" class="text-2xl font-black text-gto-blue mt-1">0</p></button>
-          <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
-        </div>
-        <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
-        <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes en el orden de la base, los IDs y los folios. Son registros existentes: corrige sobre el mismo ID; no los agregues como altas nuevas. El resumen de alertas se descarga por separado.</p>
-        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-          <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
-          <div class="flex flex-wrap gap-3 mb-3">
-            <label class="text-xs font-bold text-slate-600">Usuario responsable
-              <select id="filter-audit-user" onchange="renderAuditTable()" class="block mt-1 max-w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
-                <option value="ALL">Todos los usuarios</option>
+        <!-- VISTA A: CONCILIACIÓN GENERAL -->
+        <div id="subtab-view-general" class="space-y-6">
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <i data-lucide="clipboard-check" class="w-6 h-6 text-amber-600 shrink-0 mt-0.5"></i>
+              <div>
+                <h3 class="text-base font-extrabold text-gto-blue">Conciliación y calidad de la información</h3>
+                <p class="text-xs text-slate-600 mt-0.5">
+                  Identifica diferencias, datos importantes pendientes y concentrados que necesitan revisión. Las canceladas y capturas sustituidas conservan su historial aquí y se excluyen de los indicadores y la presentación ejecutiva.
+                </p>
+              </div>
+            </div>
+            <label class="text-xs font-bold text-amber-900">Hoja para descargar
+              <select id="filter-audit-export" onchange="renderAuditTable()" class="block mt-1 bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs">
+                <option value="actividades">Actividades · A a BN</option>
+                <option value="territorio">Territorio · A a L</option>
+                <option value="poblacion">Población · A a H</option>
+                <option value="evidencia">Evidencias · A a E</option>
+                <option value="resumen">Resumen de alertas</option>
               </select>
             </label>
-            <label class="text-xs font-bold text-slate-600">Tipo de alerta
-              <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
-                <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option><option value="canceladas">Actividades canceladas</option><option value="sustituidos">Capturas sustituidas</option>
-              </select>
-            </label>
-            <label class="text-xs font-bold text-slate-600 flex-1">Buscar actividad, folio, dirección o responsable
-              <input id="search-audit" oninput="renderAuditTable()" type="search" placeholder="Escribe para buscar…" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs" />
-            </label>
+            <button id="btn-export-audit" onclick="exportAuditCSV()" class="bg-gto-blue hover:bg-gto-dark disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span id="lbl-export-audit">Descargar reporte CSV</span>
+            </button>
           </div>
-          <button type="button" onclick="resetAuditFilters()" class="text-xs font-bold text-gto-blue underline mb-3">Limpiar usuario, alerta y búsqueda</button>
-          <p id="audit-visible-count" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
-          <div class="overflow-x-auto max-h-[500px] custom-scroll">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
-                <tr>
-                  <th class="p-2.5 font-bold">ID Actividad</th>
-                  <th class="p-2.5 font-bold">Responsable de Registro</th>
-                  <th class="p-2.5 font-bold">Nombre de la Actividad</th>
-                  <th class="p-2.5 font-bold">Municipio</th>
-                  <th class="p-2.5 font-bold text-right">Total Territorial</th>
-                  <th class="p-2.5 font-bold text-right">Total Demográfico</th>
-                  <th class="p-2.5 font-bold text-right">Variación</th>
-                  <th class="p-2.5 font-bold min-w-[280px]">Qué revisar</th>
-                  <th class="p-2.5 font-bold text-center">Expediente</th>
-                </tr>
-              </thead>
-              <tbody id="tbl-auditoria" class="divide-y divide-slate-100"></tbody>
-            </table>
+
+          <div class="grid grid-cols-2 lg:grid-cols-5 gap-3" aria-label="Resumen de calidad">
+            <button type="button" id="audit-card-diferencias" onclick="toggleAuditKind('diferencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-rose-200"><p class="text-xs font-bold text-slate-600">Cifras discrepantes</p><p id="audit-count-diferencias" class="text-2xl font-black text-rose-700 mt-1">0</p></button>
+            <button type="button" id="audit-card-faltantes" onclick="toggleAuditKind('faltantes')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-amber-200"><p class="text-xs font-bold text-slate-600">Datos por completar</p><p id="audit-count-faltantes" class="text-2xl font-black text-amber-700 mt-1">0</p></button>
+            <button type="button" id="audit-card-evidencias" onclick="toggleAuditKind('evidencias')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-slate-200"><p class="text-xs font-bold text-slate-600">Sin evidencia</p><p id="audit-count-evidencias" class="text-2xl font-black text-slate-700 mt-1">0</p></button>
+            <button type="button" id="audit-card-concentrados" onclick="toggleAuditKind('concentrados')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-blue-200"><p class="text-xs font-bold text-slate-600">Revisar cantidades</p><p id="audit-count-concentrados" class="text-2xl font-black text-gto-blue mt-1">0</p></button>
+            <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
+          </div>
+          <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
+          <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes en el orden de la base, los IDs y los folios. Son registros existentes: corrige sobre el mismo ID; no los agregues como altas nuevas. El resumen de alertas se descarga por separado.</p>
+          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
+            <div class="flex flex-wrap gap-3 mb-3">
+              <label class="text-xs font-bold text-slate-600">Usuario responsable
+                <select id="filter-audit-user" onchange="renderAuditTable()" class="block mt-1 max-w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
+                  <option value="ALL">Todos los usuarios</option>
+                </select>
+              </label>
+              <label class="text-xs font-bold text-slate-600">Tipo de alerta
+                <select id="filter-audit-kind" onchange="renderAuditTable()" class="block mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs">
+                  <option value="ALL">Todas las alertas</option><option value="diferencias">Cifras discrepantes</option><option value="faltantes">Datos por completar</option><option value="evidencias">Sin evidencia</option><option value="concentrados">Revisar cantidades</option><option value="identidad">Posible duplicación</option><option value="canceladas">Actividades canceladas</option><option value="sustituidos">Capturas sustituidas</option>
+                </select>
+              </label>
+              <label class="text-xs font-bold text-slate-600 flex-1">Buscar actividad, folio, dirección o responsable
+                <input id="search-audit" oninput="renderAuditTable()" type="search" placeholder="Escribe para buscar…" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs" />
+              </label>
+            </div>
+            <button type="button" onclick="resetAuditFilters()" class="text-xs font-bold text-gto-blue underline mb-3">Limpiar usuario, alerta y búsqueda</button>
+            <p id="audit-visible-count" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
+            <div class="overflow-x-auto max-h-[500px] custom-scroll">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
+                  <tr>
+                    <th class="p-2.5 font-bold">ID Actividad</th>
+                    <th class="p-2.5 font-bold">Responsable de Registro</th>
+                    <th class="p-2.5 font-bold">Nombre de la Actividad</th>
+                    <th class="p-2.5 font-bold">Municipio</th>
+                    <th class="p-2.5 font-bold text-right">Total Territorial</th>
+                    <th class="p-2.5 font-bold text-right">Total Demográfico</th>
+                    <th class="p-2.5 font-bold text-right">Variación</th>
+                    <th class="p-2.5 font-bold min-w-[280px]">Qué revisar</th>
+                    <th class="p-2.5 font-bold text-center">Expediente</th>
+                  </tr>
+                </thead>
+                <tbody id="tbl-auditoria" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA B: CONTROL DE FALTANTES DE TERRITORIO Y POBLACIÓN -->
+        <div id="subtab-view-faltantes" class="hidden space-y-6">
+          <div class="bg-gradient-to-r from-rose-50 via-amber-50 to-orange-50 border border-rose-200 rounded-2xl p-5 shadow-xs">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex items-start gap-3">
+                <div class="p-2.5 bg-rose-600 text-white rounded-xl shadow-xs shrink-0 mt-0.5">
+                  <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-extrabold mb-1">
+                    Auditoría de Calidad y Localización de Responsables
+                  </div>
+                  <h3 class="text-lg font-black text-slate-800 tracking-tight">Control de Faltantes de Territorio y Población</h3>
+                  <p class="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                    Identifica a los usuarios con registros pendientes en territorio (sin municipio o comunidad) o población (sin datos demográficos o con descuadres numéricos), así como falta de meta institucional. Filtra por responsable y descarga el reporte individual o global para seguimiento directo.
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-2 shrink-0">
+                <button type="button" onclick="exportFaltantesCSV()" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs shadow-sm transition">
+                  <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+                  <span>Descargar Reporte de Faltantes (CSV)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen de Indicadores de Faltantes -->
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Resumen de faltantes">
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Total con pendientes</p>
+              <p id="kpi-faltantes-total" class="text-2xl font-black text-rose-700 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Fichas a subsanar</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Municipio</p>
+              <p id="kpi-faltantes-sin-mun" class="text-2xl font-black text-rose-600 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Territorio incompleto</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Localidad</p>
+              <p id="kpi-faltantes-sin-com" class="text-2xl font-black text-amber-600 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Comunidad vacía</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Población</p>
+              <p id="kpi-faltantes-sin-pob" class="text-2xl font-black text-indigo-700 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Falta desglose</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Descuadres</p>
+              <p id="kpi-faltantes-descuadre" class="text-2xl font-black text-orange-600 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Territorio ≠ Población</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Meta / Clave</p>
+              <p id="kpi-faltantes-sin-meta" class="text-2xl font-black text-slate-700 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Alineación vacía</p>
+            </div>
+          </div>
+
+          <!-- Filtros y Tabla de Faltantes -->
+          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-xs space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h4 class="text-sm font-extrabold text-slate-800">Filtros de Auditoría y Localización</h4>
+                <p class="text-xs text-slate-500">Filtra por el usuario que capturó o el tipo de faltante para entregar reportes individualizados.</p>
+              </div>
+              <button type="button" onclick="resetFaltantesFilters()" class="text-xs font-bold text-gto-blue hover:text-gto-dark underline">
+                Restablecer filtros
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <label class="text-xs font-bold text-slate-700">Usuario responsable de captura
+                <select id="filter-faltantes-user" onchange="renderFaltantesTable()" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                  <option value="ALL">Todos los usuarios</option>
+                </select>
+              </label>
+
+              <label class="text-xs font-bold text-slate-700">Tipo de hallazgo / faltante
+                <select id="filter-faltantes-tipo" onchange="renderFaltantesTable()" class="block w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                  <option value="ALL">Todos los hallazgos</option>
+                  <option value="sin_municipio">🔴 Falta Municipio / Territorio</option>
+                  <option value="sin_comunidad">🟡 Falta Comunidad / Localidad</option>
+                  <option value="sin_poblacion">🔴 Falta Población Demográfica</option>
+                  <option value="descuadre">🟠 Descuadre Población vs Territorio</option>
+                  <option value="sin_desglose">🟣 Falta Part. / Acceso</option>
+                  <option value="sin_meta">🔵 Falta Clave Proceso / Meta</option>
+                </select>
+              </label>
+
+              <label class="text-xs font-bold text-slate-700">Buscar por ID, folio, actividad, área o meta
+                <div class="relative mt-1">
+                  <input id="search-faltantes" oninput="renderFaltantesTable()" type="search" placeholder="Escribe para buscar…" class="block w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-xs font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                  <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5"></i>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-slate-500 pt-1">
+              <p id="faltantes-visible-count" class="font-medium" aria-live="polite"></p>
+              <p class="text-[11px] text-slate-400">Las correcciones se realizan en AppSheet sobre el mismo ID de ficha.</p>
+            </div>
+
+            <div class="overflow-x-auto max-h-[560px] custom-scroll rounded-xl border border-slate-100">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-slate-50 text-slate-700 sticky top-0 shadow-xs z-10">
+                  <tr>
+                    <th class="p-2.5 font-bold">ID / Folio</th>
+                    <th class="p-2.5 font-bold">Responsable de Captura</th>
+                    <th class="p-2.5 font-bold">Dirección / Área</th>
+                    <th class="p-2.5 font-bold min-w-[200px]">Nombre de la Actividad</th>
+                    <th class="p-2.5 font-bold min-w-[180px]">Clave Proceso & Meta</th>
+                    <th class="p-2.5 font-bold">Municipio / Sede</th>
+                    <th class="p-2.5 font-bold min-w-[170px]">Diagnóstico</th>
+                    <th class="p-2.5 font-bold text-right">Territorio</th>
+                    <th class="p-2.5 font-bold text-right">Población</th>
+                    <th class="p-2.5 font-bold text-right">Dif.</th>
+                    <th class="p-2.5 font-bold text-center">Ficha</th>
+                  </tr>
+                </thead>
+                <tbody id="tbl-faltantes" class="divide-y divide-slate-100 bg-white"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -3169,6 +3323,8 @@
       quantityButton.classList.toggle('hidden', quantityCount === 0);
       quantityButton.textContent = `Revisar cantidades en ${quantityCount} registros`;
       renderAuditTable();
+      computeFaltantesAudit(actF);
+      renderFaltantesTable();
     }
 
     function filteredAuditContextRows() {
@@ -3243,6 +3399,345 @@
       const kind = document.getElementById('filter-audit-kind').value;
       const scope = [user === 'ALL' ? 'Todos' : user, kind === 'ALL' ? 'Todas_alertas' : kind].join('_').replace(/[^a-zA-Z0-9_.-]/g, '_');
       a.download = `${download.key === 'resumen' ? 'Conciliacion' : download.label}_Cultura_GTO_${scope}.csv`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    // =========================================================
+    // CONTROL DE FALTANTES DE TERRITORIO Y POBLACIÓN
+    // =========================================================
+    let auditFaltantesList = [];
+
+    function switchAuditSubtab(subtab) {
+      const isGeneral = subtab === 'general';
+      const btnGen = document.getElementById('subtab-btn-general');
+      const btnFal = document.getElementById('subtab-btn-faltantes');
+      const viewGen = document.getElementById('subtab-view-general');
+      const viewFal = document.getElementById('subtab-view-faltantes');
+      const expBtn = document.getElementById('subtab-faltantes-export-btn');
+
+      if (btnGen) {
+        btnGen.className = isGeneral
+          ? 'px-4 py-2 text-xs font-bold rounded-xl bg-gto-blue text-white shadow-sm transition flex items-center gap-2'
+          : 'px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-2';
+      }
+      if (btnFal) {
+        btnFal.className = !isGeneral
+          ? 'px-4 py-2 text-xs font-bold rounded-xl bg-gto-blue text-white shadow-sm transition flex items-center gap-2'
+          : 'px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-2';
+      }
+      if (viewGen) viewGen.classList.toggle('hidden', !isGeneral);
+      if (viewFal) viewFal.classList.toggle('hidden', isGeneral);
+      if (expBtn) expBtn.classList.toggle('hidden', isGeneral);
+      safeCreateIcons();
+    }
+
+    function computeFaltantesAudit(actividades) {
+      const acts = actividades || (rawDB && rawDB.actividades) || [];
+      const ters = new Map();
+      ((rawDB && rawDB.territorio) || []).forEach(t => {
+        const id = cleanStr(t.ID_Actividad);
+        if (!ters.has(id)) ters.set(id, []);
+        ters.get(id).push(t);
+      });
+
+      const pops = new Map();
+      ((rawDB && rawDB.poblacion) || []).forEach(p => {
+        const id = cleanStr(p.ID_Actividad);
+        if (!pops.has(id)) pops.set(id, []);
+        pops.get(id).push(p);
+      });
+
+      const metaMap = new Map();
+      ((rawDB && rawDB.alineacion) || []).forEach(c => {
+        const idAlin = cleanStr(c.ID_Alineacion);
+        const cp = cleanStr(c.Clave_Proceso);
+        if (idAlin) metaMap.set(idAlin, c);
+        if (cp) metaMap.set(cp, c);
+      });
+
+      const list = [];
+      acts.forEach(a => {
+        if (typeof CulturaCalidad !== 'undefined' && CulturaCalidad.isExcluded && CulturaCalidad.isExcluded(a)) return;
+        const id = cleanStr(a.ID_Actividad);
+        const tRows = ters.get(id) || [];
+        const pRows = pops.get(id) || [];
+        const cpTxt = cleanStr(a.Clave_Proceso_Txt || a.Clave_Proceso);
+        const metaObj = metaMap.get(cpTxt);
+
+        const issues = [];
+        let sinMun = false;
+        let sinCom = false;
+        let sinPob = false;
+        let descuadre = false;
+        let sinDesglose = false;
+        let sinMeta = false;
+
+        // Validación de territorio
+        if (tRows.length === 0) {
+          sinMun = true;
+          issues.push({ tipo: 'sin_municipio', label: 'Sin territorio', badge: 'bg-rose-100 text-rose-800' });
+        } else {
+          if (tRows.some(t => !cleanStr(t.Municipio))) {
+            sinMun = true;
+            issues.push({ tipo: 'sin_municipio', label: 'Municipio vacío', badge: 'bg-rose-100 text-rose-800' });
+          }
+          const isVirtual = cleanStr(a.Formato).toLowerCase() === 'virtual';
+          if (!isVirtual && tRows.some(t => cleanStr(t.Municipio) && !/estatal/i.test(t.Municipio) && !cleanStr(t.Comunidad) && !cleanStr(t.Nombre_Comunidad) && !cleanStr(t.Otra_Comunidad) && !cleanStr(t.Nombre_Comunidad_Final))) {
+            sinCom = true;
+            issues.push({ tipo: 'sin_comunidad', label: 'Sin localidad', badge: 'bg-amber-100 text-amber-800' });
+          }
+        }
+
+        // Validación de población
+        if (pRows.length === 0) {
+          sinPob = true;
+          issues.push({ tipo: 'sin_poblacion', label: 'Sin población', badge: 'bg-indigo-100 text-indigo-800' });
+        } else {
+          if (pRows.some(p => cleanStr(p.Cantidad_Poblacion) === '' || isNaN(Number(p.Cantidad_Poblacion)))) {
+            sinPob = true;
+            issues.push({ tipo: 'sin_poblacion', label: 'Población inválida', badge: 'bg-indigo-100 text-indigo-800' });
+          }
+          if (pRows.some(p => Number(p.Cantidad_Poblacion) > 0 && (cleanStr(p.Cantidad_Participacion) === '' || cleanStr(p.Cantidad_Acceso) === ''))) {
+            sinDesglose = true;
+            issues.push({ tipo: 'sin_desglose', label: 'Sin part./acceso', badge: 'bg-purple-100 text-purple-800' });
+          }
+        }
+
+        // Comparación de cifras
+        const validNum = v => v !== '' && !isNaN(Number(v));
+        const sumT = tRows.length ? tRows.reduce((s, t) => s + (validNum(t.Cantidad) ? Number(t.Cantidad) : 0), 0) : null;
+        const sumP = pRows.length ? pRows.reduce((s, p) => s + (validNum(p.Cantidad_Poblacion) ? Number(p.Cantidad_Poblacion) : 0), 0) : null;
+        let diff = null;
+        if (sumT !== null && sumP !== null && sumT !== sumP) {
+          diff = sumT - sumP;
+          descuadre = true;
+          issues.push({ tipo: 'descuadre', label: `Descuadre ${diff > 0 ? '+' : ''}${fmtInt(diff)}`, badge: 'bg-orange-100 text-orange-800' });
+        }
+
+        // Validación de meta
+        if (!cpTxt || !metaObj) {
+          sinMeta = true;
+          issues.push({ tipo: 'sin_meta', label: 'Sin meta', badge: 'bg-slate-100 text-slate-800' });
+        }
+
+        if (issues.length > 0) {
+          const munList = [...new Set(tRows.map(t => cleanStr(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar';
+          const comList = [...new Set(tRows.map(t => cleanStr(t.Nombre_Comunidad_Final || t.Comunidad || t.Nombre_Comunidad)).filter(Boolean))].join(', ') || 'Sin especificar';
+          list.push({
+            id,
+            folio: cleanStr(a.Folio) || '—',
+            usuario: cleanStr(a.Usuario_Registra) || 'Sin usuario registrado',
+            userKey: auditUserKey(a.Usuario_Registra),
+            direccion: cleanStr(a.Direccion) || 'Sin dirección',
+            nombre: cleanStr(a.Nombre_Actividad) || 'Actividad sin título',
+            clave: cpTxt || 'Sin clave',
+            meta: metaObj ? cleanStr(metaObj.Meta || metaObj.Nombre_Meta) : 'Sin meta asignada',
+            nombreMeta: metaObj ? cleanStr(metaObj.Nombre_Meta) : '',
+            municipio: munList,
+            comunidad: comList,
+            sumT,
+            sumP,
+            diff,
+            issues,
+            types: issues.map(i => i.tipo),
+            sinMun,
+            sinCom,
+            sinPob,
+            descuadre,
+            sinDesglose,
+            sinMeta
+          });
+        }
+      });
+
+      auditFaltantesList = list;
+      const countBadge = document.getElementById('badge-faltantes-count');
+      if (countBadge) countBadge.textContent = fmtInt(list.length);
+      populateFaltantesUsers();
+    }
+
+    function populateFaltantesUsers() {
+      const select = document.getElementById('filter-faltantes-user');
+      if (!select) return;
+      const current = select.value || 'ALL';
+      const userCounts = new Map();
+      auditFaltantesList.forEach(r => {
+        userCounts.set(r.userKey, (userCounts.get(r.userKey) || 0) + 1);
+      });
+      const users = [...userCounts.keys()].sort();
+      select.innerHTML = '<option value="ALL">Todos los usuarios (' + fmtInt(auditFaltantesList.length) + ' pendientes)</option>' +
+        users.map(u => {
+          const label = u === '__SIN_USUARIO__' ? 'Sin usuario registrado' : u;
+          const count = userCounts.get(u);
+          return `<option value="${auditEscape(u)}">${auditEscape(label)} (${count})</option>`;
+        }).join('');
+      if (users.includes(current) || current === 'ALL') select.value = current;
+    }
+
+    function renderFaltantesTable() {
+      const userFilter = document.getElementById('filter-faltantes-user')?.value || 'ALL';
+      const tipoFilter = document.getElementById('filter-faltantes-tipo')?.value || 'ALL';
+      const rawSearch = cleanStr(document.getElementById('search-faltantes')?.value);
+      const search = (rawSearch === 'ALL' ? '' : rawSearch).toLowerCase();
+
+      const filtered = auditFaltantesList.filter(r => {
+        if (userFilter !== 'ALL' && r.userKey !== userFilter) return false;
+        if (tipoFilter !== 'ALL' && !r.types.includes(tipoFilter)) return false;
+        if (search) {
+          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.municipio, r.comunidad]
+            .join(' ').toLowerCase();
+          if (!match.includes(search)) return false;
+        }
+        return true;
+      });
+
+      const contextRows = auditFaltantesList.filter(r => userFilter === 'ALL' || r.userKey === userFilter);
+      if (document.getElementById('kpi-faltantes-total')) {
+        document.getElementById('kpi-faltantes-total').textContent = fmtInt(contextRows.length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-mun')) {
+        document.getElementById('kpi-faltantes-sin-mun').textContent = fmtInt(contextRows.filter(r => r.sinMun).length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-com')) {
+        document.getElementById('kpi-faltantes-sin-com').textContent = fmtInt(contextRows.filter(r => r.sinCom).length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-pob')) {
+        document.getElementById('kpi-faltantes-sin-pob').textContent = fmtInt(contextRows.filter(r => r.sinPob).length);
+      }
+      if (document.getElementById('kpi-faltantes-descuadre')) {
+        document.getElementById('kpi-faltantes-descuadre').textContent = fmtInt(contextRows.filter(r => r.descuadre).length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-meta')) {
+        document.getElementById('kpi-faltantes-sin-meta').textContent = fmtInt(contextRows.filter(r => r.sinMeta).length);
+      }
+
+      const countEl = document.getElementById('faltantes-visible-count');
+      if (countEl) {
+        const userLabel = userFilter === 'ALL' ? 'Todos los usuarios' : (userFilter === '__SIN_USUARIO__' ? 'Sin usuario registrado' : userFilter);
+        countEl.textContent = `${userLabel}. Mostrando ${Math.min(filtered.length, 250)} de ${fmtInt(filtered.length)} fichas con pendientes.`;
+      }
+
+      const tbody = document.getElementById('tbl-faltantes');
+      if (!tbody) return;
+
+      const totalNum = n => n === null ? '<span class="text-slate-400 font-normal">N/A</span>' : fmtInt(n);
+
+      tbody.innerHTML = filtered.length ? filtered.slice(0, 250).map(r => `
+        <tr class="hover:bg-slate-50/80 transition">
+          <td class="p-2.5 font-mono font-bold text-gto-blue whitespace-nowrap">
+            ${auditEscape(r.id)}
+            <div class="text-[10px] text-slate-400 font-normal font-sans">${auditEscape(r.folio)}</div>
+          </td>
+          <td class="p-2.5 text-slate-700 font-medium whitespace-nowrap">
+            ${auditEscape(r.usuario)}
+          </td>
+          <td class="p-2.5 text-slate-600 text-[11px] whitespace-nowrap">
+            ${auditEscape(r.direccion)}
+          </td>
+          <td class="p-2.5 font-medium text-slate-800 min-w-[200px]">
+            ${auditEscape(r.nombre)}
+          </td>
+          <td class="p-2.5 min-w-[180px]">
+            <div class="font-mono text-[10px] font-bold text-slate-600">${auditEscape(r.clave)}</div>
+            <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${auditEscape(r.nombreMeta || r.meta)}</div>
+          </td>
+          <td class="p-2.5 text-slate-600 whitespace-nowrap">
+            <div class="font-semibold text-slate-700">${auditEscape(r.municipio)}</div>
+            <div class="text-[10px] text-slate-400">${auditEscape(r.comunidad)}</div>
+          </td>
+          <td class="p-2.5 min-w-[170px]">
+            <div class="flex flex-wrap gap-1">
+              ${r.issues.map(i => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${i.badge}">${auditEscape(i.label)}</span>`).join('')}
+            </div>
+          </td>
+          <td class="p-2.5 text-right font-semibold text-slate-700 whitespace-nowrap">${totalNum(r.sumT)}</td>
+          <td class="p-2.5 text-right font-semibold text-slate-700 whitespace-nowrap">${totalNum(r.sumP)}</td>
+          <td class="p-2.5 text-right font-bold whitespace-nowrap ${r.diff ? 'text-rose-600' : 'text-slate-400'}">
+            ${r.diff === null ? '—' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}
+          </td>
+          <td class="p-2.5 text-center whitespace-nowrap">
+            <button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)"
+              class="px-2.5 py-1 rounded-lg bg-gto-blue/10 hover:bg-gto-blue/20 text-gto-blue font-bold text-[10px] transition">
+              Revisar ficha
+            </button>
+          </td>
+        </tr>
+      `).join('') : '<tr><td colspan="11" class="p-8 text-center text-slate-500">No se encontraron registros con faltantes para los filtros seleccionados.</td></tr>';
+    }
+
+    function resetFaltantesFilters() {
+      const u = document.getElementById('filter-faltantes-user');
+      const t = document.getElementById('filter-faltantes-tipo');
+      const s = document.getElementById('search-faltantes');
+      if (u) u.value = 'ALL';
+      if (t) t.value = 'ALL';
+      if (s) s.value = '';
+      renderFaltantesTable();
+    }
+
+    function exportFaltantesCSV() {
+      const userFilter = document.getElementById('filter-faltantes-user')?.value || 'ALL';
+      const tipoFilter = document.getElementById('filter-faltantes-tipo')?.value || 'ALL';
+      const rawSearch = cleanStr(document.getElementById('search-faltantes')?.value);
+      const search = (rawSearch === 'ALL' ? '' : rawSearch).toLowerCase();
+
+      const filtered = auditFaltantesList.filter(r => {
+        if (userFilter !== 'ALL' && r.userKey !== userFilter) return false;
+        if (tipoFilter !== 'ALL' && !r.types.includes(tipoFilter)) return false;
+        if (search) {
+          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.municipio, r.comunidad]
+            .join(' ').toLowerCase();
+          if (!match.includes(search)) return false;
+        }
+        return true;
+      });
+
+      if (!filtered.length) return;
+
+      const fields = [
+        'ID_Actividad',
+        'Folio',
+        'Usuario_Responsable',
+        'Direccion',
+        'Nombre_Actividad',
+        'Clave_Proceso_Txt',
+        'Meta',
+        'Nombre_Meta',
+        'Municipio',
+        'Comunidad_Localidad',
+        'Total_Territorial',
+        'Total_Demografico',
+        'Diferencia',
+        'Diagnostico_Faltantes'
+      ];
+
+      const data = filtered.map(r => [
+        r.id,
+        r.folio,
+        r.usuario,
+        r.direccion,
+        r.nombre,
+        r.clave,
+        r.meta,
+        r.nombreMeta,
+        r.municipio,
+        r.comunidad,
+        r.sumT == null ? '' : r.sumT,
+        r.sumP == null ? '' : r.sumP,
+        r.diff == null ? '' : r.diff,
+        r.issues.map(i => i.label).join(' | ')
+      ]);
+
+      const csv = Papa.unparse({ fields, data }, { escapeFormulae: true, newline: '\r\n' });
+      if (typeof Blob === 'undefined' || typeof document.createElement !== 'function') return;
+      const blob = new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const userSlug = (userFilter === 'ALL' ? 'Todos' : userFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
+      const tipoSlug = (tipoFilter === 'ALL' ? 'Todos_Faltantes' : tipoFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
+      a.download = `Faltantes_Territorio_Poblacion_${userSlug}_${tipoSlug}.csv`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
