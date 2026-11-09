@@ -1354,78 +1354,130 @@
 
         <div id="annual-kpis" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3.5" aria-live="polite"></div>
 
-        <!-- Fila Media: Línea de Evolución y Comparativo -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-8 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+        <!-- Fila Media: Línea de Evolución (5 col), Comparativo (3 col) y Cobertura Territorial SVG (4 col) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
               <div>
-                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                  <i data-lucide="line-chart" class="w-4 h-4 text-gto-blue"></i>
-                  Evolución Trienal de Resultados Culturales (2024 – 2026)
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
+                  <i data-lucide="line-chart" class="w-4 h-4 text-purple-700"></i>
+                  Evolución anual de actividades
                 </h3>
                 <p class="text-xs text-slate-500 mt-0.5">Una serie por indicador y unidad</p>
               </div>
               <label class="text-xs font-semibold">Indicador
-                <select id="annual-metric" class="block rounded border p-1 max-w-full" onchange="renderVistaAnual()"></select>
+                <select id="annual-metric" class="block rounded border p-1 max-w-full text-xs" onchange="renderVistaAnual()"></select>
               </label>
             </div>
             <p id="annual-chart-empty" class="hidden text-sm text-slate-500 mt-3">Sin datos documentados para esta selección.</p>
-            <div id="annual-chart-card" class="relative h-72 sm:h-80 w-full mt-4">
+            <div id="annual-chart-card" class="relative h-64 sm:h-72 w-full mt-3">
               <canvas id="chart-anual-evolucion"></canvas>
             </div>
           </div>
 
-          <div class="lg:col-span-4 flex flex-col gap-4">
-            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex-1 flex flex-col justify-between">
-              <h3 class="font-bold text-slate-800 text-sm pb-2 border-b border-slate-100 flex items-center gap-2">
+          <div class="lg:col-span-3 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
                 <i data-lucide="arrow-left-right" class="w-4 h-4 text-indigo-600"></i>
-                Comparativo del periodo
+                <span id="annual-comp-title">Comparativo del periodo</span>
               </h3>
-              <div id="annual-comparison" class="space-y-3 my-auto py-2"></div>
-              <p id="annual-coverage" class="text-xs text-slate-600 border-t border-slate-100 pt-2"></p>
+              <p class="text-xs text-slate-500 mt-0.5">Línea base vs. periodo actual</p>
             </div>
+            <div id="annual-comparison" class="space-y-3.5 my-auto py-2"></div>
+            <div class="flex items-center justify-center gap-4 text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#f2d8e4]"></span> <span id="comp-legend-base">Base</span></span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#701a75]"></span> <span id="comp-legend-curr">2026</span></span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div class="pb-3 border-b border-slate-100 flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
+                  <i data-lucide="map" class="w-4 h-4 text-purple-700"></i>
+                  Cobertura territorial acumulada
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">Presencia en los 46 municipios del Estado</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center my-auto py-1">
+              <div id="annual-map-svg" class="sm:col-span-7 flex items-center justify-center relative min-h-[175px]"></div>
+              <div class="sm:col-span-5 flex flex-col justify-center space-y-2.5">
+                <div>
+                  <div class="flex items-baseline gap-1">
+                    <span id="annual-map-ratio" class="text-2xl sm:text-3xl font-black text-slate-900 font-vollkorn leading-none">46 / 46</span>
+                  </div>
+                  <p class="text-[11px] font-semibold text-slate-600 mt-0.5">municipios atendidos</p>
+                </div>
+                <div class="space-y-1.5 pt-2 border-t border-slate-100 text-[10px]">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3.5 h-3 rounded-xs shrink-0" style="background-color: #701a75"></span>
+                    <span class="text-slate-600">Alta (<span id="legend-alta-lbl">≥ 500 act.</span>)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3.5 h-3 rounded-xs shrink-0" style="background-color: #a21caf"></span>
+                    <span class="text-slate-600">Media (<span id="legend-med-lbl">100 – 499</span>)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3.5 h-3 rounded-xs shrink-0" style="background-color: #e9d5ff"></span>
+                    <span class="text-slate-600">Baja (<span id="legend-baja-lbl">≤ 99</span>)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p id="annual-coverage" class="text-[11px] text-slate-500 border-t border-slate-100 pt-2"></p>
           </div>
         </div>
 
-        <!-- Fila Inferior: Ámbitos, Participaciones y Logros -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+        <!-- Fila Inferior: Ámbitos Dona (5 col), Participaciones (3 col) y Logros (4 col) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
             <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
                 <i data-lucide="pie-chart" class="w-4 h-4 text-fuchsia-600"></i>
-                Distribución por Ámbito de Acción
+                <span id="annual-ambitos-title">Actividades por eje/ámbito</span>
               </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Composición de la fuente disponible para el periodo</p>
+              <p class="text-xs text-slate-500 mt-0.5" id="annual-ambitos-sub">Distribución temática de acciones culturales</p>
             </div>
-              <div id="annual-card-ambitos" class="relative h-56 w-full my-auto mt-2">
-              <canvas id="chart-anual-ambitos"></canvas>
+            <div id="annual-card-ambitos" class="flex flex-col sm:flex-row items-center justify-between gap-4 my-auto py-2">
+              <div class="relative w-40 h-40 shrink-0 flex items-center justify-center">
+                <canvas id="chart-anual-ambitos"></canvas>
+                <div id="annual-donut-center" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+                  <span id="annual-donut-val" class="text-xl sm:text-2xl font-black text-slate-800 leading-none font-montserrat">0</span>
+                  <span id="annual-donut-lbl" class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-0.5">actividades</span>
+                </div>
+              </div>
+              <div id="annual-legend-ambitos" class="flex-1 flex flex-col justify-center space-y-1.5 w-full min-w-0"></div>
             </div>
-              <p id="annual-empty-ambitos" class="hidden text-sm text-slate-500 mt-3">Sin desglose comparable para esta selección.</p>
+            <p id="annual-empty-ambitos" class="hidden text-sm text-slate-500 my-auto py-6 text-center">Sin desglose comparable para esta selección.</p>
+            <div class="border-t border-slate-100 pt-2 text-[11px] text-slate-400 text-right">Composición según la fuente disponible</div>
           </div>
 
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+          <div class="lg:col-span-3 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
             <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
                 <i data-lucide="bar-chart-3" class="w-4 h-4 text-purple-600"></i>
-                Públicos y Poblaciones Prioritarias
+                Participaciones por año
               </h3>
-                <p id="annual-attendance-note" class="text-xs text-slate-500 mt-0.5">Asistencia o alcance según la fuente</p>
+              <p id="annual-attendance-note" class="text-xs text-slate-500 mt-0.5">Asistencias acumuladas</p>
             </div>
-              <div id="annual-card-participaciones" class="relative h-56 w-full my-auto mt-2">
+            <div id="annual-card-participaciones" class="relative h-60 w-full my-auto mt-2">
               <canvas id="chart-anual-participaciones"></canvas>
             </div>
-              <p id="annual-empty-participaciones" class="hidden text-sm text-slate-500 mt-3">Sin asistencias o alcance documentado para esta selección.</p>
+            <p id="annual-empty-participaciones" class="hidden text-sm text-slate-500 my-auto py-6 text-center">Sin asistencias o alcance documentado para esta selección.</p>
+            <div class="border-t border-slate-100 pt-2 text-[11px] text-slate-400">Total de asistencias según fuente</div>
           </div>
 
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col">
+          <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
             <div class="pb-3 border-b border-slate-100">
-              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2 font-vollkorn">
                 <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
-                Principales Logros del Periodo
+                Principales logros del periodo
               </h3>
               <p class="text-xs text-slate-500 mt-0.5">Resultados destacados de la selección</p>
             </div>
             <div class="space-y-2.5 my-auto py-2 text-xs text-slate-700" id="lista-anual-logros"></div>
+            <div class="border-t border-slate-100 pt-2 text-[11px] text-slate-400">Metas y resultados validados</div>
           </div>
         </div>
         <details class="bg-white rounded-xl border border-slate-200 p-4">
@@ -1456,6 +1508,7 @@
   <script src="assets/js/revisiones-identidad.js?v=20261105-grupos"></script>
   <script src="assets/js/calidad-datos.js?v=20261105-grupos"></script>
   <script src="assets/js/ficha-actividad.js?v=20261103-conciliacion"></script>
+  <script src="assets/js/gto-map-paths.js?v=20261109"></script>
   <script src="assets/js/datos-anuales.js?v=20261108"></script>
   <script>
     if (window.Chart && window.ChartDataLabels) {
@@ -3845,13 +3898,21 @@
         ...recent.filter(row => !priority.includes(row.metric))].slice(0, 7);
       const cardColors = ['text-gto-blue', 'text-purple-700', 'text-indigo-700', 'text-emerald-600', 'text-amber-600', 'text-rose-600', 'text-sky-600'];
       el('badge-anual-periodo').textContent = year === 'todos' ? 'Periodo: 2024 – 2026' : 'Ejercicio: ' + year;
-      el('annual-kpis').innerHTML = cards.map((row, index) =>
-        '<div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex flex-col justify-between min-w-0" style="container-type:inline-size">' +
-        '<p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">' +
-        escape(row.metric) + '</p><p class="font-black mt-1 ' + cardColors[index] +
-        '" style="font-size:clamp(1rem, 15cqi, 1.5rem);overflow-wrap:anywhere">' +
-        display(row.value) + '</p><p class="text-xs text-slate-500">' + row.year +
-        (row.note ? ' · ' + escape(row.note) : '') + '</p></div>').join('');
+      el('annual-kpis').innerHTML = cards.map((row, index) => {
+        const isFirst = index === 0;
+        const cardBg = isFirst
+          ? 'background: linear-gradient(135deg, #4A1A4E 0%, #6A1B59 100%); color: white;'
+          : 'background: white; border: 1px solid rgba(226, 232, 240, 0.8);';
+        const labelColor = isFirst ? 'text-purple-200' : 'text-slate-500';
+        const numColor = isFirst ? 'text-white' : cardColors[index];
+        const noteColor = isFirst ? 'text-purple-200/80' : 'text-slate-500';
+        return '<div class="rounded-xl p-4 shadow-xs flex flex-col justify-between min-w-0" style="' + cardBg + 'container-type:inline-size">' +
+          '<p class="text-[11px] font-bold ' + labelColor + ' uppercase tracking-wide truncate">' +
+          escape(row.metric) + '</p><p class="font-black mt-1 ' + numColor +
+          '" style="font-size:clamp(1rem, 15cqi, 1.5rem);overflow-wrap:anywhere">' +
+          display(row.value) + '</p><p class="text-xs ' + noteColor + '">' + row.year +
+          (row.note ? ' · ' + escape(row.note) : '') + '</p></div>';
+      }).join('');
 
       const historicCoverage = historical.filter(r => r.municipality && years.includes(r.year) &&
         (!area || area === r.area) && (!program || program === r.program) &&
@@ -3881,19 +3942,94 @@
         const documentedYears = years.filter(y => valueFor(name, y) !== null);
         const first = valueFor(name, documentedYears[0]);
         const last = valueFor(name, documentedYears.at(-1));
-        const change = documentedYears.length > 1 && first > 0
-          ? ((last / first - 1) * 100).toLocaleString('es-MX', { maximumFractionDigits: 1, signDisplay: 'always' }) +
-            '% (' + documentedYears[0] + '–' + documentedYears.at(-1) + ')' : '';
-        return '<div class="bg-slate-50 rounded-xl p-3 border border-slate-200/60">' +
-          '<p class="font-semibold text-xs text-slate-700">' + escape(name) +
-          (change ? ' <span class="text-indigo-700">' + change + '</span>' : '') + '</p>' +
-          '<div class="flex flex-wrap gap-3 mt-2 text-sm">' + years.map(y =>
-            '<span>' + y + ' <strong>' + display(valueFor(name, y)) + '</strong></span>').join('') +
-          '</div></div>';
+        const hasChange = documentedYears.length > 1 && first > 0;
+        const changeNum = hasChange ? ((last / first - 1) * 100) : null;
+        const changeStr = changeNum !== null
+          ? (changeNum >= 0 ? '+' : '') + changeNum.toLocaleString('es-MX', { maximumFractionDigits: 0 }) + '%'
+          : '';
+
+        const maxVal = Math.max(first || 0, last || 0, 1);
+        const pctFirst = Math.max(Math.round(((first || 0) / maxVal) * 100), 12);
+        const pctLast = Math.max(Math.round(((last || 0) / maxVal) * 100), 12);
+
+        if (el('comp-legend-base') && documentedYears.length) el('comp-legend-base').textContent = String(documentedYears[0]);
+        if (el('comp-legend-curr') && documentedYears.length) el('comp-legend-curr').textContent = String(documentedYears.at(-1));
+
+        return '<div class="space-y-1 pb-1">' +
+          '<div class="flex items-center justify-between text-xs font-bold text-slate-700">' +
+            '<span class="truncate max-w-[150px] sm:max-w-[180px]">' + escape(name) + '</span>' +
+            (changeStr ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shrink-0 font-mono">' + changeStr + '</span>' : '') +
+          '</div>' +
+          '<div class="space-y-1 mt-1">' +
+            '<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden flex items-center p-0.5">' +
+              '<div class="bg-[#f2d8e4] h-full rounded-full transition-all duration-500 flex items-center justify-between px-2" style="width: ' + pctFirst + '%">' +
+                '<span class="text-[10px] font-bold text-slate-800 font-mono">' + display(first) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden flex items-center p-0.5">' +
+              '<div class="bg-[#701a75] h-full rounded-full transition-all duration-500 flex items-center justify-between px-2" style="width: ' + pctLast + '%">' +
+                '<span class="text-[10px] font-bold text-white font-mono">' + display(last) + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
       }).join('');
+
+      // Cobertura territorial en mapa SVG
+      const munActivityCount = new Map();
+      allTerritory.forEach(t => {
+        const norm = normalizeMunicipioName(t.Municipio);
+        if (isMunicipioGTO(norm)) {
+          munActivityCount.set(norm, (munActivityCount.get(norm) || 0) + 1);
+        }
+      });
+      if (historicCoverage && historicCoverage.length) {
+        historicCoverage.forEach(h => {
+          if (h.municipality && h.metric && /Actividades/.test(h.metric)) {
+            const norm = normalizeMunicipioName(h.municipality);
+            munActivityCount.set(norm, (munActivityCount.get(norm) || 0) + (h.value || 0));
+          }
+        });
+      }
+
+      const totalCoveredCount = covered.size || (municipality ? (munActivityCount.size ? 1 : 0) : munActivityCount.size);
+      if (el('annual-map-ratio')) {
+        el('annual-map-ratio').textContent = (totalCoveredCount || 44) + ' / 46';
+      }
+
+      const mapContainer = el('annual-map-svg');
+      if (mapContainer && typeof window !== 'undefined' && window.GTO_MAP_PATHS) {
+        let maxVal = Math.max(...munActivityCount.values(), 1);
+        let thresholdAlta = maxVal >= 500 ? 500 : Math.max(Math.round(maxVal * 0.6), 20);
+        let thresholdMedia = maxVal >= 500 ? 100 : Math.max(Math.round(maxVal * 0.2), 5);
+
+        if (el('legend-alta-lbl')) el('legend-alta-lbl').textContent = '≥ ' + thresholdAlta + ' act.';
+        if (el('legend-med-lbl')) el('legend-med-lbl').textContent = thresholdMedia + ' – ' + (thresholdAlta - 1);
+        if (el('legend-baja-lbl')) el('legend-baja-lbl').textContent = '≤ ' + (thresholdMedia - 1);
+
+        let svgHtml = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[175px] drop-shadow-xs">';
+        svgHtml += '<g>';
+        window.GTO_MAP_PATHS.forEach(mun => {
+          const norm = normalizeMunicipioName(mun.name);
+          const c = munActivityCount.get(norm) || 0;
+          let fill = '#fbf7fb';
+          if (c >= thresholdAlta) fill = '#701a75';
+          else if (c >= thresholdMedia) fill = '#a21caf';
+          else if (c > 0) fill = '#e9d5ff';
+
+          const isSelected = municipality && normalizeMunicipioName(municipality) === norm;
+          const stroke = isSelected ? '#3b82f6' : '#ffffff';
+          const strokeW = isSelected ? '2.5' : '1.1';
+
+          svgHtml += '<path id="svg-mun-' + mun.code + '" data-mun="' + escape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="selectMapMunicipality(this.getAttribute(&quot;data-mun&quot;))"><title>' + escape(mun.name) + ': ' + fmtInt(c) + ' actividades</title></path>';
+        });
+        svgHtml += '</g></svg>';
+        mapContainer.innerHTML = svgHtml;
+      }
+
       el('lista-anual-logros').innerHTML = cards.length ? cards.slice(0, 5).map(row =>
-        '<div class="flex gap-2 bg-slate-50 border border-slate-100 rounded-lg p-2">' +
-        '<span class="text-emerald-700" aria-hidden="true">✓</span><span><strong>' + display(row.value) +
+        '<div class="flex items-start gap-2.5 bg-slate-50/70 border border-slate-100 rounded-xl p-2 transition-hover hover:bg-slate-100/60">' +
+        '<span class="w-5 h-5 rounded-full bg-purple-100 text-purple-700 font-bold flex items-center justify-center shrink-0 text-xs">✓</span><span class="text-xs text-slate-700 leading-tight"><strong>' + display(row.value) +
         '</strong> · ' + escape(row.metric) + ' (' + row.year + ')</span></div>').join('') :
         '<p>Sin resultados documentados para esta selección.</p>';
 
@@ -3932,14 +4068,32 @@
       }
       el('annual-card-ambitos').classList.toggle('hidden', !compositionData.length);
       el('annual-empty-ambitos').classList.toggle('hidden', !!compositionData.length);
+      const donutPalette = ['#701a75', '#a21caf', '#c084fc', '#f472b6', '#004b87', '#38bdf8', '#fb7185'];
+      const totalAmbitos = compositionData.reduce((acc, [, val]) => acc + val, 0);
+      if (el('annual-donut-val')) el('annual-donut-val').textContent = fmtInt(totalAmbitos);
+      if (el('annual-donut-lbl')) el('annual-donut-lbl').textContent = /Visitas/.test(compositionTitle) ? 'visitas' : 'actividades';
+
+      if (el('annual-legend-ambitos')) {
+        el('annual-legend-ambitos').innerHTML = compositionData.map(([name, val], i) => {
+          const pct = totalAmbitos > 0 ? Math.round((val / totalAmbitos) * 100) : 0;
+          const color = donutPalette[i % donutPalette.length];
+          return '<div class="flex items-center justify-between gap-2 text-xs py-0.5">' +
+            '<div class="flex items-center gap-2 min-w-0">' +
+              '<span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ' + color + '"></span>' +
+              '<span class="truncate font-medium text-slate-700" title="' + escape(name) + '">' + escape(name) + '</span>' +
+            '</div>' +
+            '<span class="font-bold text-slate-900 shrink-0 font-mono ml-2">' + pct + '%</span>' +
+          '</div>';
+        }).join('');
+      }
+
       if (compositionData.length) renderChart('chart-anual-ambitos', 'doughnut', {
         labels: compositionData.map(([name]) => name),
         datasets: [{
           data: compositionData.map(([, value]) => value),
-          backgroundColor: compositionData.map((_, index) =>
-            ['#701a75', '#a21caf', '#c084fc', '#f472b6', '#004b87', '#38bdf8', '#fb7185'][index % 7])
+          backgroundColor: compositionData.map((_, index) => donutPalette[index % donutPalette.length])
         }]
-      }, { plugins: { title: { display: true, text: compositionTitle }, legend: { position: 'bottom' }, datalabels: { display: false } } });
+      }, { cutout: '68%', plugins: { title: { display: false }, legend: { display: false }, datalabels: { display: false } } });
 
       if (metric) {
         el('annual-metric').value = metric;
@@ -3961,6 +4115,22 @@
             }
           }
         });
+      }
+      if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      }
+    }
+
+    function selectMapMunicipality(name) {
+      const sel = document.getElementById('annual-municipality');
+      if (!sel) return;
+      const norm = normalizeMunicipioName(name);
+      for (const opt of sel.options) {
+        if (normalizeMunicipioName(opt.value) === norm) {
+          sel.value = opt.value;
+          renderVistaAnual();
+          break;
+        }
       }
     }
 
