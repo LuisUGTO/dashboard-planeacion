@@ -594,12 +594,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-slate-200/80 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Fichas capturadas</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Actividades realizadas</p>
               <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
               <p class="text-xs text-slate-500 font-semibold mt-1">
-                <span id="kpi-sesiones-total" class="text-emerald-600 font-bold">0</span> sesiones reportadas
+                <span id="kpi-fichas-total" class="text-slate-700 font-bold">0</span> fichas capturadas
               </p>
-              <p id="kpi-actividades-reportadas" class="text-[10px] text-slate-500 mt-1"></p>
+              <span id="kpi-sesiones-total" class="hidden">0</span>
+              <p id="kpi-actividades-reportadas" class="hidden text-[10px] text-slate-500 mt-1"></p>
               <button id="kpi-cantidades-alerta" onclick="openAuditQuantities()" class="hidden text-[10px] font-bold text-amber-800 mt-1 underline text-left"></button>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner">
@@ -2181,13 +2182,15 @@
       const zapCount = terF.filter(t => cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si' || cleanStr(t.ZAP_SSyP).toLowerCase() === 'si').length;
       const comunidadesLimpias = new Set(terF.map(t => `${cleanStr(t.Municipio)}|${normalizeCommunityName(t.Nombre_Comunidad_Final)}`));
 
-      document.getElementById('kpi-act-total').textContent = fmtInt(totalAct);
-      document.getElementById('kpi-sesiones-total').textContent = fmtInt(totalSesiones);
-      document.getElementById('kpi-sesiones-total').title = countMetrics.missingSessions ? `${countMetrics.missingSessions} registros sin cantidad válida de sesiones; no se convierten en cero` : 'Suma de las sesiones informadas; no equivale a cantidad de talleres';
+      document.getElementById('kpi-act-total').textContent = fmtInt(countMetrics.activities || totalAct);
+      if (document.getElementById('kpi-fichas-total')) document.getElementById('kpi-fichas-total').textContent = fmtInt(totalAct);
+      if (document.getElementById('kpi-sesiones-total')) document.getElementById('kpi-sesiones-total').textContent = fmtInt(totalSesiones);
       const hasReportedQuantity = actF.some(a => cleanStr(a.Cantidad_Actividades) || cleanStr(a.Tipo_Registro));
-      document.getElementById('kpi-actividades-reportadas').textContent = hasReportedQuantity
-        ? `${fmtInt(countMetrics.activities)} actividades reportadas${countMetrics.unresolved ? ` + ${countMetrics.unresolved} concentrados por cuantificar` : ''}`
-        : 'Un registro puede incluir varias sesiones o talleres';
+      if (document.getElementById('kpi-actividades-reportadas')) {
+        document.getElementById('kpi-actividades-reportadas').textContent = hasReportedQuantity
+          ? `${fmtInt(countMetrics.activities)} actividades reportadas`
+          : 'Un registro puede incluir varias sesiones o talleres';
+      }
       document.getElementById('kpi-pop-total').textContent = fmtInt(mainPop);
       document.getElementById('kpi-pop-sub').textContent = `${fmtInt(mainPart)} part. activa | ${fmtInt(mainAcc)} acceso`;
       document.getElementById('kpi-ingresos').textContent = fmtMoney(ingresos);
@@ -2209,14 +2212,16 @@
       const tipoCount = {};
       actF.forEach(a => {
         const t = cleanStr(a.Tipo_Actividad) || 'Sin especificar';
-        tipoCount[t] = (tipoCount[t] || 0) + 1;
+        const q = CulturaCalidad.quantity(a).value || 1;
+        tipoCount[t] = (tipoCount[t] || 0) + q;
       });
+      const totalReportedActs = countMetrics.activities || totalAct;
       const sortedTipos = Object.entries(tipoCount).sort((a, b) => b[1] - a[1]);
       const maxTipo = sortedTipos[0]?.[1] || 1;
       const barColors = ['bg-teal-600', 'bg-sky-600', 'bg-amber-500', 'bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'bg-purple-600', 'bg-cyan-600'];
 
       document.getElementById('list-tipos-actividad').innerHTML = sortedTipos.slice(0, 10).map(([nombre, count], idx) => {
-        const pctTotal = totalAct ? ((count / totalAct) * 100).toFixed(1) : 0;
+        const pctTotal = totalReportedActs ? ((count / totalReportedActs) * 100).toFixed(1) : 0;
         const barW = ((count / maxTipo) * 100).toFixed(0);
         const cClass = barColors[idx % barColors.length];
         return `
