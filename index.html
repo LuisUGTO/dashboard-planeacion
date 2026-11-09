@@ -1325,18 +1325,18 @@
             <button type="button" onclick="resetAuditFilters()" class="text-xs font-bold text-gto-blue underline mb-3">Limpiar usuario, alerta y búsqueda</button>
             <p id="audit-visible-count" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
             <div class="overflow-x-auto max-h-[500px] custom-scroll">
-              <table class="w-full text-left border-collapse text-xs">
+              <table class="w-full text-left border-collapse text-xs table-fixed min-w-[1100px]">
                 <thead class="bg-gto-ice/50 text-gto-blue sticky top-0">
                   <tr>
-                    <th class="p-2.5 font-bold">ID Actividad</th>
-                    <th class="p-2.5 font-bold">Responsable de Registro</th>
-                    <th class="p-2.5 font-bold">Nombre de la Actividad</th>
-                    <th class="p-2.5 font-bold">Municipio</th>
-                    <th class="p-2.5 font-bold text-right">Total Territorial</th>
-                    <th class="p-2.5 font-bold text-right">Total Demográfico</th>
-                    <th class="p-2.5 font-bold text-right">Variación</th>
-                    <th class="p-2.5 font-bold min-w-[280px]">Qué revisar</th>
-                    <th class="p-2.5 font-bold text-center">Expediente</th>
+                    <th class="p-2.5 font-bold w-[120px]">ID Actividad</th>
+                    <th class="p-2.5 font-bold w-[160px]">Responsable</th>
+                    <th class="p-2.5 font-bold w-[220px]">Nombre de la Actividad</th>
+                    <th class="p-2.5 font-bold w-[110px]">Municipio</th>
+                    <th class="p-2.5 font-bold text-right w-[95px]">Total Territorial</th>
+                    <th class="p-2.5 font-bold text-right w-[95px]">Total Demográfico</th>
+                    <th class="p-2.5 font-bold text-right w-[80px]">Variación</th>
+                    <th class="p-2.5 font-bold">Qué revisar</th>
+                    <th class="p-2.5 font-bold text-center w-[90px]">Expediente</th>
                   </tr>
                 </thead>
                 <tbody id="tbl-auditoria" class="divide-y divide-slate-100"></tbody>
@@ -1451,20 +1451,20 @@
             </div>
 
             <div class="overflow-x-auto max-h-[560px] custom-scroll rounded-xl border border-slate-100">
-              <table class="w-full text-left border-collapse text-xs">
+              <table class="w-full text-left border-collapse text-xs table-fixed min-w-[1200px]">
                 <thead class="bg-slate-50 text-slate-700 sticky top-0 shadow-xs z-10">
                   <tr>
-                    <th class="p-2.5 font-bold">ID / Folio</th>
-                    <th class="p-2.5 font-bold min-w-[180px]">Nombre de la Actividad</th>
-                    <th class="p-2.5 font-bold">Responsable de Captura</th>
-                    <th class="p-2.5 font-bold">Dirección / Área</th>
-                    <th class="p-2.5 font-bold min-w-[150px]">Clave & Meta</th>
-                    <th class="p-2.5 font-bold">Municipio</th>
-                    <th class="p-2.5 font-bold">Localidad</th>
-                    <th class="p-2.5 font-bold text-right">Población</th>
-                    <th class="p-2.5 font-bold text-right">Territorio</th>
-                    <th class="p-2.5 font-bold text-right">Diferencia</th>
-                    <th class="p-2.5 font-bold text-center">Expediente</th>
+                    <th class="p-2.5 font-bold w-[110px]">ID / Folio</th>
+                    <th class="p-2.5 font-bold">Nombre de la Actividad</th>
+                    <th class="p-2.5 font-bold w-[160px]">Responsable</th>
+                    <th class="p-2.5 font-bold w-[130px]">Dirección / Área</th>
+                    <th class="p-2.5 font-bold w-[150px]">Clave & Meta</th>
+                    <th class="p-2.5 font-bold w-[115px]">Municipio</th>
+                    <th class="p-2.5 font-bold w-[115px]">Localidad</th>
+                    <th class="p-2.5 font-bold text-right w-[90px]">Población</th>
+                    <th class="p-2.5 font-bold text-right w-[90px]">Territorio</th>
+                    <th class="p-2.5 font-bold text-right w-[80px]">Diferencia</th>
+                    <th class="p-2.5 font-bold text-center w-[85px]">Expediente</th>
                   </tr>
                 </thead>
                 <tbody id="tbl-faltantes" class="divide-y divide-slate-100 bg-white"></tbody>
@@ -3388,16 +3388,28 @@
       document.getElementById('lbl-export-audit').textContent = `Descargar CSV (${fmtInt(download.data.length)})`;
       const total = n => n === null ? '<span class="text-amber-700">No disponible</span>' : fmtInt(n);
       document.getElementById('tbl-auditoria').innerHTML = rows.length ? rows.slice(0, 250).map(r => `
-        <tr class="hover:bg-amber-50/30">
-          <td class="p-2.5 font-mono font-bold text-gto-blue">${auditEscape(r.id)}<div class="text-[10px] text-slate-500">${auditEscape(r.folio)}</div></td>
-          <td class="p-2.5 text-slate-500">${auditEscape(r.usuario)}</td>
-          <td class="p-2.5 font-medium text-slate-700">${auditEscape(r.nombre)}<div class="text-[10px] text-slate-500">${auditEscape(r.direccion)}</div></td>
-          <td class="p-2.5 text-slate-600">${auditEscape(r.mun)}</td>
-          <td class="p-2.5 text-right font-semibold">${total(r.sT)}</td>
-          <td class="p-2.5 text-right font-semibold">${total(r.sP)}</td>
-          <td class="p-2.5 text-right font-bold ${r.diff ? 'text-rose-700' : 'text-slate-500'}">${r.diff === null ? 'No comparable' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}</td>
-          <td class="p-2.5 text-slate-700 min-w-[280px]">${auditEscape(r.diag)}</td>
-          <td class="p-2.5 text-center"><button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">Revisar ficha</button></td>
+        <tr class="hover:bg-amber-50/30 text-xs">
+          <td class="p-2.5 font-mono font-bold text-gto-blue max-w-[130px] align-top">
+            <div class="truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
+            <div class="text-[10px] text-slate-500 font-sans font-normal truncate" title="${auditEscape(r.folio)}">${auditEscape(r.folio)}</div>
+          </td>
+          <td class="p-2.5 text-slate-600 max-w-[170px] align-top">
+            <div class="truncate text-xs" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
+          </td>
+          <td class="p-2.5 font-medium text-slate-700 min-w-[180px] max-w-[260px] align-top">
+            <div class="line-clamp-2" title="${auditEscape(r.nombre)}">${auditEscape(r.nombre)}</div>
+            <div class="text-[10px] text-slate-400 truncate" title="${auditEscape(r.direccion)}">${auditEscape(r.direccion)}</div>
+          </td>
+          <td class="p-2.5 text-slate-600 max-w-[110px] align-top">
+            <div class="truncate" title="${auditEscape(r.mun)}">${auditEscape(r.mun)}</div>
+          </td>
+          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap">${total(r.sT)}</td>
+          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap">${total(r.sP)}</td>
+          <td class="p-2.5 text-right font-bold align-top whitespace-nowrap ${r.diff ? 'text-rose-700' : 'text-slate-500'}">${r.diff === null ? 'No comparable' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}</td>
+          <td class="p-2.5 text-slate-700 min-w-[220px] align-top text-xs leading-relaxed">${auditEscape(r.diag)}</td>
+          <td class="p-2.5 text-center align-top whitespace-nowrap">
+            <button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">Revisar ficha</button>
+          </td>
         </tr>`).join('') : '<tr><td colspan="9" class="p-6 text-center text-slate-500">No hay alertas para esta selección y búsqueda.</td></tr>';
     }
 
@@ -3664,31 +3676,31 @@
 
       tbody.innerHTML = filtered.length ? filtered.slice(0, 250).map(r => `
         <tr class="hover:bg-slate-50/80 transition text-xs">
-          <td class="p-2.5 max-w-[140px] align-top">
+          <td class="p-2.5 align-top">
             <div class="font-mono font-bold text-gto-blue text-xs truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
-            <div class="text-[10px] text-slate-400 font-normal">${auditEscape(r.folio)}</div>
+            <div class="text-[10px] text-slate-400 font-normal truncate" title="${auditEscape(r.folio)}">${auditEscape(r.folio)}</div>
           </td>
-          <td class="p-2.5 min-w-[200px] max-w-[280px] align-top">
+          <td class="p-2.5 align-top">
             <div class="font-semibold text-slate-800 leading-snug line-clamp-2" title="${auditEscape(r.nombre)}">${auditEscape(r.nombre)}</div>
           </td>
-          <td class="p-2.5 max-w-[160px] align-top text-slate-700">
+          <td class="p-2.5 align-top text-slate-700">
             <div class="truncate text-xs font-medium" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
           </td>
-          <td class="p-2.5 max-w-[140px] align-top text-slate-500 text-[11px]">
+          <td class="p-2.5 align-top text-slate-500 text-[11px]">
             <div class="truncate" title="${auditEscape(r.direccion)}">${auditEscape(r.direccion)}</div>
           </td>
-          <td class="p-2.5 max-w-[170px] align-top">
-            <div class="font-mono text-[10px] font-bold text-slate-700">${auditEscape(r.clave)}</div>
+          <td class="p-2.5 align-top">
+            <div class="font-mono text-[10px] font-bold text-slate-700 truncate" title="${auditEscape(r.clave)}">${auditEscape(r.clave)}</div>
             <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${r.sinMeta ? '<span class="text-rose-600 font-bold">Sin Meta</span>' : auditEscape(r.nombreMeta || r.meta)}</div>
           </td>
-          <td class="p-2.5 align-top whitespace-nowrap">
-            ${r.sinMun ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Falta Municipio</span>' : `<span class="font-medium text-slate-700">${auditEscape(r.municipio)}</span>`}
+          <td class="p-2.5 align-top">
+            ${r.sinMun ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 inline-block">Falta Municipio</span>' : `<div class="font-medium text-slate-700 truncate" title="${auditEscape(r.municipio)}">${auditEscape(r.municipio)}</div>`}
           </td>
-          <td class="p-2.5 max-w-[140px] align-top">
-            ${r.sinCom ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Falta Localidad</span>' : `<div class="truncate text-slate-600" title="${auditEscape(r.comunidad)}">${auditEscape(r.comunidad)}</div>`}
+          <td class="p-2.5 align-top">
+            ${r.sinCom ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 inline-block">Falta Localidad</span>' : `<div class="truncate text-slate-600" title="${auditEscape(r.comunidad)}">${auditEscape(r.comunidad)}</div>`}
           </td>
           <td class="p-2.5 align-top text-right whitespace-nowrap">
-            ${r.sinPob ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Sin Población</span>' : `<span class="font-bold text-slate-800">${fmtInt(r.sumP)}</span>${r.sinDesglose ? '<div class="text-[9px] text-purple-700 font-bold">Sin Part/Acceso</div>' : ''}`}
+            ${r.sinPob ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 inline-block">Sin Población</span>' : `<span class="font-bold text-slate-800">${fmtInt(r.sumP)}</span>${r.sinDesglose ? '<div class="text-[9px] text-purple-700 font-bold">Sin Desglose</div>' : ''}`}
           </td>
           <td class="p-2.5 align-top text-right whitespace-nowrap font-semibold text-slate-700">
             ${r.sumT == null ? '<span class="text-slate-400">N/A</span>' : fmtInt(r.sumT)}
