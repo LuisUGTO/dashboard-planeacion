@@ -175,7 +175,7 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 20px -5px rgba(0, 75, 135, 0.1);
     }
-    #mapGto { height: 340px; min-height: 340px; width: 100%; border-radius: 0.75rem; z-index: 10; }
+    #mapGto { min-height: 310px; width: 100%; border-radius: 0.75rem; z-index: 10; }
     .leaflet-popup-content-wrapper { border-radius: 0.65rem; font-family: "Helvetica Neue", Arial, sans-serif; }
     @media print {
       aside, #top-filter-controls, #mobile-menu-btn { display: none !important; }
@@ -664,7 +664,7 @@
                   <button type="button" id="btn-map-mode-pob" onclick="setHomeMapMode('poblacion')" class="px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 transition">Población</button>
                 </div>
               </div>
-              <div id="mapGto" class="flex-1 flex flex-col items-center justify-center border border-slate-200 shadow-inner rounded-xl p-2.5 bg-slate-50/50 relative min-h-[300px]"></div>
+              <div id="mapGto" class="flex-1 flex flex-col border border-slate-200 shadow-inner rounded-xl p-2 bg-slate-50/50 relative"></div>
             </div>
 
             <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100">
@@ -1952,6 +1952,9 @@
       name = name.replace(/\uFFFD/g, '');
       if (name.includes('purisima') && name.includes('rinc')) return 'purisima del rincon';
       if (name.includes('san francisco') && name.includes('rinc')) return 'san francisco del rincon';
+      if (name.includes('manuel doblado')) return 'ciudad manuel doblado';
+      if (name.includes('silao')) return 'silao de la victoria';
+      if (name.includes('dolores hidalgo')) return 'dolores hidalgo cuna de la independencia nacional';
       return name === 'pueblonuevo' ? 'pueblo nuevo' : name;
     }
 
@@ -3914,10 +3917,10 @@
 
         const curMun = cleanStr(document.getElementById('f-municipio')?.value);
         const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
-        const totalCovered = [...byMunActs.keys()].filter(k => (byMunActs.get(k) || 0) > 0).length;
+        const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
 
-        let html = '<div class="w-full flex flex-col justify-between h-full select-none">';
-        html += '<div class="flex items-center justify-between text-[11px] mb-1.5 px-1 border-b border-slate-100 pb-1.5">';
+        let html = '<div class="w-full flex flex-col select-none">';
+        html += '<div class="flex items-center justify-between text-[11px] mb-1 px-1 border-b border-slate-100 pb-1 shrink-0">';
         html += '<span class="font-extrabold text-slate-700 tracking-tight">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
         html += '<div class="flex items-center gap-2 text-[10px] text-slate-500 font-medium">';
         html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs shrink-0" style="background:#701a75"></span> Alta (&ge;' + fmtInt(thresholdAlta) + ')</span>';
@@ -3926,7 +3929,7 @@
         html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs border border-slate-300 shrink-0" style="background:#f8fafc"></span> 0</span>';
         html += '</div></div>';
 
-        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[260px] drop-shadow-xs">';
+        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[295px] drop-shadow-xs mx-auto mt-0.5">';
         html += '<g>';
         window.GTO_MAP_PATHS.forEach(mun => {
           const norm = normalizeMunicipioName(mun.name);
