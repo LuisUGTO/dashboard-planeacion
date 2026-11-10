@@ -596,7 +596,7 @@
             <div>
               <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Actividades realizadas</p>
               <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
-              <p class="text-xs text-slate-500 font-semibold mt-1">
+              <p class="hidden text-xs text-slate-500 font-semibold mt-1">
                 <span id="kpi-fichas-total" class="text-slate-700 font-bold">0</span> fichas capturadas
               </p>
               <span id="kpi-sesiones-total" class="hidden">0</span>
@@ -647,9 +647,9 @@
 
         <!-- Fila Central: Mapa + Top Tipos + Disciplinas y Programa de Gobierno -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col">
+          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
             <div class="flex flex-col flex-1 min-h-0">
-              <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center justify-between gap-2 mb-2">
                 <div class="flex items-center gap-2">
                   <div class="w-7 h-7 rounded-lg bg-blue-50 text-gto-blue flex items-center justify-center shrink-0">
                     <i data-lucide="compass" class="w-4 h-4"></i>
@@ -664,10 +664,10 @@
                   <button type="button" id="btn-map-mode-pob" onclick="setHomeMapMode('poblacion')" class="px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 transition">Población</button>
                 </div>
               </div>
-              <div id="mapGto" class="flex-1 flex flex-col border border-slate-200 shadow-inner rounded-xl p-2 bg-slate-50/50 relative"></div>
+              <div id="mapGto" class="flex-1 flex flex-col justify-center border border-slate-200 shadow-inner rounded-xl p-2 bg-slate-50/50 relative"></div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100">
+            <div class="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-slate-100">
               <div class="bg-blue-50/60 rounded-xl p-2 border border-blue-100 flex items-center gap-2">
                 <div class="w-7 h-7 rounded-lg bg-gto-blue text-white flex items-center justify-center shrink-0">
                   <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
@@ -1503,7 +1503,7 @@
                     <th class="p-2.5 font-bold text-right w-[95px]">Total Territorial</th>
                     <th class="p-2.5 font-bold text-right w-[95px]">Total Demográfico</th>
                     <th class="p-2.5 font-bold text-right w-[80px]">Variación</th>
-                    <th class="p-2.5 font-bold">Qué revisar</th>
+                    <th class="p-2.5 font-bold w-[220px]">Qué revisar</th>
                     <th class="p-2.5 font-bold text-center w-[90px]">Expediente</th>
                   </tr>
                 </thead>
@@ -1619,19 +1619,19 @@
             </div>
 
             <div class="overflow-x-auto max-h-[560px] custom-scroll rounded-xl border border-slate-100">
-              <table class="w-full text-left border-collapse text-xs table-fixed min-w-[1200px]">
+              <table class="w-full text-left border-collapse text-xs table-fixed min-w-[1250px]">
                 <thead class="bg-slate-50 text-slate-700 sticky top-0 shadow-xs z-10">
                   <tr>
-                    <th class="p-2.5 font-bold w-[110px]">ID / Folio</th>
-                    <th class="p-2.5 font-bold">Nombre de la Actividad</th>
+                    <th class="p-2.5 font-bold w-[120px]">ID / Folio</th>
+                    <th class="p-2.5 font-bold w-[220px]">Nombre de la Actividad</th>
                     <th class="p-2.5 font-bold w-[160px]">Responsable</th>
-                    <th class="p-2.5 font-bold w-[130px]">Dirección / Área</th>
+                    <th class="p-2.5 font-bold w-[140px]">Dirección / Área</th>
                     <th class="p-2.5 font-bold w-[150px]">Clave & Meta</th>
                     <th class="p-2.5 font-bold w-[115px]">Municipio</th>
                     <th class="p-2.5 font-bold w-[115px]">Localidad</th>
-                    <th class="p-2.5 font-bold text-right w-[90px]">Población</th>
-                    <th class="p-2.5 font-bold text-right w-[90px]">Territorio</th>
-                    <th class="p-2.5 font-bold text-right w-[80px]">Diferencia</th>
+                    <th class="p-2.5 font-bold text-right w-[85px]">Población</th>
+                    <th class="p-2.5 font-bold text-right w-[85px]">Territorio</th>
+                    <th class="p-2.5 font-bold text-right w-[75px]">Diferencia</th>
                     <th class="p-2.5 font-bold text-center w-[85px]">Expediente</th>
                   </tr>
                 </thead>
@@ -1778,6 +1778,29 @@
     let loadedCount = 0;
 
     const cleanStr = (val) => (val === null || val === undefined) ? '' : String(val).replace(/\u00a0/g, ' ').trim();
+    function cleanMojibake(val) {
+      let s = cleanStr(val);
+      if (!s) return '';
+      return s.replace(/Vocaci[^\w\s]*n/gi, 'Vocación')
+               .replace(/Cooperaci[^\w\s]*n/gi, 'Cooperación')
+               .replace(/Art[^\w\s]*stica/gi, 'Artística')
+               .replace(/Poblaci[^\w\s]*n\s*General/gi, 'Población General')
+               .replace(/Poblaci[^\w\s]*n/gi, 'Población')
+               .replace(/Inclusi[^\w\s]*n/gi, 'Inclusión')
+               .replace(/Formaci[^\w\s]*n/gi, 'Formación')
+               .replace(/Investigaci[^\w\s]*n/gi, 'Investigación')
+               .replace(/Promoci[^\w\s]*n/gi, 'Promoción')
+               .replace(/Educaci[^\w\s]*n/gi, 'Educación')
+               .replace(/Difusi[^\w\s]*n/gi, 'Difusión')
+               .replace(/Direcci[^\w\s]*n/gi, 'Dirección')
+               .replace(/G[^\w\s]*nero/gi, 'Género')
+               .replace(/M[^\w\s]*sica/gi, 'Música')
+               .replace(/Etnicidad[^\w\s]*/gi, 'Etnicidad')
+               .replace(/Tranquilidad[^\w\s]*/gi, 'Tranquilidad')
+               .replace(/Igualdad[^\w\s]*/gi, 'Igualdad')
+               .replace(/Prosperidad[^\w\s]*/gi, 'Prosperidad')
+               .replace(/\uFFFD/g, '').trim();
+    }
     const auditEscape = (val) => cleanStr(val).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
     const toNum = (val) => {
       if (val === null || val === undefined || val === '') return 0;
@@ -1873,6 +1896,7 @@
     function formatShortDireccion(rawDir) {
       const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
       if (!u || u === 'SIN ASIGNAR') return 'Sin Asignar';
+      if (u.includes('SUBSECRETARIA')) return 'Subsecretaría de Desarrollo Artístico';
       if (u.includes('MUSEO')) return 'DG Museos y Artes Visuales';
       if (u.includes('FORMACION')) return 'DG Formación e Inv.';
       if (u.includes('EDITORIAL') || u.includes('PUBLICACION')) return 'DG Editorial y Publicaciones';
@@ -1887,6 +1911,7 @@
 
     function getCanonicalDirection(rawDir, claveProceso, claveProcesoTxt, optCatalog) {
       const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+      if (u.includes('SUBSECRETARIA')) return 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
       if (u.includes('MUSEO')) return 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES';
       if (u.includes('FORMACION')) return 'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN';
       if (u.includes('EDITORIAL') || u.includes('PUBLICACION')) return 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES';
@@ -2105,7 +2130,7 @@
       };
 
       const allDirs = new Set(
-        rawDB.alineacion.map(r => getCanonicalDirection(r.Direccion)).filter(Boolean)
+        rawDB.alineacion.map(r => getCanonicalDirection(r.Direccion)).filter(d => d && d !== 'SIN ASIGNAR')
       );
       const allEjes = new Set([
         ...rawDB.actividades.map(r => cleanStr(r.Eje_PG)),
@@ -2256,12 +2281,12 @@
     }
 
     const formatPGDistributionLabel = value => {
-      const s = cleanStr(value).replace(/^[1-5](?:[.)])?\s+/, '');
-      if (/^vocaci/i.test(s)) return 'Vocación';
-      if (/^tranquil/i.test(s)) return 'Tranquilidad';
-      if (/^igualdad/i.test(s)) return 'Igualdad';
-      if (/^prosper/i.test(s)) return 'Prosperidad';
-      if (/^sustent/i.test(s)) return 'Sustentabilidad';
+      const s = cleanMojibake(value).replace(/^[1-5](?:[.)])?\s+/, '');
+      if (/vocaci/i.test(s)) return 'Vocación';
+      if (/tranquil/i.test(s)) return 'Tranquilidad';
+      if (/igualdad/i.test(s)) return 'Igualdad';
+      if (/prosper/i.test(s)) return 'Prosperidad';
+      if (/sustent/i.test(s)) return 'Sustentabilidad';
       return s;
     };
 
@@ -2692,25 +2717,36 @@
       renderStrategicDirections([...dirMap].sort((a, b) => b[1] - a[1]));
 
       const pecMap = {};
-      actF.forEach(a => { const p = cleanStr(a.Eje_Tranversal_PEC) || 'Ninguno'; pecMap[p] = (pecMap[p] || 0) + 1; });
+      actF.forEach(a => {
+        const p = cleanMojibake(a.Eje_Tranversal_PEC) || 'Ninguno';
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+        pecMap[p] = (pecMap[p] || 0) + q;
+      });
       const pecEntries = Object.entries(pecMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-pec', 'legend-mat-pec', pecEntries, ['#84CC16', '#A855F7', '#F97316'], true);
 
       const enfMap = {};
-      actF.forEach(a => { const e = cleanStr(a.Enfoque_Actividad) || 'No especificado'; enfMap[e] = (enfMap[e] || 0) + 1; });
+      actF.forEach(a => {
+        let e = cleanMojibake(a.Enfoque_Actividad) || 'No especificado';
+        if (e.includes('Art')) e = 'Artística';
+        else if (e.includes('Cult')) e = 'Cultural';
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+        enfMap[e] = (enfMap[e] || 0) + q;
+      });
       const enfEntries = Object.entries(enfMap).sort((a, b) => b[1] - a[1]);
       renderDoughnutWithHtmlLegend('chart-mat-enfoque', 'legend-mat-enfoque', enfEntries, ['#10B981', '#F59E0B', '#94A3B8'], false, true);
 
       const alinMap = {};
       actF.forEach(a => {
-        const obj = cleanStr(a.Objetivo_PG) || 'Sin Objetivo del Programa de Gobierno';
-        const lin = cleanStr(a.Linea_PEC) || 'Sin Línea del Programa Estatal de Cultura';
-        const enf = cleanStr(a.Enfoque_Actividad);
+        const obj = cleanMojibake(a.Objetivo_PG) || 'Sin Objetivo del Programa de Gobierno';
+        const lin = cleanMojibake(a.Linea_PEC) || 'Sin Línea del Programa Estatal de Cultura';
+        const enf = cleanMojibake(a.Enfoque_Actividad);
+        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
         const k = `${obj}||${lin}`;
         if (!alinMap[k]) alinMap[k] = { obj, lin, cultural: 0, artistica: 0, total: 0 };
-        if (enf === 'Cultural') alinMap[k].cultural++;
-        else if (enf === 'Artística') alinMap[k].artistica++;
-        alinMap[k].total++;
+        if (enf.includes('Art')) alinMap[k].artistica += q;
+        else alinMap[k].cultural += q;
+        alinMap[k].total += q;
       });
       const alinRows = Object.values(alinMap).sort((a, b) => b.total - a.total);
       document.getElementById('tbl-alineacion').innerHTML = alinRows.map(r => `
@@ -2905,15 +2941,19 @@
       const generoMap = {};
 
       const enfoqueByAct = {};
-      actF.forEach(a => { enfoqueByAct[cleanStr(a.ID_Actividad)] = cleanStr(a.Enfoque_Actividad) || 'Cultural'; });
+      actF.forEach(a => {
+        const enfRaw = cleanMojibake(a.Enfoque_Actividad) || 'Cultural';
+        enfoqueByAct[cleanStr(a.ID_Actividad)] = enfRaw.includes('Art') ? 'Artística' : 'Cultural';
+      });
 
       const enfoqueEtario = { Cultural: {}, Artística: {} };
 
       pobF.forEach(p => {
         const cant = toNum(p.Cantidad_Poblacion);
-        const ge = cleanStr(p.Grupo_Etario) || 'Sin especificar';
-        const gp = cleanStr(p.Grupo_Prioritario) || 'Ninguno (Población General)';
-        const gen = cleanStr(p.Genero) || 'No se cuenta con el dato';
+        let ge = cleanMojibake(p.Grupo_Etario) || 'Sin especificar';
+        let gp = cleanMojibake(p.Grupo_Prioritario) || 'Ninguno (Población General)';
+        let gen = cleanMojibake(p.Genero);
+        if (!gen || gen === 'No se cuenta con el dato') gen = 'Dato global';
         const enf = enfoqueByAct[cleanStr(p.ID_Actividad)] || 'Cultural';
 
         etarioMap[ge] = (etarioMap[ge] || 0) + cant;
@@ -3355,8 +3395,9 @@
       populateAuditUsers();
       const quantityCount = new Set(auditList.filter(r => r.categories.includes('concentrados')).map(r => r.id)).size;
       const quantityButton = document.getElementById('kpi-cantidades-alerta');
-      quantityButton.classList.toggle('hidden', quantityCount === 0);
-      quantityButton.textContent = `Revisar cantidades en ${quantityCount} registros`;
+      if (quantityButton) {
+        quantityButton.classList.add('hidden');
+      }
       renderAuditTable();
       computeFaltantesAudit(actF);
       renderFaltantesTable();
@@ -3394,25 +3435,25 @@
       const total = n => n === null ? '<span class="text-amber-700">No disponible</span>' : fmtInt(n);
       document.getElementById('tbl-auditoria').innerHTML = rows.length ? rows.slice(0, 250).map(r => `
         <tr class="hover:bg-amber-50/30 text-xs">
-          <td class="p-2.5 font-mono font-bold text-gto-blue max-w-[130px] align-top">
+          <td class="p-2.5 font-mono font-bold text-gto-blue max-w-[130px] align-top overflow-hidden">
             <div class="truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
             <div class="text-[10px] text-slate-500 font-sans font-normal truncate" title="${auditEscape(r.folio)}">${auditEscape(r.folio)}</div>
           </td>
-          <td class="p-2.5 text-slate-600 max-w-[170px] align-top">
+          <td class="p-2.5 text-slate-600 max-w-[170px] align-top overflow-hidden">
             <div class="truncate text-xs" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
           </td>
-          <td class="p-2.5 font-medium text-slate-700 min-w-[180px] max-w-[260px] align-top">
+          <td class="p-2.5 font-medium text-slate-700 min-w-[180px] max-w-[260px] align-top overflow-hidden">
             <div class="line-clamp-2" title="${auditEscape(r.nombre)}">${auditEscape(r.nombre)}</div>
             <div class="text-[10px] text-slate-400 truncate" title="${auditEscape(r.direccion)}">${auditEscape(r.direccion)}</div>
           </td>
-          <td class="p-2.5 text-slate-600 max-w-[110px] align-top">
+          <td class="p-2.5 text-slate-600 max-w-[110px] align-top overflow-hidden">
             <div class="truncate" title="${auditEscape(r.mun)}">${auditEscape(r.mun)}</div>
           </td>
-          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap">${total(r.sT)}</td>
-          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap">${total(r.sP)}</td>
-          <td class="p-2.5 text-right font-bold align-top whitespace-nowrap ${r.diff ? 'text-rose-700' : 'text-slate-500'}">${r.diff === null ? 'No comparable' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}</td>
-          <td class="p-2.5 text-slate-700 min-w-[220px] align-top text-xs leading-relaxed">${auditEscape(r.diag)}</td>
-          <td class="p-2.5 text-center align-top whitespace-nowrap">
+          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap overflow-hidden max-w-[95px]">${total(r.sT)}</td>
+          <td class="p-2.5 text-right font-semibold align-top whitespace-nowrap overflow-hidden max-w-[95px]">${total(r.sP)}</td>
+          <td class="p-2.5 text-right font-bold align-top whitespace-nowrap overflow-hidden max-w-[80px] ${r.diff ? 'text-rose-700' : 'text-slate-500'}">${r.diff === null ? 'No comparable' : (r.diff > 0 ? '+' : '') + fmtInt(r.diff)}</td>
+          <td class="p-2.5 text-slate-700 min-w-[220px] max-w-[220px] align-top text-xs leading-relaxed overflow-hidden">${auditEscape(r.diag)}</td>
+          <td class="p-2.5 text-center align-top whitespace-nowrap overflow-hidden max-w-[90px]">
             <button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] transition">Revisar ficha</button>
           </td>
         </tr>`).join('') : '<tr><td colspan="9" class="p-6 text-center text-slate-500">No hay alertas para esta selección y búsqueda.</td></tr>';
@@ -3681,39 +3722,39 @@
 
       tbody.innerHTML = filtered.length ? filtered.slice(0, 250).map(r => `
         <tr class="hover:bg-slate-50/80 transition text-xs">
-          <td class="p-2.5 align-top">
+          <td class="p-2.5 align-top overflow-hidden max-w-[120px]">
             <div class="font-mono font-bold text-gto-blue text-xs truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
             <div class="text-[10px] text-slate-400 font-normal truncate" title="${auditEscape(r.folio)}">${auditEscape(r.folio)}</div>
           </td>
-          <td class="p-2.5 align-top">
+          <td class="p-2.5 align-top overflow-hidden max-w-[220px]">
             <div class="font-semibold text-slate-800 leading-snug line-clamp-2" title="${auditEscape(r.nombre)}">${auditEscape(r.nombre)}</div>
           </td>
-          <td class="p-2.5 align-top text-slate-700">
+          <td class="p-2.5 align-top text-slate-700 overflow-hidden max-w-[160px]">
             <div class="truncate text-xs font-medium" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
           </td>
-          <td class="p-2.5 align-top text-slate-500 text-[11px]">
+          <td class="p-2.5 align-top text-slate-500 text-[11px] overflow-hidden max-w-[140px]">
             <div class="truncate" title="${auditEscape(r.direccion)}">${auditEscape(r.direccion)}</div>
           </td>
-          <td class="p-2.5 align-top">
+          <td class="p-2.5 align-top overflow-hidden max-w-[150px]">
             <div class="font-mono text-[10px] font-bold text-slate-700 truncate" title="${auditEscape(r.clave)}">${auditEscape(r.clave)}</div>
             <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${r.sinMeta ? '<span class="text-rose-600 font-bold">Sin Meta</span>' : auditEscape(r.nombreMeta || r.meta)}</div>
           </td>
-          <td class="p-2.5 align-top">
+          <td class="p-2.5 align-top overflow-hidden max-w-[115px]">
             ${r.sinMun ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 inline-block">Falta Municipio</span>' : `<div class="font-medium text-slate-700 truncate" title="${auditEscape(r.municipio)}">${auditEscape(r.municipio)}</div>`}
           </td>
-          <td class="p-2.5 align-top">
+          <td class="p-2.5 align-top overflow-hidden max-w-[115px]">
             ${r.sinCom ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 inline-block">Falta Localidad</span>' : `<div class="truncate text-slate-600" title="${auditEscape(r.comunidad)}">${auditEscape(r.comunidad)}</div>`}
           </td>
-          <td class="p-2.5 align-top text-right whitespace-nowrap">
+          <td class="p-2.5 align-top text-right whitespace-nowrap overflow-hidden max-w-[85px]">
             ${r.sinPob ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 inline-block">Sin Población</span>' : `<span class="font-bold text-slate-800">${fmtInt(r.sumP)}</span>${r.sinDesglose ? '<div class="text-[9px] text-purple-700 font-bold">Sin Desglose</div>' : ''}`}
           </td>
-          <td class="p-2.5 align-top text-right whitespace-nowrap font-semibold text-slate-700">
+          <td class="p-2.5 align-top text-right whitespace-nowrap font-semibold text-slate-700 overflow-hidden max-w-[85px]">
             ${r.sumT == null ? '<span class="text-slate-400">N/A</span>' : fmtInt(r.sumT)}
           </td>
-          <td class="p-2.5 align-top text-right whitespace-nowrap">
+          <td class="p-2.5 align-top text-right whitespace-nowrap overflow-hidden max-w-[75px]">
             ${r.diff === null ? '<span class="text-slate-400">—</span>' : (r.diff === 0 ? '<span class="text-emerald-700 font-bold">0</span>' : `<span class="px-1.5 py-0.5 rounded text-xs font-black bg-rose-100 text-rose-700">${r.diff > 0 ? '+' : ''}${fmtInt(r.diff)}</span>`)}
           </td>
-          <td class="p-2.5 align-top text-center whitespace-nowrap">
+          <td class="p-2.5 align-top text-center whitespace-nowrap overflow-hidden max-w-[85px]">
             <button data-audit-id="${auditEscape(r.id)}" onclick="openExpedienteModal(this.dataset.auditId)"
               class="px-2.5 py-1 rounded-lg bg-gto-blue/10 hover:bg-gto-blue/20 text-gto-blue font-bold text-[10px] transition">
               Revisar
@@ -3919,7 +3960,7 @@
         const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
         const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
 
-        let html = '<div class="w-full flex flex-col select-none">';
+        let html = '<div class="w-full flex-1 flex flex-col justify-between select-none">';
         html += '<div class="flex items-center justify-between text-[11px] mb-1 px-1 border-b border-slate-100 pb-1 shrink-0">';
         html += '<span class="font-extrabold text-slate-700 tracking-tight">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
         html += '<div class="flex items-center gap-2 text-[10px] text-slate-500 font-medium">';
@@ -3929,7 +3970,7 @@
         html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs border border-slate-300 shrink-0" style="background:#f8fafc"></span> 0</span>';
         html += '</div></div>';
 
-        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[295px] drop-shadow-xs mx-auto mt-0.5">';
+        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[305px] drop-shadow-xs mx-auto my-auto">';
         html += '<g>';
         window.GTO_MAP_PATHS.forEach(mun => {
           const norm = normalizeMunicipioName(mun.name);
