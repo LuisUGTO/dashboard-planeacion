@@ -2196,6 +2196,7 @@
 
       rawDB.actividades.forEach(a => {
         const id = cleanStr(a.ID_Actividad);
+        if (!id || id.startsWith('[')) return;
         const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
         if (!matchesActivityPeriod(fIso, dStart, dEnd)) return;
         if (fDir !== 'ALL' && getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) !== fDir) return;
@@ -2712,7 +2713,9 @@
       const dirMap = new Map();
       actF.forEach(a => {
         const name = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, sourceCat);
-        dirMap.set(name, (dirMap.get(name) || 0) + 1);
+        if (name && name !== 'SIN ASIGNAR') {
+          dirMap.set(name, (dirMap.get(name) || 0) + 1);
+        }
       });
       renderStrategicDirections([...dirMap].sort((a, b) => b[1] - a[1]));
 
@@ -3478,8 +3481,12 @@
     function exportAuditCSV() {
       const download = getAuditExportData();
       if (!download.data.length) return;
-      const csv = Papa.unparse({ fields: download.fields, data: download.data }, { escapeFormulae: true, newline: '\r\n' });
-      const blob = new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8;' });
+      const cleanCell = v => (v === null || v === undefined) ? '' : String(v).replace(/[\r\n\t]+/g, ' ').trim();
+      const cleanedData = download.data.map(row => row.map(cleanCell));
+      const csv = Papa.unparse({ fields: download.fields, data: cleanedData }, { escapeFormulae: true, newline: '\r\n' });
+      if (typeof Blob === 'undefined' || typeof document.createElement !== 'function') return;
+      const content = '\uFEFFsep=,\r\n' + csv;
+      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -3810,26 +3817,29 @@
         'Diagnostico_Faltantes'
       ];
 
+      const cleanCell = v => (v === null || v === undefined) ? '' : String(v).replace(/[\r\n\t]+/g, ' ').trim();
+
       const data = filtered.map(r => [
-        r.id,
-        r.folio,
-        r.usuario,
-        r.direccion,
-        r.nombre,
-        r.clave,
-        r.meta,
-        r.nombreMeta,
-        r.municipio,
-        r.comunidad,
+        cleanCell(r.id),
+        cleanCell(r.folio),
+        cleanCell(r.usuario),
+        cleanCell(r.direccion),
+        cleanCell(r.nombre),
+        cleanCell(r.clave),
+        cleanCell(r.meta),
+        cleanCell(r.nombreMeta),
+        cleanCell(r.municipio),
+        cleanCell(r.comunidad),
         r.sumT == null ? '' : r.sumT,
         r.sumP == null ? '' : r.sumP,
         r.diff == null ? '' : r.diff,
-        r.issues.map(i => i.label).join(' | ')
+        cleanCell(r.issues.map(i => i.label).join(' | '))
       ]);
 
-      const csv = Papa.unparse({ fields, data }, { escapeFormulae: true, newline: '\r\n' });
+      const csv = Papa.unparse({ fields, data }, { escapeFormulae: false, newline: '\r\n' });
       if (typeof Blob === 'undefined' || typeof document.createElement !== 'function') return;
-      const blob = new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8;' });
+      const content = '\uFEFFsep=,\r\n' + csv;
+      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
