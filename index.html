@@ -3612,6 +3612,8 @@
         const validNum = v => v !== '' && !isNaN(Number(v));
         const sumT = tRows.length ? tRows.reduce((s, t) => s + (validNum(t.Cantidad) ? Number(t.Cantidad) : 0), 0) : null;
         const sumP = pRows.length ? pRows.reduce((s, p) => s + (validNum(p.Cantidad_Poblacion) ? Number(p.Cantidad_Poblacion) : 0), 0) : null;
+        const sumPart = pRows.length ? pRows.reduce((s, p) => s + (validNum(p.Cantidad_Participacion) ? Number(p.Cantidad_Participacion) : 0), 0) : null;
+        const sumAcc = pRows.length ? pRows.reduce((s, p) => s + (validNum(p.Cantidad_Acceso) ? Number(p.Cantidad_Acceso) : 0), 0) : null;
         let diff = null;
         if (sumT !== null && sumP !== null && sumT !== sumP) {
           diff = sumT - sumP;
@@ -3642,6 +3644,8 @@
             comunidad: comList,
             sumT,
             sumP,
+            sumPart,
+            sumAcc,
             diff,
             issues,
             types: issues.map(i => i.tipo),
@@ -3809,12 +3813,19 @@
         'Clave_Proceso_Txt',
         'Meta',
         'Nombre_Meta',
-        'Municipio',
-        'Comunidad_Localidad',
+        'Municipio_Actual',
+        'Municipio_A_Corregir',
+        'Comunidad_Sede_Actual',
+        'Comunidad_o_Sede_A_Llenar',
         'Total_Territorial',
         'Total_Demografico',
         'Diferencia',
-        'Diagnostico_Faltantes'
+        'Participacion_Actual',
+        'Participacion_A_Llenar',
+        'Acceso_Actual',
+        'Acceso_A_Llenar',
+        'Diagnostico_Faltantes',
+        'Notas_o_Comentarios_Usuario'
       ];
 
       const cleanCell = v => (v === null || v === undefined) ? '' : String(v).replace(/[\r\n\t]+/g, ' ').trim();
@@ -3829,11 +3840,18 @@
         cleanCell(r.meta),
         cleanCell(r.nombreMeta),
         cleanCell(r.municipio),
+        '', // Municipio_A_Corregir (en blanco para captura)
         cleanCell(r.comunidad),
+        '', // Comunidad_o_Sede_A_Llenar (en blanco para captura)
         r.sumT == null ? '' : r.sumT,
         r.sumP == null ? '' : r.sumP,
         r.diff == null ? '' : r.diff,
-        cleanCell(r.issues.map(i => i.label).join(' | '))
+        r.sumPart == null ? '' : r.sumPart,
+        '', // Participacion_A_Llenar (en blanco para captura)
+        r.sumAcc == null ? '' : r.sumAcc,
+        '', // Acceso_A_Llenar (en blanco para captura)
+        cleanCell(r.issues.map(i => i.label).join(' | ')),
+        '' // Notas_o_Comentarios_Usuario
       ]);
 
       const csv = Papa.unparse({ fields, data }, { escapeFormulae: false, newline: '\r\n' });
