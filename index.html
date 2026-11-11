@@ -653,25 +653,30 @@
         </div>
 
         <!-- Fila Central: Mapa + Top Tipos + Disciplinas y Programa de Gobierno -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div class="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
-            <div class="flex flex-col flex-1 min-h-0">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <div class="lg:col-span-5 self-start bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center justify-between gap-2 mb-2">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 min-w-0">
                   <div class="w-7 h-7 rounded-lg bg-blue-50 text-gto-blue flex items-center justify-center shrink-0">
                     <i data-lucide="compass" class="w-4 h-4"></i>
                   </div>
-                  <div>
+                  <div class="min-w-0">
                     <h3 class="text-base font-extrabold text-gto-blue leading-none">Cobertura Territorial</h3>
-                    <p class="text-[11px] text-slate-400 mt-0.5">Presencia en los 46 municipios del Estado</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5 truncate">Presencia en los 46 municipios del Estado</p>
                   </div>
                 </div>
-                <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-[10px] font-bold shrink-0">
-                  <button type="button" id="btn-map-mode-act" onclick="setHomeMapMode('actividades')" class="px-2 py-0.5 rounded-md bg-gto-blue text-white shadow-2xs transition">Actividades</button>
-                  <button type="button" id="btn-map-mode-pob" onclick="setHomeMapMode('poblacion')" class="px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 transition">Población</button>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-[10px] font-bold">
+                    <button type="button" id="btn-map-mode-act" onclick="setHomeMapMode('actividades')" class="px-2 py-0.5 rounded-md bg-gto-blue text-white shadow-2xs transition">Actividades</button>
+                    <button type="button" id="btn-map-mode-pob" onclick="setHomeMapMode('poblacion')" class="px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 transition">Población</button>
+                  </div>
+                  <button type="button" id="btn-expand-map" onclick="openMapFullscreenModal()" title="Ver mapa en pantalla completa" class="p-1.5 rounded-lg border border-slate-200 bg-slate-100 hover:bg-slate-200 text-gto-blue transition" aria-label="Ver mapa en pantalla completa">
+                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  </button>
                 </div>
               </div>
-              <div id="mapGto" class="flex-1 flex flex-col justify-between border border-slate-200 shadow-inner rounded-xl p-2.5 bg-white relative overflow-hidden"></div>
+              <div id="mapGto" class="flex flex-col border border-slate-200 shadow-inner rounded-xl p-2.5 bg-white relative"></div>
             </div>
 
             <div class="grid grid-cols-3 gap-2 mt-2.5 pt-2.5 border-t border-slate-100">
@@ -1666,6 +1671,28 @@
         </button>
       </div>
       <div id="mod-body" class="min-h-0 p-4 sm:p-6 overflow-y-auto custom-scroll space-y-5 text-sm"></div>
+    </div>
+  </div>
+
+  <!-- VENTANA MODAL: MAPA EN PANTALLA COMPLETA -->
+  <div id="modal-map-fullscreen" role="dialog" aria-modal="true" aria-labelledby="modal-map-title" onclick="if (event.target === this) closeMapFullscreenModal()" onkeydown="if (event.key === 'Escape') closeMapFullscreenModal()" class="fixed inset-0 bg-slate-900/75 backdrop-blur-xs z-50 hidden flex items-center justify-center p-2 sm:p-5">
+    <div class="bg-white rounded-2xl max-w-6xl w-full max-h-[94vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="bg-gto-blue text-white px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="min-w-0">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-sky-200">Cobertura Territorial Estatal</p>
+          <h3 id="modal-map-title" class="text-sm sm:text-lg font-vollkorn font-extrabold leading-snug truncate">Mapa de Cobertura — 46 Municipios de Guanajuato</h3>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <div class="inline-flex rounded-lg border border-white/25 bg-white/10 p-0.5 text-xs font-bold">
+            <button type="button" id="btn-modal-map-act" onclick="setHomeMapMode('actividades')" class="px-3 py-1 rounded-md bg-white text-gto-blue shadow-sm transition">Actividades</button>
+            <button type="button" id="btn-modal-map-pob" onclick="setHomeMapMode('poblacion')" class="px-3 py-1 rounded-md text-white/90 hover:text-white transition">Población</button>
+          </div>
+          <button id="modal-map-close" aria-label="Cerrar mapa ampliado" onclick="closeMapFullscreenModal()" class="w-8 h-8 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white shrink-0 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      <div id="modal-map-body" class="flex-1 min-h-0 p-3 sm:p-5 overflow-y-auto custom-scroll bg-white flex flex-col justify-between"></div>
     </div>
   </div>
 
@@ -3935,8 +3962,10 @@
     }
 
     let homeMapMode = 'actividades';
-    function setHomeMapMode(mode) {
-      homeMapMode = mode;
+    let lastHomeMapTerF = [];
+
+    function syncHomeMapModeButtons() {
+      const mode = homeMapMode;
       const btnAct = document.getElementById('btn-map-mode-act');
       const btnPob = document.getElementById('btn-map-mode-pob');
       if (btnAct) {
@@ -3949,7 +3978,47 @@
         btnPob.classList.toggle('text-white', mode === 'poblacion');
         btnPob.classList.toggle('text-slate-600', mode !== 'poblacion');
       }
+      const mAct = document.getElementById('btn-modal-map-act');
+      const mPob = document.getElementById('btn-modal-map-pob');
+      if (mAct) {
+        mAct.classList.toggle('bg-white', mode === 'actividades');
+        mAct.classList.toggle('text-gto-blue', mode === 'actividades');
+        mAct.classList.toggle('shadow-sm', mode === 'actividades');
+        mAct.classList.toggle('text-white/90', mode !== 'actividades');
+      }
+      if (mPob) {
+        mPob.classList.toggle('bg-white', mode === 'poblacion');
+        mPob.classList.toggle('text-gto-blue', mode === 'poblacion');
+        mPob.classList.toggle('shadow-sm', mode === 'poblacion');
+        mPob.classList.toggle('text-white/90', mode !== 'poblacion');
+      }
+    }
+
+    function setHomeMapMode(mode) {
+      homeMapMode = mode;
+      syncHomeMapModeButtons();
       applyFilters();
+    }
+
+    function openMapFullscreenModal() {
+      const modal = document.getElementById('modal-map-fullscreen');
+      const body = document.getElementById('modal-map-body');
+      if (!modal || !body) return;
+      syncHomeMapModeButtons();
+      if (typeof window !== 'undefined' && window.GTO_MAP_PATHS && Array.isArray(window.GTO_MAP_PATHS)) {
+        body.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true);
+      }
+      modal.classList.remove('hidden');
+      const closeBtn = document.getElementById('modal-map-close');
+      if (closeBtn) closeBtn.focus();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeMapFullscreenModal() {
+      const modal = document.getElementById('modal-map-fullscreen');
+      if (modal) modal.classList.add('hidden');
+      const expandBtn = document.getElementById('btn-expand-map');
+      if (expandBtn) expandBtn.focus();
     }
 
     function toggleHomeMunicipioFilter(munName) {
@@ -3966,177 +4035,200 @@
       applyFilters();
     }
 
+    const GTO_MUN_LABELS = {
+      'San Felipe': { x: 186, y: 88, fs: 7.5, lines: ['San Felipe'] },
+      'Ocampo': { x: 131, y: 94, fs: 7, lines: ['Ocampo'] },
+      'San Diego de la Unión': { x: 245, y: 111, fs: 5.5, lines: ['San Diego', 'de la U.'] },
+      'San Luis de la Paz': { x: 317, y: 121, fs: 6.2, lines: ['San Luis', 'de la Paz'] },
+      'Victoria': { x: 359, y: 138, fs: 6.2, lines: ['Victoria'] },
+      'Xichú': { x: 408, y: 133, fs: 7, lines: ['Xichú'] },
+      'Atarjea': { x: 441, y: 148, fs: 5.6, lines: ['Atarjea'] },
+      'Santa Catarina': { x: 392, y: 168, fs: 4.5, lines: ['Sta.', 'Catarina'] },
+      'Tierra Blanca': { x: 374, y: 190, fs: 5.2, lines: ['Tierra', 'Blanca'] },
+      'Doctor Mora': { x: 340, y: 169, fs: 5, lines: ['Dr. Mora'] },
+      'San José Iturbide': { x: 332, y: 198, fs: 5.4, lines: ['San José', 'Iturbide'] },
+      'Dolores Hidalgo Cuna de la Independencia Nacional': { x: 226, y: 167, fs: 6.2, lines: ['Dolores Hidalgo', 'C.I.N.'] },
+      'San Miguel de Allende': { x: 282, y: 205, fs: 6.4, lines: ['San Miguel', 'de Allende'] },
+      'Guanajuato': { x: 173, y: 185, fs: 6.2, lines: ['Guanajuato'] },
+      'Silao': { x: 140, y: 204, fs: 6.4, lines: ['Silao'] },
+      'León': { x: 100, y: 172, fs: 7.5, lines: ['León'] },
+      'Purísima del Rincón': { x: 43, y: 215, fs: 4.4, lines: ['Purísima', 'del R.'] },
+      'San Francisco del Rincón': { x: 71, y: 211, fs: 4.7, lines: ['San Fco.', 'del Rincón'] },
+      'Romita': { x: 109, y: 226, fs: 6, lines: ['Romita'] },
+      'Manuel Doblado': { x: 59, y: 249, fs: 5.8, lines: ['Manuel', 'Doblado'] },
+      'Cuerámaro': { x: 96, y: 270, fs: 4.8, lines: ['Cuerámaro'] },
+      'Pénjamo': { x: 69, y: 310, fs: 7.2, lines: ['Pénjamo'] },
+      'Abasolo': { x: 119, y: 295, fs: 5.4, lines: ['Abasolo'] },
+      'Huanímaro': { x: 127, y: 316, fs: 4.3, lines: ['Huanímaro'] },
+      'Irapuato': { x: 147, y: 254, fs: 6.5, lines: ['Irapuato'] },
+      'Pueblo Nuevo': { x: 149, y: 281, fs: 3.9, lines: ['Pueblo', 'Nuevo'] },
+      'Salamanca': { x: 187, y: 268, fs: 6, lines: ['Salamanca'] },
+      'Valle de Santiago': { x: 167, y: 312, fs: 5.5, lines: ['Valle de', 'Santiago'] },
+      'Santa Cruz de Juventino Rosas': { x: 221, y: 263, fs: 4.8, lines: ['Juventino', 'Rosas'] },
+      'Comonfort': { x: 266, y: 244, fs: 5.4, lines: ['Comonfort'] },
+      'Villagrán': { x: 223, y: 282, fs: 4.3, lines: ['Villagrán'] },
+      'Cortazar': { x: 228, y: 303, fs: 5.3, lines: ['Cortazar'] },
+      'Celaya': { x: 256, y: 275, fs: 6, lines: ['Celaya'] },
+      'Apaseo el Grande': { x: 289, y: 274, fs: 4.9, lines: ['Apaseo', 'el Grande'] },
+      'Apaseo el Alto': { x: 298, y: 305, fs: 5, lines: ['Apaseo', 'el Alto'] },
+      'Jaral del Progreso': { x: 207, y: 316, fs: 4.2, lines: ['Jaral', 'del P.'] },
+      'Salvatierra': { x: 234, y: 335, fs: 5.4, lines: ['Salvatierra'] },
+      'Tarimoro': { x: 266, y: 331, fs: 5.1, lines: ['Tarimoro'] },
+      'Jerécuaro': { x: 305, y: 342, fs: 5.6, lines: ['Jerécuaro'] },
+      'Coroneo': { x: 333, y: 340, fs: 4.4, lines: ['Coroneo'] },
+      'Acámbaro': { x: 269, y: 372, fs: 6.4, lines: ['Acámbaro'] },
+      'Tarandacuao': { x: 304, y: 379, fs: 4.1, lines: ['Tarandacuao'] },
+      'Yuriria': { x: 164, y: 344, fs: 6, lines: ['Yuriria'] },
+      'Santiago Maravatío': { x: 220, y: 353, fs: 3.9, lines: ['S.', 'Maravatío'] },
+      'Uriangato': { x: 192, y: 360, fs: 4.1, lines: ['Uriangato'] },
+      'Moroleón': { x: 172, y: 367, fs: 4.6, lines: ['Moroleón'] }
+    };
+
+    function buildHomeMapHtml(terF, isExpanded) {
+      const byMunActs = new Map();
+      const byMunPop = new Map();
+      (terF || []).forEach(t => {
+        const m = cleanStr(t.Municipio);
+        if (!m) return;
+        const norm = normalizeMunicipioName(m);
+        byMunActs.set(norm, (byMunActs.get(norm) || 0) + 1);
+        byMunPop.set(norm, (byMunPop.get(norm) || 0) + toNum(t.Cantidad));
+      });
+
+      const isPop = homeMapMode === 'poblacion';
+      const activeValues = isPop ? byMunPop : byMunActs;
+      const maxVal = Math.max(...activeValues.values(), 1);
+      const tMuyAlta = isPop
+        ? Math.max(Math.round(maxVal * 0.6), 5000)
+        : (maxVal >= 200 ? 200 : Math.max(Math.round(maxVal * 0.7), 20));
+      const tAlta = isPop
+        ? Math.min(tMuyAlta - 1, Math.max(Math.round(maxVal * 0.3), 1000))
+        : Math.min(tMuyAlta - 1, (maxVal >= 100 ? 100 : Math.max(Math.round(maxVal * 0.45), 10)));
+      const tMedia = isPop
+        ? Math.min(tAlta - 1, Math.max(Math.round(maxVal * 0.08), 100))
+        : Math.min(tAlta - 1, (maxVal >= 100 ? 25 : Math.max(Math.round(maxVal * 0.2), 3)));
+
+      const curMun = cleanStr(document.getElementById('f-municipio')?.value);
+      const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
+      const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
+
+      const tierCounts = [0, 0, 0, 0, 0];
+      let pathsHtml = '';
+      let selectedPathHtml = '';
+      let labelsHtml = '';
+
+      window.GTO_MAP_PATHS.forEach(mun => {
+        const norm = normalizeMunicipioName(mun.name);
+        const acts = byMunActs.get(norm) || 0;
+        const pop = byMunPop.get(norm) || 0;
+        const val = isPop ? pop : acts;
+
+        let fill = '#f8fafc';
+        let tierIdx = 4;
+        let darkFill = false;
+        if (val >= tMuyAlta) { fill = '#4a044e'; tierIdx = 0; darkFill = true; }
+        else if (val >= tAlta) { fill = '#701a75'; tierIdx = 1; darkFill = true; }
+        else if (val >= tMedia) { fill = '#a21caf'; tierIdx = 2; darkFill = true; }
+        else if (val > 0) { fill = '#e9d5ff'; tierIdx = 3; darkFill = false; }
+        tierCounts[tierIdx]++;
+
+        const isSelected = normSelected && normSelected === norm;
+        const stroke = isSelected ? '#2563eb' : (darkFill ? '#f1f5f9' : '#64748b');
+        const strokeW = isSelected ? '2.5' : '0.8';
+
+        const pathTag = '<path id="svg-' + (isExpanded ? 'modal' : 'home') + '-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas</title></path>';
+        if (isSelected) selectedPathHtml += pathTag;
+        else pathsHtml += pathTag;
+
+        const lbl = GTO_MUN_LABELS[mun.name];
+        if (lbl) {
+          const textFill = darkFill ? '#ffffff' : '#1e293b';
+          const haloColor = darkFill ? 'rgba(30,10,45,0.55)' : 'rgba(255,255,255,0.85)';
+          const lineHeight = lbl.fs * 1.08;
+          const startY = lbl.y - ((lbl.lines.length - 1) * lineHeight) / 2;
+          labelsHtml += '<text x="' + lbl.x + '" y="' + startY.toFixed(1) + '" text-anchor="middle" dominant-baseline="central" font-size="' + lbl.fs + '" font-weight="700" font-family="Plus Jakarta Sans, Inter, sans-serif" fill="' + textFill + '" style="pointer-events:none; paint-order:stroke; stroke:' + haloColor + '; stroke-width:1.4px; stroke-linejoin:round;">';
+          lbl.lines.forEach((ln, idx) => {
+            if (idx === 0) labelsHtml += auditEscape(ln);
+            else labelsHtml += '<tspan x="' + lbl.x + '" dy="' + lineHeight.toFixed(1) + '">' + auditEscape(ln) + '</tspan>';
+          });
+          labelsHtml += '</text>';
+        }
+      });
+
+      const tiers = [
+        { label: 'Muy Alta', range: '≥ ' + fmtInt(tMuyAlta), color: '#4a044e', border: '#3b0764', count: tierCounts[0] },
+        { label: 'Alta', range: fmtInt(tAlta) + ' – ' + fmtInt(Math.max(tAlta, tMuyAlta - 1)), color: '#701a75', border: '#701a75', count: tierCounts[1] },
+        { label: 'Media', range: fmtInt(tMedia) + ' – ' + fmtInt(Math.max(tMedia, tAlta - 1)), color: '#a21caf', border: '#a21caf', count: tierCounts[2] },
+        { label: 'Baja', range: tMedia <= 2 ? '1' : ('1 – ' + fmtInt(tMedia - 1)), color: '#e9d5ff', border: '#c084fc', count: tierCounts[3] },
+        { label: 'Sin dato', range: '0', color: '#f8fafc', border: '#cbd5e1', count: tierCounts[4] }
+      ];
+
+      const svgClass = isExpanded ? 'w-full h-auto max-h-[64vh] drop-shadow-xs' : 'w-full h-auto max-h-[295px] drop-shadow-xs';
+      const legendColClass = isExpanded ? 'w-full sm:w-[165px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-2 self-center' : 'w-full sm:w-[108px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-1 self-center';
+      const legendTitleClass = isExpanded ? 'text-xs font-extrabold text-slate-700 truncate' : 'text-[9.5px] font-extrabold text-slate-700 truncate';
+      const legendRangeClass = isExpanded ? 'text-[11px] font-semibold text-slate-500 tabular-nums truncate' : 'text-[8.5px] font-semibold text-slate-500 tabular-nums truncate';
+
+      let html = '<div class="w-full flex flex-col select-none gap-2">';
+      html += '<div class="flex items-center justify-between text-[11px] px-1 border-b border-slate-100 pb-1 shrink-0">';
+      html += '<span class="font-extrabold text-gto-blue tracking-tight ' + (isExpanded ? 'text-sm' : '') + '">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
+      html += '<span class="text-[9.5px] text-slate-400 font-medium hidden sm:inline">Clic en municipio para filtrar</span>';
+      html += '</div>';
+
+      html += '<div class="flex flex-col sm:flex-row items-center gap-3">';
+      html += '<div class="flex-1 min-w-0 w-full flex items-center justify-center">';
+      html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 37 460 366" class="' + svgClass + '">';
+      html += '<g>' + pathsHtml + selectedPathHtml + '</g><g>' + labelsHtml + '</g></svg>';
+      html += '</div>';
+
+      html += '<div class="' + legendColClass + '">';
+      tiers.forEach(t => {
+        html += '<div class="flex items-stretch rounded-md border border-slate-200/90 bg-slate-50/70 overflow-hidden">';
+        html += '<span class="' + (isExpanded ? 'w-3.5' : 'w-2.5 sm:w-3') + ' shrink-0" style="background:' + t.color + '; border-right:1px solid ' + t.border + '"></span>';
+        html += '<div class="px-1.5 ' + (isExpanded ? 'py-1.5' : 'py-1') + ' min-w-0 flex-1 leading-tight">';
+        html += '<div class="' + legendTitleClass + '">' + t.label + '</div>';
+        html += '<div class="' + legendRangeClass + '">' + t.range + ' <span class="text-slate-400">(' + t.count + ')</span></div>';
+        html += '</div></div>';
+      });
+      html += '</div>';
+      html += '</div>';
+
+      if (normSelected) {
+        html += '<div class="text-center text-[10.5px] text-blue-700 font-bold bg-blue-50 py-1 rounded-md border border-blue-200 shrink-0">Filtro activo: ' + auditEscape(curMun) + ' (clic en el mapa para ver todos)</div>';
+      }
+
+      if (isExpanded) {
+        const mTxt = document.getElementById('sub-mun-gto')?.textContent || (totalCovered + ' de 46');
+        const zTxt = document.getElementById('sub-zap-total')?.textContent || '0';
+        const lTxt = document.getElementById('sub-loc-total')?.textContent || '0';
+        html += '<div class="grid grid-cols-3 gap-3 pt-2 border-t border-slate-100">';
+        html += '<div class="bg-blue-50/60 rounded-xl px-3 py-2 border border-blue-100 text-center"><div class="text-[10px] font-bold uppercase text-slate-500">Municipios</div><div class="text-base font-black text-gto-blue">' + auditEscape(mTxt) + '</div></div>';
+        html += '<div class="bg-amber-50/70 rounded-xl px-3 py-2 border border-amber-200/70 text-center"><div class="text-[10px] font-bold uppercase text-amber-800">ZAP</div><div class="text-base font-black text-amber-600">' + auditEscape(zTxt) + '</div></div>';
+        html += '<div class="bg-emerald-50/70 rounded-xl px-3 py-2 border border-emerald-200/70 text-center"><div class="text-[10px] font-bold uppercase text-emerald-800">Localidades</div><div class="text-base font-black text-emerald-700">' + auditEscape(lTxt) + '</div></div>';
+        html += '</div>';
+      }
+
+      html += '<div class="flex items-center justify-center gap-2 pt-1.5 border-t border-slate-100 shrink-0">';
+      html += '<img src="assets/identidad/Logo.png" alt="Guanajuato Gobierno de la Gente" class="' + (isExpanded ? 'h-9' : 'h-7') + ' w-auto object-contain" />';
+      html += '<span class="' + (isExpanded ? 'h-6' : 'h-5') + ' w-px bg-slate-200"></span>';
+      html += '<span class="' + (isExpanded ? 'text-[10.5px]' : 'text-[9px]') + ' font-extrabold uppercase tracking-wider text-gto-blue leading-tight">Secretaría de<br>Cultura</span>';
+      html += '</div>';
+
+      html += '</div>';
+      return html;
+    }
+
     function updateMapMarkers(terF) {
+      lastHomeMapTerF = terF || [];
       const container = document.getElementById('mapGto');
       if (!container) return;
 
       if (typeof window !== 'undefined' && window.GTO_MAP_PATHS && Array.isArray(window.GTO_MAP_PATHS)) {
-        const byMunActs = new Map();
-        const byMunPop = new Map();
-        (terF || []).forEach(t => {
-          const m = cleanStr(t.Municipio);
-          if (!m) return;
-          const norm = normalizeMunicipioName(m);
-          byMunActs.set(norm, (byMunActs.get(norm) || 0) + 1);
-          byMunPop.set(norm, (byMunPop.get(norm) || 0) + toNum(t.Cantidad));
-        });
-
-        const isPop = homeMapMode === 'poblacion';
-        const activeValues = isPop ? byMunPop : byMunActs;
-        const maxVal = Math.max(...activeValues.values(), 1);
-        const tMuyAlta = isPop
-          ? Math.max(Math.round(maxVal * 0.6), 5000)
-          : (maxVal >= 200 ? 200 : Math.max(Math.round(maxVal * 0.7), 20));
-        const tAlta = isPop
-          ? Math.min(tMuyAlta - 1, Math.max(Math.round(maxVal * 0.3), 1000))
-          : Math.min(tMuyAlta - 1, (maxVal >= 100 ? 100 : Math.max(Math.round(maxVal * 0.45), 10)));
-        const tMedia = isPop
-          ? Math.min(tAlta - 1, Math.max(Math.round(maxVal * 0.08), 100))
-          : Math.min(tAlta - 1, (maxVal >= 100 ? 25 : Math.max(Math.round(maxVal * 0.2), 3)));
-
-        const curMun = cleanStr(document.getElementById('f-municipio')?.value);
-        const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
-        const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
-
-        const GTO_MUN_LABELS = {
-          'San Felipe': { x: 186, y: 88, fs: 7.5, lines: ['San Felipe'] },
-          'Ocampo': { x: 131, y: 94, fs: 7, lines: ['Ocampo'] },
-          'San Diego de la Unión': { x: 245, y: 111, fs: 5.5, lines: ['San Diego', 'de la U.'] },
-          'San Luis de la Paz': { x: 317, y: 121, fs: 6.2, lines: ['San Luis', 'de la Paz'] },
-          'Victoria': { x: 359, y: 138, fs: 6.2, lines: ['Victoria'] },
-          'Xichú': { x: 408, y: 133, fs: 7, lines: ['Xichú'] },
-          'Atarjea': { x: 441, y: 148, fs: 5.6, lines: ['Atarjea'] },
-          'Santa Catarina': { x: 392, y: 168, fs: 4.5, lines: ['Sta.', 'Catarina'] },
-          'Tierra Blanca': { x: 374, y: 190, fs: 5.2, lines: ['Tierra', 'Blanca'] },
-          'Doctor Mora': { x: 340, y: 169, fs: 5, lines: ['Dr. Mora'] },
-          'San José Iturbide': { x: 332, y: 198, fs: 5.4, lines: ['San José', 'Iturbide'] },
-          'Dolores Hidalgo Cuna de la Independencia Nacional': { x: 226, y: 167, fs: 6.2, lines: ['Dolores Hidalgo', 'C.I.N.'] },
-          'San Miguel de Allende': { x: 282, y: 205, fs: 6.4, lines: ['San Miguel', 'de Allende'] },
-          'Guanajuato': { x: 173, y: 185, fs: 6.2, lines: ['Guanajuato'] },
-          'Silao': { x: 140, y: 204, fs: 6.4, lines: ['Silao'] },
-          'León': { x: 100, y: 172, fs: 7.5, lines: ['León'] },
-          'Purísima del Rincón': { x: 43, y: 215, fs: 4.4, lines: ['Purísima', 'del R.'] },
-          'San Francisco del Rincón': { x: 71, y: 211, fs: 4.7, lines: ['San Fco.', 'del Rincón'] },
-          'Romita': { x: 109, y: 226, fs: 6, lines: ['Romita'] },
-          'Manuel Doblado': { x: 59, y: 249, fs: 5.8, lines: ['Manuel', 'Doblado'] },
-          'Cuerámaro': { x: 96, y: 270, fs: 4.8, lines: ['Cuerámaro'] },
-          'Pénjamo': { x: 69, y: 310, fs: 7.2, lines: ['Pénjamo'] },
-          'Abasolo': { x: 119, y: 295, fs: 5.4, lines: ['Abasolo'] },
-          'Huanímaro': { x: 127, y: 316, fs: 4.3, lines: ['Huanímaro'] },
-          'Irapuato': { x: 147, y: 254, fs: 6.5, lines: ['Irapuato'] },
-          'Pueblo Nuevo': { x: 149, y: 281, fs: 3.9, lines: ['Pueblo', 'Nuevo'] },
-          'Salamanca': { x: 187, y: 268, fs: 6, lines: ['Salamanca'] },
-          'Valle de Santiago': { x: 167, y: 312, fs: 5.5, lines: ['Valle de', 'Santiago'] },
-          'Santa Cruz de Juventino Rosas': { x: 221, y: 263, fs: 4.8, lines: ['Juventino', 'Rosas'] },
-          'Comonfort': { x: 266, y: 244, fs: 5.4, lines: ['Comonfort'] },
-          'Villagrán': { x: 223, y: 282, fs: 4.3, lines: ['Villagrán'] },
-          'Cortazar': { x: 228, y: 303, fs: 5.3, lines: ['Cortazar'] },
-          'Celaya': { x: 256, y: 275, fs: 6, lines: ['Celaya'] },
-          'Apaseo el Grande': { x: 289, y: 274, fs: 4.9, lines: ['Apaseo', 'el Grande'] },
-          'Apaseo el Alto': { x: 298, y: 305, fs: 5, lines: ['Apaseo', 'el Alto'] },
-          'Jaral del Progreso': { x: 207, y: 316, fs: 4.2, lines: ['Jaral', 'del P.'] },
-          'Salvatierra': { x: 234, y: 335, fs: 5.4, lines: ['Salvatierra'] },
-          'Tarimoro': { x: 266, y: 331, fs: 5.1, lines: ['Tarimoro'] },
-          'Jerécuaro': { x: 305, y: 342, fs: 5.6, lines: ['Jerécuaro'] },
-          'Coroneo': { x: 333, y: 340, fs: 4.4, lines: ['Coroneo'] },
-          'Acámbaro': { x: 269, y: 372, fs: 6.4, lines: ['Acámbaro'] },
-          'Tarandacuao': { x: 304, y: 379, fs: 4.1, lines: ['Tarandacuao'] },
-          'Yuriria': { x: 164, y: 344, fs: 6, lines: ['Yuriria'] },
-          'Santiago Maravatío': { x: 220, y: 353, fs: 3.9, lines: ['S.', 'Maravatío'] },
-          'Uriangato': { x: 192, y: 360, fs: 4.1, lines: ['Uriangato'] },
-          'Moroleón': { x: 172, y: 367, fs: 4.6, lines: ['Moroleón'] }
-        };
-
-        const tierCounts = [0, 0, 0, 0, 0];
-        let pathsHtml = '';
-        let selectedPathHtml = '';
-        let labelsHtml = '';
-
-        window.GTO_MAP_PATHS.forEach(mun => {
-          const norm = normalizeMunicipioName(mun.name);
-          const acts = byMunActs.get(norm) || 0;
-          const pop = byMunPop.get(norm) || 0;
-          const val = isPop ? pop : acts;
-
-          let fill = '#f8fafc';
-          let tierIdx = 4;
-          let darkFill = false;
-          if (val >= tMuyAlta) { fill = '#4a044e'; tierIdx = 0; darkFill = true; }
-          else if (val >= tAlta) { fill = '#701a75'; tierIdx = 1; darkFill = true; }
-          else if (val >= tMedia) { fill = '#a21caf'; tierIdx = 2; darkFill = true; }
-          else if (val > 0) { fill = '#e9d5ff'; tierIdx = 3; darkFill = false; }
-          tierCounts[tierIdx]++;
-
-          const isSelected = normSelected && normSelected === norm;
-          const stroke = isSelected ? '#2563eb' : (darkFill ? '#f1f5f9' : '#64748b');
-          const strokeW = isSelected ? '2.5' : '0.8';
-
-          const pathTag = '<path id="svg-home-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas</title></path>';
-          if (isSelected) selectedPathHtml += pathTag;
-          else pathsHtml += pathTag;
-
-          const lbl = GTO_MUN_LABELS[mun.name];
-          if (lbl) {
-            const textFill = darkFill ? '#ffffff' : '#1e293b';
-            const haloColor = darkFill ? 'rgba(30,10,45,0.55)' : 'rgba(255,255,255,0.85)';
-            const lineHeight = lbl.fs * 1.08;
-            const startY = lbl.y - ((lbl.lines.length - 1) * lineHeight) / 2;
-            labelsHtml += '<text x="' + lbl.x + '" y="' + startY.toFixed(1) + '" text-anchor="middle" dominant-baseline="central" font-size="' + lbl.fs + '" font-weight="700" font-family="Plus Jakarta Sans, Inter, sans-serif" fill="' + textFill + '" style="pointer-events:none; paint-order:stroke; stroke:' + haloColor + '; stroke-width:1.4px; stroke-linejoin:round;">';
-            lbl.lines.forEach((ln, idx) => {
-              if (idx === 0) {
-                labelsHtml += auditEscape(ln);
-              } else {
-                labelsHtml += '<tspan x="' + lbl.x + '" dy="' + lineHeight.toFixed(1) + '">' + auditEscape(ln) + '</tspan>';
-              }
-            });
-            labelsHtml += '</text>';
-          }
-        });
-
-        const tiers = [
-          { label: 'Muy Alta', range: '≥ ' + fmtInt(tMuyAlta), color: '#4a044e', border: '#3b0764', count: tierCounts[0] },
-          { label: 'Alta', range: fmtInt(tAlta) + ' – ' + fmtInt(Math.max(tAlta, tMuyAlta - 1)), color: '#701a75', border: '#701a75', count: tierCounts[1] },
-          { label: 'Media', range: fmtInt(tMedia) + ' – ' + fmtInt(Math.max(tMedia, tAlta - 1)), color: '#a21caf', border: '#a21caf', count: tierCounts[2] },
-          { label: 'Baja', range: tMedia <= 2 ? '1' : ('1 – ' + fmtInt(tMedia - 1)), color: '#e9d5ff', border: '#c084fc', count: tierCounts[3] },
-          { label: 'Sin dato', range: '0', color: '#f8fafc', border: '#cbd5e1', count: tierCounts[4] }
-        ];
-
-        let html = '<div class="w-full flex-1 flex flex-col justify-between select-none gap-1.5">';
-        html += '<div class="flex items-center justify-between text-[11px] px-1 border-b border-slate-100 pb-1 shrink-0">';
-        html += '<span class="font-extrabold text-gto-blue tracking-tight">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
-        html += '<span class="text-[9.5px] text-slate-400 font-medium hidden sm:inline">Clic para filtrar</span>';
-        html += '</div>';
-
-        html += '<div class="flex-1 flex flex-col sm:flex-row items-center gap-2 min-h-0">';
-        html += '<div class="flex-1 min-w-0 w-full h-full flex items-center justify-center">';
-        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 37 460 366" class="w-full h-auto max-h-[345px] drop-shadow-xs">';
-        html += '<g>' + pathsHtml + selectedPathHtml + '</g><g>' + labelsHtml + '</g></svg>';
-        html += '</div>';
-
-        html += '<div class="w-full sm:w-[108px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-1 self-center">';
-        tiers.forEach(t => {
-          html += '<div class="flex items-stretch rounded-md border border-slate-200/90 bg-slate-50/70 overflow-hidden">';
-          html += '<span class="w-2.5 sm:w-3 shrink-0" style="background:' + t.color + '; border-right:1px solid ' + t.border + '"></span>';
-          html += '<div class="px-1.5 py-1 min-w-0 flex-1 leading-tight">';
-          html += '<div class="text-[9.5px] font-extrabold text-slate-700 truncate">' + t.label + '</div>';
-          html += '<div class="text-[8.5px] font-semibold text-slate-500 tabular-nums truncate">' + t.range + ' <span class="text-slate-400">(' + t.count + ')</span></div>';
-          html += '</div></div>';
-        });
-        html += '</div>';
-        html += '</div>';
-
-        if (normSelected) {
-          html += '<div class="text-center text-[10px] text-blue-700 font-bold bg-blue-50 py-0.5 rounded-md border border-blue-200 shrink-0">Filtro activo: ' + auditEscape(curMun) + ' (clic en el mapa para ver todos)</div>';
+        container.innerHTML = buildHomeMapHtml(lastHomeMapTerF, false);
+        const modal = document.getElementById('modal-map-fullscreen');
+        const modalBody = document.getElementById('modal-map-body');
+        if (modal && modalBody && !modal.classList.contains('hidden')) {
+          modalBody.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true);
         }
-
-        html += '<div class="flex items-center justify-center gap-2 pt-1 border-t border-slate-100 shrink-0">';
-        html += '<img src="assets/identidad/Logo.png" alt="Guanajuato Gobierno de la Gente" class="h-7 w-auto object-contain" />';
-        html += '<span class="h-5 w-px bg-slate-200"></span>';
-        html += '<span class="text-[9px] font-extrabold uppercase tracking-wider text-gto-blue leading-tight">Secretaría de<br>Cultura</span>';
-        html += '</div>';
-
-        html += '</div>';
-        container.innerHTML = html;
         return;
       }
 
