@@ -436,9 +436,9 @@
           </div>
         </div>
 
-        <!-- Controles Superiores Fijos a la Derecha: Población y Pantalla Completa -->
+        <!-- Controles Superiores Fijos a la Derecha: Pantalla Completa -->
         <div id="top-filter-controls" class="flex items-center gap-1.5 shrink-0">
-          <div id="operational-population" class="flex items-center bg-slate-100 p-0.5 sm:p-1 rounded-lg border border-slate-200 text-xs">
+          <div id="operational-population" class="hidden" aria-hidden="true">
             <span class="hidden md:flex px-1.5 text-[10.5px] font-bold text-gto-blue items-center gap-1">
               <i data-lucide="users-round" class="w-3 h-3 text-gto-sky"></i>
               Población:
@@ -508,61 +508,68 @@
         </div>
 
         <!-- Cuadrícula de los 7 Filtros Operativos -->
-        <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
-          <div class="col-span-2 sm:col-span-1">
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="calendar" class="w-3 h-3 text-gto-blue"></i> Periodo 2026
+        <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-[minmax(205px,1.55fr)_repeat(6,minmax(0,1fr))] gap-2 items-end">
+          <div class="col-span-2 sm:col-span-1 flex flex-col justify-end min-w-0">
+            <label title="Periodo 2026" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="calendar" class="w-3 h-3 text-gto-blue shrink-0"></i>
+              <span class="truncate">Periodo 2026</span>
             </label>
-            <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-[11px]">
-              <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full" />
-              <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full" />
+            <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg px-2 h-[34px] text-[11px] focus-within:border-gto-blue">
+              <input type="date" id="f-date-start" value="2026-01-01" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full min-w-0" />
+              <input type="date" id="f-date-end" value="2026-12-31" onchange="applyFilters()" class="bg-transparent font-semibold text-slate-700 focus:outline-none w-full min-w-0" />
             </div>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue"></i> Municipio
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Municipio" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue shrink-0"></i>
+              <span class="truncate">Municipio</span>
             </label>
-            <select id="f-municipio" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-municipio" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todos los municipios</option>
             </select>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="building-2" class="w-3 h-3 text-purple-600"></i> Dirección General
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Dirección General" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="building-2" class="w-3 h-3 text-purple-600 shrink-0"></i>
+              <span class="truncate">Dirección General</span>
             </label>
-            <select id="f-direccion" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-direccion" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las direcciones</option>
             </select>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="palette" class="w-3 h-3 text-amber-600"></i> Disciplina
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Disciplina" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="palette" class="w-3 h-3 text-amber-600 shrink-0"></i>
+              <span class="truncate">Disciplina</span>
             </label>
-            <select id="f-disciplina" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-disciplina" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las disciplinas</option>
             </select>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="landmark" class="w-3 h-3 text-emerald-600"></i> Programa de Gobierno
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Programa de Gobierno" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="landmark" class="w-3 h-3 text-emerald-600 shrink-0"></i>
+              <span class="truncate">Programa de Gob.</span>
             </label>
-            <select id="f-eje" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-eje" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todos los ejes</option>
             </select>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="sparkles" class="w-3 h-3 text-rose-600"></i> Enfoque
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Enfoque" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="sparkles" class="w-3 h-3 text-rose-600 shrink-0"></i>
+              <span class="truncate">Enfoque</span>
             </label>
-            <select id="f-enfoque" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-enfoque" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Cultural y Artística</option>
             </select>
           </div>
-          <div>
-            <label class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-0.5">
-              <i data-lucide="flame" class="w-3 h-3 text-orange-600"></i> Zona Prioritaria
+          <div class="flex flex-col justify-end min-w-0">
+            <label title="Zona Prioritaria" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="flame" class="w-3 h-3 text-orange-600 shrink-0"></i>
+              <span class="truncate">Zona Prioritaria</span>
             </label>
-            <select id="f-zap" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+            <select id="f-zap" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
               <option value="ALL">Todas las zonas</option>
               <option value="ZAP_ANY">En Zona Prioritaria (ZAP)</option>
               <option value="ZAP_NC">ZAP Nuevo Comienzo</option>
@@ -664,37 +671,37 @@
                   <button type="button" id="btn-map-mode-pob" onclick="setHomeMapMode('poblacion')" class="px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 transition">Población</button>
                 </div>
               </div>
-              <div id="mapGto" class="flex-1 flex flex-col justify-center border border-slate-200 shadow-inner rounded-xl p-2 bg-slate-50/50 relative"></div>
+              <div id="mapGto" class="flex-1 flex flex-col justify-between border border-slate-200 shadow-inner rounded-xl p-2.5 bg-white relative overflow-hidden"></div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-slate-100">
-              <div class="bg-blue-50/60 rounded-xl p-2 border border-blue-100 flex items-center gap-2">
+            <div class="grid grid-cols-3 gap-2 mt-2.5 pt-2.5 border-t border-slate-100">
+              <div class="bg-blue-50/60 rounded-xl p-2 border border-blue-100 flex items-center gap-1.5 min-w-0">
                 <div class="w-7 h-7 rounded-lg bg-gto-blue text-white flex items-center justify-center shrink-0">
                   <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
                 </div>
-                <div>
-                  <p class="text-[9px] uppercase font-bold text-slate-500">Municipios</p>
-                  <p id="sub-mun-gto" class="kpi-number text-sm sm:text-base font-black text-gto-blue">0 de 46</p>
+                <div class="min-w-0">
+                  <p class="text-[9px] uppercase font-bold text-slate-500 truncate">Municipios</p>
+                  <p id="sub-mun-gto" class="kpi-number text-xs sm:text-sm font-black text-gto-blue whitespace-nowrap">0 de 46</p>
                 </div>
               </div>
 
-              <div class="bg-amber-50/70 rounded-xl p-2 border border-amber-200/70 flex items-center gap-2">
+              <div class="bg-amber-50/70 rounded-xl p-2 border border-amber-200/70 flex items-center gap-1.5 min-w-0">
                 <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
                   <i data-lucide="flame" class="w-3.5 h-3.5"></i>
                 </div>
-                <div>
-                  <p class="text-[9px] uppercase font-bold text-amber-800">ZAP</p>
-                  <p id="sub-zap-total" class="kpi-number text-sm sm:text-base font-black text-amber-600">0</p>
+                <div class="min-w-0">
+                  <p class="text-[9px] uppercase font-bold text-amber-800 truncate">ZAP</p>
+                  <p id="sub-zap-total" class="kpi-number text-xs sm:text-sm font-black text-amber-600 whitespace-nowrap">0</p>
                 </div>
               </div>
 
-              <div class="bg-emerald-50/70 rounded-xl p-2 border border-emerald-200/70 flex items-center gap-2">
+              <div class="bg-emerald-50/70 rounded-xl p-2 border border-emerald-200/70 flex items-center gap-1.5 min-w-0">
                 <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
                   <i data-lucide="home" class="w-3.5 h-3.5"></i>
                 </div>
-                <div>
-                  <p class="text-[9px] uppercase font-bold text-emerald-800">Localidades</p>
-                  <p id="sub-loc-total" class="kpi-number text-sm sm:text-base font-black text-emerald-700">0</p>
+                <div class="min-w-0">
+                  <p class="text-[9px] uppercase font-bold text-emerald-800 truncate">Localidades</p>
+                  <p id="sub-loc-total" class="kpi-number text-xs sm:text-sm font-black text-emerald-700 whitespace-nowrap">0</p>
                 </div>
               </div>
             </div>
@@ -3977,29 +3984,74 @@
         const isPop = homeMapMode === 'poblacion';
         const activeValues = isPop ? byMunPop : byMunActs;
         const maxVal = Math.max(...activeValues.values(), 1);
-        const thresholdAlta = isPop
-          ? Math.max(Math.round(maxVal * 0.4), 1000)
-          : (maxVal >= 100 ? 100 : Math.max(Math.round(maxVal * 0.5), 15));
-        const thresholdMedia = isPop
-          ? Math.max(Math.round(maxVal * 0.1), 100)
-          : (maxVal >= 100 ? 25 : Math.max(Math.round(maxVal * 0.2), 4));
+        const tMuyAlta = isPop
+          ? Math.max(Math.round(maxVal * 0.6), 5000)
+          : (maxVal >= 200 ? 200 : Math.max(Math.round(maxVal * 0.7), 20));
+        const tAlta = isPop
+          ? Math.min(tMuyAlta - 1, Math.max(Math.round(maxVal * 0.3), 1000))
+          : Math.min(tMuyAlta - 1, (maxVal >= 100 ? 100 : Math.max(Math.round(maxVal * 0.45), 10)));
+        const tMedia = isPop
+          ? Math.min(tAlta - 1, Math.max(Math.round(maxVal * 0.08), 100))
+          : Math.min(tAlta - 1, (maxVal >= 100 ? 25 : Math.max(Math.round(maxVal * 0.2), 3)));
 
         const curMun = cleanStr(document.getElementById('f-municipio')?.value);
         const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
         const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
 
-        let html = '<div class="w-full flex-1 flex flex-col justify-between select-none">';
-        html += '<div class="flex items-center justify-between text-[11px] mb-1 px-1 border-b border-slate-100 pb-1 shrink-0">';
-        html += '<span class="font-extrabold text-slate-700 tracking-tight">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
-        html += '<div class="flex items-center gap-2 text-[10px] text-slate-500 font-medium">';
-        html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs shrink-0" style="background:#701a75"></span> Alta (&ge;' + fmtInt(thresholdAlta) + ')</span>';
-        html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs shrink-0" style="background:#a21caf"></span> Media</span>';
-        html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs shrink-0" style="background:#e9d5ff"></span> Baja</span>';
-        html += '<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-xs border border-slate-300 shrink-0" style="background:#f8fafc"></span> 0</span>';
-        html += '</div></div>';
+        const GTO_MUN_LABELS = {
+          'San Felipe': { x: 186, y: 88, fs: 7.5, lines: ['San Felipe'] },
+          'Ocampo': { x: 131, y: 94, fs: 7, lines: ['Ocampo'] },
+          'San Diego de la Unión': { x: 245, y: 111, fs: 5.5, lines: ['San Diego', 'de la U.'] },
+          'San Luis de la Paz': { x: 317, y: 121, fs: 6.2, lines: ['San Luis', 'de la Paz'] },
+          'Victoria': { x: 359, y: 138, fs: 6.2, lines: ['Victoria'] },
+          'Xichú': { x: 408, y: 133, fs: 7, lines: ['Xichú'] },
+          'Atarjea': { x: 441, y: 148, fs: 5.6, lines: ['Atarjea'] },
+          'Santa Catarina': { x: 392, y: 168, fs: 4.5, lines: ['Sta.', 'Catarina'] },
+          'Tierra Blanca': { x: 374, y: 190, fs: 5.2, lines: ['Tierra', 'Blanca'] },
+          'Doctor Mora': { x: 340, y: 169, fs: 5, lines: ['Dr. Mora'] },
+          'San José Iturbide': { x: 332, y: 198, fs: 5.4, lines: ['San José', 'Iturbide'] },
+          'Dolores Hidalgo Cuna de la Independencia Nacional': { x: 226, y: 167, fs: 6.2, lines: ['Dolores Hidalgo', 'C.I.N.'] },
+          'San Miguel de Allende': { x: 282, y: 205, fs: 6.4, lines: ['San Miguel', 'de Allende'] },
+          'Guanajuato': { x: 173, y: 185, fs: 6.2, lines: ['Guanajuato'] },
+          'Silao': { x: 140, y: 204, fs: 6.4, lines: ['Silao'] },
+          'León': { x: 100, y: 172, fs: 7.5, lines: ['León'] },
+          'Purísima del Rincón': { x: 43, y: 215, fs: 4.4, lines: ['Purísima', 'del R.'] },
+          'San Francisco del Rincón': { x: 71, y: 211, fs: 4.7, lines: ['San Fco.', 'del Rincón'] },
+          'Romita': { x: 109, y: 226, fs: 6, lines: ['Romita'] },
+          'Manuel Doblado': { x: 59, y: 249, fs: 5.8, lines: ['Manuel', 'Doblado'] },
+          'Cuerámaro': { x: 96, y: 270, fs: 4.8, lines: ['Cuerámaro'] },
+          'Pénjamo': { x: 69, y: 310, fs: 7.2, lines: ['Pénjamo'] },
+          'Abasolo': { x: 119, y: 295, fs: 5.4, lines: ['Abasolo'] },
+          'Huanímaro': { x: 127, y: 316, fs: 4.3, lines: ['Huanímaro'] },
+          'Irapuato': { x: 147, y: 254, fs: 6.5, lines: ['Irapuato'] },
+          'Pueblo Nuevo': { x: 149, y: 281, fs: 3.9, lines: ['Pueblo', 'Nuevo'] },
+          'Salamanca': { x: 187, y: 268, fs: 6, lines: ['Salamanca'] },
+          'Valle de Santiago': { x: 167, y: 312, fs: 5.5, lines: ['Valle de', 'Santiago'] },
+          'Santa Cruz de Juventino Rosas': { x: 221, y: 263, fs: 4.8, lines: ['Juventino', 'Rosas'] },
+          'Comonfort': { x: 266, y: 244, fs: 5.4, lines: ['Comonfort'] },
+          'Villagrán': { x: 223, y: 282, fs: 4.3, lines: ['Villagrán'] },
+          'Cortazar': { x: 228, y: 303, fs: 5.3, lines: ['Cortazar'] },
+          'Celaya': { x: 256, y: 275, fs: 6, lines: ['Celaya'] },
+          'Apaseo el Grande': { x: 289, y: 274, fs: 4.9, lines: ['Apaseo', 'el Grande'] },
+          'Apaseo el Alto': { x: 298, y: 305, fs: 5, lines: ['Apaseo', 'el Alto'] },
+          'Jaral del Progreso': { x: 207, y: 316, fs: 4.2, lines: ['Jaral', 'del P.'] },
+          'Salvatierra': { x: 234, y: 335, fs: 5.4, lines: ['Salvatierra'] },
+          'Tarimoro': { x: 266, y: 331, fs: 5.1, lines: ['Tarimoro'] },
+          'Jerécuaro': { x: 305, y: 342, fs: 5.6, lines: ['Jerécuaro'] },
+          'Coroneo': { x: 333, y: 340, fs: 4.4, lines: ['Coroneo'] },
+          'Acámbaro': { x: 269, y: 372, fs: 6.4, lines: ['Acámbaro'] },
+          'Tarandacuao': { x: 304, y: 379, fs: 4.1, lines: ['Tarandacuao'] },
+          'Yuriria': { x: 164, y: 344, fs: 6, lines: ['Yuriria'] },
+          'Santiago Maravatío': { x: 220, y: 353, fs: 3.9, lines: ['S.', 'Maravatío'] },
+          'Uriangato': { x: 192, y: 360, fs: 4.1, lines: ['Uriangato'] },
+          'Moroleón': { x: 172, y: 367, fs: 4.6, lines: ['Moroleón'] }
+        };
 
-        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" class="w-full h-auto max-h-[305px] drop-shadow-xs mx-auto my-auto">';
-        html += '<g>';
+        const tierCounts = [0, 0, 0, 0, 0];
+        let pathsHtml = '';
+        let selectedPathHtml = '';
+        let labelsHtml = '';
+
         window.GTO_MAP_PATHS.forEach(mun => {
           const norm = normalizeMunicipioName(mun.name);
           const acts = byMunActs.get(norm) || 0;
@@ -4007,21 +4059,81 @@
           const val = isPop ? pop : acts;
 
           let fill = '#f8fafc';
-          if (val >= thresholdAlta) fill = '#701a75';
-          else if (val >= thresholdMedia) fill = '#a21caf';
-          else if (val > 0) fill = '#e9d5ff';
+          let tierIdx = 4;
+          let darkFill = false;
+          if (val >= tMuyAlta) { fill = '#4a044e'; tierIdx = 0; darkFill = true; }
+          else if (val >= tAlta) { fill = '#701a75'; tierIdx = 1; darkFill = true; }
+          else if (val >= tMedia) { fill = '#a21caf'; tierIdx = 2; darkFill = true; }
+          else if (val > 0) { fill = '#e9d5ff'; tierIdx = 3; darkFill = false; }
+          tierCounts[tierIdx]++;
 
           const isSelected = normSelected && normSelected === norm;
-          const stroke = isSelected ? '#2563eb' : '#cbd5e1';
-          const strokeW = isSelected ? '3' : '1.1';
+          const stroke = isSelected ? '#2563eb' : (darkFill ? '#f1f5f9' : '#64748b');
+          const strokeW = isSelected ? '2.5' : '0.8';
 
-          html += '<path id="svg-home-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-75" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas</title></path>';
+          const pathTag = '<path id="svg-home-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas</title></path>';
+          if (isSelected) selectedPathHtml += pathTag;
+          else pathsHtml += pathTag;
+
+          const lbl = GTO_MUN_LABELS[mun.name];
+          if (lbl) {
+            const textFill = darkFill ? '#ffffff' : '#1e293b';
+            const haloColor = darkFill ? 'rgba(30,10,45,0.55)' : 'rgba(255,255,255,0.85)';
+            const lineHeight = lbl.fs * 1.08;
+            const startY = lbl.y - ((lbl.lines.length - 1) * lineHeight) / 2;
+            labelsHtml += '<text x="' + lbl.x + '" y="' + startY.toFixed(1) + '" text-anchor="middle" dominant-baseline="central" font-size="' + lbl.fs + '" font-weight="700" font-family="Plus Jakarta Sans, Inter, sans-serif" fill="' + textFill + '" style="pointer-events:none; paint-order:stroke; stroke:' + haloColor + '; stroke-width:1.4px; stroke-linejoin:round;">';
+            lbl.lines.forEach((ln, idx) => {
+              if (idx === 0) {
+                labelsHtml += auditEscape(ln);
+              } else {
+                labelsHtml += '<tspan x="' + lbl.x + '" dy="' + lineHeight.toFixed(1) + '">' + auditEscape(ln) + '</tspan>';
+              }
+            });
+            labelsHtml += '</text>';
+          }
         });
-        html += '</g></svg>';
+
+        const tiers = [
+          { label: 'Muy Alta', range: '≥ ' + fmtInt(tMuyAlta), color: '#4a044e', border: '#3b0764', count: tierCounts[0] },
+          { label: 'Alta', range: fmtInt(tAlta) + ' – ' + fmtInt(Math.max(tAlta, tMuyAlta - 1)), color: '#701a75', border: '#701a75', count: tierCounts[1] },
+          { label: 'Media', range: fmtInt(tMedia) + ' – ' + fmtInt(Math.max(tMedia, tAlta - 1)), color: '#a21caf', border: '#a21caf', count: tierCounts[2] },
+          { label: 'Baja', range: tMedia <= 2 ? '1' : ('1 – ' + fmtInt(tMedia - 1)), color: '#e9d5ff', border: '#c084fc', count: tierCounts[3] },
+          { label: 'Sin dato', range: '0', color: '#f8fafc', border: '#cbd5e1', count: tierCounts[4] }
+        ];
+
+        let html = '<div class="w-full flex-1 flex flex-col justify-between select-none gap-1.5">';
+        html += '<div class="flex items-center justify-between text-[11px] px-1 border-b border-slate-100 pb-1 shrink-0">';
+        html += '<span class="font-extrabold text-gto-blue tracking-tight">' + (isPop ? 'Población Beneficiaria' : 'Intensidad de Actividades') + ' (' + totalCovered + '/46 mun.)</span>';
+        html += '<span class="text-[9.5px] text-slate-400 font-medium hidden sm:inline">Clic para filtrar</span>';
+        html += '</div>';
+
+        html += '<div class="flex-1 flex flex-col sm:flex-row items-center gap-2 min-h-0">';
+        html += '<div class="flex-1 min-w-0 w-full h-full flex items-center justify-center">';
+        html += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 37 460 366" class="w-full h-auto max-h-[345px] drop-shadow-xs">';
+        html += '<g>' + pathsHtml + selectedPathHtml + '</g><g>' + labelsHtml + '</g></svg>';
+        html += '</div>';
+
+        html += '<div class="w-full sm:w-[108px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-1 self-center">';
+        tiers.forEach(t => {
+          html += '<div class="flex items-stretch rounded-md border border-slate-200/90 bg-slate-50/70 overflow-hidden">';
+          html += '<span class="w-2.5 sm:w-3 shrink-0" style="background:' + t.color + '; border-right:1px solid ' + t.border + '"></span>';
+          html += '<div class="px-1.5 py-1 min-w-0 flex-1 leading-tight">';
+          html += '<div class="text-[9.5px] font-extrabold text-slate-700 truncate">' + t.label + '</div>';
+          html += '<div class="text-[8.5px] font-semibold text-slate-500 tabular-nums truncate">' + t.range + ' <span class="text-slate-400">(' + t.count + ')</span></div>';
+          html += '</div></div>';
+        });
+        html += '</div>';
+        html += '</div>';
 
         if (normSelected) {
-          html += '<div class="mt-1 text-center text-[10px] text-blue-700 font-bold bg-blue-50 py-0.5 rounded-md border border-blue-200">Filtro activo: ' + auditEscape(curMun) + ' (clic en el mapa para ver todos)</div>';
+          html += '<div class="text-center text-[10px] text-blue-700 font-bold bg-blue-50 py-0.5 rounded-md border border-blue-200 shrink-0">Filtro activo: ' + auditEscape(curMun) + ' (clic en el mapa para ver todos)</div>';
         }
+
+        html += '<div class="flex items-center justify-center gap-2 pt-1 border-t border-slate-100 shrink-0">';
+        html += '<img src="assets/identidad/Logo.png" alt="Guanajuato Gobierno de la Gente" class="h-7 w-auto object-contain" />';
+        html += '<span class="h-5 w-px bg-slate-200"></span>';
+        html += '<span class="text-[9px] font-extrabold uppercase tracking-wider text-gto-blue leading-tight">Secretaría de<br>Cultura</span>';
+        html += '</div>';
 
         html += '</div>';
         container.innerHTML = html;
@@ -4921,7 +5033,7 @@
       });
 
       const isAnnual = tabId === 'tab-anual';
-      for (const id of ['operational-filters', 'operational-population', 'btn-export-pptx']) {
+      for (const id of ['operational-filters', 'btn-export-pptx']) {
         document.getElementById(id).classList.toggle('hidden', isAnnual);
       }
       document.getElementById('btn-reset-filters').classList.toggle('hidden', isAnnual);
