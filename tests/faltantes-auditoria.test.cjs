@@ -179,3 +179,94 @@ test('normaliza caracteres corruptos en Ejes PG y limpia duplicados', () => {
   assert.equal(vm.runInContext('formatPGDistributionLabel("1 Tranquilidad")', context), 'Tranquilidad');
   assert.equal(vm.runInContext('formatPGDistributionLabel("2. Igualdad")', context), 'Igualdad');
 });
+
+test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
+  const { context, nodes, document } = setupFaltantes();
+
+  context.fixture = {
+    actividades: [
+      {
+        ID_Actividad: 'ACT-PG-1',
+        Folio: 'F-PG1',
+        Usuario_Registra: 'ssvillegas@guanajuato.gob.mx',
+        Nombre_Actividad: 'Concierto sin eje ni enfoque',
+        Clave_Proceso_Txt: 'PB01',
+        Eje_PG: '',
+        Enfoque_Actividad: ''
+      },
+      {
+        ID_Actividad: 'ACT-PG-2',
+        Folio: 'F-PG2',
+        Usuario_Registra: 'augalde@guanajuato.gob.mx',
+        Nombre_Actividad: 'Taller sin asignar',
+        Clave_Proceso_Txt: 'PB01',
+        Eje_PG: 'Sin asignar',
+        Enfoque_Actividad: 'Artística'
+      },
+      {
+        ID_Actividad: 'ACT-OK-3',
+        Folio: 'F-OK3',
+        Usuario_Registra: 'fmolinar@guanajuato.gob.mx',
+        Nombre_Actividad: 'Actividad completa PG y Enfoque',
+        Clave_Proceso_Txt: 'PB01',
+        Eje_PG: 'Vocación',
+        Enfoque_Actividad: 'Cultural'
+      }
+    ],
+    territorio: [
+      { ID_Actividad: 'ACT-PG-1', Municipio: 'León', Comunidad: 'Centro', Cantidad: '10' },
+      { ID_Actividad: 'ACT-PG-2', Municipio: 'León', Comunidad: 'Centro', Cantidad: '10' },
+      { ID_Actividad: 'ACT-OK-3', Municipio: 'León', Comunidad: 'Centro', Cantidad: '10' }
+    ],
+    poblacion: [
+      { ID_Actividad: 'ACT-PG-1', Cantidad_Poblacion: '10', Cantidad_Participacion: '10', Cantidad_Acceso: '0' },
+      { ID_Actividad: 'ACT-PG-2', Cantidad_Poblacion: '10', Cantidad_Participacion: '10', Cantidad_Acceso: '0' },
+      { ID_Actividad: 'ACT-OK-3', Cantidad_Poblacion: '10', Cantidad_Participacion: '10', Cantidad_Acceso: '0' }
+    ],
+    alineacion: [{ Clave_Proceso_Txt: 'PB01', Meta: 'M1', Nombre_Meta: 'Meta 1' }],
+    evidencia: []
+  };
+
+  vm.runInContext(`
+    rawDB.actividades = fixture.actividades;
+    rawDB.territorio = fixture.territorio;
+    rawDB.poblacion = fixture.poblacion;
+    rawDB.alineacion = fixture.alineacion;
+    rawDB.evidencia = fixture.evidencia;
+    computeFaltantesAudit();
+  `, context);
+
+  // Filter by sin_eje -> should match ACT-PG-1 and ACT-PG-2, not ACT-OK-3
+  document.getElementById('filter-faltantes-tipo').value = 'sin_eje';
+  vm.runInContext('renderFaltantesTable();', context);
+  assert.equal(document.getElementById('kpi-faltantes-sin-eje').textContent, '2');
+  assert.equal(document.getElementById('kpi-faltantes-sin-enfoque').textContent, '1');
+  const htmlEje = nodes.get('tbl-faltantes').innerHTML;
+  assert.match(htmlEje, /ACT-PG-1/);
+  assert.match(htmlEje, /ACT-PG-2/);
+  assert.doesNotMatch(htmlEje, /ACT-OK-3/);
+
+  // Filter by sin_enfoque -> only ACT-PG-1
+  document.getElementById('filter-faltantes-tipo').value = 'sin_enfoque';
+  vm.runInContext('renderFaltantesTable();', context);
+  const htmlEnf = nodes.get('tbl-faltantes').innerHTML;
+  assert.match(htmlEnf, /ACT-PG-1/);
+  assert.doesNotMatch(htmlEnf, /ACT-PG-2/);
+
+  let exportedData = null;
+  context.Papa = {
+    unparse(payload) {
+      exportedData = payload;
+      return 'csv-string';
+    }
+  };
+  vm.runInContext('exportFaltantesCSV();', context);
+  assert.ok(exportedData);
+  assert.equal(exportedData.data.length, 1);
+  assert.ok(exportedData.fields.includes('Eje_PG_Actual'));
+  assert.ok(exportedData.fields.includes('Eje_PG_A_Llenar'));
+  assert.ok(exportedData.fields.includes('Enfoque_Actual'));
+  assert.ok(exportedData.fields.includes('Enfoque_A_Llenar'));
+  assert.equal(exportedData.data[0][exportedData.fields.indexOf('Eje_PG_Actual')], 'Sin asignar');
+  assert.equal(exportedData.data[0][exportedData.fields.indexOf('Enfoque_Actual')], 'No especificado');
+});

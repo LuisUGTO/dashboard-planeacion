@@ -1555,7 +1555,7 @@
           </div>
 
           <!-- Resumen de Indicadores de Faltantes -->
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Resumen de faltantes">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3" aria-label="Resumen de faltantes">
             <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
               <p class="text-[11px] font-bold text-slate-500">Total con pendientes</p>
               <p id="kpi-faltantes-total" class="text-2xl font-black text-rose-700 mt-1">0</p>
@@ -1585,6 +1585,16 @@
               <p class="text-[11px] font-bold text-slate-500">Sin Meta / Clave</p>
               <p id="kpi-faltantes-sin-meta" class="text-2xl font-black text-slate-700 mt-1">0</p>
               <p class="text-[10px] text-slate-400 mt-0.5">Alineación vacía</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Eje / Prog. Gob.</p>
+              <p id="kpi-faltantes-sin-eje" class="text-2xl font-black text-sky-700 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">"Sin asignar" en dona PG</p>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs">
+              <p class="text-[11px] font-bold text-slate-500">Sin Enfoque</p>
+              <p id="kpi-faltantes-sin-enfoque" class="text-2xl font-black text-teal-700 mt-1">0</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Artístico / Cultural</p>
             </div>
           </div>
 
@@ -1616,6 +1626,8 @@
                   <option value="descuadre">🟠 Descuadre Población vs Territorio</option>
                   <option value="sin_desglose">🟣 Falta Part. / Acceso</option>
                   <option value="sin_meta">🔵 Falta Clave Proceso / Meta</option>
+                  <option value="sin_eje">🟦 Falta Eje / Prog. Gobierno (Sin asignar)</option>
+                  <option value="sin_enfoque">🟩 Falta Enfoque (Artístico / Cultural)</option>
                 </select>
               </label>
 
@@ -3612,6 +3624,8 @@
         let descuadre = false;
         let sinDesglose = false;
         let sinMeta = false;
+        let sinEje = false;
+        let sinEnfoque = false;
 
         // Validación de territorio
         if (tRows.length === 0) {
@@ -3663,6 +3677,27 @@
           issues.push({ tipo: 'sin_meta', label: 'Sin meta', badge: 'bg-slate-100 text-slate-800' });
         }
 
+        // Validación de Eje PG y Enfoque (Matriz Estratégica y Programa de Gobierno)
+        const rawEjePG = cleanStr(a.Eje_PG);
+        const isMissingEjePG = !rawEjePG || /^(?:sin asignar|sin eje|no especificado)$/i.test(rawEjePG);
+        const ejeLabel = isMissingEjePG ? 'Sin asignar' : formatPGDistributionLabel(rawEjePG);
+        if (isMissingEjePG) {
+          sinEje = true;
+          issues.push({ tipo: 'sin_eje', label: 'Sin Eje PG (Sin asignar)', badge: 'bg-sky-100 text-sky-800' });
+        }
+
+        const rawEnf = cleanMojibake(cleanStr(a.Enfoque_Actividad));
+        let enfoqueLabel = rawEnf || 'No especificado';
+        if (!rawEnf || /^(?:no especificado|sin especificar)$/i.test(rawEnf)) {
+          enfoqueLabel = 'No especificado';
+          sinEnfoque = true;
+          issues.push({ tipo: 'sin_enfoque', label: 'Sin Enfoque', badge: 'bg-teal-100 text-teal-800' });
+        } else if (/^art/i.test(rawEnf) && !/cult/i.test(rawEnf)) {
+          enfoqueLabel = 'Artística';
+        } else if (/^cult/i.test(rawEnf) && !/art/i.test(rawEnf)) {
+          enfoqueLabel = 'Cultural';
+        }
+
         if (issues.length > 0) {
           const munList = [...new Set(tRows.map(t => cleanStr(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar';
           const comList = [...new Set(tRows.map(t => cleanStr(t.Nombre_Comunidad_Final || t.Comunidad || t.Nombre_Comunidad)).filter(Boolean))].join(', ') || 'Sin especificar';
@@ -3681,6 +3716,8 @@
             clave: cpTxt || 'Sin clave',
             meta: metaObj ? cleanStr(metaObj.Meta || metaObj.Nombre_Meta) : 'Sin meta asignada',
             nombreMeta: metaObj ? cleanStr(metaObj.Nombre_Meta) : '',
+            ejePG: ejeLabel,
+            enfoque: enfoqueLabel,
             municipio: munList,
             comunidad: comList,
             sumT,
@@ -3695,7 +3732,9 @@
             sinPob,
             descuadre,
             sinDesglose,
-            sinMeta
+            sinMeta,
+            sinEje,
+            sinEnfoque
           });
         }
       });
@@ -3734,7 +3773,7 @@
         if (userFilter !== 'ALL' && r.userKey !== userFilter) return false;
         if (tipoFilter !== 'ALL' && !r.types.includes(tipoFilter)) return false;
         if (search) {
-          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.municipio, r.comunidad]
+          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.ejePG, r.enfoque, r.municipio, r.comunidad]
             .join(' ').toLowerCase();
           if (!match.includes(search)) return false;
         }
@@ -3759,6 +3798,12 @@
       }
       if (document.getElementById('kpi-faltantes-sin-meta')) {
         document.getElementById('kpi-faltantes-sin-meta').textContent = fmtInt(contextRows.filter(r => r.sinMeta).length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-eje')) {
+        document.getElementById('kpi-faltantes-sin-eje').textContent = fmtInt(contextRows.filter(r => r.sinEje).length);
+      }
+      if (document.getElementById('kpi-faltantes-sin-enfoque')) {
+        document.getElementById('kpi-faltantes-sin-enfoque').textContent = fmtInt(contextRows.filter(r => r.sinEnfoque).length);
       }
 
       const countEl = document.getElementById('faltantes-visible-count');
@@ -3790,6 +3835,10 @@
           <td class="p-2.5 align-top overflow-hidden max-w-[150px]">
             <div class="font-mono text-[10px] font-bold text-slate-700 truncate" title="${auditEscape(r.clave)}">${auditEscape(r.clave)}</div>
             <div class="text-[11px] text-slate-500 truncate" title="${auditEscape(r.nombreMeta || r.meta)}">${r.sinMeta ? '<span class="text-rose-600 font-bold">Sin Meta</span>' : auditEscape(r.nombreMeta || r.meta)}</div>
+            <div class="flex flex-wrap gap-1 mt-0.5">
+              ${r.sinEje ? '<span class="px-1.5 py-0.5 rounded bg-sky-50 border border-sky-200 text-sky-700 text-[9px] font-semibold">Sin Eje PG</span>' : ''}
+              ${r.sinEnfoque ? '<span class="px-1.5 py-0.5 rounded bg-teal-50 border border-teal-200 text-teal-700 text-[9px] font-semibold">Sin Enfoque</span>' : ''}
+            </div>
           </td>
           <td class="p-2.5 align-top overflow-hidden max-w-[115px]">
             ${r.sinMun ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 inline-block">Falta Municipio</span>' : `<div class="font-medium text-slate-700 truncate" title="${auditEscape(r.municipio)}">${auditEscape(r.municipio)}</div>`}
@@ -3864,9 +3913,9 @@
       const ws = wb.addWorksheet('Pendientes', {
         views: [{ state: 'frozen', ySplit: 1 }]
       });
-      ws.autoFilter = 'A1:U1';
+      ws.autoFilter = 'A1:Y1';
 
-      const colWidths = [16, 13, 28, 36, 34, 22, 16, 30, 22, 24, 26, 28, 16, 17, 12, 18, 20, 14, 18, 36, 30];
+      const colWidths = [16, 13, 28, 36, 34, 22, 16, 30, 26, 28, 20, 22, 22, 24, 26, 28, 16, 17, 12, 18, 20, 14, 18, 36, 30];
       ws.columns = fields.map((header, idx) => ({
         header,
         key: `col_${idx}`,
@@ -3909,7 +3958,7 @@
         };
       };
 
-      const numericCols = new Set([13, 14, 15, 16, 18]);
+      const numericCols = new Set([17, 18, 19, 20, 22]);
       const baseBorder = {
         top: { style: 'thin', color: { argb: 'FFCBD5E1' } },
         left: { style: 'thin', color: { argb: 'FFCBD5E1' } },
@@ -3930,32 +3979,46 @@
           };
         });
 
-        // Col 10: Municipio_A_Corregir
-        if (r.sinMun) {
-          styleHighlight(row.getCell(10), 'FFFFE4E6', 'FFE11D48', 'FF9F1239');
+        // Col 10: Eje_PG_A_Llenar
+        if (r.sinEje) {
+          styleHighlight(row.getCell(10), 'FFDBEAFE', 'FF2563EB', 'FF1E40AF');
         } else {
           styleMuted(row.getCell(10));
         }
 
-        // Col 12: Comunidad_o_Sede_A_Llenar
-        if (r.sinCom) {
-          styleHighlight(row.getCell(12), 'FFFEF3C7', 'FFD97706', 'FF92400E');
+        // Col 12: Enfoque_A_Llenar
+        if (r.sinEnfoque) {
+          styleHighlight(row.getCell(12), 'FFCCFBF1', 'FF0D9488', 'FF115E59');
         } else {
           styleMuted(row.getCell(12));
         }
 
-        // Col 17 & 19: Participacion_A_Llenar y Acceso_A_Llenar
-        const needsPobDesglose = Boolean(r.sinPob || r.sinDesglose || r.descuadre);
-        if (needsPobDesglose) {
-          styleHighlight(row.getCell(17), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
-          styleHighlight(row.getCell(19), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
+        // Col 14: Municipio_A_Corregir
+        if (r.sinMun) {
+          styleHighlight(row.getCell(14), 'FFFFE4E6', 'FFE11D48', 'FF9F1239');
         } else {
-          styleMuted(row.getCell(17));
-          styleMuted(row.getCell(19));
+          styleMuted(row.getCell(14));
         }
 
-        // Col 20: Diagnostico_Faltantes
-        const diagCell = row.getCell(20);
+        // Col 16: Comunidad_o_Sede_A_Llenar
+        if (r.sinCom) {
+          styleHighlight(row.getCell(16), 'FFFEF3C7', 'FFD97706', 'FF92400E');
+        } else {
+          styleMuted(row.getCell(16));
+        }
+
+        // Col 21 & 23: Participacion_A_Llenar y Acceso_A_Llenar
+        const needsPobDesglose = Boolean(r.sinPob || r.sinDesglose || r.descuadre);
+        if (needsPobDesglose) {
+          styleHighlight(row.getCell(21), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
+          styleHighlight(row.getCell(23), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
+        } else {
+          styleMuted(row.getCell(21));
+          styleMuted(row.getCell(23));
+        }
+
+        // Col 24: Diagnostico_Faltantes
+        const diagCell = row.getCell(24);
         diagCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF1F2' } };
         diagCell.font = { name: 'Calibri', size: 10, bold: true, color: { argb: 'FF9F1239' } };
       });
@@ -3975,6 +4038,8 @@
       });
 
       const legendRows = [
+        ['Azul (Sin asignar / Falta Eje PG)', 'Eje_PG_A_Llenar', 'Escribir o seleccionar el Eje del Programa de Gobierno correspondiente (aparece como "Sin asignar" en el tablero si falta).', 'FFDBEAFE', 'FF2563EB', 'FF1E40AF'],
+        ['Verde agua (Sin Enfoque)', 'Enfoque_A_Llenar', 'Indicar si la actividad tiene enfoque Artístico, Cultural o ambos.', 'FFCCFBF1', 'FF0D9488', 'FF115E59'],
         ['Rosa (Falta municipio)', 'Municipio_A_Corregir', 'Escribir el nombre oficial del municipio de Guanajuato correspondiente.', 'FFFFE4E6', 'FFE11D48', 'FF9F1239'],
         ['Amarillo (Falta comunidad/sede)', 'Comunidad_o_Sede_A_Llenar', 'Escribir la localidad, comunidad o sede donde se realizó la actividad.', 'FFFEF3C7', 'FFD97706', 'FF92400E'],
         ['Morado (Falta desglose/población)', 'Participacion_A_Llenar y Acceso_A_Llenar', 'Llenar las cantidades faltantes para igualar Total_Territorial con Total_Demografico.', 'FFF3E8FF', 'FF9333EA', 'FF6B21A8'],
@@ -4019,7 +4084,7 @@
         if (userFilter !== 'ALL' && r.userKey !== userFilter) return false;
         if (tipoFilter !== 'ALL' && !r.types.includes(tipoFilter)) return false;
         if (search) {
-          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.municipio, r.comunidad]
+          const match = [r.id, r.folio, r.usuario, r.direccion, r.nombre, r.clave, r.meta, r.nombreMeta, r.ejePG, r.enfoque, r.municipio, r.comunidad]
             .join(' ').toLowerCase();
           if (!match.includes(search)) return false;
         }
@@ -4037,6 +4102,10 @@
         'Clave_Proceso_Txt',
         'Meta',
         'Nombre_Meta',
+        'Eje_PG_Actual',
+        'Eje_PG_A_Llenar',
+        'Enfoque_Actual',
+        'Enfoque_A_Llenar',
         'Municipio_Actual',
         'Municipio_A_Corregir',
         'Comunidad_Sede_Actual',
@@ -4061,6 +4130,10 @@
         cleanFaltantesCellText(r.clave),
         cleanFaltantesCellText(r.meta),
         cleanFaltantesCellText(r.nombreMeta),
+        cleanFaltantesCellText(r.ejePG),
+        '', // Eje_PG_A_Llenar (en blanco para captura)
+        cleanFaltantesCellText(r.enfoque),
+        '', // Enfoque_A_Llenar (en blanco para captura)
         cleanFaltantesCellText(r.municipio),
         '', // Municipio_A_Corregir (en blanco para captura)
         cleanFaltantesCellText(r.comunidad),
