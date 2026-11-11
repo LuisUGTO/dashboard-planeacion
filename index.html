@@ -23,6 +23,8 @@
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <!-- PptxGenJS (Generador de Presentaciones Ejecutivas .pptx) -->
   <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <!-- ExcelJS (Generador de Plantillas .xlsx con estilos y validación visual) -->
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 
   <!-- Tipografías Institucionales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1443,8 +1445,8 @@
           </div>
           <div id="subtab-faltantes-export-btn" class="hidden">
             <button onclick="exportFaltantesCSV()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm transition flex items-center gap-1.5">
-              <i data-lucide="download" class="w-4 h-4"></i>
-              <span>Descargar reporte de faltantes (CSV)</span>
+              <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+              <span>Descargar Plantilla Excel (.xlsx)</span>
             </button>
           </div>
         </div>
@@ -1546,7 +1548,7 @@
               <div class="flex flex-col sm:flex-row gap-2 shrink-0">
                 <button type="button" onclick="exportFaltantesCSV()" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs shadow-sm transition">
                   <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-                  <span>Descargar Reporte de Faltantes (CSV)</span>
+                  <span>Descargar Plantilla Excel (.xlsx)</span>
                 </button>
               </div>
             </div>
@@ -3664,12 +3666,17 @@
         if (issues.length > 0) {
           const munList = [...new Set(tRows.map(t => cleanStr(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar';
           const comList = [...new Set(tRows.map(t => cleanStr(t.Nombre_Comunidad_Final || t.Comunidad || t.Nombre_Comunidad)).filter(Boolean))].join(', ') || 'Sin especificar';
+          const canonDir = typeof getCanonicalDirection === 'function'
+            ? getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt)
+            : '';
+          const cleanRawDir = cleanStr(a.Direccion).replace(/^[\["'\s]+|[\]"'\s]+$/g, '').trim();
+          const finalDir = (canonDir && canonDir !== 'SIN ASIGNAR') ? canonDir : (cleanRawDir || 'Sin dirección');
           list.push({
             id,
             folio: cleanStr(a.Folio) || '—',
             usuario: cleanStr(a.Usuario_Registra) || 'Sin usuario registrado',
             userKey: auditUserKey(a.Usuario_Registra),
-            direccion: cleanStr(a.Direccion) || 'Sin dirección',
+            direccion: finalDir,
             nombre: cleanStr(a.Nombre_Actividad) || 'Actividad sin título',
             clave: cpTxt || 'Sin clave',
             meta: metaObj ? cleanStr(metaObj.Meta || metaObj.Nombre_Meta) : 'Sin meta asignada',
@@ -3819,6 +3826,189 @@
       renderFaltantesTable();
     }
 
+    function cleanFaltantesCellText(v) {
+      if (v === null || v === undefined) return '';
+      let s = String(v).replace(/[\r\n\t]+/g, ' ').trim();
+      // Remove stray AppSheet/JSON wrapper quotes or brackets such as """SUBSECRETARÍA...""]]
+      if (/^["'\[]+/.test(s) || /["'\]]+$/.test(s)) {
+        s = s.replace(/^[\["'\s]+|[\]"'\s]+$/g, '').trim();
+      }
+      // Recover UTF-8-as-Windows1252/Latin1 mojibake if present in source fields (e.g. Ã“, Ã³, Ã©)
+      if (/Ã[^\x00-\x7F]/.test(s)) {
+        try {
+          const cp1252 = {
+            0x20AC: 0x80, 0x201A: 0x82, 0x0192: 0x83, 0x201E: 0x84, 0x2026: 0x85, 0x2020: 0x86,
+            0x2021: 0x87, 0x02C6: 0x88, 0x2030: 0x89, 0x0160: 0x8A, 0x2039: 0x8B, 0x0152: 0x8C,
+            0x017D: 0x8E, 0x2018: 0x91, 0x2019: 0x92, 0x201C: 0x93, 0x201D: 0x94, 0x2022: 0x95,
+            0x2013: 0x96, 0x2014: 0x97, 0x02DC: 0x98, 0x2122: 0x99, 0x0161: 0x9A, 0x203A: 0x9B,
+            0x0153: 0x9C, 0x017E: 0x9E, 0x0178: 0x9F
+          };
+          const bytes = Uint8Array.from(Array.from(s, ch => {
+            const code = ch.charCodeAt(0);
+            if (code <= 0xff) return code;
+            if (cp1252[code] !== undefined) return cp1252[code];
+            throw new Error('non-byte');
+          }));
+          const decoded = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+          if (decoded) s = decoded;
+        } catch (_) { /* keep original text if not valid UTF-8 byte sequence */ }
+      }
+      return s;
+    }
+
+    async function downloadFaltantesXlsx(filtered, fields, data, userSlug, tipoSlug) {
+      const wb = new ExcelJS.Workbook();
+      wb.creator = 'Sistema Estatal de Inteligencia Cultural';
+      wb.created = new Date();
+
+      const ws = wb.addWorksheet('Pendientes', {
+        views: [{ state: 'frozen', ySplit: 1 }]
+      });
+      ws.autoFilter = 'A1:U1';
+
+      const colWidths = [16, 13, 28, 36, 34, 22, 16, 30, 22, 24, 26, 28, 16, 17, 12, 18, 20, 14, 18, 36, 30];
+      ws.columns = fields.map((header, idx) => ({
+        header,
+        key: `col_${idx}`,
+        width: colWidths[idx] || 20
+      }));
+
+      const headerRow = ws.getRow(1);
+      headerRow.height = 30;
+      headerRow.eachCell(cell => {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0D1526' } };
+        cell.font = { name: 'Calibri', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+        cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+        cell.border = {
+          top: { style: 'thin', color: { argb: 'FF1E293B' } },
+          left: { style: 'thin', color: { argb: 'FF1E293B' } },
+          bottom: { style: 'medium', color: { argb: 'FF334155' } },
+          right: { style: 'thin', color: { argb: 'FF1E293B' } }
+        };
+      });
+
+      const styleHighlight = (cell, bgArgb, borderArgb, fontArgb) => {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: bgArgb } };
+        cell.font = { name: 'Calibri', size: 10, bold: true, color: { argb: fontArgb } };
+        cell.border = {
+          top: { style: 'medium', color: { argb: borderArgb } },
+          left: { style: 'medium', color: { argb: borderArgb } },
+          bottom: { style: 'medium', color: { argb: borderArgb } },
+          right: { style: 'medium', color: { argb: borderArgb } }
+        };
+      };
+
+      const styleMuted = (cell) => {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
+        cell.font = { name: 'Calibri', size: 10, color: { argb: 'FF94A3B8' } };
+        cell.border = {
+          top: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+          left: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+          bottom: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+          right: { style: 'thin', color: { argb: 'FFE2E8F0' } }
+        };
+      };
+
+      const numericCols = new Set([13, 14, 15, 16, 18]);
+      const baseBorder = {
+        top: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+        left: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+        bottom: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+        right: { style: 'thin', color: { argb: 'FFCBD5E1' } }
+      };
+
+      filtered.forEach((r, rowIdx) => {
+        const row = ws.addRow(data[rowIdx]);
+        row.height = 24;
+        row.eachCell({ includeEmpty: true }, (cell, colNum) => {
+          cell.font = { name: 'Calibri', size: 10, color: { argb: 'FF0F172A' } };
+          cell.border = baseBorder;
+          cell.alignment = {
+            vertical: 'middle',
+            horizontal: numericCols.has(colNum) ? 'right' : 'left',
+            wrapText: true
+          };
+        });
+
+        // Col 10: Municipio_A_Corregir
+        if (r.sinMun) {
+          styleHighlight(row.getCell(10), 'FFFFE4E6', 'FFE11D48', 'FF9F1239');
+        } else {
+          styleMuted(row.getCell(10));
+        }
+
+        // Col 12: Comunidad_o_Sede_A_Llenar
+        if (r.sinCom) {
+          styleHighlight(row.getCell(12), 'FFFEF3C7', 'FFD97706', 'FF92400E');
+        } else {
+          styleMuted(row.getCell(12));
+        }
+
+        // Col 17 & 19: Participacion_A_Llenar y Acceso_A_Llenar
+        const needsPobDesglose = Boolean(r.sinPob || r.sinDesglose || r.descuadre);
+        if (needsPobDesglose) {
+          styleHighlight(row.getCell(17), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
+          styleHighlight(row.getCell(19), 'FFF3E8FF', 'FF9333EA', 'FF6B21A8');
+        } else {
+          styleMuted(row.getCell(17));
+          styleMuted(row.getCell(19));
+        }
+
+        // Col 20: Diagnostico_Faltantes
+        const diagCell = row.getCell(20);
+        diagCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF1F2' } };
+        diagCell.font = { name: 'Calibri', size: 10, bold: true, color: { argb: 'FF9F1239' } };
+      });
+
+      const wsGuia = wb.addWorksheet('Instrucciones');
+      wsGuia.columns = [
+        { header: 'Color', key: 'color', width: 22 },
+        { header: 'Columna(s)', key: 'cols', width: 34 },
+        { header: 'Qué hacer', key: 'accion', width: 65 }
+      ];
+      const guiaHeader = wsGuia.getRow(1);
+      guiaHeader.height = 26;
+      guiaHeader.eachCell(cell => {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0D1526' } };
+        cell.font = { name: 'Calibri', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      });
+
+      const legendRows = [
+        ['Rosa (Falta municipio)', 'Municipio_A_Corregir', 'Escribir el nombre oficial del municipio de Guanajuato correspondiente.', 'FFFFE4E6', 'FFE11D48', 'FF9F1239'],
+        ['Amarillo (Falta comunidad/sede)', 'Comunidad_o_Sede_A_Llenar', 'Escribir la localidad, comunidad o sede donde se realizó la actividad.', 'FFFEF3C7', 'FFD97706', 'FF92400E'],
+        ['Morado (Falta desglose/población)', 'Participacion_A_Llenar y Acceso_A_Llenar', 'Llenar las cantidades faltantes para igualar Total_Territorial con Total_Demografico.', 'FFF3E8FF', 'FF9333EA', 'FF6B21A8'],
+        ['Gris claro (Completo)', 'Celdas sombreadas en gris', 'Ese dato ya está completo en esta fila; no es necesario llenarlo.', 'FFF1F5F9', 'FFCBD5E1', 'FF64748B'],
+        ['Regla general', 'ID_Actividad y Folio', 'No modificar ID_Actividad ni Folio para poder conciliar su archivo.', 'FFFFFFFF', 'FFCBD5E1', 'FF0F172A']
+      ];
+      legendRows.forEach(item => {
+        const r = wsGuia.addRow([item[0], item[1], item[2]]);
+        r.height = 24;
+        const c1 = r.getCell(1);
+        c1.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: item[3] } };
+        c1.font = { name: 'Calibri', size: 10, bold: true, color: { argb: item[5] } };
+        c1.border = {
+          top: { style: 'thin', color: { argb: item[4] } },
+          left: { style: 'thin', color: { argb: item[4] } },
+          bottom: { style: 'thin', color: { argb: item[4] } },
+          right: { style: 'thin', color: { argb: item[4] } }
+        };
+        [2, 3].forEach(ci => {
+          r.getCell(ci).font = { name: 'Calibri', size: 10, color: { argb: 'FF0F172A' } };
+          r.getCell(ci).alignment = { vertical: 'middle', wrapText: true };
+        });
+      });
+
+      const buffer = await wb.xlsx.writeBuffer();
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Faltantes_Territorio_Poblacion_${userSlug}_${tipoSlug}.xlsx`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
     function exportFaltantesCSV() {
       const userFilter = document.getElementById('filter-faltantes-user')?.value || 'ALL';
       const tipoFilter = document.getElementById('filter-faltantes-tipo')?.value || 'ALL';
@@ -3862,20 +4052,18 @@
         'Notas_o_Comentarios_Usuario'
       ];
 
-      const cleanCell = v => (v === null || v === undefined) ? '' : String(v).replace(/[\r\n\t]+/g, ' ').trim();
-
       const data = filtered.map(r => [
-        cleanCell(r.id),
-        cleanCell(r.folio),
-        cleanCell(r.usuario),
-        cleanCell(r.direccion),
-        cleanCell(r.nombre),
-        cleanCell(r.clave),
-        cleanCell(r.meta),
-        cleanCell(r.nombreMeta),
-        cleanCell(r.municipio),
+        cleanFaltantesCellText(r.id),
+        cleanFaltantesCellText(r.folio),
+        cleanFaltantesCellText(r.usuario),
+        cleanFaltantesCellText(r.direccion),
+        cleanFaltantesCellText(r.nombre),
+        cleanFaltantesCellText(r.clave),
+        cleanFaltantesCellText(r.meta),
+        cleanFaltantesCellText(r.nombreMeta),
+        cleanFaltantesCellText(r.municipio),
         '', // Municipio_A_Corregir (en blanco para captura)
-        cleanCell(r.comunidad),
+        cleanFaltantesCellText(r.comunidad),
         '', // Comunidad_o_Sede_A_Llenar (en blanco para captura)
         r.sumT == null ? '' : r.sumT,
         r.sumP == null ? '' : r.sumP,
@@ -3884,19 +4072,24 @@
         '', // Participacion_A_Llenar (en blanco para captura)
         r.sumAcc == null ? '' : r.sumAcc,
         '', // Acceso_A_Llenar (en blanco para captura)
-        cleanCell(r.issues.map(i => i.label).join(' | ')),
+        cleanFaltantesCellText(r.issues.map(i => i.label).join(' | ')),
         '' // Notas_o_Comentarios_Usuario
       ]);
 
+      const userSlug = (userFilter === 'ALL' ? 'Todos' : userFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
+      const tipoSlug = (tipoFilter === 'ALL' ? 'Todos_Faltantes' : tipoFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
+
+      if (typeof ExcelJS !== 'undefined' && typeof Blob !== 'undefined' && typeof document.createElement === 'function') {
+        return downloadFaltantesXlsx(filtered, fields, data, userSlug, tipoSlug);
+      }
+
       const csv = Papa.unparse({ fields, data }, { escapeFormulae: false, newline: '\r\n' });
       if (typeof Blob === 'undefined' || typeof document.createElement !== 'function') return;
-      const content = '\uFEFFsep=,\r\n' + csv;
+      const content = '\uFEFF' + csv;
       const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      const userSlug = (userFilter === 'ALL' ? 'Todos' : userFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
-      const tipoSlug = (tipoFilter === 'ALL' ? 'Todos_Faltantes' : tipoFilter).replace(/[^a-zA-Z0-9_.-]/g, '_');
       a.download = `Faltantes_Territorio_Poblacion_${userSlug}_${tipoSlug}.csv`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
