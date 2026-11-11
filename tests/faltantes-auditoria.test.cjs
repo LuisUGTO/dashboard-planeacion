@@ -191,6 +191,7 @@ test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
         Usuario_Registra: 'ssvillegas@guanajuato.gob.mx',
         Nombre_Actividad: 'Concierto sin eje ni enfoque',
         Clave_Proceso_Txt: 'PB01',
+        Tipo_Actividad: '',
         Eje_PG: '',
         Enfoque_Actividad: ''
       },
@@ -200,6 +201,7 @@ test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
         Usuario_Registra: 'augalde@guanajuato.gob.mx',
         Nombre_Actividad: 'Taller sin asignar',
         Clave_Proceso_Txt: 'PB01',
+        Tipo_Actividad: 'Sin especificar',
         Eje_PG: 'Sin asignar',
         Enfoque_Actividad: 'Artística'
       },
@@ -209,6 +211,7 @@ test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
         Usuario_Registra: 'fmolinar@guanajuato.gob.mx',
         Nombre_Actividad: 'Actividad completa PG y Enfoque',
         Clave_Proceso_Txt: 'PB01',
+        Tipo_Actividad: 'Taller',
         Eje_PG: 'Vocación',
         Enfoque_Actividad: 'Cultural'
       }
@@ -239,12 +242,21 @@ test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
   // Filter by sin_eje -> should match ACT-PG-1 and ACT-PG-2, not ACT-OK-3
   document.getElementById('filter-faltantes-tipo').value = 'sin_eje';
   vm.runInContext('renderFaltantesTable();', context);
+  assert.equal(document.getElementById('kpi-faltantes-sin-tipo').textContent, '2');
   assert.equal(document.getElementById('kpi-faltantes-sin-eje').textContent, '2');
   assert.equal(document.getElementById('kpi-faltantes-sin-enfoque').textContent, '1');
   const htmlEje = nodes.get('tbl-faltantes').innerHTML;
   assert.match(htmlEje, /ACT-PG-1/);
   assert.match(htmlEje, /ACT-PG-2/);
   assert.doesNotMatch(htmlEje, /ACT-OK-3/);
+
+  // Filter by sin_tipo -> should match ACT-PG-1 and ACT-PG-2, not ACT-OK-3
+  document.getElementById('filter-faltantes-tipo').value = 'sin_tipo';
+  vm.runInContext('renderFaltantesTable();', context);
+  const htmlTipo = nodes.get('tbl-faltantes').innerHTML;
+  assert.match(htmlTipo, /ACT-PG-1/);
+  assert.match(htmlTipo, /ACT-PG-2/);
+  assert.doesNotMatch(htmlTipo, /ACT-OK-3/);
 
   // Filter by sin_enfoque -> only ACT-PG-1
   document.getElementById('filter-faltantes-tipo').value = 'sin_enfoque';
@@ -263,10 +275,13 @@ test('detecta y exporta faltantes de Eje PG (Sin asignar) y Enfoque', () => {
   vm.runInContext('exportFaltantesCSV();', context);
   assert.ok(exportedData);
   assert.equal(exportedData.data.length, 1);
+  assert.ok(exportedData.fields.includes('Tipo_Actividad_Actual'));
+  assert.ok(exportedData.fields.includes('Tipo_Actividad_A_Llenar'));
   assert.ok(exportedData.fields.includes('Eje_PG_Actual'));
   assert.ok(exportedData.fields.includes('Eje_PG_A_Llenar'));
   assert.ok(exportedData.fields.includes('Enfoque_Actual'));
   assert.ok(exportedData.fields.includes('Enfoque_A_Llenar'));
+  assert.equal(exportedData.data[0][exportedData.fields.indexOf('Tipo_Actividad_Actual')], 'Sin especificar');
   assert.equal(exportedData.data[0][exportedData.fields.indexOf('Eje_PG_Actual')], 'Sin asignar');
   assert.equal(exportedData.data[0][exportedData.fields.indexOf('Enfoque_Actual')], 'No especificado');
 });
