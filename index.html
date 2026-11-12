@@ -1717,7 +1717,7 @@
   </div>
 
   <script src="assets/js/revisiones-identidad.js?v=20261105-grupos"></script>
-  <script src="assets/js/calidad-datos.js?v=20261105-grupos"></script>
+  <script src="assets/js/calidad-datos.js?v=20261112-cearg75"></script>
   <script src="assets/js/ficha-actividad.js?v=20261103-conciliacion"></script>
   <script src="assets/js/gto-map-paths.js?v=20261109"></script>
   <script src="assets/js/datos-anuales.js?v=20261108"></script>
@@ -2701,11 +2701,17 @@
 
         const matchStats = byIdAlin[idAlin] || byNombreMeta[nombre] || { count: 0, pop: 0, reported: 0, unresolved: 0 };
         const actCount = matchStats.count;
-        const realizado = unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : (matchStats.unresolved ? null : matchStats.reported));
+        const isVientosTraining = clave === 'QC4047' && ['24', '25', '26'].includes(idAlin) && unitCat === 'PERSONAS';
+        const training = isVientosTraining ? CulturaCalidad.vientosTrainingProgress(
+          idAlin, actF, popMode === 'territorio' ? terF : pobF
+        ) : null;
+        const requiresUnitReview = clave === 'PB3567' && idAlin === '75';
+        const realizado = requiresUnitReview ? CulturaCalidad.ceargDocumentedWorkshops(actF) :
+          training ? training.value : unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : (matchStats.unresolved ? null : matchStats.reported));
         const pct = realizado === null ? null : (metaAnual > 0 ? (realizado / metaAnual) * 100 : 0);
 
         return {
-          idAlin, clave, nombre, direccion, unidad, unitCat, metaAnual, actCount, realizado, pct
+          idAlin, clave, nombre, direccion, unidad, unitCat, metaAnual, actCount, realizado, pct, training, requiresUnitReview
         };
       });
 
@@ -2720,6 +2726,7 @@
       const sumMetaActCatalogo = metasActCatalogo.reduce((s, m) => s + m.metaAnual, 0);
       const sumRealActCatalogo = metasActCatalogo.reduce((s, m) => s + (m.realizado || 0), 0);
       const pendingQuantities = metasActCatalogo.some(m => m.realizado === null);
+      const hasPartialAdvance = metasActCatalogo.some(m => m.requiresUnitReview);
       const pctGlobalCatalogo = sumMetaActCatalogo > 0 ? ((sumRealActCatalogo / sumMetaActCatalogo) * 100).toFixed(1) : '0.0';
 
       const metasActEnOperacion = metasActCatalogo.filter(m => m.actCount > 0);
@@ -2743,7 +2750,8 @@
 
       document.getElementById('kpi-mat-cumplimiento').textContent = pendingQuantities ? 'Por confirmar' : `${pctGlobalCatalogo}%`;
       document.getElementById('kpi-mat-cumplimiento-activas').textContent = pendingQuantities ? 'Falta cuantificar concentrados' : `${pctActivasOperacion}% en activas`;
-      document.getElementById('kpi-mat-cumplimiento-sub').textContent = pendingQuantities ? 'Revisar cantidades en conciliación' : `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial`;
+      document.getElementById('kpi-mat-cumplimiento-sub').textContent = pendingQuantities ? 'Revisar cantidades en conciliación' :
+        `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial${hasPartialAdvance ? ' · Incluye avance parcial CEARG' : ''}`;
 
       const ejeMap = {};
       actF.forEach(a => {
@@ -2851,7 +2859,9 @@
             <td class="p-2.5 text-right font-semibold text-slate-700">${fmtInt(m.metaAnual)}</td>
             <td class="p-2.5 text-right font-bold text-gto-blue">
               ${m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado)}
-              ${m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
+              ${m.requiresUnitReview ? '<div class="text-[9.5px] font-normal text-slate-500">Avance documentado parcial · CEARG</div>' :
+                m.training ? `<div class="text-[9.5px] font-normal text-slate-500">${m.training.pending ? 'Hay fichas de capacitación por revisar' : 'Participación registrada en capacitación'}</div>` :
+                m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
             </td>
             <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}</span></td>
           </tr>
@@ -4941,7 +4951,7 @@
               { text: `${m.clave} (#${m.idAlin})`, options: { bold: true, color: '004B87', fill: bg } },
               { text: `${formatShortDireccion(m.direccion)}: ${shortMeta}`, options: { color: '334155', fill: bg } },
               { text: fmtInt(m.metaAnual), options: { align: 'right', color: '475569', fill: bg } },
-              { text: m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
+              { text: m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado) + (m.requiresUnitReview ? ' (parcial)' : ''), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
               { text: m.pct === null ? 'Por confirmar' : `${m.pct.toFixed(1)}%`, options: { align: 'right', bold: true, color: m.pct >= 100 ? '047857' : 'B45309', fill: bg } }
             ];
           })

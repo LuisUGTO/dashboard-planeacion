@@ -5,6 +5,26 @@ const activity = extra => ({ ID_Actividad: 'A1', Folio: 'F1', Nombre_Actividad: 
 const t = (n, extra = {}) => ({ ID_Actividad: 'A1', Municipio: 'León', Otra_Comunidad: 'Centro', Cantidad: n, ...extra });
 const p = (n, extra = {}) => ({ ID_Actividad: 'A1', Cantidad_Poblacion: n, Cantidad_Participacion: 0, Cantidad_Acceso: n, ...extra });
 
+test('CEARG meta 75 cuenta talleres cotejados una sola vez en el corte filtrado', () => {
+  const workshop = activity({ ID_Actividad: 'ACT-SCCL28269', Clave_Proceso: 75, Cantidad_Actividades: 320 });
+  const screening = activity({ ID_Actividad: 'ACT-SCUQ80549', Clave_Proceso: 75, Cantidad_Actividades: 52 });
+  assert.equal(q.ceargDocumentedWorkshops([workshop, workshop, screening]), 1);
+  assert.equal(q.ceargDocumentedWorkshops([screening]), 0);
+  assert.equal(q.ceargDocumentedWorkshops([{ ...workshop, Clave_Proceso: 77 }]), 0);
+});
+
+test('Vientos Musicales cuenta capacitación y conserva pendientes sin sumar presentaciones', () => {
+  const training = activity({ ID_Actividad: 'ACT-SCKO44883', Clave_Proceso: 26 });
+  const concert = activity({ ID_Actividad: 'ACT-SCPP14762', Clave_Proceso: 26 });
+  const rows = [
+    p(54, { ID_Actividad: training.ID_Actividad, Cantidad_Participacion: 54, Cantidad_Acceso: 0 }),
+    p(1874, { ID_Actividad: concert.ID_Actividad, Cantidad_Participacion: 12, Cantidad_Acceso: 1862 })
+  ];
+  assert.deepEqual(q.vientosTrainingProgress(26, [training, concert], rows), { value: 54, pending: 0 });
+  assert.deepEqual(q.vientosTrainingProgress(26, [training, concert], rows.slice(1)), { value: null, pending: 1 });
+  assert.deepEqual(q.vientosTrainingProgress(26, [training, concert, activity({ Clave_Proceso: 26 })], rows), { value: null, pending: 1 });
+});
+
 test('solo una marca explícita al inicio de la descripción confirma cancelación', () => {
   for (const description of ['[CANCELADA] Confirmada por el área', '  [cancelado] No se realizó']) {
     assert.equal(q.isCancelled(activity({ Descripcion_Breve: description })), true);

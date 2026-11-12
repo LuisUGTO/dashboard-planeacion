@@ -76,6 +76,43 @@
     const malformed = text(activity.Cantidad_Actividades) !== '' && explicit === null;
     return { value: malformed || (consolidated && (explicit === null || explicit === 0)) ? null : (explicit === null ? 1 : explicit), consolidated, explicit, malformed };
   }
+  // PB3567 #75: one workshop per ID verified against the CEARG source rows.
+  const ceargWorkshops75 = new Set([
+    'ACT-SCPE79917', 'ACT-SCLV97219', 'ACT-SCTP93796', 'ACT-SCCL28269', 'ACT-SCZU26953'
+  ]);
+  function ceargDocumentedWorkshops(activities) {
+    return new Set(activities.filter(a => text(a.Clave_Proceso) === '75' && !isExcluded(a))
+      .map(a => text(a.ID_Actividad)).filter(id => ceargWorkshops75.has(id))).size;
+  }
+  // QC4047: documented training and performances already reviewed for these goals.
+  const vientosTraining = new Map([
+    ['24', new Set(['ACT-SCOG94069'])],
+    ['25', new Set(['ACT-SCIN39392'])],
+    ['26', new Set(['ACT-SCYI89333', 'ACT-SCKO44883', 'ACT-SCIF80615'])]
+  ]);
+  const vientosPerformances = new Map([
+    ['24', new Set(['ACT-SCZR98192', 'ACT-SCLJ26393', 'ACT-SCLO47843', 'ACT-SCSW77630'])],
+    ['25', new Set(['ACT-SCDB29664'])],
+    ['26', new Set(['ACT-SCLE86988', 'ACT-SCPP14762'])]
+  ]);
+  function vientosTrainingProgress(goalId, activities, populationRows) {
+    const training = vientosTraining.get(text(goalId));
+    const performances = vientosPerformances.get(text(goalId));
+    if (!training) return null;
+    const grouped = group(populationRows);
+    let total = 0;
+    let pending = 0;
+    for (const activity of activities) {
+      if (text(activity.Clave_Proceso) !== text(goalId) || isExcluded(activity)) continue;
+      const id = text(activity.ID_Actividad);
+      if (performances.has(id)) continue;
+      const participation = (grouped.get(id) || []).map(row => count(row.Cantidad_Participacion))
+        .filter(value => value !== null);
+      if (!training.has(id) || !participation.length) pending++;
+      else total += participation.reduce((sum, value) => sum + value, 0);
+    }
+    return { value: pending ? null : total, pending };
+  }
   // Declaraciones documentadas por el área: una revisión aplica solo al ID,
   // periodo, cifra y texto que fueron contrastados. No acredita cada sesión.
   function sessionsReviewed(activity) {
@@ -203,5 +240,5 @@
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, isCancelled, supersededBy, isExcluded, dateISO, quantity, metrics, monthlyPopulation, audit };
+  return { number, count, isCancelled, supersededBy, isExcluded, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };
 });
