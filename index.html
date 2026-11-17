@@ -4755,6 +4755,217 @@
       }
     }
 
+    // Histórico 2024-2025 de referencia (Informe de Resultados 2025 / PPTX DGPA) para el reporte general
+    const HIST_DIR_PQ = {
+      'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES': [[2024,1,6,2,6,12],[2025,1,7,3,8,15]],
+      'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES': [[2024,1,5,5,7,12],[2025,2,9,2,4,13]],
+      'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA': [[2024,4,13,3,6,19],[2025,4,13,3,4,17]],
+      'DIRECCIÓN GENERAL DE FORUM': [[2024,2,7,0,0,7],[2025,2,7,0,0,7]],
+      'DIRECCIÓN GENERAL DE VINCULACIÓN Y DESARROLLO CULTURAL': [[2024,5,22,3,7,29],[2025,5,22,2,6,28]],
+      'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL': [[2024,2,8,7,17,25],[2025,2,8,8,19,27]],
+      'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN': [[2024,2,12,6,19,31],[2025,2,12,6,15,27]],
+      'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL': [],
+      'COORDINACIÓN DE COMUNICACIÓN SOCIAL': []
+    };
+
+    function buildGeneralGuanajuatoPPTX(pptx, shieldDataUrl, dStart, dEnd) {
+      pptx.layout = 'LAYOUT_16x9'; // 10.0 x 5.625 in (formato oficial Guanajuato)
+      const NAVY = '004B87', HDR = '143C64', SKY = '43AFE2', SKY_LT = 'E8F4FB';
+      const GRAY_BG = 'F4F6F9', BORDER = '7C93A8', LIGHT_B = 'D0D8E2', INK = '1E293B', MUTED = '5A6778';
+      const GREEN = '16815A', MINT_BG = 'E6F4EE', AMBER = 'B45309', AMB_BG = 'FEF3C7', RED = 'C0392B', ROSE_BG = 'FDEDEC';
+
+      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
+      const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)));
+      const catAll = rawDB.catAlineacion || [];
+      const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
+
+      const countsById = {};
+      const terByAct = {};
+      terF.forEach(t => {
+        const aid = cleanStr(t.ID_Actividad);
+        terByAct[aid] = (terByAct[aid] || 0) + toNum(t.Cantidad);
+      });
+      actF.forEach(a => {
+        const cl = cleanStr(a.Clave_Proceso);
+        if (!countsById[cl]) countsById[cl] = { acts: 0, people: 0 };
+        countsById[cl].acts += 1;
+        countsById[cl].people += (terByAct[cleanStr(a.ID_Actividad)] || 0);
+      });
+
+      const dirOrder = [
+        'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES',
+        'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES',
+        'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA',
+        'DIRECCIÓN GENERAL DE FORUM',
+        'DIRECCIÓN GENERAL DE VINCULACIÓN Y DESARROLLO CULTURAL',
+        'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL',
+        'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN',
+        'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL',
+        'COORDINACIÓN DE COMUNICACIÓN SOCIAL'
+      ];
+
+      const addGtoHeader = (sl, title, tag, pageNum) => {
+        if (shieldDataUrl) sl.addImage({ data: shieldDataUrl, x: 0.28, y: 0.12, w: 0.58, h: 0.72 });
+        sl.addText('GUANAJUATO\nGOBIERNO DE LA GENTE', { x: 0.92, y: 0.22, w: 2.6, h: 0.5, fontSize: 9, bold: true, color: NAVY, fontFace: 'Arial' });
+        sl.addText(tag, { x: 4.5, y: 0.12, w: 5.15, h: 0.30, fontSize: 8.5, bold: true, color: NAVY, align: 'right', fontFace: 'Arial' });
+        sl.addShape(pptx.ShapeType.rect, { x: 0, y: 0.90, w: 6.4, h: 0.32, fill: { color: SKY } });
+        sl.addText(`    ${title}`, { x: 0, y: 0.90, w: 6.4, h: 0.32, fontSize: 11.5, bold: true, italic: true, color: 'FFFFFF', valign: 'middle', fontFace: 'Arial' });
+        sl.addText('Secretaría de Cultura de Guanajuato · Informe de Resultados 2024–2026', { x: 0.35, y: 5.30, w: 8.5, h: 0.24, fontSize: 7.5, color: MUTED, fontFace: 'Arial' });
+        sl.addText(String(pageNum), { x: 9.1, y: 5.30, w: 0.55, h: 0.24, fontSize: 8.5, bold: true, color: NAVY, align: 'right', fontFace: 'Arial' });
+      };
+
+      // LÁMINA 1: PORTADA OFICIAL (ESTILO MARCE)
+      const s1 = pptx.addSlide();
+      s1.background = { color: 'FFFFFF' };
+      if (shieldDataUrl) s1.addImage({ data: shieldDataUrl, x: 0.65, y: 0.45, w: 0.95, h: 1.18 });
+      s1.addText('GUANAJUATO\nGOBIERNO DE LA GENTE', { x: 1.72, y: 0.65, w: 4.0, h: 0.75, fontSize: 14, bold: true, color: NAVY, fontFace: 'Arial' });
+      s1.addShape(pptx.ShapeType.rect, { x: 1.15, y: 2.48, w: 8.20, h: 0.72, fill: { color: NAVY } });
+      s1.addText(`Informe de resultados 2024–2026 · Corte ${dEnd}`, {
+        x: 1.15, y: 2.48, w: 8.20, h: 0.72, fontSize: 18, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle', fontFace: 'Arial'
+      });
+      s1.addText(`Secretaría de Cultura · Dirección General de Planeación · ${dStart} al ${dEnd}`, {
+        x: 1.15, y: 3.35, w: 8.20, h: 0.35, fontSize: 10, color: MUTED, align: 'center', fontFace: 'Arial'
+      });
+
+      // LÁMINA 2: PANORAMA GLOBAL + GLOSARIO
+      let page = 2;
+      const s2 = pptx.addSlide();
+      addGtoHeader(s2, 'Panorama Global 2026 por Dirección', 'Glosario: P (Operación continua) · Q (Inversión / Específico)', page++);
+      const sumRows = [[
+        { text: 'Dirección / Subsecretaría', options: { bold: true, color: 'FFFFFF', fill: { color: HDR } } },
+        { text: 'Metas 2026', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+        { text: 'Con registro', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+        { text: 'Fichas 2026', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+        { text: 'Población', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } }
+      ]];
+      dirOrder.forEach((dName, idx) => {
+        const dMetas = catAll.filter(c => getCanonicalDirection(c.Direccion, c.ID_Alineacion, c.Clave_Proceso) === dName);
+        const dActs = actF.filter(a => getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) === dName);
+        const dPop = dActs.reduce((acc, a) => acc + (terByAct[cleanStr(a.ID_Actividad)] || 0), 0);
+        const activeMetas = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
+        const bg = idx % 2 === 0 ? 'FFFFFF' : GRAY_BG;
+        sumRows.push([
+          { text: formatShortDireccion(dName), options: { bold: true, color: INK, fill: { color: bg } } },
+          { text: String(dMetas.length), options: { color: INK, fill: { color: bg }, align: 'center' } },
+          { text: `${activeMetas} / ${dMetas.length}`, options: { color: INK, fill: { color: bg }, align: 'center' } },
+          { text: fmtInt(dActs.length), options: { color: INK, fill: { color: bg }, align: 'center' } },
+          { text: fmtInt(dPop), options: { color: INK, fill: { color: bg }, align: 'center' } }
+        ]);
+      });
+      s2.addTable(sumRows, { x: 0.35, y: 1.34, w: 9.30, h: 2.55, fontSize: 7.8, fontFace: 'Arial', border: { pt: 0.5, color: LIGHT_B }, colW: [3.8, 1.1, 1.4, 1.4, 1.6] });
+
+      s2.addShape(pptx.ShapeType.rect, { x: 0.35, y: 4.10, w: 9.30, h: 1.05, fill: { color: SKY_LT }, line: { color: LIGHT_B, width: 0.75 } });
+      s2.addShape(pptx.ShapeType.rect, { x: 0.35, y: 4.10, w: 0.06, h: 1.05, fill: { color: NAVY } });
+      s2.addText('Balance general del periodo consultado', { x: 0.48, y: 4.15, w: 9.0, h: 0.25, fontSize: 9.5, bold: true, color: NAVY, fontFace: 'Arial' });
+      s2.addText(
+        `• Operación registrada: ${txt('kpi-actividades')} fichas (${txt('kpi-sesiones')}) y ${txt('kpi-poblacion')} personas beneficiadas.\n` +
+        `• Cobertura territorial: ${txt('kpi-municipios')} municipios y ${txt('kpi-metas-activas')} metas institucionales activas.`,
+        { x: 0.48, y: 4.42, w: 9.0, h: 0.65, fontSize: 8.4, color: INK, fontFace: 'Arial' }
+      );
+
+      // LÁMINAS 3–11: 1 LÁMINA EJECUTIVA POR DIRECCIÓN
+      dirOrder.forEach(dName => {
+        const sl = pptx.addSlide();
+        const shortD = formatShortDireccion(dName);
+        const dMetas = catAll.filter(c => getCanonicalDirection(c.Direccion, c.ID_Alineacion, c.Clave_Proceso) === dName);
+        const dActs = actF.filter(a => getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) === dName);
+        const dPop = dActs.reduce((acc, a) => acc + (terByAct[cleanStr(a.ID_Actividad)] || 0), 0);
+        const pProys = new Set(dMetas.filter(m => cleanStr(m.Clave_Proceso).startsWith('P')).map(m => cleanStr(m.Clave_Proceso).split('.')[0]));
+        const qProys = new Set(dMetas.filter(m => !cleanStr(m.Clave_Proceso).startsWith('P')).map(m => cleanStr(m.Clave_Proceso).split('.')[0]));
+        const pMetas = dMetas.filter(m => cleanStr(m.Clave_Proceso).startsWith('P')).length;
+        const qMetas = dMetas.length - pMetas;
+        const pqCols = [...(HIST_DIR_PQ[dName] || []), [2026, pProys.size, pMetas, qProys.size, qMetas, dMetas.length]];
+
+        addGtoHeader(sl, shortD, `Corte ${dEnd} · ${dMetas.length} metas`, page++);
+
+        // Mini matriz 2024 | 2025 | 2026
+        const cw = 0.86, gap = 0.06, startX = 0.35;
+        pqCols.forEach(([yr, pc, pm, qc, qm, tot], idx) => {
+          const x = startX + idx * (cw + gap);
+          sl.addShape(pptx.ShapeType.rect, { x, y: 1.38, w: cw, h: 0.28, fill: { color: SKY } });
+          sl.addText(String(yr), { x, y: 1.38, w: cw, h: 0.28, fontSize: 10, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle', fontFace: 'Arial' });
+          [[`${pc} P\n${pm} m`, 1.69, 0.45], [`${qc} Q\n${qm} m`, 2.17, 0.45], [`${tot} metas`, 2.65, 0.32]].forEach(([txtB, yb, hb]) => {
+            sl.addShape(pptx.ShapeType.rect, { x, y: yb, w: cw, h: hb, fill: { color: 'FFFFFF' }, line: { color: BORDER, width: 0.8 } });
+            sl.addText(txtB, { x, y: yb, w: cw, h: hb, fontSize: 8.5, bold: true, color: INK, align: 'center', valign: 'middle', fontFace: 'Arial' });
+          });
+        });
+
+        // Recuadro Logros 2026
+        sl.addShape(pptx.ShapeType.rect, { x: 0.35, y: 3.10, w: 2.70, h: 2.05, fill: { color: SKY_LT }, line: { color: LIGHT_B, width: 0.75 } });
+        sl.addShape(pptx.ShapeType.rect, { x: 0.35, y: 3.10, w: 0.05, h: 2.05, fill: { color: NAVY } });
+        sl.addText('Resumen operativo 2026', { x: 0.46, y: 3.16, w: 2.50, h: 0.25, fontSize: 9, bold: true, color: NAVY, fontFace: 'Arial' });
+        const activeM = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
+        sl.addText(
+          `• ${fmtInt(dActs.length)} acciones culturales registradas.\n` +
+          `• ${fmtInt(dPop)} asistentes en sedes.\n` +
+          `• ${activeM} de ${dMetas.length} metas con avance operativo registrado.`,
+          { x: 0.46, y: 3.44, w: 2.50, h: 1.62, fontSize: 8, color: INK, fontFace: 'Arial' }
+        );
+
+        // Tabla de principales metas 2026
+        const mRows = [[
+          { text: 'CLAVE', options: { bold: true, color: 'FFFFFF', fill: { color: HDR } } },
+          { text: 'META / INDICADOR', options: { bold: true, color: 'FFFFFF', fill: { color: HDR } } },
+          { text: 'META 26', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+          { text: 'REG. 26', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+          { text: 'AVANCE', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } }
+        ]];
+        dMetas.slice(0, 7).forEach((m, idx) => {
+          const mid = cleanStr(m.ID_Alineacion);
+          const isPers = /persona|asistente|visitante|alumno|p[úu]blico/i.test(cleanStr(m.Unidad_Medida));
+          const reg = isPers ? (countsById[mid]?.people || 0) : (countsById[mid]?.acts || 0);
+          const metaN = toNum(m.Meta_Anual);
+          const pct = metaN > 0 ? Math.min(999, (reg / metaN) * 100) : 0;
+          const bg = idx % 2 === 0 ? 'FFFFFF' : GRAY_BG;
+          const pctBg = pct >= 100 ? MINT_BG : (pct === 0 ? ROSE_BG : AMB_BG);
+          const pctCol = pct >= 100 ? GREEN : (pct === 0 ? RED : AMBER);
+          mRows.push([
+            { text: `${cleanStr(m.Clave_Proceso)} (#${mid})`, options: { bold: true, color: INK, fill: { color: bg } } },
+            { text: cleanStr(m.Nombre_Meta || m.Meta).slice(0, 58), options: { color: INK, fill: { color: bg } } },
+            { text: fmtInt(metaN), options: { color: INK, fill: { color: bg }, align: 'center' } },
+            { text: fmtInt(reg), options: { color: INK, fill: { color: bg }, align: 'center' } },
+            { text: `${pct.toFixed(1)}%`, options: { bold: true, color: pctCol, fill: { color: pctBg }, align: 'center' } }
+          ]);
+        });
+        sl.addTable(mRows, { x: 3.20, y: 1.38, w: 6.45, h: 3.77, fontSize: 7.1, fontFace: 'Arial', border: { pt: 0.5, color: LIGHT_B }, colW: [1.05, 3.05, 0.78, 0.78, 0.79] });
+      });
+
+      // LÁMINA 12: COBERTURA TERRITORIAL Y PÚBLICOS
+      const sCov = pptx.addSlide();
+      addGtoHeader(sCov, 'Cobertura Territorial y Públicos Atendidos 2026', 'Alcance Estatal e Inclusión Social', page++);
+      sCov.addShape(pptx.ShapeType.rect, { x: 0.35, y: 1.40, w: 4.55, h: 3.65, fill: { color: SKY_LT }, line: { color: LIGHT_B, width: 0.75 } });
+      sCov.addShape(pptx.ShapeType.rect, { x: 0.35, y: 1.40, w: 0.06, h: 3.65, fill: { color: NAVY } });
+      sCov.addText('Alcance territorial en el Estado', { x: 0.48, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
+      sCov.addText(
+        `• Municipios atendidos: ${txt('kpi-municipios')} (${txt('kpi-municipios-pct')}).\n\n` +
+        `• Población beneficiada: ${txt('kpi-poblacion')} personas.\n\n` +
+        `• ${txt('kpi-otros-alcances')}`,
+        { x: 0.48, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
+      );
+
+      sCov.addShape(pptx.ShapeType.rect, { x: 5.10, y: 1.40, w: 4.55, h: 3.65, fill: { color: GRAY_BG }, line: { color: LIGHT_B, width: 0.75 } });
+      sCov.addShape(pptx.ShapeType.rect, { x: 5.10, y: 1.40, w: 0.06, h: 3.65, fill: { color: SKY } });
+      sCov.addText('Públicos y seguimiento institucional', { x: 5.23, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
+      sCov.addText(
+        `• Participación vs Acceso: ${txt('kpi-part-acc')}.\n\n` +
+        `• Metas activas en operación: ${txt('kpi-metas-activas')}.\n\n` +
+        `• Enfoque de cierre: consolidar metas programadas para noviembre–diciembre y cobertura municipal.`,
+        { x: 5.23, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
+      );
+
+      // LÁMINA 13: ÚLTIMO SLIDE INSTITUCIONAL (ESTILO MARCE)
+      const sEnd = pptx.addSlide();
+      sEnd.background = { color: NAVY };
+      sEnd.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: 10.0, h: 0.14, fill: { color: SKY } });
+      if (shieldDataUrl) sEnd.addImage({ data: shieldDataUrl, x: 4.35, y: 1.10, w: 1.30, h: 1.60 });
+      sEnd.addText('SECRETARÍA DE CULTURA\nGOBIERNO DEL ESTADO DE GUANAJUATO', {
+        x: 1.0, y: 2.95, w: 8.0, h: 0.90, fontSize: 18, bold: true, color: 'FFFFFF', align: 'center', fontFace: 'Arial'
+      });
+      sEnd.addText(`Informe Ejecutivo de Resultados · Corte ${dEnd}`, {
+        x: 1.0, y: 3.95, w: 8.0, h: 0.35, fontSize: 11, color: SKY, align: 'center', fontFace: 'Arial'
+      });
+    }
+
     async function exportExecutivePPTX() {
       if (typeof PptxGenJS === 'undefined') {
         alert('La librería de exportación PptxGenJS aún se está cargando. Intenta de nuevo en unos segundos.');
@@ -4797,6 +5008,14 @@
 
         // Lectura de KPIs renderizados en pantalla
         const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
+
+        const fDirVal = document.getElementById('f-direccion')?.value || 'ALL';
+        if (fDirVal === 'ALL') {
+          buildGeneralGuanajuatoPPTX(pptx, shieldDataUrl, dStart, dEnd);
+          const dateStamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+          await pptx.writeFile({ fileName: `Resumen_Ejecutivo_Direcciones_Cultura_GTO_${dateStamp}.pptx` });
+          return;
+        }
 
         // =========================================================
         // LÁMINA 1: PORTADA INSTITUCIONAL Y FILTROS ACTIVOS
