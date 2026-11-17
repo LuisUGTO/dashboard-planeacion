@@ -4788,7 +4788,8 @@
       actF.forEach(a => {
         const cl = cleanStr(a.Clave_Proceso);
         if (!countsById[cl]) countsById[cl] = { acts: 0, people: 0 };
-        countsById[cl].acts += 1;
+        const qty = CulturaCalidad.summarizeActivityCounts([a]).activities || 1;
+        countsById[cl].acts += qty;
         countsById[cl].people += (terByAct[cleanStr(a.ID_Actividad)] || 0);
       });
 
@@ -4835,12 +4836,13 @@
         { text: 'Dirección / Subsecretaría', options: { bold: true, color: 'FFFFFF', fill: { color: HDR } } },
         { text: 'Metas 2026', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
         { text: 'Con registro', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
-        { text: 'Fichas 2026', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
+        { text: 'Actividades 2026', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } },
         { text: 'Población', options: { bold: true, color: 'FFFFFF', fill: { color: HDR }, align: 'center' } }
       ]];
       dirOrder.forEach((dName, idx) => {
         const dMetas = catAll.filter(c => getCanonicalDirection(c.Direccion, c.ID_Alineacion, c.Clave_Proceso) === dName);
         const dActs = actF.filter(a => getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) === dName);
+        const dActCount = CulturaCalidad.summarizeActivityCounts(dActs).activities || dActs.length;
         const dPop = dActs.reduce((acc, a) => acc + (terByAct[cleanStr(a.ID_Actividad)] || 0), 0);
         const activeMetas = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
         const bg = idx % 2 === 0 ? 'FFFFFF' : GRAY_BG;
@@ -4848,7 +4850,7 @@
           { text: formatShortDireccion(dName), options: { bold: true, color: INK, fill: { color: bg } } },
           { text: String(dMetas.length), options: { color: INK, fill: { color: bg }, align: 'center' } },
           { text: `${activeMetas} / ${dMetas.length}`, options: { color: INK, fill: { color: bg }, align: 'center' } },
-          { text: fmtInt(dActs.length), options: { color: INK, fill: { color: bg }, align: 'center' } },
+          { text: fmtInt(dActCount), options: { color: INK, fill: { color: bg }, align: 'center' } },
           { text: fmtInt(dPop), options: { color: INK, fill: { color: bg }, align: 'center' } }
         ]);
       });
@@ -4858,8 +4860,8 @@
       s2.addShape(pptx.ShapeType.rect, { x: 0.35, y: 4.10, w: 0.06, h: 1.05, fill: { color: NAVY } });
       s2.addText('Balance general del periodo consultado', { x: 0.48, y: 4.15, w: 9.0, h: 0.25, fontSize: 9.5, bold: true, color: NAVY, fontFace: 'Arial' });
       s2.addText(
-        `• Operación registrada: ${txt('kpi-actividades')} fichas (${txt('kpi-sesiones')}) y ${txt('kpi-poblacion')} personas beneficiadas.\n` +
-        `• Cobertura territorial: ${txt('kpi-municipios')} municipios y ${txt('kpi-metas-activas')} metas institucionales activas.`,
+        `• Operación registrada: ${txt('kpi-act-total')} actividades (${txt('kpi-sesiones-total')} sesiones) y ${txt('kpi-pop-total')} personas beneficiadas.\n` +
+        `• Cobertura territorial: ${txt('kpi-municipios')} municipios (${txt('kpi-municipios-pct')}) y ${txt('kpi-metas-activas')} metas institucionales activas.`,
         { x: 0.48, y: 4.42, w: 9.0, h: 0.65, fontSize: 8.4, color: INK, fontFace: 'Arial' }
       );
 
@@ -4895,8 +4897,9 @@
         sl.addShape(pptx.ShapeType.rect, { x: 0.35, y: 3.10, w: 0.05, h: 2.05, fill: { color: NAVY } });
         sl.addText('Resumen operativo 2026', { x: 0.46, y: 3.16, w: 2.50, h: 0.25, fontSize: 9, bold: true, color: NAVY, fontFace: 'Arial' });
         const activeM = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
+        const dActCount = CulturaCalidad.summarizeActivityCounts(dActs).activities || dActs.length;
         sl.addText(
-          `• ${fmtInt(dActs.length)} acciones culturales registradas.\n` +
+          `• ${fmtInt(dActCount)} actividades culturales registradas.\n` +
           `• ${fmtInt(dPop)} asistentes en sedes.\n` +
           `• ${activeM} de ${dMetas.length} metas con avance operativo registrado.`,
           { x: 0.46, y: 3.44, w: 2.50, h: 1.62, fontSize: 8, color: INK, fontFace: 'Arial' }
@@ -4938,7 +4941,7 @@
       sCov.addText('Alcance territorial en el Estado', { x: 0.48, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
       sCov.addText(
         `• Municipios atendidos: ${txt('kpi-municipios')} (${txt('kpi-municipios-pct')}).\n\n` +
-        `• Población beneficiada: ${txt('kpi-poblacion')} personas.\n\n` +
+        `• Población beneficiada: ${txt('kpi-pop-total')} personas.\n\n` +
         `• ${txt('kpi-otros-alcances')}`,
         { x: 0.48, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
       );
@@ -4947,7 +4950,7 @@
       sCov.addShape(pptx.ShapeType.rect, { x: 5.10, y: 1.40, w: 0.06, h: 3.65, fill: { color: SKY } });
       sCov.addText('Públicos y seguimiento institucional', { x: 5.23, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
       sCov.addText(
-        `• Participación vs Acceso: ${txt('kpi-part-acc')}.\n\n` +
+        `• Participación vs Acceso: ${txt('kpi-pop-sub')}.\n\n` +
         `• Metas activas en operación: ${txt('kpi-metas-activas')}.\n\n` +
         `• Enfoque de cierre: consolidar metas programadas para noviembre–diciembre y cobertura municipal.`,
         { x: 5.23, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
