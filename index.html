@@ -4774,9 +4774,9 @@
       const GRAY_BG = 'F4F6F9', BORDER = '7C93A8', LIGHT_B = 'D0D8E2', INK = '1E293B', MUTED = '5A6778';
       const GREEN = '16815A', MINT_BG = 'E6F4EE', AMBER = 'B45309', AMB_BG = 'FEF3C7', RED = 'C0392B', ROSE_BG = 'FDEDEC';
 
-      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)));
+      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isCanceled(a) && !CulturaCalidad.isSubstituted(a));
       const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)));
-      const catAll = rawDB.catAlineacion || [];
+      const catAll = rawDB.alineacion || [];
       const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
 
       const countsById = {};
@@ -4788,10 +4788,11 @@
       actF.forEach(a => {
         const cl = cleanStr(a.Clave_Proceso);
         if (!countsById[cl]) countsById[cl] = { acts: 0, people: 0 };
-        const qty = CulturaCalidad.summarizeActivityCounts([a]).activities || 1;
+        const qty = CulturaCalidad.quantity(a).value || 1;
         countsById[cl].acts += qty;
         countsById[cl].people += (terByAct[cleanStr(a.ID_Actividad)] || 0);
       });
+      const totalActiveMetas = catAll.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
 
       const dirOrder = [
         'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES',
@@ -4861,7 +4862,7 @@
       s2.addText('Balance general del periodo consultado', { x: 0.48, y: 4.15, w: 9.0, h: 0.25, fontSize: 9.5, bold: true, color: NAVY, fontFace: 'Arial' });
       s2.addText(
         `• Operación registrada: ${txt('kpi-act-total')} actividades (${txt('kpi-sesiones-total')} sesiones) y ${txt('kpi-pop-total')} personas beneficiadas.\n` +
-        `• Cobertura territorial: ${txt('kpi-municipios')} municipios (${txt('kpi-municipios-pct')}) y ${txt('kpi-metas-activas')} metas institucionales activas.`,
+        `• Cobertura territorial: ${txt('kpi-mun-ratio')} municipios (${txt('kpi-mun-pct')}) y ${totalActiveMetas}/${catAll.length} metas institucionales con registro.`,
         { x: 0.48, y: 4.42, w: 9.0, h: 0.65, fontSize: 8.4, color: INK, fontFace: 'Arial' }
       );
 
@@ -4930,6 +4931,15 @@
             { text: `${pct.toFixed(1)}%`, options: { bold: true, color: pctCol, fill: { color: pctBg }, align: 'center' } }
           ]);
         });
+        if (mRows.length === 1) {
+          mRows.push([
+            { text: '—', options: { color: MUTED, fill: { color: 'FFFFFF' } } },
+            { text: 'Sin metas registradas en el filtro activo', options: { color: MUTED, fill: { color: 'FFFFFF' } } },
+            { text: '—', options: { color: MUTED, fill: { color: 'FFFFFF' }, align: 'center' } },
+            { text: '—', options: { color: MUTED, fill: { color: 'FFFFFF' }, align: 'center' } },
+            { text: '—', options: { color: MUTED, fill: { color: 'FFFFFF' }, align: 'center' } }
+          ]);
+        }
         sl.addTable(mRows, { x: 3.20, y: 1.38, w: 6.45, h: 3.77, fontSize: 7.1, fontFace: 'Arial', border: { pt: 0.5, color: LIGHT_B }, colW: [1.05, 3.05, 0.78, 0.78, 0.79] });
       });
 
@@ -4940,9 +4950,9 @@
       sCov.addShape(pptx.ShapeType.rect, { x: 0.35, y: 1.40, w: 0.06, h: 3.65, fill: { color: NAVY } });
       sCov.addText('Alcance territorial en el Estado', { x: 0.48, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
       sCov.addText(
-        `• Municipios atendidos: ${txt('kpi-municipios')} (${txt('kpi-municipios-pct')}).\n\n` +
+        `• Municipios atendidos: ${txt('kpi-mun-ratio')} (${txt('kpi-mun-pct')}).\n\n` +
         `• Población beneficiada: ${txt('kpi-pop-total')} personas.\n\n` +
-        `• ${txt('kpi-otros-alcances')}`,
+        `• ${txt('kpi-mun-foraneo')}`,
         { x: 0.48, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
       );
 
@@ -4951,7 +4961,7 @@
       sCov.addText('Públicos y seguimiento institucional', { x: 5.23, y: 1.48, w: 4.30, h: 0.28, fontSize: 10, bold: true, color: NAVY, fontFace: 'Arial' });
       sCov.addText(
         `• Participación vs Acceso: ${txt('kpi-pop-sub')}.\n\n` +
-        `• Metas activas en operación: ${txt('kpi-metas-activas')}.\n\n` +
+        `• Metas con registro: ${totalActiveMetas}/${catAll.length} (${txt('sub-zap-total')} acciones en ZAP).\n\n` +
         `• Enfoque de cierre: consolidar metas programadas para noviembre–diciembre y cobertura municipal.`,
         { x: 5.23, y: 1.82, w: 4.30, h: 3.10, fontSize: 8.6, color: INK, fontFace: 'Arial' }
       );
