@@ -1486,7 +1486,7 @@
             <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
           </div>
           <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
-          <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes en el orden de la base, los IDs y los folios. Son registros existentes: corrige sobre el mismo ID; no los agregues como altas nuevas. El resumen de alertas se descarga por separado.</p>
+          <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes y sus IDs. Territorio, población y evidencias añaden al final folio, usuario responsable, Dirección y nombre de actividad para filtrar en Excel. Estas columnas son de consulta y no se deben pegar en la DB. Se descargan los registros existentes de las actividades con alertas seleccionadas; las filas ausentes se identifican en el resumen de alertas.</p>
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
             <div class="flex flex-wrap gap-3 mb-3">
@@ -3539,7 +3539,25 @@
       const fields = source.fields.slice(0, auditExportWidths[key]);
       const user = document.getElementById('filter-audit-user').value;
       const matches = source.rows.filter(r => ids.has(cleanStr(r.ID_Actividad)) && (key !== 'actividades' || user === 'ALL' || auditUserKey(r.Usuario_Registra) === user));
-      return { key, label: SHEETS[key], fields, data: matches.map(row => fields.map(field => row[field] == null ? '' : row[field])) };
+      const data = matches.map(row => fields.map(field => row[field] == null ? '' : row[field]));
+      if (key !== 'actividades') {
+        const parents = new Map();
+        const activities = (exportDB.actividades || {}).rows || rawDB.actividades || [];
+        activities.forEach(activity => {
+          if (user !== 'ALL' && auditUserKey(activity.Usuario_Registra) !== user) return;
+          const id = cleanStr(activity.ID_Actividad);
+          if (!parents.has(id)) parents.set(id, []);
+          parents.get(id).push(activity);
+        });
+        fields.push('Folio_Actividad_Consulta', 'Usuario_Responsable_Consulta', 'Direccion_Consulta', 'Nombre_Actividad_Consulta');
+        matches.forEach((row, i) => {
+          const candidates = parents.get(cleanStr(row.ID_Actividad)) || [];
+          // Ambiguous IDs must not silently assign another person's metadata.
+          const parent = candidates.length === 1 ? candidates[0] : {};
+          data[i].push(parent.Folio || '', parent.Usuario_Registra || '', parent.Direccion || '', parent.Nombre_Actividad || '');
+        });
+      }
+      return { key, label: SHEETS[key], fields, data };
     }
 
     function exportAuditCSV() {

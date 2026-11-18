@@ -267,10 +267,14 @@ test('la descarga para corregir mantiene orden, IDs y valores de cada hoja sin c
   assert.deepEqual(result.data,[['A1','F1','adriana@ejemplo.mx','09/02/2026','0','Taller']]);
   s.document.getElementById('filter-audit-export').value='territorio';
   result=data();
-  assert.deepEqual(result.data,[['T1','A1','León','0'],['T2','A1','Guanajuato','']]);
+  assert.deepEqual(result.data,[['T1','A1','León','0','F1','adriana@ejemplo.mx','','Taller'],['T2','A1','Guanajuato','','F1','adriana@ejemplo.mx','','Taller']]);
+  assert.deepEqual(result.fields.slice(-4), ['Folio_Actividad_Consulta','Usuario_Responsable_Consulta','Direccion_Consulta','Nombre_Actividad_Consulta']);
   assert.ok(!result.fields.includes('Que_Revisar'));
   s.document.getElementById('filter-audit-export').value='evidencia';
-  assert.deepEqual(data().data,[['E1','A1','archivo.pdf']]);
+  assert.deepEqual(data().data,[['E1','A1','archivo.pdf','F1','adriana@ejemplo.mx','','Taller']]);
+  s.document.getElementById('filter-audit-user').value='ALL';
+  assert.deepEqual(data().data[0].slice(-4),['','','','']);
+  s.document.getElementById('filter-audit-user').value='adriana@ejemplo.mx';
   s.document.getElementById('filter-audit-export').value='poblacion';
   vm.runInContext('renderAuditTable()',s.context);
   assert.equal(data().data.length,0);

@@ -16,5 +16,10 @@ _site/
 *.zip
 *_chat/
 **/chat_*/
+**/conversacion_whatsapp/
+**/conversacion_whastapp/
+**/conversación_whatsapp/
+**/WhatsApp Chat*/
+**/_chat.txt
 presentacion_marce.pdf
 7861ffd3-66d8-475e-959a-d7c0e3cc7b15/
