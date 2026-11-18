@@ -4774,7 +4774,7 @@
       const GRAY_BG = 'F4F6F9', BORDER = '7C93A8', LIGHT_B = 'D0D8E2', INK = '1E293B', MUTED = '5A6778';
       const GREEN = '16815A', MINT_BG = 'E6F4EE', AMBER = 'B45309', AMB_BG = 'FEF3C7', RED = 'C0392B', ROSE_BG = 'FDEDEC';
 
-      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isCanceled(a) && !CulturaCalidad.isSubstituted(a));
+      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isExcluded(a));
       const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)));
       const catAll = rawDB.alineacion || [];
       const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
@@ -5281,7 +5281,7 @@
         await pptx.writeFile({ fileName: `Presentacion_Ejecutiva_Cultura_GTO_${dateStamp}.pptx` });
       } catch (err) {
         console.error('Error al exportar presentación ejecutiva:', err);
-        alert('Ocurrió un error al generar la presentación ejecutiva. Revisa la consola para más detalles.');
+        alert('Ocurrió un error al generar la presentación ejecutiva: ' + (err?.message || err));
       } finally {
         if (btn) btn.disabled = false;
         if (lbl) lbl.textContent = origText;
