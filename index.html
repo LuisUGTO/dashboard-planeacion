@@ -3567,7 +3567,7 @@
     function buildRegistroWorkbook(sources, direction = 'ALL') {
       const workbook = new ExcelJS.Workbook();
       const lookupFields = ['Usuario_Registra', 'Nombre_Actividad', 'Clave_Proceso_Txt', 'Folio', 'Direccion'];
-      const numericFields = new Set(['Total_Sesiones', 'Meta_Anual', 'Monto_Ingreso', 'Cantidad_Agentes', 'Costo_Minimo', 'Costo_Maximo', 'Cantidad_Agente_Apoyado', 'Monto_Total_Contratado', 'Cantidad', 'Cantidad_Participacion', 'Cantidad_Acceso', 'Cantidad_Poblacion']);
+      const numericFields = new Set(['Total_Sesiones', 'Meta_Anual', 'Monto_Ingreso', 'Cantidad_Agentes', 'Costo_Minimo', 'Costo_Maximo', 'Cantidad_Agente_Apoyado', 'Monto_Total_Contratado', 'Cantidad', 'Cantidad_Participacion', 'Cantidad_Acceso', 'Cantidad_Poblacion', 'Cantidad_Actividades']);
       const keys = Object.keys(auditExportWidths);
       if (keys.some(key => !sources[key]?.fields.length)) throw new Error('Las cuatro hojas deben estar cargadas.');
 
@@ -3588,6 +3588,8 @@
       for (const key of keys) {
         const source = sources[key];
         const fields = source.fields.slice(0, auditExportWidths[key]);
+        // Audit copy of the existing snapshot. The operational range and CSV stay separate.
+        if (key === 'actividades' && !fields.includes('Cantidad_Actividades')) fields.push('Cantidad_Actividades');
         const extras = key === 'actividades' ? [] : lookupFields.filter(field => !fields.includes(field));
         const sheet = workbook.addWorksheet(SHEETS[key], { views: [{ state: 'frozen', ySplit: 1 }] });
         const columns = [...fields, ...extras];
