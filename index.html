@@ -1476,6 +1476,10 @@
               <i data-lucide="download" class="w-4 h-4"></i>
               <span id="lbl-export-audit">Descargar reporte CSV</span>
             </button>
+            <button type="button" id="btn-export-registros" onclick="exportRegistroXLSX(this)" class="bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-1.5">
+              <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+              <span>Descargar Excel de registros</span>
+            </button>
           </div>
 
           <div class="grid grid-cols-2 lg:grid-cols-5 gap-3" aria-label="Resumen de calidad">
@@ -1486,7 +1490,7 @@
             <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
           </div>
           <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
-          <p class="text-xs text-slate-600">La descarga conserva las columnas vigentes y sus IDs. Territorio, población y evidencias añaden al final folio, usuario responsable, Dirección y nombre de actividad para filtrar en Excel. Estas columnas son de consulta y no se deben pegar en la DB. Se descargan los registros existentes de las actividades con alertas seleccionadas; las filas ausentes se identifican en el resumen de alertas.</p>
+          <p class="text-xs text-slate-600">El CSV respeta los filtros de alertas. El Excel reúne las cuatro hojas completas con filtros de tabla y añade datos de la actividad a territorio, población y evidencias. Usa estas columnas adicionales para consulta.</p>
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
             <div class="flex flex-wrap gap-3 mb-3">
@@ -3558,6 +3562,75 @@
         });
       }
       return { key, label: SHEETS[key], fields, data };
+    }
+
+    function buildRegistroWorkbook(sources) {
+      const workbook = new ExcelJS.Workbook();
+      const lookupFields = ['Usuario_Registra', 'Nombre_Actividad', 'Clave_Proceso_Txt', 'Folio', 'Direccion'];
+      const numericFields = new Set(['Total_Sesiones', 'Meta_Anual', 'Monto_Ingreso', 'Cantidad_Agentes', 'Costo_Minimo', 'Costo_Maximo', 'Cantidad_Agente_Apoyado', 'Monto_Total_Contratado', 'Cantidad', 'Cantidad_Participacion', 'Cantidad_Acceso', 'Cantidad_Poblacion']);
+      const keys = Object.keys(auditExportWidths);
+      if (keys.some(key => !sources[key]?.fields.length)) throw new Error('Las cuatro hojas deben estar cargadas.');
+
+      const parents = new Map();
+      for (const row of sources.actividades.rows) {
+        const id = cleanStr(row.ID_Actividad);
+        if (id) parents.set(id, parents.has(id) ? null : row);
+      }
+
+      for (const key of keys) {
+        const source = sources[key];
+        const fields = source.fields.slice(0, auditExportWidths[key]);
+        const extras = key === 'actividades' ? [] : lookupFields.filter(field => !fields.includes(field));
+        const sheet = workbook.addWorksheet(SHEETS[key], { views: [{ state: 'frozen', ySplit: 1 }] });
+        const columns = [...fields, ...extras];
+        const rows = source.rows.map(row => {
+          const values = fields.map(field => {
+            const value = row[field];
+            if (value == null || value === '') return null;
+            if (field === 'Fecha_Inicio' || field === 'Fecha_Fin') {
+              const iso = CulturaCalidad.dateISO(value);
+              if (iso) return new Date(`${iso}T00:00:00Z`);
+            }
+            if (numericFields.has(field)) {
+              const number = CulturaCalidad.number(value);
+              if (number !== null) return number;
+            }
+            return String(value);
+          });
+          const parent = parents.get(cleanStr(row.ID_Actividad));
+          return values.concat(extras.map(field => parent?.[field] ? String(parent[field]) : null));
+        });
+        sheet.addTable({
+          name: `Tabla_${key}`, ref: 'A1', headerRow: true,
+          style: { theme: 'TableStyleMedium2', showRowStripes: true },
+          columns: columns.map(name => ({ name, filterButton: true })), rows
+        });
+        columns.forEach((field, index) => {
+          const column = sheet.getColumn(index + 1);
+          column.width = field === 'Nombre_Actividad' ? 48 : Math.max(18, Math.min(32, field.length + 4));
+          if (field === 'Fecha_Inicio' || field === 'Fecha_Fin') column.numFmt = 'dd/mm/yyyy';
+        });
+      }
+      return workbook;
+    }
+
+    async function exportRegistroXLSX(button) {
+      button.disabled = true;
+      try {
+        if (typeof ExcelJS === 'undefined') throw new Error('La librería de Excel no está disponible. Recarga el tablero.');
+        const workbook = buildRegistroWorkbook(exportDB);
+        const buffer = await workbook.xlsx.writeBuffer();
+        const url = URL.createObjectURL(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Registros_Cultura_GTO.xlsx';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (error) {
+        alert(`No se pudo descargar el Excel. ${error.message}`);
+      } finally {
+        button.disabled = false;
+      }
     }
 
     function exportAuditCSV() {
