@@ -1490,7 +1490,7 @@
             <button type="button" id="audit-card-identidad" onclick="toggleAuditKind('identidad')" aria-pressed="false" aria-controls="tbl-auditoria" class="text-left hover:shadow-md focus-visible:outline-blue-600 transition bg-white rounded-xl p-4 border border-purple-200"><p class="text-xs font-bold text-slate-600">Posible duplicación</p><p id="audit-count-identidad" class="text-2xl font-black text-purple-700 mt-1">0</p></button>
           </div>
           <p class="text-xs text-slate-500">Las tarjetas cuentan las alertas del usuario y la búsqueda seleccionados. Pulsa una tarjeta para filtrar; púlsala de nuevo para ver todas las alertas.</p>
-          <p class="text-xs text-slate-600">El CSV respeta los filtros de alertas. El Excel reúne las cuatro hojas completas con filtros de tabla y añade datos de la actividad a territorio, población y evidencias. Usa estas columnas adicionales para consulta.</p>
+          <p class="text-xs text-slate-600">El CSV respeta los filtros de alertas. El Excel reúne las cuatro hojas según el filtro Dirección. Elige Todas las direcciones para descargar todos los registros.</p>
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
             <p class="text-xs text-slate-600 mb-3">La comparación usa el total completo de cada actividad seleccionada, incluyendo todos sus municipios. Un cero informado se distingue de una cantidad vacía. Las alertas de cantidades y duplicación requieren revisión; no confirman errores.</p>
             <div class="flex flex-wrap gap-3 mb-3">
@@ -3564,7 +3564,7 @@
       return { key, label: SHEETS[key], fields, data };
     }
 
-    function buildRegistroWorkbook(sources) {
+    function buildRegistroWorkbook(sources, direction = 'ALL') {
       const workbook = new ExcelJS.Workbook();
       const lookupFields = ['Usuario_Registra', 'Nombre_Actividad', 'Clave_Proceso_Txt', 'Folio', 'Direccion'];
       const numericFields = new Set(['Total_Sesiones', 'Meta_Anual', 'Monto_Ingreso', 'Cantidad_Agentes', 'Costo_Minimo', 'Costo_Maximo', 'Cantidad_Agente_Apoyado', 'Monto_Total_Contratado', 'Cantidad', 'Cantidad_Participacion', 'Cantidad_Acceso', 'Cantidad_Poblacion']);
@@ -3572,9 +3572,17 @@
       if (keys.some(key => !sources[key]?.fields.length)) throw new Error('Las cuatro hojas deben estar cargadas.');
 
       const parents = new Map();
+      const selectedIds = new Set();
+      const otherIds = new Set();
+      const matchesDirection = row => getCanonicalDirection(row.Direccion, row.Clave_Proceso, row.Clave_Proceso_Txt) === direction;
       for (const row of sources.actividades.rows) {
         const id = cleanStr(row.ID_Actividad);
-        if (id) parents.set(id, parents.has(id) ? null : row);
+        if (!id) continue;
+        parents.set(id, parents.has(id) ? null : row);
+        if (direction !== 'ALL') {
+          if (matchesDirection(row)) selectedIds.add(id);
+          else otherIds.add(id);
+        }
       }
 
       for (const key of keys) {
@@ -3583,7 +3591,14 @@
         const extras = key === 'actividades' ? [] : lookupFields.filter(field => !fields.includes(field));
         const sheet = workbook.addWorksheet(SHEETS[key], { views: [{ state: 'frozen', ySplit: 1 }] });
         const columns = [...fields, ...extras];
-        const rows = source.rows.map(row => {
+        let selectedRows = source.rows;
+        if (direction !== 'ALL') {
+          selectedRows = key === 'actividades' ? source.rows.filter(matchesDirection) : source.rows.filter(row => {
+            const id = cleanStr(row.ID_Actividad);
+            return selectedIds.has(id) && !otherIds.has(id);
+          });
+        }
+        const rows = selectedRows.map(row => {
           const values = fields.map(field => {
             const value = row[field];
             if (value == null || value === '') return null;
@@ -3618,7 +3633,8 @@
       button.disabled = true;
       try {
         if (typeof ExcelJS === 'undefined') throw new Error('La librería de Excel no está disponible. Recarga el tablero.');
-        const workbook = buildRegistroWorkbook(exportDB);
+        const direction = document.getElementById('f-direccion')?.value || 'ALL';
+        const workbook = buildRegistroWorkbook(exportDB, direction);
         const buffer = await workbook.xlsx.writeBuffer();
         const url = URL.createObjectURL(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
         const link = document.createElement('a');
