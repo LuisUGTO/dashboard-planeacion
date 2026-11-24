@@ -2250,6 +2250,111 @@
       return !date || ((!start || date >= start) && (!end || date <= end));
     }
 
+    function matchesZapRows(tRows, fZap) {
+      if (fZap === 'ALL') return true;
+      return tRows.some(t => {
+        const nc = cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si';
+        const ss = cleanStr(t.ZAP_SSyP).toLowerCase() === 'si';
+        if (fZap === 'ZAP_ANY') return nc || ss;
+        if (fZap === 'ZAP_NC') return nc;
+        if (fZap === 'ZAP_SSYP') return ss;
+        if (fZap === 'NO_ZAP') return !nc && !ss;
+        return true;
+      });
+    }
+
+    function updateAvailableFilterOptions(ctx) {
+      const { dStart, dEnd, fMun, fDir, fProc, fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase } = ctx;
+      const anyActive = fMun !== 'ALL' || fDir !== 'ALL' || fProc !== 'ALL' || fDisc !== 'ALL' || fEje !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL';
+
+      const availMuns = new Set();
+      const availDirs = new Set();
+      const availProcs = new Set();
+      const availDiscs = new Set();
+      const availEjes = new Set();
+      const availEnfs = new Set();
+
+      if (!anyActive) {
+        (rawDB.alineacion || []).forEach(r => {
+          const d = getCanonicalDirection(r.Direccion);
+          if (d && d !== 'SIN ASIGNAR') availDirs.add(d);
+          const p = cleanStr(r.Clave_Proceso).split('.')[0];
+          if (/^[PQ][A-Z0-9]+/i.test(p)) availProcs.add(p);
+          const e = cleanStr(r.Eje_PG);
+          if (e) availEjes.add(e);
+        });
+      }
+
+      rawDB.actividades.forEach(a => {
+        const id = cleanStr(a.ID_Actividad);
+        if (!id || id.startsWith('[') || CulturaCalidad.isExcluded(a)) return;
+        const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
+        if (!matchesActivityPeriod(fIso, dStart, dEnd)) return;
+
+        const dir = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt);
+        const proc = getActClaveBase(a);
+        const disc = cleanStr(a.Disciplina);
+        const eje = cleanStr(a.Eje_PG);
+        const enf = cleanStr(a.Enfoque_Actividad);
+        const tRows = terByAct[id] || [];
+
+        const okMun = fMun === 'ALL' || tRows.some(t => cleanStr(t.Municipio) === fMun);
+        const okDir = fDir === 'ALL' || dir === fDir;
+        const okProc = fProc === 'ALL' || proc === fProc;
+        const okDisc = fDisc === 'ALL' || disc === fDisc;
+        const okEje = fEje === 'ALL' || eje === fEje;
+        const okEnf = fEnf === 'ALL' || enf === fEnf;
+        const okZap = matchesZapRows(tRows, fZap);
+
+        if (okDir && okProc && okDisc && okEje && okEnf && okZap) {
+          tRows.forEach(t => {
+            const m = cleanStr(t.Municipio);
+            if (m) availMuns.add(m);
+          });
+        }
+        if (okMun && okProc && okDisc && okEje && okEnf && okZap && dir && dir !== 'SIN ASIGNAR') availDirs.add(dir);
+        if (okMun && okDir && okDisc && okEje && okEnf && okZap && /^[PQ][A-Z0-9]+/i.test(proc)) availProcs.add(proc);
+        if (okMun && okDir && okProc && okEje && okEnf && okZap && disc) availDiscs.add(disc);
+        if (okMun && okDir && okProc && okDisc && okEnf && okZap && eje) availEjes.add(eje);
+        if (okMun && okDir && okProc && okDisc && okEje && okZap && enf) availEnfs.add(enf);
+      });
+
+      const syncSelect = (id, values, defaultLabel, currentVal) => {
+        const sel = document.getElementById(id);
+        if (!sel || typeof document.createElement !== 'function' || typeof sel.appendChild !== 'function') return;
+        const nextValues = new Set(values);
+        if (currentVal && currentVal !== 'ALL') nextValues.add(currentVal);
+        sel.innerHTML = `<option value="ALL">${defaultLabel}</option>`;
+        [...nextValues].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es')).forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v;
+          opt.textContent = v;
+          sel.appendChild(opt);
+        });
+        sel.value = currentVal || 'ALL';
+        const isActive = sel.value !== 'ALL';
+        sel.classList.toggle('ring-2', isActive);
+        sel.classList.toggle('ring-gto-blue/35', isActive);
+        sel.classList.toggle('bg-blue-50/70', isActive);
+        sel.classList.toggle('border-gto-blue/50', isActive);
+      };
+
+      syncSelect('f-municipio', availMuns, 'Todos los municipios', fMun);
+      syncSelect('f-direccion', availDirs, 'Todas las direcciones', fDir);
+      syncSelect('f-proceso', availProcs, 'Todos los procesos', fProc);
+      syncSelect('f-disciplina', availDiscs, 'Todas las disciplinas', fDisc);
+      syncSelect('f-eje', availEjes, 'Todos los ejes', fEje);
+      syncSelect('f-enfoque', availEnfs, 'Cultural y Artística', fEnf);
+      const zapEl = document.getElementById('f-zap');
+      if (zapEl) {
+        const zapActive = fZap !== 'ALL';
+        zapEl.classList.toggle('ring-2', zapActive);
+        zapEl.classList.toggle('ring-gto-blue/35', zapActive);
+        zapEl.classList.toggle('bg-blue-50/70', zapActive);
+        zapEl.classList.toggle('border-gto-blue/50', zapActive);
+      }
+    }
+
     function applyFilters() {
       const dStart = document.getElementById('f-date-start').value;
       const dEnd = document.getElementById('f-date-end').value;
@@ -2275,6 +2380,8 @@
       });
       const getActClaveBase = (a) => cleanStr(a.Clave_Proceso_Txt).split('.')[0] || claveByAlignId[cleanStr(a.Clave_Proceso)] || '';
 
+      updateAvailableFilterOptions({ dStart, dEnd, fMun, fDir, fProc, fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase });
+
       filteredActIds.clear();
 
       rawDB.actividades.forEach(a => {
@@ -2293,18 +2400,7 @@
           const matchMun = tRows.some(t => cleanStr(t.Municipio) === fMun);
           if (!matchMun) return;
         }
-        if (fZap !== 'ALL') {
-          const matchZap = tRows.some(t => {
-            const nc = cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si';
-            const ss = cleanStr(t.ZAP_SSyP).toLowerCase() === 'si';
-            if (fZap === 'ZAP_ANY') return nc || ss;
-            if (fZap === 'ZAP_NC') return nc;
-            if (fZap === 'ZAP_SSYP') return ss;
-            if (fZap === 'NO_ZAP') return !nc && !ss;
-            return true;
-          });
-          if (!matchZap) return;
-        }
+        if (!matchesZapRows(tRows, fZap)) return;
 
         filteredActIds.add(id);
       });
@@ -2376,8 +2472,62 @@
       return s;
     };
 
-    function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false, fullLabels = false) {
+    function toggleChartFilter(selectId, value) {
+      const cleanVal = cleanStr(value);
+      if (!cleanVal || /^(Sin asignar|Sin disciplina|Sin especificar|Sin Eje|SIN ASIGNAR|Otros)$/i.test(cleanVal)) return;
+      const sel = document.getElementById(selectId);
+      if (!sel) return;
+      if (sel.value === cleanVal) {
+        sel.value = 'ALL';
+      } else {
+        const hasOpt = [...sel.options].some(o => o.value === cleanVal);
+        if (!hasOpt) {
+          const opt = document.createElement('option');
+          opt.value = cleanVal;
+          opt.textContent = cleanVal;
+          sel.appendChild(opt);
+        }
+        sel.value = cleanVal;
+      }
+      applyFilters();
+    }
+
+    function toggleMonthFilter(monthIndex) {
+      const startEl = document.getElementById('f-date-start');
+      const endEl = document.getElementById('f-date-end');
+      if (!startEl || !endEl || monthIndex < 0 || monthIndex > 11) return;
+      const year = (startEl.value || '2026-01-01').slice(0, 4) || '2026';
+      const mm = String(monthIndex + 1).padStart(2, '0');
+      const lastDay = new Date(Number(year), monthIndex + 1, 0).getDate();
+      const mStart = `${year}-${mm}-01`;
+      const mEnd = `${year}-${mm}-${String(lastDay).padStart(2, '0')}`;
+      if (startEl.value === mStart && endEl.value === mEnd) {
+        startEl.value = `${year}-01-01`;
+        endEl.value = `${year}-12-31`;
+      } else {
+        startEl.value = mStart;
+        endEl.value = mEnd;
+      }
+      applyFilters();
+    }
+
+    function makeChartClickOptions(onPick) {
+      return {
+        onHover: (evt, els) => {
+          if (evt?.native?.target) evt.native.target.style.cursor = els.length ? 'pointer' : 'default';
+        },
+        onClick: (evt, els, chart) => {
+          if (!els.length) return;
+          onPick(els[0], chart);
+        }
+      };
+    }
+
+    function renderDoughnutWithHtmlLegend(canvasId, legendContainerId, entries, colors, isPie = false, fullLabels = false, onSliceClick = null) {
       const total = entries.reduce((s, e) => s + e[1], 0) || 1;
+      const clickOpts = onSliceClick ? makeChartClickOptions((el, chart) => {
+        onSliceClick(chart.data.labels[el.index], el.index);
+      }) : {};
       renderChart(canvasId, isPie ? 'pie' : 'doughnut', {
         labels: entries.map(e => e[0]),
         datasets: [{
@@ -2387,6 +2537,7 @@
           borderColor: '#FFFFFF'
         }]
       }, {
+        ...clickOpts,
         cutout: isPie ? '0%' : '58%',
         layout: { padding: 14 },
         plugins: {
@@ -2411,8 +2562,9 @@
         const pct = ((count / total) * 100).toFixed(1);
         const c = colors[idx % colors.length];
         const safeLabel = auditEscape(label);
+        const interactiveCls = onSliceClick ? 'cursor-pointer hover:bg-blue-50/70 hover:border-blue-200 transition' : '';
         return `
-          <div class="${fullLabels ? 'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2' : 'flex items-center justify-between'} text-xs bg-slate-50/80 px-2 py-1 rounded-md border border-slate-100">
+          <div data-leg-idx="${idx}" class="${fullLabels ? 'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2' : 'flex items-center justify-between'} text-xs bg-slate-50/80 px-2 py-1 rounded-md border border-slate-100 ${interactiveCls}">
             <div class="flex items-center gap-1.5 min-w-0 pr-1.5">
               <span class="w-2.5 h-2.5 rounded-sm shrink-0" style="background:${c}"></span>
               <span class="font-semibold text-slate-700 ${fullLabels ? 'whitespace-normal break-words leading-snug' : 'truncate'}" title="${safeLabel}">${safeLabel}</span>
@@ -2424,6 +2576,14 @@
           </div>
         `;
       }).join('');
+      if (onSliceClick && typeof legEl.querySelectorAll === 'function') {
+        legEl.querySelectorAll('[data-leg-idx]').forEach(el => {
+          el.addEventListener('click', () => {
+            const idx = Number(el.dataset.legIdx);
+            if (entries[idx]) onSliceClick(entries[idx][0], idx);
+          });
+        });
+      }
     }
 
     // =========================================================
@@ -2532,6 +2692,7 @@
           borderRadius: 5
         }]
       }, barHorizontalOptions({
+        ...makeChartClickOptions((el, chart) => toggleChartFilter('f-disciplina', chart.data.labels[el.index])),
         layout: { padding: { right: 58, left: 8 } },
         scales: {
           x: { grace: '22%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 }, precision: 0 } },
@@ -2559,14 +2720,18 @@
       }));
 
       const ejeCount = {};
+      const ejeRawByLabel = {};
       actF.forEach(a => {
         const rawE = cleanStr(a.Eje_PG);
         const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin asignar';
+        if (rawE) ejeRawByLabel[e] = rawE;
         const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
         ejeCount[e] = (ejeCount[e] || 0) + q;
       });
       const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
-      renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true);
+      renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true, (label) => {
+        if (ejeRawByLabel[label]) toggleChartFilter('f-eje', ejeRawByLabel[label]);
+      });
 
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const monthly = CulturaCalidad.monthlyPopulation(actF,
@@ -2647,6 +2812,7 @@
           }
         ]
       }, {
+        ...makeChartClickOptions((el) => toggleMonthFilter(el.index)),
         interaction: { mode: 'index', intersect: false },
         plugins: {
           subtitle: {
@@ -2785,9 +2951,11 @@
         `${fmtInt(sumRealActCatalogo)} de ${fmtInt(sumMetaActCatalogo)} act. en planeación oficial${hasPartialAdvance ? ' · Incluye avance parcial CEARG' : ''}`;
 
       const ejeMap = {};
+      const ejeMatRawByLabel = {};
       actF.forEach(a => {
         const rawE = cleanStr(a.Eje_PG);
         const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin Eje';
+        if (rawE) ejeMatRawByLabel[e] = rawE;
         const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
         ejeMap[e] = (ejeMap[e] || 0) + q;
       });
@@ -2800,7 +2968,14 @@
           backgroundColor: ['#2563EB', '#F59E0B', '#10B981', '#E11D48', '#7C3AED'],
           borderRadius: 5
         }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({
+        ...makeChartClickOptions((el, chart) => {
+          const lbl = chart.data.labels[el.index];
+          if (ejeMatRawByLabel[lbl]) toggleChartFilter('f-eje', ejeMatRawByLabel[lbl]);
+        }),
+        layout: { padding: { right: 58, left: 4 } },
+        scales: { y: { ticks: { mirror: false, labelOffset: 0 } } }
+      }));
 
       // Mantiene actF como fuente: todos los filtros del dashboard siguen aplicándose.
       const dirMap = new Map();
@@ -2869,13 +3044,16 @@
 
       rows.sort((a, b) => (b.actCount - a.actCount) || (b.metaAnual - a.metaAnual));
 
+      const activeProc = document.getElementById('f-proceso')?.value || 'ALL';
       document.getElementById('tbl-metas-avance').innerHTML = rows.map(m => {
         const pctStr = m.pct === null ? 'Por confirmar' : m.pct.toFixed(1) + '%';
         const badgeColor = m.pct >= 100 ? 'bg-emerald-100 text-emerald-800' : m.actCount > 0 ? 'bg-blue-100 text-gto-blue' : 'bg-slate-100 text-slate-500';
         const unitTag = m.unitCat === 'PERSONAS' ? `<span class="text-[9.5px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">Población</span>` : m.unitCat === 'METROS' ? `<span class="text-[9.5px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200">Infraestructura</span>` : `<span class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">Actividades</span>`;
+        const baseClave = cleanStr(m.clave).split('.')[0];
+        const isProcSelected = activeProc !== 'ALL' && activeProc === baseClave;
 
         return `
-          <tr class="hover:bg-slate-50">
+          <tr onclick="toggleChartFilter('f-proceso', '${auditEscape(baseClave)}')" title="Clic para filtrar por proceso ${auditEscape(baseClave)}" class="cursor-pointer transition hover:bg-blue-50/60 ${isProcSelected ? 'bg-blue-50/80 ring-1 ring-inset ring-gto-blue/40' : ''}">
             <td class="p-2.5 font-bold text-gto-blue whitespace-nowrap">
               <div>${m.clave}</div>
               <div class="text-[9.5px] font-normal text-slate-400">ID #${m.idAlin}</div>
@@ -2964,6 +3142,7 @@
           { label: 'Resto del Municipio (No)', data: sortedMuns.map(x => x[1].no), backgroundColor: '#2563EB' }
         ]
       }, {
+        ...makeChartClickOptions((el, chart) => toggleChartFilter('f-municipio', chart.data.labels[el.index])),
         indexAxis: 'y',
         datasets: { bar: { maxBarThickness: 16 } },
         scales: {
@@ -2997,7 +3176,11 @@
       renderChart('chart-ter-top-mun', 'bar', {
         labels: topM.map(x => x[0]),
         datasets: [{ label: 'Actividades', data: topM.map(x => x[1].total), backgroundColor: '#15803D', borderRadius: 5 }]
-      }, barHorizontalOptions({ layout: { padding: { right: 58, left: 4 } }, scales: { y: { ticks: { mirror: false, labelOffset: 0 } } } }));
+      }, barHorizontalOptions({
+        ...makeChartClickOptions((el, chart) => toggleChartFilter('f-municipio', chart.data.labels[el.index])),
+        layout: { padding: { right: 58, left: 4 } },
+        scales: { y: { ticks: { mirror: false, labelOffset: 0 } } }
+      }));
 
       cachedComunidadesRows = Object.values(comGroup).sort((a, b) => b.acts - a.acts);
       renderTerritorioTable();
@@ -3111,6 +3294,7 @@
           backgroundColor: stackColors[i % stackColors.length]
         }))
       }, {
+        ...makeChartClickOptions((el, chart) => toggleChartFilter('f-enfoque', chart.data.labels[el.index])),
         indexAxis: 'y',
         scales: { x: { stacked: true }, y: { stacked: true } },
         plugins: {
@@ -3314,6 +3498,11 @@
           { label: 'Pendiente de Evidencia', data: dirEntries.map(x => x[1].sin), backgroundColor: '#F59E0B', borderRadius: 4 }
         ]
       }, {
+        ...makeChartClickOptions((el, chart) => {
+          const shortD = chart.data.labels[el.index];
+          const canonical = getCanonicalDirection(fullDirNames[shortD] || shortD);
+          if (canonical) toggleChartFilter('f-direccion', canonical);
+        }),
         indexAxis: 'y',
         layout: { padding: { right: 8 } },
         scales: {
@@ -3591,7 +3780,7 @@
       return { key, label: SHEETS[key], fields, data };
     }
 
-    function buildRegistroWorkbook(sources, direction = 'ALL') {
+    function buildRegistroWorkbook(sources, direction = 'ALL', allowedIds = null) {
       const workbook = new ExcelJS.Workbook();
       const monthLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const startFields = ['Mes_Inicio_Actividad', 'Fecha_Inicio_Actividad'];
@@ -3623,11 +3812,15 @@
         const sheet = workbook.addWorksheet(SHEETS[key], { views: [{ state: 'frozen', ySplit: 1 }] });
         const columns = [...fields, ...extras, ...startFields];
         let selectedRows = source.rows;
-        if (direction !== 'ALL') {
-          selectedRows = key === 'actividades' ? source.rows.filter(matchesDirection) : source.rows.filter(row => {
-            const id = cleanStr(row.ID_Actividad);
-            return selectedIds.has(id) && !otherIds.has(id);
-          });
+        const hasAllowedIds = allowedIds instanceof Set;
+        if (direction !== 'ALL' || hasAllowedIds) {
+          selectedRows = key === 'actividades'
+            ? source.rows.filter(row => (direction === 'ALL' || matchesDirection(row)) && (!hasAllowedIds || allowedIds.has(cleanStr(row.ID_Actividad))))
+            : source.rows.filter(row => {
+              const id = cleanStr(row.ID_Actividad);
+              if (hasAllowedIds && !allowedIds.has(id)) return false;
+              return direction === 'ALL' || (selectedIds.has(id) && !otherIds.has(id));
+            });
         }
         const rows = selectedRows.map(row => {
           const values = fields.map(field => {
@@ -3669,7 +3862,18 @@
       try {
         if (typeof ExcelJS === 'undefined') throw new Error('La librería de Excel no está disponible. Recarga el tablero.');
         const direction = document.getElementById('f-direccion')?.value || 'ALL';
-        const workbook = buildRegistroWorkbook(exportDB, direction);
+        const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
+        const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
+        const anyFilter = direction !== 'ALL'
+          || (document.getElementById('f-municipio')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-proceso')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-disciplina')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-eje')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-enfoque')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-zap')?.value || 'ALL') !== 'ALL'
+          || dStart !== '2026-01-01'
+          || dEnd !== '2026-12-31';
+        const workbook = buildRegistroWorkbook(exportDB, direction, anyFilter ? filteredActIds : null);
         const buffer = await workbook.xlsx.writeBuffer();
         const url = URL.createObjectURL(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
         const link = document.createElement('a');
@@ -4734,10 +4938,13 @@
       }
       const max = Math.max(...entries.map(([, value]) => value), 1);
       const colors = ['#7C3AED', '#2563EB', '#0D9488', '#F59E0B', '#E11D48'];
+      const activeDir = document.getElementById('f-direccion')?.value || 'ALL';
       entries.forEach(([name, value], index) => {
         const row = document.createElement('div');
-        row.className = 'mat-dir-row';
+        row.className = 'mat-dir-row cursor-pointer rounded-md px-1.5 py-0.5 transition hover:bg-blue-50/70' + (activeDir === name ? ' bg-blue-50 ring-1 ring-gto-blue/40' : '');
         row.setAttribute('role', 'listitem');
+        row.title = 'Clic para filtrar por esta dirección';
+        row.addEventListener('click', () => toggleChartFilter('f-direccion', name));
         const label = document.createElement('span');
         label.className = 'mat-dir-name';
         label.textContent = name;
@@ -4918,7 +5125,19 @@
 
       const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isExcluded(a));
       const terF = rawDB.territorio.filter(t => filteredActIds.has(cleanStr(t.ID_Actividad)));
-      const catAll = rawDB.alineacion || [];
+      const fDir = document.getElementById('f-direccion')?.value || 'ALL';
+      const fProc = document.getElementById('f-proceso')?.value || 'ALL';
+      const fEje = document.getElementById('f-eje')?.value || 'ALL';
+      const fMun = document.getElementById('f-municipio')?.value || 'ALL';
+      const fDisc = document.getElementById('f-disciplina')?.value || 'ALL';
+      const fEnf = document.getElementById('f-enfoque')?.value || 'ALL';
+      const fZap = document.getElementById('f-zap')?.value || 'ALL';
+      const catAll = (rawDB.alineacion || []).filter(c => {
+        if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
+        if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
+        if (fEje !== 'ALL' && cleanStr(c.Eje_PG) !== fEje) return false;
+        return true;
+      });
       const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
 
       const countsById = {};
@@ -4936,7 +5155,7 @@
       });
       const totalActiveMetas = catAll.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
 
-      const dirOrder = [
+      const allDirOrder = [
         'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES',
         'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES',
         'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA',
@@ -4947,6 +5166,17 @@
         'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL',
         'COORDINACIÓN DE COMUNICACIÓN SOCIAL'
       ];
+      const hasNarrowFilter = fDir !== 'ALL' || fProc !== 'ALL' || fEje !== 'ALL' || fMun !== 'ALL' || fDisc !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL';
+      const dirOrder = hasNarrowFilter
+        ? allDirOrder.filter(dName => {
+            const hasActs = actF.some(a => getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) === dName);
+            const hasMetas = (fProc !== 'ALL' || fEje !== 'ALL' || fDir !== 'ALL')
+              ? catAll.some(c => getCanonicalDirection(c.Direccion, c.ID_Alineacion, c.Clave_Proceso) === dName)
+              : false;
+            return hasActs || hasMetas;
+          })
+        : allDirOrder;
+      if (!dirOrder.length) dirOrder.push(...allDirOrder);
 
       const addGtoHeader = (sl, title, tag, pageNum) => {
         if (shieldDataUrl) sl.addImage({ data: shieldDataUrl, x: 0.28, y: 0.12, w: 0.58, h: 0.72 });
@@ -4967,8 +5197,18 @@
       s1.addText(`Informe de resultados 2024–2026 · Corte ${dEnd}`, {
         x: 1.15, y: 2.48, w: 8.20, h: 0.72, fontSize: 18, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle', fontFace: 'Arial'
       });
-      s1.addText(`Secretaría de Cultura · Dirección General de Planeación · ${dStart} al ${dEnd}`, {
-        x: 1.15, y: 3.35, w: 8.20, h: 0.35, fontSize: 10, color: MUTED, align: 'center', fontFace: 'Arial'
+      const activeFilterTags = [];
+      if (fProc !== 'ALL') activeFilterTags.push(`Proceso: ${fProc}`);
+      if (fMun !== 'ALL') activeFilterTags.push(`Municipio: ${fMun}`);
+      if (fDisc !== 'ALL') activeFilterTags.push(`Disciplina: ${fDisc}`);
+      if (fEje !== 'ALL') activeFilterTags.push(`Eje: ${fEje}`);
+      if (fEnf !== 'ALL') activeFilterTags.push(`Enfoque: ${fEnf}`);
+      if (fZap !== 'ALL') activeFilterTags.push(`ZAP: ${fZap}`);
+      const filterSubtitle = activeFilterTags.length
+        ? `Secretaría de Cultura · ${dStart} al ${dEnd} · ${activeFilterTags.join(' | ')}`
+        : `Secretaría de Cultura · Dirección General de Planeación · ${dStart} al ${dEnd}`;
+      s1.addText(filterSubtitle, {
+        x: 1.15, y: 3.35, w: 8.20, h: 0.45, fontSize: 9.5, color: MUTED, align: 'center', fontFace: 'Arial'
       });
 
       // LÁMINA 2: PANORAMA GLOBAL + GLOSARIO
@@ -5153,13 +5393,14 @@
         const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
         const fMun = getSelectLabel('f-municipio');
         const fDir = getSelectLabel('f-direccion');
+        const fProc = getSelectLabel('f-proceso');
         const fDisc = getSelectLabel('f-disciplina');
         const fEje = getSelectLabel('f-eje');
         const fEnf = getSelectLabel('f-enfoque');
         const fZap = getSelectLabel('f-zap');
         const popModeTxt = popMode === 'territorio' ? 'Cobertura Territorial' : 'Perfil Demográfico';
 
-        const filterSummaryLine = `Periodo: ${dStart} a ${dEnd} | Municipio: ${fMun} | Dirección: ${formatShortDireccion(fDir)} | Enfoque: ${fEnf} | Fuente Población: ${popModeTxt}`;
+        const filterSummaryLine = `Periodo: ${dStart} a ${dEnd} | Municipio: ${fMun} | Dirección: ${formatShortDireccion(fDir)} | Proceso: ${fProc} | Enfoque: ${fEnf} | Fuente Población: ${popModeTxt}`;
 
         // Lectura de KPIs renderizados en pantalla
         const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
