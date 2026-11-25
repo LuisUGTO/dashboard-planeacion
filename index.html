@@ -3933,7 +3933,7 @@
           return;
         }
 
-        const countMetrics = CulturaCalidad.summarizeActivityCounts(actF);
+        const countMetrics = CulturaCalidad.metrics(actF);
         const metasRel = (rawDB.alineacion || []).filter(c => {
           if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
           if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
@@ -5331,7 +5331,7 @@
       dirOrder.forEach((dName, idx) => {
         const dMetas = catAll.filter(c => getCanonicalDirection(c.Direccion, c.ID_Alineacion, c.Clave_Proceso) === dName);
         const dActs = actF.filter(a => getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) === dName);
-        const dActCount = CulturaCalidad.summarizeActivityCounts(dActs).activities || dActs.length;
+        const dActCount = CulturaCalidad.metrics(dActs).activities || dActs.length;
         const dPop = dActs.reduce((acc, a) => acc + (terByAct[cleanStr(a.ID_Actividad)] || 0), 0);
         const activeMetas = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
         const bg = idx % 2 === 0 ? 'FFFFFF' : GRAY_BG;
@@ -5386,7 +5386,7 @@
         sl.addShape(pptx.ShapeType.rect, { x: 0.35, y: 3.10, w: 0.05, h: 2.05, fill: { color: NAVY } });
         sl.addText('Resumen operativo 2026', { x: 0.46, y: 3.16, w: 2.50, h: 0.25, fontSize: 9, bold: true, color: NAVY, fontFace: 'Arial' });
         const activeM = dMetas.filter(m => (countsById[cleanStr(m.ID_Alineacion)]?.acts || 0) > 0).length;
-        const dActCount = CulturaCalidad.summarizeActivityCounts(dActs).activities || dActs.length;
+        const dActCount = CulturaCalidad.metrics(dActs).activities || dActs.length;
         sl.addText(
           `• ${fmtInt(dActCount)} actividades culturales registradas.\n` +
           `• ${fmtInt(dPop)} asistentes en sedes.\n` +
