@@ -475,9 +475,9 @@
             <span class="sm:hidden">PPTX</span>
           </button>
 
-          <button id="btn-export-resumen-meta" onclick="exportResumenMetaCSV()" title="Descargar resumen rápido por municipio (CSV para Excel) de la meta o filtro activo" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-700 px-2.5 py-1 rounded-lg text-xs font-bold shadow-sm transition">
+          <button id="btn-export-resumen-meta" onclick="exportResumenMetaXLSX(this)" title="Descargar resumen rápido por municipio en Excel (.xlsx) de la meta o filtro activo" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-700 px-2.5 py-1 rounded-lg text-xs font-bold shadow-sm transition">
             <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
-            <span class="hidden sm:inline">Resumen por Municipio</span>
+            <span class="hidden sm:inline">Resumen por Municipio (Excel)</span>
             <span class="sm:hidden">Resumen</span>
           </button>
 
@@ -3914,75 +3914,104 @@
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
-    function exportResumenMetaCSV() {
-      const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
-      const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
-      const fMun = document.getElementById('f-municipio')?.value || 'ALL';
-      const fDir = document.getElementById('f-direccion')?.value || 'ALL';
-      const fProc = document.getElementById('f-proceso')?.value || 'ALL';
+    async function exportResumenMetaXLSX(button) {
+      if (button) button.disabled = true;
+      try {
+        if (typeof ExcelJS === 'undefined') throw new Error('La librería de Excel no está disponible. Recarga el tablero.');
+        const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
+        const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
+        const fMun = document.getElementById('f-municipio')?.value || 'ALL';
+        const fDir = document.getElementById('f-direccion')?.value || 'ALL';
+        const fProc = document.getElementById('f-proceso')?.value || 'ALL';
 
-      const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isExcluded(a));
-      const execIds = new Set(actF.map(a => cleanStr(a.ID_Actividad)));
-      const terF = rawDB.territorio.filter(t => execIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
+        const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isExcluded(a));
+        const execIds = new Set(actF.map(a => cleanStr(a.ID_Actividad)));
+        const terF = rawDB.territorio.filter(t => execIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
 
-      if (!actF.length && !terF.length) {
-        alert('No hay registros disponibles para los filtros activos.');
-        return;
+        if (!actF.length && !terF.length) {
+          alert('No hay registros disponibles para los filtros activos.');
+          return;
+        }
+
+        const countMetrics = CulturaCalidad.summarizeActivityCounts(actF);
+        const metasRel = (rawDB.alineacion || []).filter(c => {
+          if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
+          if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
+          return fProc !== 'ALL' || actF.some(a => cleanStr(a.Clave_Proceso) === cleanStr(c.ID_Alineacion));
+        });
+        const metaNames = [...new Set(metasRel.map(m => cleanStr(m.Nombre_Meta || m.Meta)).filter(Boolean))].join(' | ') || 'Todas las metas del filtro';
+        const dirNames = [...new Set(actF.map(a => formatShortDireccion(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt))).filter(Boolean))].join(' | ') || 'N/A';
+
+        const munAgg = {};
+        terF.forEach(t => {
+          const mun = cleanStr(t.Municipio) || 'Sin municipio';
+          if (!munAgg[mun]) munAgg[mun] = { pop: 0, part: 0, acc: 0, rows: 0, acts: new Set(), zap: false };
+          munAgg[mun].pop += toNum(t.Cantidad);
+          munAgg[mun].part += toNum(t.Cantidad_Participacion);
+          munAgg[mun].acc += toNum(t.Cantidad_Acceso);
+          munAgg[mun].rows += 1;
+          munAgg[mun].acts.add(cleanStr(t.ID_Actividad));
+          const nc = cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si';
+          const ss = cleanStr(t.ZAP_SSyP).toLowerCase() === 'si';
+          if (nc || ss) munAgg[mun].zap = true;
+        });
+
+        const munRows = Object.entries(munAgg)
+          .sort((a, b) => (b[1].pop - a[1].pop) || a[0].localeCompare(b[0], 'es'));
+
+        const totalPop = munRows.reduce((s, [, d]) => s + d.pop, 0);
+        const totalPart = munRows.reduce((s, [, d]) => s + d.part, 0);
+        const totalAcc = munRows.reduce((s, [, d]) => s + d.acc, 0);
+
+        const scope = (fProc !== 'ALL' ? fProc : fDir !== 'ALL' ? formatShortDireccion(fDir) : 'General').replace(/[^a-zA-Z0-9_.-]/g, '_');
+        const workbook = new ExcelJS.Workbook();
+        const sheet = workbook.addWorksheet(`Resumen_${scope}`.slice(0, 31));
+
+        const titleRow = sheet.addRow([`Resumen por Municipio — ${fProc === 'ALL' ? 'Filtro activo' : fProc}`]);
+        titleRow.font = { bold: true, size: 13, color: { argb: 'FFFFFFFF' } };
+        titleRow.eachCell(c => { c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF004B87' } }; });
+        sheet.mergeCells('A1:F1');
+
+        sheet.addRow(['Proceso / Meta', fProc === 'ALL' ? 'Todos' : fProc, 'Periodo', `${dStart} al ${dEnd}`, 'Actividades', countMetrics.activities || actF.length]);
+        sheet.addRow(['Nombre Meta', metaNames, 'Dirección', dirNames, 'Municipios', munRows.length]);
+        sheet.addRow([]);
+
+        const hdrRow = sheet.addRow(['Municipio', 'Población Beneficiaria', 'Participación', 'Acceso', 'Actividades', 'ZAP']);
+        hdrRow.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+        hdrRow.eachCell(c => {
+          c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF143C64' } };
+          c.alignment = { vertical: 'middle', horizontal: c.col === 1 || c.col === 6 ? 'left' : 'right' };
+        });
+
+        munRows.forEach(([mun, d]) => {
+          const r = sheet.addRow([mun, d.pop, d.part, d.acc, d.acts.size, d.zap ? 'Sí' : 'No']);
+          [2, 3, 4, 5].forEach(colIdx => { r.getCell(colIdx).numFmt = '#,##0'; });
+        });
+
+        const totRow = sheet.addRow(['TOTAL', totalPop, totalPart, totalAcc, countMetrics.activities || actF.length, '']);
+        totRow.font = { bold: true, color: { argb: 'FF004B87' } };
+        totRow.eachCell(c => { c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE8F4FB' } }; });
+        [2, 3, 4, 5].forEach(colIdx => { totRow.getCell(colIdx).numFmt = '#,##0'; });
+
+        sheet.columns = [
+          { width: 32 }, { width: 22 }, { width: 16 }, { width: 16 }, { width: 14 }, { width: 10 }
+        ];
+
+        const buffer = await workbook.xlsx.writeBuffer();
+        const url = URL.createObjectURL(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+        const link = document.createElement('a');
+        link.href = url;
+        const dateStamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        link.download = `Resumen_Municipios_${scope}_${dateStamp}.xlsx`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (error) {
+        alert(`No se pudo descargar el Excel de resumen. ${error.message}`);
+      } finally {
+        if (button) button.disabled = false;
       }
-
-      const countMetrics = CulturaCalidad.summarizeActivityCounts(actF);
-      const metasRel = (rawDB.alineacion || []).filter(c => {
-        if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
-        if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
-        return fProc !== 'ALL' || actF.some(a => cleanStr(a.Clave_Proceso) === cleanStr(c.ID_Alineacion));
-      });
-      const metaNames = [...new Set(metasRel.map(m => cleanStr(m.Nombre_Meta || m.Meta)).filter(Boolean))].join(' | ') || 'Todas las metas del filtro';
-      const dirNames = [...new Set(actF.map(a => formatShortDireccion(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt))).filter(Boolean))].join(' | ');
-
-      const munAgg = {};
-      terF.forEach(t => {
-        const mun = cleanStr(t.Municipio) || 'Sin municipio';
-        if (!munAgg[mun]) munAgg[mun] = { pop: 0, part: 0, acc: 0, rows: 0, acts: new Set(), zap: false };
-        munAgg[mun].pop += toNum(t.Cantidad);
-        munAgg[mun].part += toNum(t.Cantidad_Participacion);
-        munAgg[mun].acc += toNum(t.Cantidad_Acceso);
-        munAgg[mun].rows += 1;
-        munAgg[mun].acts.add(cleanStr(t.ID_Actividad));
-        const nc = cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si';
-        const ss = cleanStr(t.ZAP_SSyP).toLowerCase() === 'si';
-        if (nc || ss) munAgg[mun].zap = true;
-      });
-
-      const munRows = Object.entries(munAgg)
-        .sort((a, b) => (b[1].pop - a[1].pop) || a[0].localeCompare(b[0], 'es'));
-
-      const totalPop = munRows.reduce((s, [, d]) => s + d.pop, 0);
-      const totalPart = munRows.reduce((s, [, d]) => s + d.part, 0);
-      const totalAcc = munRows.reduce((s, [, d]) => s + d.acc, 0);
-
-      const rows = [
-        ['RESUMEN EJECUTIVO POR MUNICIPIO', '', '', '', '', ''],
-        ['Proceso / Meta', fProc === 'ALL' ? 'Todos' : fProc, 'Nombre Meta', metaNames, 'Periodo', `${dStart} al ${dEnd}`],
-        ['Direccion(es)', dirNames || 'N/A', 'Actividades', countMetrics.activities || actF.length, 'Sesiones', countMetrics.sessions || 0],
-        ['Poblacion Total (Territorial)', totalPop, 'Participacion', totalPart, 'Acceso', totalAcc],
-        ['Municipios con registro', munRows.length, 'Filtro Municipio', fMun === 'ALL' ? 'Todos' : fMun, '', ''],
-        [],
-        ['Municipio', 'Poblacion_Beneficiaria', 'Participacion', 'Acceso', 'Actividades', 'Registros_Territorio', 'ZAP'],
-        ...munRows.map(([mun, d]) => [mun, d.pop, d.part, d.acc, d.acts.size, d.rows, d.zap ? 'Sí' : 'No']),
-        ['TOTAL', totalPop, totalPart, totalAcc, actF.length, terF.length, '']
-      ];
-
-      const csv = Papa.unparse(rows, { escapeFormulae: true, newline: '\r\n' });
-      if (typeof Blob === 'undefined' || typeof document.createElement !== 'function') return;
-      const content = '\uFEFFsep=,\r\n' + csv;
-      const url = URL.createObjectURL(new Blob([content], { type: 'text/csv;charset=utf-8;' }));
-      const a = document.createElement('a');
-      a.href = url;
-      const scope = (fProc !== 'ALL' ? fProc : fDir !== 'ALL' ? formatShortDireccion(fDir) : 'General').replace(/[^a-zA-Z0-9_.-]/g, '_');
-      const dateStamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      a.download = `Resumen_Municipios_${scope}_${dateStamp}.csv`;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     // =========================================================
