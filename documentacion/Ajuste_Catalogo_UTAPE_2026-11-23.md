@@ -12,4 +12,10 @@ El lote inicial conservó los IDs y las metas anuales. En una intervención post
 
 ## Revisión de la meta 94 de Museos
 
+### 25/11/2026 — Primer ajuste verificado de Museos
+
+Se marcaron como sustituidas `ACT-SCJO26685` por `ACT-SCSR73635` y `ACT-SCOX33073` por `ACT-SCMR72135`. La matriz de Museos, pestaña `Pablo B.`, filas 29 y 31, respalda una actividad por cada par. Coinciden fecha, título o descripción, público (27 y 25 respectivamente) y recinto (`Cat_Recintos` ID 26). El lote editó `Registro_Actividades!N1040` y `N1042` con respaldo privado excluido de Git. Ambas marcas fueron verificadas por relectura. Las fichas e hijos conservan sus IDs. Quedan 53 fichas computables en el corte comparable con 55. Pendiente confirmar el porcentaje en el navegador. La pareja de Cartonería queda pendiente por el conflicto de municipio.
+
+La meta 92 conserva sus 943 fichas y su meta anual de 800. Incluye 368 visitas guiadas y 239 visitas escolares. La confirmación previa de Soraya distingue los grupos o fechas de varias visitas. El avance SED equivale a 1,438 en el archivo auditado, con corte pendiente de homologar. No se trasladaron fichas de la meta 94 a la 92.
+
 La lectura en vivo encontró 55 fichas vinculadas a la meta 94 de `PB3572`, cuya meta anual es 12 actividades creadas para poblaciones específicas. La pantalla muestra 55/12 (458.3%). De las fichas vinculadas, 45 inician hasta septiembre y 10 en octubre. En 28 fichas el detalle demográfico con total positivo carece de grupo prioritario identificado y 27 tienen al menos uno. Ese dato orienta la revisión del público objetivo y por sí solo no acredita ni descarta una actividad. El antecedente SED auditado implica 11 actividades, con corte y criterio por cotejar. No se reclasificaron fichas de Museos ni se ajustaron cantidades.
