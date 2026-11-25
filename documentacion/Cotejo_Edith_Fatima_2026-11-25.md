@@ -1,6 +1,12 @@
 # Cotejo de archivos nuevos de Edith y Fátima
 
-Fecha de revisión: 25 de noviembre de 2026. Se leyeron cinco libros de las carpetas `Archivos_nuevos` y se contrastaron con el catálogo y los registros operativos en vivo. Los rangos consultados fueron `Registro_Actividades` A:U, `Registro_Territorio` A:L, `Registro_Poblacion` A:H y `Cat_Alineacion` A:H. No se hicieron escrituras en la base. Las fuentes originales se conservan fuera de este cambio.
+Fecha de revisión: 25 de noviembre de 2026. Se leyeron cinco libros de las carpetas `Archivos_nuevos` y se contrastaron con el catálogo y los registros operativos en vivo. Los rangos consultados fueron `Registro_Actividades` A:U, `Registro_Territorio` A:L, `Registro_Poblacion` A:H y `Cat_Alineacion` A:H. Las fuentes originales se conservan fuera de este cambio.
+
+## Cambios en producción
+
+El 25 de noviembre, con autorización de Luis, se aplicaron diez cambios de celda en un solo lote, con respaldo local excluido de Git. En `Registro_Actividades!J327:K327`, la ficha `ACT-SCTQ57837` pasó de «Presentaciones realizadas» y 92 a «Foro realizado» y 1, según `Cat_Alineacion!G91:H91`. En `Registro_Actividades!N327`, `N330` y `N1431` se añadieron notas de cotejo para el foro, el festival y el encuentro del 19 de octubre, respectivamente. En `Cat_Alineacion!H67:H71` se añadieron notas con los avances reportados de Edith, sus filas de origen y las reservas de alcance. El valor de las metas anuales se conservó.
+
+La API devolvió las diez escrituras y la relectura de 154 celdas confirmó los cambios esperados, junto con los valores, el formato y las validaciones del rango circundante. No hubo altas, bajas ni cambios en fechas, sesiones, territorio o población. Las notas son trazabilidad para la conciliación y no computan como avance del tablero. Sigue pendiente decidir si se recuperan las dos fichas de octubre y cómo integrar los concentrados de Edith una vez establecido su periodo.
 
 ## Edith
 
