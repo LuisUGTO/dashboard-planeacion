@@ -224,3 +224,14 @@ test('hasUsableEvidence rechaza filas vacías y valida foto o archivo útil', ()
   assert.equal(q.hasUsableEvidence(activity({ Foto_Evidencia: 'foto.jpg' }), []), true);
   assert.equal(q.hasUsableEvidence(activity({ Foto_Evidencia: '' }), [{ Archivo_Evidencia: 'respaldo.pdf' }]), true);
 });
+
+test('localidad sin especificar omite sedes urbanas ya identificadas y se mantiene en rural, periurbano o sin sede', () => {
+  const urbanoConSede = q.audit([activity({ Nombre_Espacio: 'Museo del Pueblo' })], [t(10, { Tipo_Asentamiento: 'Urbano', Otra_Comunidad: '' })], [p(10)], []);
+  assert.equal(urbanoConSede.length, 0);
+  const urbanoSinSede = q.audit([activity({ Nombre_Espacio: '', Especifique_Espacio: '' })], [t(10, { Tipo_Asentamiento: 'Urbano', Otra_Comunidad: '' })], [p(10)], [])[0];
+  assert.ok(urbanoSinSede.diag.includes('Localidad sin especificar en territorio'));
+  for (const tipo of ['Rural', 'Periurbano', '']) {
+    const row = q.audit([activity()], [t(10, { Tipo_Asentamiento: tipo, Otra_Comunidad: '' })], [p(10)], [])[0];
+    assert.ok(row.diag.includes('Localidad sin especificar en territorio'), tipo || 'vacío');
+  }
+});

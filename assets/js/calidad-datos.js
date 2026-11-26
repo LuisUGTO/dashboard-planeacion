@@ -216,7 +216,7 @@
       else {
         if (st === null) add('faltantes', 'Territorio contiene cantidades vacías o inválidas');
         if (tr.some(r => absent(r.Municipio))) add('faltantes', 'Municipio sin identificar');
-        if (norm(a.Formato) !== 'virtual' && tr.some(r => !absent(r.Municipio) && !/estatal/.test(norm(r.Municipio)) && absent(r.Comunidad) && absent(r.Nombre_Comunidad) && absent(r.Otra_Comunidad))) add('faltantes', 'Localidad sin especificar en territorio');
+        if (norm(a.Formato) !== 'virtual' && tr.some(r => !absent(r.Municipio) && !/estatal/.test(norm(r.Municipio)) && absent(r.Comunidad) && absent(r.Nombre_Comunidad) && absent(r.Otra_Comunidad) && (norm(r.Tipo_Asentamiento) !== 'urbano' || (absent(a.Nombre_Espacio) && absent(a.Especifique_Espacio))))) add('faltantes', 'Localidad sin especificar en territorio');
       }
       if (!pr.length) add('faltantes', 'Sin registro de población');
       else if (sp === null) add('faltantes', 'Población contiene cantidades vacías o inválidas');

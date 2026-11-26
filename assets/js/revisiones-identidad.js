@@ -45,8 +45,8 @@
       "ACT-SCVX90182"
     ],
     "snapshots": {
-      "ACT-SCDG78924": "[\"ACT-SCDG78924\",\"Visita guiada libre.\",\"2026-08-08\",\"2026-08-08\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"41df3d77\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"\",\"5\"]],[[\"5bb95cc4\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"5\",\"5\"]]]",
-      "ACT-SCVX90182": "[\"ACT-SCVX90182\",\"Visita guiada libre.\",\"2026-08-08\",\"2026-08-08\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"583eb682\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"0\",\"4\"]],[[\"6cb5ba2a\",\"Jóvenes (18 a 29 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"4\",\"4\"]]]"
+      "ACT-SCDG78924": "[\"ACT-SCDG78924\",\"Visita guiada libre.\",\"2026-08-08\",\"2026-08-08\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"41df3d77\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"\",\"5\"]],[[\"5bb95cc4\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"5\",\"5\"]]]",
+      "ACT-SCVX90182": "[\"ACT-SCVX90182\",\"Visita guiada libre.\",\"2026-08-08\",\"2026-08-08\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"583eb682\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"0\",\"4\"]],[[\"6cb5ba2a\",\"Jóvenes (18 a 29 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"4\",\"4\"]]]"
     },
     "evidence": [
       {
@@ -69,8 +69,8 @@
       "ACT-SCVR72910"
     ],
     "snapshots": {
-      "ACT-SCFR24702": "[\"ACT-SCFR24702\",\"Visita guiada libre.\",\"2026-08-15\",\"2026-08-15\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"4944eaa8\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"5a07fea6\",\"Adultos Mayores (60 años o más)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"2\",\"2\"]]]",
-      "ACT-SCVR72910": "[\"ACT-SCVR72910\",\"Visita guiada libre.\",\"2026-08-15\",\"2026-08-15\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a58f3d82\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"bfd0704e\",\"Jóvenes (18 a 29 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"2\",\"2\"]]]"
+      "ACT-SCFR24702": "[\"ACT-SCFR24702\",\"Visita guiada libre.\",\"2026-08-15\",\"2026-08-15\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"4944eaa8\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"5a07fea6\",\"Adultos Mayores (60 años o más)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"2\",\"2\"]]]",
+      "ACT-SCVR72910": "[\"ACT-SCVR72910\",\"Visita guiada libre.\",\"2026-08-15\",\"2026-08-15\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a58f3d82\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"bfd0704e\",\"Jóvenes (18 a 29 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"2\",\"2\"]]]"
     },
     "evidence": [
       {
@@ -89,8 +89,8 @@
       "ACT-SCWN41231"
     ],
     "snapshots": {
-      "ACT-SCFD64081": "[\"ACT-SCFD64081\",\"Visita guiada libre.\",\"2026-08-16\",\"2026-08-16\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ca5f428f\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"9\",\"\",\"9\"]],[[\"413c6d6a\",\"Adolescentes (13 a 17 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"9\",\"9\"]]]",
-      "ACT-SCWN41231": "[\"ACT-SCWN41231\",\"Visita guiada libre.\",\"2026-08-16\",\"2026-08-16\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"f8502c10\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"6\",\"\",\"6\"]],[[\"8f1e1222\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"6\",\"6\"]]]"
+      "ACT-SCFD64081": "[\"ACT-SCFD64081\",\"Visita guiada libre.\",\"2026-08-16\",\"2026-08-16\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ca5f428f\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"9\",\"\",\"9\"]],[[\"413c6d6a\",\"Adolescentes (13 a 17 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"9\",\"9\"]]]",
+      "ACT-SCWN41231": "[\"ACT-SCWN41231\",\"Visita guiada libre.\",\"2026-08-16\",\"2026-08-16\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"f8502c10\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"6\",\"\",\"6\"]],[[\"8f1e1222\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"6\",\"6\"]]]"
     },
     "evidence": [
       {
@@ -109,8 +109,8 @@
       "ACT-SCMO58522"
     ],
     "snapshots": {
-      "ACT-SCAL82876": "[\"ACT-SCAL82876\",\"Visita guiada libre.\",\"2026-08-18\",\"2026-08-18\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"0452361e\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1218c4ae\",\"Jóvenes (18 a 29 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"2\",\"2\"]]]",
-      "ACT-SCMO58522": "[\"ACT-SCMO58522\",\"Visita guiada libre.\",\"2026-08-18\",\"2026-08-18\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"5b886de6\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"3ac5085a\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"3\",\"3\"]]]"
+      "ACT-SCAL82876": "[\"ACT-SCAL82876\",\"Visita guiada libre.\",\"2026-08-18\",\"2026-08-18\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"0452361e\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1218c4ae\",\"Jóvenes (18 a 29 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"2\",\"2\"]]]",
+      "ACT-SCMO58522": "[\"ACT-SCMO58522\",\"Visita guiada libre.\",\"2026-08-18\",\"2026-08-18\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"5b886de6\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"3ac5085a\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"3\",\"3\"]]]"
     },
     "evidence": [
       {
@@ -129,8 +129,8 @@
       "ACT-SCPT19980"
     ],
     "snapshots": {
-      "ACT-SCNP58131": "[\"ACT-SCNP58131\",\"Visita guiada libre.\",\"2026-08-23\",\"2026-08-23\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a19059ab\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1363826c\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"2\",\"2\"]]]",
-      "ACT-SCPT19980": "[\"ACT-SCPT19980\",\"Visita guiada libre.\",\"2026-08-23\",\"2026-08-23\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"850eb029\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"7\",\"\",\"7\"]],[[\"45ff2299\",\"Adultos Mayores (60 años o más)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"7\",\"7\"]]]"
+      "ACT-SCNP58131": "[\"ACT-SCNP58131\",\"Visita guiada libre.\",\"2026-08-23\",\"2026-08-23\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a19059ab\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1363826c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"2\",\"2\"]]]",
+      "ACT-SCPT19980": "[\"ACT-SCPT19980\",\"Visita guiada libre.\",\"2026-08-23\",\"2026-08-23\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"850eb029\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"7\",\"\",\"7\"]],[[\"45ff2299\",\"Adultos Mayores (60 años o más)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"7\",\"7\"]]]"
     },
     "evidence": [
       {
@@ -153,8 +153,8 @@
       "ACT-SCYY62075"
     ],
     "snapshots": {
-      "ACT-SCLF07599": "[\"ACT-SCLF07599\",\"Visita guiada libre.\",\"2026-08-25\",\"2026-08-25\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a3b4ec7a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"313090df\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"3\",\"3\"]]]",
-      "ACT-SCYY62075": "[\"ACT-SCYY62075\",\"Visita guiada libre.\",\"2026-08-25\",\"2026-08-25\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"3e0772be\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"f9ce7e72\",\"Jóvenes (18 a 29 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"3\",\"3\"]]]"
+      "ACT-SCLF07599": "[\"ACT-SCLF07599\",\"Visita guiada libre.\",\"2026-08-25\",\"2026-08-25\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"a3b4ec7a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"313090df\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"3\",\"3\"]]]",
+      "ACT-SCYY62075": "[\"ACT-SCYY62075\",\"Visita guiada libre.\",\"2026-08-25\",\"2026-08-25\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"3e0772be\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"f9ce7e72\",\"Jóvenes (18 a 29 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"3\",\"3\"]]]"
     },
     "evidence": [
       {
@@ -174,9 +174,9 @@
       "ACT-SCRW71537"
     ],
     "snapshots": {
-      "ACT-SCFV66869": "[\"ACT-SCFV66869\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"479c3891\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"\",\"4\"]],[[\"4d39c011\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"4\",\"4\"]]]",
-      "ACT-SCHL56287": "[\"ACT-SCHL56287\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"403a8060\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"\",\"5\"]],[[\"72a9b085\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"5\",\"5\"]]]",
-      "ACT-SCRW71537": "[\"ACT-SCRW71537\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d669c157\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1e1b7abd\",\"Jóvenes (18 a 29 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"2\",\"2\"]]]"
+      "ACT-SCFV66869": "[\"ACT-SCFV66869\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"479c3891\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"\",\"4\"]],[[\"4d39c011\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"4\",\"4\"]]]",
+      "ACT-SCHL56287": "[\"ACT-SCHL56287\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"403a8060\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"\",\"5\"]],[[\"72a9b085\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"5\",\"5\"]]]",
+      "ACT-SCRW71537": "[\"ACT-SCRW71537\",\"Visita guiada libre.\",\"2026-08-28\",\"2026-08-28\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d669c157\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"\",\"2\"]],[[\"1e1b7abd\",\"Jóvenes (18 a 29 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"2\",\"2\"]]]"
     },
     "evidence": [
       {
@@ -199,8 +199,8 @@
       "ACT-SCVH99141"
     ],
     "snapshots": {
-      "ACT-SCCQ25265": "[\"ACT-SCCQ25265\",\"Visita guiada libre.\",\"2026-08-29\",\"2026-08-29\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"dc5e1e0b\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"4407bb88\",\"Adultos Mayores (60 años o más)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"3\",\"3\"]]]",
-      "ACT-SCVH99141": "[\"ACT-SCVH99141\",\"Visita guiada libre.\",\"2026-08-29\",\"2026-08-29\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"4f17bb11\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"\",\"4\"]],[[\"635266d4\",\"Adultos (30 a 59 años)\",\"No se cuenta con el dato\",\"Ninguno (Población General)\",\"\",\"4\",\"4\"]]]"
+      "ACT-SCCQ25265": "[\"ACT-SCCQ25265\",\"Visita guiada libre.\",\"2026-08-29\",\"2026-08-29\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"dc5e1e0b\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"3\",\"\",\"3\"]],[[\"4407bb88\",\"Adultos Mayores (60 años o más)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"3\",\"3\"]]]",
+      "ACT-SCVH99141": "[\"ACT-SCVH99141\",\"Visita guiada libre.\",\"2026-08-29\",\"2026-08-29\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"4f17bb11\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"4\",\"\",\"4\"]],[[\"635266d4\",\"Adultos (30 a 59 años)\",\"Dato global\",\"Ninguno (Población General)\",\"0\",\"4\",\"4\"]]]"
     },
     "evidence": [
       {
@@ -219,8 +219,8 @@
       "ACT-SCRN05061"
     ],
     "snapshots": {
-      "ACT-SCRA39908": "[\"ACT-SCRA39908\",\"ENCUENTRO ESTATAL DE MUSEOS\",\"2026-05-28\",\"2026-05-28\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"1bb101df\",\"León\",\"Urbano\",\"\",\"\",\"\",\"43\",\"\",\"\"]],[[\"1162cac7\",\"Población General\",\"Dato global\",\"\",\"\",\"\",\"43\"]]]",
-      "ACT-SCRN05061": "[\"ACT-SCRN05061\",\"ENCUENTRO ESTATAL DE MUSEOS\",\"2026-05-28\",\"2026-05-28\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"6bf40fbb\",\"León\",\"Urbano\",\"\",\"\",\"\",\"41\",\"\",\"\"]],[[\"bc10b0ca\",\"Población General\",\"Dato global\",\"\",\"\",\"\",\"41\"]]]"
+      "ACT-SCRA39908": "[\"ACT-SCRA39908\",\"ENCUENTRO ESTATAL DE MUSEOS\",\"2026-05-28\",\"2026-05-28\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"1bb101df\",\"León\",\"Urbano\",\"\",\"\",\"\",\"43\",\"0\",\"43\"]],[[\"1162cac7\",\"Población General\",\"Dato global\",\"\",\"0\",\"43\",\"43\"]]]",
+      "ACT-SCRN05061": "[\"ACT-SCRN05061\",\"ENCUENTRO ESTATAL DE MUSEOS\",\"2026-05-28\",\"2026-05-28\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"6bf40fbb\",\"León\",\"Urbano\",\"\",\"\",\"\",\"41\",\"0\",\"41\"]],[[\"bc10b0ca\",\"Población General\",\"Dato global\",\"\",\"0\",\"41\",\"41\"]]]"
     },
     "evidence": [
       {
@@ -235,8 +235,8 @@
       "ACT-SCVU58310"
     ],
     "snapshots": {
-      "ACT-SCHR06694": "[\"ACT-SCHR06694\",\"GABRIELA MISTRAL\",\"2026-06-18\",\"2026-06-18\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"98e2468d\",\"León\",\"Urbano\",\"\",\"\",\"\",\"35\",\"\",\"\"]],[[\"128f7f99\",\"Población General\",\"Dato global\",\"\",\"\",\"\",\"35\"]]]",
-      "ACT-SCVU58310": "[\"ACT-SCVU58310\",\"GABRIELA MISTRAL\",\"2026-06-18\",\"2026-06-18\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"9c8d6a01\",\"León\",\"Urbano\",\"\",\"\",\"\",\"48\",\"\",\"\"]],[[\"efa00fc4\",\"Población General\",\"Dato global\",\"\",\"\",\"\",\"48\"]]]"
+      "ACT-SCHR06694": "[\"ACT-SCHR06694\",\"GABRIELA MISTRAL\",\"2026-06-18\",\"2026-06-18\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"98e2468d\",\"León\",\"Urbano\",\"\",\"\",\"\",\"35\",\"0\",\"35\"]],[[\"128f7f99\",\"Población General\",\"Dato global\",\"\",\"0\",\"35\",\"35\"]]]",
+      "ACT-SCVU58310": "[\"ACT-SCVU58310\",\"GABRIELA MISTRAL\",\"2026-06-18\",\"2026-06-18\",\"Museo de Arte e Historia de Guanajuato\",\"Visita mediada\",\"1\",[[\"9c8d6a01\",\"León\",\"Urbano\",\"\",\"\",\"\",\"48\",\"0\",\"48\"]],[[\"efa00fc4\",\"Población General\",\"Dato global\",\"\",\"0\",\"48\",\"48\"]]]"
     },
     "evidence": [
       {
@@ -539,8 +539,8 @@
       "ACT-SCYR77313"
     ],
     "snapshots": {
-      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]",
-      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
+      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]",
+      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
     },
     "evidence": [
       {
@@ -555,8 +555,8 @@
       "ACT-SCYR77313"
     ],
     "snapshots": {
-      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
+      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
     },
     "evidence": [
       {
@@ -571,8 +571,8 @@
       "ACT-SCWL29449"
     ],
     "snapshots": {
-      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
+      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
     },
     "evidence": [
       {
@@ -587,8 +587,8 @@
       "ACT-SCYR77313"
     ],
     "snapshots": {
-      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
-      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
+      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
+      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
     },
     "evidence": [
       {
@@ -603,8 +603,8 @@
       "ACT-SCWL29449"
     ],
     "snapshots": {
-      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
-      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
+      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
+      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
     },
     "evidence": [
       {
@@ -619,8 +619,8 @@
       "ACT-SCVC16818"
     ],
     "snapshots": {
-      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
-      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]"
+      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]",
+      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]"
     },
     "evidence": [
       {
@@ -635,8 +635,8 @@
       "ACT-SCYR77313"
     ],
     "snapshots": {
-      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
+      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCYR77313": "[\"ACT-SCYR77313\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"9d1f5164\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"12\",\"12\",\"0\"]],[[\"3fb65cb3\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"12\",\"0\",\"12\"]]]"
     },
     "evidence": [
       {
@@ -651,8 +651,8 @@
       "ACT-SCWL29449"
     ],
     "snapshots": {
-      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
+      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCWL29449": "[\"ACT-SCWL29449\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"e69d650a\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"1\",\"1\",\"0\"]],[[\"c8110ccf\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"1\",\"0\",\"1\"]]]"
     },
     "evidence": [
       {
@@ -667,8 +667,8 @@
       "ACT-SCVC16818"
     ],
     "snapshots": {
-      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]"
+      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCVC16818": "[\"ACT-SCVC16818\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"fa8399e9\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"77b0d166\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]"
     },
     "evidence": [
       {
@@ -683,8 +683,8 @@
       "ACT-SCHL28991"
     ],
     "snapshots": {
-      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
-      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"Museo de Arte-Olga Costa-José Chávez Morado\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]"
+      "ACT-SCEC08568": "[\"ACT-SCEC08568\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"d0701ab7\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"2\",\"2\",\"0\"]],[[\"00fbae5c\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"2\",\"0\",\"2\"]]]",
+      "ACT-SCHL28991": "[\"ACT-SCHL28991\",\"Visita guiada libre\",\"2026-09-12\",\"2026-09-12\",\"\",\"Recorrido guiado por el museo\",\"1\",[[\"ce92e7ca\",\"Guanajuato\",\"Urbano\",\"\",\"\",\"\",\"5\",\"5\",\"0\"]],[[\"95fd80f6\",\"Adultos (30 a 59 años)\",\"Dato global\",\"\",\"5\",\"0\",\"5\"]]]"
     },
     "evidence": [
       {
@@ -779,13 +779,47 @@
       "ACT-SCRN56558"
     ],
     "snapshots": {
-      "ACT-SCDA95565": "[\"ACT-SCDA95565\",\"Visita libre\",\"2026-09-25\",\"2026-09-25\",\"Museo José y Tomas Chavez Morado\",\"visita libre\",\"1\",[[\"d537d9b6\",\"\",\"Urbano\",\"\",\"\",\"\",\"41\",\"\",\"\"]],[[\"4ffbb59d\",\"Población General\",\"Dato global\",\"Jóvenes en riesgo\",\"\",\"\",\"41\"]]]",
-      "ACT-SCRN56558": "[\"ACT-SCRN56558\",\"Visita libre\",\"2026-09-25\",\"2026-09-25\",\"Museo José y Tomas Chavez Morado\",\"visita libre\",\"1\",[[\"bebe8121\",\"\",\"Urbano\",\"\",\"\",\"\",\"18\",\"\",\"\"]],[[\"a6918bac\",\"Población General\",\"Dato global\",\"Jóvenes en riesgo\",\"\",\"\",\"18\"]]]"
+      "ACT-SCDA95565": "[\"ACT-SCDA95565\",\"Visita libre\",\"2026-09-25\",\"2026-09-25\",\"Museo José y Tomas Chavez Morado\",\"visita libre\",\"1\",[[\"d537d9b6\",\"Silao de la Victoria\",\"Urbano\",\"\",\"\",\"\",\"41\",\"0\",\"41\"]],[[\"4ffbb59d\",\"Población General\",\"Dato global\",\"Jóvenes en riesgo\",\"0\",\"41\",\"41\"]]]",
+      "ACT-SCRN56558": "[\"ACT-SCRN56558\",\"Visita libre\",\"2026-09-25\",\"2026-09-25\",\"Museo José y Tomas Chavez Morado\",\"visita libre\",\"1\",[[\"bebe8121\",\"Silao de la Victoria\",\"Urbano\",\"\",\"\",\"\",\"18\",\"0\",\"18\"]],[[\"a6918bac\",\"Población General\",\"Dato global\",\"Jóvenes en riesgo\",\"0\",\"18\",\"18\"]]]"
     },
     "evidence": [
       {
         "consulta": 474,
         "fuente": "Formato Interno de Indicadores (2).xlsx / Pablo B. / fila 108; comparar Pablo B.!107"
+      }
+    ]
+  },
+  {
+    "ids": [
+      "ACT-SCFT93131",
+      "ACT-SCNZ66851"
+    ],
+    "snapshots": {
+      "ACT-SCFT93131": "[\"ACT-SCFT93131\",\"14.º Encuentro de Cocina Tradicional\",\"2026-05-30\",\"2026-05-30\",\"Andador Sor Juana\",\"Artista: Trio Guanacteco. Hora: 16:00:00\",\"1\",[[\"49f06464\",\"Irapuato\",\"\",\"\",\"\",\"\",\"0\",\"0\",\"0\"]],[[\"3112e91f\",\"Población General\",\"Hombre\",\"\",\"0\",\"0\",\"0\"],[\"7344c1d2\",\"Población General\",\"Mujer\",\"\",\"0\",\"0\",\"0\"]]]",
+      "ACT-SCNZ66851": "[\"ACT-SCNZ66851\",\"14.º Encuentro de Cocina Tradicional\",\"2026-05-30\",\"2026-05-30\",\"Andador Sor Juana\",\"Artista: Flor de Autonomía. Hora: 16:00:00\",\"1\",[[\"fb40a7a1\",\"Irapuato\",\"\",\"\",\"\",\"\",\"0\",\"0\",\"0\"]],[[\"bbec05ef\",\"Población General\",\"Hombre\",\"\",\"0\",\"0\",\"0\"],[\"ea19e83c\",\"Población General\",\"Mujer\",\"\",\"0\",\"0\",\"0\"]]]"
+    },
+    "evidence": [
+      {
+        "criterio": "Artistas distintos en Descripcion_Breve (Trio Guanacteco vs Flor de Autonomía)",
+        "fuente": "Registro_Actividades!N715:N716",
+        "revisado": "2026-11-25"
+      }
+    ]
+  },
+  {
+    "ids": [
+      "ACT-SCWJ22047",
+      "ACT-SCNH31908"
+    ],
+    "snapshots": {
+      "ACT-SCWJ22047": "[\"ACT-SCWJ22047\",\"Sexto Festival Nacional de Danza \\\"Guanajuato Tradiciones de mi Tierra\\\"\",\"2026-06-06\",\"2026-06-06\",\"Jardin Principal\",\"Artista: Compañía México en Trande, del estado de Hidalgo. Hora: 19:00:00\",\"1\",[[\"8b6c85b4\",\"Purísima del Rincón\",\"\",\"\",\"\",\"\",\"129\",\"0\",\"129\"]],[[\"13b9915a\",\"Población General\",\"Mujer\",\"Personas con Discapacidad\",\"0\",\"1\",\"1\"],[\"221f2390\",\"Población General\",\"Hombre\",\"Personas con Discapacidad\",\"0\",\"2\",\"2\"],[\"9e70be19\",\"Población General\",\"Mujer\",\"\",\"0\",\"66\",\"66\"],[\"c5449ddb\",\"Población General\",\"Hombre\",\"\",\"0\",\"60\",\"60\"]]]",
+      "ACT-SCNH31908": "[\"ACT-SCNH31908\",\"Sexto Festival Nacional de Danza \\\"Guanajuato Tradiciones de mi Tierra\\\"\",\"2026-06-06\",\"2026-06-06\",\"Jardin Principal\",\"Artista: Ballet Folklorico Cutzi de Yurécuaro. Hora: 19:00:00\",\"1\",[[\"bde376c6\",\"Jaral del Progreso\",\"\",\"\",\"\",\"\",\"120\",\"0\",\"120\"]],[[\"27b5e93e\",\"Población General\",\"Mujer\",\"\",\"0\",\"50\",\"50\"],[\"538f3047\",\"Población General\",\"Hombre\",\"\",\"0\",\"68\",\"68\"],[\"761c18cc\",\"Población General\",\"Mujer\",\"Personas con Discapacidad\",\"0\",\"1\",\"1\"],[\"8df0a736\",\"Población General\",\"Hombre\",\"Personas con Discapacidad\",\"0\",\"1\",\"1\"]]]"
+    },
+    "evidence": [
+      {
+        "criterio": "Compañías distintas en Descripcion_Breve (Compañía México en Trande vs Ballet Folklorico Cutzi)",
+        "fuente": "Registro_Actividades!N722:N723",
+        "revisado": "2026-11-25"
       }
     ]
   }
