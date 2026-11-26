@@ -47,6 +47,15 @@ Fátima confirmó que la hoja `Reportadas a SET` reproduce la clasificación del
 
 QC4055 continúa pendiente de respaldo de adquisición, modernización y equipamiento. Los audios y la hoja de actividades no detallan su avance.
 
+### Dos participaciones preparadas para captura
+
+| Fuente | Fecha inicial | Fecha final | Meta | Unidad |
+|---|---|---|---|---|
+| `Reportadas a SET`, fila 34 | 29/05/2026 | 07/06/2026 | PB3573, ID 87 | 1 feria |
+| `Reportadas a SET`, fila 51 | 10/10/2026 | 18/10/2026 | PB3573, ID 87 | 1 feria |
+
+La revisión automática rechazó el alta directa porque la operación asignaba IDs y folios sintéticos y carecía de nombre oficial, sede y público. El lote no se aplicó. La captura operativa por AppSheet debe generar los identificadores y permitir cotejar cada participación con su nombre y sede. El público pendiente queda sin cifra. Las presentaciones dentro de la feria se cotejan por separado en Promoción.
+
 La hoja `Reportadas a SET` identifica el tipo de reporte, fecha, evento, cantidad de actividades y público. Algunas filas están agrupadas en ferias, foros o ciclos ya capturados. La cantidad de actividades del grupo y la unidad de su meta se cotejan por separado.
 
 | Filas SET | Caso | Contraste y decisión propuesta |
