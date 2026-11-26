@@ -32,6 +32,19 @@ Los dos archivos FIARCA y comités identifican 12 reuniones o sesiones realizada
 
 ## Fátima
 
+### Criterio confirmado por Fátima para el corte a octubre
+
+Fátima confirmó que la hoja `Reportadas a SET` reproduce la clasificación del reporte que cotejó con la contadora Ángeles. La columna E se titula `Meta Sed`. La participación se cuenta por feria en el ID 87. Las presentaciones elegibles dentro de las ferias y las actividades desglosadas del Encuentro de Escritoras se documentan en Promoción (ID 88), conservando la relación con el evento. La etiqueta `Feria` en las filas de presentaciones se distingue de `Feria de libro` en las filas del evento completo. No se modificó el archivo original ni la base en esta revisión.
+
+| Filas | Qué se puede conciliar | Qué queda por verificar |
+|---|---|---|
+| 7–27 y 57–61 | Buscar cada presentación por fecha, título y sede en el ID 88. Ya hay coincidencias en marzo para Este País, El brillo intermitente y Amor y rabia. | Varias fichas tienen títulos genéricos. La fila 60 reporta cinco actividades con 35 asistentes agregados. Sin reparto documentado. |
+| 34 y 51 | Dos participaciones candidatas para el ID 87, 29 de mayo a 7 de junio y 10 a 18 de octubre. | Los rótulos son genéricos. Identificar nombre y sede en la matriz original o evidencia y cruzar con fichas existentes. El bloque de marzo también requiere identificar el evento padre. |
+| 2, 35 y 48 | Los dos encuentros reportados son Festival de Escritores (`ACT-SCFB82875`, ID 89) y Encuentro de lectores y escritores del 24 de junio (`ACT-SCWM53099`, ID 88, 220 asistentes). Este último tiene correspondencia directa para reclasificar al ID 89 junto con la revisión de Voces. | La lectura de Voces del 29 de julio figura como Promoción con 15 asistentes. `ACT-SCIG15181` abarca 28–29 de julio y 300 asistentes en Ciudad de México. Verificar si la lectura ya forma parte del registro o corresponde a una ficha distinta antes de mover el concentrado o tocar el público. |
+| 59, 62 y 63 | Confirmada la clasificación Promoción. El 19 ya está vigente. El 12 y 23 se cotejaron con los antecedentes de Salamanca y Acámbaro. | Recuperar los registros originales con IDs, folios y relaciones. La fila 59 no informa cantidad de actividades. |
+
+QC4055 continúa pendiente de respaldo de adquisición, modernización y equipamiento. Los audios y la hoja de actividades no detallan su avance.
+
 La hoja `Reportadas a SET` identifica el tipo de reporte, fecha, evento, cantidad de actividades y público. Algunas filas están agrupadas en ferias, foros o ciclos ya capturados. La cantidad de actividades del grupo y la unidad de su meta se cotejan por separado.
 
 | Filas SET | Caso | Contraste y decisión propuesta |
