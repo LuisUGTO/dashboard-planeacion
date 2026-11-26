@@ -662,7 +662,6 @@
             <div class="min-w-0">
               <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Convocatorias</p>
               <p id="kpi-conv-total" class="kpi-number text-3xl font-black text-teal-700 mt-1">0</p>
-              <p id="kpi-conv-sub" class="text-[11px] text-slate-500 font-medium mt-1">Registros con tipo Convocatoria pública</p>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center shadow-inner shrink-0">
               <i data-lucide="megaphone" class="w-6 h-6"></i>
@@ -3008,9 +3007,6 @@
       }
       if (document.getElementById('kpi-conv-total')) {
         document.getElementById('kpi-conv-total').textContent = fmtInt(convQty);
-      }
-      if (document.getElementById('kpi-conv-sub')) {
-        document.getElementById('kpi-conv-sub').textContent = `${fmtInt(convActs.length)} ficha(s) en Tipo_Actividad: Convocatoria`;
       }
       document.getElementById('kpi-act-total').textContent = fmtInt(countMetrics.activities || totalAct);
       if (document.getElementById('kpi-fichas-total')) document.getElementById('kpi-fichas-total').textContent = fmtInt(totalAct);
