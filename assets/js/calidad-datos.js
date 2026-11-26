@@ -71,9 +71,12 @@
   }
   function quantity(activity) {
     // A reported workshop quantity must never be guessed from Total_Sesiones.
-    const explicit = count(activity.Cantidad_Actividades);
-    const consolidated = /concentrad|consolidad|acumulad/.test(norm(activity.Tipo_Registro));
-    const malformed = text(activity.Cantidad_Actividades) !== '' && explicit === null;
+    const explicitCol = count(activity.Cantidad_Actividades);
+    const malformed = text(activity.Cantidad_Actividades) !== '' && explicitCol === null;
+    const descMatch = /^(?:Avance mensual|Concentrado(?:\s+[^:]+)?)\s*:\s*(\d+)/i.exec(text(activity.Descripcion_Breve));
+    const descQty = explicitCol === null && !malformed && descMatch ? count(descMatch[1]) : null;
+    const explicit = explicitCol !== null ? explicitCol : descQty;
+    const consolidated = /concentrad|consolidad|acumulad/.test(norm(activity.Tipo_Registro)) || descQty !== null;
     return { value: malformed || (consolidated && (explicit === null || explicit === 0)) ? null : (explicit === null ? 1 : explicit), consolidated, explicit, malformed };
   }
   // PB3567 #75: one workshop per ID verified against the CEARG source rows.

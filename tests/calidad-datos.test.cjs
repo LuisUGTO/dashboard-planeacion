@@ -103,6 +103,11 @@ test('mil talleres y sesiones son cantidades independientes', () => {
   assert.equal(q.quantity(activity({ Tipo_Registro: 'Concentrado mensual' })).value, null);
   assert.equal(q.quantity(activity({ Cantidad_Actividades: 'desconocido' })).value, null);
 });
+test('concentrados dentro de A:BN toman su cantidad documentada de Descripcion_Breve sin leer BV ni sesiones', () => {
+  assert.equal(q.quantity(activity({ Descripcion_Breve: 'Avance mensual: 687 Talleres realizados. Fuente DGVDC/PB3562!12/01.', Total_Sesiones: 999 })).value, 687);
+  assert.equal(q.quantity(activity({ Descripcion_Breve: 'Concentrado ene-oct 2026: 4 Charlas en Pénjamo.', Total_Sesiones: 12 })).value, 4);
+  assert.equal(q.quantity(activity({ Descripcion_Breve: 'Avance mensual: 0 Talleres realizados.', Total_Sesiones: 5 })).value, null);
+});
 test('revisa concentrados multimes sin inventar un reparto mensual', () => {
   const a = activity({ Tipo_Registro: 'Concentrado histórico', Cantidad_Actividades: 1000, Fecha_Fin: '2026-09-30' });
   assert.ok(q.audit([a], [t(0)], [p(0)], [])[0].diag.includes('desglose mensual'));
