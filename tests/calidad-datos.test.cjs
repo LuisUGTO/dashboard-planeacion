@@ -200,3 +200,27 @@ test('la serie mensual distingue un cero declarado de población ausente o parci
   assert.equal(result.unallocatedPeople, 30); assert.equal(result.unallocatedRecords, 2);
   assert.equal(q.monthlyPopulation([acts[1]], [], 'Cantidad_Poblacion').people[0], null);
 });
+
+test('supersededBy reconoce IDs con prefijo y guion sin aceptar formatos inválidos ni autorreferencias', () => {
+  assert.equal(q.supersededBy(activity({ ID_Actividad: 'ACT-OLD1', Descripcion_Breve: '[SUSTITUIDO:ACT-SCFM-26DA213] reemplazo' })), 'ACT-SCFM-26DA213');
+  assert.equal(q.supersededBy(activity({ ID_Actividad: 'ACT-SCFM-26DA213', Descripcion_Breve: '[SUSTITUIDO:ACT-SCFM-26DA213]' })), '');
+  assert.equal(q.supersededBy(activity({ Descripcion_Breve: '[SUSTITUIDO:otro]' })), '');
+});
+
+test('audit alerta discrepancia entre participación y acceso cuando el total coincide entre territorio y población', () => {
+  const row = q.audit(
+    [activity()],
+    [t(185, { Cantidad_Participacion: 3, Cantidad_Acceso: 182 })],
+    [p(185, { Cantidad_Participacion: 182, Cantidad_Acceso: 3 })],
+    []
+  )[0];
+  assert.ok(row.categories.includes('diferencias'));
+  assert.match(row.diag, /Desglose territorial \(3 participación \/ 182 acceso\) difiere de población \(182 participación \/ 3 acceso\)/);
+  assert.equal(row.diff, 0);
+});
+
+test('hasUsableEvidence rechaza filas vacías y valida foto o archivo útil', () => {
+  assert.equal(q.hasUsableEvidence(activity({ Foto_Evidencia: '' }), [{ Archivo_Evidencia: '' }]), false);
+  assert.equal(q.hasUsableEvidence(activity({ Foto_Evidencia: 'foto.jpg' }), []), true);
+  assert.equal(q.hasUsableEvidence(activity({ Foto_Evidencia: '' }), [{ Archivo_Evidencia: 'respaldo.pdf' }]), true);
+});

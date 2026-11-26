@@ -21,10 +21,12 @@
   // cancellation (or a matching title on another date) do not change status.
   const isCancelled = activity => /^\[CANCELAD[AO]\]/i.test(text(activity.Descripcion_Breve));
   const supersededBy = activity => {
-    const m = text(activity.Descripcion_Breve).match(/^\[SUSTITUIDO:(ACT-SC[A-Z]{2}\d{5})\]/);
+    const m = text(activity.Descripcion_Breve).match(/^\[SUSTITUIDO:(ACT-[A-Z0-9]+(?:-[A-Z0-9]+)*)\]/);
     return m && m[1] !== text(activity.ID_Actividad) ? m[1] : '';
   };
   const isExcluded = activity => isCancelled(activity) || !!supersededBy(activity);
+  const hasUsableEvidence = (activity, evidenceRows = []) => !absent(activity?.Foto_Evidencia)
+    || (evidenceRows || []).some(e => !absent(e?.Archivo_Evidencia));
   function reportedTime(activity) {
     // Import descriptions carry the explicit start time. Unknown, malformed or
     // multiple times cannot establish that two otherwise matching records differ.
@@ -227,7 +229,12 @@
         });
         if (inconsistent) add('diferencias', `${label}: participación más acceso no coincide con su total`);
       }
-      if (absent(a.Foto_Evidencia) && !(evis.get(id) || []).some(e => !absent(e.Archivo_Evidencia))) add('evidencias', 'Sin archivo de evidencia vinculado');
+      const tPart = sum(tr, 'Cantidad_Participacion'), tAcc = sum(tr, 'Cantidad_Acceso');
+      const pPart = sum(pr, 'Cantidad_Participacion'), pAcc = sum(pr, 'Cantidad_Acceso');
+      if (tPart !== null && tAcc !== null && pPart !== null && pAcc !== null && (tPart !== pPart || tAcc !== pAcc)) {
+        add('diferencias', `Desglose territorial (${tPart} participación / ${tAcc} acceso) difiere de población (${pPart} participación / ${pAcc} acceso)`);
+      }
+      if (!hasUsableEvidence(a, evis.get(id) || [])) add('evidencias', 'Sin archivo de evidencia vinculado');
       const q = quantity(a);
       if (q.value === null) add('concentrados', 'Concentrado sin cantidad válida de actividades reportadas');
       if (q.explicit === 0 && !q.consolidated) add('concentrados', 'Cantidad de actividades reportada en cero: confirmar');
@@ -243,5 +250,5 @@
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, isCancelled, supersededBy, isExcluded, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };
+  return { number, count, isCancelled, supersededBy, isExcluded, hasUsableEvidence, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };
 });

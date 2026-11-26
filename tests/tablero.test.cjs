@@ -388,3 +388,83 @@ test('buildRegistroWorkbook omite actividades sustituidas y canceladas y sus fil
   assert.deepEqual(sheets.Registro_Poblacion.tables[0].rows.map(r => r[0]), ['P1']);
   assert.deepEqual(sheets.Regitro_Evidencia.tables[0].rows.map(r => r[0]), ['E1']);
 });
+
+test('buildRegistroWorkbook calcula Cantidad_Actividades desde A:BN según CulturaCalidad.quantity', () => {
+  const s = setup();
+  const sheets = {};
+  s.context.ExcelJS = {
+    Workbook: class {
+      addWorksheet(name) {
+        const ws = { name, tables: [], cols: {}, addTable(t) { this.tables.push(t); }, getColumn(i) { return (this.cols[i] = this.cols[i] || {}); } };
+        sheets[name] = ws;
+        return ws;
+      }
+    }
+  };
+  s.context.sources = {
+    actividades: { fields: ['ID_Actividad', 'Folio', 'Usuario_Registra', 'Direccion', 'Nombre_Actividad', 'Descripcion_Breve', 'Fecha_Inicio', 'Tipo_Registro'], rows: [
+      { ID_Actividad: 'ACT-1', Folio: 'F1', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Individual', Descripcion_Breve: 'Taller regular', Fecha_Inicio: '10/05/2026', Tipo_Registro: 'Actividad individual' },
+      { ID_Actividad: 'ACT-2', Folio: 'F2', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Concentrado numérico', Descripcion_Breve: 'Avance mensual: 14 Visitas guiadas.', Fecha_Inicio: '10/05/2026', Tipo_Registro: 'Concentrado mensual' },
+      { ID_Actividad: 'ACT-3', Folio: 'F3', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Concentrado pendiente', Descripcion_Breve: 'Sin cifra declarada', Fecha_Inicio: '10/05/2026', Tipo_Registro: 'Concentrado mensual' }
+    ] },
+    territorio: { fields: ['ID_Territorio', 'ID_Actividad', 'Municipio', 'Cantidad'], rows: [] },
+    poblacion: { fields: ['ID_Poblacion', 'ID_Actividad', 'Cantidad_Poblacion'], rows: [] },
+    evidencia: { fields: ['ID_Evidencia', 'ID_Actividad', 'Archivo_Evidencia'], rows: [] }
+  };
+  vm.runInContext('buildRegistroWorkbook(sources, "ALL")', s.context);
+  const cols = sheets.Registro_Actividades.tables[0].columns.map(c => c.name);
+  const qtyIdx = cols.indexOf('Cantidad_Actividades');
+  assert.ok(qtyIdx >= 0);
+  const qtys = sheets.Registro_Actividades.tables[0].rows.map(r => r[qtyIdx]);
+  assert.deepEqual(qtys, [1, 14, null]);
+});
+
+test('renderRepositorioEvidencias excluye archivos vacíos y coincide con Conciliación en actividades sin evidencia', () => {
+  const s = setup();
+  s.context.acts = [
+    { ...a, ID_Actividad: 'CON_ARCH', Foto_Evidencia: '' },
+    { ...a, ID_Actividad: 'CON_FOTO', Foto_Evidencia: 'foto.jpg' },
+    { ...a, ID_Actividad: 'VACIO', Foto_Evidencia: '' }
+  ];
+  s.context.ters = [];
+  s.context.evis = [
+    { ID_Evidencia: 'E1', ID_Actividad: 'CON_ARCH', Archivo_Evidencia: 'evidencia.pdf', Tipo_Evidencia: 'PDF' },
+    { ID_Evidencia: 'E2', ID_Actividad: 'VACIO', Archivo_Evidencia: '', Tipo_Evidencia: 'PDF' }
+  ];
+  vm.runInContext('renderRepositorioEvidencias(acts, ters, evis);', s.context);
+  assert.equal(s.nodes.get('kpi-evi-total').textContent, '1');
+  assert.equal(s.nodes.get('kpi-evi-cov-ratio').textContent, '2/3');
+  assert.match(s.nodes.get('kpi-evi-missing').textContent, /^1 actividades sin evidencia/);
+  const missingIds = JSON.parse(vm.runInContext('JSON.stringify(cachedMissingActsList.map(x => x.idAct))', s.context));
+  assert.deepEqual(missingIds, ['VACIO']);
+});
+
+test('filtros canonizan municipios, corrigen mojibake de eje y enfoque y formatean fecha local', () => {
+  const s = setup();
+  s.context.fixture = {
+    actividades: [
+      { ...a, ID_Actividad: 'A1', Eje_PG: '4 Vocaci\uFFFDn', Enfoque_Actividad: 'Art\uFFFDstica', Total_Sesiones: 1 },
+      { ...a, ID_Actividad: 'A2', Eje_PG: '4 Vocación', Enfoque_Actividad: 'Artística', Total_Sesiones: 1 }
+    ],
+    territorio: [
+      { ID_Territorio: 'T1', ID_Actividad: 'A1', Municipio: 'Silao', Cantidad: 10 },
+      { ID_Territorio: 'T2', ID_Actividad: 'A2', Municipio: 'Silao de la Victoria', Cantidad: 20 }
+    ],
+    poblacion: [],
+    evidencia: [],
+    alineacion: cat
+  };
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  s.document.getElementById('f-municipio').value = 'Silao de la Victoria';
+  s.document.getElementById('f-eje').value = '4 Vocación';
+  s.document.getElementById('f-enfoque').value = 'Artística';
+  vm.runInContext(`rawDB = fixture;
+    renderVisionGeneral = () => {}; renderMatrizEstrategica = () => {};
+    renderCoberturaTerritorial = () => {}; renderPerfilPoblacion = () => {};
+    renderRepositorioEvidencias = () => {}; applyFilters();`, s.context);
+  const ids = JSON.parse(vm.runInContext('JSON.stringify([...filteredActIds])', s.context));
+  assert.deepEqual(ids, ['A1', 'A2']);
+  assert.equal(vm.runInContext('getCanonicalMunicipioLabel("Dolores Hidalgo")', s.context), 'Dolores Hidalgo Cuna de la Independencia Nacional');
+  assert.equal(vm.runInContext('getLocalDateStamp(new Date(2026, 10, 25, 22, 30, 0))', s.context), '20261125');
+});
