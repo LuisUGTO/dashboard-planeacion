@@ -507,3 +507,38 @@ test('grupos prioritarios excluye Público general, usa barras horizontales con 
   const stack = captured['chart-pob-enfoque-stack'];
   assert.equal(stack.options.scales.x.ticks.maxRotation, 0);
 });
+
+test('renderHomeMetasProgress resume direcciones y cambia a procesos al filtrar dirección sin mezclar unidades', () => {
+  const s = setup();
+  const catRows = [
+    { ID_Alineacion: 1, Clave_Proceso: 'PB3572', Direccion: 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES', Nombre_Meta: 'Talleres en museos', Unidad_Medida: 'Talleres realizados', Meta_Anual: 100 },
+    { ID_Alineacion: 2, Clave_Proceso: 'QC4047', Direccion: 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES', Nombre_Meta: 'Asistentes museos', Unidad_Medida: 'Personas atendidas', Meta_Anual: 500 },
+    { ID_Alineacion: 3, Clave_Proceso: 'PB3573', Direccion: 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES', Nombre_Meta: 'Ferias del libro', Unidad_Medida: 'Ferias realizadas', Meta_Anual: 4 }
+  ];
+  const acts = [
+    { ...a, ID_Actividad: 'A1', Direccion: 'Museos', Clave_Proceso: 1, Descripcion_Breve: 'Avance mensual: 50 Talleres' },
+    { ...a, ID_Actividad: 'A2', Direccion: 'Editorial', Clave_Proceso: 3 }
+  ];
+  s.context.catRows = catRows;
+  s.context.acts = acts;
+  s.document.getElementById('f-direccion').value = 'ALL';
+  vm.runInContext('rawDB.alineacion = catRows; renderMatrizEstrategica(acts, [], [], catRows);', s.context);
+
+  const summaryAll = s.nodes.get('home-metas-summary').innerHTML;
+  const gridAll = s.nodes.get('home-metas-grid').innerHTML;
+  assert.match(summaryAll, /0 cumplidas/);
+  assert.match(summaryAll, /2 en avance/);
+  assert.match(summaryAll, /1 sin registro/);
+  assert.match(gridAll, /DG Museos y Artes Visuales/);
+  assert.match(gridAll, /50 \/ 100 act\./);
+  assert.match(gridAll, /DG Editorial y Publicaciones/);
+  assert.match(gridAll, /1 \/ 4 act\./);
+
+  s.document.getElementById('f-direccion').value = 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES';
+  vm.runInContext('renderMatrizEstrategica(acts, [], [], catRows.slice(0, 2));', s.context);
+  assert.match(s.nodes.get('home-metas-title').textContent, /Avance por Proceso/);
+  const gridDir = s.nodes.get('home-metas-grid').innerHTML;
+  assert.match(gridDir, /PB3572 · Talleres en museos/);
+  assert.match(gridDir, /QC4047 · Asistentes museos/);
+  assert.ok(!gridDir.includes('NaN'));
+});
