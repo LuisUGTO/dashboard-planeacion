@@ -515,9 +515,9 @@
           </div>
         </div>
 
-        <!-- Cuadrícula de los 8 Filtros Operativos -->
-        <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-[minmax(205px,1.55fr)_repeat(7,minmax(0,1fr))] gap-2 items-end">
-          <div class="col-span-2 sm:col-span-1 flex flex-col justify-end min-w-0">
+        <!-- Cuadrícula de Filtros Operativos -->
+        <div id="operational-filters" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 items-end">
+          <div class="col-span-2 flex flex-col justify-end min-w-0">
             <label title="Periodo 2026" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
               <i data-lucide="calendar" class="w-3 h-3 text-gto-blue shrink-0"></i>
               <span class="truncate">Periodo 2026</span>
@@ -528,6 +528,27 @@
             </div>
           </div>
           <div class="flex flex-col justify-end min-w-0">
+            <label title="Mes de inicio" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="calendar-days" class="w-3 h-3 text-gto-blue shrink-0"></i>
+              <span class="truncate">Mes</span>
+            </label>
+            <select id="f-mes" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todos los meses</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="flex flex-col justify-end min-w-0">
             <label title="Municipio" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
               <i data-lucide="map-pin" class="w-3 h-3 text-gto-blue shrink-0"></i>
               <span class="truncate">Municipio</span>
@@ -536,22 +557,31 @@
               <option value="ALL">Todos los municipios</option>
             </select>
           </div>
-          <div class="flex flex-col justify-end min-w-0">
-            <label title="Dirección General" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+          <div class="col-span-2 sm:col-span-2 lg:col-span-2 flex flex-col justify-end min-w-0">
+            <label title="Subsecretaría o Dirección General" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
               <i data-lucide="building-2" class="w-3 h-3 text-purple-600 shrink-0"></i>
-              <span class="truncate">Dirección General</span>
+              <span class="truncate">Subsecretaría / Dirección</span>
             </label>
             <select id="f-direccion" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-              <option value="ALL">Todas las direcciones</option>
+              <option value="ALL">Todas las direcciones y subsecretarías</option>
             </select>
           </div>
-          <div class="flex flex-col justify-end min-w-0">
-            <label title="Proceso o Meta (Clave)" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
-              <i data-lucide="target" class="w-3 h-3 text-indigo-600 shrink-0"></i>
-              <span class="truncate">Proceso / Meta</span>
+          <div class="col-span-2 sm:col-span-2 lg:col-span-2 flex flex-col justify-end min-w-0">
+            <label title="Proceso o Proyecto (Clave y nombre)" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="folder-kanban" class="w-3 h-3 text-indigo-600 shrink-0"></i>
+              <span class="truncate">Proceso / Proyecto</span>
             </label>
             <select id="f-proceso" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-              <option value="ALL">Todos los procesos</option>
+              <option value="ALL">Todos los procesos y proyectos</option>
+            </select>
+          </div>
+          <div class="col-span-2 sm:col-span-2 lg:col-span-2 flex flex-col justify-end min-w-0">
+            <label title="Meta institucional (ID y descripción)" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
+              <i data-lucide="target" class="w-3 h-3 text-teal-600 shrink-0"></i>
+              <span class="truncate">Meta</span>
+            </label>
+            <select id="f-meta" onchange="applyFilters()" class="w-full h-[34px] bg-slate-50 border border-slate-200 rounded-lg px-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
+              <option value="ALL">Todas las metas</option>
             </select>
           </div>
           <div class="flex flex-col justify-end min-w-0">
@@ -563,7 +593,7 @@
               <option value="ALL">Todas las disciplinas</option>
             </select>
           </div>
-          <div class="flex flex-col justify-end min-w-0">
+          <div id="filter-wrap-eje" class="hidden flex flex-col justify-end min-w-0">
             <label title="Programa de Gobierno" class="flex items-center gap-1 text-[10px] font-bold uppercase text-slate-500 mb-1 whitespace-nowrap truncate">
               <i data-lucide="landmark" class="w-3 h-3 text-emerald-600 shrink-0"></i>
               <span class="truncate">Programa de Gob.</span>
@@ -615,47 +645,70 @@
            VISTA 1: INICIO - VISIÓN GENERAL
       ========================================================== -->
       <section id="tab-vision" class="space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Fila 1 y 2: 6 Indicadores Principales -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-indigo-600 border border-slate-200/80 shadow-sm flex items-center justify-between">
+            <div class="min-w-0">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Programas</p>
+              <p id="kpi-prog-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0/0</p>
+              <p id="kpi-prog-sub" class="text-[11px] text-slate-500 font-medium mt-1">Procesos y proyectos activos en catálogo</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shadow-inner shrink-0">
+              <i data-lucide="folder-kanban" class="w-6 h-6"></i>
+            </div>
+          </div>
+
+          <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-teal-500 border border-slate-200/80 shadow-sm flex items-center justify-between">
+            <div class="min-w-0">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Convocatorias</p>
+              <p id="kpi-conv-total" class="kpi-number text-3xl font-black text-teal-700 mt-1">0</p>
+              <p id="kpi-conv-sub" class="text-[11px] text-slate-500 font-medium mt-1">Registros con tipo Convocatoria pública</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center shadow-inner shrink-0">
+              <i data-lucide="megaphone" class="w-6 h-6"></i>
+            </div>
+          </div>
+
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-gto-blue border border-slate-200/80 shadow-sm flex items-center justify-between">
-            <div>
+            <div class="min-w-0">
               <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Actividades realizadas</p>
               <p id="kpi-act-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
-              <p class="hidden text-xs text-slate-500 font-semibold mt-1">
-                <span id="kpi-fichas-total" class="text-slate-700 font-bold">0</span> fichas capturadas
+              <p class="text-[11px] text-slate-500 font-medium mt-1">
+                <span id="kpi-fichas-total" class="font-bold text-slate-700">0</span> fichas · <span id="kpi-sesiones-total" class="font-bold text-slate-700">0</span> sesiones
               </p>
-              <span id="kpi-sesiones-total" class="hidden">0</span>
-              <p id="kpi-actividades-reportadas" class="hidden text-[10px] text-slate-500 mt-1"></p>
-              <button id="kpi-cantidades-alerta" onclick="openAuditQuantities()" class="hidden text-[10px] font-bold text-amber-800 mt-1 underline text-left"></button>
+              <p id="kpi-actividades-reportadas" class="hidden text-[10px] text-slate-500 mt-0.5"></p>
+              <button id="kpi-cantidades-alerta" onclick="openAuditQuantities()" class="hidden text-[10px] font-bold text-amber-800 mt-0.5 underline text-left"></button>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner shrink-0">
               <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
             </div>
           </div>
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-amber-500 border border-slate-200/80 shadow-sm flex items-center justify-between">
-            <div>
+            <div class="min-w-0">
               <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Personas Beneficiadas</p>
               <p id="kpi-pop-total" class="kpi-number text-3xl font-black text-gto-blue mt-1">0</p>
               <p id="kpi-pop-sub" class="text-[11px] text-slate-500 font-medium mt-1">0 participación | 0 acceso</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Alcance y asistencias acumuladas (no personas únicas)</p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center shadow-inner">
+            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center shadow-inner shrink-0">
               <i data-lucide="users" class="w-6 h-6"></i>
             </div>
           </div>
 
-          <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-emerald-500 border border-slate-200/80 shadow-sm flex items-center justify-between">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Ingresos Generados</p>
-              <p id="kpi-ingresos" class="kpi-number text-2xl font-black text-emerald-700 mt-1">$0.00</p>
-              <p id="kpi-contratado" class="text-[11px] text-slate-500 font-medium mt-1">Inversión contratada: $0.00</p>
+          <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-cyan-500 border border-slate-200/80 shadow-sm flex items-center justify-between">
+            <div class="min-w-0">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Beneficiarios por grupo prioritario</p>
+              <p id="kpi-home-prio" class="kpi-number text-3xl font-black text-cyan-700 mt-1">0</p>
+              <p id="kpi-home-prio-sub" class="text-[11px] text-slate-500 font-medium mt-1">Asistencias en inclusión · excluye Público general</p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner">
-              <i data-lucide="banknote" class="w-6 h-6"></i>
+            <div class="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-100 text-cyan-600 flex items-center justify-center shadow-inner shrink-0">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
             </div>
           </div>
 
           <div class="kpi-card bg-white rounded-xl p-4 border-l-4 border-l-purple-600 border border-slate-200/80 shadow-sm flex items-center justify-between">
-            <div>
+            <div class="min-w-0">
               <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Municipios con Actividad</p>
               <div class="flex items-baseline gap-2 mt-1">
                 <p id="kpi-mun-ratio" class="kpi-number text-3xl font-black text-gto-blue">0/46</p>
@@ -663,13 +716,13 @@
               </div>
               <p id="kpi-mun-foraneo" class="text-[11px] text-slate-500 mt-1">Cobertura Estatal</p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center shadow-inner">
+            <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center shadow-inner shrink-0">
               <i data-lucide="map-pinned" class="w-6 h-6"></i>
             </div>
           </div>
         </div>
 
-        <!-- Fila Central: Mapa + Top Tipos + Avance Metas (8 cols) | Disciplinas y Programa de Gobierno (4 cols) -->
+        <!-- Fila Central: Mapa + Cobertura + Top Tipos + Avance Metas (8 cols) | Disciplinas (4 cols) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           <div class="lg:col-span-8 flex flex-col gap-5">
             <div class="grid grid-cols-1 lg:grid-cols-8 gap-5 items-start">
@@ -698,41 +751,46 @@
                   <div id="mapGto" class="flex flex-col border border-slate-200 shadow-inner rounded-xl p-2.5 bg-white relative"></div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-2 mt-2.5 pt-2.5 border-t border-slate-100">
-                  <div class="bg-blue-50/60 rounded-xl p-2 border border-blue-100 flex items-center gap-1.5 min-w-0">
-                    <div class="w-7 h-7 rounded-lg bg-gto-blue text-white flex items-center justify-center shrink-0">
-                      <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-[9px] uppercase font-bold text-slate-500 truncate">Municipios</p>
-                      <p id="sub-mun-gto" class="kpi-number text-xs sm:text-sm font-black text-gto-blue whitespace-nowrap">0 de 46</p>
-                    </div>
-                  </div>
-
-                  <div class="bg-amber-50/70 rounded-xl p-2 border border-amber-200/70 flex items-center gap-1.5 min-w-0">
+                <div class="grid grid-cols-2 gap-2 mt-2.5 pt-2.5 border-t border-slate-100">
+                  <div class="bg-amber-50/70 rounded-xl p-2.5 border border-amber-200/70 flex items-center gap-2 min-w-0" title="Zonas únicas identificables descontando traslape entre Nuevo Comienzo y Seguridad Pública">
                     <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
                       <i data-lucide="flame" class="w-3.5 h-3.5"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-[9px] uppercase font-bold text-amber-800 truncate">ZAP</p>
-                      <p id="sub-zap-total" class="kpi-number text-xs sm:text-sm font-black text-amber-600 whitespace-nowrap">0</p>
+                      <p class="text-[9.5px] uppercase font-bold text-amber-800 truncate">Total de ZAP atendidas</p>
+                      <p id="sub-zap-total" class="kpi-number text-sm font-black text-amber-700 whitespace-nowrap">0</p>
                     </div>
                   </div>
 
-                  <div class="bg-emerald-50/70 rounded-xl p-2 border border-emerald-200/70 flex items-center gap-1.5 min-w-0">
+                  <div class="bg-emerald-50/70 rounded-xl p-2.5 border border-emerald-200/70 flex items-center gap-2 min-w-0" title="Localidades distintas con clave o nombre verificable">
                     <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
                       <i data-lucide="home" class="w-3.5 h-3.5"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-[9px] uppercase font-bold text-emerald-800 truncate">Localidades</p>
-                      <p id="sub-loc-total" class="kpi-number text-xs sm:text-sm font-black text-emerald-700 whitespace-nowrap">0</p>
+                      <p class="text-[9.5px] uppercase font-bold text-emerald-800 truncate">Total de localidades atendidas</p>
+                      <p id="sub-loc-total" class="kpi-number text-sm font-black text-emerald-700 whitespace-nowrap">0</p>
                     </div>
                   </div>
                 </div>
+
+                <div class="mt-2.5 overflow-x-auto rounded-lg border border-slate-200">
+                  <table class="w-full text-left border-collapse text-[11px]">
+                    <thead class="bg-slate-50 text-slate-600">
+                      <tr>
+                        <th class="px-2 py-1.5 font-bold">Cobertura</th>
+                        <th class="px-2 py-1.5 font-bold text-right">Total personas atendidas</th>
+                        <th class="px-2 py-1.5 font-bold text-right">Actividades</th>
+                        <th class="px-2 py-1.5 font-bold text-right">Beneficiarios</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbl-home-cobertura" class="divide-y divide-slate-100"></tbody>
+                  </table>
+                </div>
+                <p id="home-cobertura-note" class="text-[10px] text-slate-400 mt-1.5 leading-snug"></p>
               </div>
 
               <!-- Top de Tipos de Actividad -->
-              <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col max-h-[470px]">
+              <div class="lg:col-span-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col max-h-[560px]">
                 <div class="flex items-center gap-2 mb-3">
                   <div class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center">
                     <i data-lucide="award" class="w-4 h-4"></i>
@@ -764,7 +822,7 @@
             </div>
           </div>
 
-          <!-- Actividades por Disciplina + Dona Programa de Gobierno -->
+          <!-- Actividades por Disciplina -->
           <div class="lg:col-span-4 flex flex-col gap-5">
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
               <div class="flex items-center gap-2 mb-2">
@@ -773,20 +831,7 @@
                 </div>
                 <h3 class="text-base font-extrabold text-gto-blue">Registros por Disciplina</h3>
               </div>
-              <div class="h-64"><canvas id="chart-disciplinas"></canvas></div>
-            </div>
-
-            <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex-1">
-              <div class="flex items-center gap-2 mb-2">
-                <div class="w-6 h-6 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center">
-                  <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i>
-                </div>
-                <h3 class="text-base font-extrabold text-gto-blue">Distribución por Programa de Gobierno</h3>
-              </div>
-              <div class="grid grid-cols-1 items-center gap-3">
-                <div class="h-36 w-full max-w-[180px] mx-auto"><canvas id="chart-eje-dona"></canvas></div>
-                <div id="legend-eje-dona" class="min-w-0 space-y-1.5"></div>
-              </div>
+              <div class="h-72"><canvas id="chart-disciplinas"></canvas></div>
             </div>
           </div>
         </div>
@@ -2149,6 +2194,7 @@
     function formatShortDireccion(rawDir) {
       const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
       if (!u || u === 'SIN ASIGNAR') return 'Sin Asignar';
+      if (u.includes('SUBSECRETARIA') && (u.includes('COMUNITARI') || u.includes('PATRIMONIAL'))) return 'Subsecretaría de Desarrollo Comunitario';
       if (u.includes('SUBSECRETARIA')) return 'Subsecretaría de Desarrollo Artístico';
       if (u.includes('MUSEO')) return 'DG Museos y Artes Visuales';
       if (u.includes('FORMACION')) return 'DG Formación e Inv.';
@@ -2164,7 +2210,12 @@
 
     function getCanonicalDirection(rawDir, claveProceso, claveProcesoTxt, optCatalog) {
       const u = cleanStr(rawDir).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
-      if (u.includes('SUBSECRETARIA')) return 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
+      if (u.includes('SUBSECRETARIA') && (u.includes('COMUNITARI') || u.includes('PATRIMONIAL'))) {
+        return 'SUBSECRETARÍA DE DESARROLLO COMUNITARIO Y PROMOCIÓN PATRIMONIAL';
+      }
+      if (u.includes('SUBSECRETARIA') && (u.includes('ARTISTIC') || u.includes('CULTURAL'))) {
+        return 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
+      }
       if (u.includes('MUSEO')) return 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES';
       if (u.includes('FORMACION')) return 'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN';
       if (u.includes('EDITORIAL') || u.includes('PUBLICACION')) return 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES';
@@ -2183,10 +2234,12 @@
           const catCode = cleanStr(c.Clave_Proceso);
           return (fkId && fkId !== '0' && catId === fkId) || (txt && catCode === txt);
         });
-        if (match && cleanStr(match.Direccion) && cleanStr(match.Direccion) !== 'SIN ASIGNAR') {
-          return getCanonicalDirection(match.Direccion);
+        const matchArea = match ? cleanStr(match.Direccion || match.Area) : '';
+        if (matchArea && matchArea.toUpperCase() !== 'SIN ASIGNAR') {
+          return getCanonicalDirection(matchArea, '', '', []);
         }
       }
+      if (u.includes('SUBSECRETARIA')) return 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
       return 'SIN ASIGNAR';
     }
 
@@ -2386,35 +2439,71 @@
       }
     }
 
+    function getProcessLabelMap(catalog = rawDB?.alineacion || []) {
+      const map = {};
+      (catalog || []).forEach(r => {
+        const code = cleanStr(r.Clave_Proceso).split('.')[0];
+        if (!/^[PQ][A-Z0-9]+/i.test(code)) return;
+        const pname = cleanMojibake(r.Meta);
+        if (!map[code]) map[code] = pname ? `${code} — ${pname}` : code;
+      });
+      return map;
+    }
+
+    function getMetaLabelMap(catalog = rawDB?.alineacion || []) {
+      const map = {};
+      (catalog || []).forEach(r => {
+        const id = String(Math.round(toNum(r.ID_Alineacion)));
+        if (!id || id === '0') return;
+        const mname = cleanMojibake(r.Nombre_Meta || r.Meta);
+        map[id] = mname ? `#${id} · ${mname}` : `Meta #${id}`;
+      });
+      return map;
+    }
+
     function populateFilterDropdowns() {
-      const fillSelect = (id, values, defaultLabel) => {
+      const fillSelect = (id, values, defaultLabel, labelMap = null) => {
         const sel = document.getElementById(id);
         if (!sel) return;
         sel.innerHTML = `<option value="ALL">${defaultLabel}</option>`;
-        [...values].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es')).forEach(v => {
+        [...values].filter(Boolean).sort((a, b) => {
+          const la = labelMap?.[a] || a;
+          const lb = labelMap?.[b] || b;
+          return la.localeCompare(lb, 'es');
+        }).forEach(v => {
           const opt = document.createElement('option');
           opt.value = v;
-          opt.textContent = v;
+          const text = labelMap?.[v] || v;
+          opt.textContent = text;
+          opt.title = text;
           sel.appendChild(opt);
         });
       };
 
       const allDirs = new Set(
-        rawDB.alineacion.map(r => getCanonicalDirection(r.Direccion)).filter(d => d && d !== 'SIN ASIGNAR')
+        rawDB.alineacion.map(r => getCanonicalDirection(r.Direccion || r.Area)).filter(d => d && d !== 'SIN ASIGNAR')
       );
       const allEjes = new Set([
         ...rawDB.actividades.map(r => cleanMojibake(r.Eje_PG)),
         ...rawDB.alineacion.map(r => cleanMojibake(r.Eje_PG))
       ]);
 
+      const procLabels = getProcessLabelMap(rawDB.alineacion);
+      const metaLabels = getMetaLabelMap(rawDB.alineacion);
+
       const allProcesos = new Set([
         ...rawDB.alineacion.map(r => cleanStr(r.Clave_Proceso).split('.')[0]),
         ...rawDB.actividades.map(r => cleanStr(r.Clave_Proceso_Txt).split('.')[0])
       ].filter(v => /^[PQ][A-Z0-9]+/i.test(v)));
 
+      const allMetas = new Set(
+        rawDB.alineacion.map(r => String(Math.round(toNum(r.ID_Alineacion)))).filter(v => v && v !== '0')
+      );
+
       fillSelect('f-municipio', new Set(rawDB.territorio.map(r => getCanonicalMunicipioLabel(r.Municipio))), 'Todos los municipios');
-      fillSelect('f-direccion', allDirs, 'Todas las direcciones');
-      fillSelect('f-proceso', allProcesos, 'Todos los procesos');
+      fillSelect('f-direccion', allDirs, 'Todas las direcciones y subsecretarías');
+      fillSelect('f-proceso', allProcesos, 'Todos los procesos y proyectos', procLabels);
+      fillSelect('f-meta', allMetas, 'Todas las metas', metaLabels);
       fillSelect('f-disciplina', new Set(rawDB.actividades.map(r => cleanMojibake(r.Disciplina))), 'Todas las disciplinas');
       fillSelect('f-eje', allEjes, 'Todos los ejes');
       fillSelect('f-enfoque', new Set(rawDB.actividades.map(r => cleanMojibake(r.Enfoque_Actividad))), 'Cultural y Artística');
@@ -2423,10 +2512,14 @@
     function resetFilters() {
       document.getElementById('f-date-start').value = '2026-01-01';
       document.getElementById('f-date-end').value = '2026-12-31';
+      const fMesEl = document.getElementById('f-mes');
+      if (fMesEl) fMesEl.value = 'ALL';
       document.getElementById('f-municipio').value = 'ALL';
       document.getElementById('f-direccion').value = 'ALL';
       const fProcEl = document.getElementById('f-proceso');
       if (fProcEl) fProcEl.value = 'ALL';
+      const fMetaEl = document.getElementById('f-meta');
+      if (fMetaEl) fMetaEl.value = 'ALL';
       document.getElementById('f-disciplina').value = 'ALL';
       document.getElementById('f-eje').value = 'ALL';
       document.getElementById('f-enfoque').value = 'ALL';
@@ -2449,7 +2542,11 @@
       applyFilters();
     }
 
-    function matchesActivityPeriod(date, start, end) {
+    function matchesActivityPeriod(date, start, end, monthFilter = 'ALL') {
+      const mFilter = cleanStr(monthFilter) || 'ALL';
+      if (mFilter !== 'ALL') {
+        if (!date || date.slice(5, 7) !== mFilter) return false;
+      }
       return !date || ((!start || date >= start) && (!end || date <= end));
     }
 
@@ -2467,26 +2564,36 @@
     }
 
     function updateAvailableFilterOptions(ctx) {
-      const { dStart, dEnd, fMun, fDir, fProc, fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase } = ctx;
-      const anyActive = fMun !== 'ALL' || fDir !== 'ALL' || fProc !== 'ALL' || fDisc !== 'ALL' || fEje !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL';
+      const { dStart, dEnd, fMes = 'ALL', fMun, fDir, fProc, fMeta = 'ALL', fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase } = ctx;
+      const anyActive = fMes !== 'ALL' || fMun !== 'ALL' || fDir !== 'ALL' || fProc !== 'ALL' || fMeta !== 'ALL' || fDisc !== 'ALL' || fEje !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL';
 
       const availMuns = new Set();
       const availDirs = new Set();
       const availProcs = new Set();
+      const availMetas = new Set();
       const availDiscs = new Set();
       const availEjes = new Set();
       const availEnfs = new Set();
 
-      if (!anyActive) {
-        (rawDB.alineacion || []).forEach(r => {
-          const d = getCanonicalDirection(r.Direccion);
+      const procLabels = getProcessLabelMap(rawDB.alineacion);
+      const metaLabels = getMetaLabelMap(rawDB.alineacion);
+
+      (rawDB.alineacion || []).forEach(r => {
+        const d = getCanonicalDirection(r.Direccion || r.Area);
+        const p = cleanStr(r.Clave_Proceso).split('.')[0];
+        const mId = String(Math.round(toNum(r.ID_Alineacion)));
+        const e = cleanMojibake(r.Eje_PG);
+        if (!anyActive) {
           if (d && d !== 'SIN ASIGNAR') availDirs.add(d);
-          const p = cleanStr(r.Clave_Proceso).split('.')[0];
           if (/^[PQ][A-Z0-9]+/i.test(p)) availProcs.add(p);
-          const e = cleanMojibake(r.Eje_PG);
+          if (mId && mId !== '0') availMetas.add(mId);
           if (e) availEjes.add(e);
-        });
-      }
+        } else {
+          if (d && d !== 'SIN ASIGNAR' && (fProc === 'ALL' || p === fProc) && (fMeta === 'ALL' || mId === fMeta)) availDirs.add(d);
+          if (/^[PQ][A-Z0-9]+/i.test(p) && (fDir === 'ALL' || d === fDir)) availProcs.add(p);
+          if (mId && mId !== '0' && (fDir === 'ALL' || d === fDir) && (fProc === 'ALL' || p === fProc)) availMetas.add(mId);
+        }
+      });
 
       const targetMun = fMun === 'ALL' ? 'ALL' : getCanonicalMunicipioLabel(fMun);
 
@@ -2494,10 +2601,11 @@
         const id = cleanStr(a.ID_Actividad);
         if (!id || id.startsWith('[') || CulturaCalidad.isExcluded(a)) return;
         const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
-        if (!matchesActivityPeriod(fIso, dStart, dEnd)) return;
+        if (!matchesActivityPeriod(fIso, dStart, dEnd, fMes)) return;
 
         const dir = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt);
         const proc = getActClaveBase(a);
+        const metaId = String(Math.round(toNum(a.Clave_Proceso)));
         const disc = cleanMojibake(a.Disciplina);
         const eje = cleanMojibake(a.Eje_PG);
         const enf = cleanMojibake(a.Enfoque_Actividad);
@@ -2506,34 +2614,42 @@
         const okMun = targetMun === 'ALL' || tRows.some(t => getCanonicalMunicipioLabel(t.Municipio) === targetMun);
         const okDir = fDir === 'ALL' || dir === fDir;
         const okProc = fProc === 'ALL' || proc === fProc;
+        const okMeta = fMeta === 'ALL' || metaId === fMeta;
         const okDisc = fDisc === 'ALL' || disc === fDisc;
         const okEje = fEje === 'ALL' || eje === fEje;
         const okEnf = fEnf === 'ALL' || enf === fEnf;
         const okZap = matchesZapRows(tRows, fZap);
 
-        if (okDir && okProc && okDisc && okEje && okEnf && okZap) {
+        if (okDir && okProc && okMeta && okDisc && okEje && okEnf && okZap) {
           tRows.forEach(t => {
             const m = getCanonicalMunicipioLabel(t.Municipio);
             if (m) availMuns.add(m);
           });
         }
-        if (okMun && okProc && okDisc && okEje && okEnf && okZap && dir && dir !== 'SIN ASIGNAR') availDirs.add(dir);
+        if (okMun && okProc && okMeta && okDisc && okEje && okEnf && okZap && dir && dir !== 'SIN ASIGNAR') availDirs.add(dir);
         if (okMun && okDir && okDisc && okEje && okEnf && okZap && /^[PQ][A-Z0-9]+/i.test(proc)) availProcs.add(proc);
-        if (okMun && okDir && okProc && okEje && okEnf && okZap && disc) availDiscs.add(disc);
-        if (okMun && okDir && okProc && okDisc && okEnf && okZap && eje) availEjes.add(eje);
-        if (okMun && okDir && okProc && okDisc && okEje && okZap && enf) availEnfs.add(enf);
+        if (okMun && okDir && okProc && okDisc && okEje && okEnf && okZap && metaId && metaId !== '0') availMetas.add(metaId);
+        if (okMun && okDir && okProc && okMeta && okEje && okEnf && okZap && disc) availDiscs.add(disc);
+        if (okMun && okDir && okProc && okMeta && okDisc && okEnf && okZap && eje) availEjes.add(eje);
+        if (okMun && okDir && okProc && okMeta && okDisc && okEje && okZap && enf) availEnfs.add(enf);
       });
 
-      const syncSelect = (id, values, defaultLabel, currentVal) => {
+      const syncSelect = (id, values, defaultLabel, currentVal, labelMap = null) => {
         const sel = document.getElementById(id);
         if (!sel || typeof document.createElement !== 'function' || typeof sel.appendChild !== 'function') return;
         const nextValues = new Set(values);
         if (currentVal && currentVal !== 'ALL') nextValues.add(currentVal);
         sel.innerHTML = `<option value="ALL">${defaultLabel}</option>`;
-        [...nextValues].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es')).forEach(v => {
+        [...nextValues].filter(Boolean).sort((a, b) => {
+          const la = labelMap?.[a] || a;
+          const lb = labelMap?.[b] || b;
+          return la.localeCompare(lb, 'es');
+        }).forEach(v => {
           const opt = document.createElement('option');
           opt.value = v;
-          opt.textContent = v;
+          const text = labelMap?.[v] || v;
+          opt.textContent = text;
+          opt.title = text;
           sel.appendChild(opt);
         });
         sel.value = currentVal || 'ALL';
@@ -2544,32 +2660,50 @@
         sel.classList.toggle('border-gto-blue/50', isActive);
       };
 
+      const styleToggle = (id, val) => {
+        const el = document.getElementById(id);
+        if (!el || !el.classList) return;
+        const active = (val || 'ALL') !== 'ALL';
+        el.classList.toggle('ring-2', active);
+        el.classList.toggle('ring-gto-blue/35', active);
+        el.classList.toggle('bg-blue-50/70', active);
+        el.classList.toggle('border-gto-blue/50', active);
+      };
+
+      styleToggle('f-mes', fMes);
       syncSelect('f-municipio', availMuns, 'Todos los municipios', fMun);
-      syncSelect('f-direccion', availDirs, 'Todas las direcciones', fDir);
-      syncSelect('f-proceso', availProcs, 'Todos los procesos', fProc);
+      syncSelect('f-direccion', availDirs, 'Todas las direcciones y subsecretarías', fDir);
+      syncSelect('f-proceso', availProcs, 'Todos los procesos y proyectos', fProc, procLabels);
+      syncSelect('f-meta', availMetas, 'Todas las metas', fMeta, metaLabels);
       syncSelect('f-disciplina', availDiscs, 'Todas las disciplinas', fDisc);
       syncSelect('f-eje', availEjes, 'Todos los ejes', fEje);
       syncSelect('f-enfoque', availEnfs, 'Cultural y Artística', fEnf);
-      const zapEl = document.getElementById('f-zap');
-      if (zapEl) {
-        const zapActive = fZap !== 'ALL';
-        zapEl.classList.toggle('ring-2', zapActive);
-        zapEl.classList.toggle('ring-gto-blue/35', zapActive);
-        zapEl.classList.toggle('bg-blue-50/70', zapActive);
-        zapEl.classList.toggle('border-gto-blue/50', zapActive);
-      }
+      styleToggle('f-zap', fZap);
     }
 
     function applyFilters() {
       const dStart = document.getElementById('f-date-start').value;
       const dEnd = document.getElementById('f-date-end').value;
+      const fMes = document.getElementById('f-mes')?.value || 'ALL';
       const fMun = document.getElementById('f-municipio').value;
       const fDir = document.getElementById('f-direccion').value;
       const fProc = document.getElementById('f-proceso')?.value || 'ALL';
+      const fMetaEl = document.getElementById('f-meta');
+      let fMeta = fMetaEl?.value || 'ALL';
       const fDisc = document.getElementById('f-disciplina').value;
       const fEje = document.getElementById('f-eje').value;
       const fEnf = document.getElementById('f-enfoque').value;
       const fZap = document.getElementById('f-zap').value;
+
+      if (fMeta !== 'ALL' && (fProc !== 'ALL' || fDir !== 'ALL') && Array.isArray(rawDB.alineacion) && rawDB.alineacion.length) {
+        const metaRow = rawDB.alineacion.find(c => String(Math.round(toNum(c.ID_Alineacion))) === fMeta);
+        const matchesProc = fProc === 'ALL' || (metaRow && cleanStr(metaRow.Clave_Proceso).split('.')[0] === fProc);
+        const matchesDir = fDir === 'ALL' || (metaRow && getCanonicalDirection(metaRow.Direccion || metaRow.Area) === fDir);
+        if (!metaRow || !matchesProc || !matchesDir) {
+          fMeta = 'ALL';
+          if (fMetaEl) fMetaEl.value = 'ALL';
+        }
+      }
 
       const terByAct = {};
       rawDB.territorio.forEach(t => {
@@ -2585,7 +2719,7 @@
       });
       const getActClaveBase = (a) => cleanStr(a.Clave_Proceso_Txt).split('.')[0] || claveByAlignId[cleanStr(a.Clave_Proceso)] || '';
 
-      updateAvailableFilterOptions({ dStart, dEnd, fMun, fDir, fProc, fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase });
+      updateAvailableFilterOptions({ dStart, dEnd, fMes, fMun, fDir, fProc, fMeta, fDisc, fEje, fEnf, fZap, terByAct, getActClaveBase });
 
       filteredActIds.clear();
 
@@ -2594,9 +2728,10 @@
         const id = cleanStr(a.ID_Actividad);
         if (!id || id.startsWith('[')) return;
         const fIso = CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio) || '';
-        if (!matchesActivityPeriod(fIso, dStart, dEnd)) return;
+        if (!matchesActivityPeriod(fIso, dStart, dEnd, fMes)) return;
         if (fDir !== 'ALL' && getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt) !== fDir) return;
         if (fProc !== 'ALL' && getActClaveBase(a) !== fProc) return;
+        if (fMeta !== 'ALL' && String(Math.round(toNum(a.Clave_Proceso))) !== fMeta) return;
         if (fDisc !== 'ALL' && cleanMojibake(a.Disciplina) !== fDisc) return;
         if (fEje !== 'ALL' && cleanMojibake(a.Eje_PG) !== fEje) return;
         if (fEnf !== 'ALL' && cleanMojibake(a.Enfoque_Actividad) !== fEnf) return;
@@ -2612,8 +2747,9 @@
       });
 
       const catAlF = rawDB.alineacion.filter(c => {
-        if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
+        if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion || c.Area) !== fDir) return false;
         if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
+        if (fMeta !== 'ALL' && String(Math.round(toNum(c.ID_Alineacion))) !== fMeta) return false;
         if (fEje !== 'ALL' && cleanMojibake(c.Eje_PG) !== fEje) return false;
         return true;
       });
@@ -2631,7 +2767,7 @@
       document.getElementById('btn-pop-pob').textContent = `Demográfico (${fmtInt(sumPobAll)})`;
       document.getElementById('badge-evi').textContent = eviF.length;
 
-      const hasActiveFilters = (fMun !== 'ALL' || fDir !== 'ALL' || fProc !== 'ALL' || fDisc !== 'ALL' || fEje !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL' || (dStart && dStart !== '2026-01-01') || (dEnd && dEnd !== '2026-12-31'));
+      const hasActiveFilters = (fMes !== 'ALL' || fMun !== 'ALL' || fDir !== 'ALL' || fProc !== 'ALL' || fMeta !== 'ALL' || fDisc !== 'ALL' || fEje !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL' || (dStart && dStart !== '2026-01-01') || (dEnd && dEnd !== '2026-12-31'));
       const badgeFiltersActive = document.getElementById('badge-filters-active');
       if (badgeFiltersActive) badgeFiltersActive.classList.toggle('hidden', !hasActiveFilters);
 
@@ -2711,11 +2847,18 @@
     }
 
     function toggleMonthFilter(monthIndex) {
+      if (monthIndex < 0 || monthIndex > 11) return;
+      const mesEl = document.getElementById('f-mes');
+      const mm = String(monthIndex + 1).padStart(2, '0');
+      if (mesEl) {
+        mesEl.value = mesEl.value === mm ? 'ALL' : mm;
+        applyFilters();
+        return;
+      }
       const startEl = document.getElementById('f-date-start');
       const endEl = document.getElementById('f-date-end');
-      if (!startEl || !endEl || monthIndex < 0 || monthIndex > 11) return;
+      if (!startEl || !endEl) return;
       const year = (startEl.value || '2026-01-01').slice(0, 4) || '2026';
-      const mm = String(monthIndex + 1).padStart(2, '0');
       const lastDay = new Date(Number(year), monthIndex + 1, 0).getDate();
       const mStart = `${year}-${mm}-01`;
       const mEnd = `${year}-${mm}-${String(lastDay).padStart(2, '0')}`;
@@ -2836,9 +2979,39 @@
         else munsForaneos.add(m);
       });
 
-      const zapCount = terF.filter(t => cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si' || cleanStr(t.ZAP_SSyP).toLowerCase() === 'si').length;
-      const comunidadesLimpias = new Set(terF.map(t => `${getCanonicalMunicipioLabel(t.Municipio)}|${normalizeCommunityName(t.Nombre_Comunidad_Final || t.Nombre_Comunidad || t.Otra_Comunidad || t.Comunidad)}`));
+      const catList = Array.isArray(rawDB?.alineacion) ? rawDB.alineacion : [];
+      const claveByAlignId = {};
+      const catProgSet = new Set();
+      catList.forEach(c => {
+        const cid = String(Math.round(toNum(c.ID_Alineacion)));
+        const code = cleanStr(c.Clave_Proceso).split('.')[0];
+        if (cid && cid !== '0') claveByAlignId[cid] = code;
+        if (/^[PQ][A-Z0-9]+/i.test(code)) catProgSet.add(code);
+      });
+      const activeProgSet = new Set();
+      actF.forEach(a => {
+        const code = cleanStr(a.Clave_Proceso_Txt).split('.')[0] || claveByAlignId[String(Math.round(toNum(a.Clave_Proceso)))] || '';
+        if (/^[PQ][A-Z0-9]+/i.test(code)) activeProgSet.add(code);
+      });
+      const activePCount = [...activeProgSet].filter(c => /^P/i.test(c)).length;
+      const activeQCount = [...activeProgSet].filter(c => /^Q/i.test(c)).length;
 
+      const convActs = actF.filter(a => /convocatoria/i.test(cleanMojibake(a.Tipo_Actividad)));
+      const convQty = convActs.length ? (CulturaCalidad.metrics(convActs).activities || convActs.length) : 0;
+      const totalPrioHome = pobF.reduce((s, p) => s + (isPriorityGroup(p.Grupo_Prioritario) ? toNum(p.Cantidad_Poblacion) : 0), 0);
+
+      if (document.getElementById('kpi-prog-total')) {
+        document.getElementById('kpi-prog-total').textContent = `${activeProgSet.size}/${catProgSet.size || activeProgSet.size}`;
+      }
+      if (document.getElementById('kpi-prog-sub')) {
+        document.getElementById('kpi-prog-sub').textContent = `${activePCount} P · ${activeQCount} Q con registro en el corte`;
+      }
+      if (document.getElementById('kpi-conv-total')) {
+        document.getElementById('kpi-conv-total').textContent = fmtInt(convQty);
+      }
+      if (document.getElementById('kpi-conv-sub')) {
+        document.getElementById('kpi-conv-sub').textContent = `${fmtInt(convActs.length)} ficha(s) en Tipo_Actividad: Convocatoria`;
+      }
       document.getElementById('kpi-act-total').textContent = fmtInt(countMetrics.activities || totalAct);
       if (document.getElementById('kpi-fichas-total')) document.getElementById('kpi-fichas-total').textContent = fmtInt(totalAct);
       if (document.getElementById('kpi-sesiones-total')) document.getElementById('kpi-sesiones-total').textContent = fmtInt(totalSesiones);
@@ -2850,8 +3023,9 @@
       }
       document.getElementById('kpi-pop-total').textContent = fmtInt(mainPop);
       document.getElementById('kpi-pop-sub').textContent = `${fmtInt(mainPart)} part. activa | ${fmtInt(mainAcc)} acceso`;
-      document.getElementById('kpi-ingresos').textContent = fmtMoney(ingresos);
-      document.getElementById('kpi-contratado').textContent = `Inversión contratada: ${fmtMoney(contratado)}`;
+      if (document.getElementById('kpi-home-prio')) document.getElementById('kpi-home-prio').textContent = fmtInt(totalPrioHome);
+      if (document.getElementById('kpi-ingresos')) document.getElementById('kpi-ingresos').textContent = fmtMoney(ingresos);
+      if (document.getElementById('kpi-contratado')) document.getElementById('kpi-contratado').textContent = `Inversión contratada: ${fmtMoney(contratado)}`;
 
       const pctGto = ((munsGTO.size / 46) * 100).toFixed(1);
       document.getElementById('kpi-mun-ratio').textContent = `${munsGTO.size}/46`;
@@ -2860,11 +3034,27 @@
         ? `Otros alcances: ${[...munsForaneos].join(', ')}`
         : 'Cobertura Estatal en Guanajuato';
 
-      document.getElementById('sub-mun-gto').textContent = `${munsGTO.size} de 46`;
-      document.getElementById('sub-zap-total').textContent = fmtInt(zapCount);
-      document.getElementById('sub-loc-total').textContent = fmtInt(comunidadesLimpias.size);
+      const covSummary = summarizeHomeTerritoryCoverage(actF, terF);
+      if (document.getElementById('sub-mun-gto')) document.getElementById('sub-mun-gto').textContent = `${munsGTO.size} de 46`;
+      if (document.getElementById('sub-zap-total')) document.getElementById('sub-zap-total').textContent = fmtInt(covSummary.totalZapUnique);
+      if (document.getElementById('sub-loc-total')) document.getElementById('sub-loc-total').textContent = fmtInt(covSummary.totalLocalidadesUnique);
+      const tblCovEl = document.getElementById('tbl-home-cobertura');
+      if (tblCovEl) {
+        tblCovEl.innerHTML = covSummary.rows.map(r => `
+          <tr class="hover:bg-slate-50/80">
+            <td class="px-2 py-1.5 font-semibold text-slate-700">${auditEscape(r.label)}</td>
+            <td class="px-2 py-1.5 text-right font-bold text-gto-blue tabular-nums">${fmtInt(r.personas)}</td>
+            <td class="px-2 py-1.5 text-right font-semibold text-slate-700 tabular-nums">${fmtInt(r.actividades)}</td>
+            <td class="px-2 py-1.5 text-right text-slate-400 italic">${r.beneficiarios === null ? 'Por definir' : fmtInt(r.beneficiarios)}</td>
+          </tr>
+        `).join('');
+      }
+      const noteCovEl = document.getElementById('home-cobertura-note');
+      if (noteCovEl) {
+        noteCovEl.textContent = `ZAP únicas identificables (${fmtInt(covSummary.totalZapUnique)}) considerando traslape entre Nuevo Comienzo y Seguridad Pública. «Beneficiarios» queda por definir mientras la base registre asistencias acumuladas sin personas únicas.`;
+      }
 
-      updateMapMarkers(terF);
+      updateMapMarkers(terF, actF);
 
       const tipoCount = {};
       actF.forEach(a => {
@@ -2937,19 +3127,21 @@
         }
       }));
 
-      const ejeCount = {};
-      const ejeRawByLabel = {};
-      actF.forEach(a => {
-        const rawE = cleanMojibake(a.Eje_PG);
-        const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin asignar';
-        if (rawE) ejeRawByLabel[e] = rawE;
-        const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
-        ejeCount[e] = (ejeCount[e] || 0) + q;
-      });
-      const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
-      renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true, (label) => {
-        if (ejeRawByLabel[label]) toggleChartFilter('f-eje', ejeRawByLabel[label]);
-      });
+      if (document.getElementById('chart-eje-dona')) {
+        const ejeCount = {};
+        const ejeRawByLabel = {};
+        actF.forEach(a => {
+          const rawE = cleanMojibake(a.Eje_PG);
+          const e = rawE ? formatPGDistributionLabel(rawE) : 'Sin asignar';
+          if (rawE) ejeRawByLabel[e] = rawE;
+          const q = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function' ? CulturaCalidad.quantity(a).value : 1) || 1;
+          ejeCount[e] = (ejeCount[e] || 0) + q;
+        });
+        const ejeEntries = Object.entries(ejeCount).sort((a, b) => b[1] - a[1]);
+        renderDoughnutWithHtmlLegend('chart-eje-dona', 'legend-eje-dona', ejeEntries, ['#F59E0B', '#2563EB', '#E11D48', '#7C3AED', '#10B981'], false, true, (label) => {
+          if (ejeRawByLabel[label]) toggleChartFilter('f-eje', ejeRawByLabel[label]);
+        });
+      }
 
       const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       const monthly = CulturaCalidad.monthlyPopulation(actF,
@@ -4265,8 +4457,10 @@
         const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
         const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
         const anyFilter = direction !== 'ALL'
+          || (document.getElementById('f-mes')?.value || 'ALL') !== 'ALL'
           || (document.getElementById('f-municipio')?.value || 'ALL') !== 'ALL'
           || (document.getElementById('f-proceso')?.value || 'ALL') !== 'ALL'
+          || (document.getElementById('f-meta')?.value || 'ALL') !== 'ALL'
           || (document.getElementById('f-disciplina')?.value || 'ALL') !== 'ALL'
           || (document.getElementById('f-eje')?.value || 'ALL') !== 'ALL'
           || (document.getElementById('f-enfoque')?.value || 'ALL') !== 'ALL'
@@ -4317,10 +4511,12 @@
         const fMun = document.getElementById('f-municipio')?.value || 'ALL';
         const fDir = document.getElementById('f-direccion')?.value || 'ALL';
         const fProc = document.getElementById('f-proceso')?.value || 'ALL';
+        const fMeta = document.getElementById('f-meta')?.value || 'ALL';
 
+        const targetMun = fMun === 'ALL' ? 'ALL' : getCanonicalMunicipioLabel(fMun);
         const actF = rawDB.actividades.filter(a => filteredActIds.has(cleanStr(a.ID_Actividad)) && !CulturaCalidad.isExcluded(a));
         const execIds = new Set(actF.map(a => cleanStr(a.ID_Actividad)));
-        const terF = rawDB.territorio.filter(t => execIds.has(cleanStr(t.ID_Actividad)) && (fMun === 'ALL' || cleanStr(t.Municipio) === fMun));
+        const terF = rawDB.territorio.filter(t => execIds.has(cleanStr(t.ID_Actividad)) && (targetMun === 'ALL' || getCanonicalMunicipioLabel(t.Municipio) === targetMun));
 
         if (!actF.length && !terF.length) {
           alert('No hay registros disponibles para los filtros activos.');
@@ -4329,9 +4525,10 @@
 
         const countMetrics = CulturaCalidad.metrics(actF);
         const metasRel = (rawDB.alineacion || []).filter(c => {
+          if (fMeta !== 'ALL' && String(Math.round(toNum(c.ID_Alineacion))) !== fMeta) return false;
           if (fProc !== 'ALL' && cleanStr(c.Clave_Proceso).split('.')[0] !== fProc) return false;
-          if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion) !== fDir) return false;
-          return fProc !== 'ALL' || actF.some(a => cleanStr(a.Clave_Proceso) === cleanStr(c.ID_Alineacion));
+          if (fDir !== 'ALL' && getCanonicalDirection(c.Direccion || c.Area) !== fDir) return false;
+          return fMeta !== 'ALL' || fProc !== 'ALL' || actF.some(a => cleanStr(a.Clave_Proceso) === cleanStr(c.ID_Alineacion));
         });
         const metaNames = [...new Set(metasRel.map(m => cleanStr(m.Nombre_Meta || m.Meta)).filter(Boolean))].join(' | ') || 'Todas las metas del filtro';
         const dirNames = [...new Set(actF.map(a => formatShortDireccion(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt))).filter(Boolean))].join(' | ') || 'N/A';
@@ -5118,6 +5315,7 @@
 
     let homeMapMode = 'actividades';
     let lastHomeMapTerF = [];
+    let lastHomeMapActF = [];
 
     function syncHomeMapModeButtons() {
       const mode = homeMapMode;
@@ -5161,7 +5359,7 @@
       if (!modal || !body) return;
       syncHomeMapModeButtons();
       if (typeof window !== 'undefined' && window.GTO_MAP_PATHS && Array.isArray(window.GTO_MAP_PATHS)) {
-        body.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true);
+        body.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true, lastHomeMapActF);
       }
       modal.classList.remove('hidden');
       const closeBtn = document.getElementById('modal-map-close');
@@ -5239,33 +5437,169 @@
       'Moroleón': { x: 172, y: 367, fs: 4.6, lines: ['Moroleón'] }
     };
 
-    function buildHomeMapHtml(terF, isExpanded) {
-      const byMunActs = new Map();
-      const byMunPop = new Map();
-      (terF || []).forEach(t => {
-        const m = cleanStr(t.Municipio);
-        if (!m) return;
-        const norm = normalizeMunicipioName(m);
-        byMunActs.set(norm, (byMunActs.get(norm) || 0) + 1);
-        byMunPop.set(norm, (byMunPop.get(norm) || 0) + toNum(t.Cantidad));
+    function getHomeMapActivityTier(count) {
+      const n = Number(count) || 0;
+      if (n <= 0) return { idx: 4, label: 'Sin dato o actividad', range: '0', fill: '#f8fafc', border: '#cbd5e1', darkFill: false };
+      if (n <= 25) return { idx: 3, label: 'Baja', range: '1 – 25', fill: '#e9d5ff', border: '#c084fc', darkFill: false };
+      if (n <= 50) return { idx: 2, label: 'Media', range: '26 – 50', fill: '#a21caf', border: '#a21caf', darkFill: true };
+      if (n <= 100) return { idx: 1, label: 'Alta', range: '51 – 100', fill: '#701a75', border: '#701a75', darkFill: true };
+      return { idx: 0, label: 'Muy Alta', range: '> 100', fill: '#4a044e', border: '#3b0764', darkFill: true };
+    }
+
+    function summarizeHomeMapByMunicipio(actF, terF) {
+      const actSource = (Array.isArray(actF) && actF.length) ? actF : (typeof rawDB !== 'undefined' && Array.isArray(rawDB.actividades) ? rawDB.actividades : []);
+      const actById = new Map();
+      actSource.forEach(a => {
+        const id = cleanStr(a.ID_Actividad);
+        if (id && !CulturaCalidad.isExcluded(a)) actById.set(id, a);
       });
 
+      const byMunActs = new Map();
+      const byMunPop = new Map();
+      const presenceOnlyMuns = new Set();
+      const rowsByAct = new Map();
+
+      (terF || []).forEach(t => {
+        const m = getCanonicalMunicipioLabel(t.Municipio) || cleanStr(t.Municipio);
+        if (!m) return;
+        const norm = normalizeMunicipioName(m);
+        byMunPop.set(norm, (byMunPop.get(norm) || 0) + toNum(t.Cantidad));
+        const idAct = cleanStr(t.ID_Actividad);
+        if (!idAct) return;
+        if (!rowsByAct.has(idAct)) rowsByAct.set(idAct, new Set());
+        rowsByAct.get(idAct).add(norm);
+      });
+
+      const unallocatedMultiMun = { records: 0, activities: 0 };
+      rowsByAct.forEach((munsSet, idAct) => {
+        const act = actById.get(idAct);
+        const qVal = act && typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function'
+          ? CulturaCalidad.quantity(act).value
+          : 1;
+        const q = qVal === null ? 1 : qVal;
+        if (munsSet.size > 1) {
+          if (q > 1) {
+            unallocatedMultiMun.records += 1;
+            unallocatedMultiMun.activities += q;
+            munsSet.forEach(m => presenceOnlyMuns.add(m));
+          } else {
+            munsSet.forEach(m => byMunActs.set(m, (byMunActs.get(m) || 0) + 1));
+          }
+        } else {
+          munsSet.forEach(m => byMunActs.set(m, (byMunActs.get(m) || 0) + q));
+        }
+      });
+
+      return { byMunActs, byMunPop, presenceOnlyMuns, unallocatedMultiMun };
+    }
+
+    function getVerifiableLocationKey(t) {
+      const normMun = normalizeMunicipioName(getCanonicalMunicipioLabel(t?.Municipio) || t?.Municipio);
+      if (!normMun || normMun === 'cobertura estatal') return '';
+      const badVal = v => !v || /^(si|no|sin asignar|n\/?a|null|nan|cabecera municipal \/ sin especificar)$/i.test(v);
+      const comId = cleanStr(t?.Comunidad);
+      const nom = cleanMojibake(cleanStr(t?.Nombre_Comunidad));
+      const otra = cleanMojibake(cleanStr(t?.Otra_Comunidad));
+      if (!badVal(comId)) return `${normMun}|id:${comId.toLowerCase()}`;
+      const txt = !badVal(nom) ? nom : (!badVal(otra) ? otra : '');
+      if (!txt) return '';
+      return `${normMun}|${txt.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim()}`;
+    }
+
+    function summarizeHomeTerritoryCoverage(actF, terF) {
+      const actSource = (Array.isArray(actF) && actF.length) ? actF : (typeof rawDB !== 'undefined' && Array.isArray(rawDB.actividades) ? rawDB.actividades : []);
+      const actById = new Map();
+      actSource.forEach(a => {
+        const id = cleanStr(a.ID_Actividad);
+        if (id) actById.set(id, a);
+      });
+
+      const munsByAct = new Map();
+      (terF || []).forEach(t => {
+        const id = cleanStr(t.ID_Actividad);
+        const normMun = normalizeMunicipioName(getCanonicalMunicipioLabel(t.Municipio) || t.Municipio);
+        if (!id || !normMun) return;
+        if (!munsByAct.has(id)) munsByAct.set(id, new Set());
+        munsByAct.get(id).add(normMun);
+      });
+
+      const zapNCKeys = new Set();
+      const zapSSKeys = new Set();
+      const allLocKeys = new Set();
+      const buckets = {
+        nc: { label: 'ZAP Nuevo Comienzo', personas: 0, actIds: new Set() },
+        ss: { label: 'ZAP Seguridad Pública', personas: 0, actIds: new Set() },
+        loc: { label: 'Localidades', personas: 0, actIds: new Set() }
+      };
+
+      (terF || []).forEach(t => {
+        const idAct = cleanStr(t.ID_Actividad);
+        const cant = toNum(t.Cantidad);
+        const nc = cleanStr(t.ZAP_Nuevo_Comienzo).toLowerCase() === 'si';
+        const ss = cleanStr(t.ZAP_SSyP).toLowerCase() === 'si';
+        const locKey = getVerifiableLocationKey(t);
+
+        if (nc) {
+          buckets.nc.personas += cant;
+          if (idAct) buckets.nc.actIds.add(idAct);
+          if (locKey) zapNCKeys.add(locKey);
+        }
+        if (ss) {
+          buckets.ss.personas += cant;
+          if (idAct) buckets.ss.actIds.add(idAct);
+          if (locKey) zapSSKeys.add(locKey);
+        }
+        if (locKey) {
+          allLocKeys.add(locKey);
+          buckets.loc.personas += cant;
+          if (idAct) buckets.loc.actIds.add(idAct);
+        }
+      });
+
+      const totalZapUnique = new Set([...zapNCKeys, ...zapSSKeys]).size;
+      const totalLocalidadesUnique = allLocKeys.size;
+      const countBucketActs = (actIds) => {
+        let total = 0;
+        actIds.forEach(id => {
+          const act = actById.get(id);
+          const qVal = act && typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.quantity === 'function'
+            ? CulturaCalidad.quantity(act).value
+            : 1;
+          const q = qVal === null ? 1 : qVal;
+          const isMultiMun = (munsByAct.get(id)?.size || 0) > 1;
+          total += (isMultiMun && q > 1) ? 1 : q;
+        });
+        return total;
+      };
+
+      const rows = [buckets.nc, buckets.ss, buckets.loc].map(b => ({
+        label: b.label,
+        personas: b.personas,
+        actividades: countBucketActs(b.actIds),
+        beneficiarios: null
+      }));
+
+      return { totalZapUnique, totalLocalidadesUnique, rows };
+    }
+
+    function buildHomeMapHtml(terF, isExpanded, actF = lastHomeMapActF) {
+      const { byMunActs, byMunPop, presenceOnlyMuns, unallocatedMultiMun } = summarizeHomeMapByMunicipio(actF, terF);
+
       const isPop = homeMapMode === 'poblacion';
-      const activeValues = isPop ? byMunPop : byMunActs;
-      const maxVal = Math.max(...activeValues.values(), 1);
-      const tMuyAlta = isPop
-        ? Math.max(Math.round(maxVal * 0.6), 5000)
-        : (maxVal >= 200 ? 200 : Math.max(Math.round(maxVal * 0.7), 20));
-      const tAlta = isPop
-        ? Math.min(tMuyAlta - 1, Math.max(Math.round(maxVal * 0.3), 1000))
-        : Math.min(tMuyAlta - 1, (maxVal >= 100 ? 100 : Math.max(Math.round(maxVal * 0.45), 10)));
-      const tMedia = isPop
-        ? Math.min(tAlta - 1, Math.max(Math.round(maxVal * 0.08), 100))
-        : Math.min(tAlta - 1, (maxVal >= 100 ? 25 : Math.max(Math.round(maxVal * 0.2), 3)));
+      const maxPop = Math.max(...byMunPop.values(), 1);
+      const tMuyAlta = Math.max(Math.round(maxPop * 0.6), 5000);
+      const tAlta = Math.min(tMuyAlta - 1, Math.max(Math.round(maxPop * 0.3), 1000));
+      const tMedia = Math.min(tAlta - 1, Math.max(Math.round(maxPop * 0.08), 100));
 
       const curMun = cleanStr(document.getElementById('f-municipio')?.value);
       const normSelected = curMun && curMun !== 'ALL' ? normalizeMunicipioName(curMun) : '';
-      const totalCovered = [...byMunActs.keys()].filter(k => isMunicipioGTO(k) && (byMunActs.get(k) || 0) > 0).length;
+      const coveredSet = new Set();
+      [...byMunActs.keys(), ...presenceOnlyMuns, ...byMunPop.keys()].forEach(k => {
+        if (isMunicipioGTO(k) && ((byMunActs.get(k) || 0) > 0 || presenceOnlyMuns.has(k) || (byMunPop.get(k) || 0) > 0)) {
+          coveredSet.add(k);
+        }
+      });
+      const totalCovered = coveredSet.size;
 
       const tierCounts = [0, 0, 0, 0, 0];
       let pathsHtml = '';
@@ -5276,22 +5610,30 @@
         const norm = normalizeMunicipioName(mun.name);
         const acts = byMunActs.get(norm) || 0;
         const pop = byMunPop.get(norm) || 0;
-        const val = isPop ? pop : acts;
+        const hasPresenceOnly = presenceOnlyMuns.has(norm);
 
         let fill = '#f8fafc';
         let tierIdx = 4;
         let darkFill = false;
-        if (val >= tMuyAlta) { fill = '#4a044e'; tierIdx = 0; darkFill = true; }
-        else if (val >= tAlta) { fill = '#701a75'; tierIdx = 1; darkFill = true; }
-        else if (val >= tMedia) { fill = '#a21caf'; tierIdx = 2; darkFill = true; }
-        else if (val > 0) { fill = '#e9d5ff'; tierIdx = 3; darkFill = false; }
+        if (isPop) {
+          if (pop >= tMuyAlta) { fill = '#4a044e'; tierIdx = 0; darkFill = true; }
+          else if (pop >= tAlta) { fill = '#701a75'; tierIdx = 1; darkFill = true; }
+          else if (pop >= tMedia) { fill = '#a21caf'; tierIdx = 2; darkFill = true; }
+          else if (pop > 0) { fill = '#e9d5ff'; tierIdx = 3; darkFill = false; }
+        } else {
+          const tier = getHomeMapActivityTier(acts);
+          fill = tier.fill;
+          tierIdx = tier.idx;
+          darkFill = tier.darkFill;
+        }
         tierCounts[tierIdx]++;
 
         const isSelected = normSelected && normSelected === norm;
         const stroke = isSelected ? '#2563eb' : (darkFill ? '#f1f5f9' : '#64748b');
         const strokeW = isSelected ? '2.5' : '0.8';
 
-        const pathTag = '<path id="svg-' + (isExpanded ? 'modal' : 'home') + '-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas</title></path>';
+        const multiNote = hasPresenceOnly ? ' · incluye concentrado multimunicipio' : '';
+        const pathTag = '<path id="svg-' + (isExpanded ? 'modal' : 'home') + '-mun-' + mun.code + '" data-mun="' + auditEscape(mun.name) + '" d="' + mun.d + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '" stroke-linejoin="round" class="transition-all duration-200 cursor-pointer hover:opacity-80" onclick="toggleHomeMunicipioFilter(this.getAttribute(&quot;data-mun&quot;))"><title>' + auditEscape(mun.name) + ': ' + fmtInt(acts) + ' actividades · ' + fmtInt(pop) + ' personas' + multiNote + '</title></path>';
         if (isSelected) selectedPathHtml += pathTag;
         else pathsHtml += pathTag;
 
@@ -5310,16 +5652,22 @@
         }
       });
 
-      const tiers = [
+      const tiers = isPop ? [
         { label: 'Muy Alta', range: '≥ ' + fmtInt(tMuyAlta), color: '#4a044e', border: '#3b0764', count: tierCounts[0] },
         { label: 'Alta', range: fmtInt(tAlta) + ' – ' + fmtInt(Math.max(tAlta, tMuyAlta - 1)), color: '#701a75', border: '#701a75', count: tierCounts[1] },
         { label: 'Media', range: fmtInt(tMedia) + ' – ' + fmtInt(Math.max(tMedia, tAlta - 1)), color: '#a21caf', border: '#a21caf', count: tierCounts[2] },
         { label: 'Baja', range: tMedia <= 2 ? '1' : ('1 – ' + fmtInt(tMedia - 1)), color: '#e9d5ff', border: '#c084fc', count: tierCounts[3] },
         { label: 'Sin dato', range: '0', color: '#f8fafc', border: '#cbd5e1', count: tierCounts[4] }
+      ] : [
+        { label: 'Muy Alta', range: '> 100', color: '#4a044e', border: '#3b0764', count: tierCounts[0] },
+        { label: 'Alta', range: '51 – 100', color: '#701a75', border: '#701a75', count: tierCounts[1] },
+        { label: 'Media', range: '26 – 50', color: '#a21caf', border: '#a21caf', count: tierCounts[2] },
+        { label: 'Baja', range: '1 – 25', color: '#e9d5ff', border: '#c084fc', count: tierCounts[3] },
+        { label: 'Sin dato / act.', range: '0', color: '#f8fafc', border: '#cbd5e1', count: tierCounts[4] }
       ];
 
       const svgClass = isExpanded ? 'w-full h-auto max-h-[64vh] drop-shadow-xs' : 'w-full h-auto max-h-[295px] drop-shadow-xs';
-      const legendColClass = isExpanded ? 'w-full sm:w-[165px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-2 self-center' : 'w-full sm:w-[108px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-1 self-center';
+      const legendColClass = isExpanded ? 'w-full sm:w-[165px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-2 self-center' : 'w-full sm:w-[114px] shrink-0 grid grid-cols-5 sm:grid-cols-1 gap-1 self-center';
       const legendTitleClass = isExpanded ? 'text-xs font-extrabold text-slate-700 truncate' : 'text-[9.5px] font-extrabold text-slate-700 truncate';
       const legendRangeClass = isExpanded ? 'text-[11px] font-semibold text-slate-500 tabular-nums truncate' : 'text-[8.5px] font-semibold text-slate-500 tabular-nums truncate';
 
@@ -5347,18 +5695,20 @@
       html += '</div>';
       html += '</div>';
 
+      if (!isPop && unallocatedMultiMun.records > 0) {
+        html += '<div class="text-center text-[10px] text-amber-800 bg-amber-50/90 px-2 py-1 rounded-md border border-amber-200/80 shrink-0">Alcance multimunicipio sin reparto: ' + fmtInt(unallocatedMultiMun.records) + ' registro(s) (' + fmtInt(unallocatedMultiMun.activities) + ' act.) conservados fuera del conteo por municipio.</div>';
+      }
+
       if (normSelected) {
         html += '<div class="text-center text-[10.5px] text-blue-700 font-bold bg-blue-50 py-1 rounded-md border border-blue-200 shrink-0">Filtro activo: ' + auditEscape(curMun) + ' (clic en el mapa para ver todos)</div>';
       }
 
       if (isExpanded) {
-        const mTxt = document.getElementById('sub-mun-gto')?.textContent || (totalCovered + ' de 46');
         const zTxt = document.getElementById('sub-zap-total')?.textContent || '0';
         const lTxt = document.getElementById('sub-loc-total')?.textContent || '0';
-        html += '<div class="grid grid-cols-3 gap-3 pt-2 border-t border-slate-100">';
-        html += '<div class="bg-blue-50/60 rounded-xl px-3 py-2 border border-blue-100 text-center"><div class="text-[10px] font-bold uppercase text-slate-500">Municipios</div><div class="text-base font-black text-gto-blue">' + auditEscape(mTxt) + '</div></div>';
-        html += '<div class="bg-amber-50/70 rounded-xl px-3 py-2 border border-amber-200/70 text-center"><div class="text-[10px] font-bold uppercase text-amber-800">ZAP</div><div class="text-base font-black text-amber-600">' + auditEscape(zTxt) + '</div></div>';
-        html += '<div class="bg-emerald-50/70 rounded-xl px-3 py-2 border border-emerald-200/70 text-center"><div class="text-[10px] font-bold uppercase text-emerald-800">Localidades</div><div class="text-base font-black text-emerald-700">' + auditEscape(lTxt) + '</div></div>';
+        html += '<div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">';
+        html += '<div class="bg-amber-50/70 rounded-xl px-3 py-2 border border-amber-200/70 text-center"><div class="text-[10px] font-bold uppercase text-amber-800">Total de ZAP atendidas</div><div class="text-base font-black text-amber-700">' + auditEscape(zTxt) + '</div></div>';
+        html += '<div class="bg-emerald-50/70 rounded-xl px-3 py-2 border border-emerald-200/70 text-center"><div class="text-[10px] font-bold uppercase text-emerald-800">Total de localidades atendidas</div><div class="text-base font-black text-emerald-700">' + auditEscape(lTxt) + '</div></div>';
         html += '</div>';
       }
 
@@ -5372,17 +5722,18 @@
       return html;
     }
 
-    function updateMapMarkers(terF) {
+    function updateMapMarkers(terF, actF = lastHomeMapActF) {
       lastHomeMapTerF = terF || [];
+      lastHomeMapActF = actF || [];
       const container = document.getElementById('mapGto');
       if (!container) return;
 
       if (typeof window !== 'undefined' && window.GTO_MAP_PATHS && Array.isArray(window.GTO_MAP_PATHS)) {
-        container.innerHTML = buildHomeMapHtml(lastHomeMapTerF, false);
+        container.innerHTML = buildHomeMapHtml(lastHomeMapTerF, false, lastHomeMapActF);
         const modal = document.getElementById('modal-map-fullscreen');
         const modalBody = document.getElementById('modal-map-body');
         if (modal && modalBody && !modal.classList.contains('hidden')) {
-          modalBody.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true);
+          modalBody.innerHTML = buildHomeMapHtml(lastHomeMapTerF, true, lastHomeMapActF);
         }
         return;
       }
@@ -5665,6 +6016,7 @@
         'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL',
         'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN',
         'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL',
+        'SUBSECRETARÍA DE DESARROLLO COMUNITARIO Y PROMOCIÓN PATRIMONIAL',
         'COORDINACIÓN DE COMUNICACIÓN SOCIAL'
       ];
       const hasNarrowFilter = fDir !== 'ALL' || fProc !== 'ALL' || fEje !== 'ALL' || fMun !== 'ALL' || fDisc !== 'ALL' || fEnf !== 'ALL' || fZap !== 'ALL';
@@ -5892,16 +6244,18 @@
         };
         const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
         const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
+        const fMes = getSelectLabel('f-mes');
         const fMun = getSelectLabel('f-municipio');
         const fDir = getSelectLabel('f-direccion');
         const fProc = getSelectLabel('f-proceso');
+        const fMeta = getSelectLabel('f-meta');
         const fDisc = getSelectLabel('f-disciplina');
         const fEje = getSelectLabel('f-eje');
         const fEnf = getSelectLabel('f-enfoque');
         const fZap = getSelectLabel('f-zap');
         const popModeTxt = popMode === 'territorio' ? 'Cobertura Territorial' : 'Perfil Demográfico';
 
-        const filterSummaryLine = `Periodo: ${dStart} a ${dEnd} | Municipio: ${fMun} | Dirección: ${formatShortDireccion(fDir)} | Proceso: ${fProc} | Enfoque: ${fEnf} | Fuente Población: ${popModeTxt}`;
+        const filterSummaryLine = `Periodo: ${dStart} a ${dEnd} | Mes: ${fMes} | Municipio: ${fMun} | Área: ${formatShortDireccion(fDir)} | Proceso: ${fProc} | Meta: ${fMeta} | Enfoque: ${fEnf}`;
 
         // Lectura de KPIs renderizados en pantalla
         const txt = (id) => cleanStr(document.getElementById(id)?.textContent || '0');
@@ -5991,9 +6345,9 @@
         slide2.background = { color: 'F4F7FB' };
         addExecutiveSlideHeader(slide2, pptx, '1. Visión General del Ecosistema Cultural', filterSummaryLine, shieldDataUrl, 2);
 
-        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Fichas capturadas', txt('kpi-act-total'), `${txt('kpi-sesiones-total')} sesiones reportadas`, '004B87');
+        addKpiCardToSlide(slide2, pptx, 0.40, 0.98, 3.00, 1.00, 'Actividades realizadas', txt('kpi-act-total'), `${txt('kpi-fichas-total')} fichas · ${txt('kpi-sesiones-total')} sesiones`, '004B87');
         addKpiCardToSlide(slide2, pptx, 3.58, 0.98, 3.00, 1.00, 'Personas Beneficiadas', txt('kpi-pop-total'), txt('kpi-pop-sub'), 'F59E0B');
-        addKpiCardToSlide(slide2, pptx, 6.76, 0.98, 3.00, 1.00, 'Ingresos Generados', txt('kpi-ingresos'), txt('kpi-contratado'), '10B981');
+        addKpiCardToSlide(slide2, pptx, 6.76, 0.98, 3.00, 1.00, 'Grupos Prioritarios', txt('kpi-home-prio'), txt('kpi-home-prio-sub'), '0891B2');
         addKpiCardToSlide(slide2, pptx, 9.94, 0.98, 3.00, 1.00, 'Cobertura Municipal', `${txt('kpi-mun-ratio')} (${txt('kpi-mun-pct')})`, txt('kpi-mun-foraneo'), '7C3AED');
 
         // Gráfica Evolución Mensual
@@ -6003,22 +6357,11 @@
         const imgEvol = getChartHighResBase64('chart-evolucion-mensual');
         if (imgEvol) slide2.addImage({ data: imgEvol, x: 0.52, y: 2.78, w: 7.50, h: 4.05 });
 
-        // Gráfica Disciplinas y Programa de Gobierno
-        slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 2.12, w: 4.62, h: 2.40, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
-        slide2.addText('Registros por Disciplina (Top 8)', { x: 8.48, y: 2.20, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
+        // Gráfica Disciplinas
+        slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 2.12, w: 4.62, h: 4.88, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
+        slide2.addText('Registros por Disciplina (Top 8)', { x: 8.48, y: 2.22, w: 4.3, h: 0.28, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
         const imgDisc = getChartHighResBase64('chart-disciplinas');
-        if (imgDisc) slide2.addImage({ data: imgDisc, x: 8.42, y: 2.48, w: 4.42, h: 1.96 });
-
-        slide2.addShape(pptx.ShapeType.roundRect, { x: 8.32, y: 4.62, w: 4.62, h: 2.38, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { color: 'E2E8F0', width: 1 } });
-        slide2.addText('Distribución por Programa de Gobierno', { x: 8.48, y: 4.70, w: 4.3, h: 0.26, fontSize: 10.5, bold: true, color: '004B87', fontFace: 'Arial' });
-        const imgEjeDona = getChartHighResBase64('chart-eje-dona');
-        if (imgEjeDona) slide2.addImage({ data: imgEjeDona, x: 8.45, y: 4.98, w: 2.10, h: 1.90 });
-
-        // Leyenda textual de Ejes en Lámina 2
-        const ejeLegendItems = [...document.querySelectorAll('#legend-eje-dona > div')].slice(0, 5).map(el => cleanStr(el.innerText).replace(/\s+/g, ' '));
-        if (ejeLegendItems.length) {
-          slide2.addText(ejeLegendItems.join('\n'), { x: 10.60, y: 5.05, w: 2.25, h: 1.80, fontSize: 8, color: '334155', fontFace: 'Arial' });
-        }
+        if (imgDisc) slide2.addImage({ data: imgDisc, x: 8.42, y: 2.58, w: 4.42, h: 4.10 });
 
         // =========================================================
         // LÁMINA 3: MATRIZ ESTRATÉGICA Y ALINEACIÓN DE METAS
@@ -6555,6 +6898,17 @@
       }
       document.getElementById('btn-reset-filters').classList.toggle('hidden', isAnnual);
       document.getElementById('annual-filter-controls').classList.toggle('hidden', !isAnnual);
+
+      const ejeWrap = document.getElementById('filter-wrap-eje');
+      const hideEjeOnInicio = tabId === 'tab-vision';
+      if (ejeWrap) ejeWrap.classList.toggle('hidden', hideEjeOnInicio || isAnnual);
+      if (hideEjeOnInicio) {
+        const ejeSel = document.getElementById('f-eje');
+        if (ejeSel && ejeSel.value !== 'ALL') {
+          ejeSel.value = 'ALL';
+          applyFilters();
+        }
+      }
 
       document.getElementById('view-title').textContent = titles[tabId] || 'Evolución Plurianual';
       toggleMobileSidebar(false);

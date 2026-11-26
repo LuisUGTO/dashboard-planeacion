@@ -107,22 +107,24 @@ test('las leyendas completas permiten varias líneas y escapan las etiquetas sin
   assert.match(s.nodes.get('legend-default').innerHTML, /\btruncate\b/);
 });
 
-test('PG muestra nombres sin numeración y conserva claves, conteos y categorías sin enfoque', () => {
+test('PG muestra nombres sin numeración en Matriz Estratégica y no renderiza dona PG en Inicio', () => {
   const s = setup({ keepHtmlLegend: true });
   s.context.fixture = [{ ...a, Eje_PG: '2 Igualdad', Enfoque_Actividad: 'Cultural' }, { ...a, ID_Actividad: 'A2', Eje_PG: '1 Tranquilidad', Enfoque_Actividad: 'Artística' }, { ...a, ID_Actividad: 'A3', Eje_PG: '', Enfoque_Actividad: '' }];
   s.context.cat = cat;
   s.context.renders = {};
+  const origGetById = s.document.getElementById;
+  s.document.getElementById = (id) => (id === 'chart-eje-dona' || id === 'legend-eje-dona') ? null : origGetById(id);
   vm.runInContext('renderChart = (id,type,data) => { renders[id] = data; }; rawDB.alineacion = cat; renderVisionGeneral(fixture, [], []); renderMatrizEstrategica(fixture, [], [], cat);', s.context);
   const charts = JSON.parse(vm.runInContext('JSON.stringify(renders)', s.context));
-  assert.deepEqual(charts['chart-eje-dona'].labels, ['Igualdad', 'Tranquilidad', 'Sin asignar']);
-  assert.deepEqual(charts['chart-eje-dona'].datasets[0].data, [1, 1, 1]);
+  assert.equal(charts['chart-eje-dona'], undefined);
+  assert.deepEqual(charts['chart-mat-eje'].labels, ['Igualdad', 'Tranquilidad', 'Sin Eje']);
+  assert.deepEqual(charts['chart-mat-eje'].datasets[0].data, [1, 1, 1]);
   assert.deepEqual(charts['chart-mat-enfoque'].labels, ['Cultural', 'Artística', 'No especificado']);
   assert.equal(s.context.fixture[0].Eje_PG, '2 Igualdad');
   assert.equal(vm.runInContext('formatPGDistributionLabel("5. Prosperidad")', s.context), 'Prosperidad');
   assert.equal(vm.runInContext('formatPGDistributionLabel("2.4 Objetivo")', s.context), '2.4 Objetivo');
   assert.equal(vm.runInContext('formatPGDistributionLabel("2026 Cultura")', s.context), '2026 Cultura');
   assert.match(s.nodes.get('legend-mat-enfoque').innerHTML, /No especificado/);
-  assert.doesNotMatch(s.nodes.get('legend-eje-dona').innerHTML, /\btruncate\b/);
 });
 
 test('las canceladas salen de las cinco vistas de ejecución y se conservan en conciliación, ficha y CSV', () => {
@@ -541,4 +543,175 @@ test('renderHomeMetasProgress resume direcciones y cambia a procesos al filtrar 
   assert.match(gridDir, /PB3572 · Talleres en museos/);
   assert.match(gridDir, /QC4047 · Asistentes museos/);
   assert.ok(!gridDir.includes('NaN'));
+});
+
+test('Checklist Inicio: filtros de mes, fechas, subsecretarías, proceso, meta, eje oculto y KPIs', () => {
+  const s = setup();
+  // Agregar soporte básico de select/options para verificar populateFilterDropdowns y #f-meta/#f-proceso
+  s.document.createElement = () => ({ value: '', textContent: '', title: '' });
+  const selectIds = ['f-municipio', 'f-direccion', 'f-proceso', 'f-meta', 'f-disciplina', 'f-eje', 'f-enfoque', 'f-mes', 'f-zap'];
+  for (const id of selectIds) {
+    const el = s.document.getElementById(id);
+    el.children = [];
+    el.appendChild = (opt) => el.children.push(opt);
+    Object.defineProperty(el, 'innerHTML', {
+      get() { return this._html || ''; },
+      set(v) { this._html = v; this.children = []; }
+    });
+  }
+
+  const catRows = [
+    { ID_Alineacion: 10, Clave_Proceso: 'PB3571', Meta: 'Fortalecimiento Artístico', Nombre_Meta: 'Conciertos didácticos', Direccion: 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL', Eje_PG: 'Cultura', Unidad_Medida: 'Actividades realizadas', Meta_Anual: 10 },
+    { ID_Alineacion: 47, Clave_Proceso: 'PB3575', Meta: 'Desarrollo Comunitario', Nombre_Meta: 'Talleres comunitarios', Direccion: 'SUBSECRETARÍA DE DESARROLLO COMUNITARIO Y PROMOCIÓN PATRIMONIAL', Eje_PG: 'Bienestar', Unidad_Medida: 'Actividades realizadas', Meta_Anual: 20 },
+    { ID_Alineacion: 63, Clave_Proceso: 'PB3565', Meta: 'Conservación del Patrimonio', Nombre_Meta: 'Cursos de conservación', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Eje_PG: 'Patrimonio', Unidad_Medida: 'Cursos', Meta_Anual: 5 }
+  ];
+  const acts = [
+    { ID_Actividad: 'A-JAN', Nombre_Actividad: 'Concierto Enero', Fecha_Inicio: '2026-01-10', Fecha_Inicio_ISO: '2026-01-10', Direccion: 'Subsecretaría de Desarrollo y Promoción Artística y Cultural', Clave_Proceso: 10, Clave_Proceso_Txt: 'PB3571', Tipo_Actividad: 'Concierto', Eje_PG: 'Cultura', Disciplina: 'Música', Enfoque_Actividad: 'Artístico', Cantidad_Actividades: 2, Total_Sesiones: 2, Total_Poblacion: 100 },
+    { ID_Actividad: 'A-MAR-OUT', Nombre_Actividad: 'Taller Marzo Fuera', Fecha_Inicio: '2026-03-05', Fecha_Inicio_ISO: '2026-03-05', Direccion: 'Subsecretaría de Desarrollo Comunitario y Promoción Patrimonial', Clave_Proceso: 47, Clave_Proceso_Txt: 'PB3575', Tipo_Actividad: 'Convocatoria pública', Eje_PG: 'Bienestar', Disciplina: 'Artes visuales', Enfoque_Actividad: 'Comunitario', Cantidad_Actividades: 1, Total_Sesiones: 3, Total_Poblacion: 40 },
+    { ID_Actividad: 'A-MAR-IN', Nombre_Actividad: 'Curso Marzo Dentro', Fecha_Inicio: '2026-03-20', Fecha_Inicio_ISO: '2026-03-20', Direccion: 'Patrimonio Cultural', Clave_Proceso: 63, Clave_Proceso_Txt: 'PB3565', Tipo_Actividad: 'Taller', Eje_PG: 'Bienestar', Disciplina: 'Patrimonio', Enfoque_Actividad: 'Patrimonial', Cantidad_Actividades: 3, Total_Sesiones: 6, Total_Poblacion: 60 }
+  ];
+  const ters = [
+    { ID_Territorio: 'T1', ID_Actividad: 'A-JAN', Municipio: 'León', Cantidad: 100, Cantidad_Participacion: 60, Cantidad_Acceso: 40 },
+    { ID_Territorio: 'T2', ID_Actividad: 'A-MAR-OUT', Municipio: 'Irapuato', Cantidad: 40, Cantidad_Participacion: 40, Cantidad_Acceso: 0 },
+    { ID_Territorio: 'T3', ID_Actividad: 'A-MAR-IN', Municipio: 'Guanajuato', Cantidad: 60, Cantidad_Participacion: 60, Cantidad_Acceso: 0 }
+  ];
+  const pobs = [
+    { ID_Poblacion: 'P1', ID_Actividad: 'A-JAN', Grupo_Prioritario: 'Público general', Cantidad_Poblacion: 70 },
+    { ID_Poblacion: 'P2', ID_Actividad: 'A-JAN', Grupo_Prioritario: 'Infancias (Niñas, Niños y Adolescentes)', Cantidad_Poblacion: 30 },
+    { ID_Poblacion: 'P3', ID_Actividad: 'A-MAR-OUT', Grupo_Prioritario: 'Jóvenes en riesgo', Cantidad_Poblacion: 40 }
+  ];
+
+  s.context._fixture = { actividades: acts, territorio: ters, poblacion: pobs, evidencia: [], alineacion: catRows };
+  vm.runInContext(`
+    rawDB = _fixture;
+    renderMatrizEstrategica = () => {};
+    renderCoberturaTerritorial = () => {};
+    renderPerfilPoblacion = () => {};
+    renderRepositorioEvidencias = () => {};
+    updateMapMarkers = () => {};
+    renderAuditDashboard = () => {};
+    renderVistaAnual = () => {};
+    renderChart = () => {};
+    populateFilterDropdowns();
+  `, s.context);
+
+  // 1. Dos subsecretarías distintas y resolución por Cat_Alineacion
+  const dirOpts = s.nodes.get('f-direccion').children.map(o => o.value);
+  assert.ok(dirOpts.includes('SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL'));
+  assert.ok(dirOpts.includes('SUBSECRETARÍA DE DESARROLLO COMUNITARIO Y PROMOCIÓN PATRIMONIAL'));
+  assert.equal(
+    vm.runInContext("getCanonicalDirection('Subsecretaría sin etiqueta', 47, 'PB3575', rawDB.alineacion)", s.context),
+    'SUBSECRETARÍA DE DESARROLLO COMUNITARIO Y PROMOCIÓN PATRIMONIAL'
+  );
+
+  // 2. Proceso con nombre completo y Meta dependiente que se limpia si cambia el proceso
+  const procLabels = s.nodes.get('f-proceso').children.map(o => `${o.value}|${o.textContent}`);
+  assert.ok(procLabels.includes('PB3575|PB3575 — Desarrollo Comunitario'));
+  const metaLabels = s.nodes.get('f-meta').children.map(o => `${o.value}|${o.textContent}`);
+  assert.ok(metaLabels.includes('47|#47 · Talleres comunitarios'));
+
+  s.document.getElementById('f-date-start').value = '2026-03-10';
+  s.document.getElementById('f-date-end').value = '2026-03-31';
+  s.document.getElementById('f-mes').value = '03';
+  vm.runInContext('applyFilters()', s.context);
+  // Intersección mes=03 + 2026-03-10..31 deja solo A-MAR-IN
+  assert.deepEqual(vm.runInContext('[...filteredActIds].join(",")', s.context), 'A-MAR-IN');
+  // Quitar mes conserva el rango de fechas
+  s.document.getElementById('f-mes').value = 'ALL';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.document.getElementById('f-date-start').value, '2026-03-10');
+  assert.equal(s.document.getElementById('f-date-end').value, '2026-03-31');
+  assert.deepEqual(vm.runInContext('[...filteredActIds].join(",")', s.context), 'A-MAR-IN');
+
+  // Cambio de proceso limpia #f-meta incompatible
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  s.document.getElementById('f-proceso').value = 'PB3575';
+  s.document.getElementById('f-meta').value = '47';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.document.getElementById('f-meta').value, '47');
+  s.document.getElementById('f-proceso').value = 'PB3565';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.document.getElementById('f-meta').value, 'ALL');
+  assert.equal(vm.runInContext('[...filteredActIds].join(",")', s.context), 'A-MAR-IN');
+
+  // 3. Eje PG oculto en Inicio y activo en otras vistas
+  s.document.getElementById('f-proceso').value = 'ALL';
+  vm.runInContext("switchTab('tab-matriz')", s.context);
+  s.document.getElementById('f-eje').value = 'Bienestar';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(vm.runInContext('[...filteredActIds].sort().join(",")', s.context), 'A-MAR-IN,A-MAR-OUT');
+  let ejeHidden = false;
+  s.nodes.get('filter-wrap-eje').classList = { toggle(cls, force) { if (cls === 'hidden') ejeHidden = !!force; } };
+  vm.runInContext("switchTab('tab-vision')", s.context);
+  assert.equal(ejeHidden, true);
+  assert.equal(s.document.getElementById('f-eje').value, 'ALL');
+  assert.equal(vm.runInContext('filteredActIds.size', s.context), 3);
+
+  // 4. KPIs de Inicio (Programas, Convocatorias, Actividades, Personas, Grupos prioritarios sin Público general, Municipios)
+  assert.equal(s.nodes.get('kpi-prog-total').textContent, '3/3');
+  assert.equal(s.nodes.get('kpi-conv-total').textContent, '1');
+  assert.equal(s.nodes.get('kpi-act-total').textContent, '6');
+  assert.equal(s.nodes.get('kpi-fichas-total').textContent, '3');
+  assert.equal(s.nodes.get('kpi-sesiones-total').textContent, '11');
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '200');
+  assert.equal(s.nodes.get('kpi-home-prio').textContent, '70'); // 30 + 40 (excluye 70 de Público general)
+  assert.equal(s.nodes.get('kpi-mun-ratio').textContent, '3/46');
+
+  // 5. Selección sin resultados y Borrar filtros
+  s.document.getElementById('f-municipio').value = 'Xichú';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.nodes.get('kpi-act-total').textContent, '0');
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '0');
+  assert.equal(s.nodes.get('kpi-home-prio').textContent, '0');
+  assert.equal(s.nodes.get('kpi-mun-ratio').textContent, '0/46');
+  assert.ok(!s.nodes.get('kpi-mun-pct').textContent.includes('NaN'));
+
+  vm.runInContext('resetFilters()', s.context);
+  assert.equal(s.document.getElementById('f-mes').value, 'ALL');
+  assert.equal(s.document.getElementById('f-municipio').value, 'ALL');
+  assert.equal(vm.runInContext('filteredActIds.size', s.context), 3);
+});
+
+test('Checklist Inicio: mapa con rangos fijos 0..101+, deduplicación por municipio y cobertura ZAP/Localidades', () => {
+  const s = setup();
+  const tiers = JSON.parse(vm.runInContext('JSON.stringify([0, 1, 25, 26, 50, 51, 100, 101].map(n => getHomeMapActivityTier(n).label))', s.context));
+  assert.deepEqual(tiers, ['Sin dato o actividad', 'Baja', 'Baja', 'Media', 'Media', 'Alta', 'Alta', 'Muy Alta']);
+
+  const acts = [
+    { ID_Actividad: 'ACT-M1', Cantidad_Actividades: 1 },
+    { ID_Actividad: 'ACT-MULTI', Cantidad_Actividades: 4 },
+    { ID_Actividad: 'ACT-Z1', Cantidad_Actividades: 1 },
+    { ID_Actividad: 'ACT-Z2', Cantidad_Actividades: 2 }
+  ];
+  const ters = [
+    // Dos filas de la misma actividad en Moroleón: no debe duplicar la actividad
+    { ID_Actividad: 'ACT-M1', Municipio: 'Moroleón', Comunidad: '101', Nombre_Comunidad: 'Centro', Cantidad: 30, ZAP_Nuevo_Comienzo: 'Si', ZAP_SSyP: 'Si' },
+    { ID_Actividad: 'ACT-M1', Municipio: 'Moroleón', Comunidad: '102', Nombre_Comunidad: 'Quiahuyo', Cantidad: 40, ZAP_Nuevo_Comienzo: 'Si', ZAP_SSyP: 'No' },
+    // Concentrado multi-municipio sin reparto: no atribuye 4 actividades a cada municipio
+    { ID_Actividad: 'ACT-MULTI', Municipio: 'León', Cantidad: 100, ZAP_Nuevo_Comienzo: 'No', ZAP_SSyP: 'No' },
+    { ID_Actividad: 'ACT-MULTI', Municipio: 'Silao de la Victoria', Cantidad: 50, ZAP_Nuevo_Comienzo: 'No', ZAP_SSyP: 'No' },
+    // Fila con bandera Si pero sin clave territorial ni localidad verificable (solo edificio en ZAP_SSyP)
+    { ID_Actividad: 'ACT-Z1', Municipio: 'Guanajuato', Comunidad: '', Nombre_Comunidad: '', Otra_Comunidad: '', Cantidad: 27, ZAP_Nuevo_Comienzo: 'Si', ZAP_SSyP: 'Teatro Juárez' }
+  ];
+
+  s.context.acts = acts;
+  s.context.ters = ters;
+  const mapSummary = vm.runInContext('summarizeHomeMapByMunicipio(acts, ters)', s.context);
+  assert.equal(mapSummary.byMunActs.get('moroleon'), 1);
+  assert.equal(mapSummary.byMunPop.get('moroleon'), 70);
+  assert.equal(mapSummary.unallocatedMultiMun.records, 1);
+  assert.equal(mapSummary.unallocatedMultiMun.activities, 4);
+  assert.equal(mapSummary.presenceOnlyMuns.has('leon'), true);
+  assert.equal(mapSummary.byMunActs.get('leon') || 0, 0);
+
+  const cov = JSON.parse(vm.runInContext('JSON.stringify(summarizeHomeTerritoryCoverage(acts, ters))', s.context));
+  // ZAP NC tiene claves 101 y 102; ZAP SS tiene clave 101 (traslape); ACT-Z1 no tiene clave verificable; 'Teatro Juárez' tampoco cuenta como Si
+  assert.equal(cov.totalZapUnique, 2);
+  assert.equal(cov.totalLocalidadesUnique, 2);
+  assert.deepEqual(cov.rows, [
+    { label: 'ZAP Nuevo Comienzo', personas: 97, actividades: 2, beneficiarios: null },
+    { label: 'ZAP Seguridad Pública', personas: 30, actividades: 1, beneficiarios: null },
+    { label: 'Localidades', personas: 70, actividades: 1, beneficiarios: null }
+  ]);
 });
