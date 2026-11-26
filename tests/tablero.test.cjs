@@ -200,18 +200,26 @@ test('cuenta áreas del catálogo y áreas registradas, sin contar sin asignar',
 test('la gráfica separa los acumulados sin perder los registros ni mezclar las fuentes de público', () => {
   const s = setup(); const plots = {};
   s.context.capturePlot = (id, type, data, options) => { plots[id] = { data, options }; };
-  s.context.act = [{ ...a, ID_Actividad: 'ACUM', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-09-30' }, { ...a, ID_Actividad: 'MES', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-01-31' }];
+  s.context.act = [
+    { ...a, ID_Actividad: 'ACUM', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-09-30' },
+    { ...a, ID_Actividad: 'MES', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-01-31' },
+    { ...a, ID_Actividad: 'SIN_PUB', Fecha_Inicio_ISO: '2026-01-10', Fecha_Fin: '2026-01-10' }
+  ];
   s.context.ter = [{ ID_Actividad: 'ACUM', Cantidad: 351071 }, { ID_Actividad: 'MES', Cantidad: 18405 }];
   s.context.pop = [{ ID_Actividad: 'ACUM', Cantidad_Poblacion: 301817 }, { ID_Actividad: 'MES', Cantidad_Poblacion: 18248 }];
   vm.runInContext('renderChart = capturePlot; updateMapMarkers = () => {}; renderVisionGeneral(act, ter, pop);', s.context);
   assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[0], 18405);
-  assert.equal(plots['chart-evolucion-mensual'].data.datasets[1].data[0], 2);
-  assert.match(s.nodes.get('monthly-population-note').textContent, /351,071/);
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[1].data[0], 3);
+  const noteTer = s.nodes.get('monthly-population-note').textContent;
+  assert.match(noteTer, /351,071 asistencias sin mes asignable/);
+  assert.match(noteTer, /total general/);
+  assert.match(noteTer, /aparte de la línea mensual/);
+  assert.match(noteTer, /Por separado, 1 ficha tiene un total de público incompleto/);
   assert.equal(s.nodes.get('kpi-pop-total').textContent, '369,476');
-  assert.match(plots['chart-evolucion-mensual'].options.plugins.subtitle.text, /351,071/);
+  assert.equal(plots['chart-evolucion-mensual'].options.plugins.subtitle.display, false);
   vm.runInContext('popMode = "poblacion"; renderVisionGeneral(act, ter, pop);', s.context);
   assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[0], 18248);
-  assert.match(s.nodes.get('monthly-population-note').textContent, /301,817/);
+  assert.match(s.nodes.get('monthly-population-note').textContent, /301,817 asistencias sin mes asignable/);
 });
 
 test('CSV y tarjetas respetan usuario, búsqueda y alerta incluso con más de 250 resultados', () => {

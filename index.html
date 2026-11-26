@@ -3155,11 +3155,11 @@
       const popPorMes = monthly.people;
       const missingMonthly = monthly.missing.reduce((sum, n) => sum + n, 0) + monthly.unallocatedMissing;
       const accumulatedNote = monthly.unallocatedRecords
-        ? `${fmtInt(monthly.unallocatedPeople)} asistencias reportadas en ${fmtInt(monthly.unallocatedRecords)} registros sin desglose mensual: se conservan en los totales generales y se muestran aparte de la línea mensual.`
-        : 'No hay registros con público pendiente de asignar a un mes por su periodo.';
+        ? `${fmtInt(monthly.unallocatedPeople)} asistencias sin mes asignable (${fmtInt(monthly.unallocatedRecords)} ${monthly.unallocatedRecords === 1 ? 'registro' : 'registros'}) sí están incluidas en el total general y se muestran aparte de la línea mensual hasta contar con un desglose mensual respaldado.`
+        : 'Todas las asistencias con periodo contenido en un mes aparecen en la línea mensual y forman parte del total general.';
       document.getElementById('monthly-population-note').textContent = accumulatedNote
-        + (missingMonthly ? ` Además, ${fmtInt(missingMonthly)} registros no tienen un total completo de público; no se interpretan como cero.` : '')
-        + ' Las actividades se cuantifican por mes de inicio. Las asistencias no equivalen a personas únicas.';
+        + (missingMonthly ? ` Por separado, ${fmtInt(missingMonthly)} ${missingMonthly === 1 ? 'ficha tiene' : 'fichas tienen'} un total de público incompleto y no se interpretan como cero.` : '')
+        + ' Las actividades se cuantifican por mes de inicio; las asistencias no equivalen a personas únicas.';
 
       renderChart('chart-evolucion-mensual', 'bar', {
         labels: MESES,
@@ -3222,12 +3222,7 @@
         interaction: { mode: 'index', intersect: false },
         plugins: {
           subtitle: {
-            display: true,
-            position: 'bottom',
-            text: monthly.unallocatedRecords
-              ? `${fmtInt(monthly.unallocatedPeople)} asistencias acumuladas sin desglose mensual (${fmtInt(monthly.unallocatedRecords)} registros), fuera de la línea.`
-              : 'La línea incluye solo registros con público informado y periodo contenido en un mes.',
-            font: { size: 10 }, color: '#92400E', padding: { top: 8 }
+            display: false
           }
         },
         scales: {
