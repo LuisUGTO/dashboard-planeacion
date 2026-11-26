@@ -779,7 +779,7 @@
                         <th class="px-2 py-1.5 font-bold">Cobertura</th>
                         <th class="px-2 py-1.5 font-bold text-right">Total personas atendidas</th>
                         <th class="px-2 py-1.5 font-bold text-right">Actividades</th>
-                        <th class="px-2 py-1.5 font-bold text-right">Beneficiarios</th>
+                        <th class="px-2 py-1.5 font-bold text-right">Total de ZAP / localidades</th>
                       </tr>
                     </thead>
                     <tbody id="tbl-home-cobertura" class="divide-y divide-slate-100"></tbody>
@@ -3042,13 +3042,13 @@
             <td class="px-2 py-1.5 font-semibold text-slate-700">${auditEscape(r.label)}</td>
             <td class="px-2 py-1.5 text-right font-bold text-gto-blue tabular-nums">${fmtInt(r.personas)}</td>
             <td class="px-2 py-1.5 text-right font-semibold text-slate-700 tabular-nums">${fmtInt(r.actividades)}</td>
-            <td class="px-2 py-1.5 text-right text-slate-400 italic">${r.beneficiarios === null ? 'Por definir' : fmtInt(r.beneficiarios)}</td>
+            <td class="px-2 py-1.5 text-right font-bold text-slate-700 tabular-nums">${fmtInt(r.totalZonas)}</td>
           </tr>
         `).join('');
       }
       const noteCovEl = document.getElementById('home-cobertura-note');
       if (noteCovEl) {
-        noteCovEl.textContent = `ZAP únicas identificables (${fmtInt(covSummary.totalZapUnique)}) considerando traslape entre Nuevo Comienzo y Seguridad Pública. «Beneficiarios» queda por definir mientras la base registre asistencias acumuladas sin personas únicas.`;
+        noteCovEl.textContent = `ZAP únicas identificables (${fmtInt(covSummary.totalZapUnique)}) considerando traslape entre Nuevo Comienzo y Seguridad Pública. Las cifras de personas corresponden a asistencias acumuladas.`;
       }
 
       updateMapMarkers(terF, actF);
@@ -5575,11 +5575,15 @@
         return total;
       };
 
-      const rows = [buckets.nc, buckets.ss, buckets.loc].map(b => ({
+      const rows = [
+        [buckets.nc, zapNCKeys.size],
+        [buckets.ss, zapSSKeys.size],
+        [buckets.loc, allLocKeys.size]
+      ].map(([b, totalZonas]) => ({
         label: b.label,
         personas: b.personas,
         actividades: countBucketActs(b.actIds),
-        beneficiarios: null
+        totalZonas
       }));
 
       return { totalZapUnique, totalLocalidadesUnique, rows };

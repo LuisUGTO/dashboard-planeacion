@@ -788,8 +788,8 @@ test('Checklist Inicio: mapa con rangos fijos 0..101+, deduplicación por munici
   assert.equal(cov.totalZapUnique, 2);
   assert.equal(cov.totalLocalidadesUnique, 2);
   assert.deepEqual(cov.rows, [
-    { label: 'ZAP Nuevo Comienzo', personas: 97, actividades: 2, beneficiarios: null },
-    { label: 'ZAP Seguridad Pública', personas: 30, actividades: 1, beneficiarios: null },
-    { label: 'Localidades', personas: 70, actividades: 1, beneficiarios: null }
+    { label: 'ZAP Nuevo Comienzo', personas: 97, actividades: 2, totalZonas: 2 },
+    { label: 'ZAP Seguridad Pública', personas: 30, actividades: 1, totalZonas: 1 },
+    { label: 'Localidades', personas: 70, actividades: 1, totalZonas: 2 }
   ]);
 });
