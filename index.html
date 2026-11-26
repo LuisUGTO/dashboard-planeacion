@@ -3798,10 +3798,15 @@
       const parents = new Map();
       const selectedIds = new Set();
       const otherIds = new Set();
+      const excludedIds = new Set();
       const matchesDirection = row => getCanonicalDirection(row.Direccion, row.Clave_Proceso, row.Clave_Proceso_Txt) === direction;
       for (const row of sources.actividades.rows) {
         const id = cleanStr(row.ID_Actividad);
         if (!id) continue;
+        if (CulturaCalidad.isExcluded(row)) {
+          excludedIds.add(id);
+          continue;
+        }
         parents.set(id, parents.has(id) ? null : row);
         if (direction !== 'ALL') {
           if (matchesDirection(row)) selectedIds.add(id);
@@ -3817,12 +3822,14 @@
         const extras = key === 'actividades' ? [] : lookupFields.filter(field => !fields.includes(field));
         const sheet = workbook.addWorksheet(SHEETS[key], { views: [{ state: 'frozen', ySplit: 1 }] });
         const columns = [...fields, ...extras, ...startFields];
-        let selectedRows = source.rows;
+        let selectedRows = key === 'actividades'
+          ? source.rows.filter(row => !CulturaCalidad.isExcluded(row))
+          : source.rows.filter(row => !excludedIds.has(cleanStr(row.ID_Actividad)));
         const hasAllowedIds = allowedIds instanceof Set;
         if (direction !== 'ALL' || hasAllowedIds) {
           selectedRows = key === 'actividades'
-            ? source.rows.filter(row => (direction === 'ALL' || matchesDirection(row)) && (!hasAllowedIds || allowedIds.has(cleanStr(row.ID_Actividad))))
-            : source.rows.filter(row => {
+            ? selectedRows.filter(row => (direction === 'ALL' || matchesDirection(row)) && (!hasAllowedIds || allowedIds.has(cleanStr(row.ID_Actividad))))
+            : selectedRows.filter(row => {
               const id = cleanStr(row.ID_Actividad);
               if (hasAllowedIds && !allowedIds.has(id)) return false;
               return direction === 'ALL' || (selectedIds.has(id) && !otherIds.has(id));

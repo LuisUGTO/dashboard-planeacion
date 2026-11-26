@@ -349,3 +349,42 @@ test('la ficha conserva todos los hijos y detecta duplicación fuera del filtro 
   assert.equal(s.nodes.get('mod-id').textContent, 'A1 • Folio: F1');
   assert.equal(s.nodes.get('mod-body').scrollTop, 0);
 });
+
+test('buildRegistroWorkbook omite actividades sustituidas y canceladas y sus filas hijas', () => {
+  const s = setup();
+  const sheets = {};
+  s.context.ExcelJS = {
+    Workbook: class {
+      addWorksheet(name) {
+        const ws = { name, tables: [], cols: {}, addTable(t) { this.tables.push(t); }, getColumn(i) { return (this.cols[i] = this.cols[i] || {}); } };
+        sheets[name] = ws;
+        return ws;
+      }
+    }
+  };
+  s.context.sources = {
+    actividades: { fields: ['ID_Actividad', 'Folio', 'Usuario_Registra', 'Direccion', 'Nombre_Actividad', 'Descripcion_Breve', 'Fecha_Inicio', 'Clave_Proceso', 'Clave_Proceso_Txt'], rows: [
+      { ID_Actividad: 'ACT-SCAA12345', Folio: 'F1', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Vigente', Descripcion_Breve: 'Activa', Fecha_Inicio: '10/05/2026', Clave_Proceso: '92', Clave_Proceso_Txt: 'PB3572' },
+      { ID_Actividad: 'ACT-SCBB67890', Folio: 'F2', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Sustituida', Descripcion_Breve: '[SUSTITUIDO:ACT-SCAA12345] vieja', Fecha_Inicio: '10/05/2026', Clave_Proceso: '92', Clave_Proceso_Txt: 'PB3572' },
+      { ID_Actividad: 'ACT-SCCC11111', Folio: 'F3', Usuario_Registra: 'u@g.mx', Direccion: 'Museos', Nombre_Actividad: 'Cancelada', Descripcion_Breve: '[CANCELADA] no se hizo', Fecha_Inicio: '10/05/2026', Clave_Proceso: '92', Clave_Proceso_Txt: 'PB3572' }
+    ] },
+    territorio: { fields: ['ID_Territorio', 'ID_Actividad', 'Municipio', 'Cantidad'], rows: [
+      { ID_Territorio: 'T1', ID_Actividad: 'ACT-SCAA12345', Municipio: 'León', Cantidad: '10' },
+      { ID_Territorio: 'T2', ID_Actividad: 'ACT-SCBB67890', Municipio: 'León', Cantidad: '99' },
+      { ID_Territorio: 'T3', ID_Actividad: 'ACT-SCCC11111', Municipio: 'León', Cantidad: '50' }
+    ] },
+    poblacion: { fields: ['ID_Poblacion', 'ID_Actividad', 'Cantidad_Poblacion'], rows: [
+      { ID_Poblacion: 'P1', ID_Actividad: 'ACT-SCAA12345', Cantidad_Poblacion: '10' },
+      { ID_Poblacion: 'P2', ID_Actividad: 'ACT-SCBB67890', Cantidad_Poblacion: '99' }
+    ] },
+    evidencia: { fields: ['ID_Evidencia', 'ID_Actividad', 'Archivo_Evidencia'], rows: [
+      { ID_Evidencia: 'E1', ID_Actividad: 'ACT-SCAA12345', Archivo_Evidencia: 'ok.pdf' },
+      { ID_Evidencia: 'E2', ID_Actividad: 'ACT-SCBB67890', Archivo_Evidencia: 'old.pdf' }
+    ] }
+  };
+  vm.runInContext('buildRegistroWorkbook(sources, "ALL")', s.context);
+  assert.deepEqual(sheets.Registro_Actividades.tables[0].rows.map(r => r[0]), ['ACT-SCAA12345']);
+  assert.deepEqual(sheets.Registro_Territorio.tables[0].rows.map(r => r[0]), ['T1']);
+  assert.deepEqual(sheets.Registro_Poblacion.tables[0].rows.map(r => r[0]), ['P1']);
+  assert.deepEqual(sheets.Regitro_Evidencia.tables[0].rows.map(r => r[0]), ['E1']);
+});
