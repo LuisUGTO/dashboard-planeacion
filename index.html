@@ -3240,7 +3240,7 @@
         let ge = cleanMojibake(p.Grupo_Etario) || 'Sin especificar';
         let gp = cleanMojibake(p.Grupo_Prioritario) || 'Ninguno (Población General)';
         let gen = cleanMojibake(p.Genero);
-        if (!gen || gen === 'No se cuenta con el dato') gen = 'Dato global';
+        if (!gen || /^(No se cuenta con el dato|Sin dato|No especificado)$/i.test(gen)) gen = 'Dato global';
         const enf = enfoqueByAct[cleanStr(p.ID_Actividad)] || 'Cultural';
 
         etarioMap[ge] = (etarioMap[ge] || 0) + cant;
