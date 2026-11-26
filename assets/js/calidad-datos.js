@@ -1,9 +1,10 @@
 (function (root, factory) {
   const reviews = typeof module === 'object' && module.exports ? require('./revisiones-identidad.js') : root.CulturaRevisionesIdentidad;
-  const api = factory(reviews || []);
+  const breakdowns = typeof module === 'object' && module.exports ? require('./desgloses-mensuales.js') : root.CulturaDesglosesMensuales;
+  const api = factory(reviews || [], breakdowns || []);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.CulturaCalidad = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function (identityReviews) {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (identityReviews, monthlyBreakdowns) {
   'use strict';
   const text = value => value == null ? '' : String(value).trim();
   const norm = value => text(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -138,25 +139,79 @@
     });
     return { records: active.length, activities: activitiesTotal, unresolved, sessions, missingSessions };
   }
+  const breakdownMap = new Map(
+    (Array.isArray(monthlyBreakdowns) ? monthlyBreakdowns : [])
+      .filter(b => b && text(b.id) && Array.isArray(b.mesesPresenciales) && b.mesesPresenciales.length === 9
+        && b.mesesPresenciales.every(n => typeof n === 'number' && Number.isFinite(n) && n >= 0)
+        && b.mesesPresenciales.reduce((s, n) => s + n, 0) === b.presencialTotal
+        && b.presencialTotal + b.digitalTotal === b.totalOriginal)
+      .map(b => [text(b.id), b])
+  );
+  function hasConflictingBreakdownRecord(activity, b, active, linked, field) {
+    const targetSede = norm(b.sede);
+    const targetId = text(activity.ID_Actividad);
+    return active.some(other => {
+      const otherId = text(other.ID_Actividad);
+      if (!otherId || otherId === targetId) return false;
+      if (norm(other.Nombre_Espacio || other.Especifique_Espacio) !== targetSede) return false;
+      const otherTotal = sum(linked.get(otherId) || [], field);
+      if (otherTotal === null || otherTotal <= 0) return false;
+      const kind = `${norm(other.Tipo_Actividad)} ${norm(other.Nombre_Actividad)}`;
+      const isExpo = text(other.Clave_Proceso) === '70' || /exposici|muestra/.test(kind);
+      if (isExpo) return true;
+      const oStart = dateISO(other.Fecha_Inicio_ISO || other.Fecha_Inicio);
+      const oEnd = dateISO(other.Fecha_Fin_ISO || other.Fecha_Fin);
+      const inRange = oStart && oEnd && oEnd >= oStart && oStart >= b.start && oEnd <= b.end;
+      const sameVisitFlow = norm(other.Clave_Proceso_Txt) === norm(b.claveProceso) || /\bvisita/.test(kind);
+      return Boolean(inRange && sameVisitFlow && oStart.slice(0, 7) === oEnd.slice(0, 7));
+    });
+  }
   function monthlyPopulation(activities, rows, field) {
     const linked = group(rows);
+    const active = activities.filter(a => !isExcluded(a));
     const records = new Array(12).fill(0), people = new Array(12).fill(null);
     const missing = new Array(12).fill(0);
     let unallocatedPeople = 0, unallocatedRecords = 0, unallocatedMissing = 0;
-    activities.filter(a => !isExcluded(a)).forEach(a => {
+    let digitalPeople = 0, digitalRecords = 0, appliedBreakdowns = 0, appliedPresencialPeople = 0;
+    active.forEach(a => {
+      const id = text(a.ID_Actividad);
       const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio);
       const end = dateISO(a.Fecha_Fin_ISO || a.Fecha_Fin);
       const month = start ? Number(start.slice(5, 7)) - 1 : null;
       if (month !== null) records[month]++;
-      const total = sum(linked.get(text(a.ID_Actividad)) || [], field);
-      // An interval spanning months does not establish attendance in any one month.
+      const total = sum(linked.get(id) || [], field);
+      // An interval spanning months does not establish attendance in any one month unless backed by a verified breakdown.
       if (!start || !end || end < start || start.slice(0, 7) !== end.slice(0, 7)) {
-        unallocatedRecords++;
-        if (total === null) unallocatedMissing++; else unallocatedPeople += total;
+        const b = breakdownMap.get(id);
+        const canApply = b && total === b.totalOriginal
+          && start === b.start && end === b.end
+          && norm(a.Nombre_Espacio || a.Especifique_Espacio) === norm(b.sede)
+          && !hasConflictingBreakdownRecord(a, b, active, linked, field);
+        if (canApply) {
+          b.mesesPresenciales.forEach((val, idx) => {
+            people[idx] = (people[idx] ?? 0) + val;
+          });
+          appliedBreakdowns++;
+          appliedPresencialPeople += b.presencialTotal;
+          unallocatedRecords++;
+          unallocatedPeople += b.digitalTotal;
+          digitalRecords++;
+          digitalPeople += b.digitalTotal;
+        } else {
+          unallocatedRecords++;
+          if (total === null) unallocatedMissing++; else unallocatedPeople += total;
+        }
       } else if (total === null) missing[month]++;
       else people[month] = (people[month] ?? 0) + total;
     });
-    return { records, people, missing, unallocatedPeople, unallocatedRecords, unallocatedMissing };
+    const otherUnallocatedPeople = Math.max(0, unallocatedPeople - digitalPeople);
+    const otherUnallocatedRecords = Math.max(0, unallocatedRecords - digitalRecords);
+    return {
+      records, people, missing,
+      unallocatedPeople, unallocatedRecords, unallocatedMissing,
+      digitalPeople, digitalRecords, otherUnallocatedPeople, otherUnallocatedRecords,
+      appliedBreakdowns, appliedPresencialPeople
+    };
   }
   function audit(activities, territory, population, evidence, catalog = []) {
     const ters = group(territory), pops = group(population), evis = group(evidence);

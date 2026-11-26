@@ -1803,7 +1803,8 @@
   </div>
 
   <script src="assets/js/revisiones-identidad.js?v=20261105-grupos"></script>
-  <script src="assets/js/calidad-datos.js?v=20261125-abn"></script>
+  <script src="assets/js/desgloses-mensuales.js?v=20261126-edith"></script>
+  <script src="assets/js/calidad-datos.js?v=20261126-desgloses"></script>
   <script src="assets/js/ficha-actividad.js?v=20261103-conciliacion"></script>
   <script src="assets/js/gto-map-paths.js?v=20261109"></script>
   <script src="assets/js/datos-anuales.js?v=20261108"></script>
@@ -3154,9 +3155,20 @@
       });
       const popPorMes = monthly.people;
       const missingMonthly = monthly.missing.reduce((sum, n) => sum + n, 0) + monthly.unallocatedMissing;
-      const accumulatedNote = monthly.unallocatedRecords
-        ? `${fmtInt(monthly.unallocatedPeople)} asistencias sin mes asignable (${fmtInt(monthly.unallocatedRecords)} ${monthly.unallocatedRecords === 1 ? 'registro' : 'registros'}) sí están incluidas en el total general y se muestran aparte de la línea mensual hasta contar con un desglose mensual respaldado.`
-        : 'Todas las asistencias con periodo contenido en un mes aparecen en la línea mensual y forman parte del total general.';
+      const digitalPeople = monthly.digitalPeople || 0;
+      const otherUnallocPeople = monthly.otherUnallocatedPeople != null
+        ? monthly.otherUnallocatedPeople
+        : Math.max(0, monthly.unallocatedPeople - digitalPeople);
+      let accumulatedNote = 'Todas las asistencias con periodo contenido en un mes aparecen en la línea mensual y forman parte del total general.';
+      if (monthly.unallocatedRecords) {
+        const regLabel = monthly.unallocatedRecords === 1 ? 'registro' : 'registros';
+        const breakdownDetail = digitalPeople > 0
+          ? (otherUnallocPeople > 0
+            ? `: ${fmtInt(digitalPeople)} métricas digitales de Zonas Arqueológicas y ${fmtInt(otherUnallocPeople)} en otros acumulados`
+            : `, correspondientes a métricas digitales de Zonas Arqueológicas`)
+          : '';
+        accumulatedNote = `${fmtInt(monthly.unallocatedPeople)} asistencias sin mes asignable (${fmtInt(monthly.unallocatedRecords)} ${regLabel}${breakdownDetail}) sí están incluidas en el total general y se muestran aparte de la línea mensual hasta contar con un desglose mensual respaldado.`;
+      }
       document.getElementById('monthly-population-note').textContent = accumulatedNote
         + (missingMonthly ? ` Por separado, ${fmtInt(missingMonthly)} ${missingMonthly === 1 ? 'ficha tiene' : 'fichas tienen'} un total de público incompleto y no se interpretan como cero.` : '')
         + ' Las actividades se cuantifican por mes de inicio; las asistencias no equivalen a personas únicas.';

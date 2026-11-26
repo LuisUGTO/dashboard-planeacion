@@ -235,3 +235,52 @@ test('localidad sin especificar omite sedes urbanas ya identificadas y se mantie
     assert.ok(row.diag.includes('Localidad sin especificar en territorio'), tipo || 'vacío');
   }
 });
+
+test('desgloses mensuales de Edith llevan 26,661 presenciales a ene-sep, dejan 274,945 digitales aparte y bloquean solapamientos', () => {
+  const zaSpecs = [
+    ['ACT-SCQZ00697', 'QC4042', 'Zona Arqueológica Cañada de la Virgen', 69395],
+    ['ACT-SCAC38909', 'QC4043', 'Zona Arqueológica el Cóporo', 57652],
+    ['ACT-SCYP66179', 'QC4045', 'Zona Arqueológica Plazuelas', 68385],
+    ['ACT-SCCS51664', 'QC4046', 'Zona Arqueológica Peralta', 61362],
+    ['ACT-SCOT28274', 'QC4048', 'Zona Arqueológica Arroyo Seco', 44812]
+  ];
+  const zaActs = zaSpecs.map(([ID_Actividad, Clave_Proceso_Txt, Nombre_Espacio]) => activity({
+    ID_Actividad, Clave_Proceso_Txt, Nombre_Espacio,
+    Fecha_Inicio: '01/01/2026', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '30/09/2026'
+  }));
+  const zaRows = zaSpecs.map(([ID_Actividad, , , total]) => t(total, { ID_Actividad }));
+
+  const res = q.monthlyPopulation(zaActs, zaRows, 'Cantidad');
+  assert.deepEqual(res.people.slice(0, 9), [3694, 1776, 3461, 2492, 2015, 2727, 4536, 4010, 1950]);
+  assert.equal(res.appliedBreakdowns, 5);
+  assert.equal(res.appliedPresencialPeople, 26661);
+  assert.equal(res.digitalPeople, 274945);
+  assert.equal(res.unallocatedPeople, 274945);
+  assert.equal(res.otherUnallocatedPeople, 0);
+
+  // Cañada sola verifica abril = 0 explícito
+  const canadaOnly = q.monthlyPopulation([zaActs[0]], [zaRows[0]], 'Cantidad');
+  assert.equal(canadaOnly.people[3], 0);
+  assert.equal(canadaOnly.digitalPeople, 62054);
+
+  // Si cambia el total, la sede o aparece una exposición con público > 0 o ficha mensual de visitas en la misma sede, se bloquea el desglose
+  const changedTotal = q.monthlyPopulation([zaActs[0]], [t(69394, { ID_Actividad: 'ACT-SCQZ00697' })], 'Cantidad');
+  assert.equal(changedTotal.appliedBreakdowns, 0);
+  assert.equal(changedTotal.unallocatedPeople, 69394);
+
+  const expoConflict = q.monthlyPopulation(
+    [zaActs[0], activity({ ID_Actividad: 'EXPO-CONFLICTO', Clave_Proceso: '70', Tipo_Actividad: 'Exposición', Nombre_Espacio: 'Zona Arqueológica Cañada de la Virgen', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-10-31' })],
+    [zaRows[0], t(500, { ID_Actividad: 'EXPO-CONFLICTO' })],
+    'Cantidad'
+  );
+  assert.equal(expoConflict.appliedBreakdowns, 0);
+  assert.equal(expoConflict.unallocatedPeople, 69895);
+
+  const monthlyVisitConflict = q.monthlyPopulation(
+    [zaActs[0], activity({ ID_Actividad: 'VIS-MES', Clave_Proceso_Txt: 'QC4042', Tipo_Actividad: 'Visitas guiadas', Nombre_Espacio: 'Zona Arqueológica Cañada de la Virgen', Fecha_Inicio_ISO: '2026-07-01', Fecha_Fin: '2026-07-31' })],
+    [zaRows[0], t(100, { ID_Actividad: 'VIS-MES' })],
+    'Cantidad'
+  );
+  assert.equal(monthlyVisitConflict.appliedBreakdowns, 0);
+  assert.equal(monthlyVisitConflict.people[6], 100);
+});

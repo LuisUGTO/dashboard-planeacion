@@ -199,6 +199,8 @@ test('cuenta áreas del catálogo y áreas registradas, sin contar sin asignar',
 });
 test('la gráfica separa los acumulados sin perder los registros ni mezclar las fuentes de público', () => {
   const s = setup(); const plots = {};
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
   s.context.capturePlot = (id, type, data, options) => { plots[id] = { data, options }; };
   s.context.act = [
     { ...a, ID_Actividad: 'ACUM', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '2026-09-30' },
@@ -220,6 +222,74 @@ test('la gráfica separa los acumulados sin perder los registros ni mezclar las 
   vm.runInContext('popMode = "poblacion"; renderVisionGeneral(act, ter, pop);', s.context);
   assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[0], 18248);
   assert.match(s.nodes.get('monthly-population-note').textContent, /301,817 asistencias sin mes asignable/);
+});
+
+test('desgloses mensuales en Inicio separan métricas digitales y responden a filtros de municipio y mes', () => {
+  const s = setup();
+  const plots = {};
+  const zaAct = { ...a, ID_Actividad: 'ACT-SCQZ00697', Clave_Proceso: 13, Clave_Proceso_Txt: 'QC4042', Nombre_Espacio: 'Zona Arqueológica Cañada de la Virgen', Fecha_Inicio: '01/01/2026', Fecha_Inicio_ISO: '2026-01-01', Fecha_Fin: '30/09/2026', Cantidad_Actividades: 1, Total_Sesiones: 1 };
+  const otherAcum = { ...a, ID_Actividad: 'OTRO-ACUM', Fecha_Inicio: '01/02/2026', Fecha_Inicio_ISO: '2026-02-01', Fecha_Fin: '31/03/2026', Cantidad_Actividades: 1, Total_Sesiones: 1 };
+  const julAct = { ...a, ID_Actividad: 'MES-JUL', Fecha_Inicio: '10/07/2026', Fecha_Inicio_ISO: '2026-07-10', Fecha_Fin: '10/07/2026', Cantidad_Actividades: 1, Total_Sesiones: 1 };
+  s.context._fixture = {
+    actividades: [zaAct, otherAcum, julAct],
+    territorio: [
+      { ID_Territorio: 'T1', ID_Actividad: 'ACT-SCQZ00697', Municipio: 'San Miguel de Allende', Cantidad: 69395, Cantidad_Participacion: 69395, Cantidad_Acceso: 0 },
+      { ID_Territorio: 'T2', ID_Actividad: 'OTRO-ACUM', Municipio: 'León', Cantidad: 1000, Cantidad_Participacion: 1000, Cantidad_Acceso: 0 },
+      { ID_Territorio: 'T3', ID_Actividad: 'MES-JUL', Municipio: 'San Miguel de Allende', Cantidad: 500, Cantidad_Participacion: 500, Cantidad_Acceso: 0 }
+    ],
+    poblacion: [
+      { ID_Poblacion: 'P1', ID_Actividad: 'ACT-SCQZ00697', Cantidad_Poblacion: 69395, Cantidad_Participacion: 69395, Cantidad_Acceso: 0 },
+      { ID_Poblacion: 'P2', ID_Actividad: 'OTRO-ACUM', Cantidad_Poblacion: 1000, Cantidad_Participacion: 1000, Cantidad_Acceso: 0 },
+      { ID_Poblacion: 'P3', ID_Actividad: 'MES-JUL', Cantidad_Poblacion: 500, Cantidad_Participacion: 500, Cantidad_Acceso: 0 }
+    ],
+    evidencia: [],
+    alineacion: [{ ID_Alineacion: 13, Clave_Proceso: 'QC4042', Direccion: 'PATRIMONIO CULTURAL', Meta: 'Cañada', Nombre_Meta: 'Atención', Meta_Anual: 105000 }]
+  };
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  s.context.capturePlot = (id, type, data, options) => { plots[id] = { data, options }; };
+  vm.runInContext(`
+    rawDB = _fixture;
+    renderChart = capturePlot;
+    updateMapMarkers = () => {};
+    renderMatrizEstrategica = () => {};
+    renderCoberturaTerritorial = () => {};
+    renderPerfilPoblacion = () => {};
+    renderRepositorioEvidencias = () => {};
+    applyFilters();
+  `, s.context);
+
+  // Corte completo: 7,341 de Cañada entran en Ene-Sep + 500 de MES-JUL en julio = 2,195; 63,054 sin mes (62,054 digitales + 1,000 otros); total = 70,895
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[0], 1587);
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[6], 2195);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '70,895');
+  assert.equal(s.nodes.get('kpi-act-total').textContent, '3');
+  const noteAll = s.nodes.get('monthly-population-note').textContent;
+  assert.match(noteAll, /63,054 asistencias sin mes asignable/);
+  assert.match(noteAll, /62,054 métricas digitales de Zonas Arqueológicas y 1,000 en otros acumulados/);
+
+  // Filtro por municipio: San Miguel de Allende conserva Cañada + MES-JUL (total = 69,895; sin mes = 62,054 digitales)
+  s.document.getElementById('f-municipio').value = 'San Miguel de Allende';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '69,895');
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[6], 2195);
+  assert.match(s.nodes.get('monthly-population-note').textContent, /62,054 asistencias sin mes asignable.*correspondientes a métricas digitales de Zonas Arqueológicas/);
+
+  // Filtro por mes: Julio deja solo MES-JUL (500 en julio, 0 sin mes)
+  s.document.getElementById('f-municipio').value = 'ALL';
+  s.document.getElementById('f-mes').value = '07';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '500');
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[6], 500);
+  assert.match(s.nodes.get('monthly-population-note').textContent, /Todas las asistencias con periodo contenido en un mes aparecen en la línea mensual/);
+
+  // Filtro por mes: Enero deja solo ACT-SCQZ00697 (total = 69,395; julio presencial Cañada = 1,695; digitales = 62,054)
+  s.document.getElementById('f-mes').value = '01';
+  vm.runInContext('applyFilters()', s.context);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '69,395');
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[0], 1587);
+  assert.equal(plots['chart-evolucion-mensual'].data.datasets[0].data[6], 1695);
+  assert.match(s.nodes.get('monthly-population-note').textContent, /62,054 asistencias sin mes asignable/);
 });
 
 test('CSV y tarjetas respetan usuario, búsqueda y alerta incluso con más de 250 resultados', () => {
