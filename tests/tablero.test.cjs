@@ -468,3 +468,42 @@ test('filtros canonizan municipios, corrigen mojibake de eje y enfoque y formate
   assert.equal(vm.runInContext('getCanonicalMunicipioLabel("Dolores Hidalgo")', s.context), 'Dolores Hidalgo Cuna de la Independencia Nacional');
   assert.equal(vm.runInContext('getLocalDateStamp(new Date(2026, 10, 25, 22, 30, 0))', s.context), '20261125');
 });
+
+test('grupos prioritarios excluye Público general, usa barras horizontales con iconos y eje X compacto', () => {
+  const s = setup();
+  const captured = {};
+  s.context.renderChart = (id, type, data, options, plugins) => { captured[id] = { type, data, options, plugins }; };
+  assert.equal(vm.runInContext('isPriorityGroup("Público general")', s.context), false);
+  assert.equal(vm.runInContext('isPriorityGroup("Ninguno (Población General)")', s.context), false);
+  assert.equal(vm.runInContext('isPriorityGroup("")', s.context), false);
+  assert.equal(vm.runInContext('isPriorityGroup("NNA (Niñas, Niños y Adolescentes)")', s.context), true);
+  assert.equal(vm.runInContext('formatAxisCompact(0)', s.context), '0');
+  assert.equal(vm.runInContext('formatAxisCompact(950)', s.context), '950');
+  assert.equal(vm.runInContext('formatAxisCompact(20000)', s.context), '20k');
+  assert.equal(vm.runInContext('formatAxisCompact(719000)', s.context), '719k');
+  assert.equal(vm.runInContext('formatAxisCompact(1200000)', s.context), '1.2M');
+
+  s.context.acts = [a];
+  s.context.ters = [{ ID_Actividad: 'A1', Municipio: 'León', Cantidad: 31000 }];
+  s.context.pobs = [
+    { ID_Actividad: 'A1', Grupo_Etario: 'Población General', Genero: 'Dato global', Grupo_Prioritario: 'Público general', Cantidad_Participacion: 0, Cantidad_Acceso: 20000, Cantidad_Poblacion: 20000 },
+    { ID_Actividad: 'A1', Grupo_Etario: 'Niñas y Niños (6 a 12 años)', Genero: 'Mujeres', Grupo_Prioritario: 'NNA (Niñas, Niños y Adolescentes)', Cantidad_Participacion: 10000, Cantidad_Acceso: 0, Cantidad_Poblacion: 10000 },
+    { ID_Actividad: 'A1', Grupo_Etario: 'Adultos (30 a 59 años)', Genero: 'Hombres', Grupo_Prioritario: 'Personas Migrantes', Cantidad_Participacion: 1000, Cantidad_Acceso: 0, Cantidad_Poblacion: 1000 }
+  ];
+  vm.runInContext('renderPerfilPoblacion(acts, ters, pobs, []);', s.context);
+
+  assert.equal(s.nodes.get('kpi-pob-prio').textContent, '11,000');
+  const prio = captured['chart-pob-prioritario'];
+  assert.equal(prio.options.indexAxis, 'y');
+  assert.deepEqual(JSON.parse(JSON.stringify(prio.data.labels)), ['Niñas, Niños y Adolesc.', 'Personas Migrantes']);
+  assert.deepEqual(JSON.parse(JSON.stringify(prio.data.datasets[0].data)), [10000, 1000]);
+  assert.equal(prio.data.datasets[0].minBarLength, 6);
+  assert.equal(prio.options.scales.x.ticks.maxRotation, 0);
+  assert.equal(prio.plugins.length, 1);
+  assert.equal(prio.plugins[0].id, 'priorityIconsBadge');
+
+  const etario = captured['chart-pob-etario'];
+  assert.equal(etario.options.scales.x.ticks.maxRotation, 0);
+  const stack = captured['chart-pob-enfoque-stack'];
+  assert.equal(stack.options.scales.x.ticks.maxRotation, 0);
+});
