@@ -1,5 +1,11 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (ajuste verificado de `Meta_Anual` en `37` fichas de `QC4140`, ID 5) — `10 → 12,500` por relectura directa.**
+- **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_qc4140_id5_37_2026-11-27.json` y verificación en `scratch/verify_qc4140_id5_37_2026-11-27.json`):**
+  - *`QC4140`, ID `5` (`Registro_Actividades!K`, `18` subrangos contiguos entre las filas `643` y `826`, `37` fichas `ACT-SCBG71126` a `ACT-SCAQ03662`, `0` omitidas):* confirmadas todas con `Clave_Proceso = 5`, `QC4140` y `Meta_Anual = 10` (truncado de `10000` en la carga del `26/10/2026`); actualizado `Meta_Anual` a **`12500`** (`numberValue: 12500`) conforme a UTAPE Noviembre (`Hoja1!E89`), `Avance metas (1).xlsx!Hoja1!F6` y `Cat_Alineacion!H6`.
+  - *Integridad verificada celda por celda:* `37/37` fichas objetivo con `K = 12500` y `A:J` sin cambios; `0` cambios en las `147` filas intermedias de `A643:K826`; la fila `1342` (`ACT-SCSD72334`) permanece sin tocar en `10000` por quedar fuera del alcance autorizado.
+  - *Reversión:* restaurar los `18` subrangos de `K643..K826` a `10` desde el respaldo privado. Pendiente `git push` del usuario.
+
 **27/11/2026 (lote de Forum `PB3571` ID 97 y Museos `ACT-SCMG26633` ID 92 aplicado y verificado) — `125` fichas actualizadas por relectura directa.**
 - **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_lote_forum_museos_2026-11-27.json` y verificación en `scratch/verify_lote_forum_museos_2026-11-27.json`):**
   - *Forum (`PB3571`, ID `97`, `Registro_Actividades!K1429:K1552`):* confirmadas las `124` fichas (`ACT-SCFM00001` a `ACT-SCFM00124`, `0` omitidas) con `Clave_Proceso = 97`, `PB3571` y `Meta_Anual = 120`; actualizado `Meta_Anual` a **`70`** (valor numérico) conforme a `Cat_Alineacion!H98`, `Avance metas (1).xlsx!Hoja1!F107` y `Matriz_PG_PEC_para_revision.xlsx!Listas!BE96`, conservando `A:J` y el bloque PEC pendientes sin cambios.
