@@ -233,6 +233,7 @@
     });
     return activities.map(a => {
       const id = text(a.ID_Actividad), tr = ters.get(id) || [], pr = pops.get(id) || [];
+      const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), end = dateISO(a.Fecha_Fin);
       const st = sum(tr, 'Cantidad'), sp = sum(pr, 'Cantidad_Poblacion');
       const categories = new Set(), reasons = [];
       const add = (category, reason) => { categories.add(category); reasons.push(reason); };
@@ -242,18 +243,17 @@
         if (!idCounts.has(replacement)) add('identidad', 'No se encuentra el registro que sustituye esta captura');
         if (idCounts.get(id) > 1) add('identidad', 'ID repetido');
         if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
-        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
+        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), sinFecha: !start, mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
       }
       if (isCancelled(a)) {
         add('canceladas', 'Actividad cancelada: se conserva el historial y se excluye de los indicadores de ejecución');
         if ((st !== null && st > 0) || (sp !== null && sp > 0)) add('diferencias', 'La actividad cancelada conserva cifras de público: revisar su origen sin contarlas como ejecución');
         if (idCounts.get(id) > 1) add('identidad', 'ID repetido');
         if (text(a.Folio) && folios.get(text(a.Folio)) > 1) add('identidad', 'Folio repetido');
-        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
+        return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), sinFecha: !start, mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
       }
       const missing = [];
       if (absent(a.Nombre_Actividad)) missing.push('nombre');
-      const start = dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio), end = dateISO(a.Fecha_Fin);
       if (!start) missing.push('fecha de inicio válida');
       if (!end) missing.push('fecha de fin válida');
       if (start && end && end < start) add('faltantes', 'La fecha de fin es anterior al inicio');
@@ -306,7 +306,7 @@
       const key = [start, norm(a.Nombre_Actividad), norm(a.Nombre_Espacio || a.Especifique_Espacio)].join('|');
       const time = reportedTime(a);
       if ((identities.get(key) || []).some(other => other.id !== id && (!time || !other.time || time === other.time) && !confirmedDistinct(a, other.activity, ters, pops))) add('identidad', 'Mismo nombre, fecha y sede en otro ID sin horario distinto confirmado: revisar posible duplicado o participación de otra área');
-      return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
+      return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), sinFecha: !start, mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
   return { number, count, isCancelled, supersededBy, isExcluded, goalExcluded, hasUsableEvidence, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };

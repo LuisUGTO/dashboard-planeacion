@@ -314,3 +314,13 @@ test('supersededBy identifica sustitución reversible del caso Monterrey (ACT-SC
   assert.equal(q.isExcluded(original), false);
   assert.deepEqual(q.metrics([original, duplicate]), { records: 1, activities: 1, unresolved: 0, sessions: 4, missingSessions: 0 });
 });
+
+test('audit marca sinFecha únicamente en fichas sin fecha de inicio válida', () => {
+  const sinFecha = activity({ ID_Actividad: 'ACT-SCCK28026', Fecha_Inicio: '', Fecha_Fin: '' });
+  const conFecha = activity({ ID_Actividad: 'ACT-CON-FECHA', Fecha_Inicio: '2026-11-10', Fecha_Fin: '2026-11-10' });
+  const rows = q.audit([sinFecha, conFecha], [], [], []);
+  const rowSin = rows.find(r => r.id === 'ACT-SCCK28026');
+  const rowCon = rows.find(r => r.id === 'ACT-CON-FECHA');
+  assert.equal(rowSin.sinFecha, true);
+  assert.equal(rowCon.sinFecha, false);
+});

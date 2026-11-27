@@ -676,6 +676,7 @@
                 <span id="kpi-fichas-total" class="font-bold text-slate-700">0</span> fichas · <span id="kpi-sesiones-total" class="font-bold text-slate-700">0</span> sesiones
               </p>
               <p id="kpi-actividades-reportadas" class="hidden text-[10px] text-slate-500 mt-0.5"></p>
+              <p id="kpi-sin-fecha-note" class="hidden text-[10px] font-semibold text-amber-800 mt-0.5"></p>
               <button id="kpi-cantidades-alerta" onclick="openAuditQuantities()" class="hidden text-[10px] font-bold text-amber-800 mt-0.5 underline text-left"></button>
             </div>
             <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-gto-blue flex items-center justify-center shadow-inner shrink-0">
@@ -2576,12 +2577,24 @@
       applyFilters();
     }
 
-    function matchesActivityPeriod(date, start, end, monthFilter = 'ALL') {
+    const DEFAULT_PERIOD_START = '2026-01-01';
+    const DEFAULT_PERIOD_END = '2026-12-31';
+    function isSpecificPeriodFilter(start, end, monthFilter = 'ALL') {
       const mFilter = cleanStr(monthFilter) || 'ALL';
-      if (mFilter !== 'ALL') {
-        if (!date || date.slice(5, 7) !== mFilter) return false;
+      const s = cleanStr(start);
+      const e = cleanStr(end);
+      return mFilter !== 'ALL'
+        || (!!s && s !== DEFAULT_PERIOD_START)
+        || (!!e && e !== DEFAULT_PERIOD_END);
+    }
+    function matchesActivityPeriod(date, start, end, monthFilter = 'ALL') {
+      const d = cleanStr(date);
+      const mFilter = cleanStr(monthFilter) || 'ALL';
+      if (!d) {
+        return !isSpecificPeriodFilter(start, end, mFilter);
       }
-      return !date || ((!start || date >= start) && (!end || date <= end));
+      if (mFilter !== 'ALL' && d.slice(5, 7) !== mFilter) return false;
+      return (!start || d >= start) && (!end || d <= end);
     }
 
     function matchesZapRows(tRows, fZap) {
@@ -3052,6 +3065,23 @@
           ? `${fmtInt(countMetrics.activities)} actividades reportadas`
           : 'Un registro puede incluir varias sesiones o talleres';
       }
+      const undatedActs = actF.filter(a => !CulturaCalidad.dateISO(a.Fecha_Inicio_ISO || a.Fecha_Inicio));
+      const undatedIds = new Set(undatedActs.map(a => cleanStr(a.ID_Actividad)));
+      const undatedPop = undatedActs.length
+        ? (popMode === 'territorio'
+          ? terF.reduce((s, r) => s + (undatedIds.has(cleanStr(r.ID_Actividad)) ? toNum(r.Cantidad) : 0), 0)
+          : pobF.reduce((s, r) => s + (undatedIds.has(cleanStr(r.ID_Actividad)) ? toNum(r.Cantidad_Poblacion) : 0), 0))
+        : 0;
+      const sinFechaEl = document.getElementById('kpi-sin-fecha-note');
+      if (sinFechaEl) {
+        if (undatedActs.length) {
+          sinFechaEl.textContent = `Incluye ${fmtInt(undatedActs.length)} ${undatedActs.length === 1 ? 'ficha' : 'fichas'} «Sin fecha» (${fmtInt(undatedPop)} asistencias)`;
+          sinFechaEl.classList.remove('hidden');
+        } else {
+          sinFechaEl.textContent = '';
+          sinFechaEl.classList.add('hidden');
+        }
+      }
       document.getElementById('kpi-pop-total').textContent = fmtInt(mainPop);
       document.getElementById('kpi-pop-sub').textContent = `${fmtInt(mainPart)} part. activa | ${fmtInt(mainAcc)} acceso`;
       if (document.getElementById('kpi-home-prio')) document.getElementById('kpi-home-prio').textContent = fmtInt(totalPrioHome);
@@ -3203,8 +3233,12 @@
           : '';
         accumulatedNote = `${fmtInt(monthly.unallocatedPeople)} asistencias sin mes asignable (${fmtInt(monthly.unallocatedRecords)} ${regLabel}${breakdownDetail}) sí están incluidas en el total general y se muestran aparte de la línea mensual hasta contar con un desglose mensual respaldado.`;
       }
+      const sinFechaMonthlyNote = undatedActs.length
+        ? ` Incluye ${fmtInt(undatedActs.length)} ${undatedActs.length === 1 ? 'ficha' : 'fichas'} «Sin fecha» (${fmtInt(undatedPop)} asistencias), conservada en la vista general y excluida de periodos específicos.`
+        : '';
       document.getElementById('monthly-population-note').textContent = accumulatedNote
         + (missingMonthly ? ` Por separado, ${fmtInt(missingMonthly)} ${missingMonthly === 1 ? 'ficha tiene' : 'fichas tienen'} un total de público incompleto y no se interpretan como cero.` : '')
+        + sinFechaMonthlyNote
         + ' Las actividades se cuantifican por mes de inicio; las asistencias no equivalen a personas únicas.';
 
       renderChart('chart-evolucion-mensual', 'bar', {
@@ -4371,6 +4405,7 @@
           <td class="p-2.5 font-mono font-bold text-gto-blue max-w-[130px] align-top overflow-hidden">
             <div class="truncate" title="${auditEscape(r.id)}">${auditEscape(r.id)}</div>
             <div class="text-[10px] text-slate-500 font-sans font-normal truncate" title="${auditEscape(r.folio)}">${auditEscape(r.folio)}</div>
+            ${r.sinFecha ? '<span class="inline-block mt-1 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[9.5px] font-sans font-bold">Sin fecha</span>' : ''}
           </td>
           <td class="p-2.5 text-slate-600 max-w-[170px] align-top overflow-hidden">
             <div class="truncate text-xs" title="${auditEscape(r.usuario)}">${auditEscape(r.usuario)}</div>
@@ -4496,7 +4531,7 @@
           const parent = parents.get(cleanStr(row.ID_Actividad));
           const activity = key === 'actividades' ? row : parent;
           const start = CulturaCalidad.dateISO(normalizeDateISO(activity?.Fecha_Inicio));
-          const month = start ? monthLabels[Number(start.slice(5, 7)) - 1] : null;
+          const month = start ? monthLabels[Number(start.slice(5, 7)) - 1] : 'Sin fecha';
           const date = start ? new Date(`${start}T00:00:00Z`) : null;
           return values.concat(extras.map(field => parent?.[field] ? String(parent[field]) : null), [month, date]);
         });
@@ -4571,8 +4606,9 @@
       if (button) button.disabled = true;
       try {
         if (typeof ExcelJS === 'undefined') throw new Error('La librería de Excel no está disponible. Recarga el tablero.');
-        const dStart = document.getElementById('f-date-start')?.value || '2026-01-01';
-        const dEnd = document.getElementById('f-date-end')?.value || '2026-12-31';
+        const dStart = document.getElementById('f-date-start')?.value || DEFAULT_PERIOD_START;
+        const dEnd = document.getElementById('f-date-end')?.value || DEFAULT_PERIOD_END;
+        const fMes = document.getElementById('f-mes')?.value || 'ALL';
         const fMun = document.getElementById('f-municipio')?.value || 'ALL';
         const fDir = document.getElementById('f-direccion')?.value || 'ALL';
         const fProc = document.getElementById('f-proceso')?.value || 'ALL';
@@ -4628,7 +4664,7 @@
         titleRow.eachCell(c => { c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF004B87' } }; });
         sheet.mergeCells('A1:F1');
 
-        sheet.addRow(['Proceso / Meta', fProc === 'ALL' ? 'Todos' : fProc, 'Periodo', `${dStart} al ${dEnd}`, 'Actividades', countMetrics.activities || actF.length]);
+        sheet.addRow(['Proceso / Meta', fProc === 'ALL' ? 'Todos' : fProc, 'Periodo', `${dStart} al ${dEnd}${fMes !== 'ALL' ? ` (Mes ${fMes})` : ''}`, 'Actividades', countMetrics.activities || actF.length]);
         sheet.addRow(['Nombre Meta', metaNames, 'Dirección', dirNames, 'Municipios', munRows.length]);
         sheet.addRow([]);
 

@@ -993,3 +993,117 @@ test('Camino Real ID 17: marcador reversible excluye ACT-SCMY88002 del cómputo 
   assert.equal(m17.pct, 100);
   assert.equal(s.nodes.get('kpi-mat-act').textContent, '3');
 });
+
+test('Filtro de fecha excluye fichas Sin fecha de periodos específicos, las conserva e identifica en vista general y respeta exportaciones', () => {
+  const s = setup();
+  const sinFecha = { ...a, ID_Actividad: 'ACT-SCCK28026', Folio: 'SC-261030-164117', Fecha_Inicio: '', Fecha_Inicio_ISO: '', Fecha_Fin: '', Nombre_Actividad: 'Visita libre', Descripcion_Breve: 'Recorrido guiado', Direccion: 'DIRECCIÓN GENERAL DE MUSEOS, ARTES VISUALES Y EXPOSICIONES', Clave_Proceso: 92, Total_Sesiones: '' };
+  const nov1 = { ...a, ID_Actividad: 'ACT-NOV-1', Folio: 'F-NOV-1', Fecha_Inicio: '05/11/2026', Fecha_Inicio_ISO: '2026-11-05', Fecha_Fin: '05/11/2026', Nombre_Actividad: 'Actividad Noviembre 1', Total_Sesiones: 1 };
+  const nov2 = { ...a, ID_Actividad: 'ACT-NOV-2', Folio: 'F-NOV-2', Fecha_Inicio: '20/11/2026', Fecha_Inicio_ISO: '2026-11-20', Fecha_Fin: '20/11/2026', Nombre_Actividad: 'Actividad Noviembre 2', Total_Sesiones: 1 };
+  const oct1 = { ...a, ID_Actividad: 'ACT-OCT-1', Folio: 'F-OCT-1', Fecha_Inicio: '10/10/2026', Fecha_Inicio_ISO: '2026-10-10', Fecha_Fin: '10/10/2026', Nombre_Actividad: 'Actividad Octubre 1', Total_Sesiones: 1 };
+  const allActs = [sinFecha, nov1, nov2, oct1];
+  const allTers = [
+    { ID_Territorio: 'T0', ID_Actividad: 'ACT-SCCK28026', Municipio: 'Silao de la Victoria', Cantidad: 4 },
+    { ID_Territorio: 'T1', ID_Actividad: 'ACT-NOV-1', Municipio: 'León', Cantidad: 10 },
+    { ID_Territorio: 'T2', ID_Actividad: 'ACT-NOV-2', Municipio: 'León', Cantidad: 20 },
+    { ID_Territorio: 'T3', ID_Actividad: 'ACT-OCT-1', Municipio: 'León', Cantidad: 30 }
+  ];
+  const allPobs = [
+    { ID_Poblacion: 'P0', ID_Actividad: 'ACT-SCCK28026', Cantidad_Poblacion: 4, Cantidad_Participacion: 0, Cantidad_Acceso: 4 },
+    { ID_Poblacion: 'P1', ID_Actividad: 'ACT-NOV-1', Cantidad_Poblacion: 10, Cantidad_Participacion: 0, Cantidad_Acceso: 10 },
+    { ID_Poblacion: 'P2', ID_Actividad: 'ACT-NOV-2', Cantidad_Poblacion: 20, Cantidad_Participacion: 0, Cantidad_Acceso: 20 },
+    { ID_Poblacion: 'P3', ID_Actividad: 'ACT-OCT-1', Cantidad_Poblacion: 30, Cantidad_Participacion: 0, Cantidad_Acceso: 30 }
+  ];
+
+  // Track classList.toggle('hidden', ...) for #kpi-sin-fecha-note
+  let sinFechaHidden = true;
+  s.document.getElementById('kpi-sin-fecha-note').classList = {
+    toggle(c, f) { if (c === 'hidden') sinFechaHidden = !!f; },
+    add(c) { if (c === 'hidden') sinFechaHidden = true; },
+    remove(c) { if (c === 'hidden') sinFechaHidden = false; }
+  };
+
+  const sheets = {};
+  s.context.ExcelJS = {
+    Workbook: class {
+      addWorksheet(name) {
+        const ws = { name, tables: [], cols: {}, addTable(t) { this.tables.push(t); }, getColumn(i) { return (this.cols[i] = this.cols[i] || {}); } };
+        sheets[name] = ws;
+        return ws;
+      }
+    }
+  };
+  s.context._fixture = { actividades: allActs, territorio: allTers, poblacion: allPobs, evidencia: [], alineacion: cat };
+  s.context._exportSrc = {
+    actividades: { fields: ['ID_Actividad', 'Folio', 'Usuario_Registra', 'Direccion', 'Nombre_Actividad', 'Fecha_Inicio', 'Fecha_Fin'], rows: allActs },
+    territorio: { fields: ['ID_Territorio', 'ID_Actividad', 'Municipio', 'Cantidad'], rows: allTers },
+    poblacion: { fields: ['ID_Poblacion', 'ID_Actividad', 'Cantidad_Poblacion'], rows: allPobs },
+    evidencia: { fields: ['ID_Evidencia', 'ID_Actividad', 'Archivo_Evidencia'], rows: [] }
+  };
+
+  // 1. Vista general (todo 2026, mes ALL): conserva ACT-SCCK28026 + 4 asistencias e identifica "Sin fecha"
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  s.document.getElementById('f-mes').value = 'ALL';
+  vm.runInContext(`
+    rawDB = _fixture;
+    exportDB = _exportSrc;
+    renderMatrizEstrategica = () => {};
+    renderCoberturaTerritorial = () => {};
+    renderPerfilPoblacion = () => {};
+    renderRepositorioEvidencias = () => {};
+    updateMapMarkers = () => {};
+    renderVistaAnual = () => {};
+    renderChart = () => {};
+    applyFilters();
+  `, s.context);
+
+  assert.equal(vm.runInContext('filteredActIds.size', s.context), 4);
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCCK28026')", s.context), true);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '64');
+  assert.equal(sinFechaHidden, false);
+  assert.match(s.nodes.get('kpi-sin-fecha-note').textContent, /1 ficha «Sin fecha» \(4 asistencias\)/);
+  assert.match(s.nodes.get('monthly-population-note').textContent, /1 ficha «Sin fecha» \(4 asistencias\)/);
+  assert.match(s.nodes.get('tbl-auditoria').innerHTML, /ACT-SCCK28026[\s\S]*Sin fecha/);
+
+  vm.runInContext('wbAll = buildRegistroWorkbook(exportDB, "ALL", null)', s.context);
+  const allExportRows = sheets.Registro_Actividades.tables[0].rows;
+  assert.equal(allExportRows.length, 4);
+  const actCols = sheets.Registro_Actividades.tables[0].columns.map(c => c.name);
+  const mesColIdx = actCols.indexOf('Mes_Inicio_Actividad');
+  const ckExportRow = allExportRows.find(r => r[0] === 'ACT-SCCK28026');
+  assert.equal(ckExportRow[mesColIdx], 'Sin fecha');
+
+  // 2. Noviembre por rango (1 al 30 nov): excluye ACT-SCCK28026 y coincide con selector de mes
+  s.document.getElementById('f-date-start').value = '2026-11-01';
+  s.document.getElementById('f-date-end').value = '2026-11-30';
+  s.document.getElementById('f-mes').value = 'ALL';
+  vm.runInContext('applyFilters();', s.context);
+  const novByRangeIds = JSON.parse(vm.runInContext('JSON.stringify([...filteredActIds].sort())', s.context));
+  assert.deepEqual(novByRangeIds, ['ACT-NOV-1', 'ACT-NOV-2']);
+  assert.equal(sinFechaHidden, true);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '30');
+  vm.runInContext('wbNovRange = buildRegistroWorkbook(exportDB, "ALL", filteredActIds)', s.context);
+  assert.deepEqual(sheets.Registro_Actividades.tables[0].rows.map(r => r[0]).sort(), ['ACT-NOV-1', 'ACT-NOV-2']);
+  assert.equal(sheets.Registro_Territorio.tables[0].rows.length, 2);
+
+  // 3. Noviembre por selector de mes (rango amplio 2026): exactamente las mismas 2 fichas (sin ACT-SCCK28026)
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  s.document.getElementById('f-mes').value = '11';
+  vm.runInContext('applyFilters();', s.context);
+  const novByMonthIds = JSON.parse(vm.runInContext('JSON.stringify([...filteredActIds].sort())', s.context));
+  assert.deepEqual(novByMonthIds, novByRangeIds);
+  assert.equal(sinFechaHidden, true);
+  assert.equal(s.nodes.get('kpi-pop-total').textContent, '30');
+  vm.runInContext('wbNovMonth = buildRegistroWorkbook(exportDB, "ALL", filteredActIds)', s.context);
+  assert.deepEqual(sheets.Registro_Actividades.tables[0].rows.map(r => r[0]).sort(), ['ACT-NOV-1', 'ACT-NOV-2']);
+  const auditNovIds = JSON.parse(vm.runInContext('JSON.stringify(getAuditExportData().data.map(r => r[0]).sort())', s.context));
+  assert.equal(auditNovIds.includes('ACT-SCCK28026'), false);
+
+  // 4. Rango parcial ene-sep también excluye ficha Sin fecha
+  s.document.getElementById('f-mes').value = 'ALL';
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-09-30';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCCK28026')", s.context), false);
+});
