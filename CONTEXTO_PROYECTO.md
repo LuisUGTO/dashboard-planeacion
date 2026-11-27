@@ -1,5 +1,11 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (`ACT00019` y `ACT00030` en Lote A2 aplicadas y verificadas) — `Registro_Actividades!AT20` y `AT31` corregidas a Línea 4; saldo Lote A2 en `41` filas.**
+- **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo en `scratch/backup_act00019_act00030_2026-11-27.json`) y verificadas por relectura directa:**
+  - Cotejadas contra [Formato Interno de Indicadores (2).xlsx](archivos_base/Soraya%20Villegas/Formato%20Interno%20de%20Indicadores%20%20(2).xlsx) (`DiegoDiana`, filas `6` y `17`: fecha `19/04/2026` y `23/05/2026`, Museo de Arte e Historia de Guanajuato / sede `8`, acción `4.1.2.5`).
+  - `Registro_Actividades!AT20` (`ACT00019`, folio `SC-260615-104331`) y `AT31` (`ACT00030`, folio `SC-260615-144427`): cambiada únicamente `Linea_PEC` de `Sostenibilidad del trabajo cultural y la economía creativa.` a **`Protección y dinamización del patrimonio, la memoria y los espacios culturales`** (Línea 4), conservando intactos `AU` (`4.1.2`), `AV` (`4.1.2.5`), `AW` y demás columnas.
+  - Quedan `41` filas pendientes del Lote A2 (`24` Museos `ID 92`, `15` Museos `ID 94`, `2` CEARG `ID 75`) en espera de validación de Planeación.
+
 **27/11/2026 (Lote A1 de alineación PEC aplicado y verificado) — `Registro_Actividades!AV361` y `AW409` corregidas; Lote A2 (`43` filas) y pendientes de catálogo/fichas en espera de Planeación.**
 - **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo en `scratch/backup_lote_a1_pec_2026-11-27.json`) y verificadas por relectura directa:**
   - `Registro_Actividades!AV361` (`ACT-SCNW78674`, folio `SC-260910-143646`): corregido mojibake (`programacin` → **`programación`**) en `Fortalecer la programación cultural en espacios públicos, espacios alternativos y otros espacios culturales.`
