@@ -1,5 +1,11 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (cierre `38/38` de `QC4140` ID 5 en `12,500`: `ACT-SCSD72334` aplicado y verificado) — `Registro_Actividades!K1342` (`10,000 → 12,500`).**
+- **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_k1342_scsd72334_2026-11-27.json` y verificación en `scratch/verify_k1342_id5_38_2026-11-27.json`):**
+  - *`ACT-SCSD72334` (`Registro_Actividades!K1342`, folio `SC-261029-213918-IS-82F79E`):* confirmada previamente vinculada a `Clave_Proceso = 5` (`QC4140`) con `K1342 = 10000`; actualizado únicamente `Meta_Anual` a **`12500`** (`numberValue: 12500`), manteniendo `A1342:J1342` y columnas restantes intactas.
+  - *Relectura global verificada:* todas las **`38/38`** fichas vivas vinculadas a `QC4140`, ID `5` tienen ahora `Meta_Anual = 12500` (alineadas con `Cat_Alineacion!H6`, `Avance metas (1).xlsx!Hoja1!F6` y UTAPE Noviembre `Hoja1!E89`).
+  - *Reversión:* restaurar `Registro_Actividades!K1342` a `10000` desde el respaldo privado. Pendiente `git push` del usuario.
+
 **27/11/2026 (completado verificado de `Unidad_Medida` y `Meta_Anual` en `ACT-SCCR89004` y `ACT-SCCR89006`, `PB3567` ID 79) — `J1426:K1426` y `J1428:K1428` actualizados.**
 - **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_cearg_id79_89004_89006_2026-11-27.json` y verificación en `scratch/verify_cearg_id79_89004_89006_2026-11-27.json`):**
   - *`ACT-SCCR89004` (`Registro_Actividades!J1426:K1426`, folio `SC-261106-145004`) y `ACT-SCCR89006` (`J1428:K1428`, folio `SC-261106-145006`), ambas confirmadas en `PB3567`, `ID 79` con `J:K` vacíos:* completados únicamente `Unidad_Medida = Laboratorios y residencias artísticas realizadas` (`stringValue`) y `Meta_Anual = 2` (`numberValue: 2`) conforme a `Cat_Alineacion!G80:H80`.
