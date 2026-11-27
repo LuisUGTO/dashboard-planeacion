@@ -1,5 +1,11 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (completado verificado de `Unidad_Medida` y `Meta_Anual` en `ACT-SCCR89004` y `ACT-SCCR89006`, `PB3567` ID 79) — `J1426:K1426` y `J1428:K1428` actualizados.**
+- **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_cearg_id79_89004_89006_2026-11-27.json` y verificación en `scratch/verify_cearg_id79_89004_89006_2026-11-27.json`):**
+  - *`ACT-SCCR89004` (`Registro_Actividades!J1426:K1426`, folio `SC-261106-145004`) y `ACT-SCCR89006` (`J1428:K1428`, folio `SC-261106-145006`), ambas confirmadas en `PB3567`, `ID 79` con `J:K` vacíos:* completados únicamente `Unidad_Medida = Laboratorios y residencias artísticas realizadas` (`stringValue`) y `Meta_Anual = 2` (`numberValue: 2`) conforme a `Cat_Alineacion!G80:H80`.
+  - *Integridad verificada:* `A:I` intactos (incluida la columna `F` que queda para otro lote) y la fila intermedia `1427` (`ACT-SCCR89005`) permanece 100 % sin cambios (`J1427:K1427` vacíos), igual que `1420–1422` (`ACT-SCMY88001–88003`), pendientes de validación de vínculo.
+  - *Reversión:* restaurar `Registro_Actividades!J1426:K1426` y `J1428:K1428` a vacío desde el respaldo privado. Pendiente `git push` del usuario.
+
 **27/11/2026 (Lote B ortográfico de `QB4208` ID 40 aplicado y verificado; Lote A y propuesta de obras en solo lectura) — `Cat_Alineacion!F41` y `Registro_Actividades!G595` corregidos.**
 - **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_lote_b_qb4208_id40_2026-11-27.json` y verificación en `scratch/verify_lote_b_qb4208_id40_2026-11-27.json`):**
   - *Lote B (`QB4208`, `ID 40` / `ACT-SCSY89615`, folio `SC-261026-144357`):* actualizados `Cat_Alineacion!F41` y `Registro_Actividades!G595` de `...Caballete de la capilla del Çrosario del Santuario de Jesís...` a **`Restauración de pinturas de caballete de la capilla del Rosario del Santuario de Jesús de Nazareno, Atotonilco, San Miguel de Allende`**; verificado por relectura directa e `inspect-cell` que `Lote A` (`Cat_Alineacion!G41`, `G43` y `Registro_Actividades!J595`) y las metas anuales (`3` y `2`) permanecen sin cambios.
