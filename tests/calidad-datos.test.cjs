@@ -284,3 +284,33 @@ test('desgloses mensuales de Edith llevan 26,661 presenciales a ene-sep, dejan 2
   assert.equal(monthlyVisitConflict.appliedBreakdowns, 0);
   assert.equal(monthlyVisitConflict.people[6], 100);
 });
+
+test('goalExcluded excluye solo el cómputo de la meta indicada sin ocultar ficha ni asistencias', () => {
+  const caminoReal = activity({
+    ID_Actividad: 'ACT-SCMY88002',
+    Folio: 'SC-261106-140002',
+    Clave_Proceso: 17,
+    Descripcion_Breve: '[NO_COMPUTA_META:17] Reunión de la unidad de Gestión del Camino Real'
+  });
+  const regular = activity({ ID_Actividad: 'ACT-SCEDQ-F078DD3', Clave_Proceso: 17, Tipo_Registro: 'Concentrado', Descripcion_Breve: 'Concentrado ene-oct 2026: 2 acciones' });
+  assert.equal(q.goalExcluded(caminoReal), '17');
+  assert.equal(q.goalExcluded(regular), '');
+  assert.equal(q.isExcluded(caminoReal), false);
+  assert.deepEqual(q.metrics([caminoReal, regular]), { records: 2, activities: 3, unresolved: 0, sessions: 2, missingSessions: 0 });
+});
+
+test('supersededBy identifica sustitución reversible del caso Monterrey (ACT-SCFM-5C45B46 → ACT-SCFM-F037FB3)', () => {
+  const original = activity({ ID_Actividad: 'ACT-SCFM-F037FB3', Folio: 'FOL-FM-87-03', Clave_Proceso: 87, Temporalidad: 'Concentrado', Total_Sesiones: 4 });
+  const duplicate = activity({
+    ID_Actividad: 'ACT-SCFM-5C45B46',
+    Folio: 'FOL-FM-87-04',
+    Clave_Proceso: 87,
+    Temporalidad: 'Concentrado',
+    Total_Sesiones: 1,
+    Descripcion_Breve: '[SUSTITUIDO:ACT-SCFM-F037FB3] Participación en feria del libro reportada a SET.'
+  });
+  assert.equal(q.supersededBy(duplicate), 'ACT-SCFM-F037FB3');
+  assert.equal(q.isExcluded(duplicate), true);
+  assert.equal(q.isExcluded(original), false);
+  assert.deepEqual(q.metrics([original, duplicate]), { records: 1, activities: 1, unresolved: 0, sessions: 4, missingSessions: 0 });
+});

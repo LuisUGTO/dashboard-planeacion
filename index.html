@@ -1965,17 +1965,29 @@
       return fmtInt(n);
     };
     const DOCUMENTED_AREA_M2 = {};
-    function getDocumentedAreaValue(catRow) {
-      const explicitVal = catRow?.Realizado_M2_Verificado;
-      if (explicitVal !== undefined && explicitVal !== null && cleanStr(explicitVal) !== '') {
-        const parsed = toNum(explicitVal);
-        if (Number.isFinite(parsed) && parsed >= 0) return parsed;
+    function parseDocumentedAreaM2(val) {
+      if (val === null || val === undefined || typeof val === 'boolean') return null;
+      if (typeof val === 'number') return Number.isFinite(val) && val >= 0 ? val : null;
+      const s = cleanStr(val);
+      if (!s) return null;
+      let normalized = s;
+      if (/^\d+,\d{1,2}$/.test(normalized)) {
+        normalized = normalized.replace(',', '.');
+      } else if (/^\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(normalized)) {
+        normalized = normalized.replace(/,/g, '');
+      } else if (!/^\d+(?:\.\d+)?$/.test(normalized)) {
+        return null;
       }
-      const id = String(Math.round(toNum(catRow?.ID_Alineacion)));
-      if (id && Object.prototype.hasOwnProperty.call(DOCUMENTED_AREA_M2, id)) {
-        return DOCUMENTED_AREA_M2[id];
-      }
-      return null;
+      const parsed = Number(normalized);
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+    }
+    function getDocumentedAreaValue(catRow, documentedMeasurements = DOCUMENTED_AREA_M2) {
+      if (!catRow || !documentedMeasurements || typeof documentedMeasurements !== 'object') return null;
+      const idRaw = cleanStr(catRow.ID_Alineacion);
+      if (!/^\d+$/.test(idRaw)) return null;
+      const id = String(Number(idRaw));
+      if (!Object.prototype.hasOwnProperty.call(documentedMeasurements, id)) return null;
+      return parseDocumentedAreaM2(documentedMeasurements[id]);
     }
     const fmtCompact = (n) => {
       if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + ' mil';
@@ -3302,6 +3314,10 @@
       actF.forEach(a => {
         const idAct = cleanStr(a.ID_Actividad);
         const fkId = String(Math.round(toNum(a.Clave_Proceso)));
+        const excludedGoalId = (typeof CulturaCalidad !== 'undefined' && typeof CulturaCalidad.goalExcluded === 'function')
+          ? CulturaCalidad.goalExcluded(a)
+          : '';
+        if (excludedGoalId && excludedGoalId === fkId) return;
         const nomMeta = cleanStr(a.Nombre_Meta);
         const pop = activePopMap[idAct] || 0;
 

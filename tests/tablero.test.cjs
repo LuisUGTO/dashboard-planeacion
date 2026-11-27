@@ -828,27 +828,56 @@ test('Matriz Estratégica: no recae al catálogo completo cuando filtro direcci�
   assert.doesNotMatch(s.nodes.get('tbl-metas-avance').innerHTML, /PB3573/);
 });
 
-test('Matriz Estratégica: metas en m² muestran Sin dato verificado y raya sin medición, y conservan 0 expreso', () => {
+test('Matriz Estratégica: validación estricta de m² usa solo esquema vigente, conserva 0 expreso y rechaza texto inválido', () => {
   const s = setup();
   assert.equal(vm.runInContext("toNum('769,12')", s.context), 769.12);
   assert.equal(vm.runInContext("toNum('1,478')", s.context), 1478);
 
+  // parseDocumentedAreaM2 y getDocumentedAreaValue solo aceptan cifras puras respaldadas y nunca leen campos fuera de esquema
+  const invalidCases = ['', '   ', null, undefined, false, true, 'Pendiente', 'N/A', 'n/a', '23 actas', '-5', -1, '12m2', '769,12 m2'];
+  for (const raw of invalidCases) {
+    assert.equal(vm.runInContext(`parseDocumentedAreaM2(${JSON.stringify(raw)})`, s.context), null, `rechaza ${String(raw)}`);
+  }
+  assert.equal(vm.runInContext("parseDocumentedAreaM2(0)", s.context), 0);
+  assert.equal(vm.runInContext("parseDocumentedAreaM2('0')", s.context), 0);
+  assert.equal(vm.runInContext("parseDocumentedAreaM2('0,00')", s.context), 0);
+  assert.equal(vm.runInContext("parseDocumentedAreaM2('769,12')", s.context), 769.12);
+  assert.equal(vm.runInContext("parseDocumentedAreaM2('1,478')", s.context), 1478);
+
+  // Ignora propiedad inexistente en Cat_Alineacion!A:R como Realizado_M2_Verificado
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 39, Realizado_M2_Verificado: 1200 })", s.context), null);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: 'Pendiente' })", s.context), null);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: 'N/A' })", s.context), null);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: '23 actas' })", s.context), null);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: '' })", s.context), null);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: 0 })", s.context), 0);
+  assert.equal(vm.runInContext("getDocumentedAreaValue({ ID_Alineacion: 43 }, { 43: '769,12' })", s.context), 769.12);
+
   const catRows = [
     { ID_Alineacion: 39, Clave_Proceso: 'QA4095', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Teatro Juárez', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '1478' },
     { ID_Alineacion: 43, Clave_Proceso: 'QB4208', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Catedral León', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '769,12' },
-    { ID_Alineacion: 99, Clave_Proceso: 'QX0001', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Con cero verificado', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '100', Realizado_M2_Verificado: 0 }
+    { ID_Alineacion: 97, Clave_Proceso: 'QX0097', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Texto mixto 23 actas', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '100' },
+    { ID_Alineacion: 98, Clave_Proceso: 'QX0098', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Texto Pendiente', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '100' },
+    { ID_Alineacion: 99, Clave_Proceso: 'QX0099', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Con cero verificado', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '100' }
   ];
   s.context.catRows = catRows;
-  vm.runInContext('rawDB.alineacion = catRows; renderMatrizEstrategica([], [], [], catRows);', s.context);
+  vm.runInContext(`
+    DOCUMENTED_AREA_M2[97] = '23 actas';
+    DOCUMENTED_AREA_M2[98] = 'Pendiente';
+    DOCUMENTED_AREA_M2[99] = 0;
+    rawDB.alineacion = catRows;
+    renderMatrizEstrategica([], [], [], catRows);
+  `, s.context);
   const rows = JSON.parse(vm.runInContext('JSON.stringify(cachedMetasCatalogoRows)', s.context));
-  assert.equal(rows[0].missingAreaMeasurement, true);
-  assert.equal(rows[0].realizado, null);
-  assert.equal(rows[0].pct, null);
+  for (const idx of [0, 1, 2, 3]) {
+    assert.equal(rows[idx].missingAreaMeasurement, true);
+    assert.equal(rows[idx].realizado, null);
+    assert.equal(rows[idx].pct, null);
+  }
   assert.equal(rows[1].metaAnual, 769.12);
-  assert.equal(rows[1].missingAreaMeasurement, true);
-  assert.equal(rows[2].missingAreaMeasurement, false);
-  assert.equal(rows[2].realizado, 0);
-  assert.equal(rows[2].pct, 0);
+  assert.equal(rows[4].missingAreaMeasurement, false);
+  assert.equal(rows[4].realizado, 0);
+  assert.equal(rows[4].pct, 0);
 
   const tblHtml = s.nodes.get('tbl-metas-avance').innerHTML;
   assert.match(tblHtml, /1,478/);
@@ -856,4 +885,111 @@ test('Matriz Estratégica: metas en m² muestran Sin dato verificado y raya sin 
   assert.match(tblHtml, /Sin dato verificado/);
   assert.match(tblHtml, />—</);
   assert.match(tblHtml, />0\.0%</);
+});
+
+test('Matriz Estratégica QC4142: distingue dirección ejecutora vs responsable de meta y prueba las 2 fichas de Dirección de Música', () => {
+  const s = setup();
+  const buildFixture = (catDir) => ({
+    alineacion: [
+      { ID_Alineacion: 8, Clave_Proceso: 'QC4142', Direccion: catDir, Nombre_Meta: 'Programa literario', Unidad_Medida: 'Eventos realizados', Meta_Anual: 50 },
+      { ID_Alineacion: 9, Clave_Proceso: 'QC4142', Direccion: catDir, Nombre_Meta: 'Programa expositivo', Unidad_Medida: 'Exposiciones realizadas', Meta_Anual: 40 },
+      { ID_Alineacion: 10, Clave_Proceso: 'QC4142', Direccion: catDir, Nombre_Meta: 'Programa de artes vivas', Unidad_Medida: 'Presentaciones realizadas', Meta_Anual: 104 }
+    ],
+    actividades: [
+      ...Array.from({ length: 31 }, (_, i) => ({ ...a, ID_Actividad: `ACT-PA-${i + 1}`, Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA', Nombre_Meta: 'Programa de artes vivas' })),
+      { ...a, ID_Actividad: 'ACT-SCCF54781', Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'DIRECCIÓN DE MÚSICA', Nombre_Meta: 'Programa de artes vivas' },
+      { ...a, ID_Actividad: 'ACT-SCIH64446', Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'DIRECCIÓN DE MÚSICA', Nombre_Meta: 'Programa de artes vivas' },
+      { ...a, ID_Actividad: 'ACT-SCDW90018', Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL', Nombre_Meta: 'Programa de artes vivas' },
+      { ...a, ID_Actividad: 'ACT-SCNU71129', Clave_Proceso: 8, Clave_Proceso_Txt: 'QC4142', Direccion: 'DIRECCIÓN GENERAL DE FORMACIÓN E INVESTIGACIÓN', Nombre_Meta: 'Programa literario' }
+    ],
+    territorio: [],
+    poblacion: [],
+    evidencia: []
+  });
+
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  vm.runInContext('updateMapMarkers = () => {}; renderVisionGeneral = () => {}; renderCoberturaTerritorial = () => {}; renderPerfilPoblacion = () => {}; renderRepositorioEvidencias = () => {};', s.context);
+
+  // ANTES (IDs 8-10 atribuidos en catálogo a Subsecretaría)
+  s.context._fixture = buildFixture('SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL');
+  s.document.getElementById('f-proceso').value = 'QC4142';
+  s.document.getElementById('f-direccion').value = 'ALL';
+  vm.runInContext('rawDB = _fixture; applyFilters();', s.context);
+  let meta10 = JSON.parse(vm.runInContext("JSON.stringify(cachedMetasCatalogoRows.find(m => m.idAlin === '10'))", s.context));
+  assert.equal(meta10.realizado, 34);
+
+  s.document.getElementById('f-direccion').value = 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows.length', s.context), 0);
+  assert.equal(s.nodes.get('kpi-mat-act').textContent, '31');
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCCF54781') || filteredActIds.has('ACT-SCIH64446')", s.context), false);
+
+  s.document.getElementById('f-direccion').value = 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
+  vm.runInContext('applyFilters();', s.context);
+  meta10 = JSON.parse(vm.runInContext("JSON.stringify(cachedMetasCatalogoRows.find(m => m.idAlin === '10'))", s.context));
+  assert.equal(meta10.realizado, 3);
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCCF54781') && filteredActIds.has('ACT-SCIH64446') && filteredActIds.has('ACT-SCDW90018')", s.context), true);
+
+  // DESPUÉS (ajuste UTAPE IDs 8-10 -> Producción Artística, conservando Direccion intacta en Registro_Actividades)
+  s.context._fixture = buildFixture('DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA');
+  s.document.getElementById('f-direccion').value = 'ALL';
+  vm.runInContext('rawDB = _fixture; applyFilters();', s.context);
+  meta10 = JSON.parse(vm.runInContext("JSON.stringify(cachedMetasCatalogoRows.find(m => m.idAlin === '10'))", s.context));
+  const meta8 = JSON.parse(vm.runInContext("JSON.stringify(cachedMetasCatalogoRows.find(m => m.idAlin === '8'))", s.context));
+  assert.equal(meta10.realizado, 34);
+  assert.equal(meta8.realizado, 1);
+
+  s.document.getElementById('f-direccion').value = 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows.length', s.context), 3);
+  meta10 = JSON.parse(vm.runInContext("JSON.stringify(cachedMetasCatalogoRows.find(m => m.idAlin === '10'))", s.context));
+  assert.equal(meta10.realizado, 33);
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCCF54781') && filteredActIds.has('ACT-SCIH64446')", s.context), true);
+  assert.equal(vm.runInContext("filteredActIds.has('ACT-SCDW90018')", s.context), false);
+
+  s.document.getElementById('f-direccion').value = 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows.length', s.context), 0);
+  assert.equal(s.nodes.get('kpi-mat-act').textContent, '1');
+  assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify([...filteredActIds])', s.context)), ['ACT-SCDW90018']);
+});
+
+test('Camino Real ID 17: marcador reversible excluye ACT-SCMY88002 del cómputo de la meta sin perder ficha, folio ni 41 asistencias', () => {
+  const s = setup();
+  const cat17 = [{ ID_Alineacion: 17, Clave_Proceso: 'QC4044', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Cerro de los Remedios', Unidad_Medida: 'Intervenciones realizadas', Meta_Anual: 2 }];
+  const baseActs = [
+    { ...a, ID_Actividad: 'ACT-SCMY88002', Folio: 'SC-261106-140002', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Clave_Proceso: 17, Clave_Proceso_Txt: 'QC4044', Nombre_Meta: 'Cerro de los Remedios', Descripcion_Breve: 'Reunión de coordinación Camino Real' },
+    { ...a, ID_Actividad: 'ACT-SCEDQ-F078DD3', Folio: 'FOL-EDQ-17-03', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Clave_Proceso: 17, Clave_Proceso_Txt: 'QC4044', Nombre_Meta: 'Cerro de los Remedios', Tipo_Registro: 'Concentrado', Descripcion_Breve: 'Concentrado ene-oct 2026: 2 acciones de preservación.' }
+  ];
+  const ters = [
+    { ID_Actividad: 'ACT-SCMY88002', Municipio: 'Comonfort', Cantidad: 41 },
+    { ID_Actividad: 'ACT-SCEDQ-F078DD3', Municipio: 'Comonfort', Cantidad: 10 }
+  ];
+  const pobs = [
+    { ID_Actividad: 'ACT-SCMY88002', Cantidad_Poblacion: 41 },
+    { ID_Actividad: 'ACT-SCEDQ-F078DD3', Cantidad_Poblacion: 10 }
+  ];
+
+  // Antes: 3/2 (150.0%)
+  s.context._cat17 = cat17;
+  s.context._actsBefore = baseActs;
+  s.context._ters = ters;
+  s.context._pobs = pobs;
+  vm.runInContext('rawDB.alineacion = _cat17; renderMatrizEstrategica(_actsBefore, _pobs, _ters, _cat17);', s.context);
+  let m17 = JSON.parse(vm.runInContext('JSON.stringify(cachedMetasCatalogoRows[0])', s.context));
+  assert.equal(m17.realizado, 3);
+  assert.equal(m17.pct, 150);
+
+  // Después con [NO_COMPUTA_META:17]: pasa a 2/2 (100.0%) conservando las 2 fichas y 51 asistencias en el universo activo
+  s.context._actsAfter = [
+    { ...baseActs[0], Descripcion_Breve: '[NO_COMPUTA_META:17] ' + baseActs[0].Descripcion_Breve },
+    baseActs[1]
+  ];
+  vm.runInContext('renderMatrizEstrategica(_actsAfter, _pobs, _ters, _cat17);', s.context);
+  m17 = JSON.parse(vm.runInContext('JSON.stringify(cachedMetasCatalogoRows[0])', s.context));
+  assert.equal(m17.realizado, 2);
+  assert.equal(m17.metaAnual, 2);
+  assert.equal(m17.pct, 100);
+  assert.equal(s.nodes.get('kpi-mat-act').textContent, '3');
 });

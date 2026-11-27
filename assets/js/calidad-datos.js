@@ -26,6 +26,10 @@
     return m && m[1] !== text(activity.ID_Actividad) ? m[1] : '';
   };
   const isExcluded = activity => isCancelled(activity) || !!supersededBy(activity);
+  const goalExcluded = activity => {
+    const m = text(activity.Descripcion_Breve).match(/^\[NO_COMPUTA_META:(\d+)\]/i);
+    return m ? m[1] : '';
+  };
   const hasUsableEvidence = (activity, evidenceRows = []) => !absent(activity?.Foto_Evidencia)
     || (evidenceRows || []).some(e => !absent(e?.Archivo_Evidencia));
   function reportedTime(activity) {
@@ -305,5 +309,5 @@
       return { id, folio: text(a.Folio), usuario: text(a.Usuario_Registra), direccion: text(a.Direccion), nombre: text(a.Nombre_Actividad), mun: [...new Set(tr.map(t => text(t.Municipio)).filter(Boolean))].join(', ') || 'Sin identificar', sT: st, sP: sp, diff: st !== null && sp !== null ? st - sp : null, categories: [...categories], diag: reasons.join(' · ') };
     }).filter(r => r.categories.length);
   }
-  return { number, count, isCancelled, supersededBy, isExcluded, hasUsableEvidence, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };
+  return { number, count, isCancelled, supersededBy, isExcluded, goalExcluded, hasUsableEvidence, dateISO, quantity, ceargDocumentedWorkshops, vientosTrainingProgress, metrics, monthlyPopulation, audit };
 });
