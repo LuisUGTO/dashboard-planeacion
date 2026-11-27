@@ -1,5 +1,11 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (lote de Forum `PB3571` ID 97 y Museos `ACT-SCMG26633` ID 92 aplicado y verificado) — `125` fichas actualizadas por relectura directa.**
+- **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_lote_forum_museos_2026-11-27.json` y verificación en `scratch/verify_lote_forum_museos_2026-11-27.json`):**
+  - *Forum (`PB3571`, ID `97`, `Registro_Actividades!K1429:K1552`):* confirmadas las `124` fichas (`ACT-SCFM00001` a `ACT-SCFM00124`, `0` omitidas) con `Clave_Proceso = 97`, `PB3571` y `Meta_Anual = 120`; actualizado `Meta_Anual` a **`70`** (valor numérico) conforme a `Cat_Alineacion!H98`, `Avance metas (1).xlsx!Hoja1!F107` y `Matriz_PG_PEC_para_revision.xlsx!Listas!BE96`, conservando `A:J` y el bloque PEC pendientes sin cambios.
+  - *Museos (`PB3572`, ID `92`, `Registro_Actividades!J322:K322`, `ACT-SCMG26633`, folio `SC-260821-122322`):* confirmados ID, `Clave_Proceso = 92`, `PB3572`, `Unidad_Medida = Foro realizado` y `Meta_Anual = 1`; actualizados a **`Número de Actividades realizadas`** y **`800`** (valor numérico) conforme a `Cat_Alineacion!G93:H93`, `Avance metas (1).xlsx!Hoja1!E102:F102` y `Formato Interno de Indicadores (2).xlsx!Anny!118`, conservando `A322:I322` e hijos territorial/demográfico (`4` asistencias) sin cambios.
+  - *Reversión:* restaurar `Registro_Actividades!J322:K322` (`Foro realizado` / `1`) y `K1429:K1552` (`120`) desde el respaldo privado. Pendiente `git push` del usuario.
+
 **27/11/2026 (`ACT00019` y `ACT00030` en Lote A2 aplicadas y verificadas) — `Registro_Actividades!AT20` y `AT31` corregidas a Línea 4; saldo Lote A2 en `41` filas.**
 - **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo en `scratch/backup_act00019_act00030_2026-11-27.json`) y verificadas por relectura directa:**
   - Cotejadas contra [Formato Interno de Indicadores (2).xlsx](archivos_base/Soraya%20Villegas/Formato%20Interno%20de%20Indicadores%20%20(2).xlsx) (`DiegoDiana`, filas `6` y `17`: fecha `19/04/2026` y `23/05/2026`, Museo de Arte e Historia de Guanajuato / sede `8`, acción `4.1.2.5`).
