@@ -989,10 +989,10 @@
             <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
               <div>
                 <h3 class="text-base font-extrabold text-gto-blue">Seguimiento del Tabulador Oficial de Metas</h3>
-                <p class="text-xs text-slate-400">Evalúa las 99 metas anuales programadas distinguiendo Actividades, Personas y Metros cuadrados</p>
+                <p id="lbl-metas-cat-sub" class="text-xs text-slate-400">Evalúa las metas anuales programadas distinguiendo Actividades, Personas y Metros cuadrados</p>
               </div>
               <select id="filter-metas-cat" onchange="renderTablaMetasCatalogo()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-gto-blue">
-                <option value="ALL">Todas las metas programadas (99)</option>
+                <option id="opt-metas-cat-all" value="ALL">Todas las metas programadas</option>
                 <option value="ACTIVE">Solo metas con avance registrado</option>
                 <option value="PENDING">Metas pendientes de ejecución (en 0)</option>
                 <option value="ACT_ONLY">Solo metas de Actividades / Eventos</option>
@@ -1951,10 +1951,32 @@
     const toNum = (val) => {
       if (val === null || val === undefined || val === '') return 0;
       if (typeof val === 'number') return isNaN(val) ? 0 : val;
-      const n = parseFloat(String(val).replace(/[^0-9.-]/g, ''));
+      let s = String(val).trim();
+      if (/^-?\d+,\d{1,2}$/.test(s)) s = s.replace(',', '.');
+      const n = parseFloat(s.replace(/[^0-9.-]/g, ''));
       return isNaN(n) ? 0 : n;
     };
     const fmtInt = (n) => Math.round(n).toLocaleString('es-MX');
+    const fmtMetaVal = (n, unitCat) => {
+      if (n === null || n === undefined || !Number.isFinite(n)) return '—';
+      if (unitCat === 'METROS' && Math.abs(n % 1) > 1e-6) {
+        return n.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      }
+      return fmtInt(n);
+    };
+    const DOCUMENTED_AREA_M2 = {};
+    function getDocumentedAreaValue(catRow) {
+      const explicitVal = catRow?.Realizado_M2_Verificado;
+      if (explicitVal !== undefined && explicitVal !== null && cleanStr(explicitVal) !== '') {
+        const parsed = toNum(explicitVal);
+        if (Number.isFinite(parsed) && parsed >= 0) return parsed;
+      }
+      const id = String(Math.round(toNum(catRow?.ID_Alineacion)));
+      if (id && Object.prototype.hasOwnProperty.call(DOCUMENTED_AREA_M2, id)) {
+        return DOCUMENTED_AREA_M2[id];
+      }
+      return null;
+    }
     const fmtCompact = (n) => {
       if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + ' mil';
       return String(Math.round(n));
@@ -3261,9 +3283,10 @@
     function renderMatrizEstrategica(actF, pobF, terF, catAlF) {
       const directionKey = value => cleanStr(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
       const validDirection = d => d && d !== 'SIN ASIGNAR';
-      const sourceCat = catAlF.length > 0 ? catAlF : (typeof rawDB !== 'undefined' && rawDB && rawDB.alineacion ? rawDB.alineacion : []);
+      const fullCat = typeof rawDB !== 'undefined' && rawDB && Array.isArray(rawDB.alineacion) ? rawDB.alineacion : [];
+      const sourceCat = Array.isArray(catAlF) ? catAlF : fullCat;
       const dirsCatalogo = new Set(sourceCat.map(c => directionKey(getCanonicalDirection(c.Direccion))).filter(validDirection));
-      const dirsActivas = new Set(actF.map(a => directionKey(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, sourceCat))).filter(d => dirsCatalogo.has(d)));
+      const dirsActivas = new Set(actF.map(a => directionKey(getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, fullCat))).filter(d => dirsCatalogo.has(d)));
 
       const popByActTer = {};
       terF.forEach(t => { popByActTer[cleanStr(t.ID_Actividad)] = (popByActTer[cleanStr(t.ID_Actividad)] || 0) + toNum(t.Cantidad); });
@@ -3316,12 +3339,15 @@
           idAlin, actF, popMode === 'territorio' ? terF : pobF
         ) : null;
         const requiresUnitReview = clave === 'PB3567' && idAlin === '75';
+        const documentedArea = unitCat === 'METROS' ? getDocumentedAreaValue(c) : null;
+        const missingAreaMeasurement = unitCat === 'METROS' && documentedArea === null;
         const realizado = requiresUnitReview ? CulturaCalidad.ceargDocumentedWorkshops(actF) :
-          training ? training.value : unitCat === 'PERSONAS' ? matchStats.pop : (unitCat === 'METROS' ? 0 : (matchStats.unresolved ? null : matchStats.reported));
+          training ? training.value : unitCat === 'PERSONAS' ? matchStats.pop :
+          (unitCat === 'METROS' ? documentedArea : (matchStats.unresolved ? null : matchStats.reported));
         const pct = realizado === null ? null : (metaAnual > 0 ? (realizado / metaAnual) * 100 : 0);
 
         return {
-          idAlin, clave, nombre, direccion, unidad, unitCat, metaAnual, actCount, realizado, pct, training, requiresUnitReview
+          idAlin, clave, nombre, direccion, unidad, unitCat, metaAnual, actCount, realizado, pct, training, requiresUnitReview, missingAreaMeasurement
         };
       });
 
@@ -3357,6 +3383,12 @@
       document.getElementById('kpi-mat-metas').textContent = `${metasConRegistro}/${totalMetasCat}`;
       document.getElementById('kpi-mat-metas-pct').textContent = `${pctMetasAtendidas}%`;
       document.getElementById('kpi-mat-procesos').textContent = `Sobre ${procesosCatTotal} procesos estratégicos`;
+      if (document.getElementById('lbl-metas-cat-sub')) {
+        document.getElementById('lbl-metas-cat-sub').textContent = `Evalúa ${fmtInt(totalMetasCat)} metas anuales del filtro activo distinguiendo Actividades, Personas y Metros cuadrados`;
+      }
+      if (document.getElementById('opt-metas-cat-all')) {
+        document.getElementById('opt-metas-cat-all').textContent = `Todas las metas programadas (${fmtInt(totalMetasCat)})`;
+      }
 
       document.getElementById('kpi-mat-cumplimiento').textContent = pendingQuantities ? 'Por confirmar' : `${pctGlobalCatalogo}%`;
       document.getElementById('kpi-mat-cumplimiento-activas').textContent = pendingQuantities ? 'Falta cuantificar concentrados' : `${pctActivasOperacion}% en activas`;
@@ -3393,7 +3425,7 @@
       // Mantiene actF como fuente: todos los filtros del dashboard siguen aplicándose.
       const dirMap = new Map();
       actF.forEach(a => {
-        const name = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, sourceCat);
+        const name = getCanonicalDirection(a.Direccion, a.Clave_Proceso, a.Clave_Proceso_Txt, fullCat);
         if (name && name !== 'SIN ASIGNAR') {
           dirMap.set(name, (dirMap.get(name) || 0) + 1);
         }
@@ -3502,12 +3534,13 @@
         const hasActScope = actMetas.some(m => m.metaAnual > 0);
         const scoped = hasActScope ? actMetas : (popMetas.length ? popMetas : g.items);
         const unitLabel = hasActScope ? 'act.' : (popMetas.length ? 'pers.' : (g.items.some(m => m.unitCat === 'METROS') ? 'm' : 'act.'));
-        const pending = scoped.some(m => m.realizado === null);
+        const missingArea = scoped.length > 0 && scoped.every(m => m.missingAreaMeasurement);
+        const pending = !missingArea && scoped.some(m => m.realizado === null);
         const sumMeta = scoped.reduce((s, m) => s + m.metaAnual, 0);
         const sumReal = scoped.reduce((s, m) => s + (m.realizado || 0), 0);
-        const pct = pending ? null : (sumMeta > 0 ? (sumReal / sumMeta) * 100 : 0);
+        const pct = (pending || missingArea) ? null : (sumMeta > 0 ? (sumReal / sumMeta) * 100 : 0);
         const selected = isProcessMode ? fProc === g.key : fDir === g.key;
-        return { ...g, totalMetas, activeMetas, unitLabel, pending, sumMeta, sumReal, pct, selected };
+        return { ...g, totalMetas, activeMetas, unitLabel, pending, missingArea, sumMeta, sumReal, pct, selected };
       }).sort((a, b) => {
         const aOn = a.activeMetas > 0 ? 1 : 0;
         const bOn = b.activeMetas > 0 ? 1 : 0;
@@ -3527,22 +3560,26 @@
       gridEl.innerHTML = cards.map(c => {
         const pctVal = c.pct === null ? 0 : c.pct;
         const barW = Math.max(0, Math.min(100, pctVal)).toFixed(1);
-        const badgeCls = c.pct === null
+        const badgeCls = c.missingArea
+          ? 'bg-slate-100 text-slate-500'
+          : c.pct === null
           ? 'bg-amber-100 text-amber-800'
           : c.pct >= 100
           ? 'bg-emerald-100 text-emerald-800'
           : c.activeMetas > 0
           ? 'bg-blue-100 text-gto-blue'
           : 'bg-slate-100 text-slate-500';
-        const barCls = c.pct === null
+        const barCls = c.missingArea
+          ? 'bg-slate-300'
+          : c.pct === null
           ? 'bg-amber-400'
           : c.pct >= 100
           ? 'bg-emerald-500'
           : c.activeMetas > 0
           ? 'bg-gto-blue'
           : 'bg-slate-300';
-        const pctText = c.pct === null ? 'Por confirmar' : `${c.pct.toFixed(1)}%`;
-        const progressNums = c.pending ? 'Sin cuantificar' : `${fmtInt(c.sumReal)} / ${fmtInt(c.sumMeta)} ${c.unitLabel}`;
+        const pctText = c.missingArea ? '—' : c.pct === null ? 'Por confirmar' : `${c.pct.toFixed(1)}%`;
+        const progressNums = c.missingArea ? 'Sin dato verificado' : c.pending ? 'Sin cuantificar' : `${fmtMetaVal(c.sumReal, c.unitLabel === 'm' ? 'METROS' : 'ACTIVIDADES')} / ${fmtMetaVal(c.sumMeta, c.unitLabel === 'm' ? 'METROS' : 'ACTIVIDADES')} ${c.unitLabel}`;
         const ringCls = c.selected ? 'border-gto-blue bg-blue-50/70 ring-1 ring-gto-blue/30' : 'border-slate-200 bg-slate-50/70 hover:bg-blue-50/40 hover:border-blue-200';
         const safeKey = auditEscape(c.key);
         const safeLabel = auditEscape(c.label);
@@ -3576,12 +3613,20 @@
       rows.sort((a, b) => (b.actCount - a.actCount) || (b.metaAnual - a.metaAnual));
 
       const activeProc = document.getElementById('f-proceso')?.value || 'ALL';
-      document.getElementById('tbl-metas-avance').innerHTML = rows.map(m => {
-        const pctStr = m.pct === null ? 'Por confirmar' : m.pct.toFixed(1) + '%';
-        const badgeColor = m.pct >= 100 ? 'bg-emerald-100 text-emerald-800' : m.actCount > 0 ? 'bg-blue-100 text-gto-blue' : 'bg-slate-100 text-slate-500';
+      const tbody = document.getElementById('tbl-metas-avance');
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-slate-400 italic">No hay metas del catálogo que correspondan a la combinación de filtros activa.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map(m => {
+        const pctStr = m.missingAreaMeasurement ? '—' : (m.pct === null ? 'Por confirmar' : m.pct.toFixed(1) + '%');
+        const badgeColor = m.missingAreaMeasurement ? 'bg-slate-100 text-slate-500' : (m.pct !== null && m.pct >= 100) ? 'bg-emerald-100 text-emerald-800' : m.actCount > 0 ? 'bg-blue-100 text-gto-blue' : 'bg-slate-100 text-slate-500';
         const unitTag = m.unitCat === 'PERSONAS' ? `<span class="text-[9.5px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">Población</span>` : m.unitCat === 'METROS' ? `<span class="text-[9.5px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200">Infraestructura</span>` : `<span class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">Actividades</span>`;
         const baseClave = cleanStr(m.clave).split('.')[0];
         const isProcSelected = activeProc !== 'ALL' && activeProc === baseClave;
+        const realizadoHtml = m.missingAreaMeasurement
+          ? '<span class="text-slate-500 font-semibold">Sin dato verificado</span>'
+          : (m.realizado === null ? 'Por confirmar' : fmtMetaVal(m.realizado, m.unitCat));
 
         return `
           <tr onclick="toggleChartFilter('f-proceso', '${auditEscape(baseClave)}')" title="Clic para filtrar por proceso ${auditEscape(baseClave)}" class="cursor-pointer transition hover:bg-blue-50/60 ${isProcSelected ? 'bg-blue-50/80 ring-1 ring-inset ring-gto-blue/40' : ''}">
@@ -3596,11 +3641,12 @@
                 <span class="text-[10px] text-slate-400">${m.unidad} • ${formatShortDireccion(m.direccion)}</span>
               </div>
             </td>
-            <td class="p-2.5 text-right font-semibold text-slate-700">${fmtInt(m.metaAnual)}</td>
+            <td class="p-2.5 text-right font-semibold text-slate-700">${fmtMetaVal(m.metaAnual, m.unitCat)}</td>
             <td class="p-2.5 text-right font-bold text-gto-blue">
-              ${m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado)}
+              ${realizadoHtml}
               ${m.requiresUnitReview ? '<div class="text-[9.5px] font-normal text-slate-500">Avance documentado parcial · CEARG</div>' :
                 m.training ? `<div class="text-[9.5px] font-normal text-slate-500">${m.training.pending ? 'Hay fichas de capacitación por revisar' : 'Participación registrada en capacitación'}</div>` :
+                m.missingAreaMeasurement ? '<div class="text-[9.5px] font-normal text-slate-400">Requiere medición en m²</div>' :
                 m.unitCat === 'PERSONAS' && m.actCount > 0 ? `<div class="text-[9.5px] font-normal text-slate-400">en ${m.actCount} act.</div>` : ''}
             </td>
             <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${pctStr}</span></td>
@@ -6416,9 +6462,9 @@
             return [
               { text: `${m.clave} (#${m.idAlin})`, options: { bold: true, color: '004B87', fill: bg } },
               { text: `${formatShortDireccion(m.direccion)}: ${shortMeta}`, options: { color: '334155', fill: bg } },
-              { text: fmtInt(m.metaAnual), options: { align: 'right', color: '475569', fill: bg } },
-              { text: m.realizado === null ? 'Por confirmar' : fmtInt(m.realizado) + (m.requiresUnitReview ? ' (parcial)' : ''), options: { align: 'right', bold: true, color: '004B87', fill: bg } },
-              { text: m.pct === null ? 'Por confirmar' : `${m.pct.toFixed(1)}%`, options: { align: 'right', bold: true, color: m.pct >= 100 ? '047857' : 'B45309', fill: bg } }
+              { text: fmtMetaVal(m.metaAnual, m.unitCat), options: { align: 'right', color: '475569', fill: bg } },
+              { text: m.missingAreaMeasurement ? 'Sin dato verificado' : (m.realizado === null ? 'Por confirmar' : fmtMetaVal(m.realizado, m.unitCat) + (m.requiresUnitReview ? ' (parcial)' : '')), options: { align: 'right', bold: true, color: m.missingAreaMeasurement ? '64748B' : '004B87', fill: bg } },
+              { text: m.missingAreaMeasurement ? '—' : (m.pct === null ? 'Por confirmar' : `${m.pct.toFixed(1)}%`), options: { align: 'right', bold: true, color: m.missingAreaMeasurement ? '64748B' : (m.pct !== null && m.pct >= 100 ? '047857' : 'B45309'), fill: bg } }
             ];
           })
         ];

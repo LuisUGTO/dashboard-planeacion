@@ -793,3 +793,67 @@ test('Checklist Inicio: mapa con rangos fijos 0..101+, deduplicación por munici
     { label: 'Localidades', personas: 70, actividades: 1, totalZonas: 2 }
   ]);
 });
+
+test('Matriz Estratégica: no recae al catálogo completo cuando filtro dirección+proceso queda vacío (caso QC4142)', () => {
+  const s = setup();
+  const catRows = [
+    { ID_Alineacion: 10, Clave_Proceso: 'QC4142', Direccion: 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL', Nombre_Meta: 'Programa de artes vivas', Unidad_Medida: 'Presentaciones realizadas', Meta_Anual: 104 },
+    { ID_Alineacion: 88, Clave_Proceso: 'PB3573', Direccion: 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES', Nombre_Meta: 'Presentaciones editoriales', Unidad_Medida: 'Presentaciones', Meta_Anual: 92 }
+  ];
+  const acts = [
+    { ...a, ID_Actividad: 'A-PA', Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA', Nombre_Meta: 'Programa de artes vivas' },
+    { ...a, ID_Actividad: 'A-SUB', Clave_Proceso: 10, Clave_Proceso_Txt: 'QC4142', Direccion: 'SUBSECRETARÍA DE DESARROLLO Y PROMOCIÓN ARTÍSTICA Y CULTURAL', Nombre_Meta: 'Programa de artes vivas' },
+    { ...a, ID_Actividad: 'A-ED', Clave_Proceso: 88, Clave_Proceso_Txt: 'PB3573', Direccion: 'DIRECCIÓN GENERAL DE EDITORIAL Y PUBLICACIONES', Nombre_Meta: 'Presentaciones editoriales' }
+  ];
+  s.context._fixture = { actividades: acts, territorio: [], poblacion: [], evidencia: [], alineacion: catRows };
+  s.document.getElementById('f-date-start').value = '2026-01-01';
+  s.document.getElementById('f-date-end').value = '2026-12-31';
+  vm.runInContext('rawDB = _fixture; updateMapMarkers = () => {}; renderVisionGeneral = () => {}; renderCoberturaTerritorial = () => {}; renderPerfilPoblacion = () => {}; renderRepositorioEvidencias = () => {};', s.context);
+
+  // Solo QC4142: 1 meta en catálogo, suma 2 actividades (1 Producción + 1 Subsecretaría)
+  s.document.getElementById('f-proceso').value = 'QC4142';
+  s.document.getElementById('f-direccion').value = 'ALL';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows.length', s.context), 1);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows[0].realizado', s.context), 2);
+  assert.equal(s.nodes.get('kpi-mat-metas').textContent, '1/1');
+
+  // QC4142 + Producción Artística: catálogo filtrado vacío (0 metas), NO debe mostrar PB3573 ni 2 metas
+  s.document.getElementById('f-direccion').value = 'DIRECCIÓN GENERAL DE PRODUCCIÓN ARTÍSTICA';
+  vm.runInContext('applyFilters();', s.context);
+  assert.equal(vm.runInContext('cachedMetasCatalogoRows.length', s.context), 0);
+  assert.equal(s.nodes.get('kpi-mat-metas').textContent, '0/0');
+  assert.equal(s.nodes.get('kpi-mat-act').textContent, '1');
+  assert.match(s.nodes.get('tbl-metas-avance').innerHTML, /No hay metas del catálogo que correspondan a la combinación de filtros activa/);
+  assert.doesNotMatch(s.nodes.get('tbl-metas-avance').innerHTML, /PB3573/);
+});
+
+test('Matriz Estratégica: metas en m² muestran Sin dato verificado y raya sin medición, y conservan 0 expreso', () => {
+  const s = setup();
+  assert.equal(vm.runInContext("toNum('769,12')", s.context), 769.12);
+  assert.equal(vm.runInContext("toNum('1,478')", s.context), 1478);
+
+  const catRows = [
+    { ID_Alineacion: 39, Clave_Proceso: 'QA4095', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Teatro Juárez', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '1478' },
+    { ID_Alineacion: 43, Clave_Proceso: 'QB4208', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Catedral León', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '769,12' },
+    { ID_Alineacion: 99, Clave_Proceso: 'QX0001', Direccion: 'DIRECCIÓN GENERAL DE PATRIMONIO CULTURAL', Nombre_Meta: 'Con cero verificado', Unidad_Medida: 'Metros cuadrados', Meta_Anual: '100', Realizado_M2_Verificado: 0 }
+  ];
+  s.context.catRows = catRows;
+  vm.runInContext('rawDB.alineacion = catRows; renderMatrizEstrategica([], [], [], catRows);', s.context);
+  const rows = JSON.parse(vm.runInContext('JSON.stringify(cachedMetasCatalogoRows)', s.context));
+  assert.equal(rows[0].missingAreaMeasurement, true);
+  assert.equal(rows[0].realizado, null);
+  assert.equal(rows[0].pct, null);
+  assert.equal(rows[1].metaAnual, 769.12);
+  assert.equal(rows[1].missingAreaMeasurement, true);
+  assert.equal(rows[2].missingAreaMeasurement, false);
+  assert.equal(rows[2].realizado, 0);
+  assert.equal(rows[2].pct, 0);
+
+  const tblHtml = s.nodes.get('tbl-metas-avance').innerHTML;
+  assert.match(tblHtml, /1,478/);
+  assert.match(tblHtml, /769\.12/);
+  assert.match(tblHtml, /Sin dato verificado/);
+  assert.match(tblHtml, />—</);
+  assert.match(tblHtml, />0\.0%</);
+});
