@@ -1,5 +1,10 @@
 # Contexto del proyecto — Dashboard de Planeación de Cultura
 
+**27/11/2026 (ajuste verificado de Peralta `ACT-SCEDQ-77F4C6C` ID 21: cantidades en Territorio y Población dejadas sin informar).**
+- **Escritura aplicada con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_peralta_sin_informar_20261127_185552.json` y relectura en `scratch/verify_peralta_empty_*.json`):**
+  - Confirmados los IDs `TER-EDQ-77F4C6C` (`Registro_Territorio!J1808:L1808`) y `POB-EDQ-77F4C6C` (`Registro_Poblacion!F3060:H3060`), ambos vinculados a `ACT-SCEDQ-77F4C6C` (`ID 21`, `QC4046`); limpiadas únicamente las cantidades (`0/0/0` → vacío) porque `Act 2 de los Q´s de Arqueológicos nov2026.xlsx` no informa participantes propios de las `2` obras de preservación ni declara cero explícito.
+  - Relectura directa verificada: `ID 21` conserva **`2` de `2` intervenciones** (`Actividad = 2`, `Total_Sesiones = 2`, `Meta_Anual = 2`), **`ID 20` (`ACT-SCCS51664`)** conserva sus visitantes intactos y los totales generales permanecen idénticos (`TER Cant = 1,072,385`, `TER Acc = 742,548`, `POB = 1,071,961`). `node --test tests/calidad-datos.test.cjs tests/tablero.test.cjs tests/ficha-actividad.test.cjs` (**70/70 aprobadas**). Pendiente `git push` del usuario.
+
 **27/11/2026 (corrección autorizada de `ACT-SCIL37982` `M1757` y `ACT-SCDW90018` `P452:Q452`, más simulación solo-lectura de Peralta ID 21).**
 - **Escrituras aplicadas con autorización explícita (`1Enq__tSbcolJ7J7PS3qomn5idh9Zh56JdFA9wR9Gkm4`, respaldo privado en `scratch/backup_m1757_p452q452_20261127_185251.json` y verificación por relectura directa):**
   - *`ACT-SCIL37982` (`Registro_Actividades!M1757`, folio `SC-261126-154005`):* corregida errata de `Nombre_Actividad` de `Presentaccion artistcia` a **`Romeo y Julieta de Bolsillo`** conforme a `resumen mio, DGPA.xlsx!sep - oct 2026!J22`.
